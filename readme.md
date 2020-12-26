@@ -4,3 +4,5 @@ Web app che permetta la ricerca geolocalizzata dei progetti presenti sul sito ht
 le informazioni relative ai report di http://www.monithon.it/.
 
 App creata con framework Ionic/Angular e Web components custom https://github.com/lbrutti/monithon-components.
+
+test
