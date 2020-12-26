@@ -1,0 +1,7 @@
+{
+  "name": "monithon-ng",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
