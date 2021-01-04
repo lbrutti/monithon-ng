@@ -23,6 +23,11 @@
  * I campi (*) sono da reperire, gli altri sono presenti nel CSV su cui si basa questo spreadsheet 
  * https://docs.google.com/spreadsheets/d/1Uol55fO96CXjhUGXza_PnYaecuUhlDIbFjmKY6RodK8/edit#gid=537025182
  *
+ * 
+ * Ipotesi di ordinamenti sui seguenti campi:
+ * - distanza del comune selezionato
+ * - ANNO_INIZIO_PROGETTO
+ * - OC_FINANZ_TOT_PUB_NETTO
  */
 
 export const listaProgetti = [
