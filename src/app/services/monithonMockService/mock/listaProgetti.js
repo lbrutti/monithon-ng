@@ -12,10 +12,10 @@
  *  | ANNO_INIZIO_PROGETTO                  |  annoInizio       |  number/dateTime  |
  *  | OC_TEMA_SINTETICO                     |  tema             |  string           |
  *  | OC_FINANZ_TOT_PUB_NETTO               |  costoPubblico    |  double           |
- *  | TOT_PAGAMENTI                         |  totalePagamenti  |  double           |
+ *  | TOT_PAGAMENTI (04/01/21: non usato)   |  totalePagamenti  |  double           |
  *  | OC_DESCR_CATEGORIA_SPESA              |  descrCategoria   |  string           |
  *  | OC_COD_CATEGORIA_SPESA                |  codCategoria     |  string           |
- *  | CUP_DESCR_NATURA (*)                  |  descrNatura      |  string           |
+ *  | CUP_DESCR_NATURA(04/01/21:* non usato)|  descrNatura      |  string           |
  *  | COORDINATE (*)                        |  localizzazione   |  object           |
  *  | HAS_REPORT (*)                        |  hasReport        |  bool             |
  *  |---------------------------------------|-------------------|-------------------|
