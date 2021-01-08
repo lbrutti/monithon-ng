@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 export class MonithonApiService {
     private httpClient: HttpClient;
-    private url = '/api/progetti';
+    private url = '/monithon-api/progetti';
 
     constructor(httpClient: HttpClient) {
         this.httpClient = httpClient;

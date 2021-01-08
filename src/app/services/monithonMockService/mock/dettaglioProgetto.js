@@ -13,13 +13,13 @@
  *  | OC_FINANZ_TOT_PUB_NETTO               |  costoPubblico       |  double                          |
  *  | TOT_PAGAMENTI                         |  totalePagamenti     |  double                          |
  *  | COORDINATE (*)                        |  localizzazione      |  object:{lat, lng}               |
+ *  | OC_LINK                               |  ocUrl               |  string                          |
+ *  | MONITHON_REPORT_SET (*)               |  monithonReportSet   |  array di url o di oggetti       |
+ *  |                                       |                      |  contenenti url e info report    |
  *  | ------------------------------------------------------------------------------------------------|
  *
  *  | DA SKETCH 04/01/21: NON MOSTRO ALCUN DETTAGLIO IN APP MA REDIRIGO A OC O report                 |
  *  |quindi sono sufficenti i campi relativi ai link cui puntare                                       |
- *  | OC_LINK                               |  ocUrl               |  string                          |
- *  | MONITHON_REPORT_SET (*)               |  monithonReportSet   |  array di url o di oggetti       |
- *  |                                       |                      |  contenenti url e info report    |
  *  |---------------------------------------|----------------------|----------------------------------|
  * 
  * I campi (*) sono da reperire, gli altri sono presenti nel CSV su cui si basa questo spreadsheet 

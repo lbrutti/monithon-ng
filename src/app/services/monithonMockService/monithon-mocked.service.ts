@@ -19,8 +19,8 @@ export class MonithonMockedService {
     public mirageJsServer(): Server {
         return new Server({
             routes(): void {
-                this.namespace = 'api';
-
+                this.namespace = 'monithon-api';
+                this.urlPrefix = 'http://localhost:4200'
                 this.get('/progetti', () => {
                     return MonithonMockedService.listaProgetti();
                 });
@@ -28,6 +28,13 @@ export class MonithonMockedService {
                 this.get('/progetti/dettaglio', () => {
                     return MonithonMockedService.dettaglioProgetto();
                 });
+                //mapbox passthrough
+                this.passthrough('https://api.mapbox.com/**');
+                this.passthrough('https://events.mapbox.com/**');
+
+                //dc.js example
+                this.passthrough('https://dc-js.github.io/**');
+
             },
         });
     }
