@@ -13,9 +13,9 @@ export class HomePage implements OnInit {
         private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService) { }
     ngOnInit(): void {
-        this.monitonMockedService.mirageJsServer();
-        this.getProgetti();
-        this.getDettaglio();
+        // this.monitonMockedService.mirageJsServer();
+        // this.getProgetti();
+        // this.getDettaglio();
     }
 
     private getProgetti(): void {
