@@ -6,6 +6,7 @@ import { Progetto } from '../model/progetto/progetto';
 import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
 import { MonithonMockedService } from '../services/monithonMockService/monithon-mocked.service';
 
+//librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
     selector: 'app-home',
