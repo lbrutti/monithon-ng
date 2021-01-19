@@ -15,9 +15,9 @@
 
     <div id="container">
         <!-- Mappa -->
-        <monithon-map
+        <!-- <monithon-map
             api-key='pk.eyJ1IjoibGJydXR0aSIsImEiOiJjaXl5NXMxNWswMDA2MzJwZGViZDNxOG05In0.R5OZB0r3ov9HeduzarkLjw'
-            region='it' geolocate='true'></monithon-map>
+            region='it' geolocate='true'></monithon-map> -->
         <!-- filtri e dettaglio -->
         <ion-grid>
             <ion-row>
@@ -30,6 +30,17 @@
                             </ion-col>
                             <ion-col size="6">
                                 <h2>altre dimensioni</h2>
+                                <ion-grid>
+                                    <ion-row>
+                                        <h3>budget</h3>
+                                        <div #budgetChart id='budgetChartContanier'></div>
+                                    </ion-row>
+
+                                    <ion-row>
+                                        <h3>anno</h3>
+                                        <div #annoChart  id='annoChartContanier'></div>
+                                    </ion-row>
+                                </ion-grid>
                             </ion-col>
                         </ion-row>
                     </ion-grid>

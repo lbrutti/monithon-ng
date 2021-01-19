@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Server } from 'miragejs';
 import * as listaProgetti from './mock/listaProgetti';
-import * as dettaglioProgetto from './mock/dettaglioProgetto';
+import * as dettagliProgetti from './mock/dettagliProgetti';
 
 @Injectable({
     providedIn: 'root'
@@ -10,10 +10,10 @@ export class MonithonMockedService {
 
     constructor() { }
     private static listaProgetti(): any[] {
-        return listaProgetti;
+        return listaProgetti.listaProgetti;
     }
     private static dettaglioProgetto(): any[] {
-        return dettaglioProgetto;
+        return dettagliProgetti;
     }
 
     public mirageJsServer(): Server {
