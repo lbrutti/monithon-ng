@@ -37,7 +37,6 @@ export class HomePage implements OnInit, AfterViewInit {
             .toPromise()
             .then((data: Array<any>) => {
 
-
                 //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
                 //Add 'implements AfterViewInit' to the class.
 
@@ -102,16 +101,11 @@ export class HomePage implements OnInit, AfterViewInit {
 
                 this.budgetChart.on("renderlet", (chart, filter) => {
                     //propagare evento per aggiornare la lista dei progetti
-                    console.log('budgetChart.on("renderlet")');
-                    console.dir(budgetDim.top(Infinity).length);
                     this.progetti = budgetDim.top(Infinity)
-
                 });
 
                 this.budgetChart.on("filtered", (chart, filter) => {
                     //propagare evento per aggiornare la lista dei progetti
-                    console.log('budgetChart.on("filtered")');
-                    console.dir(budgetDim.top(Infinity).length);
                     this.progetti = budgetDim.top(Infinity)
 
                 });
@@ -134,23 +128,13 @@ export class HomePage implements OnInit, AfterViewInit {
                     .tickFormat((anno) => `${parseInt(anno)}`);
 
                 this.annoChart.on("filtered", (chart, filter) => {
-                    //propagare evento per aggiornare la lista dei progetti
-                    console.log('annoChart.on("filtered")');
-
-                    // console.dir(.length);
                     this.progetti = annoDim.top(Infinity)
                 });
 
                 this.annoChart.on("renderlet", (chart, filter) => {
-                    //propagare evento per aggiornare la lista dei progetti
-                    console.log('annoChart.on("renderlet")');
-
-                    // console.dir(.length);
                     this.progetti = annoDim.top(Infinity)
                 });
 
-                // this.budgetChart.render();
-                // this.annoChart.render();
                 dc.renderAll();
             });
 
@@ -160,13 +144,15 @@ export class HomePage implements OnInit, AfterViewInit {
 
     private getProgetti(): Observable<any> {
         return this.monithonApiService.getProgetti();
-
     }
 
     /**
      * onProgettoClick
      */
-    public onProgettoClick() {
+    public onProgettoClick(evt, progetto) {
+        console.dir(evt);
+        console.dir(progetto);
+
         console.log('onProgettoClick');
         
     }

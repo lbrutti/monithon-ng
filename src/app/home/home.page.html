@@ -48,7 +48,7 @@
                 <ion-col size="4">
                     <h1>lista progetti</h1>
                     <ion-list>
-                    <ion-item *ngFor="let item of this.progetti" (click)="this.onProgettoClick()">
+                    <ion-item *ngFor="let item of this.progetti" (click)="this.onProgettoClick($event, item)">
                         <h3>{{item.ocTitoloProgetto}}</h3>
                     </ion-item>
                     </ion-list>
