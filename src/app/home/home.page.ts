@@ -36,7 +36,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.getProgetti()
             .toPromise()
             .then((data: Array<any>) => {
-                this.progetti = data//.slice(0,10);
+
 
                 //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
                 //Add 'implements AfterViewInit' to the class.
@@ -51,7 +51,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
                 let baseArrotondamento = 10000;
 
-                let listaProgetti = this.progetti.map((d: any) => {
+                let listaProgetti = data.map((d: any) => {
                     d.ocFinanzTotPubNetto = arrotonda(
                         parseInt(d.ocFinanzTotPubNetto),
                         baseArrotondamento
@@ -104,6 +104,7 @@ export class HomePage implements OnInit, AfterViewInit {
                     //propagare evento per aggiornare la lista dei progetti
                     console.log('budgetChart.on("renderlet")');
                     console.dir(budgetDim.top(Infinity).length);
+                    this.progetti = budgetDim.top(Infinity)
 
                 });
 
@@ -111,6 +112,7 @@ export class HomePage implements OnInit, AfterViewInit {
                     //propagare evento per aggiornare la lista dei progetti
                     console.log('budgetChart.on("filtered")');
                     console.dir(budgetDim.top(Infinity).length);
+                    this.progetti = budgetDim.top(Infinity)
 
                 });
 
@@ -135,14 +137,16 @@ export class HomePage implements OnInit, AfterViewInit {
                     //propagare evento per aggiornare la lista dei progetti
                     console.log('annoChart.on("filtered")');
 
-                    console.dir(annoDim.top(Infinity).length);
+                    // console.dir(.length);
+                    this.progetti = annoDim.top(Infinity)
                 });
 
                 this.annoChart.on("renderlet", (chart, filter) => {
                     //propagare evento per aggiornare la lista dei progetti
                     console.log('annoChart.on("renderlet")');
 
-                    console.dir(annoDim.top(Infinity).length);
+                    // console.dir(.length);
+                    this.progetti = annoDim.top(Infinity)
                 });
 
                 // this.budgetChart.render();
@@ -159,11 +163,13 @@ export class HomePage implements OnInit, AfterViewInit {
 
     }
 
-    // private getDettaglio(): void {
-    //     this.monithonApiService.getDettaglio()
-    //         .subscribe(response => {
-    //             console.dir(response);
-    //         }, error => console.error('errore in getDettaglio'));
-    // }
-
+    /**
+     * onProgettoClick
+     */
+    public onProgettoClick() {
+        console.log('onProgettoClick');
+        
+    }
 }
+
+
