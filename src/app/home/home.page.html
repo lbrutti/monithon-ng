@@ -14,16 +14,87 @@
     </ion-header> -->
 
     <!-- Mappa -->
-    <!-- <monithon-map
-        api-key='pk.eyJ1IjoibGJydXR0aSIsImEiOiJjaXl5NXMxNWswMDA2MzJwZGViZDNxOG05In0.R5OZB0r3ov9HeduzarkLjw'
-        region='it' geolocate='true'></monithon-map> -->
     <div id="container">
+        <div id="mapContainer">
+            <monithon-map
+                api-key='pk.eyJ1IjoibGJydXR0aSIsImEiOiJjaXl5NXMxNWswMDA2MzJwZGViZDNxOG05In0.R5OZB0r3ov9HeduzarkLjw'
+                region='it' geolocate='true'></monithon-map>
+        </div>
+        <div id="panelContainer">
+            <div id="filterContainer">
+                <mat-chip-list aria-label="Fish selection" multiple="true">
+                    <mat-chip selectable="true">tema 1</mat-chip>
+                    <mat-chip selectable="true">tema 2</mat-chip>
+                    <mat-chip selectable="true">tema 3</mat-chip>
+                    <mat-chip selectable="true">tema 4</mat-chip>
+                </mat-chip-list>
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Categorie
+                        </mat-panel-title>
+
+                    </mat-expansion-panel-header>
+                    <div id="filtri">
+
+                        <div id="categorieDiSpesaContainer">
+                            <h2>carateristiche</h2>
+                            <mat-chip-list aria-label="Fish selection" multiple="true">
+                                <mat-chip selectable="true">tema 1</mat-chip>
+                                <mat-chip selectable="true">tema 2</mat-chip>
+                                <mat-chip selectable="true">tema 3</mat-chip>
+                                <mat-chip selectable="true">tema 4</mat-chip>
+                            </mat-chip-list>
+                        </div>
+
+                        <mat-expansion-panel id="resultContainer">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Budget, anno e stato
+                                </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+                            <div id="chartContainer">
+                                <h2>altre dimensioni</h2>
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col>
+                                            <h3>budget</h3>
+                                            <div #budgetChart id='budgetChartContanier'></div>
+                                        </ion-col>
+                                    </ion-row>
+
+                                    <ion-row>
+                                        <ion-col>
+                                            <h3>anno</h3>
+                                            <div #annoChart id='annoChartContanier'></div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </div>
+                        </mat-expansion-panel>
+
+
+
+                    </div>
+                </mat-expansion-panel>
+            </div>
+
+
+            <mat-expansion-panel id="resultContainer">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Progetti disponibili
+                    </mat-panel-title>
+
+                </mat-expansion-panel-header>
+
+            </mat-expansion-panel>
+        </div>
         <!-- filtri e dettaglio -->
-        <ion-grid>
+        <!-- <ion-grid>
             <ion-row>
-                <ion-col>
-                    <button mat-button>Basic</button>
-                </ion-col>
                 <ion-col>
                     <h1>filtri</h1>
                     <ion-grid>
@@ -61,6 +132,6 @@
                     </ion-list>
                 </ion-col>
             </ion-row>
-        </ion-grid>
+        </ion-grid> -->
     </div>
 </ion-content>
