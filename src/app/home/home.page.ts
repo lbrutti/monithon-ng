@@ -99,6 +99,19 @@ export class HomePage implements OnInit, AfterViewInit {
                     .xAxis()
                     .tickFormat((v: any) => `${binThresholds[v] / 1000} K`);
 
+                // this.budgetChart
+                //     .width('120')
+                //controllare dimensioni
+                // this.budgetChart
+                //     .width((element) => {
+                //         var width = element && element.getBoundingClientRect && element.getBoundingClientRect().width;
+                //         return (width && width > this.budgetChart.minWidth()) ? width : this.budgetChart.minWidth();
+                //     });
+                // this.budgetChart
+                //     .height(function (element) {
+                //         var height = element && element.getBoundingClientRect && element.getBoundingClientRect().height;
+                //         return (height && height > this.budgetChart.minHeight()) ? height : this.budgetChart.minHeight();
+                //     });
                 this.budgetChart.on("renderlet", (chart, filter) => {
                     //propagare evento per aggiornare la lista dei progetti
                     this.progetti = budgetDim.top(Infinity)
@@ -154,7 +167,7 @@ export class HomePage implements OnInit, AfterViewInit {
         console.dir(progetto);
 
         console.log('onProgettoClick');
-        
+
     }
 }
 

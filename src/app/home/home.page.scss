@@ -53,10 +53,16 @@ monithon-map {
 
 }
 
+
 #filtri {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+#budgetChartContanier{
+    // width:240px;
+    // height: auto;
 }
 
 ion-grid {
