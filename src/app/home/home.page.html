@@ -13,15 +13,18 @@
         </ion-toolbar>
     </ion-header> -->
 
+    <!-- Mappa -->
+    <!-- <monithon-map
+        api-key='pk.eyJ1IjoibGJydXR0aSIsImEiOiJjaXl5NXMxNWswMDA2MzJwZGViZDNxOG05In0.R5OZB0r3ov9HeduzarkLjw'
+        region='it' geolocate='true'></monithon-map> -->
     <div id="container">
-        <!-- Mappa -->
-        <!-- <monithon-map
-            api-key='pk.eyJ1IjoibGJydXR0aSIsImEiOiJjaXl5NXMxNWswMDA2MzJwZGViZDNxOG05In0.R5OZB0r3ov9HeduzarkLjw'
-            region='it' geolocate='true'></monithon-map> -->
         <!-- filtri e dettaglio -->
         <ion-grid>
             <ion-row>
-                <ion-col size="8">
+                <ion-col>
+                    <button mat-button>Basic</button>
+                </ion-col>
+                <ion-col>
                     <h1>filtri</h1>
                     <ion-grid>
                         <ion-row>
@@ -38,19 +41,23 @@
 
                                     <ion-row>
                                         <h3>anno</h3>
-                                        <div #annoChart  id='annoChartContanier'></div>
+                                        <div #annoChart id='annoChartContanier'></div>
                                     </ion-row>
                                 </ion-grid>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
                 </ion-col>
-                <ion-col size="4">
+            </ion-row>
+        </ion-grid>
+        <ion-grid>
+            <ion-row>
+                <ion-col>
                     <h1>lista progetti</h1>
                     <ion-list>
-                    <ion-item *ngFor="let item of this.progetti" (click)="this.onProgettoClick($event, item)">
-                        <h3>{{item.ocTitoloProgetto}}</h3>
-                    </ion-item>
+                        <ion-item *ngFor="let item of this.progetti" (click)="this.onProgettoClick($event, item)">
+                            <h3>{{item.ocTitoloProgetto}}</h3>
+                        </ion-item>
                     </ion-list>
                 </ion-col>
             </ion-row>
