@@ -17,7 +17,7 @@ import { MaterialModule } from './material.module';
     declarations: [AppComponent],
     entryComponents: [],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, BrowserAnimationsModule, MaterialModule],
-    exports:[MaterialModule],
+    exports: [MaterialModule],
     providers: [
         StatusBar,
         SplashScreen,

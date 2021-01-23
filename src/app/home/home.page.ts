@@ -6,6 +6,11 @@ import { Progetto } from '../model/progetto/progetto';
 import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
 import { MonithonMockedService } from '../services/monithonMockService/monithon-mocked.service';
 
+import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js';
+import { environment } from 'src/environments/environment';
+import * as mapboxgl from 'mapbox-gl';
+
+
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -18,22 +23,58 @@ export class HomePage implements OnInit, AfterViewInit {
     @ViewChild('budgetChart') budgetChartContainer: HTMLElement;
     @ViewChild('annoChart') annoChartContainer: HTMLElement;
     @ViewChild('categorieDiSpesaContainer') categorieDiSpesaContainer: ElementRef;
+    @ViewChild('mapContainer') mapContainer: ElementRef;
 
     progetti: Array<Progetto> = [];
 
     budgetChart: any;
     annoChart: any;
 
+    map: mapboxgl.Map;
     constructor(
         private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
-        private renderer:Renderer2) { }
+        private renderer: Renderer2
+    ) { }
 
     ngOnInit(): void {
         this.monitonMockedService.mirageJsServer();
+        (mapboxgl as any).accessToken = environment.mapbox.accessToken;
+
+    }
+
+    renderMap(): void {
+       
+        this.map = new mapboxgl.Map({
+            container: this.mapContainer.nativeElement,
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [30.5, 50.5],
+            zoom: 6,
+            antialias: true,
+            attributionControl: false
+        });
+        let geocoderOptions: any = {
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+        };
+        geocoderOptions.country = 'ITA';
+
+        let geocoder: MapboxGeocoder = new MapboxGeocoder(geocoderOptions);
+        this.map.addControl(
+            geocoder
+        );
+
+        this.map.addControl(new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true
+        }));
+
     }
 
     ngAfterViewInit(): void {
+
 
         this.getProgetti()
             .toPromise()
@@ -105,10 +146,10 @@ export class HomePage implements OnInit, AfterViewInit {
                 //     .width('120')
                 //controllare dimensioni
                 // this.budgetChart
-                    // .width((element) => {
-                    //     var width = element && element.getBoundingClientRect && element.getBoundingClientRect().width;
-                    //     return (width && width > this.budgetChart.minWidth()) ? width : this.budgetChart.minWidth();
-                    // });
+                // .width((element) => {
+                //     var width = element && element.getBoundingClientRect && element.getBoundingClientRect().width;
+                //     return (width && width > this.budgetChart.minWidth()) ? width : this.budgetChart.minWidth();
+                // });
                 // this.budgetChart
                 //     .height(function (element) {
                 //         var height = element && element.getBoundingClientRect && element.getBoundingClientRect().height;
@@ -153,10 +194,12 @@ export class HomePage implements OnInit, AfterViewInit {
 
                 dc.renderAll();
             });
+        this.renderMap();
 
 
 
     }
+
 
     private getProgetti(): Observable<any> {
         return this.monithonApiService.getProgetti();
@@ -173,12 +216,12 @@ export class HomePage implements OnInit, AfterViewInit {
 
     }
 
-    public onChartPanelOpen(){
-        this.renderer.addClass(this.categorieDiSpesaContainer.nativeElement ,'shrink');
+    public onChartPanelOpen() {
+        this.renderer.addClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
     }
 
     public onChartPanelClose() {
-        this.renderer.removeClass(this.categorieDiSpesaContainer.nativeElement ,'shrink');
+        this.renderer.removeClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
     }
 }
 

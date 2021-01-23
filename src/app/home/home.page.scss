@@ -3,8 +3,8 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    // top: 50%;
+    // transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -29,15 +29,13 @@
     text-decoration: none;
 }
 
-monithon-map {
-    width: 100%;
-    height: 100%;
-}
+
 
 #panelContainer {
     display: flex;
     align-items: baseline;
     margin-top: auto;
+    z-index: 100;
 }
 
 #filterContainer {
@@ -53,7 +51,7 @@ monithon-map {
 }
 
 #chartPanelContainer {
-   
+
     width: 50%;
     z-index: 10;
     display: flex;
@@ -74,7 +72,6 @@ monithon-map {
     }
 }
 
-
 #filtri {
     display: flex;
     flex-direction: row;
@@ -87,17 +84,16 @@ monithon-map {
 }
 
 
-
-
-ion-grid {
-    margin: auto;
-    background: green;
+#mapContainer {
+    // display: block;
+    width: 100vw;
+    height:100vh;
+    top: 0;
+    left: 0;
+    position: absolute;
 }
 
-ion-row {
-    background: goldenrod;
-}
 
-ion-col {
-    background: coral;
+.mapboxgl-ctrl-bottom-left {
+    display: none;
 }
