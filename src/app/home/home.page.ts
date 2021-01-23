@@ -44,11 +44,11 @@ export class HomePage implements OnInit, AfterViewInit {
     }
 
     renderMap(): void {
-       
+
         this.map = new mapboxgl.Map({
             container: this.mapContainer.nativeElement,
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [30.5, 50.5],
+            center: [12.3959144, 41.909986], //roma
             zoom: 6,
             antialias: true,
             attributionControl: false
@@ -71,18 +71,51 @@ export class HomePage implements OnInit, AfterViewInit {
             trackUserLocation: true
         }));
 
+        this.map.on('load', () => {
+            this.getProgetti()
+                .toPromise()
+                .then((data: Array<any>) => {
+                    console.log('bind data');
+                    this.map.addSource('progetti', {
+                        type: 'geojson',
+                        data: {
+                            "type": "FeatureCollection",
+                            "features": data.map((p: any) => {
+                                return {
+                                    "type": "Feature",
+                                    "properties": { "name": "Null Island" },
+                                    "geometry": {
+                                        "type": "Point",
+                                        "coordinates": [parseFloat(p.coordinate.lng.replace(',', '.')), parseFloat(p.coordinate.lat.replace(',', '.'))]
+                                    }
+
+                                };
+                            })
+                        }
+                    });
+                    this.map.addLayer({
+                        'id': 'progetti-layer',
+                        'type': 'circle',
+                        'source': 'progetti',
+                        'paint': {
+                            'circle-radius': 6,
+                            'circle-color': '#B42222'
+                        }
+                    });
+                });
+
+            
+        })
+
     }
 
     ngAfterViewInit(): void {
 
+        this.renderMap();
 
         this.getProgetti()
             .toPromise()
-            .then((data: Array<any>) => {
-
-                //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-                //Add 'implements AfterViewInit' to the class.
-
+            .then(data => {
                 this.budgetChart = new dc.BarChart((this.budgetChartContainer as any).nativeElement);
                 this.annoChart = new dc.BarChart((this.annoChartContainer as any).nativeElement);
 
@@ -167,7 +200,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
                 });
 
-                let annoRange = d3.extent(listaProgetti, (d) =>
+                let annoRange = d3.extent(listaProgetti, (d:any) =>
                     moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year()
                 );
                 annoRange[1] += 2;
@@ -194,7 +227,6 @@ export class HomePage implements OnInit, AfterViewInit {
 
                 dc.renderAll();
             });
-        this.renderMap();
 
 
 
