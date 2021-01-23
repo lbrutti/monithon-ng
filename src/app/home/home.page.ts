@@ -72,39 +72,48 @@ export class HomePage implements OnInit, AfterViewInit {
         }));
 
         this.map.on('load', () => {
+            this.map
+                .addSource('progetti', {
+                    type: 'geojson',
+                    data: {
+                        "type": "FeatureCollection",
+                        "features": []
+                    }
+                });
+
+            this.map
+                .addLayer({
+                    'id': 'progetti-layer',
+                    'type': 'circle',
+                    'source': 'progetti',
+                    'paint': {
+                        'circle-radius': 6,
+                        'circle-color': '#B42222'
+                    }
+                });
+
             this.getProgetti()
                 .toPromise()
                 .then((data: Array<any>) => {
-                    console.log('bind data');
-                    this.map.addSource('progetti', {
-                        type: 'geojson',
-                        data: {
-                            "type": "FeatureCollection",
-                            "features": data.map((p: any) => {
-                                return {
-                                    "type": "Feature",
-                                    "properties": { "name": "Null Island" },
-                                    "geometry": {
-                                        "type": "Point",
-                                        "coordinates": [parseFloat(p.coordinate.lng.replace(',', '.')), parseFloat(p.coordinate.lat.replace(',', '.'))]
-                                    }
+                    let progettiSource: mapboxgl.GeoJSONSource = (this.map.getSource('progetti') as mapboxgl.GeoJSONSource);
+                    progettiSource.setData({
+                        "type": "FeatureCollection",
+                        "features": data.map((p: any) => {
+                            return {
+                                "type": "Feature",
+                                "properties": {},
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [parseFloat(p.coordinate.lng.replace(',', '.')), parseFloat(p.coordinate.lat.replace(',', '.'))]
+                                }
+                            };
+                        })
 
-                                };
-                            })
-                        }
                     });
-                    this.map.addLayer({
-                        'id': 'progetti-layer',
-                        'type': 'circle',
-                        'source': 'progetti',
-                        'paint': {
-                            'circle-radius': 6,
-                            'circle-color': '#B42222'
-                        }
-                    });
+
                 });
 
-            
+
         })
 
     }
@@ -113,6 +122,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
         this.renderMap();
 
+        //rendere il resto dei filtri slave rispetto alla mappa
         this.getProgetti()
             .toPromise()
             .then(data => {
@@ -200,7 +210,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
                 });
 
-                let annoRange = d3.extent(listaProgetti, (d:any) =>
+                let annoRange = d3.extent(listaProgetti, (d: any) =>
                     moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year()
                 );
                 annoRange[1] += 2;
