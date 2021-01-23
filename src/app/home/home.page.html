@@ -1,17 +1,4 @@
-<!-- <ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title>
-            Blank
-        </ion-title>
-    </ion-toolbar>
-</ion-header> -->
-
 <ion-content [fullscreen]="true">
-    <!-- <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-    </ion-header> -->
 
     <!-- Mappa -->
     <div id="container">
@@ -22,6 +9,7 @@
         </div>
         <div id="panelContainer">
             <div id="filterContainer">
+                <!-- parametrizzare con temi -->
                 <mat-chip-list aria-label="Fish selection" multiple="true">
                     <mat-chip selectable="true">tema 1</mat-chip>
                     <mat-chip selectable="true">tema 2</mat-chip>
@@ -38,44 +26,57 @@
                     </mat-expansion-panel-header>
                     <div id="filtri">
 
-                        <div id="categorieDiSpesaContainer">
-                            <h2>carateristiche</h2>
+                        <div #categorieDiSpesaContainer id="categorieDiSpesaContainer">
+                            <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
                             <mat-chip-list aria-label="Fish selection" multiple="true">
                                 <mat-chip selectable="true">tema 1</mat-chip>
                                 <mat-chip selectable="true">tema 2</mat-chip>
                                 <mat-chip selectable="true">tema 3</mat-chip>
                                 <mat-chip selectable="true">tema 4</mat-chip>
+                                <mat-chip selectable="true">tema 5</mat-chip>
+                                <mat-chip selectable="true">tema 6</mat-chip>
+                                <mat-chip selectable="true">tema 7</mat-chip>
+                                <mat-chip selectable="true">tema 8</mat-chip>
+                                <mat-chip selectable="true">tema 9</mat-chip>
+                                <mat-chip selectable="true">tema 10</mat-chip>
+                                <mat-chip selectable="true">tema 11</mat-chip>
+                                <mat-chip selectable="true">tema 12</mat-chip>
+                                <mat-chip selectable="true">tema 13</mat-chip>
+                                <mat-chip selectable="true">tema 14</mat-chip>
+                                <mat-chip selectable="true">tema 15</mat-chip>
+                                <mat-chip selectable="true">tema 16</mat-chip>
+                                <mat-chip selectable="true">tema 17</mat-chip>
+                                <mat-chip selectable="true">tema 18</mat-chip>
+                              
+
                             </mat-chip-list>
                         </div>
+                        <div id="chartPanelContainer">
+                            <mat-expansion-panel id="chartPanel" (opened)="this.onChartPanelOpen()" (closed)="this.onChartPanelClose()">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Budget, anno e stato
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div id="chartContainer">
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col>
+                                                <h3>budget</h3>
+                                                <div #budgetChart id='budgetChartContanier'></div>
+                                            </ion-col>
+                                        </ion-row>
 
-                        <mat-expansion-panel id="resultContainer">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    Budget, anno e stato
-                                </mat-panel-title>
-
-                            </mat-expansion-panel-header>
-                            <div id="chartContainer">
-                                <h2>altre dimensioni</h2>
-                                <ion-grid>
-                                    <ion-row>
-                                        <ion-col>
-                                            <h3>budget</h3>
-                                            <div #budgetChart id='budgetChartContanier'></div>
-                                        </ion-col>
-                                    </ion-row>
-
-                                    <ion-row>
-                                        <ion-col>
-                                            <h3>anno</h3>
-                                            <div #annoChart id='annoChartContanier'></div>
-                                        </ion-col>
-                                    </ion-row>
-                                </ion-grid>
-                            </div>
-                        </mat-expansion-panel>
-
-
+                                        <ion-row>
+                                            <ion-col>
+                                                <h3>anno</h3>
+                                                <div #annoChart id='annoChartContanier'></div>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </div>
+                            </mat-expansion-panel>
+                        </div>
 
                     </div>
                 </mat-expansion-panel>
@@ -87,55 +88,11 @@
                     <mat-panel-title>
                         Progetti disponibili
                     </mat-panel-title>
-
                 </mat-expansion-panel-header>
                 <mat-list>
                     <mat-list-item *ngFor="let item of this.progetti"> {{item.ocTitoloProgetto}} </mat-list-item>
-
                 </mat-list>
-
             </mat-expansion-panel>
         </div>
-        <!-- filtri e dettaglio -->
-        <!-- <ion-grid>
-            <ion-row>
-                <ion-col>
-                    <h1>filtri</h1>
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col size="6">
-                                <h2>carrateristiche</h2>
-                            </ion-col>
-                            <ion-col size="6">
-                                <h2>altre dimensioni</h2>
-                                <ion-grid>
-                                    <ion-row>
-                                        <h3>budget</h3>
-                                        <div #budgetChart id='budgetChartContanier'></div>
-                                    </ion-row>
-
-                                    <ion-row>
-                                        <h3>anno</h3>
-                                        <div #annoChart id='annoChartContanier'></div>
-                                    </ion-row>
-                                </ion-grid>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-        <ion-grid>
-            <ion-row>
-                <ion-col>
-                    <h1>lista progetti</h1>
-                    <ion-list>
-                        <ion-item *ngFor="let item of this.progetti" (click)="this.onProgettoClick($event, item)">
-                            <h3>{{item.ocTitoloProgetto}}</h3>
-                        </ion-item>
-                    </ion-list>
-                </ion-col>
-            </ion-row>
-        </ion-grid> -->
     </div>
 </ion-content>

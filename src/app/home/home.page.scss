@@ -50,7 +50,28 @@ monithon-map {
     width: 34vw;
     max-height: 100vh;
     align-self: flex-end;
+}
 
+#chartPanelContainer {
+   
+    width: 50%;
+    z-index: 10;
+    display: flex;
+    align-self: flex-end;
+}
+
+#chartPanel {
+    width: 100%;
+    height: 100%;
+    align-self: flex-end;
+}
+
+#categorieDiSpesaContainer {
+    width: 100%;
+
+    &.shrink {
+        width: 50%;
+    }
 }
 
 
@@ -60,10 +81,13 @@ monithon-map {
     justify-content: space-between;
 }
 
-#budgetChartContanier{
-    // width:240px;
-    // height: auto;
+#budgetChartContanier {
+    width: 100%;
+    height: 240px;
 }
+
+
+
 
 ion-grid {
     margin: auto;

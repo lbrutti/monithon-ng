@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
@@ -17,6 +17,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     @ViewChild('budgetChart') budgetChartContainer: HTMLElement;
     @ViewChild('annoChart') annoChartContainer: HTMLElement;
+    @ViewChild('categorieDiSpesaContainer') categorieDiSpesaContainer: ElementRef;
 
     progetti: Array<Progetto> = [];
 
@@ -25,7 +26,8 @@ export class HomePage implements OnInit, AfterViewInit {
 
     constructor(
         private monitonMockedService: MonithonMockedService,
-        private monithonApiService: MonithonApiService) { }
+        private monithonApiService: MonithonApiService,
+        private renderer:Renderer2) { }
 
     ngOnInit(): void {
         this.monitonMockedService.mirageJsServer();
@@ -103,13 +105,14 @@ export class HomePage implements OnInit, AfterViewInit {
                 //     .width('120')
                 //controllare dimensioni
                 // this.budgetChart
-                //     .width((element) => {
-                //         var width = element && element.getBoundingClientRect && element.getBoundingClientRect().width;
-                //         return (width && width > this.budgetChart.minWidth()) ? width : this.budgetChart.minWidth();
-                //     });
+                    // .width((element) => {
+                    //     var width = element && element.getBoundingClientRect && element.getBoundingClientRect().width;
+                    //     return (width && width > this.budgetChart.minWidth()) ? width : this.budgetChart.minWidth();
+                    // });
                 // this.budgetChart
                 //     .height(function (element) {
                 //         var height = element && element.getBoundingClientRect && element.getBoundingClientRect().height;
+                //         height *= 0.5;
                 //         return (height && height > this.budgetChart.minHeight()) ? height : this.budgetChart.minHeight();
                 //     });
                 this.budgetChart.on("renderlet", (chart, filter) => {
@@ -168,6 +171,14 @@ export class HomePage implements OnInit, AfterViewInit {
 
         console.log('onProgettoClick');
 
+    }
+
+    public onChartPanelOpen(){
+        this.renderer.addClass(this.categorieDiSpesaContainer.nativeElement ,'shrink');
+    }
+
+    public onChartPanelClose() {
+        this.renderer.removeClass(this.categorieDiSpesaContainer.nativeElement ,'shrink');
     }
 }
 
