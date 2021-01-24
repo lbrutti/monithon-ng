@@ -87,7 +87,7 @@ export class HomePage implements OnInit, AfterViewInit {
                     'type': 'circle',
                     'source': 'progetti',
                     'paint': {
-                        'circle-radius': 6,
+                        'circle-radius': 3,
                         'circle-color': '#B42222'
                     }
                 });
