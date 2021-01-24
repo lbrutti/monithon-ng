@@ -47,7 +47,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
         this.map = new mapboxgl.Map({
             container: this.mapContainer.nativeElement,
-            style: 'mapbox://styles/mapbox/streets-v11',
+            style: environment.mapbox.style,
             center: [12.3959144, 41.909986], //roma
             zoom: 6,
             antialias: true,
