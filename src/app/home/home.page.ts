@@ -9,7 +9,8 @@ import { MonithonMockedService } from '../services/monithonMockService/monithon-
 import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js';
 import { environment } from 'src/environments/environment';
 import * as mapboxgl from 'mapbox-gl';
-
+import MapboxDraw from "@mapbox/mapbox-gl-draw";
+import  RadiusMode  from '../utils/radiusMode';
 
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
@@ -70,7 +71,13 @@ export class HomePage implements OnInit, AfterViewInit {
             },
             trackUserLocation: true
         }));
-
+        let Draw = new MapboxDraw({
+            defaultMode: 'radius',
+            modes: Object.assign({
+                'radius': RadiusMode
+            }, MapboxDraw.modes)
+        });
+        this.map.addControl(Draw, 'top-left');
         this.map.on('load', () => {
             this.map
                 .addSource('progetti', {
