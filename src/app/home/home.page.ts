@@ -10,7 +10,12 @@ import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbo
 import { environment } from 'src/environments/environment';
 import * as mapboxgl from 'mapbox-gl';
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
-import  RadiusMode  from '../utils/radiusMode';
+import {
+    CircleMode,
+    DragCircleMode,
+    DirectMode,
+    SimpleSelectMode
+} from 'mapbox-gl-draw-circle';
 
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
@@ -41,17 +46,16 @@ export class HomePage implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.monitonMockedService.mirageJsServer();
         (mapboxgl as any).accessToken = environment.mapbox.accessToken;
-
     }
 
-    renderMap(): void {
+    renderMap(container): void {
 
         this.map = new mapboxgl.Map({
-            container: this.mapContainer.nativeElement,
+            container: container,
             style: environment.mapbox.style,
             center: [12.3959144, 41.909986], //roma
             zoom: 6,
-            antialias: true,
+            antialias: false,
             attributionControl: false
         });
         let geocoderOptions: any = {
@@ -71,13 +75,19 @@ export class HomePage implements OnInit, AfterViewInit {
             },
             trackUserLocation: true
         }));
-        let Draw = new MapboxDraw({
-            defaultMode: 'radius',
-            modes: Object.assign({
-                'radius': RadiusMode
-            }, MapboxDraw.modes)
+        let draw = new MapboxDraw({
+            defaultMode: "draw_circle",
+            userProperties: true,
+            modes: {
+                ...MapboxDraw.modes,
+                draw_circle: CircleMode,
+                drag_circle: DragCircleMode,
+                direct_select: DirectMode,
+                simple_select: SimpleSelectMode
+            }
         });
-        this.map.addControl(Draw, 'top-left');
+        this.map.addControl(draw, 'top-left');
+        draw.changeMode('draw_circle', { initialRadiusInKm: 50.5 });
         this.map.on('load', () => {
             this.map
                 .addSource('progetti', {
@@ -127,7 +137,9 @@ export class HomePage implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
 
-        this.renderMap();
+        // this.mapContainer.nativeElement.addEventListener('ready', ()=>{
+        this.renderMap(this.mapContainer.nativeElement);
+        // })
 
         //rendere il resto dei filtri slave rispetto alla mappa
         this.getProgetti()
