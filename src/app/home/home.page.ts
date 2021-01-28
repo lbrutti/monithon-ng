@@ -10,12 +10,14 @@ import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbo
 import { environment } from 'src/environments/environment';
 import * as mapboxgl from 'mapbox-gl';
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
+
 import {
     CircleMode,
     DragCircleMode,
     DirectMode,
     SimpleSelectMode
 } from 'mapbox-gl-draw-circle';
+import circle from '@turf/circle';
 
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
@@ -33,10 +35,17 @@ export class HomePage implements OnInit, AfterViewInit {
 
     progetti: Array<Progetto> = [];
 
+    //variabili charts
     budgetChart: any;
     annoChart: any;
 
+    // variabili per mappa
     map: mapboxgl.Map;
+    geocoder: MapboxGeocoder;
+    draw: MapboxDraw;
+    rangeProgetti: any;
+    geolocator: mapboxgl.GeolocateControl;
+
     constructor(
         private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
@@ -64,19 +73,31 @@ export class HomePage implements OnInit, AfterViewInit {
         };
         geocoderOptions.country = 'ITA';
 
-        let geocoder: MapboxGeocoder = new MapboxGeocoder(geocoderOptions);
+        this.geocoder = new MapboxGeocoder(geocoderOptions);
         this.map.addControl(
-            geocoder
+            this.geocoder
         );
 
-        this.map.addControl(new mapboxgl.GeolocateControl({
+        this.geocoder.on('result', evt => {
+            console.log('geocoder.result');
+            console.dir(evt);
+            let center = evt.result.center;
+            this.drawRangeProgetti(center);
+        })
+        this.geolocator = new mapboxgl.GeolocateControl({
             positionOptions: {
                 enableHighAccuracy: true
             },
-            trackUserLocation: true
-        }));
-        let draw = new MapboxDraw({
-            defaultMode: "draw_circle",
+            trackUserLocation: false
+        });
+        this.geolocator.on('geolocate', (evt:any)=> {
+
+            console.log('A geolocate event has occurred.')
+            console.dir(evt);
+            this.drawRangeProgetti([evt.coords.longitude, evt.coords.latitude])
+        });
+        this.map.addControl(this.geolocator);
+        this.draw = new MapboxDraw({
             userProperties: true,
             modes: {
                 ...MapboxDraw.modes,
@@ -86,8 +107,15 @@ export class HomePage implements OnInit, AfterViewInit {
                 simple_select: SimpleSelectMode
             }
         });
-        this.map.addControl(draw, 'top-left');
-        draw.changeMode('draw_circle', { initialRadiusInKm: 50.5 });
+        this.map.addControl(this.draw, 'top-left');
+        this.map.on('draw.update', (evt) => {
+            console.log('draw.update');
+            console.dir(evt);
+        });
+        this.map.on('draw.create', (evt) => {
+            console.log('draw.create');
+            console.dir(evt);
+        });
         this.map.on('load', () => {
             this.map
                 .addSource('progetti', {
@@ -135,11 +163,23 @@ export class HomePage implements OnInit, AfterViewInit {
 
     }
 
+    private drawRangeProgetti(center: any) {
+        this.rangeProgetti = {
+            id: 'range_progetti',
+            type: 'Feature',
+            properties: { center: center, isCircle: true, radiusInKm: 10 },
+            geometry: {
+                type: 'Polygon', coordinates: circle(center, 10).geometry.coordinates
+            }
+        };
+        this.draw.add(this.rangeProgetti);
+    }
+
     ngAfterViewInit(): void {
 
-        // this.mapContainer.nativeElement.addEventListener('ready', ()=>{
-        this.renderMap(this.mapContainer.nativeElement);
-        // })
+        setTimeout(() => {
+            this.renderMap(this.mapContainer.nativeElement);
+        }, 50);
 
         //rendere il resto dei filtri slave rispetto alla mappa
         this.getProgetti()
