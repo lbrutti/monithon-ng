@@ -69,21 +69,23 @@ export class HomePage implements OnInit, AfterViewInit {
         });
         let geocoderOptions: any = {
             accessToken: mapboxgl.accessToken,
-            mapboxgl: mapboxgl
+            mapboxgl: mapboxgl,
+            countries:'it',
+            minLength:3
         };
-        geocoderOptions.country = 'ITA';
 
         this.geocoder = new MapboxGeocoder(geocoderOptions);
+        
+
+        this.geocoder.on('result', evt => {
+            let center = evt.result.center;
+            this.drawRangeProgetti(center);
+        });
+
         this.map.addControl(
             this.geocoder
         );
 
-        this.geocoder.on('result', evt => {
-            console.log('geocoder.result');
-            console.dir(evt);
-            let center = evt.result.center;
-            this.drawRangeProgetti(center);
-        })
         this.geolocator = new mapboxgl.GeolocateControl({
             positionOptions: {
                 enableHighAccuracy: true
@@ -91,10 +93,8 @@ export class HomePage implements OnInit, AfterViewInit {
             trackUserLocation: false
         });
         this.geolocator.on('geolocate', (evt:any)=> {
-
-            console.log('A geolocate event has occurred.')
-            console.dir(evt);
-            this.drawRangeProgetti([evt.coords.longitude, evt.coords.latitude])
+            let center = [evt.coords.longitude, evt.coords.latitude];
+            this.drawRangeProgetti(center);
         });
         this.map.addControl(this.geolocator);
         this.draw = new MapboxDraw({
@@ -116,6 +116,7 @@ export class HomePage implements OnInit, AfterViewInit {
             console.log('draw.create');
             console.dir(evt);
         });
+        
         this.map.on('load', () => {
             this.map
                 .addSource('progetti', {
@@ -136,7 +137,6 @@ export class HomePage implements OnInit, AfterViewInit {
                         'circle-color': '#B42222'
                     }
                 });
-
             this.getProgetti()
                 .toPromise()
                 .then((data: Array<any>) => {
@@ -163,6 +163,11 @@ export class HomePage implements OnInit, AfterViewInit {
 
     }
 
+    /**
+     * 
+     * Disegna cerchio attorno alla località selezionata 
+     * @param center 
+     */
     private drawRangeProgetti(center: any) {
         this.rangeProgetti = {
             id: 'range_progetti',
