@@ -3,6 +3,7 @@ export class Progetto {
     ocTitoloProgetto: string;
     ocStatoProgetto: string;
     ocDataInizioProgetto: number;
+    ocCodTemaSintentico: number;
     ocTemaSintetico: string;
     ocFinanzTotPubNetto: string;
     ocCodCategoriaSpesa: string;
