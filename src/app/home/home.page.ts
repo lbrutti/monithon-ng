@@ -187,8 +187,9 @@ export class HomePage implements OnInit, AfterViewInit {
         return this.monithonApiService.getProgetti();
     }
 
-    public toggleLayer(layerId:string):void{
-        console.log(layerId);
+    public toggleLayer(tema: any): void {
+        tema.isSelected = !tema.isSelected;
+        console.log(tema);
     }
     /**
      * onProgettoClick

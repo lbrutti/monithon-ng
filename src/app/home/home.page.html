@@ -3,13 +3,14 @@
     <!-- Mappa -->
     <div id="container">
         <div #mapContainer id="mapContainer">
-        
+
         </div>
         <div id="panelContainer">
             <div id="filterContainer">
                 <!-- parametrizzare con temi -->
                 <mat-chip-list aria-label="Fish selection" multiple="true">
-                    <mat-chip  *ngFor="let tema of this.temi" selectable="true" (click)="this.toggleLayer(tema)">{{tema.ocTemaSintetico}}</mat-chip>
+                    <mat-chip *ngFor="let tema of this.temi" [selected]="tema.isSelected" (click)="this.toggleLayer(tema)">
+                        {{tema.ocTemaSintetico}}</mat-chip>
                 </mat-chip-list>
 
                 <mat-expansion-panel>
@@ -42,12 +43,13 @@
                                 <mat-chip selectable="true">tema 16</mat-chip>
                                 <mat-chip selectable="true">tema 17</mat-chip>
                                 <mat-chip selectable="true">tema 18</mat-chip>
-                              
+
 
                             </mat-chip-list>
                         </div>
                         <div id="chartPanelContainer">
-                            <mat-expansion-panel id="chartPanel" (opened)="this.onChartPanelOpen()" (closed)="this.onChartPanelClose()">
+                            <mat-expansion-panel id="chartPanel" (opened)="this.onChartPanelOpen()"
+                                (closed)="this.onChartPanelClose()">
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>
                                         Budget, anno e stato
