@@ -8,6 +8,7 @@ import { MonithonMockedService } from '../services/monithonMockService/monithon-
 
 
 import { MonithonMapService } from '../services/monithonMapService/monithonmap.service';
+import { Layer } from 'mapbox-gl';
 
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
@@ -29,6 +30,7 @@ export class HomePage implements OnInit, AfterViewInit {
     budgetChart: any;
     annoChart: any;
 
+    temi: Array<any>;
     constructor(
         private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
@@ -49,6 +51,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .toPromise()
             .then(data => {
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data);
+                this.temi = this.monithonMap.getMapLayersId();
                 return data;
             })
             .then(data => {
@@ -184,6 +187,9 @@ export class HomePage implements OnInit, AfterViewInit {
         return this.monithonApiService.getProgetti();
     }
 
+    public toggleLayer(layerId:string):void{
+        console.log(layerId);
+    }
     /**
      * onProgettoClick
      */

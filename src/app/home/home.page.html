@@ -9,10 +9,7 @@
             <div id="filterContainer">
                 <!-- parametrizzare con temi -->
                 <mat-chip-list aria-label="Fish selection" multiple="true">
-                    <mat-chip selectable="true">tema 1</mat-chip>
-                    <mat-chip selectable="true">tema 2</mat-chip>
-                    <mat-chip selectable="true">tema 3</mat-chip>
-                    <mat-chip selectable="true">tema 4</mat-chip>
+                    <mat-chip  *ngFor="let tema of this.temi" selectable="true" (click)="this.toggleLayer(tema)">{{tema.ocTemaSintetico}}</mat-chip>
                 </mat-chip-list>
 
                 <mat-expansion-panel>
