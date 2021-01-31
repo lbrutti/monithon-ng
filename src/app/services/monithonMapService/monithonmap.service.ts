@@ -12,6 +12,7 @@ import {
     SimpleSelectMode
 } from 'mapbox-gl-draw-circle';
 import circle from '@turf/circle';
+import { Progetto } from 'src/app/model/progetto/progetto';
 
 @Injectable({
     providedIn: 'root'
@@ -22,10 +23,11 @@ export class MonithonMapService {
     geolocator: mapboxgl.GeolocateControl;
     draw: any;
     rangeProgetti: any;
+    temi: Array<any>=[];
 
     constructor() {
         mapboxgl.accessToken = environment.mapbox.accessToken;
-     }
+    }
 
     public renderMap(container, data): void {
 
@@ -97,40 +99,56 @@ export class MonithonMapService {
                     }
                 });
 
-            this.map
-                .addLayer({
-                    'id': 'progetti-layer',
-                    'type': 'circle',
-                    'source': 'progetti',
-                    'paint': {
-                        'circle-radius': 3,
-                        'circle-color': '#B42222'
-                    }
-                });
-
             let progettiSource: mapboxgl.GeoJSONSource = (this.map.getSource('progetti') as mapboxgl.GeoJSONSource);
-            progettiSource.setData({
-                "type": "FeatureCollection",
-                "features": data.map((p: any) => {
-                    return {
-                        "type": "Feature",
-                        "properties": {},
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [parseFloat(p.coordinate.lng.replace(',', '.')), parseFloat(p.coordinate.lat.replace(',', '.'))]
-                        }
-                    };
-                })
+            let progettiData = this.progettiToFeatureCollection(data);
+            progettiSource.setData(progettiData);
+            let colors = {'tema-4':'#ff0000','tema-5': '#00ff00', 'tema-6':'#ff00ff'};
+            progettiData.features.forEach(feature => {
+                let ocCodTemaSintetico = feature.properties.ocCodTemaSintetico;
+                let layerId = `tema-${ocCodTemaSintetico}`;
+                //aggiungere un layer per ogni categoria di progetto (vedi https://codepen.io/lbrutti/pen/WNoeKLW?editors=0010)
+                if (!this.map.getLayer(layerId)) {
+                    let ocTemaSintetico = feature.properties.ocTemaSintetico;
+                    this.temi.push({ 'layerId': layerId, 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': ocTemaSintetico});
+                    this.map
+                        .addLayer({
+                            'id': layerId,
+                            'type': 'circle',
+                            'source': 'progetti',
+                            'paint': {
+                                'circle-radius': 3,
+                                'circle-color': colors[layerId] || '#ffffff'
+                            },
+                            'filter': ['==', 'ocCodTemaSintetico', ocCodTemaSintetico]
+                        });
+                }
 
             });
-
-
-
-
-        })
+        });
 
     }
-  
+
+    private progettiToFeatureCollection(data: Array<Progetto>): any {
+        return {
+            "type": "FeatureCollection",
+            "features": data.map((p: Progetto) => {
+                let properties: any = Object.assign({}, p);
+                return {
+                    "type": "Feature",
+                    "properties": properties,
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [p.coordinate.lng, p.coordinate.lat]
+                    }
+                };
+            })
+        };
+    }
+
+    public getMapLayersId():Array<any>{
+        return this.temi;
+    }
+
     /**
      * 
      * Disegna cerchio attorno alla località selezionata 
