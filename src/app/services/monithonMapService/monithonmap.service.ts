@@ -21,6 +21,7 @@ import lodash from 'lodash';
 export class MonithonMapService {
 
 
+
     map: mapboxgl.Map;
     geocoder: any;
     geolocator: mapboxgl.GeolocateControl;
@@ -192,18 +193,37 @@ export class MonithonMapService {
         this.getCategorie();
     }
 
+    filterByCategoria(categoria: any) {
+        let categorieSelezionate = this.categorie.filter(cat => cat.isSelected);
+        let temiSelezionati = this.temi.filter(tema => tema.isSelected);
+
+        temiSelezionati.map(tema => {
+            let layerId = `tema-${tema.ocCodTemaSintetico}`;
+            this.map.setFilter(layerId, [
+                'match',
+                ['get', 'ocCodCategoriaSpesa'],
+                categorieSelezionate.map(function (cat) {
+                    return cat.ocCodCategoriaSpesa;
+                }),
+                true,
+                false
+            ]);
+        });
+        // throw new Error('Method not implemented.');
+    }
+
     getCategorie(): any[] {
         let categorieAttive = this.features.features.filter(feature => lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico));
         this.categorie = lodash.chain(categorieAttive)
-        .map(feature => {
-            let categoria = {
-                ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,
-                ocDescrCategoriaSpesa: feature.properties.ocDescrCategoriaSpesa
-            }
-            return categoria;
-        })
-        .uniqBy(cat => cat.ocCodCategoriaSpesa)
-        .value();
+            .map(feature => {
+                let categoria = {
+                    ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,
+                    ocDescrCategoriaSpesa: feature.properties.ocDescrCategoriaSpesa
+                }
+                return categoria;
+            })
+            .uniqBy(cat => cat.ocCodCategoriaSpesa)
+            .value();
 
         return this.categorie;
     }

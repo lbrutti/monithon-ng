@@ -193,7 +193,11 @@ export class HomePage implements OnInit, AfterViewInit {
     public toggleLayer(tema: any): void {
         tema.isSelected = !tema.isSelected;
         this.monithonMap.toggleLayer(tema);
+    }
 
+    public filterByCategoria(categoria: any): void {
+        categoria.isSelected = !categoria.isSelected;
+        this.monithonMap.filterByCategoria(categoria);
     }
     /**
      * onProgettoClick
