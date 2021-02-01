@@ -30,7 +30,8 @@ export class HomePage implements OnInit, AfterViewInit {
     budgetChart: any;
     annoChart: any;
 
-    temi: Array<any>;
+    temi: Array<any> = [];
+    categorie: Array<any> = [];
     constructor(
         private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
@@ -51,7 +52,8 @@ export class HomePage implements OnInit, AfterViewInit {
             .toPromise()
             .then(data => {
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data);
-                this.temi = this.monithonMap.getMapLayersId();
+                this.temi = this.monithonMap.getTemi();
+                this.categorie = this.monithonMap.getCategorie();
                 return data;
             })
             .then(data => {
@@ -190,7 +192,7 @@ export class HomePage implements OnInit, AfterViewInit {
     public toggleLayer(tema: any): void {
         tema.isSelected = !tema.isSelected;
         this.monithonMap.toggleLayer(tema);
-        console.log(tema);
+
     }
     /**
      * onProgettoClick

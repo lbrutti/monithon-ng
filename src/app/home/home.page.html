@@ -25,26 +25,7 @@
                         <div #categorieDiSpesaContainer id="categorieDiSpesaContainer">
                             <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
                             <mat-chip-list aria-label="Fish selection" multiple="true">
-                                <mat-chip selectable="true">tema 1</mat-chip>
-                                <mat-chip selectable="true">tema 2</mat-chip>
-                                <mat-chip selectable="true">tema 3</mat-chip>
-                                <mat-chip selectable="true">tema 4</mat-chip>
-                                <mat-chip selectable="true">tema 5</mat-chip>
-                                <mat-chip selectable="true">tema 6</mat-chip>
-                                <mat-chip selectable="true">tema 7</mat-chip>
-                                <mat-chip selectable="true">tema 8</mat-chip>
-                                <mat-chip selectable="true">tema 9</mat-chip>
-                                <mat-chip selectable="true">tema 10</mat-chip>
-                                <mat-chip selectable="true">tema 11</mat-chip>
-                                <mat-chip selectable="true">tema 12</mat-chip>
-                                <mat-chip selectable="true">tema 13</mat-chip>
-                                <mat-chip selectable="true">tema 14</mat-chip>
-                                <mat-chip selectable="true">tema 15</mat-chip>
-                                <mat-chip selectable="true">tema 16</mat-chip>
-                                <mat-chip selectable="true">tema 17</mat-chip>
-                                <mat-chip selectable="true">tema 18</mat-chip>
-
-
+                                <mat-chip selectable="true" *ngFor="let categoria of this.monithonMap.categorie" [selected]="categoria.isSelected" (click)="this.toggleLayer(categoria)">{{categoria.ocDescrCategoriaSpesa}}</mat-chip>
                             </mat-chip-list>
                         </div>
                         <div id="chartPanelContainer">

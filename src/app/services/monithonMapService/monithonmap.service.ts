@@ -13,18 +13,22 @@ import {
 } from 'mapbox-gl-draw-circle';
 import circle from '@turf/circle';
 import { Progetto } from 'src/app/model/progetto/progetto';
+import lodash from 'lodash';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MonithonMapService {
 
+
     map: mapboxgl.Map;
     geocoder: any;
     geolocator: mapboxgl.GeolocateControl;
     draw: any;
     rangeProgetti: any;
-    temi: Array<any>=[];
+    temi: Array<any> = [];
+    features: any;
+    categorie: any;
 
     constructor() {
         mapboxgl.accessToken = environment.mapbox.accessToken;
@@ -101,16 +105,17 @@ export class MonithonMapService {
                 });
 
             let progettiSource: mapboxgl.GeoJSONSource = (this.map.getSource('progetti') as mapboxgl.GeoJSONSource);
-            let progettiData = this.progettiToFeatureCollection(data);
-            progettiSource.setData(progettiData);
-            let colors = {'tema-4':'#ff0000','tema-5': '#00ff00', 'tema-6':'#0000ff'};
-            progettiData.features.forEach(feature => {
+            this.progettiToFeatureCollection(data);
+            this.getCategorie();
+            progettiSource.setData(this.features);
+            let colors = { 'tema-4': '#ff0000', 'tema-5': '#00ff00', 'tema-6': '#0000ff' };
+            this.features.features.forEach(feature => {
                 let ocCodTemaSintetico = feature.properties.ocCodTemaSintetico;
                 let layerId = `tema-${ocCodTemaSintetico}`;
                 //aggiungere un layer per ogni categoria di progetto (vedi https://codepen.io/lbrutti/pen/WNoeKLW?editors=0010)
                 if (!this.map.getLayer(layerId)) {
                     let ocTemaSintetico = feature.properties.ocTemaSintetico;
-                    this.temi.push({ 'layerId': layerId, 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': ocTemaSintetico, 'isSelected':true});
+                    this.temi.push({ 'layerId': layerId, 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': ocTemaSintetico, 'isSelected': true });
                     this.map
                         .addLayer({
                             'id': layerId,
@@ -130,7 +135,7 @@ export class MonithonMapService {
     }
 
     private progettiToFeatureCollection(data: Array<Progetto>): any {
-        return {
+        this.features = {
             "type": "FeatureCollection",
             "features": data.map((p: Progetto) => {
                 let properties: any = Object.assign({}, p);
@@ -146,7 +151,7 @@ export class MonithonMapService {
         };
     }
 
-    public getMapLayersId():Array<any>{
+    public getTemi(): Array<any> {
         return this.temi;
     }
 
@@ -174,6 +179,21 @@ export class MonithonMapService {
             'visibility',
             tema.isSelected ? 'visible' : 'none'
         );
+    }
+
+    getCategorie(): any[] {
+        this.categorie = lodash.chain(this.features.features)
+            .map(feature => {
+            let categoria = {
+                ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,
+                ocDescrCategoriaSpesa: feature.properties.ocDescrCategoriaSpesa
+            }
+            return categoria;
+        })
+            .uniqBy(cat => cat.ocCodCategoriaSpesa)
+            .value();
+        
+        return this.categorie;
     }
 
 }
