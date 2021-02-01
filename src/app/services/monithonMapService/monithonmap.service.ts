@@ -18,6 +18,7 @@ import { Progetto } from 'src/app/model/progetto/progetto';
     providedIn: 'root'
 })
 export class MonithonMapService {
+
     map: mapboxgl.Map;
     geocoder: any;
     geolocator: mapboxgl.GeolocateControl;
@@ -102,14 +103,14 @@ export class MonithonMapService {
             let progettiSource: mapboxgl.GeoJSONSource = (this.map.getSource('progetti') as mapboxgl.GeoJSONSource);
             let progettiData = this.progettiToFeatureCollection(data);
             progettiSource.setData(progettiData);
-            let colors = {'tema-4':'#ff0000','tema-5': '#00ff00', 'tema-6':'#ff00ff'};
+            let colors = {'tema-4':'#ff0000','tema-5': '#00ff00', 'tema-6':'#0000ff'};
             progettiData.features.forEach(feature => {
                 let ocCodTemaSintetico = feature.properties.ocCodTemaSintetico;
                 let layerId = `tema-${ocCodTemaSintetico}`;
                 //aggiungere un layer per ogni categoria di progetto (vedi https://codepen.io/lbrutti/pen/WNoeKLW?editors=0010)
                 if (!this.map.getLayer(layerId)) {
                     let ocTemaSintetico = feature.properties.ocTemaSintetico;
-                    this.temi.push({ 'layerId': layerId, 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': ocTemaSintetico});
+                    this.temi.push({ 'layerId': layerId, 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': ocTemaSintetico, 'isSelected':true});
                     this.map
                         .addLayer({
                             'id': layerId,
@@ -164,6 +165,15 @@ export class MonithonMapService {
             }
         };
         this.draw.add(this.rangeProgetti);
+    }
+
+    toggleLayer(tema: any) {
+        let layerId = `tema-${tema.ocCodTemaSintetico}`;
+        this.map.setLayoutProperty(
+            layerId,
+            'visibility',
+            tema.isSelected ? 'visible' : 'none'
+        );
     }
 
 }

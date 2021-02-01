@@ -1275,8 +1275,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7096857",
-            "lng": "13,2326466"
+            "lat": 43.7096857,
+            "lng": 13.2326466
         },
         "hasReport": true
     },
@@ -1291,8 +1291,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,4761111",
-            "lng": "13,6330556"
+            "lat": 43.4761111,
+            "lng": 13.6330556
         },
         "hasReport": true
     },
@@ -1307,8 +1307,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7066922",
-            "lng": "13,1846033"
+            "lat": 43.7066922,
+            "lng": 13.1846033
         },
         "hasReport": true
     },
@@ -1323,8 +1323,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,4748824",
-            "lng": "13,0410837"
+            "lat": 43.4748824,
+            "lng": 13.0410837
         },
         "hasReport": true
     },
@@ -1339,8 +1339,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,6820908",
-            "lng": "13,2790527"
+            "lat": 43.6820908,
+            "lng": 13.2790527
         },
         "hasReport": true
     },
@@ -1355,8 +1355,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -1371,8 +1371,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -1387,8 +1387,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,6158299",
-            "lng": "13,518915"
+            "lat": 43.6158299,
+            "lng": 13.518915
         },
         "hasReport": true
     },
@@ -1403,8 +1403,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,4443141",
-            "lng": "13,6436986"
+            "lat": 43.4443141,
+            "lng": 13.6436986
         },
         "hasReport": true
     },
@@ -1419,8 +1419,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,490915",
-            "lng": "13,568777"
+            "lat": 43.490915,
+            "lng": 13.568777
         },
         "hasReport": true
     },
@@ -1435,8 +1435,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,550105",
-            "lng": "13,4168622"
+            "lat": 43.550105,
+            "lng": 13.4168622
         },
         "hasReport": true
     },
@@ -1451,8 +1451,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -1467,8 +1467,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,6158299",
-            "lng": "13,518915"
+            "lat": 43.6158299,
+            "lng": 13.518915
         },
         "hasReport": true
     },
@@ -1483,8 +1483,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,6158299",
-            "lng": "13,518915"
+            "lat": 43.6158299,
+            "lng": 13.518915
         },
         "hasReport": true
     },
@@ -1499,8 +1499,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4312903",
-            "lng": "12,8573502"
+            "lat": 43.4312903,
+            "lng": 12.8573502
         },
         "hasReport": true
     },
@@ -1515,8 +1515,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,6158299",
-            "lng": "13,518915"
+            "lat": 43.6158299,
+            "lng": 13.518915
         },
         "hasReport": true
     },
@@ -1531,8 +1531,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "59",
         "ocDescrCategoriaSpesa": "Sviluppo delle infrastrutture culturali",
         "coordinate": {
-            "lat": "43,4360045",
-            "lng": "12,8586412"
+            "lat": 43.4360045,
+            "lng": 12.8586412
         },
         "hasReport": true
     },
@@ -1547,8 +1547,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,612717",
-            "lng": "13,158168"
+            "lat": 43.612717,
+            "lng": 13.158168
         },
         "hasReport": true
     },
@@ -1563,8 +1563,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,5270861",
-            "lng": "13,2463797"
+            "lat": 43.5270861,
+            "lng": 13.2463797
         },
         "hasReport": true
     },
@@ -1579,8 +1579,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "59",
         "ocDescrCategoriaSpesa": "Sviluppo delle infrastrutture culturali",
         "coordinate": {
-            "lat": "43,5218089",
-            "lng": "13,2441627"
+            "lat": 43.5218089,
+            "lng": 13.2441627
         },
         "hasReport": true
     },
@@ -1595,8 +1595,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,6168737",
-            "lng": "13,5170765"
+            "lat": 43.6168737,
+            "lng": 13.5170765
         },
         "hasReport": true
     },
@@ -1611,8 +1611,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,5270861",
-            "lng": "13,2463797"
+            "lat": 43.5270861,
+            "lng": 13.2463797
         },
         "hasReport": true
     },
@@ -1627,8 +1627,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,5270861",
-            "lng": "13,2463797"
+            "lat": 43.5270861,
+            "lng": 13.2463797
         },
         "hasReport": true
     },
@@ -1643,8 +1643,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4326531",
-            "lng": "13,1866586"
+            "lat": 43.4326531,
+            "lng": 13.1866586
         },
         "hasReport": true
     },
@@ -1659,8 +1659,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,3355002",
-            "lng": "12,9034382"
+            "lat": 43.3355002,
+            "lng": 12.9034382
         },
         "hasReport": true
     },
@@ -1675,8 +1675,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,3449672",
-            "lng": "12,9062153"
+            "lat": 43.3449672,
+            "lng": 12.9062153
         },
         "hasReport": true
     },
@@ -1691,8 +1691,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,3449672",
-            "lng": "12,9062153"
+            "lat": 43.3449672,
+            "lng": 12.9062153
         },
         "hasReport": true
     },
@@ -1707,8 +1707,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4291392",
-            "lng": "12,935166"
+            "lat": 43.4291392,
+            "lng": 12.935166
         },
         "hasReport": true
     },
@@ -1723,8 +1723,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,4861459",
-            "lng": "13,4817969"
+            "lat": 43.4861459,
+            "lng": 13.4817969
         },
         "hasReport": true
     },
@@ -1739,8 +1739,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "56",
         "ocDescrCategoriaSpesa": "Tutela e sviluppo del patrimonio naturale",
         "coordinate": {
-            "lat": "43,5808096",
-            "lng": "13,0246911"
+            "lat": 43.5808096,
+            "lng": 13.0246911
         },
         "hasReport": true
     },
@@ -1755,8 +1755,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,5766937",
-            "lng": "13,2061722"
+            "lat": 43.5766937,
+            "lng": 13.2061722
         },
         "hasReport": true
     },
@@ -1771,8 +1771,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,5804029",
-            "lng": "13,166622"
+            "lat": 43.5804029,
+            "lng": 13.166622
         },
         "hasReport": true
     },
@@ -1787,8 +1787,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,5256583",
-            "lng": "13,062963"
+            "lat": 43.5256583,
+            "lng": 13.062963
         },
         "hasReport": true
     },
@@ -1803,8 +1803,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "56",
         "ocDescrCategoriaSpesa": "Tutela e sviluppo del patrimonio naturale",
         "coordinate": {
-            "lat": "43,5371076",
-            "lng": "13,2899882"
+            "lat": 43.5371076,
+            "lng": 13.2899882
         },
         "hasReport": true
     },
@@ -1819,8 +1819,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4413345",
-            "lng": "13,6056396"
+            "lat": 43.4413345,
+            "lng": 13.6056396
         },
         "hasReport": true
     },
@@ -1835,8 +1835,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4319705",
-            "lng": "13,6082737"
+            "lat": 43.4319705,
+            "lng": 13.6082737
         },
         "hasReport": true
     },
@@ -1851,8 +1851,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4383438",
-            "lng": "13,6068867"
+            "lat": 43.4383438,
+            "lng": 13.6068867
         },
         "hasReport": true
     },
@@ -1867,8 +1867,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7148218",
-            "lng": "13,2181036"
+            "lat": 43.7148218,
+            "lng": 13.2181036
         },
         "hasReport": true
     },
@@ -1883,8 +1883,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -1899,8 +1899,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7084591",
-            "lng": "13,2344723"
+            "lat": 43.7084591,
+            "lng": 13.2344723
         },
         "hasReport": true
     },
@@ -1915,8 +1915,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -1931,8 +1931,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7225328",
-            "lng": "13,2142781"
+            "lat": 43.7225328,
+            "lng": 13.2142781
         },
         "hasReport": true
     },
@@ -1947,8 +1947,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7171987",
-            "lng": "13,1724578"
+            "lat": 43.7171987,
+            "lng": 13.1724578
         },
         "hasReport": true
     },
@@ -1963,8 +1963,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7151758",
-            "lng": "13,224758"
+            "lat": 43.7151758,
+            "lng": 13.224758
         },
         "hasReport": true
     },
@@ -1979,8 +1979,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,5325469",
-            "lng": "13,6051674"
+            "lat": 43.5325469,
+            "lng": 13.6051674
         },
         "hasReport": true
     },
@@ -1995,8 +1995,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,6105194",
-            "lng": "13,5103008"
+            "lat": 43.6105194,
+            "lng": 13.5103008
         },
         "hasReport": true
     },
@@ -2011,8 +2011,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,5212428",
-            "lng": "13,2420911"
+            "lat": 43.5212428,
+            "lng": 13.2420911
         },
         "hasReport": true
     },
@@ -2027,8 +2027,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,5997269",
-            "lng": "13,325532"
+            "lat": 43.5997269,
+            "lng": 13.325532
         },
         "hasReport": true
     },
@@ -2043,8 +2043,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "56",
         "ocDescrCategoriaSpesa": "Tutela e sviluppo del patrimonio naturale",
         "coordinate": {
-            "lat": "43,4471034",
-            "lng": "13,0154659"
+            "lat": 43.4471034,
+            "lng": 13.0154659
         },
         "hasReport": true
     },
@@ -2059,8 +2059,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,578705",
-            "lng": "13,3521829"
+            "lat": 43.578705,
+            "lng": 13.3521829
         },
         "hasReport": true
     },
@@ -2075,8 +2075,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "56",
         "ocDescrCategoriaSpesa": "Tutela e sviluppo del patrimonio naturale",
         "coordinate": {
-            "lat": "43,3494084",
-            "lng": "12,92619"
+            "lat": 43.3494084,
+            "lng": 12.92619
         },
         "hasReport": true
     },
@@ -2091,8 +2091,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,530777",
-            "lng": "13,552923"
+            "lat": 43.530777,
+            "lng": 13.552923
         },
         "hasReport": true
     },
@@ -2107,8 +2107,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "56",
         "ocDescrCategoriaSpesa": "Tutela e sviluppo del patrimonio naturale",
         "coordinate": {
-            "lat": "43,5634345",
-            "lng": "13,2505178"
+            "lat": 43.5634345,
+            "lng": 13.2505178
         },
         "hasReport": true
     },
@@ -2123,8 +2123,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,639684",
-            "lng": "13,3109985"
+            "lat": 43.639684,
+            "lng": 13.3109985
         },
         "hasReport": true
     },
@@ -2139,8 +2139,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,5431619",
-            "lng": "13,3856226"
+            "lat": 43.5431619,
+            "lng": 13.3856226
         },
         "hasReport": true
     },
@@ -2155,8 +2155,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,499921",
-            "lng": "12,939746"
+            "lat": 43.499921,
+            "lng": 12.939746
         },
         "hasReport": true
     },
@@ -2171,8 +2171,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,6127599",
-            "lng": "13,1572752"
+            "lat": 43.6127599,
+            "lng": 13.1572752
         },
         "hasReport": true
     },
@@ -2187,8 +2187,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4961036",
-            "lng": "13,3108492"
+            "lat": 43.4961036,
+            "lng": 13.3108492
         },
         "hasReport": true
     },
@@ -2203,8 +2203,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "56",
         "ocDescrCategoriaSpesa": "Tutela e sviluppo del patrimonio naturale",
         "coordinate": {
-            "lat": "43,6167855",
-            "lng": "13,5188848"
+            "lat": 43.6167855,
+            "lng": 13.5188848
         },
         "hasReport": true
     },
@@ -2219,8 +2219,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,52736",
-            "lng": "13,4416903"
+            "lat": 43.52736,
+            "lng": 13.4416903
         },
         "hasReport": true
     },
@@ -2235,8 +2235,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,5249549",
-            "lng": "13,3937978"
+            "lat": 43.5249549,
+            "lng": 13.3937978
         },
         "hasReport": true
     },
@@ -2251,8 +2251,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,671747",
-            "lng": "13,1063535"
+            "lat": 43.671747,
+            "lng": 13.1063535
         },
         "hasReport": true
     },
@@ -2267,8 +2267,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,6073717",
-            "lng": "12,9763244"
+            "lat": 43.6073717,
+            "lng": 12.9763244
         },
         "hasReport": true
     },
@@ -2283,8 +2283,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,3188834",
-            "lng": "12,9860296"
+            "lat": 43.3188834,
+            "lng": 12.9860296
         },
         "hasReport": true
     },
@@ -2299,8 +2299,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,6179716",
-            "lng": "13,515591"
+            "lat": 43.6179716,
+            "lng": 13.515591
         },
         "hasReport": true
     },
@@ -2315,8 +2315,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "59",
         "ocDescrCategoriaSpesa": "Sviluppo delle infrastrutture culturali",
         "coordinate": {
-            "lat": "43,486718",
-            "lng": "13,4844786"
+            "lat": 43.486718,
+            "lng": 13.4844786
         },
         "hasReport": true
     },
@@ -2331,8 +2331,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,6073642",
-            "lng": "13,5124658"
+            "lat": 43.6073642,
+            "lng": 13.5124658
         },
         "hasReport": true
     },
@@ -2347,8 +2347,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,5270861",
-            "lng": "13,2463797"
+            "lat": 43.5270861,
+            "lng": 13.2463797
         },
         "hasReport": true
     },
@@ -2363,8 +2363,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,4744199",
-            "lng": "13,1148347"
+            "lat": 43.4744199,
+            "lng": 13.1148347
         },
         "hasReport": true
     },
@@ -2379,8 +2379,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "59",
         "ocDescrCategoriaSpesa": "Sviluppo delle infrastrutture culturali",
         "coordinate": {
-            "lat": "43,4028547",
-            "lng": "13,0072526"
+            "lat": 43.4028547,
+            "lng": 13.0072526
         },
         "hasReport": true
     },
@@ -2395,8 +2395,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "59",
         "ocDescrCategoriaSpesa": "Sviluppo delle infrastrutture culturali",
         "coordinate": {
-            "lat": "43,5189205",
-            "lng": "13,6181668"
+            "lat": 43.5189205,
+            "lng": 13.6181668
         },
         "hasReport": true
     },
@@ -2411,8 +2411,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4805968",
-            "lng": "13,1364848"
+            "lat": 43.4805968,
+            "lng": 13.1364848
         },
         "hasReport": true
     },
@@ -2427,8 +2427,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,488214",
-            "lng": "13,629606"
+            "lat": 43.488214,
+            "lng": 13.629606
         },
         "hasReport": true
     },
@@ -2443,8 +2443,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7361814",
-            "lng": "13,1917204"
+            "lat": 43.7361814,
+            "lng": 13.1917204
         },
         "hasReport": true
     },
@@ -2459,8 +2459,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,6821134",
-            "lng": "13,279016"
+            "lat": 43.6821134,
+            "lng": 13.279016
         },
         "hasReport": true
     },
@@ -2475,8 +2475,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7151758",
-            "lng": "13,224758"
+            "lat": 43.7151758,
+            "lng": 13.224758
         },
         "hasReport": true
     },
@@ -2491,8 +2491,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,5625225",
-            "lng": "13,5826134"
+            "lat": 43.5625225,
+            "lng": 13.5826134
         },
         "hasReport": true
     },
@@ -2507,8 +2507,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,4967281",
-            "lng": "13,6250946"
+            "lat": 43.4967281,
+            "lng": 13.6250946
         },
         "hasReport": true
     },
@@ -2523,8 +2523,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4463181",
-            "lng": "13,116565"
+            "lat": 43.4463181,
+            "lng": 13.116565
         },
         "hasReport": true
     },
@@ -2539,8 +2539,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4445537",
-            "lng": "13,6046814"
+            "lat": 43.4445537,
+            "lng": 13.6046814
         },
         "hasReport": true
     },
@@ -2555,8 +2555,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7008288",
-            "lng": "13,2466219"
+            "lat": 43.7008288,
+            "lng": 13.2466219
         },
         "hasReport": true
     },
@@ -2571,8 +2571,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7231093",
-            "lng": "13,2132598"
+            "lat": 43.7231093,
+            "lng": 13.2132598
         },
         "hasReport": true
     },
@@ -2587,8 +2587,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,5628386",
-            "lng": "13,2763585"
+            "lat": 43.5628386,
+            "lng": 13.2763585
         },
         "hasReport": true
     },
@@ -2603,8 +2603,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -2619,8 +2619,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,335907",
-            "lng": "12,9044838"
+            "lat": 43.335907,
+            "lng": 12.9044838
         },
         "hasReport": true
     },
@@ -2635,8 +2635,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "59",
         "ocDescrCategoriaSpesa": "Sviluppo delle infrastrutture culturali",
         "coordinate": {
-            "lat": "43,4410346",
-            "lng": "13,6109412"
+            "lat": 43.4410346,
+            "lng": 13.6109412
         },
         "hasReport": true
     },
@@ -2651,8 +2651,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7346496",
-            "lng": "13,194245"
+            "lat": 43.7346496,
+            "lng": 13.194245
         },
         "hasReport": true
     },
@@ -2667,8 +2667,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "59",
         "ocDescrCategoriaSpesa": "Sviluppo delle infrastrutture culturali",
         "coordinate": {
-            "lat": "43,44816",
-            "lng": "13,0140907"
+            "lat": 43.44816,
+            "lng": 13.0140907
         },
         "hasReport": true
     },
@@ -2683,8 +2683,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,5784484",
-            "lng": "13,2217604"
+            "lat": 43.5784484,
+            "lng": 13.2217604
         },
         "hasReport": true
     },
@@ -2699,8 +2699,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,2970333",
-            "lng": "12,873029"
+            "lat": 43.2970333,
+            "lng": 12.873029
         },
         "hasReport": true
     },
@@ -2715,8 +2715,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4398241",
-            "lng": "13,6075145"
+            "lat": 43.4398241,
+            "lng": 13.6075145
         },
         "hasReport": true
     },
@@ -2731,8 +2731,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,4397131",
-            "lng": "13,6192917"
+            "lat": 43.4397131,
+            "lng": 13.6192917
         },
         "hasReport": true
     },
@@ -2747,8 +2747,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "59",
         "ocDescrCategoriaSpesa": "Sviluppo delle infrastrutture culturali",
         "coordinate": {
-            "lat": "43,6171442",
-            "lng": "13,5127759"
+            "lat": 43.6171442,
+            "lng": 13.5127759
         },
         "hasReport": true
     },
@@ -2763,8 +2763,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,5309814",
-            "lng": "13,5525802"
+            "lat": 43.5309814,
+            "lng": 13.5525802
         },
         "hasReport": true
     },
@@ -2779,8 +2779,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,4767515",
-            "lng": "13,6361377"
+            "lat": 43.4767515,
+            "lng": 13.6361377
         },
         "hasReport": true
     },
@@ -2795,8 +2795,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7009001",
-            "lng": "13,2469048"
+            "lat": 43.7009001,
+            "lng": 13.2469048
         },
         "hasReport": true
     },
@@ -2811,8 +2811,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,4823458",
-            "lng": "12,9976686"
+            "lat": 43.4823458,
+            "lng": 12.9976686
         },
         "hasReport": true
     },
@@ -2827,8 +2827,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,5124814",
-            "lng": "13,4216702"
+            "lat": 43.5124814,
+            "lng": 13.4216702
         },
         "hasReport": true
     },
@@ -2843,8 +2843,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,4882633",
-            "lng": "13,5291668"
+            "lat": 43.4882633,
+            "lng": 13.5291668
         },
         "hasReport": true
     },
@@ -2859,8 +2859,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,6282768",
-            "lng": "13,4027815"
+            "lat": 43.6282768,
+            "lng": 13.4027815
         },
         "hasReport": true
     },
@@ -2875,8 +2875,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,706756",
-            "lng": "13,23682"
+            "lat": 43.706756,
+            "lng": 13.23682
         },
         "hasReport": true
     },
@@ -2891,8 +2891,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,725776",
-            "lng": "13,2060752"
+            "lat": 43.725776,
+            "lng": 13.2060752
         },
         "hasReport": true
     },
@@ -2907,8 +2907,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7361814",
-            "lng": "13,1917204"
+            "lat": 43.7361814,
+            "lng": 13.1917204
         },
         "hasReport": true
     },
@@ -2923,8 +2923,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7238013",
-            "lng": "13,2118028"
+            "lat": 43.7238013,
+            "lng": 13.2118028
         },
         "hasReport": true
     },
@@ -2939,8 +2939,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,51914",
-            "lng": "13,5928"
+            "lat": 43.51914,
+            "lng": 13.5928
         },
         "hasReport": true
     },
@@ -2955,8 +2955,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,6158299",
-            "lng": "13,518915"
+            "lat": 43.6158299,
+            "lng": 13.518915
         },
         "hasReport": true
     },
@@ -2971,8 +2971,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,4363424",
-            "lng": "13,1883748"
+            "lat": 43.4363424,
+            "lng": 13.1883748
         },
         "hasReport": true
     },
@@ -2987,8 +2987,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,407987",
-            "lng": "12,936847"
+            "lat": 43.407987,
+            "lng": 12.936847
         },
         "hasReport": true
     },
@@ -3003,8 +3003,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,4977671",
-            "lng": "13,6249215"
+            "lat": 43.4977671,
+            "lng": 13.6249215
         },
         "hasReport": true
     },
@@ -3019,8 +3019,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,616867",
-            "lng": "13,4243638"
+            "lat": 43.616867,
+            "lng": 13.4243638
         },
         "hasReport": true
     },
@@ -3035,8 +3035,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "56",
         "ocDescrCategoriaSpesa": "Tutela e sviluppo del patrimonio naturale",
         "coordinate": {
-            "lat": "43,4562943",
-            "lng": "13,6286299"
+            "lat": 43.4562943,
+            "lng": 13.6286299
         },
         "hasReport": true
     },
@@ -3051,8 +3051,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,5147749",
-            "lng": "13,5832227"
+            "lat": 43.5147749,
+            "lng": 13.5832227
         },
         "hasReport": true
     },
@@ -3067,8 +3067,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,69989",
-            "lng": "13,249"
+            "lat": 43.69989,
+            "lng": 13.249
         },
         "hasReport": true
     },
@@ -3083,8 +3083,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,5608791",
-            "lng": "13,6021938"
+            "lat": 43.5608791,
+            "lng": 13.6021938
         },
         "hasReport": true
     },
@@ -3099,8 +3099,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,7154806",
-            "lng": "13,2197376"
+            "lat": 43.7154806,
+            "lng": 13.2197376
         },
         "hasReport": true
     },
@@ -3115,8 +3115,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "58",
         "ocDescrCategoriaSpesa": "Tutela e conservazione del patrimonio culturale",
         "coordinate": {
-            "lat": "43,7152807",
-            "lng": "13,2194919"
+            "lat": 43.7152807,
+            "lng": 13.2194919
         },
         "hasReport": true
     },
@@ -3131,8 +3131,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,432505",
-            "lng": "13,18606"
+            "lat": 43.432505,
+            "lng": 13.18606
         },
         "hasReport": true
     },
@@ -3147,8 +3147,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,2287217",
-            "lng": "12,8681255"
+            "lat": 43.2287217,
+            "lng": 12.8681255
         },
         "hasReport": true
     },
@@ -3163,8 +3163,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3179,8 +3179,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "60",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi culturali",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3195,8 +3195,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3211,8 +3211,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "57",
         "ocDescrCategoriaSpesa": "Altra assistenza per migliorare i servizi turistici",
         "coordinate": {
-            "lat": "43,7148337",
-            "lng": "13,2177939"
+            "lat": 43.7148337,
+            "lng": 13.2177939
         },
         "hasReport": true
     },
@@ -3227,8 +3227,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,6236517",
-            "lng": "13,5110149"
+            "lat": 43.6236517,
+            "lng": 13.5110149
         },
         "hasReport": true
     },
@@ -3243,8 +3243,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,5651726",
-            "lng": "13,3856365"
+            "lat": 43.5651726,
+            "lng": 13.3856365
         },
         "hasReport": true
     },
@@ -3259,8 +3259,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,6133583",
-            "lng": "13,5085674"
+            "lat": 43.6133583,
+            "lng": 13.5085674
         },
         "hasReport": true
     },
@@ -3275,8 +3275,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,513985",
-            "lng": "13,620673"
+            "lat": 43.513985,
+            "lng": 13.620673
         },
         "hasReport": true
     },
@@ -3291,8 +3291,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,5250171",
-            "lng": "13,3977573"
+            "lat": 43.5250171,
+            "lng": 13.3977573
         },
         "hasReport": true
     },
@@ -3307,8 +3307,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,4871213",
-            "lng": "13,145121"
+            "lat": 43.4871213,
+            "lng": 13.145121
         },
         "hasReport": true
     },
@@ -3323,8 +3323,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,5248517",
-            "lng": "13,3938723"
+            "lat": 43.5248517,
+            "lng": 13.3938723
         },
         "hasReport": true
     },
@@ -3339,8 +3339,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,6220339",
-            "lng": "13,3702811"
+            "lat": 43.6220339,
+            "lng": 13.3702811
         },
         "hasReport": true
     },
@@ -3355,8 +3355,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,6220339",
-            "lng": "13,3702811"
+            "lat": 43.6220339,
+            "lng": 13.3702811
         },
         "hasReport": true
     },
@@ -3371,8 +3371,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,5830655",
-            "lng": "13,1690011"
+            "lat": 43.5830655,
+            "lng": 13.1690011
         },
         "hasReport": true
     },
@@ -3387,8 +3387,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,4871213",
-            "lng": "13,145121"
+            "lat": 43.4871213,
+            "lng": 13.145121
         },
         "hasReport": true
     },
@@ -3403,8 +3403,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,4631153",
-            "lng": "13,5514218"
+            "lat": 43.4631153,
+            "lng": 13.5514218
         },
         "hasReport": true
     },
@@ -3419,8 +3419,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,4815672",
-            "lng": "13,1385238"
+            "lat": 43.4815672,
+            "lng": 13.1385238
         },
         "hasReport": true
     },
@@ -3435,8 +3435,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,6006049",
-            "lng": "13,2721197"
+            "lat": 43.6006049,
+            "lng": 13.2721197
         },
         "hasReport": true
     },
@@ -3451,8 +3451,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,6006049",
-            "lng": "13,2721197"
+            "lat": 43.6006049,
+            "lng": 13.2721197
         },
         "hasReport": true
     },
@@ -3467,8 +3467,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3483,8 +3483,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3499,8 +3499,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3515,8 +3515,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3531,8 +3531,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3547,8 +3547,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3563,8 +3563,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3579,8 +3579,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3595,8 +3595,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3611,8 +3611,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3627,8 +3627,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3643,8 +3643,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3659,8 +3659,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3675,8 +3675,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3691,8 +3691,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3707,8 +3707,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3723,8 +3723,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3739,8 +3739,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3755,8 +3755,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,6488939",
-            "lng": "13,0472908"
+            "lat": 43.6488939,
+            "lng": 13.0472908
         },
         "hasReport": true
     },
@@ -3771,8 +3771,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3787,8 +3787,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3803,8 +3803,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6015272",
-            "lng": "13,5023602"
+            "lat": 43.6015272,
+            "lng": 13.5023602
         },
         "hasReport": true
     },
@@ -3819,8 +3819,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3835,8 +3835,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3851,8 +3851,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3867,8 +3867,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3883,8 +3883,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3899,8 +3899,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3915,8 +3915,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3931,8 +3931,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3947,8 +3947,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3963,8 +3963,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -3979,8 +3979,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -3995,8 +3995,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4011,8 +4011,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4027,8 +4027,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4043,8 +4043,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,5132966",
-            "lng": "13,620969"
+            "lat": 43.5132966,
+            "lng": 13.620969
         },
         "hasReport": true
     },
@@ -4059,8 +4059,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4075,8 +4075,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4091,8 +4091,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4107,8 +4107,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4123,8 +4123,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4139,8 +4139,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4155,8 +4155,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4171,8 +4171,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4187,8 +4187,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4203,8 +4203,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4219,8 +4219,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4235,8 +4235,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6022012",
-            "lng": "13,4973851"
+            "lat": 43.6022012,
+            "lng": 13.4973851
         },
         "hasReport": true
     },
@@ -4251,8 +4251,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4267,8 +4267,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4283,8 +4283,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,5195361",
-            "lng": "13,6179025"
+            "lat": 43.5195361,
+            "lng": 13.6179025
         },
         "hasReport": true
     },
@@ -4299,8 +4299,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,4312125",
-            "lng": "12,8573026"
+            "lat": 43.4312125,
+            "lng": 12.8573026
         },
         "hasReport": true
     },
@@ -4315,8 +4315,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4331,8 +4331,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4347,8 +4347,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4363,8 +4363,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "095",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi culturali pubblici",
         "coordinate": {
-            "lat": "43,6167855",
-            "lng": "13,5188848"
+            "lat": 43.6167855,
+            "lng": 13.5188848
         },
         "hasReport": true
     },
@@ -4379,8 +4379,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,4644804",
-            "lng": "13,546319"
+            "lat": 43.4644804,
+            "lng": 13.546319
         },
         "hasReport": true
     },
@@ -4395,8 +4395,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "095",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi culturali pubblici",
         "coordinate": {
-            "lat": "43,50787",
-            "lng": "13,6215113"
+            "lat": 43.50787,
+            "lng": 13.6215113
         },
         "hasReport": true
     },
@@ -4411,8 +4411,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4427,8 +4427,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,4410768",
-            "lng": "13,61017"
+            "lat": 43.4410768,
+            "lng": 13.61017
         },
         "hasReport": true
     },
@@ -4443,8 +4443,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "095",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi culturali pubblici",
         "coordinate": {
-            "lat": "43,6231554",
-            "lng": "13,3937027"
+            "lat": 43.6231554,
+            "lng": 13.3937027
         },
         "hasReport": true
     },
@@ -4459,8 +4459,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "095",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi culturali pubblici",
         "coordinate": {
-            "lat": "43,5195361",
-            "lng": "13,6179025"
+            "lat": 43.5195361,
+            "lng": 13.6179025
         },
         "hasReport": true
     },
@@ -4475,8 +4475,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "095",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi culturali pubblici",
         "coordinate": {
-            "lat": "43,6626136",
-            "lng": "13,3196604"
+            "lat": 43.6626136,
+            "lng": 13.3196604
         },
         "hasReport": true
     },
@@ -4491,8 +4491,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,4400679",
-            "lng": "13,606699"
+            "lat": 43.4400679,
+            "lng": 13.606699
         },
         "hasReport": true
     },
@@ -4507,8 +4507,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,4400679",
-            "lng": "13,606699"
+            "lat": 43.4400679,
+            "lng": 13.606699
         },
         "hasReport": true
     },
@@ -4523,8 +4523,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4539,8 +4539,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4555,8 +4555,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4571,8 +4571,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,4404369",
-            "lng": "13,6083401"
+            "lat": 43.4404369,
+            "lng": 13.6083401
         },
         "hasReport": true
     },
@@ -4587,8 +4587,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4603,8 +4603,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4619,8 +4619,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4635,8 +4635,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,4403063",
-            "lng": "13,6076647"
+            "lat": 43.4403063,
+            "lng": 13.6076647
         },
         "hasReport": true
     },
@@ -4651,8 +4651,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4667,8 +4667,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4683,8 +4683,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4699,8 +4699,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4715,8 +4715,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4731,8 +4731,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4747,8 +4747,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4763,8 +4763,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4779,8 +4779,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4795,8 +4795,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4811,8 +4811,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4827,8 +4827,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4843,8 +4843,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4859,8 +4859,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4875,8 +4875,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4891,8 +4891,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4907,8 +4907,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4923,8 +4923,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4939,8 +4939,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4955,8 +4955,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4971,8 +4971,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -4987,8 +4987,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5003,8 +5003,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5019,8 +5019,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5035,8 +5035,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5051,8 +5051,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5067,8 +5067,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5083,8 +5083,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5099,8 +5099,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5115,8 +5115,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5131,8 +5131,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5147,8 +5147,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5163,8 +5163,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5179,8 +5179,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5195,8 +5195,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5211,8 +5211,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5227,8 +5227,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5243,8 +5243,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5259,8 +5259,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5275,8 +5275,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5291,8 +5291,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5307,8 +5307,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5323,8 +5323,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5339,8 +5339,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5355,8 +5355,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5371,8 +5371,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5387,8 +5387,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5403,8 +5403,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5419,8 +5419,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6167855",
-            "lng": "13,5188848"
+            "lat": 43.6167855,
+            "lng": 13.5188848
         },
         "hasReport": true
     },
@@ -5435,8 +5435,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5451,8 +5451,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5467,8 +5467,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5483,8 +5483,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5499,8 +5499,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5515,8 +5515,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5531,8 +5531,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5547,8 +5547,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5563,8 +5563,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5579,8 +5579,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5595,8 +5595,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5611,8 +5611,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5627,8 +5627,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5643,8 +5643,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5659,8 +5659,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5675,8 +5675,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5691,8 +5691,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5707,8 +5707,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5723,8 +5723,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,5301043",
-            "lng": "13,5523002"
+            "lat": 43.5301043,
+            "lng": 13.5523002
         },
         "hasReport": true
     },
@@ -5739,8 +5739,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5755,8 +5755,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,3361195",
-            "lng": "12,905113"
+            "lat": 43.3361195,
+            "lng": 12.905113
         },
         "hasReport": true
     },
@@ -5771,8 +5771,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5787,8 +5787,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5803,8 +5803,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5819,8 +5819,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5835,8 +5835,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5851,8 +5851,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5867,8 +5867,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5883,8 +5883,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5899,8 +5899,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5915,8 +5915,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5931,8 +5931,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5947,8 +5947,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5963,8 +5963,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5979,8 +5979,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -5995,8 +5995,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6011,8 +6011,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6027,8 +6027,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6043,8 +6043,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6059,8 +6059,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6075,8 +6075,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6091,8 +6091,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6107,8 +6107,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6123,8 +6123,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6139,8 +6139,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6155,8 +6155,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6171,8 +6171,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6098591",
-            "lng": "13,5091686"
+            "lat": 43.6098591,
+            "lng": 13.5091686
         },
         "hasReport": true
     },
@@ -6187,8 +6187,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6203,8 +6203,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6219,8 +6219,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6235,8 +6235,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6251,8 +6251,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "093",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi turistici pubblici",
         "coordinate": {
-            "lat": "43,6101964",
-            "lng": "13,5093069"
+            "lat": 43.6101964,
+            "lng": 13.5093069
         },
         "hasReport": true
     },
@@ -6267,8 +6267,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": " ",
         "ocDescrCategoriaSpesa": " ",
         "coordinate": {
-            "lat": "43,530777",
-            "lng": "13,552923"
+            "lat": 43.530777,
+            "lng": 13.552923
         },
         "hasReport": true
     },
@@ -6283,8 +6283,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,6171442",
-            "lng": "13,5127759"
+            "lat": 43.6171442,
+            "lng": 13.5127759
         },
         "hasReport": true
     },
@@ -6299,8 +6299,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "095",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi culturali pubblici",
         "coordinate": {
-            "lat": "43,6161908",
-            "lng": "13,5054829"
+            "lat": 43.6161908,
+            "lng": 13.5054829
         },
         "hasReport": true
     },
@@ -6315,8 +6315,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "095",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi culturali pubblici",
         "coordinate": {
-            "lat": "43,510502",
-            "lng": "13,6221799"
+            "lat": 43.510502,
+            "lng": 13.6221799
         },
         "hasReport": true
     },
@@ -6331,8 +6331,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,6158299",
-            "lng": "13,518915"
+            "lat": 43.6158299,
+            "lng": 13.518915
         },
         "hasReport": true
     },
@@ -6347,8 +6347,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "095",
         "ocDescrCategoriaSpesa": "Sviluppo e promozione di servizi culturali pubblici",
         "coordinate": {
-            "lat": "43,5270861",
-            "lng": "13,2463797"
+            "lat": 43.5270861,
+            "lng": 13.2463797
         },
         "hasReport": true
     },
@@ -6363,8 +6363,8 @@ export const listaProgetti = [
         "ocCodCategoriaSpesa": "094",
         "ocDescrCategoriaSpesa": "Protezione, sviluppo e promozione del patrimonio culturale pubblico",
         "coordinate": {
-            "lat": "43,6158299",
-            "lng": "13,518915"
+            "lat": 43.6158299,
+            "lng": 13.518915
         },
         "hasReport": true
     }, {

@@ -189,6 +189,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     public toggleLayer(tema: any): void {
         tema.isSelected = !tema.isSelected;
+        this.monithonMap.toggleLayer(tema);
         console.log(tema);
     }
     /**
