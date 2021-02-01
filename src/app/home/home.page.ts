@@ -46,14 +46,15 @@ export class HomePage implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
 
-
         //rendere il resto dei filtri slave rispetto alla mappa
         this.getProgetti()
             .toPromise()
             .then(data => {
-                this.monithonMap.renderMap(this.mapContainer.nativeElement, data);
-                this.temi = this.monithonMap.getTemi();
-                this.categorie = this.monithonMap.getCategorie();
+                this.monithonMap.renderMap(this.mapContainer.nativeElement, data)
+                .then(data =>{
+                    this.temi =data.temi;
+                    this.categorie = data.categorie;
+                });
                 return data;
             })
             .then(data => {

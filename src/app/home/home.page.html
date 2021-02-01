@@ -9,7 +9,7 @@
             <div id="filterContainer">
                 <!-- parametrizzare con temi -->
                 <mat-chip-list aria-label="Fish selection" multiple="true">
-                    <mat-chip *ngFor="let tema of this.temi" [selected]="tema.isSelected" (click)="this.toggleLayer(tema)">
+                    <mat-chip *ngFor="let tema of this.monithonMap.temi" [selected]="tema.isSelected" (click)="this.toggleLayer(tema)">
                         {{tema.ocTemaSintetico}}</mat-chip>
                 </mat-chip-list>
 
