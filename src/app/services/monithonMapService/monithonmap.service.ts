@@ -14,6 +14,7 @@ import {
 import circle from '@turf/circle';
 import { Progetto } from 'src/app/model/progetto/progetto';
 import lodash from 'lodash';
+import { Observer, Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +31,8 @@ export class MonithonMapService {
     temi: Array<any> = [];
     features: any;
     categorie: any;
+    public mapUpdated: Subject<any> = new Subject();
+
 
     constructor() {
         mapboxgl.accessToken = environment.mapbox.accessToken;
@@ -162,6 +165,11 @@ export class MonithonMapService {
         };
     }
 
+    private featureCollectionToProgetti(): Array<Progetto> {
+        let progetti: Array<Progetto> = this.features.features.map(feat => feat.properties);
+        return progetti;
+    }
+
     public getTemi(): Array<any> {
         return this.temi;
     }
@@ -183,7 +191,7 @@ export class MonithonMapService {
         this.draw.add(this.rangeProgetti);
     }
 
-    toggleLayer(tema: any) {
+    filterByTema(tema: any) {
         let layerId = `tema-${tema.ocCodTemaSintetico}`;
         this.map.setLayoutProperty(
             layerId,
@@ -191,6 +199,7 @@ export class MonithonMapService {
             tema.isSelected ? 'visible' : 'none'
         );
         this.getCategorie();
+        this.publishUpdate();
     }
 
     filterByCategoria(categoria: any) {
@@ -209,6 +218,7 @@ export class MonithonMapService {
                 false
             ]);
         });
+        this.publishUpdate();
         // throw new Error('Method not implemented.');
     }
 
@@ -226,6 +236,17 @@ export class MonithonMapService {
             .value();
 
         return this.categorie;
+    }
+
+    public subscribeToUpdates(obs: Observer<any>): void {
+        this.mapUpdated.subscribe(obs);
+    }
+    public unsubscribeToUpdates(): void {
+        this.mapUpdated.unsubscribe();
+    }
+
+    publishUpdate(): void {
+        this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: this.featureCollectionToProgetti() });
     }
 
 }

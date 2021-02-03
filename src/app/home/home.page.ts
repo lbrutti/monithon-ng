@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
 import moment from 'moment';
-import { Observable } from 'rxjs';
+import { Observable, Observer, Subject } from 'rxjs';
 import { Progetto } from '../model/progetto/progetto';
 import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
 import { MonithonMockedService } from '../services/monithonMockService/monithon-mocked.service';
 
 
 import { MonithonMapService } from '../services/monithonMapService/monithonmap.service';
-import { Layer } from 'mapbox-gl';
+import lodash from 'lodash';
 
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
@@ -32,6 +32,9 @@ export class HomePage implements OnInit, AfterViewInit {
 
     temi: Array<any> = [];
     categorie: Array<any> = [];
+    progettiCrossFilter: any;
+
+
     constructor(
         private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
@@ -45,41 +48,45 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
     ngAfterViewInit(): void {
+        let observer: Observer<any> = {
+            next: updateSubject => {
+                console.dir(updateSubject);
+            },
+            error: err => console.error('subscribeToUpdates error: ', err),
+            complete: () => console.log('subscribeToUpdates complete: ')
+        };
+        this.monithonMap.subscribeToUpdates(observer);
 
         //rendere il resto dei filtri slave rispetto alla mappa
         this.getProgetti()
             .toPromise()
             .then(data => {
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data)
-                .then(data =>{
-                    this.temi =data.temi;
-                    this.categorie = data.categorie;
-                });
+                    .then(data => {
+                        this.temi = data.temi;
+                        this.categorie = data.categorie;
+                    });
                 return data;
             })
             .then(data => {
-
-                let arrotonda = (val, multiplo) => {
-                    let arrotondamento = multiplo * Math.floor(val / multiplo);
-                    return arrotondamento;
-                };
-
                 let baseArrotondamento = 10000;
-
-                let listaProgetti = data.map((d: any) => {
-                    d.ocFinanzTotPubNetto = arrotonda(
-                        parseInt(d.ocFinanzTotPubNetto),
+                let listaProgetti = data.map((d: Progetto) => {
+                    if (lodash.isString(d.ocFinanzTotPubNetto)) {
+                        d.ocFinanzTotPubNetto = parseInt(d.ocFinanzTotPubNetto)
+                    }
+                    d.ocFinanzTotPubNetto = this.arrotonda(
+                        d.ocFinanzTotPubNetto,
                         baseArrotondamento
                     );
-                    d.ocDataInizioProgetto = parseInt(d.ocDataInizioProgetto);
+                    if (lodash.isString(d.ocDataInizioProgetto)) {
+                        d.ocDataInizioProgetto = parseInt(d.ocDataInizioProgetto);
+                    }
                     return d;
                 });
 
-                let progetti = crossfilter(listaProgetti);
-                this.renderBudgetChart(progetti, listaProgetti);
-
-                this.renderAnnoChart(progetti, listaProgetti);
-
+                this.progettiCrossFilter = crossfilter(listaProgetti);
+                this.renderBudgetChart(this.progettiCrossFilter, listaProgetti);
+                this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
                 dc.renderAll();
             });
 
@@ -190,9 +197,9 @@ export class HomePage implements OnInit, AfterViewInit {
         return this.monithonApiService.getProgetti();
     }
 
-    public toggleLayer(tema: any): void {
+    public filterByTema(tema: any): void {
         tema.isSelected = !tema.isSelected;
-        this.monithonMap.toggleLayer(tema);
+        this.monithonMap.filterByTema(tema);
     }
 
     public filterByCategoria(categoria: any): void {
@@ -217,6 +224,11 @@ export class HomePage implements OnInit, AfterViewInit {
     public onChartPanelClose() {
         this.renderer.removeClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
     }
+
+    arrotonda(val, multiplo) {
+        let arrotondamento = multiplo * Math.floor(val / multiplo);
+        return arrotondamento;
+    };
 }
 
 
