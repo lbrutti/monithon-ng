@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment';
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js';
 
-
 import {
     CircleMode,
     DragCircleMode,
@@ -15,6 +14,9 @@ import circle from '@turf/circle';
 import { Progetto } from 'src/app/model/progetto/progetto';
 import lodash from 'lodash';
 import { Observer, Subject } from 'rxjs';
+
+import '@turf/distance';
+import { distance, point } from '@turf/turf';
 
 @Injectable({
     providedIn: 'root'
@@ -92,10 +94,13 @@ export class MonithonMapService {
         this.map.on('draw.update', (evt) => {
             console.log('draw.update');
             console.dir(evt);
+            this.filterByRadius(evt);
         });
         this.map.on('draw.create', (evt) => {
             console.log('draw.create');
             console.dir(evt);
+            this.filterByRadius(evt);
+
         });
 
         this.map.on('load', () => {
@@ -142,6 +147,22 @@ export class MonithonMapService {
         });
 
 
+    }
+
+    /**
+     * 
+     * @param evt : 
+     */
+    filterByRadius(evt: any) {
+        let centerCoods = lodash.get(evt, 'features[0].properties.center');
+        let centerPoint = point(centerCoods);
+        let radius = lodash.get(evt, 'features[0].properties.radiusInKm');
+        let withinRange = this.features.features.filter(f => {
+            let featPoint = point(f.geometry.coordinates);
+            return distance(featPoint, centerPoint) <= radius
+        });
+        console.dir(withinRange);
+        debugger;
     }
 
     private progettiToFeatureCollection(data: Array<Progetto>): any {
