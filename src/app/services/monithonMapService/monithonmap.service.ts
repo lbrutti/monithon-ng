@@ -107,7 +107,10 @@ export class MonithonMapService {
                             data: {
                                 "type": "FeatureCollection",
                                 "features": []
-                            }
+                            },
+                            cluster: false,
+                            clusterMaxZoom: 14, // Max zoom to cluster points on
+                            clusterRadius: 50 //
                         });
 
                     let progettiSource: mapboxgl.GeoJSONSource = (this.map.getSource('progetti') as mapboxgl.GeoJSONSource);
@@ -120,7 +123,8 @@ export class MonithonMapService {
                         //aggiungere un layer per ogni categoria di progetto (vedi https://codepen.io/lbrutti/pen/WNoeKLW?editors=0010)
                         if (!this.map.getLayer(layerId)) {
                             let ocTemaSintetico = feature.properties.ocTemaSintetico;
-                            this.temi.push({ 'layerId': layerId, 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': ocTemaSintetico, 'isSelected': true });
+                            let tema = { 'layerId': layerId, 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': ocTemaSintetico, 'isSelected': true };
+                            this.temi.push(tema);
                             this.map
                                 .addLayer({
                                     'id': layerId,
@@ -128,7 +132,8 @@ export class MonithonMapService {
                                     'source': 'progetti',
                                     'paint': {
                                         'circle-radius': 3,
-                                        'circle-color': colors[layerId] || '#ffffff'
+                                        'circle-color': colors[layerId] || '#ffffff',
+                                        // 'circle-opacity': ['match', ['get','isSelected'], true, 1, 0.5]
                                     },
                                     'filter': ['==', 'ocCodTemaSintetico', ocCodTemaSintetico]
                                 });
@@ -153,6 +158,7 @@ export class MonithonMapService {
             "type": "FeatureCollection",
             "features": data.map((p: Progetto) => {
                 let properties: any = Object.assign({}, p);
+                properties.isSelected = true;
                 return {
                     "type": "Feature",
                     "properties": properties,
@@ -198,8 +204,15 @@ export class MonithonMapService {
             'visibility',
             tema.isSelected ? 'visible' : 'none'
         );
+        let progetti=[];
+        this.temi.map(t => {
+           this.features.features
+                .filter(f => f.properties.ocCodTemaSintetico == t.ocCodTemaSintetico)
+                .map(f => { f.properties.isSelected = t.isSelected; progetti.push(f.properties); });
+        });
+        lodash.remove(progetti, p => !p.isSelected);
         this.getCategorie();
-        this.publishUpdate();
+        this.publishUpdate(progetti);
     }
 
     filterByCategoria(categoria: any) {
@@ -218,8 +231,7 @@ export class MonithonMapService {
                 false
             ]);
         });
-        this.publishUpdate();
-        // throw new Error('Method not implemented.');
+        this.publishUpdate([]);
     }
 
     getCategorie(): any[] {
@@ -245,8 +257,9 @@ export class MonithonMapService {
         this.mapUpdated.unsubscribe();
     }
 
-    publishUpdate(): void {
-        this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: this.featureCollectionToProgetti() });
+    publishUpdate(progetti): void {
+        // let progettiSelezionati = this.featureCollectionToProgetti().filter((p: any) => p.isSelected);
+        this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: progetti });
     }
 
 }

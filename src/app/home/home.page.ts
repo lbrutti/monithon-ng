@@ -50,7 +50,10 @@ export class HomePage implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
         let observer: Observer<any> = {
             next: updateSubject => {
-                console.dir(updateSubject);
+                this.progetti = updateSubject.progetti;
+                this.renderCharts(this.progetti);
+
+                
             },
             error: err => console.error('subscribeToUpdates error: ', err),
             complete: () => console.log('subscribeToUpdates complete: ')
@@ -69,31 +72,31 @@ export class HomePage implements OnInit, AfterViewInit {
                 return data;
             })
             .then(data => {
-                let baseArrotondamento = 10000;
-                let listaProgetti = data.map((d: Progetto) => {
-                    if (lodash.isString(d.ocFinanzTotPubNetto)) {
-                        d.ocFinanzTotPubNetto = parseInt(d.ocFinanzTotPubNetto)
-                    }
-                    d.ocFinanzTotPubNetto = this.arrotonda(
-                        d.ocFinanzTotPubNetto,
-                        baseArrotondamento
-                    );
-                    if (lodash.isString(d.ocDataInizioProgetto)) {
-                        d.ocDataInizioProgetto = parseInt(d.ocDataInizioProgetto);
-                    }
-                    return d;
-                });
-
-                this.progettiCrossFilter = crossfilter(listaProgetti);
-                this.renderBudgetChart(this.progettiCrossFilter, listaProgetti);
-                this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
-                dc.renderAll();
+                this.renderCharts(data);
             });
-
-
-
     }
 
+    private renderCharts(data: any) {
+        let baseArrotondamento = 10000;
+        let listaProgetti = data.map((d: Progetto) => {
+            if (lodash.isString(d.ocFinanzTotPubNetto)) {
+                d.ocFinanzTotPubNetto = parseInt(d.ocFinanzTotPubNetto);
+            }
+            d.ocFinanzTotPubNetto = this.arrotonda(
+                d.ocFinanzTotPubNetto,
+                baseArrotondamento
+            );
+            if (lodash.isString(d.ocDataInizioProgetto)) {
+                d.ocDataInizioProgetto = parseInt(d.ocDataInizioProgetto);
+            }
+            return d;
+        });
+
+        this.progettiCrossFilter = crossfilter(listaProgetti);
+        this.renderBudgetChart(this.progettiCrossFilter, listaProgetti);
+        this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
+        dc.renderAll();
+    }
 
     private renderAnnoChart(crossFilterData: any, listaProgetti: any) {
         this.annoChart = new dc.BarChart((this.annoChartContainer as any).nativeElement);
