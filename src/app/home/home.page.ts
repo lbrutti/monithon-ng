@@ -1,15 +1,14 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import * as d3 from 'd3';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import moment from 'moment';
-import { Observable, Observer, Subject } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import { Progetto } from '../model/progetto/progetto';
 import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
 import { MonithonMockedService } from '../services/monithonMockService/monithon-mocked.service';
 
-
 import { MonithonMapService } from '../services/monithonMapService/monithonmap.service';
 import lodash from 'lodash';
 
+import * as d3 from 'd3';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -21,6 +20,8 @@ export class HomePage implements OnInit {
 
     @ViewChild('budgetChart') budgetChartContainer: HTMLElement;
     @ViewChild('annoChart') annoChartContainer: HTMLElement;
+    @ViewChild('resultCounter') resultCounterElem: HTMLElement;
+
     @ViewChild('categorieDiSpesaContainer') categorieDiSpesaContainer: ElementRef;
     @ViewChild('mapContainer') mapContainer: ElementRef;
 
@@ -29,6 +30,7 @@ export class HomePage implements OnInit {
     //variabili charts
     budgetChart: any;
     annoChart: any;
+    resultCounter:any;
 
     temi: Array<any> = [];
     categorie: Array<any> = [];
@@ -60,8 +62,8 @@ export class HomePage implements OnInit {
                 next: data => {
                     this.monithonMap.renderMap(this.mapContainer.nativeElement, data)
                 },
-                error: err => console.error('subscribeToUpdates error: ', err),
-                complete: () => console.log('subscribeToUpdates complete: ')
+                error: err => console.error('getProgetti error: ', err),
+                complete: () => console.log('getProgetti complete: ')
             });
     }
 
@@ -89,6 +91,7 @@ export class HomePage implements OnInit {
         this.progettiCrossFilter = crossfilter(listaProgetti);
         this.renderBudgetChart(this.progettiCrossFilter, listaProgetti);
         this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
+        this.renderCounter(this.progettiCrossFilter)
         dc.renderAll();
     }
 
@@ -125,6 +128,16 @@ export class HomePage implements OnInit {
         });
     }
 
+    private renderCounter(crossFilterData:any){
+        this.resultCounter = new dc.DataCount((this.resultCounterElem as any).nativeElement);
+        let all = crossFilterData.groupAll();
+
+        this.resultCounter.crossfilter(crossFilterData).groupAll(all).html({
+            some: "%filter-count",
+            all: "%total-count"
+        });
+
+    }
     private renderBudgetChart(crossFilterData: any, listaProgetti: any) {
         this.budgetChart = new dc.BarChart((this.budgetChartContainer as any).nativeElement);
 
@@ -133,7 +146,7 @@ export class HomePage implements OnInit {
         //creo bin usando arrotondamento del budget
         budgetBin.value((d: any) => +d.ocFinanzTotPubNetto);
         //inserire soglie per non avere troppi bin: parametrizzare qui quantili?
-        let dieciQuantili = d3.range(0, 1.1, 0.025); //.map((n) => +d3.format(".1f")(n));
+        let dieciQuantili = d3.range(0, 1.1, 0.25); //.map((n) => +d3.format(".1f")(n));
         let binThresholds = dieciQuantili.map((quant) => d3.quantile(listaProgetti, quant, (p: any) => +p.ocFinanzTotPubNetto)
         );
         binThresholds = [...new Set(binThresholds)];

@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { MaterialModule } from '../material.module';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { MaterialModule } from '../material.module';
         FormsModule,
         IonicModule,
         HomePageRoutingModule,
-        MaterialModule
+        MatExpansionModule,
+        MatChipsModule
     ],
     declarations: [HomePage],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
