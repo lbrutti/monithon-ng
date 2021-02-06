@@ -17,7 +17,6 @@ import { Observer, Subject } from 'rxjs';
 
 import '@turf/distance';
 import { distance, point } from '@turf/turf';
-import { threadId } from 'worker_threads';
 
 @Injectable({
     providedIn: 'root'
