@@ -38,7 +38,7 @@ export class MonithonMapService {
         mapboxgl.accessToken = environment.mapbox.accessToken;
     }
 
-    public renderMap(container, data): Promise<any> {
+    public renderMap(container, data): void {
 
         this.map = new mapboxgl.Map({
             container: container,
@@ -97,57 +97,48 @@ export class MonithonMapService {
             console.log('draw.create');
             console.dir(evt);
         });
-        return new Promise((resolve, reject) => {
 
-            try {
-                this.map.on('load', () => {
-                    this.map
-                        .addSource('progetti', {
-                            type: 'geojson',
-                            data: {
-                                "type": "FeatureCollection",
-                                "features": []
-                            },
-                            cluster: false,
-                            clusterMaxZoom: 14, // Max zoom to cluster points on
-                            clusterRadius: 50 //
-                        });
-
-                    let progettiSource: mapboxgl.GeoJSONSource = (this.map.getSource('progetti') as mapboxgl.GeoJSONSource);
-                    this.progettiToFeatureCollection(data);
-                    progettiSource.setData(this.features);
-                    let colors = { 'tema-4': '#ff0000', 'tema-5': '#00ff00', 'tema-6': '#0000ff' };
-                    this.features.features.forEach(feature => {
-                        let ocCodTemaSintetico = feature.properties.ocCodTemaSintetico;
-                        let layerId = `tema-${ocCodTemaSintetico}`;
-                        //aggiungere un layer per ogni categoria di progetto (vedi https://codepen.io/lbrutti/pen/WNoeKLW?editors=0010)
-                        if (!this.map.getLayer(layerId)) {
-                            let ocTemaSintetico = feature.properties.ocTemaSintetico;
-                            let tema = { 'layerId': layerId, 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': ocTemaSintetico, 'isSelected': true };
-                            this.temi.push(tema);
-                            this.map
-                                .addLayer({
-                                    'id': layerId,
-                                    'type': 'circle',
-                                    'source': 'progetti',
-                                    'paint': {
-                                        'circle-radius': 3,
-                                        'circle-color': colors[layerId] || '#ffffff',
-                                        // 'circle-opacity': ['match', ['get','isSelected'], true, 1, 0.5]
-                                    },
-                                    'filter': ['==', 'ocCodTemaSintetico', ocCodTemaSintetico]
-                                });
-                        }
-                        this.getCategorie();
-
-                        resolve({ categorie: this.categorie, temi: this.temi });
-
-                    });
+        this.map.on('load', () => {
+            this.map
+                .addSource('progetti', {
+                    type: 'geojson',
+                    data: {
+                        "type": "FeatureCollection",
+                        "features": []
+                    },
+                    cluster: false,
+                    clusterMaxZoom: 14, // Max zoom to cluster points on
+                    clusterRadius: 50 //
                 });
-            } catch (error) {
-                reject(error);
-            }
 
+            let progettiSource: mapboxgl.GeoJSONSource = (this.map.getSource('progetti') as mapboxgl.GeoJSONSource);
+            this.progettiToFeatureCollection(data);
+            progettiSource.setData(this.features);
+            let colors = { 'tema-4': '#ff0000', 'tema-5': '#00ff00', 'tema-6': '#0000ff' };
+            this.features.features.forEach(feature => {
+                let ocCodTemaSintetico = feature.properties.ocCodTemaSintetico;
+                let layerId = `tema-${ocCodTemaSintetico}`;
+                //aggiungere un layer per ogni categoria di progetto (vedi https://codepen.io/lbrutti/pen/WNoeKLW?editors=0010)
+                if (!this.map.getLayer(layerId)) {
+                    let ocTemaSintetico = feature.properties.ocTemaSintetico;
+                    let tema = { 'layerId': layerId, 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': ocTemaSintetico, 'isSelected': true };
+                    this.temi.push(tema);
+                    this.map
+                        .addLayer({
+                            'id': layerId,
+                            'type': 'circle',
+                            'source': 'progetti',
+                            'paint': {
+                                'circle-radius': 3,
+                                'circle-color': colors[layerId] || '#ffffff',
+                                // 'circle-opacity': ['match', ['get','isSelected'], true, 1, 0.5]
+                            },
+                            'filter': ['==', 'ocCodTemaSintetico', ocCodTemaSintetico]
+                        });
+                }
+                this.getCategorie();
+            });
+            this.publishUpdate(this.featureCollectionToProgetti());
         });
 
 
@@ -204,9 +195,9 @@ export class MonithonMapService {
             'visibility',
             tema.isSelected ? 'visible' : 'none'
         );
-        let progetti=[];
+        let progetti = [];
         this.temi.map(t => {
-           this.features.features
+            this.features.features
                 .filter(f => f.properties.ocCodTemaSintetico == t.ocCodTemaSintetico)
                 .map(f => { f.properties.isSelected = t.isSelected; progetti.push(f.properties); });
         });

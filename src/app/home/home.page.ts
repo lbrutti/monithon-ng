@@ -51,38 +51,34 @@ export class HomePage implements OnInit, AfterViewInit {
         let observer: Observer<any> = {
             next: updateSubject => {
                 this.progetti = updateSubject.progetti;
-                this.renderCharts(this.progetti);
-
-                
+                // this.temi = data.temi;
+                this.categorie = updateSubject.categorie;
+                this.renderCharts(this.progetti);   
             },
             error: err => console.error('subscribeToUpdates error: ', err),
             complete: () => console.log('subscribeToUpdates complete: ')
         };
         this.monithonMap.subscribeToUpdates(observer);
 
-        //rendere il resto dei filtri slave rispetto alla mappa
         this.getProgetti()
             .toPromise()
             .then(data => {
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data)
-                    .then(data => {
-                        this.temi = data.temi;
-                        this.categorie = data.categorie;
-                    });
-                return data;
             })
-            .then(data => {
-                this.renderCharts(data);
-            });
+            .catch(e=>console.error(e));
     }
 
     private renderCharts(data: any) {
         let baseArrotondamento = 10000;
+       let arrotonda = (val, multiplo) =>{
+            let arrotondamento = multiplo * Math.floor(val / multiplo);
+            return arrotondamento;
+        };
         let listaProgetti = data.map((d: Progetto) => {
             if (lodash.isString(d.ocFinanzTotPubNetto)) {
                 d.ocFinanzTotPubNetto = parseInt(d.ocFinanzTotPubNetto);
             }
-            d.ocFinanzTotPubNetto = this.arrotonda(
+            d.ocFinanzTotPubNetto = arrotonda(
                 d.ocFinanzTotPubNetto,
                 baseArrotondamento
             );
@@ -228,10 +224,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.renderer.removeClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
     }
 
-    arrotonda(val, multiplo) {
-        let arrotondamento = multiplo * Math.floor(val / multiplo);
-        return arrotondamento;
-    };
+
 }
 
 
