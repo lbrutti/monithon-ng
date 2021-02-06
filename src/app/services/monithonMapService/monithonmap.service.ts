@@ -150,7 +150,8 @@ export class MonithonMapService {
                             '#ffffff'
                         ],
                         // 'circle-opacity': ['match', ['get','isSelected'], true, 1, 0.5]
-                    }
+                    },
+                    'filter': ['all', ['get', 'isWithinRange'], ['get', 'matchesTema'], ['get', 'matchesCategoria']]
                 });
 
             this.getCategorie();
@@ -166,6 +167,10 @@ export class MonithonMapService {
             "features": data.map((p: Progetto) => {
                 let properties: any = Object.assign({}, p);
                 properties.isSelected = true;
+                properties.isWithinRange = true;
+                properties.matchesTema = true;
+                properties.matchesCategoria = true;
+
                 return {
                     "type": "Feature",
                     "properties": properties,
@@ -208,40 +213,61 @@ export class MonithonMapService {
         });
     }
 
-    filterByTema(tema: any) {
+    filterByTema() {
         let layerId = `progetti-layer`;
-        this.map.setFilter(layerId,['all',[], ['==', ['get', 'ocCodTemaSintetico']], +tema.ocCodTemaSintetico]);
         let progetti = [];
         this.temi.map(t => {
             this.progetti.features
-                .filter(f => f.properties.ocCodTemaSintetico == t.ocCodTemaSintetico)
                 .map(f => {
-                    f.properties.isSelected = t.isSelected;
-                    progetti.push(f.properties);
+                    if (f.properties.ocCodTemaSintetico == t.ocCodTemaSintetico) {
+                        f.properties.matchesTema = t.isSelected;
+                        f.properties.isSelected = f.properties.matchesTema;
+                        progetti.push(f.properties);
+                    }
                 });
         });
+        let temiSelezionati = this.temi.filter(t => t.isSelected);
+        if (lodash.every(this.temi, t => !t.isSelected)) {
+            this.temi.map(t => t.isSelected = true);
+            temiSelezionati = this.temi;
+        }
+        let codiciTema = temiSelezionati.map(t => +t.ocCodTemaSintetico);
+        let newFilter = ['match', ['get', 'ocCodTemaSintetico'], codiciTema, true, false];
+        this.map.setFilter(layerId, newFilter);
         lodash.remove(progetti, p => !p.isSelected);
         this.getCategorie();
         this.publishUpdate(progetti);
     }
 
-    filterByCategoria(categoria: any) {
+    filterByCategoria() {
         let categorieSelezionate = this.categorie.filter(cat => cat.isSelected);
-        let temiSelezionati = this.temi.filter(tema => tema.isSelected);
-
-        temiSelezionati.map(tema => {
-            let layerId = `progetti-layer`;
-            this.map.setFilter(layerId, [
-                'match',
-                ['get', 'ocCodCategoriaSpesa'],
-                categorieSelezionate.map(function (cat) {
-                    return cat.ocCodCategoriaSpesa;
-                }),
-                true,
-                false
-            ]);
+        if (lodash.every(this.categorie, c => !c.isSelected)) {
+            this.categorie.map(c => c.isSelected = true);
+            categorieSelezionate = this.categorie;
+        }
+        let progetti = [];
+        categorieSelezionate.map(c => {
+            this.progetti.features
+                .map(f => {
+                    if (f.properties.ocCodCategoriaSpesa == c.ocCodCategoriaSpesa) {
+                        f.properties.matchesCategoria = c.isSelected;
+                        f.properties.isSelected = f.properties.matchesCategoria;
+                        progetti.push(f.properties);
+                    }
+                });
         });
-        this.publishUpdate([]);
+        let layerId = `progetti-layer`;
+        //occhio ai temi! per la categoria "nulla" non devono esserci sovrapposizioni
+        this.map.setFilter(layerId, [
+            'match',
+            ['get', 'ocCodCategoriaSpesa'],
+            categorieSelezionate.map(function (cat) {
+                return cat.ocCodCategoriaSpesa;
+            }),
+            true,
+            false
+        ]);
+        this.publishUpdate(progetti);
     }
 
     /**
@@ -259,13 +285,15 @@ export class MonithonMapService {
     }
 
     getCategorie(): any[] {
-        let categorieAttive = this.progetti.features.filter(feature => lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico));
+        let categorieAttive = this.progetti
+            .features.filter(feature => lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico));
         this.categorie = lodash.chain(categorieAttive)
             .map(feature => {
                 let categoria = {
                     ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,
-                    ocDescrCategoriaSpesa: feature.properties.ocDescrCategoriaSpesa
-                }
+                    ocDescrCategoriaSpesa: feature.properties.ocDescrCategoriaSpesa,
+                    isSelected: true
+                };
                 return categoria;
             })
             .uniqBy(cat => cat.ocCodCategoriaSpesa)
