@@ -17,6 +17,7 @@ import { Observer, Subject } from 'rxjs';
 
 import '@turf/distance';
 import { distance, point } from '@turf/turf';
+import { threadId } from 'worker_threads';
 
 @Injectable({
     providedIn: 'root'
@@ -92,15 +93,18 @@ export class MonithonMapService {
         });
         this.map.addControl(this.draw, 'top-left');
         this.map.on('draw.update', (evt) => {
-            console.log('draw.update');
-            console.dir(evt);
-            this.filterByRadius(evt);
+            let circleData = {
+                center: lodash.get(evt, 'features[0].properties.center'),
+                radius: lodash.get(evt, 'features[0].properties.radiusInKm')
+            };
+            this.filterByRadius(circleData);
         });
         this.map.on('draw.create', (evt) => {
-            console.log('draw.create');
-            console.dir(evt);
-            this.filterByRadius(evt);
-
+            let circleData = {
+                center: lodash.get(evt, 'features[0].properties.center'),
+                radius: lodash.get(evt, 'features[0].properties.radiusInKm')
+            };
+            this.filterByRadius(circleData);
         });
 
         this.map.on('load', () => {
@@ -151,18 +155,16 @@ export class MonithonMapService {
 
     /**
      * 
-     * @param evt : 
+     * @param circleData : 
      */
-    filterByRadius(evt: any) {
-        let centerCoods = lodash.get(evt, 'features[0].properties.center');
-        let centerPoint = point(centerCoods);
-        let radius = lodash.get(evt, 'features[0].properties.radiusInKm');
+    filterByRadius(circleData: any) {
+        let centerPoint = point(circleData.center);
+        let radius = circleData.radius;
         let withinRange = this.features.features.filter(f => {
             let featPoint = point(f.geometry.coordinates);
             return distance(featPoint, centerPoint) <= radius
         });
         console.dir(withinRange);
-        debugger;
     }
 
     private progettiToFeatureCollection(data: Array<Progetto>): any {
@@ -207,6 +209,10 @@ export class MonithonMapService {
             }
         };
         this.draw.add(this.rangeProgetti);
+        this.filterByRadius({
+            center: center,
+            radius: 10
+        });
     }
 
     filterByTema(tema: any) {
