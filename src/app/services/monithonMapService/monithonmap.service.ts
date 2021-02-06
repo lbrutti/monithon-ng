@@ -31,7 +31,7 @@ export class MonithonMapService {
     draw: any;
     rangeProgetti: any;
     temi: Array<any> = [];
-    features: any;
+    progetti: any;
     categorie: any;
     public mapUpdated: Subject<any> = new Subject();
 
@@ -121,53 +121,47 @@ export class MonithonMapService {
 
             let progettiSource: mapboxgl.GeoJSONSource = (this.map.getSource('progetti') as mapboxgl.GeoJSONSource);
             this.progettiToFeatureCollection(data);
-            progettiSource.setData(this.features);
-            let colors = { 'tema-4': '#ff0000', 'tema-5': '#00ff00', 'tema-6': '#0000ff' };
-            this.features.features.forEach(feature => {
-                let ocCodTemaSintetico = feature.properties.ocCodTemaSintetico;
-                let layerId = `tema-${ocCodTemaSintetico}`;
-                //aggiungere un layer per ogni categoria di progetto (vedi https://codepen.io/lbrutti/pen/WNoeKLW?editors=0010)
-                if (!this.map.getLayer(layerId)) {
-                    let ocTemaSintetico = feature.properties.ocTemaSintetico;
-                    let tema = { 'layerId': layerId, 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': ocTemaSintetico, 'isSelected': true };
-                    this.temi.push(tema);
-                    this.map
-                        .addLayer({
-                            'id': layerId,
-                            'type': 'circle',
-                            'source': 'progetti',
-                            'paint': {
-                                'circle-radius': 3,
-                                'circle-color': colors[layerId] || '#ffffff',
-                                // 'circle-opacity': ['match', ['get','isSelected'], true, 1, 0.5]
-                            },
-                            'filter': ['==', 'ocCodTemaSintetico', ocCodTemaSintetico]
-                        });
-                }
-                this.getCategorie();
-            });
+            progettiSource.setData(this.progetti);
+
+            let colors = { '4': '#ff0000', '5': '#00ff00', '6': '#0000ff' };
+            //refactoring come singolo layer di progetti:
+            this.temi = lodash.chain(this.progetti.features)
+                .groupBy(f => f.properties.ocCodTemaSintetico)
+                .map((temi, ocCodTemaSintetico) => ({ 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': lodash.get(temi, '[0].properties.ocTemaSintetico'), 'isSelected': true }))
+                .value();
+
+            let layerId = 'progetti-layer'
+            //aggiungere un layer per ogni categoria di progetto (vedi https://codepen.io/lbrutti/pen/WNoeKLW?editors=0010)
+            this.map
+                .addLayer({
+                    'id': layerId,
+                    'type': 'circle',
+                    'source': 'progetti',
+                    'paint': {
+                        'circle-radius': 3,
+                        'circle-color': [
+                            'case',
+                            ['==', ['get', 'ocCodTemaSintetico'], 4],
+                            colors['4'],
+                            ['==', ['get', 'ocCodTemaSintetico'], 5],
+                            colors['5'],
+                            ['==', ['get', 'ocCodTemaSintetico'], 6],
+                            colors['6'],
+                            '#ffffff'
+                        ],
+                        // 'circle-opacity': ['match', ['get','isSelected'], true, 1, 0.5]
+                    }
+                });
+
+            this.getCategorie();
             this.publishUpdate(this.featureCollectionToProgetti());
         });
 
 
     }
 
-    /**
-     * 
-     * @param circleData : 
-     */
-    filterByRadius(circleData: any) {
-        let centerPoint = point(circleData.center);
-        let radius = circleData.radius;
-        let withinRange = this.features.features.filter(f => {
-            let featPoint = point(f.geometry.coordinates);
-            return distance(featPoint, centerPoint) <= radius
-        });
-        console.dir(withinRange);
-    }
-
     private progettiToFeatureCollection(data: Array<Progetto>): any {
-        this.features = {
+        this.progetti = {
             "type": "FeatureCollection",
             "features": data.map((p: Progetto) => {
                 let properties: any = Object.assign({}, p);
@@ -185,7 +179,7 @@ export class MonithonMapService {
     }
 
     private featureCollectionToProgetti(): Array<Progetto> {
-        let progetti: Array<Progetto> = this.features.features.map(feat => feat.properties);
+        let progetti: Array<Progetto> = this.progetti.features.map(feat => feat.properties);
         return progetti;
     }
 
@@ -215,17 +209,16 @@ export class MonithonMapService {
     }
 
     filterByTema(tema: any) {
-        let layerId = `tema-${tema.ocCodTemaSintetico}`;
-        this.map.setLayoutProperty(
-            layerId,
-            'visibility',
-            tema.isSelected ? 'visible' : 'none'
-        );
+        let layerId = `progetti-layer`;
+        this.map.setFilter(layerId,['all',[], ['==', ['get', 'ocCodTemaSintetico']], +tema.ocCodTemaSintetico]);
         let progetti = [];
         this.temi.map(t => {
-            this.features.features
+            this.progetti.features
                 .filter(f => f.properties.ocCodTemaSintetico == t.ocCodTemaSintetico)
-                .map(f => { f.properties.isSelected = t.isSelected; progetti.push(f.properties); });
+                .map(f => {
+                    f.properties.isSelected = t.isSelected;
+                    progetti.push(f.properties);
+                });
         });
         lodash.remove(progetti, p => !p.isSelected);
         this.getCategorie();
@@ -237,7 +230,7 @@ export class MonithonMapService {
         let temiSelezionati = this.temi.filter(tema => tema.isSelected);
 
         temiSelezionati.map(tema => {
-            let layerId = `tema-${tema.ocCodTemaSintetico}`;
+            let layerId = `progetti-layer`;
             this.map.setFilter(layerId, [
                 'match',
                 ['get', 'ocCodCategoriaSpesa'],
@@ -251,8 +244,22 @@ export class MonithonMapService {
         this.publishUpdate([]);
     }
 
+    /**
+     * 
+     * @param circleData : 
+     */
+    filterByRadius(circleData: any) {
+        let centerPoint = point(circleData.center);
+        let radius = circleData.radius;
+        let withinRange = this.progetti.features.filter(f => {
+            let featPoint = point(f.geometry.coordinates);
+            return distance(featPoint, centerPoint) <= radius
+        });
+        console.dir(withinRange);
+    }
+
     getCategorie(): any[] {
-        let categorieAttive = this.features.features.filter(feature => lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico));
+        let categorieAttive = this.progetti.features.filter(feature => lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico));
         this.categorie = lodash.chain(categorieAttive)
             .map(feature => {
                 let categoria = {
