@@ -17,7 +17,7 @@ declare const dc, crossfilter;
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit, AfterViewInit {
+export class HomePage implements OnInit {
 
     @ViewChild('budgetChart') budgetChartContainer: HTMLElement;
     @ViewChild('annoChart') annoChartContainer: HTMLElement;
@@ -44,33 +44,31 @@ export class HomePage implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.monitonMockedService.mirageJsServer();
-    }
-
-
-    ngAfterViewInit(): void {
         let observer: Observer<any> = {
             next: updateSubject => {
                 this.progetti = updateSubject.progetti;
-                // this.temi = data.temi;
+                this.temi = updateSubject.temi;
                 this.categorie = updateSubject.categorie;
-                this.renderCharts(this.progetti);   
+                this.renderCharts(this.progetti);
             },
             error: err => console.error('subscribeToUpdates error: ', err),
             complete: () => console.log('subscribeToUpdates complete: ')
         };
         this.monithonMap.subscribeToUpdates(observer);
-
         this.getProgetti()
-            .toPromise()
-            .then(data => {
-                this.monithonMap.renderMap(this.mapContainer.nativeElement, data)
-            })
-            .catch(e=>console.error(e));
+            .subscribe({
+                next: data => {
+                    this.monithonMap.renderMap(this.mapContainer.nativeElement, data)
+                },
+                error: err => console.error('subscribeToUpdates error: ', err),
+                complete: () => console.log('subscribeToUpdates complete: ')
+            });
     }
+
 
     private renderCharts(data: any) {
         let baseArrotondamento = 10000;
-       let arrotonda = (val, multiplo) =>{
+        let arrotonda = (val, multiplo) => {
             let arrotondamento = multiplo * Math.floor(val / multiplo);
             return arrotondamento;
         };

@@ -9,7 +9,7 @@
             <div id="filterContainer">
                 <!-- parametrizzare con temi -->
                 <mat-chip-list aria-label="Fish selection" multiple="true">
-                    <mat-chip *ngFor="let tema of this.monithonMap.temi" [selected]="tema.isSelected" (click)="this.filterByTema(tema)">
+                    <mat-chip *ngFor="let tema of this.temi" [selected]="tema.isSelected" (click)="this.filterByTema(tema)">
                         {{tema.ocTemaSintetico}}</mat-chip>
                 </mat-chip-list>
 
@@ -25,7 +25,7 @@
                         <div #categorieDiSpesaContainer id="categorieDiSpesaContainer">
                             <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
                             <mat-chip-list aria-label="Fish selection" multiple="true">
-                                <mat-chip selectable="true" *ngFor="let categoria of this.monithonMap.categorie" [selected]="categoria.isSelected" (click)="this.filterByCategoria(categoria)">{{categoria.ocDescrCategoriaSpesa}}</mat-chip>
+                                <mat-chip selectable="true" *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected" (click)="this.filterByCategoria(categoria)">{{categoria.ocDescrCategoriaSpesa}}</mat-chip>
                             </mat-chip-list>
                         </div>
                         <div id="chartPanelContainer">
