@@ -279,7 +279,7 @@ export class MonithonMapService {
             progetto.isWithinRange = distance(point(f.geometry.coordinates), centerPoint) <= radius
             this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isWithinRange: progetto.isWithinRange });
         });
-        this.publishUpdate(this.progetti.features.filter(p => p.properties.isSelected && p.properties.isWithinRange));
+        this.publishUpdate(this.progetti.features.filter(f => f.properties.isSelected && f.properties.isWithinRange).map(f => f.properties));
     }
 
     getCategorie(): any[] {
