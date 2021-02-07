@@ -117,23 +117,15 @@ export class MonithonMapService {
         });
 
         this.map.on('load', () => {
+            this.progettiToFeatureCollection(data);
+
             this.map
                 .addSource('progetti', {
                     type: 'geojson',
-                    data: {
-                        "type": "FeatureCollection",
-                        "features": []
-                    },
-                    cluster: false,
-                    clusterMaxZoom: 14, // Max zoom to cluster points on
-                    clusterRadius: 50 //
+                    data: this.progetti,
+                    promoteId: 'codLocaleProgetto'
                 });
 
-            let progettiSource: mapboxgl.GeoJSONSource = (this.map.getSource('progetti') as mapboxgl.GeoJSONSource);
-            this.progettiToFeatureCollection(data);
-            progettiSource.setData(this.progetti);
-
-            let colors = { '4': COLOR_MAP.temi.energia, '5': COLOR_MAP.temi.ambiente, '6': COLOR_MAP.temi.attrazione };
             //refactoring come singolo layer di progetti:
             this.temi = lodash.chain(this.progetti.features)
                 .groupBy(f => f.properties.ocCodTemaSintetico)
@@ -153,27 +145,27 @@ export class MonithonMapService {
                         'circle-radius': 3,
                         'circle-color': [
                             'case',
-                            ['==', ['get', 'ocCodTemaSintetico'], 4],
-                            colors['4'],
-                            ['==', ['get', 'ocCodTemaSintetico'], 5],
-                            colors['5'],
-                            ['==', ['get', 'ocCodTemaSintetico'], 6],
-                         colors['6'],
-                            '#ffffff'
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 4]],
+                            COLOR_MAP.temi.energia,
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 5]],
+                            COLOR_MAP.temi.ambiente,
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 6]],
+                            COLOR_MAP.temi.attrazione,
+                            'transparent'
                         ],
                         'circle-stroke-color': [
                             'case',
                             ['==', ['get', 'ocCodTemaSintetico'], 4],
-                            colors['4'],
+                            COLOR_MAP.temi.energia,
                             ['==', ['get', 'ocCodTemaSintetico'], 5],
-                            colors['5'],
+                            COLOR_MAP.temi.ambiente,
                             ['==', ['get', 'ocCodTemaSintetico'], 6],
-                            colors['6'],
+                            COLOR_MAP.temi.attrazione,
                             '#ffffff'
-                        ]
-                        // 'circle-opacity': ['match', ['get','isSelected'], true, 1, 0.5]
+                        ],
+                        'circle-stroke-width': 1
                     },
-                    'filter': ['all', ['get', 'isWithinRange'], this.filtroTemi, ['get', 'matchesCategoria']]
+                    // 'filter': ['all', ['get', 'isWithinRange'], this.filtroTemi, ['get', 'matchesCategoria']]
                 });
 
 
@@ -186,7 +178,7 @@ export class MonithonMapService {
     private progettiToFeatureCollection(data: Array<Progetto>): any {
         this.progetti = {
             "type": "FeatureCollection",
-            "features": data.map((p: Progetto) => {
+            "features": data.map((p: Progetto, idx) => {
                 let properties: any = Object.assign({}, p);
                 properties.isSelected = true;
                 properties.isWithinRange = true;
@@ -241,15 +233,19 @@ export class MonithonMapService {
         this.temi.map(t => {
             this.progetti.features
                 .map(f => {
-                    if (f.properties.ocCodTemaSintetico == t.ocCodTemaSintetico) {
-                        f.properties.matchesTema = t.isSelected;
-                        f.properties.isSelected = f.properties.matchesTema;
+                    let progetto = f.properties;
+                    if (progetto.ocCodTemaSintetico == t.ocCodTemaSintetico) {
+                        progetto.matchesTema = progetto.isSelected = t.isSelected;
                         progetti.push(f.properties);
                     }
                 });
         });
+
+        progetti.map(p => {
+            this.map.setFeatureState({ source: 'progetti', id: p.codLocaleProgetto }, { isSelected: p.isSelected })
+        })
         this.setFiltroTemi();
-        this.map.setFilter(layerId, this.filtroTemi);
+        // this.map.setFilter(layerId, this.filtroTemi);
         lodash.remove(progetti, p => !p.isSelected);
         this.getCategorie();
         this.publishUpdate(progetti);
@@ -316,6 +312,7 @@ export class MonithonMapService {
                 let categoria = {
                     ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,
                     ocDescrCategoriaSpesa: feature.properties.ocDescrCategoriaSpesa,
+                    ocCodTemaSintetico: feature.properties.ocCodTemaSintetico,
                     isSelected: true
                 };
                 return categoria;
