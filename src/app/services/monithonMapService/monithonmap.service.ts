@@ -274,11 +274,12 @@ export class MonithonMapService {
     filterByRadius(circleData: any) {
         let centerPoint = point(circleData.center);
         let radius = circleData.radius;
-        let withinRange = this.progetti.features.filter(f => {
-            let featPoint = point(f.geometry.coordinates);
-            return distance(featPoint, centerPoint) <= radius
+        this.progetti.features.map(f => {
+            let progetto = f.properties;
+            progetto.isWithinRange = distance(point(f.geometry.coordinates), centerPoint) <= radius
+            this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isWithinRange: progetto.isWithinRange });
         });
-        console.dir(withinRange);
+        this.publishUpdate(this.progetti.features.filter(p => p.properties.isSelected && p.properties.isWithinRange));
     }
 
     getCategorie(): any[] {
