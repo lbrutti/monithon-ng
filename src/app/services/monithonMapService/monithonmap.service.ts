@@ -12,7 +12,7 @@ import {
 } from 'mapbox-gl-draw-circle';
 import circle from '@turf/circle';
 import { Progetto } from 'src/app/model/progetto/progetto';
-import lodash from 'lodash';
+import lodash, { groupBy } from 'lodash';
 import { Observer, Subject } from 'rxjs';
 
 import '@turf/distance';
@@ -35,19 +35,11 @@ export class MonithonMapService {
     progetti: any;
     categorie: any;
 
-    filtroTemi: Array<any>;
-    static FILTRO_TEMI_PARAM_IDX = 2;
-
-    filtroCategorie: Array<any>;
-    static FILTRO_CATEGORIE_PARAM_IDX = 2;
-
     public mapUpdated: Subject<any> = new Subject();
 
 
     constructor() {
         mapboxgl.accessToken = environment.mapbox.accessToken;
-        this.filtroTemi = ['match', ['get', 'ocCodTemaSintetico'], [], true, false];
-        this.filtroCategorie = ['match', ['get', 'ocCodCategoriaSpesa'], [], true, false];
     }
 
     public renderMap(container, data): void {
@@ -131,7 +123,7 @@ export class MonithonMapService {
                 .groupBy(f => f.properties.ocCodTemaSintetico)
                 .map((temi, ocCodTemaSintetico) => ({ 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': lodash.get(temi, '[0].properties.ocTemaSintetico'), 'isSelected': true }))
                 .value();
-            this.setFiltroTemi();
+            this.aggiornaTemiSelezionati();
             this.getCategorie();
 
             let layerId = 'progetti-layer'
@@ -164,8 +156,7 @@ export class MonithonMapService {
                             '#ffffff'
                         ],
                         'circle-stroke-width': 1
-                    },
-                    // 'filter': ['all', ['get', 'isWithinRange'], this.filtroTemi, ['get', 'matchesCategoria']]
+                    }
                 });
 
 
@@ -227,8 +218,8 @@ export class MonithonMapService {
         });
     }
 
-    filterByTema() {
-        let layerId = `progetti-layer`;
+    filtraPerTema() {
+        this.aggiornaTemiSelezionati();
         let progetti = [];
         this.temi.map(t => {
             this.progetti.features
@@ -238,56 +229,49 @@ export class MonithonMapService {
                         progetto.matchesTema = progetto.isSelected = t.isSelected;
                         progetti.push(f.properties);
                     }
+                    this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected })
                 });
         });
 
-        progetti.map(p => {
-            this.map.setFeatureState({ source: 'progetti', id: p.codLocaleProgetto }, { isSelected: p.isSelected })
-        })
-        this.setFiltroTemi();
-        // this.map.setFilter(layerId, this.filtroTemi);
         lodash.remove(progetti, p => !p.isSelected);
         this.getCategorie();
         this.publishUpdate(progetti);
     }
 
-    private setFiltroTemi() {
-        let temiSelezionati = this.temi.filter(t => t.isSelected);
+    private aggiornaTemiSelezionati() {
         if (lodash.every(this.temi, t => !t.isSelected)) {
             this.temi.map(t => t.isSelected = true);
-            temiSelezionati = this.temi;
         }
-        let codiciTema = temiSelezionati.map(t => +t.ocCodTemaSintetico);
-        this.filtroTemi[MonithonMapService.FILTRO_TEMI_PARAM_IDX] = codiciTema;
     }
 
-    filterByCategoria() {
+    filtraPerCategoria() {
         let progetti = [];
-        this.setFiltroCategorie();
-        this.categorie.filter(cat => cat.isSelected)
-            .map(c => {
-                this.progetti.features
-                    .map(f => {
-                        if (f.properties.ocCodCategoriaSpesa == c.ocCodCategoriaSpesa) {
-                            f.properties.matchesCategoria = c.isSelected;
-                            f.properties.isSelected = f.properties.matchesCategoria;
-                            progetti.push(f.properties);
+        this.aggiornaCategorieSelezionate();
+        this.categorie
+            .map(categoria => {
+                lodash.chain(this.progetti.features)
+                    .groupBy(p => p.properties.ocCodCategoriaSpesa)
+                    .map((progettiCategoria, ocCodCategoriaSpesa) => {
+                        if (ocCodCategoriaSpesa == categoria.ocCodCategoriaSpesa) {
+                            progettiCategoria.map(f => {
+                                let progetto = f.properties;
+                                if (progetto.ocCodTemaSintetico == categoria.ocCodTemaSintetico && progetto.ocCodCategoriaSpesa == categoria.ocCodCategoriaSpesa) {
+                                    progetto.matchesCategoria = progetto.isSelected = categoria.isSelected;
+                                    progetti.push(progetto);
+                                    this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected })
+                                }
+                            });
                         }
                     });
             });
-        let layerId = `progetti-layer`;
-        this.map.setFilter(layerId, this.filtroCategorie);
+
         this.publishUpdate(progetti);
     }
 
-    private setFiltroCategorie() {
+    private aggiornaCategorieSelezionate() {
         if (lodash.every(this.categorie, c => !c.isSelected)) {
             this.categorie.map(c => c.isSelected = true);
         }
-        //occhio ai temi! per la categoria "nulla" non devono esserci sovrapposizioni
-        this.filtroCategorie[MonithonMapService.FILTRO_CATEGORIE_PARAM_IDX] = this.categorie.filter(cat => cat.isSelected).map(function (cat) {
-            return cat.ocCodCategoriaSpesa;
-        });
     }
 
     /**

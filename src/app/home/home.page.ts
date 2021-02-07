@@ -209,12 +209,12 @@ export class HomePage implements OnInit {
 
     public filterByTema(tema: any): void {
         tema.isSelected = !tema.isSelected;
-        this.monithonMap.filterByTema();
+        this.monithonMap.filtraPerTema();
     }
 
     public filterByCategoria(categoria: any): void {
         categoria.isSelected = !categoria.isSelected;
-        this.monithonMap.filterByCategoria();
+        this.monithonMap.filtraPerCategoria();
     }
     /**
      * onProgettoClick
