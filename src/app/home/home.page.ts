@@ -170,9 +170,9 @@ export class HomePage implements OnInit {
             .brushOn(true)
             .x(d3.scaleLinear().domain([0, numQuantili]))
             .elasticY(true)
-            .margins({ top: 10, right: 50, bottom: 30, left: 40 })
+            .margins({ top: 10, right: 10, bottom: 20, left: 20 })
             .xAxis()
-            .tickFormat((v: any) => `${binThresholds[v] / 1000} K`);
+            .tickFormat((v: any) => `${binThresholds[v] / 1000} K`)
 
 
 

@@ -173,8 +173,6 @@ export class MonithonMapService {
                 let properties: any = Object.assign({}, p);
                 properties.isSelected = true;
                 properties.isWithinRange = true;
-                properties.matchesTema = true;
-                properties.matchesCategoria = true;
 
                 return {
                     "type": "Feature",
@@ -226,7 +224,7 @@ export class MonithonMapService {
                 .map(f => {
                     let progetto = f.properties;
                     if (progetto.ocCodTemaSintetico == t.ocCodTemaSintetico) {
-                        progetto.matchesTema = progetto.isSelected = t.isSelected;
+                        progetto.isSelected = t.isSelected;
                         progetti.push(f.properties);
                     }
                     this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected })
@@ -247,26 +245,21 @@ export class MonithonMapService {
     filtraPerCategoria() {
         let progetti = [];
         this.aggiornaCategorieSelezionate();
-        this.categorie
-            .map(categoria => {
-                lodash.chain(this.progetti.features)
-                    .groupBy(p => p.properties.ocCodCategoriaSpesa)
-                    .map((progettiCategoria, ocCodCategoriaSpesa) => {
-                        if (ocCodCategoriaSpesa == categoria.ocCodCategoriaSpesa) {
-                            progettiCategoria.map(f => {
-                                let progetto = f.properties;
-                                if (progetto.ocCodTemaSintetico == categoria.ocCodTemaSintetico && progetto.ocCodCategoriaSpesa == categoria.ocCodCategoriaSpesa) {
-                                    progetto.matchesCategoria = progetto.isSelected = categoria.isSelected;
-                                    progetti.push(progetto);
-                                    this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected })
-                                }
-                            });
-                        }
-                    });
-            });
 
+        // ciclo le progetti  e li setto a selezionati se matchano per tema e categoria e la categoria è selezionata
+        this.progetti.features.map(f => {
+            let progetto = f.properties;
+            let categoriaProgetto = this.categorie.find(c => (c.ocCodTemaSintetico == progetto.ocCodTemaSintetico && c.ocCodCategoriaSpesa == progetto.ocCodCategoriaSpesa));
+            progetto.isSelected = categoriaProgetto.isSelected;
+            progetti.push(progetto);
+            this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected });
+
+        });
+        lodash.remove(progetti, p => !p.isSelected);
         this.publishUpdate(progetti);
     }
+
+
 
     private aggiornaCategorieSelezionate() {
         if (lodash.every(this.categorie, c => !c.isSelected)) {
@@ -295,13 +288,13 @@ export class MonithonMapService {
             .map(feature => {
                 let categoria = {
                     ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,
-                    ocDescrCategoriaSpesa: feature.properties.ocDescrCategoriaSpesa,
+                    ocDescrCategoriaSpesa: feature.properties.ocDescrCategoriaSpesa || 'none',
                     ocCodTemaSintetico: feature.properties.ocCodTemaSintetico,
                     isSelected: true
                 };
                 return categoria;
             })
-            .uniqBy(cat => cat.ocCodCategoriaSpesa)
+            .uniqBy(cat => cat.ocCodTemaSintetico + cat.ocCodCategoriaSpesa)
             .value();
 
         return this.categorie;

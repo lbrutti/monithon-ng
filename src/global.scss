@@ -44,6 +44,7 @@
     background-color: transparent;
     border-width: 1px;
     border-style: solid;
+
     &[data-oc-cod-tema-sintetico="4"] {
         color: var(--monithon-tema-energia-background) !important;
         border-color: var(--monithon-tema-energia-background);
@@ -75,4 +76,11 @@
             background-color: var(--monithon-tema-attrazione-background);
         }
     }
+}
+
+.mat-chip.monithon-categoria {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 6rem;
 }
