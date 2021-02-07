@@ -35,3 +35,43 @@
 .mapbox-gl-draw_ctrl-draw-btn {
     display: none !important;
 }
+
+
+.mat-chip.monithon-tema {
+
+
+    background-color: transparent;
+    border-width: 1px;
+    border-style: solid;
+    &[data-oc-cod-tema-sintetico="4"] {
+        color: var(--monithon-tema-energia-background) !important;
+        border-color: var(--monithon-tema-energia-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="5"] {
+
+        color: var(--monithon-tema-ambiente-background) !important;
+        border-color: var(--monithon-tema-ambiente-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="6"] {
+        color: var(--monithon-tema-attrazione-background) !important;
+        border-color: var(--monithon-tema-attrazione-background);
+    }
+
+    &.mat-chip-selected {
+        color: var(--monithon-tema-color) !important;
+
+        &[data-oc-cod-tema-sintetico="4"] {
+            background-color: var(--monithon-tema-energia-background);
+        }
+
+        &[data-oc-cod-tema-sintetico="5"] {
+            background-color: var(--monithon-tema-ambiente-background);
+        }
+
+        &[data-oc-cod-tema-sintetico="6"] {
+            background-color: var(--monithon-tema-attrazione-background);
+        }
+    }
+}

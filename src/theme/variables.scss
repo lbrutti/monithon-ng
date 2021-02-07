@@ -267,3 +267,12 @@ $app-theme: mat-light-theme((
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+//monithon:
+:root{
+    --monithon-tema-energia-background: #FFC921;
+    --monithon-tema-ambiente-background: #EA4A3E;
+    --monithon-tema-attrazione-background: #FDD0B3;
+    --monithon-tema-color: #00172A;
+}

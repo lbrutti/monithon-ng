@@ -17,6 +17,7 @@ import { Observer, Subject } from 'rxjs';
 
 import '@turf/distance';
 import { distance, point } from '@turf/turf';
+import { COLOR_MAP } from 'src/app/utils/colorMap';
 
 @Injectable({
     providedIn: 'root'
@@ -132,7 +133,7 @@ export class MonithonMapService {
             this.progettiToFeatureCollection(data);
             progettiSource.setData(this.progetti);
 
-            let colors = { '4': '#ff0000', '5': '#00ff00', '6': '#0000ff' };
+            let colors = { '4': COLOR_MAP.temi.energia, '5': COLOR_MAP.temi.ambiente, '6': COLOR_MAP.temi.attrazione };
             //refactoring come singolo layer di progetti:
             this.temi = lodash.chain(this.progetti.features)
                 .groupBy(f => f.properties.ocCodTemaSintetico)
@@ -157,9 +158,19 @@ export class MonithonMapService {
                             ['==', ['get', 'ocCodTemaSintetico'], 5],
                             colors['5'],
                             ['==', ['get', 'ocCodTemaSintetico'], 6],
-                            colors['6'],
+                         colors['6'],
                             '#ffffff'
                         ],
+                        'circle-stroke-color': [
+                            'case',
+                            ['==', ['get', 'ocCodTemaSintetico'], 4],
+                            colors['4'],
+                            ['==', ['get', 'ocCodTemaSintetico'], 5],
+                            colors['5'],
+                            ['==', ['get', 'ocCodTemaSintetico'], 6],
+                            colors['6'],
+                            '#ffffff'
+                        ]
                         // 'circle-opacity': ['match', ['get','isSelected'], true, 1, 0.5]
                     },
                     'filter': ['all', ['get', 'isWithinRange'], this.filtroTemi, ['get', 'matchesCategoria']]
