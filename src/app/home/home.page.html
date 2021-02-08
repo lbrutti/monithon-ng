@@ -6,8 +6,7 @@
 
         </div>
         <div id="dettaglioProgetto">
-            <ion-router-outlet></ion-router-outlet>
-
+            <ion-router-outlet animated="true"></ion-router-outlet>
         </div>
         <div id="panelContainer">
 
@@ -82,7 +81,7 @@
                 </mat-expansion-panel-header>
                 <mat-list>
                     <mat-list-item *ngFor="let item of this.progetti">
-                        <h5><a class="nav-link" [routerLink]="'dettaglio'"
+                        <h5><a class="nav-link" [routerLink]="['dettaglio',item.codLocaleProgetto]"
                                 routerLinkActive="active">{{item.ocTitoloProgetto}} </a>
                         </h5>
                     </mat-list-item>

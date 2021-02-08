@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DettaglioProgettoComponent } from '../dettaglio-progetto/dettaglio-progetto.component';
 import { HomePage } from './home.page';
 
 const routes: Routes = [
@@ -8,7 +9,7 @@ const routes: Routes = [
         component: HomePage,
         children: [
             {
-                path: 'dettaglio', loadChildren: () => import('../dettaglio/dettaglio.module').then(m => m.DettaglioPageModule)
+                path: 'dettaglio/:id', component: DettaglioProgettoComponent
             }
         ]
     }
