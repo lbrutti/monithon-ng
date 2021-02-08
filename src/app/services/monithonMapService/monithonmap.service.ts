@@ -35,7 +35,8 @@ export class MonithonMapService {
     progetti: any;
     categorie: any;
 
-    public mapUpdated: Subject<any> = new Subject();
+    private mapUpdated: Subject<any> = new Subject();
+    private projectSelected: Subject<any> = new Subject();
 
 
     constructor() {
@@ -163,10 +164,10 @@ export class MonithonMapService {
                     }
                 });
 
-            this.map.on('click', 'progetti-layer', function (e) {
+            this.map.on('click', 'progetti-layer', e => {
                 if (e.features.length) {
                     let feature = e.features[0];
-                    console.log(feature.id);
+                    this.publishSelectedProject(feature.properties);
                 }
             });
 
@@ -318,8 +319,20 @@ export class MonithonMapService {
         this.mapUpdated.unsubscribe();
     }
 
+    public subscribeProjectSelection(obs: Observer<any>): void {
+        this.projectSelected.subscribe(obs);
+    }
+    public unsubscribeProjectSelection(): void {
+        this.projectSelected.unsubscribe();
+    }
+
     publishUpdate(progetti): void {
         this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: progetti });
+    }
+
+    publishSelectedProject(progetto): void {
+        this.projectSelected.next(progetto);
+
     }
 
 }

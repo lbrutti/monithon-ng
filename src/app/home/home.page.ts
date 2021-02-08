@@ -9,7 +9,7 @@ import { MonithonMapService } from '../services/monithonMapService/monithonmap.s
 import lodash from 'lodash';
 
 import * as d3 from 'd3';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
     //variabili charts
     budgetChart: any;
     annoChart: any;
-    resultCounter:any;
+    resultCounter: any;
 
     temi: Array<any> = [];
     categorie: Array<any> = [];
@@ -43,12 +43,12 @@ export class HomePage implements OnInit {
         private monithonApiService: MonithonApiService,
         private renderer: Renderer2,
         private monithonMap: MonithonMapService,
-        private router: Router
-    ) { }
+        private router: Router, 
+        private route: ActivatedRoute) { }
 
     ngOnInit(): void {
         this.monitonMockedService.mirageJsServer();
-        let observer: Observer<any> = {
+        let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
                 this.progetti = updateSubject.progetti;
                 this.temi = updateSubject.temi;
@@ -58,7 +58,16 @@ export class HomePage implements OnInit {
             error: err => console.error('subscribeToUpdates error: ', err),
             complete: () => console.log('subscribeToUpdates complete: ')
         };
-        this.monithonMap.subscribeToUpdates(observer);
+
+        let projectSelectionObserver: Observer<any> = {
+            next: progetto => {
+                this.router.navigate(['dettaglio', progetto.codLocaleProgetto], { relativeTo: this.route });
+            },
+            error: err => console.error('subscribeProjectSelection error: ', err),
+            complete: () => console.log('subscribeProjectSelection complete: ')
+        };
+        this.monithonMap.subscribeToUpdates(mapUpdateObserver);
+        this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
         this.getProgetti()
             .subscribe({
                 next: data => {
@@ -130,7 +139,7 @@ export class HomePage implements OnInit {
         });
     }
 
-    private renderCounter(crossFilterData:any){
+    private renderCounter(crossFilterData: any) {
         this.resultCounter = new dc.DataCount((this.resultCounterElem as any).nativeElement);
         let all = crossFilterData.groupAll();
 

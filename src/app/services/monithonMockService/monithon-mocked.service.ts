@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Server } from 'miragejs';
 import * as listaProgetti from './mock/listaProgetti';
-import * as dettagliProgetti from './mock/dettagliProgetti';
+import dettagliProgetti from './mock/dettagliProgetti';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,8 +13,8 @@ export class MonithonMockedService {
     private static listaProgetti(): any[] {
         return listaProgetti.listaProgetti;
     }
-    private static dettaglioProgetto(): any[] {
-        return dettagliProgetti;
+    private static dettaglioProgetto(codLocaleProgetto: string): any[] {
+        return dettagliProgetti.filter(p => p.codLocaleProgetto == codLocaleProgetto);
     }
 
     public mirageJsServer(): Server {
@@ -26,8 +26,9 @@ export class MonithonMockedService {
                     return MonithonMockedService.listaProgetti();
                 });
 
-                this.get('/progetti/dettaglio', () => {
-                    return MonithonMockedService.dettaglioProgetto();
+                this.get('/progetti/dettaglio/:id', (schema, request) => {
+                    let codLocaleProgetto = request.params.id
+                    return MonithonMockedService.dettaglioProgetto(codLocaleProgetto);
                 });
                 //mapbox passthrough
                 this.passthrough('https://api.mapbox.com/**');

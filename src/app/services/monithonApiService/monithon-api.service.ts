@@ -17,8 +17,8 @@ export class MonithonApiService {
         return this.httpClient.get<any[]>(this.url);
     }
     
-    public getDettaglio(): Observable<any> {
-        return this.httpClient.get<any>(this.url + '/dettaglio');
+    public getDettaglio(codLocaleProgetto:string): Observable<any> {
+        return this.httpClient.get<any>(this.url + '/dettaglio/' + codLocaleProgetto);
     }
 
 }
