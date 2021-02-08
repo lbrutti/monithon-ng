@@ -98,14 +98,14 @@ export class MonithonMapService {
                 center: lodash.get(evt, 'features[0].properties.center'),
                 radius: lodash.get(evt, 'features[0].properties.radiusInKm')
             };
-            this.filterByRadius(circleData);
+            this.filtraPerDistanza(circleData);
         });
         this.map.on('draw.create', (evt) => {
             let circleData = {
                 center: lodash.get(evt, 'features[0].properties.center'),
                 radius: lodash.get(evt, 'features[0].properties.radiusInKm')
             };
-            this.filterByRadius(circleData);
+            this.filtraPerDistanza(circleData);
         });
 
         this.map.on('load', () => {
@@ -163,6 +163,12 @@ export class MonithonMapService {
                     }
                 });
 
+            this.map.on('click', 'progetti-layer', function (e) {
+                if (e.features.length) {
+                    let feature = e.features[0];
+                    console.log(feature.id);
+                }
+            });
 
             this.publishUpdate(this.featureCollectionToProgetti());
         });
@@ -214,7 +220,7 @@ export class MonithonMapService {
             }
         };
         this.draw.add(this.rangeProgetti);
-        this.filterByRadius({
+        this.filtraPerDistanza({
             center: center,
             radius: 10
         });
@@ -275,7 +281,7 @@ export class MonithonMapService {
      * 
      * @param circleData : 
      */
-    filterByRadius(circleData: any) {
+    filtraPerDistanza(circleData: any) {
         let centerPoint = point(circleData.center);
         let radius = circleData.radius;
         this.progetti.features.map(f => {

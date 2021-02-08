@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
     imports: [
@@ -15,9 +16,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
         IonicModule,
         HomePageRoutingModule,
         MatExpansionModule,
-        MatChipsModule
+        MatChipsModule,
+        MatListModule
     ],
-    declarations: [HomePage],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    declarations: [HomePage]
 })
 export class HomePageModule { }

@@ -33,8 +33,8 @@ export class MonithonMockedService {
                 this.passthrough('https://api.mapbox.com/**');
                 this.passthrough('https://events.mapbox.com/**');
 
-                //dc.js example
-                this.passthrough('https://dc-js.github.io/**');
+                // //dc.js example
+                // this.passthrough('https://dc-js.github.io/**');
 
             },
         });

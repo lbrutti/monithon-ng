@@ -9,6 +9,7 @@ import { MonithonMapService } from '../services/monithonMapService/monithonmap.s
 import lodash from 'lodash';
 
 import * as d3 from 'd3';
+import { Router } from '@angular/router';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -41,7 +42,8 @@ export class HomePage implements OnInit {
         private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
         private renderer: Renderer2,
-        private monithonMap: MonithonMapService
+        private monithonMap: MonithonMapService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
