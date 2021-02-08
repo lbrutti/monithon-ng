@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
 
 @Component({
@@ -12,7 +12,8 @@ export class DettaglioProgettoComponent implements OnInit {
     codLocaleProgetto: string;
 
     constructor(private monithonApiService: MonithonApiService,
-        private router: Router) {
+        private router: Router,
+        private route: ActivatedRoute) {
         if (this.router.getCurrentNavigation().extras) {
             this.routeState = this.router.getCurrentNavigation().extras;
             if (this.routeState) {
@@ -22,11 +23,14 @@ export class DettaglioProgettoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.monithonApiService.getDettaglio(this.codLocaleProgetto)
-            .subscribe({
-                next : data=> console.dir(data),
-                error : err => console.error(err)
-            });
+        this.route.paramMap.subscribe(params => {
+            this.codLocaleProgetto = params.get('id');
+            this.monithonApiService.getDettaglio(this.codLocaleProgetto)
+                .subscribe({
+                    next : data=> console.dir(data),
+                    error : err => console.error(err)
+                });
+        });
     }
 
 
