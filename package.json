@@ -29,6 +29,7 @@
         "@ionic/angular": "^5.0.0",
         "@mapbox/mapbox-gl-draw": "^1.2.0",
         "@mapbox/mapbox-gl-geocoder": "^4.7.0",
+        "@ngneat/transloco": "^2.20.0",
         "@turf/circle": "^6.3.0",
         "@turf/distance": "^6.3.0",
         "@turf/line-distance": "^4.7.3",
