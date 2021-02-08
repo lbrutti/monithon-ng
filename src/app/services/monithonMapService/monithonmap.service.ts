@@ -137,6 +137,8 @@ export class MonithonMapService {
                         'circle-radius': 3,
                         'circle-color': [
                             'case',
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
+                            COLOR_MAP.temi.default,
                             ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 4]],
                             COLOR_MAP.temi.energia,
                             ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 5]],
@@ -147,13 +149,15 @@ export class MonithonMapService {
                         ],
                         'circle-stroke-color': [
                             'case',
+                            ['!', ['boolean', ['feature-state', 'isWithinRange'], true]],
+                            COLOR_MAP.temi.default,
                             ['==', ['get', 'ocCodTemaSintetico'], 4],
                             COLOR_MAP.temi.energia,
                             ['==', ['get', 'ocCodTemaSintetico'], 5],
                             COLOR_MAP.temi.ambiente,
                             ['==', ['get', 'ocCodTemaSintetico'], 6],
                             COLOR_MAP.temi.attrazione,
-                            '#ffffff'
+                            'transparent'
                         ],
                         'circle-stroke-width': 1
                     }
