@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Server } from 'miragejs';
 import * as listaProgetti from './mock/listaProgetti';
 import * as dettagliProgetti from './mock/dettagliProgetti';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +21,7 @@ export class MonithonMockedService {
         return new Server({
             routes(): void {
                 this.namespace = 'monithon-api';
-                this.urlPrefix = 'http://localhost:4200'
+                this.urlPrefix = `${environment.server.protocol}://${environment.server.ip}:${environment.server.port}`;
                 this.get('/progetti', () => {
                     return MonithonMockedService.listaProgetti();
                 });

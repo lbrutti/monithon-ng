@@ -7,6 +7,11 @@ export const environment = {
     mapbox: {
         accessToken: 'pk.eyJ1IjoibGJydXR0aSIsImEiOiJjaXl5NXMxNWswMDA2MzJwZGViZDNxOG05In0.R5OZB0r3ov9HeduzarkLjw',
         style: 'mapbox://styles/lbrutti/ckioi1m7m4o0g17nrz5wydq5g/draft'
+    },
+    server:{
+        protocol:"http",
+        ip:"192.168.1.142",
+        port:"4200"
     }
 };
 
