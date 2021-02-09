@@ -5,11 +5,10 @@
         <div #mapContainer id="mapContainer">
 
         </div>
-        <div id="dettaglioProgetto">
+        <!-- <div id="dettaglioProgetto">
             <ion-router-outlet animated="true"></ion-router-outlet>
-        </div>
+        </div> -->
         <div id="panelContainer">
-
             <div id="filterContainer">
                 <!-- Temi -->
                 <mat-chip-list [ngClass]="{'monithon-temi': true}" aria-label="Temi progetto" multiple="true">
@@ -36,7 +35,8 @@
                                     *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected"
                                     (click)="this.filterByCategoria(categoria)"
                                     [attr.data-oc-cod-tema-sintetico]="categoria.ocCodTemaSintetico">
-                                    {{categoria.ocDescrCategoriaSpesa}}</mat-chip>
+                                    {{categoria.ocCodCategoriaSpesa | transloco}}
+                                </mat-chip>
                             </mat-chip-list>
                         </div>
                         <div id="chartPanelContainer">

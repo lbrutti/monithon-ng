@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { MatListModule } from '@angular/material/list';
         HomePageRoutingModule,
         MatExpansionModule,
         MatChipsModule,
-        MatListModule
+        MatListModule,
+        TranslocoModule
     ],
     declarations: [HomePage]
 })

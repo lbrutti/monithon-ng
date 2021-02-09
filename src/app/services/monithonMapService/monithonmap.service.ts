@@ -260,7 +260,7 @@ export class MonithonMapService {
         // ciclo le progetti  e li setto a selezionati se matchano per tema e categoria e la categoria è selezionata
         this.progetti.features.map(f => {
             let progetto = f.properties;
-            let categoriaProgetto = this.categorie.find(c => (c.ocCodTemaSintetico == progetto.ocCodTemaSintetico && c.ocCodCategoriaSpesa == progetto.ocCodCategoriaSpesa));
+            let categoriaProgetto = lodash.find(this.categorie,c => (c.ocCodTemaSintetico == progetto.ocCodTemaSintetico && c.ocCodCategoriaSpesa == progetto.ocCodCategoriaSpesa))||{};
             progetto.isSelected = categoriaProgetto.isSelected;
             progetti.push(progetto);
             this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected });
