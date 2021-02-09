@@ -25,6 +25,7 @@ export class HomePage implements OnInit {
 
     @ViewChild('categorieDiSpesaContainer') categorieDiSpesaContainer: ElementRef;
     @ViewChild('mapContainer') mapContainer: ElementRef;
+    @ViewChild('dettagliProgetto') dettagliProgetto: ElementRef;
 
     progetti: Array<Progetto> = [];
 
@@ -36,7 +37,8 @@ export class HomePage implements OnInit {
     temi: Array<any> = [];
     categorie: Array<any> = [];
     progettiCrossFilter: any;
-
+    progettoSelezionato: any = {};
+    visualizzaDettaglio: boolean = false;
 
     constructor(
         private monitonMockedService: MonithonMockedService,
@@ -61,7 +63,8 @@ export class HomePage implements OnInit {
 
         let projectSelectionObserver: Observer<any> = {
             next: progetto => {
-                this.router.navigate(['dettaglio', progetto.codLocaleProgetto], { relativeTo: this.route });
+                this.showDettaglioProgetto(progetto);
+                // this.router.navigate(['home/dettaglio', progetto.codLocaleProgetto]);
             },
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
@@ -76,6 +79,19 @@ export class HomePage implements OnInit {
                 error: err => console.error('getProgetti error: ', err),
                 complete: () => console.log('getProgetti complete: ')
             });
+    }
+    showDettaglioProgetto(progetto: any) {
+        this.monithonApiService.getDettaglio(progetto.codLocaleProgetto)
+            .subscribe({
+                next: progetto=>{
+                    this.progettoSelezionato = progetto[0];
+                    this.visualizzaDettaglio = true;
+                },
+                error: err=>{
+                    this.visualizzaDettaglio = false;
+                }
+            })
+       
     }
 
 
