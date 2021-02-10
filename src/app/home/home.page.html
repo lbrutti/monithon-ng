@@ -67,36 +67,36 @@
                             </ion-col>
                             <ion-col size="6">
                                 <!-- <div id="chartPanelContainer"> -->
-                                    <mat-expansion-panel class="monithon-filtri-charts" id="chartPanel" (opened)="this.onChartPanelOpen()"
-                                        (closed)="this.onChartPanelClose()">
-                                        <mat-expansion-panel-header>
-                                            <mat-panel-title>
-                                                Budget, anno e stato
-                                            </mat-panel-title>
-                                        </mat-expansion-panel-header>
-                                        <div id="chartContainer">
-                                            <ion-grid>
-                                                <ion-row>
-                                                    <ion-col>
-                                                        <h3>budget</h3>
-                                                        <div #budgetChart id='budgetChartContanier'></div>
-                                                    </ion-col>
-                                                </ion-row>
+                                <mat-expansion-panel class="monithon-filtri-charts" id="chartPanel"
+                                    (opened)="this.onChartPanelOpen()" (closed)="this.onChartPanelClose()">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            Budget, anno e stato
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div id="chartContainer">
+                                        <ion-grid>
+                                            <ion-row>
+                                                <ion-col>
+                                                    <h3>budget</h3>
+                                                    <div #budgetChart id='budgetChartContanier'></div>
+                                                </ion-col>
+                                            </ion-row>
 
-                                                <ion-row>
-                                                    <ion-col>
-                                                        <h3>anno</h3>
-                                                        <div #annoChart id='annoChartContanier'></div>
-                                                    </ion-col>
-                                                </ion-row>
-                                            </ion-grid>
-                                        </div>
-                                    </mat-expansion-panel>
+                                            <ion-row>
+                                                <ion-col>
+                                                    <h3>anno</h3>
+                                                    <div #annoChart id='annoChartContanier'></div>
+                                                </ion-col>
+                                            </ion-row>
+                                        </ion-grid>
+                                    </div>
+                                </mat-expansion-panel>
                                 <!-- </div> -->
                             </ion-col>
                         </ion-row>
                     </ion-grid>
-                   
+
                 </mat-expansion-panel>
             </div>
 
@@ -104,15 +104,48 @@
             <mat-expansion-panel id="resultContainer">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        <h1 #resultCounter></h1>
                         <h2>Progetti disponibili</h2>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                <mat-list>
-                    <mat-list-item *ngFor="let progetto of this.progetti">
-                        <h5>{{progetto.ocTitoloProgetto}}</h5>
-                    </mat-list-item>
-                </mat-list>
+                <div class="monithon-lista-header">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>
+                                <h1 #resultCounter></h1>
+                            </ion-col>
+                            <ion-col><span>comune</span>; <span>distanza</span></ion-col>
+                        </ion-row>
+                        <!-- ordinamento -->
+                        <ion-row>
+                            <ion-col>
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header>
+                                        <span>{{'ordinati'|transloco}}</span>
+                                        <mat-chip class="monithon-criterio-ordinamento-selezionato"
+                                            [ngClass]="{'visible': !this.panelOpenState, 'hidden':this.panelOpenState}">
+                                            Distanza</mat-chip>
+                                    </mat-expansion-panel-header>
+                                    <mat-chip-list class="monithon-criteri-ordinamento">
+                                        <mat-chip>Distanza</mat-chip>
+                                        <mat-chip>Categoria</mat-chip>
+                                        <mat-chip>Budget</mat-chip>
+                                        <mat-chip>Anno</mat-chip>
+                                    </mat-chip-list>
+
+                                </mat-expansion-panel>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </div>
+                <ion-list class="monithon-lista-progetti">
+                    <ion-list-header>
+                    </ion-list-header>
+                    <ion-item *ngFor="let progetto of this.progetti">
+                        <ion-label>
+                            <h2>{{progetto.ocTitoloProgetto}}</h2>
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
             </mat-expansion-panel>
         </div>
     </div>

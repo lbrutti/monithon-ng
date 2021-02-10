@@ -40,6 +40,8 @@ export class HomePage implements OnInit {
     progettoSelezionato: any = {};
     visualizzaDettaglio: boolean = false;
 
+    panelOpenState:boolean= false;
+
     constructor(
         private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,

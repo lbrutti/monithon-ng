@@ -53,8 +53,7 @@
     width: 34vw;
     max-height: 90vh;
     align-self: flex-end;
-    overflow-y: scroll;
-    scrollbar-width: none;
+    overflow-y: hidden;
 }
 
 // #chartPanelContainer {
@@ -67,6 +66,14 @@
 //https://stackoverflow.com/questions/53195131/angular-material-mat-expansion-panel-body-style-not-being-applied
 ::ng-deep .mat-expansion-panel-body {
     padding: 0 !important;
+}
+
+#resultContainer {
+    .monithon-lista-progetti {
+        overflow-y: scroll;
+        scrollbar-width: none;
+        height: 90vh;
+    }
 }
 
 #chartPanel {
@@ -195,10 +202,20 @@
     padding: 0;
 }
 
-.monithon-filtri{
+.monithon-filtri {
     background-color: var(--monithon-tema-sfondo-filtri);
 }
 
-.monithon-filtri-charts{
+.monithon-filtri-charts {
     background-color: var(--monithon-tema-sfondo-charts);
+}
+
+// .monithon-criteri-ordinamento{
+//     display: flex;
+//     flex-direction: column;
+// }
+.monithon-criterio-ordinamento-selezionato{
+    &.hidden{
+        display: none;
+    }
 }
