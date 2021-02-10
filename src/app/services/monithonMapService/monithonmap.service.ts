@@ -164,10 +164,17 @@ export class MonithonMapService {
                     }
                 });
 
+            this.map.on('click', e => {
+
+                    this.publishSelectedProject();
+            });
             this.map.on('click', 'progetti-layer', e => {
                 if (e.features.length) {
                     let feature = e.features[0];
                     this.publishSelectedProject(feature.properties);
+                } else {
+                    this.publishSelectedProject();
+
                 }
             });
 
@@ -330,7 +337,7 @@ export class MonithonMapService {
         this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: progetti });
     }
 
-    publishSelectedProject(progetto): void {
+    publishSelectedProject(progetto?:any): void {
         this.projectSelected.next(progetto);
 
     }

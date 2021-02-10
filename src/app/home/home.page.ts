@@ -45,7 +45,7 @@ export class HomePage implements OnInit {
         private monithonApiService: MonithonApiService,
         private renderer: Renderer2,
         private monithonMap: MonithonMapService,
-        private router: Router, 
+        private router: Router,
         private route: ActivatedRoute) { }
 
     ngOnInit(): void {
@@ -62,10 +62,7 @@ export class HomePage implements OnInit {
         };
 
         let projectSelectionObserver: Observer<any> = {
-            next: progetto => {
-                this.showDettaglioProgetto(progetto);
-                // this.router.navigate(['home/dettaglio', progetto.codLocaleProgetto]);
-            },
+            next: progetto => this.showDettaglioProgetto(progetto),
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
         };
@@ -81,17 +78,22 @@ export class HomePage implements OnInit {
             });
     }
     showDettaglioProgetto(progetto: any) {
-        this.monithonApiService.getDettaglio(progetto.codLocaleProgetto)
-            .subscribe({
-                next: progetto=>{
-                    this.progettoSelezionato = progetto[0];
-                    this.visualizzaDettaglio = true;
-                },
-                error: err=>{
-                    this.visualizzaDettaglio = false;
-                }
-            })
-       
+        if (progetto) {
+
+            this.monithonApiService.getDettaglio(progetto.codLocaleProgetto)
+                .subscribe({
+                    next: progetto => {
+                        this.progettoSelezionato = progetto[0];
+                        this.visualizzaDettaglio = true;
+                    },
+                    error: err => {
+                        this.visualizzaDettaglio = false;
+                    }
+                });
+        } else {
+            this.visualizzaDettaglio = false;
+        }
+
     }
 
 
