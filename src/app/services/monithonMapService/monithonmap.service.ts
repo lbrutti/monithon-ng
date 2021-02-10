@@ -191,13 +191,13 @@ export class MonithonMapService {
                 let properties: any = Object.assign({}, p);
                 properties.isSelected = true;
                 properties.isWithinRange = true;
-
+                let jitteredCoords = this.addJitter()(p.coordinate.lat,p.coordinate.lng, 0.5, false);
                 return {
                     "type": "Feature",
                     "properties": properties,
                     "geometry": {
                         "type": "Point",
-                        "coordinates": [p.coordinate.lng, p.coordinate.lat]
+                        "coordinates": [jitteredCoords.lng, jitteredCoords.lat]
                     }
                 };
             })
@@ -342,4 +342,30 @@ export class MonithonMapService {
 
     }
 
+    addJitter(): Function {
+
+        var rad_Earth = 6378.16;
+        var one_degree = (2 * Math.PI * rad_Earth) / 360;
+        var one_km = 1 / one_degree;
+
+        function randomInRange(from, to, fixed) {
+            fixed = fixed || 10;
+            return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+        }
+
+        return (lat, lng, kms, fixed) => {
+            return {
+                lat: randomInRange(
+                    lat - (kms * one_km),
+                    lat + (kms * one_km),
+                    fixed
+                ),
+                lng: randomInRange(
+                    lng - (kms * one_km),
+                    lng + (kms * one_km),
+                    fixed
+                )
+            };
+        }
+    }
 }
