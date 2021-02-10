@@ -45,7 +45,7 @@
                 <mat-expansion-panel class="monithon-filtri">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Categorie
+                            {{'monithonFiltriTitle'|transloco}}
                         </mat-panel-title>
 
                     </mat-expansion-panel-header>
@@ -66,33 +66,31 @@
                                 </div>
                             </ion-col>
                             <ion-col size="6">
-                                <!-- <div id="chartPanelContainer"> -->
                                 <mat-expansion-panel class="monithon-filtri-charts" id="chartPanel"
                                     (opened)="this.onChartPanelOpen()" (closed)="this.onChartPanelClose()">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title>
-                                            Budget, anno e stato
+                                            {{'chartPanelTitle'|transloco}}
                                         </mat-panel-title>
                                     </mat-expansion-panel-header>
                                     <div id="chartContainer">
                                         <ion-grid>
                                             <ion-row>
                                                 <ion-col>
-                                                    <h3>budget</h3>
+                                                    <h3>{{'budgetChartTitle' |transloco}}</h3>
                                                     <div #budgetChart id='budgetChartContanier'></div>
                                                 </ion-col>
                                             </ion-row>
 
                                             <ion-row>
                                                 <ion-col>
-                                                    <h3>anno</h3>
+                                                    <h3>{{'annoChartTitle'|transloco}}</h3>
                                                     <div #annoChart id='annoChartContanier'></div>
                                                 </ion-col>
                                             </ion-row>
                                         </ion-grid>
                                     </div>
                                 </mat-expansion-panel>
-                                <!-- </div> -->
                             </ion-col>
                         </ion-row>
                     </ion-grid>
@@ -104,16 +102,17 @@
             <mat-expansion-panel id="resultContainer">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        <h2>Progetti disponibili</h2>
+                        <h2>{{'resultContainerTitle' | transloco}}</h2>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="monithon-lista-header">
                     <ion-grid>
                         <ion-row>
                             <ion-col>
-                                <h1 #resultCounter></h1>
+                                <h1 class="monithon-contatore-risultati" #resultCounter></h1>
                             </ion-col>
-                            <ion-col><span>comune</span>; <span>distanza</span></ion-col>
+                            <ion-col><span>{{'comune'|transloco}}</span>; <span>{{'distanza'|transloco}}</span>
+                            </ion-col>
                         </ion-row>
                         <!-- ordinamento -->
                         <ion-row>
@@ -137,11 +136,13 @@
                         </ion-row>
                     </ion-grid>
                 </div>
+                <!-- lista risultati -->
                 <ion-list class="monithon-lista-progetti">
                     <ion-list-header>
                     </ion-list-header>
                     <ion-item *ngFor="let progetto of this.progetti">
-                        <ion-label>
+                        <ion-label class="monithon-lista-risultato"
+                            [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
                             <h2>{{progetto.ocTitoloProgetto}}</h2>
                         </ion-label>
                     </ion-item>

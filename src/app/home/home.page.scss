@@ -214,8 +214,56 @@
 //     display: flex;
 //     flex-direction: column;
 // }
-.monithon-criterio-ordinamento-selezionato{
-    &.hidden{
+.monithon-criterio-ordinamento-selezionato {
+    &.hidden {
         display: none;
     }
+}
+
+.monithon-contatore-risultati {
+    color: #EA4A3E;
+    font-size: 80px;
+    font-weight: bolder;
+}
+
+.monithon-lista-risultato {
+    text-transform: lowercase;
+    white-space: pre-line;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+
+    &::before {
+        content: '\0000a0';
+        border-radius: 100%;
+        width: .5rem;
+        height: .5rem;
+        display: inline-block;
+        margin-bottom: auto;
+        margin-top: 6px;
+
+    }
+
+    &[data-oc-cod-tema-sintetico="4"]::before {
+        background-color: var(--monithon-tema-energia-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="5"]::before {
+        background-color: var(--monithon-tema-ambiente-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="6"]::before {
+        background-color: var(--monithon-tema-attrazione-background);
+    }
+
+
+    h2 {
+        margin-bottom: auto;
+        width: 90%;
+        margin-left: 0;
+        margin-top: 0;
+    }
+
 }
