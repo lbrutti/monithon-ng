@@ -1,10 +1,11 @@
 <ion-content [fullscreen]="true" [scrollY]="false">
 
-    <!-- Mappa -->
     <div id="container">
+        <!-- Mappa -->
         <div #mapContainer id="mapContainer">
 
         </div>
+        <!-- dettaglio progetto -->
         <div [ngClass]="{'hidden': !this.visualizzaDettaglio, 'visible': this.visualizzaDettaglio}" #schedaProgetto
             [attr.data-oc-cod-tema-sintetico]="this.progettoSelezionato.ocCodTemaSintetico"
             class="monithon-scheda-progetto">
@@ -29,6 +30,7 @@
 
             </div>
         </div>
+
         <div id="panelContainer">
             <div id="filterContainer">
                 <!-- Temi -->
@@ -47,48 +49,54 @@
                         </mat-panel-title>
 
                     </mat-expansion-panel-header>
-                    <div id="filtri">
-
-                        <div #categorieDiSpesaContainer id="categorieDiSpesaContainer">
-                            <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
-                            <mat-chip-list aria-label="Fish selection" multiple="true">
-                                <mat-chip [ngClass]="{'monithon-categoria': true}" selectable="true"
-                                    *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected"
-                                    (click)="this.filterByCategoria(categoria)"
-                                    [attr.data-oc-cod-tema-sintetico]="categoria.ocCodTemaSintetico">
-                                    {{'categorie.'+categoria.ocCodCategoriaSpesa | transloco}}
-                                </mat-chip>
-                            </mat-chip-list>
-                        </div>
-                        <div id="chartPanelContainer">
-                            <mat-expansion-panel id="chartPanel" (opened)="this.onChartPanelOpen()"
-                                (closed)="this.onChartPanelClose()">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Budget, anno e stato
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <div id="chartContainer">
-                                    <ion-grid>
-                                        <ion-row>
-                                            <ion-col>
-                                                <h3>budget</h3>
-                                                <div #budgetChart id='budgetChartContanier'></div>
-                                            </ion-col>
-                                        </ion-row>
-
-                                        <ion-row>
-                                            <ion-col>
-                                                <h3>anno</h3>
-                                                <div #annoChart id='annoChartContanier'></div>
-                                            </ion-col>
-                                        </ion-row>
-                                    </ion-grid>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="6">
+                                <div #categorieDiSpesaContainer id="categorieDiSpesaContainer">
+                                    <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
+                                    <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
+                                        aria-orientation="horizontal">
+                                        <mat-chip [ngClass]="{'monithon-categoria': true}" selectable="true"
+                                            *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected"
+                                            (click)="this.filterByCategoria(categoria)"
+                                            [attr.data-oc-cod-tema-sintetico]="categoria.ocCodTemaSintetico">
+                                            {{'categorie.'+categoria.ocCodCategoriaSpesa | transloco}}
+                                        </mat-chip>
+                                    </mat-chip-list>
                                 </div>
-                            </mat-expansion-panel>
-                        </div>
+                            </ion-col>
+                            <ion-col size="6">
+                                <!-- <div id="chartPanelContainer"> -->
+                                    <mat-expansion-panel id="chartPanel" (opened)="this.onChartPanelOpen()"
+                                        (closed)="this.onChartPanelClose()">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Budget, anno e stato
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div id="chartContainer">
+                                            <ion-grid>
+                                                <ion-row>
+                                                    <ion-col>
+                                                        <h3>budget</h3>
+                                                        <div #budgetChart id='budgetChartContanier'></div>
+                                                    </ion-col>
+                                                </ion-row>
 
-                    </div>
+                                                <ion-row>
+                                                    <ion-col>
+                                                        <h3>anno</h3>
+                                                        <div #annoChart id='annoChartContanier'></div>
+                                                    </ion-col>
+                                                </ion-row>
+                                            </ion-grid>
+                                        </div>
+                                    </mat-expansion-panel>
+                                <!-- </div> -->
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                   
                 </mat-expansion-panel>
             </div>
 

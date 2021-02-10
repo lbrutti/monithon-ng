@@ -255,11 +255,11 @@ export class HomePage implements OnInit {
     }
 
     public onChartPanelOpen() {
-        this.renderer.addClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
+        // this.renderer.addClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
     }
 
     public onChartPanelClose() {
-        this.renderer.removeClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
+        // this.renderer.removeClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
     }
 
 
