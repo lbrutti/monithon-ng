@@ -122,9 +122,9 @@ export class MonithonMapService {
             //refactoring come singolo layer di progetti:
             this.temi = lodash.chain(this.progetti.features)
                 .groupBy(f => f.properties.ocCodTemaSintetico)
-                .map((temi, ocCodTemaSintetico) => ({ 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': lodash.get(temi, '[0].properties.ocTemaSintetico'), 'isSelected': true }))
+                .map((temi, ocCodTemaSintetico) => ({ 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': lodash.get(temi, '[0].properties.ocTemaSintetico'), 'isSelected': false }))
                 .value();
-            this.aggiornaTemiSelezionati();
+            // this.aggiornaTemiSelezionati();
             this.getCategorie();
 
             let layerId = 'progetti-layer'
@@ -166,7 +166,7 @@ export class MonithonMapService {
 
             this.map.on('click', e => {
 
-                    this.publishSelectedProject();
+                this.publishSelectedProject();
             });
             this.map.on('click', 'progetti-layer', e => {
                 if (e.features.length) {
@@ -235,14 +235,16 @@ export class MonithonMapService {
     }
 
     filtraPerTema() {
-        this.aggiornaTemiSelezionati();
+        // this.aggiornaTemiSelezionati();
+        let nessunTemaSelezionato = lodash.every(this.temi, t => !t.isSelected);
+
         let progetti = [];
         this.temi.map(t => {
             this.progetti.features
                 .map(f => {
                     let progetto = f.properties;
                     if (progetto.ocCodTemaSintetico == t.ocCodTemaSintetico) {
-                        progetto.isSelected = t.isSelected;
+                        progetto.isSelected = nessunTemaSelezionato || t.isSelected;
                         progetti.push(f.properties);
                     }
                     this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected })
@@ -254,21 +256,18 @@ export class MonithonMapService {
         this.publishUpdate(progetti);
     }
 
-    private aggiornaTemiSelezionati() {
-        if (lodash.every(this.temi, t => !t.isSelected)) {
-            this.temi.map(t => t.isSelected = true);
-        }
-    }
+
 
     filtraPerCategoria() {
         let progetti = [];
-        this.aggiornaCategorieSelezionate();
+        let nessunaCategoriaSelezionata = lodash.every(this.categorie, c => !c.isSelected);
+        // this.aggiornaCategorieSelezionate();
 
         // ciclo le progetti  e li setto a selezionati se matchano per tema e categoria e la categoria è selezionata
         this.progetti.features.map(f => {
             let progetto = f.properties;
-            let categoriaProgetto = lodash.find(this.categorie,c => (c.ocCodTemaSintetico == progetto.ocCodTemaSintetico && c.ocCodCategoriaSpesa == progetto.ocCodCategoriaSpesa))||{};
-            progetto.isSelected = categoriaProgetto.isSelected;
+            let categoriaProgetto = lodash.find(this.categorie, c => (c.ocCodTemaSintetico == progetto.ocCodTemaSintetico && (nessunaCategoriaSelezionata || (c.ocCodCategoriaSpesa == progetto.ocCodCategoriaSpesa)))) || {};
+            progetto.isSelected = nessunaCategoriaSelezionata || categoriaProgetto.isSelected;
             progetti.push(progetto);
             this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected });
 
@@ -301,15 +300,16 @@ export class MonithonMapService {
     }
 
     getCategorie(): any[] {
+        let nessunTemaSelezionato = lodash.every(this.temi, t => !t.isSelected)
         let categorieAttive = this.progetti
-            .features.filter(feature => lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico));
+            .features.filter(feature => (nessunTemaSelezionato || lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico)));
         this.categorie = lodash.chain(categorieAttive)
             .map(feature => {
                 let categoria = {
                     ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,
                     ocDescrCategoriaSpesa: feature.properties.ocDescrCategoriaSpesa || 'none',
                     ocCodTemaSintetico: feature.properties.ocCodTemaSintetico,
-                    isSelected: true
+                    isSelected: false
                 };
                 return categoria;
             })
@@ -337,7 +337,7 @@ export class MonithonMapService {
         this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: progetti });
     }
 
-    publishSelectedProject(progetto?:any): void {
+    publishSelectedProject(progetto?: any): void {
         this.projectSelected.next(progetto);
 
     }
