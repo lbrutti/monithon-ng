@@ -41,6 +41,7 @@
     align-items: baseline;
     margin-top: auto;
     z-index: 100;
+    width:66vw;
 }
 
 #filterContainer {
@@ -266,4 +267,12 @@
         margin-top: 0;
     }
 
+}
+
+.right-column {
+    margin-top: auto;
+    z-index: 100;
+    right: 0;
+    position: absolute;
+    bottom: 0;
 }
