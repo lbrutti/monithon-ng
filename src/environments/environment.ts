@@ -10,7 +10,7 @@ export const environment = {
     },
     server:{
         protocol:"http",
-        ip:"192.168.1.142",
+        ip:"localhost",
         port:"4200"
     }
 };

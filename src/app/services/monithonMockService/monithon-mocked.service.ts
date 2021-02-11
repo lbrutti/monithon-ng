@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Server } from 'miragejs';
-import * as listaProgetti from './mock/listaProgetti';
+import listaProgettiTotali from './mock/listaProgettiTotali';
 import dettagliProgetti from './mock/dettagliProgetti';
 import { environment } from 'src/environments/environment';
 
@@ -11,7 +11,7 @@ export class MonithonMockedService {
 
     constructor() { }
     private static listaProgetti(): any[] {
-        return listaProgetti.listaProgetti;
+        return listaProgettiTotali;
     }
     private static dettaglioProgetto(codLocaleProgetto: string): any[] {
         return dettagliProgetti.filter(p => p.codLocaleProgetto == codLocaleProgetto);
@@ -34,6 +34,7 @@ export class MonithonMockedService {
                 this.passthrough('https://api.mapbox.com/**');
                 this.passthrough('https://events.mapbox.com/**');
                 this.passthrough('http://192.168.1.142:4200/**');
+                this.passthrough('http://localhost:4200/assets/*');
 
 
                 // //dc.js example
