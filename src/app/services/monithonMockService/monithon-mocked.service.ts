@@ -12,7 +12,16 @@ export class MonithonMockedService {
 
     constructor() { }
     private static listaProgetti(): any[] {
-        return listaProgettiTotali;
+        return listaProgettiTotali
+            .map(p => ({
+                'codLocaleProgetto': p.codLocaleProgetto,
+                'ocCodTemaSintetico': p.ocCodTemaSintetico,
+                'ocCodCategoriaSpesa': p.ocCodCategoriaSpesa,
+                'coordinate': p.coordinate,
+                'ocTitoloProgetto': p.ocTitoloProgetto,
+                'ocDataInizioProgetto': p.ocDataInizioProgetto,
+                'ocFinanzTotPubNetto': p.ocFinanzTotPubNetto
+            }));
     }
 
     private static listaProgettiMinimi():any[]{

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import moment from 'moment';
 import { Observable, Observer } from 'rxjs';
 import { Progetto } from '../model/progetto/progetto';
@@ -9,7 +9,6 @@ import { MonithonMapService } from '../services/monithonMapService/monithonmap.s
 import lodash from 'lodash';
 
 import * as d3 from 'd3';
-import { Router, ActivatedRoute } from '@angular/router';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -40,24 +39,21 @@ export class HomePage implements OnInit {
     progettoSelezionato: any = {};
     visualizzaDettaglio: boolean = false;
 
-    panelOpenState:boolean= false;
+    panelOpenState: boolean = false;
 
     constructor(
         private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
-        private renderer: Renderer2,
-        private monithonMap: MonithonMapService,
-        private router: Router,
-        private route: ActivatedRoute) { }
+        private monithonMap: MonithonMapService) { }
 
     ngOnInit(): void {
         this.monitonMockedService.mirageJsServer();
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
-                // this.progetti = updateSubject.progetti;
-                this.temi = updateSubject.temi;
-               // this.categorie = updateSubject.categorie;
-                // this.renderCharts(this.progetti);
+                this.temi = updateSubject.temi; // <- nessun problema di pergormance
+                this.categorie = updateSubject.categorie;
+                this.progetti = updateSubject.progetti;
+                this.renderCharts(this.progetti);
             },
             error: err => console.error('subscribeToUpdates error: ', err),
             complete: () => console.log('subscribeToUpdates complete: ')
@@ -260,14 +256,6 @@ export class HomePage implements OnInit {
 
         console.log('onProgettoClick');
 
-    }
-
-    public onChartPanelOpen() {
-        // this.renderer.addClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
-    }
-
-    public onChartPanelClose() {
-        // this.renderer.removeClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
     }
 
 

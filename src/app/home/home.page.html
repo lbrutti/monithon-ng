@@ -140,12 +140,13 @@
                 <ion-list class="monithon-lista-progetti">
                     <ion-list-header>
                     </ion-list-header>
-                    <ion-item *ngFor="let progetto of this.progetti">
+                    <!-- COLLO DI BOTTIGLIA: verificare performance con loading incrementale -->
+                    <!-- <ion-item *ngFor="let progetto of this.progetti">
                         <ion-label class="monithon-lista-risultato"
                             [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
                             <h2>{{progetto.ocTitoloProgetto}}</h2>
                         </ion-label>
-                    </ion-item>
+                    </ion-item> -->
                 </ion-list>
             </mat-expansion-panel>
         </div>

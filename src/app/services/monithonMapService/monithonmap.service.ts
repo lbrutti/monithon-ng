@@ -128,7 +128,6 @@ export class MonithonMapService {
             this.getCategorie();
 
             let layerId = 'progetti-layer'
-            //aggiungere un layer per ogni categoria di progetto (vedi https://codepen.io/lbrutti/pen/WNoeKLW?editors=0010)
             this.map
                 .addLayer({
                     'id': layerId,
