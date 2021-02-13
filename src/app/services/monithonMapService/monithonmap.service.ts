@@ -276,7 +276,7 @@ export class MonithonMapService {
         this.progetti.features.map(f => {
             let progetto = f.properties;
             let categoriaProgetto = lodash.find(this.categorie, c => (c.ocCodTemaSintetico == progetto.ocCodTemaSintetico && (nessunaCategoriaSelezionata || (lodash.includes(progetto.ocCodCategoriaSpesa, c.ocCodCategoriaSpesa))))) || {};
-            progetto.isSelected = nessunaCategoriaSelezionata || categoriaProgetto.isSelected;
+            progetto.isSelected = nessunaCategoriaSelezionata || (categoriaProgetto.isVisible && categoriaProgetto.isSelected);
             progetti.push(progetto);
             this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected });
 
@@ -285,13 +285,6 @@ export class MonithonMapService {
         this.publishUpdate(progetti);
     }
 
-
-
-    private aggiornaCategorieSelezionate() {
-        if (lodash.every(this.categorie, c => !c.isSelected)) {
-            this.categorie.map(c => c.isSelected = true);
-        }
-    }
 
     /**
      * 
@@ -321,7 +314,7 @@ export class MonithonMapService {
 
         this.categorie.map(c => {
             c.isVisible = lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa);
-            c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
+            //c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
         });
 
         // this.categorieAttive = lodash.chain(categorieVisibili)
