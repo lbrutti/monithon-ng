@@ -115,7 +115,7 @@ export class MonithonMapService {
             this.map
                 .addSource('progetti', {
                     type: 'geojson',
-                    data: '/assets/csv/progettiMinimi.csv',
+                    data: this.progetti,
                     promoteId: 'codLocaleProgetto'
                 });
 
@@ -124,7 +124,7 @@ export class MonithonMapService {
                 .groupBy(f => f.properties.ocCodTemaSintetico)
                 .map((temi, ocCodTemaSintetico) => ({ 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': lodash.get(temi, '[0].properties.ocTemaSintetico'), 'isSelected': false }))
                 .value();
-            // this.aggiornaTemiSelezionati();
+
             this.getCategorie();
 
             let layerId = 'progetti-layer'
@@ -191,7 +191,7 @@ export class MonithonMapService {
                 let properties: any = Object.assign({}, p);
                 properties.isSelected = true;
                 properties.isWithinRange = true;
-                let jitteredCoords = this.addJitter()(p.coordinate.lat,p.coordinate.lng, 0.5, false);
+                let jitteredCoords = this.addJitter()(p.coordinate.lat, p.coordinate.lng, 0.5, false);
                 return {
                     "type": "Feature",
                     "properties": properties,
@@ -307,7 +307,6 @@ export class MonithonMapService {
             .map(feature => {
                 let categoria = {
                     ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,
-                    ocDescrCategoriaSpesa: feature.properties.ocDescrCategoriaSpesa || 'none',
                     ocCodTemaSintetico: feature.properties.ocCodTemaSintetico,
                     isSelected: false
                 };

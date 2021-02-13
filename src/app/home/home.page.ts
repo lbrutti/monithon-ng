@@ -54,23 +54,23 @@ export class HomePage implements OnInit {
         this.monitonMockedService.mirageJsServer();
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
-                this.progetti = updateSubject.progetti;
+                // this.progetti = updateSubject.progetti;
                 this.temi = updateSubject.temi;
-                this.categorie = updateSubject.categorie;
-                this.renderCharts(this.progetti);
+               // this.categorie = updateSubject.categorie;
+                // this.renderCharts(this.progetti);
             },
             error: err => console.error('subscribeToUpdates error: ', err),
             complete: () => console.log('subscribeToUpdates complete: ')
         };
 
         let projectSelectionObserver: Observer<any> = {
-            next: progetto => this.showDettaglioProgetto(progetto),
+            next: progetto => false && this.showDettaglioProgetto(progetto),
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
         };
         this.monithonMap.subscribeToUpdates(mapUpdateObserver);
         this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
-        this.getProgettiMinimi()
+        this.getProgetti()
             .subscribe({
                 next: data => {
                     this.monithonMap.renderMap(this.mapContainer.nativeElement, data)
