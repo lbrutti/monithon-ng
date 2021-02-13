@@ -18,6 +18,7 @@ import { Observer, Subject } from 'rxjs';
 import '@turf/distance';
 import { distance, point } from '@turf/turf';
 import { COLOR_MAP } from 'src/app/utils/colorMap';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
     providedIn: 'root'
@@ -37,6 +38,7 @@ export class MonithonMapService {
 
     private mapUpdated: Subject<any> = new Subject();
     private projectSelected: Subject<any> = new Subject();
+    categorieAttive: { ocCodCategoriaSpesa: any; ocCodTemaSintetico: any; isSelected: boolean; }[];
 
 
     constructor() {
@@ -120,10 +122,6 @@ export class MonithonMapService {
                 });
 
             //refactoring come singolo layer di progetti:
-            this.temi = lodash.chain(this.progetti.features)
-                .groupBy(f => f.properties.ocCodTemaSintetico)
-                .map((temi, ocCodTemaSintetico) => ({ 'ocCodTemaSintetico': ocCodTemaSintetico, 'ocTemaSintetico': lodash.get(temi, '[0].properties.ocTemaSintetico'), 'isSelected': false }))
-                .value();
 
             this.getCategorie();
 
@@ -183,6 +181,13 @@ export class MonithonMapService {
 
     }
 
+    public setTemi(temi: Array<any>) {
+        this.temi = temi.map((t) => ({ 'ocCodTemaSintetico': t.ocCodTemaSintetico, 'isSelected': false }));
+    }
+
+    public setCategorie(categorie: Array<any>) {
+        this.categorie = categorie.map((c) => ({ 'ocCodCategoriaSpesa': c.ocCodCategoriaSpesa, 'ocCodTemaSintentico': c.ocCodTemaSintentico, 'isSelected': false }));
+    }
     private progettiToFeatureCollection(data: Array<Progetto>): any {
         this.progetti = {
             "type": "FeatureCollection",
@@ -265,7 +270,7 @@ export class MonithonMapService {
         // ciclo le progetti  e li setto a selezionati se matchano per tema e categoria e la categoria è selezionata
         this.progetti.features.map(f => {
             let progetto = f.properties;
-            let categoriaProgetto = lodash.find(this.categorie, c => (c.ocCodTemaSintetico == progetto.ocCodTemaSintetico && (nessunaCategoriaSelezionata || (c.ocCodCategoriaSpesa == progetto.ocCodCategoriaSpesa)))) || {};
+            let categoriaProgetto = lodash.find(this.categorie, c => (c.ocCodTemaSintetico == progetto.ocCodTemaSintetico && (nessunaCategoriaSelezionata || (lodash.includes(progetto.ocCodCategoriaSpesa, c.ocCodCategoriaSpesa))))) || {};
             progetto.isSelected = nessunaCategoriaSelezionata || categoriaProgetto.isSelected;
             progetti.push(progetto);
             this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected });
@@ -299,20 +304,20 @@ export class MonithonMapService {
     }
 
     getCategorie(): any[] {
-        let nessunTemaSelezionato = lodash.every(this.temi, t => !t.isSelected)
-        let categorieAttive = this.progetti
-            .features.filter(feature => (nessunTemaSelezionato || lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico)));
-        this.categorie = lodash.chain(categorieAttive)
-            .map(feature => {
-                let categoria = {
-                    ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,
-                    ocCodTemaSintetico: feature.properties.ocCodTemaSintetico,
-                    isSelected: false
-                };
-                return categoria;
-            })
-            .uniqBy(cat => cat.ocCodTemaSintetico + cat.ocCodCategoriaSpesa)
-            .value();
+        // let nessunTemaSelezionato = lodash.every(this.temi, t => !t.isSelected)
+        // let categorieAttive = this.progetti
+        //     .features.filter(feature => (nessunTemaSelezionato || lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico)));
+        // this.categorieAttive = lodash.chain(categorieAttive)
+        //     .map(feature => {
+        //         let categoria = {
+        //             ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,
+        //             ocCodTemaSintetico: feature.properties.ocCodTemaSintetico,
+        //             isSelected: false
+        //         };
+        //         return categoria;
+        //     })
+        //     .uniqBy(cat => cat.ocCodTemaSintetico + cat.ocCodCategoriaSpesa)
+        //     .value();
 
         return this.categorie;
     }
