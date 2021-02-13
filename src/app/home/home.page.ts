@@ -70,7 +70,7 @@ export class HomePage implements OnInit {
         };
         this.monithonMap.subscribeToUpdates(mapUpdateObserver);
         this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
-        this.getProgetti()
+        this.getProgettiMinimi()
             .subscribe({
                 next: data => {
                     this.monithonMap.renderMap(this.mapContainer.nativeElement, data)
@@ -236,6 +236,10 @@ export class HomePage implements OnInit {
 
     private getProgetti(): Observable<any> {
         return this.monithonApiService.getProgetti();
+    }
+
+    private getProgettiMinimi(): Observable<any> {
+        return this.monithonApiService.getListaProgetti();
     }
 
     public filterByTema(tema: any): void {

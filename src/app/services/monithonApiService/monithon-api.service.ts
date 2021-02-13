@@ -16,9 +16,14 @@ export class MonithonApiService {
     public getProgetti(): Observable<any[]> {
         return this.httpClient.get<any[]>(this.url);
     }
-    
-    public getDettaglio(codLocaleProgetto:string): Observable<any> {
-        return this.httpClient.get<any>(this.url + '/dettaglio/' + codLocaleProgetto);
+
+    public getListaProgetti(): Observable<any> {
+
+        return this.httpClient.get<any[]>(this.url+'/minimi');
+    }
+
+    public getDettaglio(codLocaleProgetto: string): Observable<any> {
+        return this.httpClient.get<any>(this.url + '/dettaglio/' + codLocaleProgetto );
     }
 
 }

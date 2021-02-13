@@ -115,7 +115,7 @@ export class MonithonMapService {
             this.map
                 .addSource('progetti', {
                     type: 'geojson',
-                    data: this.progetti,
+                    data: '/assets/csv/progettiMinimi.csv',
                     promoteId: 'codLocaleProgetto'
                 });
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Server } from 'miragejs';
 import listaProgettiTotali from './mock/listaProgettiTotali';
 import dettagliProgetti from './mock/dettagliProgetti';
+import progettiMinimi from './mock/progettiMinimi';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,6 +13,10 @@ export class MonithonMockedService {
     constructor() { }
     private static listaProgetti(): any[] {
         return listaProgettiTotali;
+    }
+
+    private static listaProgettiMinimi():any[]{
+        return progettiMinimi;
     }
     private static dettaglioProgetto(codLocaleProgetto: string): any[] {
         return dettagliProgetti.filter(p => p.codLocaleProgetto == codLocaleProgetto);
@@ -29,6 +34,10 @@ export class MonithonMockedService {
                 this.get('/progetti/dettaglio/:id', (schema, request) => {
                     let codLocaleProgetto = request.params.id
                     return MonithonMockedService.dettaglioProgetto(codLocaleProgetto);
+                });
+
+                this.get('/progetti/minimi', () => {
+                    return MonithonMockedService.listaProgetti();
                 });
                 //mapbox passthrough
                 this.passthrough('https://api.mapbox.com/**');
