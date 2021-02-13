@@ -20,17 +20,58 @@ export class MonithonMockedService {
                 'coordinate': p.coordinate,
                 'ocTitoloProgetto': p.ocTitoloProgetto,
                 'ocDataInizioProgetto': p.ocDataInizioProgetto,
-                'ocFinanzTotPubNetto': p.ocFinanzTotPubNetto
+                'ocFinanzTotPubNetto': p.ocFinanzTotPubNetto,
+                'ocStatoProgetto': p.ocStatoProgetto,
+                'monithonReports': Math.random() * 10 > 5 ? [] : ['https://dev.monithon.it/report/view/107', 'https://dev.monithon.it/report/view/108']
             }));
     }
 
-    private static listaProgettiMinimi():any[]{
+    private static listaProgettiMinimi(): any[] {
         return progettiMinimi;
     }
     private static dettaglioProgetto(codLocaleProgetto: string): any[] {
         return dettagliProgetti.filter(p => p.codLocaleProgetto == codLocaleProgetto);
     }
 
+    private static temi() {
+        return [{ 'ocCodTemaSintetico': 4 },
+                { 'ocCodTemaSintetico': 5 },
+                { 'ocCodTemaSintetico': 6 }];
+    }
+
+    private static categorie() {
+        let codiciCategoria = [
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "017" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "018" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "019" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "020" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "021" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "022" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "023" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "084" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "085" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "086" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "087" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "088" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "089" },
+            { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': "090" },
+            { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': "091" },
+            { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': "092" },
+            { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': "093" },
+            { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': "094" },
+            { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': "095" },
+            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': "09" },
+            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': "010" },
+            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': "011" },
+            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': "012" },
+            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': "013" },
+            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': "014" },
+            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': "015" },
+            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': "016" },
+            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': "068" },
+            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': "070" }]
+        return codiciCategoria;
+    }
     public mirageJsServer(): Server {
         return new Server({
             routes(): void {
@@ -47,6 +88,14 @@ export class MonithonMockedService {
 
                 this.get('/progetti/minimi', () => {
                     return MonithonMockedService.listaProgetti();
+                });
+
+                this.get('/temi', () => {
+                    return MonithonMockedService.temi();
+                });
+
+                this.get('/categorie', () => {
+                    return MonithonMockedService.categorie();
                 });
                 //mapbox passthrough
                 this.passthrough('https://api.mapbox.com/**');
