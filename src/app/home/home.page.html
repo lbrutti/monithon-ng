@@ -66,8 +66,7 @@
                                 </div>
                             </ion-col>
                             <ion-col size="6">
-                                <mat-expansion-panel class="monithon-filtri-charts" id="chartPanel"
-                                    (opened)="this.onChartPanelOpen()" (closed)="this.onChartPanelClose()">
+                                <mat-expansion-panel class="monithon-filtri-charts" id="chartPanel">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title>
                                             {{'chartPanelTitle'|transloco}}
@@ -137,17 +136,22 @@
                     </ion-grid>
                 </div>
                 <!-- lista risultati -->
-                <ion-list class="monithon-lista-progetti">
-                    <ion-list-header>
-                    </ion-list-header>
-                    <!-- COLLO DI BOTTIGLIA: verificare performance con loading incrementale -->
-                    <!-- <ion-item *ngFor="let progetto of this.progetti">
-                        <ion-label class="monithon-lista-risultato"
-                            [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
-                            <h2>{{progetto.ocTitoloProgetto}}</h2>
-                        </ion-label>
-                    </ion-item> -->
+                <ion-list #listaProgetti class="monithon-lista-progetti">
+                    <ion-virtual-scroll>
+
+                        <!-- COLLO DI BOTTIGLIA: verificare performance con loading incrementale -->
+                        <ion-item *ngFor="let progetto of this.progetti">
+                            <ion-label class="monithon-lista-risultato"
+                                [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
+                                <h2>{{progetto.ocTitoloProgetto}}</h2>
+                            </ion-label>
+                        </ion-item>
+                    </ion-virtual-scroll>
                 </ion-list>
+                <!-- <ion-infinite-scroll #infiniteScroll threshold="1px">
+                    <ion-infinite-scroll-content (ionInfinite)="this.caricaProgetti()" loading-spinner="bubbles" loading-text="Loading more data...">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll> -->
             </mat-expansion-panel>
         </div>
     </div>

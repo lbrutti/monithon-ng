@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import moment from 'moment';
 import { Observable, Observer } from 'rxjs';
 import { Progetto } from '../model/progetto/progetto';
@@ -16,7 +16,7 @@ declare const dc, crossfilter;
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
 
     @ViewChild('budgetChart') budgetChartContainer: HTMLElement;
     @ViewChild('annoChart') annoChartContainer: HTMLElement;
@@ -25,6 +25,9 @@ export class HomePage implements OnInit {
     @ViewChild('categorieDiSpesaContainer') categorieDiSpesaContainer: ElementRef;
     @ViewChild('mapContainer') mapContainer: ElementRef;
     @ViewChild('dettagliProgetto') dettagliProgetto: ElementRef;
+    @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
+    @ViewChild('infiniteScroll', { read: ElementRef }) infiniteScroll: ElementRef;
+
 
     progetti: Array<Progetto> = [];
 
@@ -40,6 +43,7 @@ export class HomePage implements OnInit {
     visualizzaDettaglio: boolean = false;
 
     panelOpenState: boolean = false;
+    progettiVisualizzati: number = 0;
 
     constructor(
         private monitonMockedService: MonithonMockedService,
@@ -52,7 +56,9 @@ export class HomePage implements OnInit {
             next: updateSubject => {
                 this.temi = updateSubject.temi; // <- nessun problema di pergormance
                 this.categorie = updateSubject.categorie;
-                this.progetti = updateSubject.progetti;
+                this.progetti = lodash.take(updateSubject.progetti, 50);
+                this.progettiVisualizzati = 0;
+                this.aggiungiProgetti(10);
                 this.renderCharts(this.progetti);
             },
             error: err => console.error('subscribeToUpdates error: ', err),
@@ -74,6 +80,13 @@ export class HomePage implements OnInit {
                 error: err => console.error('getProgetti error: ', err),
                 complete: () => console.log('getProgetti complete: ')
             });
+    }
+
+    ngAfterViewInit(): void {
+        //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+        //Add 'implements AfterViewInit' to the class.
+        // this.aggiungiProgetti(10);
+
     }
     showDettaglioProgetto(progetto: any) {
         if (progetto) {
@@ -258,6 +271,32 @@ export class HomePage implements OnInit {
 
     }
 
+
+    public caricaProgetti(evt) {
+        console.dir(evt);
+        if (this.progettiVisualizzati < this.progetti.length) {
+            this.aggiungiProgetti(10);
+        } else {
+            console.log('No More Data');
+            this.infiniteScroll.nativeElement.disabled = true;
+        }
+    }
+
+    public aggiungiProgetti(numeroElementi: number) {
+        const originalLength = this.progettiVisualizzati;
+        for (var i = 0; i < numeroElementi; i++) {
+            const el = document.createElement('ion-item');
+            let progetto = this.progetti[i + originalLength];
+            if (progetto) {
+                el.innerHTML = `<ion-label class="monithon-lista-risultato"
+        data-oc-cod-tema-sintetico="${progetto.ocCodTemaSintetico}">
+        <h2>${progetto.ocTitoloProgetto}</h2>
+    </ion-label>`;
+                this.listaProgetti.nativeElement.appendChild(el);
+                this.progettiVisualizzati++;
+            }
+        }
+    }
 
 }
 
