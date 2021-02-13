@@ -275,6 +275,7 @@ export class MonithonMapService {
         // ciclo le progetti  e li setto a selezionati se matchano per tema e categoria e la categoria è selezionata
         this.progetti.features.map(f => {
             let progetto = f.properties;
+            //ricerca con includes potrbbe provocare rallentamenti...
             let categoriaProgetto = lodash.find(this.categorie, c => (c.ocCodTemaSintetico == progetto.ocCodTemaSintetico && (nessunaCategoriaSelezionata || (lodash.includes(progetto.ocCodCategoriaSpesa, c.ocCodCategoriaSpesa))))) || {};
             progetto.isSelected = nessunaCategoriaSelezionata || (categoriaProgetto.isVisible && categoriaProgetto.isSelected);
             progetti.push(progetto);
