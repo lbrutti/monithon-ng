@@ -54,7 +54,7 @@ export class HomePage implements OnInit {
         this.monitonMockedService.mirageJsServer();
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
-                this.progetti = updateSubject.progetti;
+                this.progetti = lodash.take(updateSubject.progetti,50); // <-SM-87 : test per ridurre numero elementi in lista
                 this.temi = updateSubject.temi;
                 this.categorie = updateSubject.categorie;
                 this.renderCharts(this.progetti);
