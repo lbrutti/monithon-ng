@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import moment from 'moment';
-import { Observable, Observer } from 'rxjs';
+import { merge, Observable, Observer } from 'rxjs';
 import { Progetto } from '../model/progetto/progetto';
 import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
 import { MonithonMockedService } from '../services/monithonMockService/monithon-mocked.service';
@@ -56,9 +56,8 @@ export class HomePage implements OnInit, AfterViewInit {
             next: updateSubject => {
                 this.temi = updateSubject.temi; // <- nessun problema di pergormance
                 this.categorie = updateSubject.categorie;
-                this.progetti = lodash.take(updateSubject.progetti, 50);
+                this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
                 this.progettiVisualizzati = 0;
-                this.aggiungiProgetti(10);
                 this.renderCharts(this.progetti);
             },
             error: err => console.error('subscribeToUpdates error: ', err),
@@ -72,14 +71,19 @@ export class HomePage implements OnInit, AfterViewInit {
         };
         this.monithonMap.subscribeToUpdates(mapUpdateObserver);
         this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
-        this.getProgetti()
-            .subscribe({
-                next: data => {
-                    this.monithonMap.renderMap(this.mapContainer.nativeElement, data)
-                },
-                error: err => console.error('getProgetti error: ', err),
-                complete: () => console.log('getProgetti complete: ')
-            });
+        Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise(), this.getCategorie().toPromise()])
+            .then( data => {
+                this.monithonMap.categorie = data[2];
+                this.monithonMap.setTemi(data[1]);
+                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0]);
+            }
+               );
+    }
+    getCategorie() {
+        return this.monithonApiService.getCategorie();
+    }
+    getTemi() {
+        return this.monithonApiService.getTemi();
     }
 
     ngAfterViewInit(): void {
