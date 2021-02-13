@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import moment from 'moment';
-import { Observable, Observer } from 'rxjs';
+import { merge, Observable, Observer } from 'rxjs';
 import { Progetto } from '../model/progetto/progetto';
 import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
 import { MonithonMockedService } from '../services/monithonMockService/monithon-mocked.service';
@@ -9,7 +9,6 @@ import { MonithonMapService } from '../services/monithonMapService/monithonmap.s
 import lodash from 'lodash';
 
 import * as d3 from 'd3';
-import { Router, ActivatedRoute } from '@angular/router';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -17,7 +16,7 @@ declare const dc, crossfilter;
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
 
     @ViewChild('budgetChart') budgetChartContainer: HTMLElement;
     @ViewChild('annoChart') annoChartContainer: HTMLElement;
@@ -26,6 +25,9 @@ export class HomePage implements OnInit {
     @ViewChild('categorieDiSpesaContainer') categorieDiSpesaContainer: ElementRef;
     @ViewChild('mapContainer') mapContainer: ElementRef;
     @ViewChild('dettagliProgetto') dettagliProgetto: ElementRef;
+    @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
+    @ViewChild('infiniteScroll', { read: ElementRef }) infiniteScroll: ElementRef;
+
 
     progetti: Array<Progetto> = [];
 
@@ -40,23 +42,22 @@ export class HomePage implements OnInit {
     progettoSelezionato: any = {};
     visualizzaDettaglio: boolean = false;
 
-    panelOpenState:boolean= false;
+    panelOpenState: boolean = false;
+    progettiVisualizzati: number = 0;
 
     constructor(
         private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
-        private renderer: Renderer2,
-        private monithonMap: MonithonMapService,
-        private router: Router,
-        private route: ActivatedRoute) { }
+        private monithonMap: MonithonMapService) { }
 
     ngOnInit(): void {
         this.monitonMockedService.mirageJsServer();
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
-                this.progetti = lodash.take(updateSubject.progetti,50); // <-SM-87 : test per ridurre numero elementi in lista
-                this.temi = updateSubject.temi;
-                this.categorie = updateSubject.categorie;
+                this.temi = updateSubject.temi; // <- nessun problema di pergormance
+                this.categorie = updateSubject.categorie.filter(c=>c.isVisible);
+                this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
+                this.progettiVisualizzati = 0;
                 this.renderCharts(this.progetti);
             },
             error: err => console.error('subscribeToUpdates error: ', err),
@@ -64,20 +65,32 @@ export class HomePage implements OnInit {
         };
 
         let projectSelectionObserver: Observer<any> = {
-            next: progetto => this.showDettaglioProgetto(progetto),
+            next: progetto => false && this.showDettaglioProgetto(progetto),
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
         };
         this.monithonMap.subscribeToUpdates(mapUpdateObserver);
         this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
-        this.getProgetti()
-            .subscribe({
-                next: data => {
-                    this.monithonMap.renderMap(this.mapContainer.nativeElement, data)
-                },
-                error: err => console.error('getProgetti error: ', err),
-                complete: () => console.log('getProgetti complete: ')
-            });
+        Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise(), this.getCategorie().toPromise()])
+            .then( data => {
+                this.monithonMap.categorie = data[2];
+                this.monithonMap.setTemi(data[1]);
+                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0]);
+            }
+               );
+    }
+    getCategorie() {
+        return this.monithonApiService.getCategorie();
+    }
+    getTemi() {
+        return this.monithonApiService.getTemi();
+    }
+
+    ngAfterViewInit(): void {
+        //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+        //Add 'implements AfterViewInit' to the class.
+        // this.aggiungiProgetti(10);
+
     }
     showDettaglioProgetto(progetto: any) {
         if (progetto) {
@@ -238,6 +251,10 @@ export class HomePage implements OnInit {
         return this.monithonApiService.getProgetti();
     }
 
+    private getProgettiMinimi(): Observable<any> {
+        return this.monithonApiService.getListaProgetti();
+    }
+
     public filterByTema(tema: any): void {
         tema.isSelected = !tema.isSelected;
         this.monithonMap.filtraPerTema();
@@ -258,14 +275,32 @@ export class HomePage implements OnInit {
 
     }
 
-    public onChartPanelOpen() {
-        // this.renderer.addClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
+
+    public caricaProgetti(evt) {
+        console.dir(evt);
+        if (this.progettiVisualizzati < this.progetti.length) {
+            this.aggiungiProgetti(10);
+        } else {
+            console.log('No More Data');
+            this.infiniteScroll.nativeElement.disabled = true;
+        }
     }
 
-    public onChartPanelClose() {
-        // this.renderer.removeClass(this.categorieDiSpesaContainer.nativeElement, 'shrink');
+    public aggiungiProgetti(numeroElementi: number) {
+        const originalLength = this.progettiVisualizzati;
+        for (var i = 0; i < numeroElementi; i++) {
+            const el = document.createElement('ion-item');
+            let progetto = this.progetti[i + originalLength];
+            if (progetto) {
+                el.innerHTML = `<ion-label class="monithon-lista-risultato"
+        data-oc-cod-tema-sintetico="${progetto.ocCodTemaSintetico}">
+        <h2>${progetto.ocTitoloProgetto}</h2>
+    </ion-label>`;
+                this.listaProgetti.nativeElement.appendChild(el);
+                this.progettiVisualizzati++;
+            }
+        }
     }
-
 
 }
 
