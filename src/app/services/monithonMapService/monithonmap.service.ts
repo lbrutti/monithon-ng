@@ -123,7 +123,7 @@ export class MonithonMapService {
 
             //refactoring come singolo layer di progetti:
 
-            this.getCategorie();
+            this.aggiornaCategorieVisibili();
 
             let layerId = 'progetti-layer'
             this.map
@@ -186,7 +186,12 @@ export class MonithonMapService {
     }
 
     public setCategorie(categorie: Array<any>) {
-        this.categorie = categorie.map((c) => ({ 'ocCodCategoriaSpesa': c.ocCodCategoriaSpesa, 'ocCodTemaSintentico': c.ocCodTemaSintentico, 'isSelected': false }));
+        this.categorie = categorie.map((c) => ({
+            'ocCodCategoriaSpesa': c.ocCodCategoriaSpesa,
+            'ocCodTemaSintentico': c.ocCodTemaSintentico,
+            'isSelected': false,
+            'isVisible': true
+        }));
     }
     private progettiToFeatureCollection(data: Array<Progetto>): any {
         this.progetti = {
@@ -256,7 +261,7 @@ export class MonithonMapService {
         });
 
         lodash.remove(progetti, p => !p.isSelected);
-        this.getCategorie();
+        this.aggiornaCategorieVisibili();
         this.publishUpdate(progetti);
     }
 
@@ -303,11 +308,23 @@ export class MonithonMapService {
         this.publishUpdate(this.progetti.features.filter(f => f.properties.isSelected && f.properties.isWithinRange).map(f => f.properties));
     }
 
-    getCategorie(): any[] {
-        // let nessunTemaSelezionato = lodash.every(this.temi, t => !t.isSelected)
-        // let categorieAttive = this.progetti
-        //     .features.filter(feature => (nessunTemaSelezionato || lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico)));
-        // this.categorieAttive = lodash.chain(categorieAttive)
+    aggiornaCategorieVisibili(): any[] {
+        let nessunTemaSelezionato = lodash.every(this.temi, t => !t.isSelected)
+
+        let categorieVisibili =
+            lodash.chain(this.progetti.features)
+                .filter(feature => (nessunTemaSelezionato || lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico)))
+                .map(f => f.properties.ocCodCategoriaSpesa)
+                .flatten()
+                .uniq()
+                .value();
+
+        this.categorie.map(c => {
+            c.isVisible = lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa);
+            c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
+        });
+
+        // this.categorieAttive = lodash.chain(categorieVisibili)
         //     .map(feature => {
         //         let categoria = {
         //             ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,

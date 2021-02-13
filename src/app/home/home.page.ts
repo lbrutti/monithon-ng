@@ -55,7 +55,7 @@ export class HomePage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
                 this.temi = updateSubject.temi; // <- nessun problema di pergormance
-                this.categorie = updateSubject.categorie;
+                this.categorie = updateSubject.categorie.filter(c=>c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
                 this.progettiVisualizzati = 0;
                 this.renderCharts(this.progetti);
