@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Server } from 'miragejs';
-import listaProgettiTotali from './mock/listaProgettiTotali';
-import dettagliProgetti from './mock/dettagliProgetti';
-import progettiMinimi from './mock/progettiMinimi';
+import listaProgettiTotaliCodCategorieFixed from './mock/listaProgettiTotaliCodCategorieFixed';
+import dettagliProgettiTotaliCodCategorieFixed from './mock/dettagliProgettiTotaliCodCategorieFixed';
+dettagliProgettiTotaliCodCategorieFixed
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,28 +12,25 @@ export class MonithonMockedService {
 
     constructor() { }
     private static listaProgetti(): any[] {
-        return listaProgettiTotali
-            .map(p => {
-                let processedProject = {
-                    'codLocaleProgetto': p.codLocaleProgetto,
-                    'ocCodTemaSintetico': p.ocCodTemaSintetico,
-                    'ocCodCategoriaSpesa': [...p.ocCodCategoriaSpesa.split(',').map(c => parseInt(c))],
-                    'coordinate': p.coordinate,
-                    'ocTitoloProgetto': p.ocTitoloProgetto,
-                    'ocDataInizioProgetto': p.ocDataInizioProgetto,
-                    'ocFinanzTotPubNetto': p.ocFinanzTotPubNetto,
-                    'ocStatoProgetto': p.ocStatoProgetto,
-                    'monithonReports': Math.random() * 10 > 5 ? [] : ['https://dev.monithon.it/report/view/107', 'https://dev.monithon.it/report/view/108']
-                };
-                return processedProject;
-            });
+        return listaProgettiTotaliCodCategorieFixed
+            // .map(p => {
+            //     let processedProject = {
+            //         'codLocaleProgetto': p.codLocaleProgetto,
+            //         'ocCodTemaSintetico': p.ocCodTemaSintetico,
+            //         'ocCodCategoriaSpesa': [...p.ocCodCategoriaSpesa.split(',').map(c => parseInt(c))],
+            //         'coordinate': p.coordinate,
+            //         'ocTitoloProgetto': p.ocTitoloProgetto,
+            //         'ocDataInizioProgetto': p.ocDataInizioProgetto,
+            //         'ocFinanzTotPubNetto': p.ocFinanzTotPubNetto,
+            //         'ocStatoProgetto': p.ocStatoProgetto,
+            //         'monithonReports': Math.random() * 10 > 5 ? [] : ['https://dev.monithon.it/report/view/107', 'https://dev.monithon.it/report/view/108']
+            //     };
+            //     return processedProject;
+            // });
     }
 
-    private static listaProgettiMinimi(): any[] {
-        return progettiMinimi;
-    }
     private static dettaglioProgetto(codLocaleProgetto: string): any[] {
-        return dettagliProgetti.filter(p => p.codLocaleProgetto == codLocaleProgetto);
+        return dettagliProgettiTotaliCodCategorieFixed.filter(p => p.codLocaleProgetto == codLocaleProgetto);
     }
 
     private static temi() {
@@ -86,7 +83,7 @@ export class MonithonMockedService {
                     return MonithonMockedService.listaProgetti();
                 });
 
-                this.get('/progetti/dettaglio/:id', (schema, request) => {
+                this.get('/progetti/dettaglio/:id', (_schema, request) => {
                     let codLocaleProgetto = request.params.id
                     return MonithonMockedService.dettaglioProgetto(codLocaleProgetto);
                 });

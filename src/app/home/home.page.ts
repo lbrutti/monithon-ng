@@ -93,7 +93,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     }
     showDettaglioProgetto(progetto: any) {
-        if (progetto) {
+        if (false && progetto) {
 
             this.monithonApiService.getDettaglio(progetto.codLocaleProgetto)
                 .subscribe({

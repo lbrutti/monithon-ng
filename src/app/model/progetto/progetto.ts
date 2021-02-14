@@ -6,8 +6,9 @@ export class Progetto {
     ocCodTemaSintetico: number;
     ocTemaSintetico: string;
     ocFinanzTotPubNetto: number|string;
-    ocCodCategoriaSpesa: string;
+    ocCodCategoriaSpesa: Array<string>;
     ocDescrCategoriaSpesa: string;
-    coordinate: { lat: string, lng: string };
+    lat: number; 
+    long: number ;
     hasReport: boolean;
 }

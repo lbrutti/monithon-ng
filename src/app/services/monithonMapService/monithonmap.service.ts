@@ -168,7 +168,7 @@ export class MonithonMapService {
             this.map.on('click', 'progetti-layer', e => {
                 if (e.features.length) {
                     let feature = e.features[0];
-                    this.publishSelectedProject(feature.properties);
+                    this.publishSelectedProject((feature.properties as Progetto));
                 } else {
                     this.publishSelectedProject();
 
@@ -200,7 +200,7 @@ export class MonithonMapService {
                 let properties: any = Object.assign({}, p);
                 properties.isSelected = true;
                 properties.isWithinRange = true;
-                let jitteredCoords = this.addJitter()(p.coordinate.lat, p.coordinate.lng, 0.5, false);
+                let jitteredCoords = this.addJitter()(p.lat, p.long, 0.5, false);
                 return {
                     "type": "Feature",
                     "properties": properties,
@@ -214,7 +214,14 @@ export class MonithonMapService {
     }
 
     private featureCollectionToProgetti(): Array<Progetto> {
-        let progetti: Array<Progetto> = this.progetti.features.map(feat => feat.properties);
+        let progetti: Array<Progetto> = this.progetti.features.map(feat => {
+            let data = feat.properties;
+            if (lodash.isString(data.ocCodCategoriaSpesa)) {
+                //see : https://github.com/mapbox/mapbox-gl-js/issues/2434
+                data.ocCodCategoriaSpesa = JSON.parse(data.ocCodCategoriaSpesa);
+            }
+            return data;
+        });
         return progetti;
     }
 
@@ -305,19 +312,33 @@ export class MonithonMapService {
     aggiornaCategorieVisibili(): any[] {
         let nessunTemaSelezionato = lodash.every(this.temi, t => !t.isSelected)
 
-        let categorieVisibili =
-            lodash.chain(this.progetti.features)
-                .filter(feature => (nessunTemaSelezionato || lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico)))
-                .map(f => f.properties.ocCodCategoriaSpesa)
-                .flatten()
-                .uniq()
-                .value();
+        if (nessunTemaSelezionato) {
+            //tutte le categorie sono visibili:
+            lodash.mapValues(this.categorie, (c => {
+                c.isVisible = true;
+                c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
+            }));
+        } else {
 
-        this.categorie =  lodash.map( this.categorie,(c => {
-            c.isVisible = lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa);
-            c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
-            return c;
-        }));
+            this.temi.map(t => {
+                let categorieVisibili = lodash.uniq(this.progetti.features.filter(f => (f.properties.ocCodTemaSintetico == t.ocCodTemaSintetico && t.isSelected)).reduce((acc, f) => [...acc, ...f.properties.ocCodCategoriaSpesa], []))
+                lodash.mapValues(this.categorie, (c => {
+                    if (c.ocCodTemaSintetico == t.ocCodTemaSintetico) {
+                        c.isVisible = c.ocCodTemaSintetico == t.ocCodTemaSintetico && lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa);
+                        c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
+                    }
+                }));
+            });
+            // let categorieVisibili =
+            //     lodash.chain(this.progetti.features)
+            //         .filter(feature => (nessunTemaSelezionato || lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico)))
+            //         .map(f => f.properties.ocCodCategoriaSpesa)
+            //         .flatten()
+            //         .uniq()
+            //         .value();
+
+
+        }
 
         // this.categorieAttive = lodash.chain(categorieVisibili)
         //     .map(feature => {
@@ -348,12 +369,15 @@ export class MonithonMapService {
         this.projectSelected.unsubscribe();
     }
 
-    publishUpdate(progetti): void {
+    publishUpdate(progetti: Array<Progetto>): void {
         this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: progetti });
     }
 
-    publishSelectedProject(progetto?: any): void {
+    publishSelectedProject(progetto?: Progetto): void {
         console.log(progetto);
+        if (progetto && lodash.isString(progetto.ocCodCategoriaSpesa)) {
+            progetto.ocCodCategoriaSpesa = JSON.parse(progetto.ocCodCategoriaSpesa);
+        }
         this.projectSelected.next(progetto);
 
     }
