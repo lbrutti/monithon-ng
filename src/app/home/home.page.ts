@@ -65,7 +65,7 @@ export class HomePage implements OnInit, AfterViewInit {
         };
 
         let projectSelectionObserver: Observer<any> = {
-            next: progetto => false && this.showDettaglioProgetto(progetto),
+            next: progetto => this.showDettaglioProgetto(progetto),
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
         };
@@ -73,7 +73,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
         Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise(), this.getCategorie().toPromise()])
             .then( data => {
-                this.monithonMap.categorie = data[2];
+                this.monithonMap.setCategorie(data[2]);
                 this.monithonMap.setTemi(data[1]);
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0]);
             }

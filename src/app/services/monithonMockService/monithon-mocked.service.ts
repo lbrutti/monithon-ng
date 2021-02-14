@@ -13,17 +13,20 @@ export class MonithonMockedService {
     constructor() { }
     private static listaProgetti(): any[] {
         return listaProgettiTotali
-            .map(p => ({
-                'codLocaleProgetto': p.codLocaleProgetto,
-                'ocCodTemaSintetico': p.ocCodTemaSintetico,
-                'ocCodCategoriaSpesa': p.ocCodCategoriaSpesa.split(',').map(c=>+c),
-                'coordinate': p.coordinate,
-                'ocTitoloProgetto': p.ocTitoloProgetto,
-                'ocDataInizioProgetto': p.ocDataInizioProgetto,
-                'ocFinanzTotPubNetto': p.ocFinanzTotPubNetto,
-                'ocStatoProgetto': p.ocStatoProgetto,
-                'monithonReports': Math.random() * 10 > 5 ? [] : ['https://dev.monithon.it/report/view/107', 'https://dev.monithon.it/report/view/108']
-            }));
+            .map(p => {
+                let processedProject = {
+                    'codLocaleProgetto': p.codLocaleProgetto,
+                    'ocCodTemaSintetico': p.ocCodTemaSintetico,
+                    'ocCodCategoriaSpesa': [...p.ocCodCategoriaSpesa.split(',').map(c => parseInt(c))],
+                    'coordinate': p.coordinate,
+                    'ocTitoloProgetto': p.ocTitoloProgetto,
+                    'ocDataInizioProgetto': p.ocDataInizioProgetto,
+                    'ocFinanzTotPubNetto': p.ocFinanzTotPubNetto,
+                    'ocStatoProgetto': p.ocStatoProgetto,
+                    'monithonReports': Math.random() * 10 > 5 ? [] : ['https://dev.monithon.it/report/view/107', 'https://dev.monithon.it/report/view/108']
+                };
+                return processedProject;
+            });
     }
 
     private static listaProgettiMinimi(): any[] {
@@ -35,8 +38,8 @@ export class MonithonMockedService {
 
     private static temi() {
         return [{ 'ocCodTemaSintetico': 4 },
-                { 'ocCodTemaSintetico': 5 },
-                { 'ocCodTemaSintetico': 6 }];
+        { 'ocCodTemaSintetico': 5 },
+        { 'ocCodTemaSintetico': 6 }];
     }
 
     private static categorie() {
@@ -55,11 +58,13 @@ export class MonithonMockedService {
             { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': 88 },
             { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': 89 },
             { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': 90 },
+
             { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': 91 },
             { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': 92 },
             { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': 93 },
             { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': 94 },
             { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': 95 },
+
             { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 9 },
             { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 10 },
             { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 11 },

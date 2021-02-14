@@ -188,7 +188,7 @@ export class MonithonMapService {
     public setCategorie(categorie: Array<any>) {
         this.categorie = categorie.map((c) => ({
             'ocCodCategoriaSpesa': c.ocCodCategoriaSpesa,
-            'ocCodTemaSintentico': c.ocCodTemaSintentico,
+            'ocCodTemaSintetico': c.ocCodTemaSintetico,
             'isSelected': false,
             'isVisible': true
         }));
@@ -313,10 +313,11 @@ export class MonithonMapService {
                 .uniq()
                 .value();
 
-        this.categorie.map(c => {
+        this.categorie =  lodash.map( this.categorie,(c => {
             c.isVisible = lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa);
-            //c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
-        });
+            c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
+            return c;
+        }));
 
         // this.categorieAttive = lodash.chain(categorieVisibili)
         //     .map(feature => {
@@ -352,6 +353,7 @@ export class MonithonMapService {
     }
 
     publishSelectedProject(progetto?: any): void {
+        console.log(progetto);
         this.projectSelected.next(progetto);
 
     }
