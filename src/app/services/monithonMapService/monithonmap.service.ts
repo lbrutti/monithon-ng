@@ -252,6 +252,16 @@ export class MonithonMapService {
 
     filtraPerTema() {
         // this.aggiornaTemiSelezionati();
+        let progetti = this.getProgettiTemiSelezionati();
+
+        lodash.remove(progetti, p => !p.isSelected);
+        this.aggiornaCategorieVisibili();
+        this.publishUpdate(progetti);
+    }
+
+
+
+    private getProgettiTemiSelezionati() {
         let nessunTemaSelezionato = lodash.every(this.temi, t => !t.isSelected);
 
         let progetti = [];
@@ -263,19 +273,15 @@ export class MonithonMapService {
                         progetto.isSelected = nessunTemaSelezionato || t.isSelected;
                         progetti.push(f.properties);
                     }
-                    this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected })
+                    this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected });
                 });
         });
-
-        lodash.remove(progetti, p => !p.isSelected);
-        this.aggiornaCategorieVisibili();
-        this.publishUpdate(progetti);
+        return progetti;
     }
-
-
 
     filtraPerCategoria() {
         let progetti = [];
+        this.getProgettiTemiSelezionati();
         let nessunaCategoriaSelezionata = lodash.every(this.categorie, c => !c.isSelected);
         // this.aggiornaCategorieSelezionate();
 
@@ -316,7 +322,7 @@ export class MonithonMapService {
             //tutte le categorie sono visibili:
             lodash.mapValues(this.categorie, (c => {
                 c.isVisible = true;
-                c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
+                // c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
             }));
         } else {
 
@@ -325,33 +331,11 @@ export class MonithonMapService {
                 lodash.mapValues(this.categorie, (c => {
                     if (c.ocCodTemaSintetico == t.ocCodTemaSintetico) {
                         c.isVisible = c.ocCodTemaSintetico == t.ocCodTemaSintetico && lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa);
-                        c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
+                        c.isSelected = c.isVisible ? c.isSelected : false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
                     }
                 }));
             });
-            // let categorieVisibili =
-            //     lodash.chain(this.progetti.features)
-            //         .filter(feature => (nessunTemaSelezionato || lodash.find(this.temi, tema => tema.isSelected && tema.ocCodTemaSintetico == feature.properties.ocCodTemaSintetico)))
-            //         .map(f => f.properties.ocCodCategoriaSpesa)
-            //         .flatten()
-            //         .uniq()
-            //         .value();
-
-
         }
-
-        // this.categorieAttive = lodash.chain(categorieVisibili)
-        //     .map(feature => {
-        //         let categoria = {
-        //             ocCodCategoriaSpesa: feature.properties.ocCodCategoriaSpesa,
-        //             ocCodTemaSintetico: feature.properties.ocCodTemaSintetico,
-        //             isSelected: false
-        //         };
-        //         return categoria;
-        //     })
-        //     .uniqBy(cat => cat.ocCodTemaSintetico + cat.ocCodCategoriaSpesa)
-        //     .value();
-
         return this.categorie;
     }
 

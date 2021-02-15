@@ -13,20 +13,6 @@ export class MonithonMockedService {
     constructor() { }
     private static listaProgetti(): any[] {
         return listaProgettiTotaliCodCategorieFixed
-            // .map(p => {
-            //     let processedProject = {
-            //         'codLocaleProgetto': p.codLocaleProgetto,
-            //         'ocCodTemaSintetico': p.ocCodTemaSintetico,
-            //         'ocCodCategoriaSpesa': [...p.ocCodCategoriaSpesa.split(',').map(c => parseInt(c))],
-            //         'coordinate': p.coordinate,
-            //         'ocTitoloProgetto': p.ocTitoloProgetto,
-            //         'ocDataInizioProgetto': p.ocDataInizioProgetto,
-            //         'ocFinanzTotPubNetto': p.ocFinanzTotPubNetto,
-            //         'ocStatoProgetto': p.ocStatoProgetto,
-            //         'monithonReports': Math.random() * 10 > 5 ? [] : ['https://dev.monithon.it/report/view/107', 'https://dev.monithon.it/report/view/108']
-            //     };
-            //     return processedProject;
-            // });
     }
 
     private static dettaglioProgetto(codLocaleProgetto: string): any[] {
