@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import moment from 'moment';
-import { merge, Observable, Observer } from 'rxjs';
+import {  Observable, Observer } from 'rxjs';
 import { Progetto } from '../model/progetto/progetto';
 import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
 import { MonithonMockedService } from '../services/monithonMockService/monithon-mocked.service';
@@ -51,7 +51,7 @@ export class HomePage implements OnInit, AfterViewInit {
         private monithonMap: MonithonMapService) { }
 
     ngOnInit(): void {
-        this.monitonMockedService.mirageJsServer();
+        // this.monitonMockedService.mirageJsServer();
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
                 this.temi = updateSubject.temi; // <- nessun problema di pergormance
@@ -249,10 +249,6 @@ export class HomePage implements OnInit, AfterViewInit {
 
     private getProgetti(): Observable<any> {
         return this.monithonApiService.getProgetti();
-    }
-
-    private getProgettiMinimi(): Observable<any> {
-        return this.monithonApiService.getListaProgetti();
     }
 
     public filterByTema(tema: any): void {

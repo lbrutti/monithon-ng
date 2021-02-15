@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Server } from 'miragejs';
-import listaProgettiTotaliCodCategorieFixed from './mock/listaProgettiTotaliCodCategorieFixed';
-import dettagliProgettiTotaliCodCategorieFixed from './mock/dettagliProgettiTotaliCodCategorieFixed';
-dettagliProgettiTotaliCodCategorieFixed
+import listaProgettiTotaliCodCategorieFixed from '../../../assets/mock/listaProgettiTotaliCodCategorieFixed';
+import dettagliProgettiTotaliCodCategorieFixed from '../../../assets/mock/dettagliProgettiTotaliCodCategorieFixed';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -57,7 +56,7 @@ export class MonithonMockedService {
             { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 15 },
             { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 16 },
             { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 68 },
-            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 70 }]
+            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 70 }];
         return codiciCategoria;
     }
     public mirageJsServer(): Server {
