@@ -37,7 +37,8 @@
                 <mat-chip-list [ngClass]="{'monithon-temi': true}" aria-label="Temi progetto" multiple="true">
                     <mat-chip [ngClass]="{'monithon-tema': true}" *ngFor="let tema of this.temi"
                         [selected]="tema.isSelected" (click)="this.filterByTema(tema)"
-                        [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico">
+                        [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico"
+                        disableRipple="true">
                         {{'temi.'+tema.ocCodTemaSintetico | transloco}}</mat-chip>
                 </mat-chip-list>
 
@@ -59,7 +60,8 @@
                                         <mat-chip [ngClass]="{'monithon-categoria': true}" selectable="true"
                                             *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected"
                                             (click)="this.filterByCategoria(categoria)"
-                                            [attr.data-oc-cod-tema-sintetico]="categoria.ocCodTemaSintetico">
+                                            [attr.data-oc-cod-tema-sintetico]="categoria.ocCodTemaSintetico"
+                                            disableRipple="true">
                                             {{'categorie.'+categoria.ocCodCategoriaSpesa | transloco}}
                                         </mat-chip>
                                     </mat-chip-list>

@@ -262,7 +262,7 @@ export class MonithonMapService {
     filtraProgetti(): Array<any> {
         let temiSelezionati = this.temi.filter(t => t.isSelected).map(t => t.ocCodTemaSintetico);
         let categorieSelezionate = this.categorie.filter(c => {
-            return lodash.includes(temiSelezionati, c.ocCodTemaSintetico) && c.isSelected;
+            return (temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico)) && c.isSelected;
         }).map(c => c.ocCodCategoriaSpesa);
         this.progetti.features
             .map(f => {
