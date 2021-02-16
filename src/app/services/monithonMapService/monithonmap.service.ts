@@ -116,7 +116,8 @@ export class MonithonMapService {
         this.map.on('draw.delete', (evt) => {
 
             this.filtroPerRaggioEnabled = false;
-            this.filtraProgetti();
+            this.filtraPerDistanza();
+
         });
         this.map.on('load', () => {
             this.progettiToFeatureCollection(data);
@@ -168,15 +169,14 @@ export class MonithonMapService {
                 });
 
             this.map.on('click', e => {
-
-                this.publishSelectedProject();
+                this.publishSelectedProject(null);
             });
             this.map.on('click', 'progetti-layer', e => {
                 if (e.features.length) {
                     let feature = e.features[0];
                     this.publishSelectedProject((feature.properties as Progetto));
                 } else {
-                    this.publishSelectedProject();
+                    this.publishSelectedProject(null);
 
                 }
             });
@@ -206,13 +206,13 @@ export class MonithonMapService {
                 let properties: any = Object.assign({}, p);
                 properties.isSelected = true;
                 properties.isWithinRange = true;
-                let jitteredCoords = this.addJitter()(p.lat, p.long, 0.5, false);
+                // let jitteredCoords = this.addJitter()(p.lat, p.long, 0.5, false);
                 return {
                     "type": "Feature",
                     "properties": properties,
                     "geometry": {
                         "type": "Point",
-                        "coordinates": [jitteredCoords.lng, jitteredCoords.lat]
+                        "coordinates": [p.long, p.lat]
                     }
                 };
             })
@@ -306,14 +306,22 @@ export class MonithonMapService {
      * 
      * @param circleData : 
      */
-    filtraPerDistanza(circleData: any) {
-        let centerPoint = point(circleData.center);
-        let radius = circleData.radius;
-        this.progetti.features.map(f => {
-            let progetto = f.properties;
-            progetto.isWithinRange = distance(point(f.geometry.coordinates), centerPoint) <= radius
-            this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isWithinRange: progetto.isWithinRange });
-        });
+    filtraPerDistanza(circleData?: any) {
+        if (circleData) {
+            let centerPoint = point(circleData.center);
+            let radius = circleData.radius;
+            this.progetti.features.map(f => {
+                let progetto = f.properties;
+                progetto.isWithinRange = distance(point(f.geometry.coordinates), centerPoint) <= radius
+                this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isWithinRange: progetto.isWithinRange });
+            });
+        } else {
+            this.progetti.features.map(f => {
+                let progetto = f.properties;
+                progetto.isWithinRange = true;
+                this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isWithinRange: progetto.isWithinRange });
+            });
+        }
 
         let progetti = this.filtraProgetti();
         this.aggiornaVisibilitaCategorie();

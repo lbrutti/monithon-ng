@@ -72,7 +72,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.monithonMap.subscribeToUpdates(mapUpdateObserver);
         this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
     }
-   
+
     getCategorie() {
         return this.monithonApiService.getCategorie();
     }
@@ -89,13 +89,17 @@ export class HomePage implements OnInit, AfterViewInit {
             });
     }
     showDettaglioProgetto(progetto: any) {
-        if (false && progetto) {
-
+        if (!lodash.isNil(progetto)) {
             this.monithonApiService.getDettaglio(progetto.codLocaleProgetto)
                 .subscribe({
                     next: progetto => {
-                        this.progettoSelezionato = progetto[0];
-                        this.visualizzaDettaglio = true;
+                        if (progetto && progetto.length) {
+                            this.progettoSelezionato = progetto[0];
+                            this.visualizzaDettaglio = true;
+                        } else {
+                            this.visualizzaDettaglio = false;
+
+                        }
                     },
                     error: err => {
                         this.visualizzaDettaglio = false;

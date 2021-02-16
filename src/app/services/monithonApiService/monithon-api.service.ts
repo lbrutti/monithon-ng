@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import temi from '../../../assets/mock/temi';
 import categorie from '../../../assets/mock/categorie';
 import listaProgettiTotaliCodCategorieFixed from '../../../assets/mock/listaProgetti';
-import dettagliProgettiTotaliCodCategorieFixed from '../../../assets/mock/dettaglioProgetti';
+import dettaglioProgetti from '../../../assets/mock/dettaglioProgetti';
 import lodash from 'lodash';
 @Injectable({
     providedIn: 'root'
@@ -25,8 +25,7 @@ export class MonithonApiService {
 
     public getDettaglio(codLocaleProgetto: string): Observable<any> {
         // return this.httpClient.get<any>(this.url + '/progetti/dettaglio/' + codLocaleProgetto);
-        dettagliProgettiTotaliCodCategorieFixed
-        return of(lodash.filter(dettagliProgettiTotaliCodCategorieFixed, p => p.codLocaleProgetto == codLocaleProgetto));
+        return of(lodash.filter(dettaglioProgetti, p => p.codLocaleProgetto == codLocaleProgetto));
 
     }
 
