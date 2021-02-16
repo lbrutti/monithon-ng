@@ -45,7 +45,7 @@ export class MonithonMapService {
     }
 
     public renderMap(container, data): void {
-        
+
         this.map = new mapboxgl.Map({
             container: container,
             style: environment.mapbox.style,
@@ -54,7 +54,7 @@ export class MonithonMapService {
             antialias: false,
             attributionControl: false
         });
-        
+
         let geocoderOptions: any = {
             accessToken: mapboxgl.accessToken,
             mapboxgl: mapboxgl,
@@ -113,7 +113,7 @@ export class MonithonMapService {
 
         this.map.on('load', () => {
             this.progettiToFeatureCollection(data);
-            
+
             this.map
                 .addSource('progetti', {
                     type: 'geojson',
@@ -250,51 +250,53 @@ export class MonithonMapService {
         });
     }
 
-    filtraPerTema() {
-        // this.aggiornaTemiSelezionati();
-        let progetti = this.getProgettiTemiSelezionati();
 
+    filtraPerTema() {
+        // rimuovi filtro su categorie non associate ai temi selezionati
+        this.filtraCategorie();
+        let progetti = this.filtraProgetti();
         lodash.remove(progetti, p => !p.isSelected);
-        this.aggiornaCategorieVisibili();
         this.publishUpdate(progetti);
     }
 
-
-
-    private getProgettiTemiSelezionati() {
-        let nessunTemaSelezionato = lodash.every(this.temi, t => !t.isSelected);
-
-        let progetti = [];
-        this.temi.map(t => {
-            this.progetti.features
-                .map(f => {
-                    let progetto = f.properties;
-                    if (progetto.ocCodTemaSintetico == t.ocCodTemaSintetico) {
-                        progetto.isSelected = nessunTemaSelezionato || t.isSelected;
-                        progetti.push(f.properties);
-                    }
-                    this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected });
-                });
-        });
-        return progetti;
+    filtraProgetti(): Array<any> {
+        let temiSelezionati = this.temi.filter(t => t.isSelected).map(t => t.ocCodTemaSintetico);
+        let categorieSelezionate = this.categorie.filter(c => {
+            return lodash.includes(temiSelezionati, c.ocCodTemaSintetico) && c.isSelected;
+        }).map(c => c.ocCodCategoriaSpesa);
+        this.progetti.features
+            .map(f => {
+                let progetto = f.properties;
+                progetto.isSelected = (temiSelezionati.length == 0) || lodash.includes(temiSelezionati, progetto.ocCodTemaSintetico);
+                progetto.isSelected = progetto.isSelected && ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, progetto.ocCodCategoriaSpesa).length > 0));
+                this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected });
+            });
+        return this.progetti.features.filter(f => f.properties.isSelected).map(f => f.properties);
     }
 
+    filtraCategorie() {
+        let categorieSelezionate = this.categorie.filter(c => c.isSelected);
+        let temiSelezionati = this.temi.filter(t => t.isSelected).map(t => t.ocCodTemaSintetico);
+
+        if (categorieSelezionate.length == 0) {
+            //nascondo le categorie non pertinenti al tema
+            this.categorie.map(c => c.isVisible = temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico));
+        } else {
+            // se ho categorie selezionate, le mantengo tali sse il loro tema di pertinenza è selezionato o non ci sono temi selezionati
+            this.categorie.map(c => {
+                // se non ho temi selezionati: tutte le categorie sono DESELEZIONATE  e visibili:
+                if (temiSelezionati.length == 0) {
+                    c.isSelected = false;
+                    c.isVisible = true;
+                } else {
+                    c.isSelected = lodash.includes(temiSelezionati, c.ocCodTemaSintetico) && c.isSelected;
+                    c.isVisible = lodash.includes(temiSelezionati, c.ocCodTemaSintetico);
+                }
+            });
+        }
+    }
     filtraPerCategoria() {
-        let progetti = [];
-        this.getProgettiTemiSelezionati();
-        let nessunaCategoriaSelezionata = lodash.every(this.categorie, c => !c.isSelected);
-        // this.aggiornaCategorieSelezionate();
-
-        // ciclo le progetti  e li setto a selezionati se matchano per tema e categoria e la categoria è selezionata
-        this.progetti.features.map(f => {
-            let progetto = f.properties;
-            //ricerca con includes potrbbe provocare rallentamenti...
-            let categoriaProgetto = lodash.find(this.categorie, c => (c.ocCodTemaSintetico == progetto.ocCodTemaSintetico && (nessunaCategoriaSelezionata || (lodash.includes(progetto.ocCodCategoriaSpesa, c.ocCodCategoriaSpesa))))) || {};
-            progetto.isSelected = nessunaCategoriaSelezionata || (categoriaProgetto.isVisible && categoriaProgetto.isSelected);
-            progetti.push(progetto);
-            this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected });
-
-        });
+        let progetti = this.filtraProgetti();
         lodash.remove(progetti, p => !p.isSelected);
         this.publishUpdate(progetti);
     }
@@ -316,28 +318,29 @@ export class MonithonMapService {
     }
 
     aggiornaCategorieVisibili(): any[] {
-        let nessunTemaSelezionato = lodash.every(this.temi, t => !t.isSelected)
+        // let nessunTemaSelezionato = lodash.every(this.temi, t => !t.isSelected)
 
-        if (nessunTemaSelezionato) {
-            //tutte le categorie sono visibili:
-            lodash.mapValues(this.categorie, (c => {
-                c.isVisible = true;
-                // c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
-            }));
-        } else {
+        // if (nessunTemaSelezionato) {
+        //     //tutte le categorie sono visibili:
+        //     lodash.mapValues(this.categorie, (c => {
+        //         c.isVisible = true;
+        //         // c.isSelected = false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
+        //     }));
+        // } else {
 
-            this.temi.map(t => {
-                let categorieVisibili = lodash.uniq(this.progetti.features.filter(f => (f.properties.ocCodTemaSintetico == t.ocCodTemaSintetico && t.isSelected)).reduce((acc, f) => [...acc, ...f.properties.ocCodCategoriaSpesa], []))
-                lodash.mapValues(this.categorie, (c => {
-                    if (c.ocCodTemaSintetico == t.ocCodTemaSintetico) {
-                        c.isVisible = c.ocCodTemaSintetico == t.ocCodTemaSintetico && lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa);
-                        c.isSelected = c.isVisible ? c.isSelected : false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
-                    }
-                }));
-            });
-        }
+        //     this.temi.map(t => {
+        //         let categorieVisibili = lodash.uniq(this.progetti.features.filter(f => (f.properties.ocCodTemaSintetico == t.ocCodTemaSintetico && t.isSelected)).reduce((acc, f) => [...acc, ...f.properties.ocCodCategoriaSpesa], []))
+        //         lodash.mapValues(this.categorie, (c => {
+        //             if (c.ocCodTemaSintetico == t.ocCodTemaSintetico) {
+        //                 c.isVisible = c.ocCodTemaSintetico == t.ocCodTemaSintetico && lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa);
+        //                 c.isSelected = c.isVisible ? c.isSelected : false; //controllare se, lasciandolo invariato, persistono i filtri al cambio di tema
+        //             }
+        //         }));
+        //     });
+        // }
         return this.categorie;
     }
+
 
     public subscribeToUpdates(obs: Observer<any>): void {
         this.mapUpdated.subscribe(obs);
