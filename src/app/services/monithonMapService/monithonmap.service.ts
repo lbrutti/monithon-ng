@@ -316,6 +316,7 @@ export class MonithonMapService {
         });
 
         let progetti = this.filtraProgetti();
+        this.aggiornaVisibilitaCategorie();
         this.publishUpdate(progetti);
     }
 
