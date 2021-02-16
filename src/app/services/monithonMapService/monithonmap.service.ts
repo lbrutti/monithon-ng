@@ -262,8 +262,14 @@ export class MonithonMapService {
         // rimuovi filtro su categorie non associate ai temi selezionati
         this.filtraCategorie();
         let progetti = this.filtraProgetti();
+        this.aggiornaVisibilitaCategorie();
         lodash.remove(progetti, p => !p.isSelected);
         this.publishUpdate(progetti);
+    }
+
+    aggiornaVisibilitaCategorie() {
+        let categorieVisibili = lodash.uniq(this.progetti.features.filter(f => f.properties.isSelected).reduce((acc, f) => [...acc, ...f.properties.ocCodCategoriaSpesa], []));
+        this.categorie.map(c => c.isVisible = lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa));
     }
 
 
