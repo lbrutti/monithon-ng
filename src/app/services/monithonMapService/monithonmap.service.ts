@@ -18,7 +18,6 @@ import { Observer, Subject } from 'rxjs';
 import '@turf/distance';
 import { distance, point } from '@turf/turf';
 import { COLOR_MAP } from 'src/app/utils/colorMap';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
     providedIn: 'root'
@@ -46,7 +45,7 @@ export class MonithonMapService {
     }
 
     public renderMap(container, data): void {
-
+        
         this.map = new mapboxgl.Map({
             container: container,
             style: environment.mapbox.style,
@@ -55,6 +54,7 @@ export class MonithonMapService {
             antialias: false,
             attributionControl: false
         });
+        
         let geocoderOptions: any = {
             accessToken: mapboxgl.accessToken,
             mapboxgl: mapboxgl,
@@ -113,7 +113,7 @@ export class MonithonMapService {
 
         this.map.on('load', () => {
             this.progettiToFeatureCollection(data);
-
+            
             this.map
                 .addSource('progetti', {
                     type: 'geojson',
@@ -174,7 +174,7 @@ export class MonithonMapService {
 
                 }
             });
-
+            this.map.resize();
             this.publishUpdate(this.featureCollectionToProgetti());
         });
 

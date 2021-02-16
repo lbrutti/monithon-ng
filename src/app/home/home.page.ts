@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import moment from 'moment';
-import {  Observable, Observer } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import { Progetto } from '../model/progetto/progetto';
 import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
 import { MonithonMockedService } from '../services/monithonMockService/monithon-mocked.service';
@@ -55,7 +55,7 @@ export class HomePage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
                 this.temi = updateSubject.temi; // <- nessun problema di pergormance
-                this.categorie = updateSubject.categorie.filter(c=>c.isVisible);
+                this.categorie = updateSubject.categorie.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
                 this.progettiVisualizzati = 0;
                 this.renderCharts(this.progetti);
@@ -71,14 +71,8 @@ export class HomePage implements OnInit, AfterViewInit {
         };
         this.monithonMap.subscribeToUpdates(mapUpdateObserver);
         this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
-        Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise(), this.getCategorie().toPromise()])
-            .then( data => {
-                this.monithonMap.setCategorie(data[2]);
-                this.monithonMap.setTemi(data[1]);
-                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0]);
-            }
-               );
     }
+   
     getCategorie() {
         return this.monithonApiService.getCategorie();
     }
@@ -87,10 +81,12 @@ export class HomePage implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-        //Add 'implements AfterViewInit' to the class.
-        // this.aggiungiProgetti(10);
-
+        Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise(), this.getCategorie().toPromise()])
+            .then(data => {
+                this.monithonMap.setCategorie(data[2]);
+                this.monithonMap.setTemi(data[1]);
+                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0]);
+            });
     }
     showDettaglioProgetto(progetto: any) {
         if (false && progetto) {
