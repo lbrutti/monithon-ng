@@ -47,7 +47,7 @@ export class HomePage implements OnInit, AfterViewInit {
     panelOpenState: boolean = false;
     progettiPaginati: Progetto[] = [];
     pageStart: number = 0;
-    pageSize: number=25;
+    pageSize: number = 25;
     pageEnd: number = 25;
 
     constructor(
@@ -59,11 +59,13 @@ export class HomePage implements OnInit, AfterViewInit {
         // this.monitonMockedService.mirageJsServer();
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
+                this.virtualScroll.checkEnd();
+                this.pageStart = 0;
+                this.pageEnd = this.pageSize;
                 this.temi = updateSubject.temi; // <- nessun problema di pergormance
                 this.categorie = updateSubject.categorie.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
                 this.progettiPaginati = [...lodash.slice(this.progetti, this.pageStart, this.pageEnd)];
-                this.virtualScroll.items = this.progettiPaginati;
                 this.renderCharts(this.progetti);
             },
             error: err => console.error('subscribeToUpdates error: ', err),
@@ -89,6 +91,8 @@ export class HomePage implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
         Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise(), this.getCategorie().toPromise()])
             .then(data => {
+                // this.progetti = data[0];
+                // this.progettiPaginati = lodash.slice(this.progetti, this.pageStart, this.pageEnd);
                 this.monithonMap.setCategorie(data[2]);
                 this.monithonMap.setTemi(data[1]);
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0]);
@@ -117,7 +121,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     }
 
-   
+
 
     private renderCharts(data: any) {
         let baseArrotondamento = 10000;
@@ -279,13 +283,14 @@ export class HomePage implements OnInit, AfterViewInit {
     }
 
 
-   
+
 
     public caricaProgetti(event) {
         if (this.progettiPaginati.length < this.progetti.length) {
+            this.virtualScroll.checkEnd();
+            this.pageStart += this.pageSize;
             this.pageEnd += this.pageSize;
             this.progettiPaginati = [...lodash.slice(this.progetti, this.pageStart, this.pageEnd)];
-            this.virtualScroll.items = this.progettiPaginati;
 
         } else {
             this.infiniteScroll.nativeElement.disabled = true;
@@ -296,11 +301,9 @@ export class HomePage implements OnInit, AfterViewInit {
     }
 
 
-    public reusultOpenHandler(){
+    public reusultOpenHandler() {
         this.panelOpenState = !this.panelOpenState;
-        if(this.panelOpenState){
-            this.virtualScroll.checkEnd();
-        }
+        this.virtualScroll.checkEnd();
     }
 
 }

@@ -140,7 +140,7 @@
                 <!-- <ion-list #listaProgetti class="monithon-lista-progetti"> -->
                 <ion-list>
                     <!-- COLLO DI BOTTIGLIA: verificare performance con loading incrementale -->
-                    <ion-virtual-scroll [items]="progettiPaginati">
+                    <ion-virtual-scroll [items]="this.progettiPaginati">
                         <ion-item *virtualItem="let progetto; let itemBounds = bounds;">
                             <ion-label class="monithon-lista-risultato"
                                 [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
