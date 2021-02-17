@@ -9,6 +9,7 @@ import { MonithonMapService } from '../services/monithonMapService/monithonmap.s
 import lodash from 'lodash';
 
 import * as d3 from 'd3';
+import { IonVirtualScroll } from '@ionic/angular';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -27,6 +28,7 @@ export class HomePage implements OnInit, AfterViewInit {
     @ViewChild('dettagliProgetto') dettagliProgetto: ElementRef;
     @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
     @ViewChild('infiniteScroll', { read: ElementRef }) infiniteScroll: ElementRef;
+    @ViewChild(IonVirtualScroll) virtualScroll: IonVirtualScroll;
 
 
     progetti: Array<Progetto> = [];
@@ -43,7 +45,10 @@ export class HomePage implements OnInit, AfterViewInit {
     visualizzaDettaglio: boolean = false;
 
     panelOpenState: boolean = false;
-    progettiVisualizzati: number = 0;
+    progettiPaginati: Progetto[] = [];
+    pageStart: number = 0;
+    pageSize: number=25;
+    pageEnd: number = 25;
 
     constructor(
         private monitonMockedService: MonithonMockedService,
@@ -57,7 +62,8 @@ export class HomePage implements OnInit, AfterViewInit {
                 this.temi = updateSubject.temi; // <- nessun problema di pergormance
                 this.categorie = updateSubject.categorie.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
-                this.progettiVisualizzati = 0;
+                this.progettiPaginati = [...lodash.slice(this.progetti, this.pageStart, this.pageEnd)];
+                this.virtualScroll.items = this.progettiPaginati;
                 this.renderCharts(this.progetti);
             },
             error: err => console.error('subscribeToUpdates error: ', err),
@@ -111,6 +117,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     }
 
+   
 
     private renderCharts(data: any) {
         let baseArrotondamento = 10000;
@@ -272,29 +279,27 @@ export class HomePage implements OnInit, AfterViewInit {
     }
 
 
-    public caricaProgetti(evt) {
-        console.dir(evt);
-        if (this.progettiVisualizzati < this.progetti.length) {
-            this.aggiungiProgetti(10);
+   
+
+    public caricaProgetti(event) {
+        if (this.progettiPaginati.length < this.progetti.length) {
+            this.pageEnd += this.pageSize;
+            this.progettiPaginati = [...lodash.slice(this.progetti, this.pageStart, this.pageEnd)];
+            this.virtualScroll.items = this.progettiPaginati;
+
         } else {
-            console.log('No More Data');
             this.infiniteScroll.nativeElement.disabled = true;
         }
+        this.virtualScroll.checkEnd();
+        event.target.complete();
+
     }
 
-    public aggiungiProgetti(numeroElementi: number) {
-        const originalLength = this.progettiVisualizzati;
-        for (var i = 0; i < numeroElementi; i++) {
-            const el = document.createElement('ion-item');
-            let progetto = this.progetti[i + originalLength];
-            if (progetto) {
-                el.innerHTML = `<ion-label class="monithon-lista-risultato"
-        data-oc-cod-tema-sintetico="${progetto.ocCodTemaSintetico}">
-        <h2>${progetto.ocTitoloProgetto}</h2>
-    </ion-label>`;
-                this.listaProgetti.nativeElement.appendChild(el);
-                this.progettiVisualizzati++;
-            }
+
+    public reusultOpenHandler(){
+        this.panelOpenState = !this.panelOpenState;
+        if(this.panelOpenState){
+            this.virtualScroll.checkEnd();
         }
     }
 
