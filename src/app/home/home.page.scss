@@ -41,7 +41,7 @@
     align-items: baseline;
     margin-top: auto;
     z-index: 100;
-    width:66vw;
+    width: 66vw;
 }
 
 #filterContainer {
@@ -69,13 +69,7 @@
     padding: 0 !important;
 }
 
-#resultContainer {
-    .monithon-lista-progetti {
-        overflow-y: scroll;
-        scrollbar-width: none;
-        height: 90vh;
-    }
-}
+
 
 #chartPanel {
     // width: 100%;
@@ -106,9 +100,9 @@
 
 #mapContainer {
     width: 100vw;
-    height:100vh;
+    height: 100vh;
     position: absolute;
-    top:0;
+    top: 0;
     margin: 0;
     padding: 0;
 }
@@ -274,4 +268,16 @@
     right: 0;
     position: absolute;
     bottom: 0;
+}
+
+#resultContainer {
+
+    .monithon-lista-progetti {
+        ion-item {
+            height: 100px;
+        }
+
+        scrollbar-width: none;
+        height: 90vh;
+    }
 }

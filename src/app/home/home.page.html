@@ -138,22 +138,15 @@
                 </div>
                 <!-- lista risultati -->
                 <!-- <ion-list #listaProgetti class="monithon-lista-progetti"> -->
-                <ion-list>
-                    <!-- COLLO DI BOTTIGLIA: verificare performance con loading incrementale -->
-                    <ion-virtual-scroll [items]="this.progettiPaginati">
-                        <ion-item *virtualItem="let progetto; let itemBounds = bounds;">
-                            <ion-label class="monithon-lista-risultato"
-                                [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
+                    <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="monithon-lista-progetti">
+                        <ion-item *cdkVirtualFor="let progetto of progetti;
+                        let index = index;">
+                            <ion-label class="monithon-lista-risultato" [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
                                 <h2>{{progetto.ocTitoloProgetto}}</h2>
+                                <span>{{index}}</span>
                             </ion-label>
                         </ion-item>
-                    </ion-virtual-scroll>
-                </ion-list>
-                <ion-infinite-scroll threshold="33%" (ionInfinite)="caricaProgetti($event)">
-                    <ion-infinite-scroll-content loadingSpinner="bubbles" [loadingText]="'loadingData'|transloco">
-                    </ion-infinite-scroll-content>
-                </ion-infinite-scroll>
-
+                    </cdk-virtual-scroll-viewport>
             </mat-expansion-panel>
         </div>
     </div>

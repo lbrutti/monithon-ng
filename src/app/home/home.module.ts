@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { MatChipsModule } from '@angular/material/chips';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { TranslocoModule } from '@ngneat/transloco';
@@ -19,7 +20,9 @@ import { TranslocoModule } from '@ngneat/transloco';
         MatExpansionModule,
         MatChipsModule,
         MatListModule,
-        TranslocoModule
+        TranslocoModule,
+        ScrollingModule
+        
     ],
     declarations: [HomePage]
 })

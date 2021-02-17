@@ -27,8 +27,8 @@ export class HomePage implements OnInit, AfterViewInit {
     @ViewChild('mapContainer') mapContainer: ElementRef;
     @ViewChild('dettagliProgetto') dettagliProgetto: ElementRef;
     @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
-    @ViewChild('infiniteScroll', { read: ElementRef }) infiniteScroll: ElementRef;
-    @ViewChild(IonVirtualScroll) virtualScroll: IonVirtualScroll;
+    // @ViewChild('infiniteScroll', { read: ElementRef }) infiniteScroll: ElementRef;
+    // @ViewChild(IonVirtualScroll) virtualScroll: IonVirtualScroll;
 
 
     progetti: Array<Progetto> = [];
@@ -59,7 +59,7 @@ export class HomePage implements OnInit, AfterViewInit {
         // this.monitonMockedService.mirageJsServer();
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
-                this.virtualScroll.checkEnd();
+                // this.virtualScroll.checkEnd();
                 this.pageStart = 0;
                 this.pageEnd = this.pageSize;
                 this.temi = updateSubject.temi; // <- nessun problema di pergormance
@@ -285,25 +285,25 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
 
-    public caricaProgetti(event) {
-        if (this.progettiPaginati.length < this.progetti.length) {
-            this.virtualScroll.checkEnd();
-            this.pageStart += this.pageSize;
-            this.pageEnd += this.pageSize;
-            this.progettiPaginati = [...lodash.slice(this.progetti, this.pageStart, this.pageEnd)];
+    // public caricaProgetti(event) {
+    //     if (this.progettiPaginati.length < this.progetti.length) {
+    //         this.virtualScroll.checkEnd();
+    //         this.pageStart += this.pageSize;
+    //         this.pageEnd += this.pageSize;
+    //         this.progettiPaginati = [...lodash.slice(this.progetti, this.pageStart, this.pageEnd)];
 
-        } else {
-            this.infiniteScroll.nativeElement.disabled = true;
-        }
-        this.virtualScroll.checkEnd();
-        event.target.complete();
+    //     } else {
+    //         this.infiniteScroll.nativeElement.disabled = true;
+    //     }
+    //     this.virtualScroll.checkEnd();
+    //     event.target.complete();
 
-    }
+    // }
 
 
     public reusultOpenHandler() {
         this.panelOpenState = !this.panelOpenState;
-        this.virtualScroll.checkEnd();
+        // this.virtualScroll.checkEnd();
     }
 
 }
