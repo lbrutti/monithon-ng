@@ -9,7 +9,6 @@ import { MonithonMapService } from '../services/monithonMapService/monithonmap.s
 import lodash from 'lodash';
 
 import * as d3 from 'd3';
-import { IonVirtualScroll } from '@ionic/angular';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -27,9 +26,7 @@ export class HomePage implements OnInit, AfterViewInit {
     @ViewChild('mapContainer') mapContainer: ElementRef;
     @ViewChild('dettagliProgetto') dettagliProgetto: ElementRef;
     @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
-    // @ViewChild('infiniteScroll', { read: ElementRef }) infiniteScroll: ElementRef;
-    // @ViewChild(IonVirtualScroll) virtualScroll: IonVirtualScroll;
-
+    
 
     progetti: Array<Progetto> = [];
 
@@ -45,10 +42,6 @@ export class HomePage implements OnInit, AfterViewInit {
     visualizzaDettaglio: boolean = false;
 
     panelOpenState: boolean = false;
-    progettiPaginati: Progetto[] = [];
-    pageStart: number = 0;
-    pageSize: number = 25;
-    pageEnd: number = 25;
 
     constructor(
         private monitonMockedService: MonithonMockedService,
@@ -59,13 +52,10 @@ export class HomePage implements OnInit, AfterViewInit {
         // this.monitonMockedService.mirageJsServer();
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
-                // this.virtualScroll.checkEnd();
-                this.pageStart = 0;
-                this.pageEnd = this.pageSize;
+             
                 this.temi = updateSubject.temi; // <- nessun problema di pergormance
                 this.categorie = updateSubject.categorie.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
-                this.progettiPaginati = [...lodash.slice(this.progetti, this.pageStart, this.pageEnd)];
                 this.renderCharts(this.progetti);
             },
             error: err => console.error('subscribeToUpdates error: ', err),
@@ -91,8 +81,7 @@ export class HomePage implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
         Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise(), this.getCategorie().toPromise()])
             .then(data => {
-                // this.progetti = data[0];
-                // this.progettiPaginati = lodash.slice(this.progetti, this.pageStart, this.pageEnd);
+              
                 this.monithonMap.setCategorie(data[2]);
                 this.monithonMap.setTemi(data[1]);
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0]);
@@ -284,26 +273,8 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
 
-
-    // public caricaProgetti(event) {
-    //     if (this.progettiPaginati.length < this.progetti.length) {
-    //         this.virtualScroll.checkEnd();
-    //         this.pageStart += this.pageSize;
-    //         this.pageEnd += this.pageSize;
-    //         this.progettiPaginati = [...lodash.slice(this.progetti, this.pageStart, this.pageEnd)];
-
-    //     } else {
-    //         this.infiniteScroll.nativeElement.disabled = true;
-    //     }
-    //     this.virtualScroll.checkEnd();
-    //     event.target.complete();
-
-    // }
-
-
     public reusultOpenHandler() {
         this.panelOpenState = !this.panelOpenState;
-        // this.virtualScroll.checkEnd();
     }
 
 }
