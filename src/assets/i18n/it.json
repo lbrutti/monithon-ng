@@ -43,8 +43,8 @@
         "4": "Concluso"
     },
     "reportFlags": {
-        "0": "No",
-        "1": "Si"
+        "false": "No",
+        "true": "Si"
     },
     "statoAvanzamento": "Stato avanzamento",
     "monitorati": "Monitorati",

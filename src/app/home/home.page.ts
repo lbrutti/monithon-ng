@@ -58,10 +58,10 @@ export class HomePage implements OnInit, AfterViewInit {
     reportFlags: Array<any> = [
         {
             isSelected: false,
-            hasReport: 1
+            hasReport: true
         }, {
             isSelected: false,
-            hasReport: 0
+            hasReport: false
         }]
 
     progettiCrossFilter: any;
@@ -293,9 +293,11 @@ export class HomePage implements OnInit, AfterViewInit {
         console.dir(stato);
 
     }
-    public filterByReportFlag(reportflag) {
-        reportflag.isSelected = !reportflag.isSelected;
-        console.dir(reportflag);
+    public filterByReportFlag(reportFlag) {
+        reportFlag.isSelected = !reportFlag.isSelected;
+        this.monithonMap.filtraPerReport(this.reportFlags);
+
+        console.dir(reportFlag);
 
     }
     /**

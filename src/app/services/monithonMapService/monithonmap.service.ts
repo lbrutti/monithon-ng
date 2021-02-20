@@ -19,10 +19,12 @@ import '@turf/distance';
 import { distance, point } from '@turf/turf';
 import { COLOR_MAP } from 'src/app/utils/colorMap';
 
+
 @Injectable({
     providedIn: 'root'
 })
 export class MonithonMapService {
+
 
 
 
@@ -39,6 +41,7 @@ export class MonithonMapService {
     private projectSelected: Subject<any> = new Subject();
     categorieAttive: { ocCodCategoriaSpesa: any; ocCodTemaSintetico: any; isSelected: boolean; }[];
     filtroPerRaggioEnabled: boolean = false;
+    reportFlags: any[] = [];
 
 
     constructor() {
@@ -328,16 +331,24 @@ export class MonithonMapService {
         this.publishUpdate(progetti);
     }
 
+    filtraPerReport(reportFlags: Array<any>) {
+        this.reportFlags = reportFlags;
+        this.filtraProgetti();
+    }
+
     filtraProgetti(): Array<any> {
         let temiSelezionati = this.temi.filter(t => t.isSelected).map(t => t.ocCodTemaSintetico);
         let categorieSelezionate = this.categorie.filter(c => {
             return (temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico)) && c.isSelected;
         }).map(c => c.ocCodCategoriaSpesa);
+        let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);
         this.progetti.features
             .map(f => {
                 let progetto = f.properties;
                 progetto.isSelected = (temiSelezionati.length == 0) || lodash.includes(temiSelezionati, progetto.ocCodTemaSintetico);
                 progetto.isSelected = progetto.isSelected && ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, progetto.ocCodCategoriaSpesa).length > 0));
+
+                progetto.isSelected = progetto.isSelected && ((reportFlagSelezionate.length == 0) || lodash.includes(reportFlagSelezionate, progetto.hasReports));
                 if (this.filtroPerRaggioEnabled) {
                     progetto.isSelected = progetto.isSelected && progetto.isWithinRange;
                 }
