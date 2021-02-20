@@ -35,5 +35,16 @@
         "16": "Cogenerazione e teleriscaldamento",
         "68": "Efficienza energetica e progetti dimostrativi nelle PMI e misure di sostegno",
         "70": "Promozione dell'efficienza energetica nelle grandi imprese"
+    },
+    "statiAvanzamento":{
+        "0":"Non terminabile",
+        "1":"Non avviato",
+        "2":"In corso",
+        "3":"Liquidato",
+        "4": "Concluso"
+    },
+    "reportFlags":{
+        "0": "No",
+        "1":"Si"
     }
 }

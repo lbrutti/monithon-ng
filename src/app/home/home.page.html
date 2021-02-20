@@ -92,6 +92,30 @@
                                             </ion-row>
                                         </ion-grid>
                                     </div>
+                                    <div id="filtriSecondariContainer">
+                                        <ion-grid>
+                                            <ion-row>
+                                                <ion-col>
+                                                    <mat-chip-list [ngClass]="{'monithon-filtro-stato-avanzamento': true}" multiple="true" aria-orientation="horizontal">
+                                                        <mat-chip [ngClass]="{'monithon-filtro-stato-avanzamento': true}" selectable="true" *ngFor="let stato of this.stati"
+                                                            [selected]="stato.isSelected" (click)="this.filterByStato(stato)"
+                                                            [attr.data-oc-cod-tema-sintetico]="stato.ocCodStatoAvanzamento" disableRipple="true">
+                                                            {{'statiAvanzamento.'+stato.ocCodStatoAvanzamento | transloco}}
+                                                        </mat-chip>
+                                                    </mat-chip-list>
+                                                </ion-col>
+                                                <ion-col>
+                                                    <mat-chip-list [ngClass]="{'monithon-filtro-report': true}" multiple="true" aria-orientation="horizontal">
+                                                        <mat-chip [ngClass]="{'monithon-filtro-report': true}" selectable="true" *ngFor="let flag of this.reportFlags"
+                                                            [selected]="flag.isSelected" (click)="this.filterByReportFlag(flag)"
+                                                            [attr.data-oc-cod-tema-sintetico]="flag.hasReport" disableRipple="true">
+                                                            {{'reportFlags.'+flag.hasReport | transloco}}
+                                                        </mat-chip>
+                                                    </mat-chip-list>
+                                                </ion-col>
+                                            </ion-row>
+                                        </ion-grid>
+                                    </div>
                                 </mat-expansion-panel>
                             </ion-col>
                         </ion-row>
@@ -119,7 +143,8 @@
                         <!-- ordinamento -->
                         <ion-row>
                             <ion-col>
-                                <mat-expansion-panel (opened)="this.reusultOpenHandler()" (closed)="this.reusultOpenHandler()">
+                                <mat-expansion-panel (opened)="this.reusultOpenHandler()"
+                                    (closed)="this.reusultOpenHandler()">
                                     <mat-expansion-panel-header>
                                         <span>{{'ordinati'|transloco}}</span>
                                         <mat-chip class="monithon-criterio-ordinamento-selezionato"
@@ -140,15 +165,17 @@
                 </div>
                 <!-- lista risultati -->
                 <!-- <ion-list #listaProgetti class="monithon-lista-progetti"> -->
-                    <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="monithon-lista-progetti">
-                        <ion-item *cdkVirtualFor="let progetto of progetti;
+                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                    class="monithon-lista-progetti">
+                    <ion-item *cdkVirtualFor="let progetto of progetti;
                         let index = index;">
-                            <ion-label class="monithon-lista-risultato" [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
-                                <h2>{{progetto.ocTitoloProgetto}}</h2>
-                                <span>{{index}}</span>
-                            </ion-label>
-                        </ion-item>
-                    </cdk-virtual-scroll-viewport>
+                        <ion-label class="monithon-lista-risultato"
+                            [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
+                            <h2>{{progetto.ocTitoloProgetto}}</h2>
+                            <span>{{index}}</span>
+                        </ion-label>
+                    </ion-item>
+                </cdk-virtual-scroll-viewport>
             </mat-expansion-panel>
         </div>
     </div>

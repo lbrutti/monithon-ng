@@ -28,7 +28,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     @ViewChild('dettagliProgetto') dettagliProgetto: ElementRef;
     @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
-    
+
 
     progetti: Array<Progetto> = [];
 
@@ -39,6 +39,32 @@ export class HomePage implements OnInit, AfterViewInit {
 
     temi: Array<any> = [];
     categorie: Array<any> = [];
+    stati: Array<any> = [{
+        isSelected: false,
+        ocCodStatoAvanzamento: 0
+    }, {
+        isSelected: false,
+        ocCodStatoAvanzamento: 1
+    }, {
+        isSelected: false,
+        ocCodStatoAvanzamento: 2
+    }, {
+        isSelected: false,
+        ocCodStatoAvanzamento: 3
+    }, {
+        isSelected: false,
+        ocCodStatoAvanzamento: 4
+    }];
+
+    reportFlags: Array<any> = [
+        {
+            isSelected: false,
+            hasReport: 1
+        }, {
+            isSelected: false,
+            hasReport: 0
+        }]
+
     progettiCrossFilter: any;
     progettoSelezionato: any = {};
     visualizzaDettaglio: boolean = false;
@@ -54,8 +80,8 @@ export class HomePage implements OnInit, AfterViewInit {
         // this.monitonMockedService.mirageJsServer();
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
-             
-                this.temi = updateSubject.temi; // <- nessun problema di pergormance
+
+                this.temi = updateSubject.temi; // <- nessun problema di performance
                 this.categorie = updateSubject.categorie.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
                 this.renderCharts(this.progetti);
@@ -83,7 +109,7 @@ export class HomePage implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
         Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise(), this.getCategorie().toPromise()])
             .then(data => {
-              
+
                 this.monithonMap.setCategorie(data[2]);
                 this.monithonMap.setTemi(data[1]);
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement);
@@ -261,6 +287,17 @@ export class HomePage implements OnInit, AfterViewInit {
     public filterByCategoria(categoria: any): void {
         categoria.isSelected = !categoria.isSelected;
         this.monithonMap.filtraPerCategoria();
+    }
+
+    public filterByStato(stato) {
+        stato.isSelected = !stato.isSelected;
+        console.dir(stato);
+
+    }
+    public filterByReportFlag(reportflag) {
+        reportflag.isSelected = !reportflag.isSelected;
+        console.dir(reportflag);
+
     }
     /**
      * onProgettoClick
