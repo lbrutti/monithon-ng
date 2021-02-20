@@ -24,6 +24,8 @@ export class HomePage implements OnInit, AfterViewInit {
 
     @ViewChild('categorieDiSpesaContainer') categorieDiSpesaContainer: ElementRef;
     @ViewChild('mapContainer') mapContainer: ElementRef;
+    @ViewChild('geocoder') geocoder: ElementRef;
+
     @ViewChild('dettagliProgetto') dettagliProgetto: ElementRef;
     @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
     
@@ -84,7 +86,7 @@ export class HomePage implements OnInit, AfterViewInit {
               
                 this.monithonMap.setCategorie(data[2]);
                 this.monithonMap.setTemi(data[1]);
-                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0]);
+                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement);
             });
     }
     showDettaglioProgetto(progetto: any) {

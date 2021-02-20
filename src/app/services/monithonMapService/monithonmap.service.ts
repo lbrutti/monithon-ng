@@ -12,7 +12,7 @@ import {
 } from 'mapbox-gl-draw-circle';
 import circle from '@turf/circle';
 import { Progetto } from 'src/app/model/progetto/progetto';
-import lodash, { groupBy } from 'lodash';
+import lodash from 'lodash';
 import { Observer, Subject } from 'rxjs';
 
 import '@turf/distance';
@@ -28,7 +28,7 @@ export class MonithonMapService {
 
     map: mapboxgl.Map;
     geocoder: any;
-    geolocator: mapboxgl.GeolocateControl;
+    // geolocator: mapboxgl.GeolocateControl;
     draw: any;
     rangeProgetti: any;
     temi: Array<any> = [];
@@ -45,7 +45,7 @@ export class MonithonMapService {
         mapboxgl.accessToken = environment.mapbox.accessToken;
     }
 
-    public renderMap(container, data): void {
+    public renderMap(container, data, geocoderContainer): void {
 
         this.map = new mapboxgl.Map({
             container: container,
@@ -70,22 +70,22 @@ export class MonithonMapService {
             let center = evt.result.center;
             this.drawRangeProgetti(center);
         });
+        geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
+        // this.map.addControl(
+        //     this.geocoder
+        // );
 
-        this.map.addControl(
-            this.geocoder
-        );
-
-        this.geolocator = new mapboxgl.GeolocateControl({
-            positionOptions: {
-                enableHighAccuracy: true
-            },
-            trackUserLocation: false
-        });
-        this.geolocator.on('geolocate', (evt: any) => {
-            let center = [evt.coords.longitude, evt.coords.latitude];
-            this.drawRangeProgetti(center);
-        });
-        this.map.addControl(this.geolocator);
+        // this.geolocator = new mapboxgl.GeolocateControl({
+        //     positionOptions: {
+        //         enableHighAccuracy: true
+        //     },
+        //     trackUserLocation: false
+        // });
+        // this.geolocator.on('geolocate', (evt: any) => {
+        //     let center = [evt.coords.longitude, evt.coords.latitude];
+        //     this.drawRangeProgetti(center);
+        // });
+        // this.map.addControl(this.geolocator);
         this.draw = new MapboxDraw({
             userProperties: true,
             modes: {
