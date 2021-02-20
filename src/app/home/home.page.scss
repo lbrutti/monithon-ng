@@ -8,7 +8,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    top:0;
+    top: 0;
     // top: 50%;
     // transform: translateY(-50%);
     display: flex;
@@ -58,12 +58,6 @@
     overflow-y: hidden;
 }
 
-// #chartPanelContainer {
-//     width: 100%;
-//     // z-index: 10;
-//     display: flex;
-//     align-self: flex-end;
-// }
 
 //https://stackoverflow.com/questions/53195131/angular-material-mat-expansion-panel-body-style-not-being-applied
 ::ng-deep .mat-expansion-panel-body {
@@ -73,12 +67,10 @@
 
 
 #chartPanel {
- 
     align-self: flex-end;
 
     .mat-expansion-panel-content {
         overflow-y: scroll;
-
     }
 }
 
@@ -179,12 +171,26 @@
     }
 }
 
+.mat-chip.monithon-filtro-stato-avanzamento {
+    width: 45%;
+    text-align: center;
+    display: inline-block;
+}
+
+.mat-chip.monithon-filtro-report {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+}
 
 .mat-expansion-panel {
     border-radius: 0;
 }
 
-
+ion-row.monithon-filtri-secondari{
+    display: flex;
+    justify-content: space-between;
+}
 
 .mat-chip-list.monithon-categorie {
     height: 33vh;
@@ -282,7 +288,7 @@
     }
 }
 
-.monithon-header *{
+.monithon-header * {
     background-color: transparent;
 }
 
