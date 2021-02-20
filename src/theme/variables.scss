@@ -289,5 +289,21 @@ body {
     --background: transparent;
     --ion-toolbar-background: transparent;
     --ion-background-color: transparent;
+    
+    //SM-66 : settare classe all'elemento <html> per switch delle variabili
+    &.monochrome{
+            --monithon-filtro-secondario-unselected-color:#000000;
+            --monithon-filtro-secondario-selected-color:#ffffff;
+
+            --monithon-tema-energia-background: #FFC921;
+            --monithon-tema-ambiente-background: #EA4A3E;
+            --monithon-tema-attrazione-background: #FDD0B3;
+            --monithon-tema-color: #00172A;
+            --monithon-tema-sfondo-filtri: #ffffff;
+            --monithon-tema-sfondo-charts: #ffffff;
+            --background: transparent;
+            --ion-toolbar-background: transparent;
+            --ion-background-color: transparent;
+    }
 
 }
