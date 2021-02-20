@@ -184,7 +184,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .controlsUseVisibility(true)
             .x(d3.scaleLinear().domain(annoRange))
             .xUnits(dc.units.integers)
-            .elasticX(true)
+            // .elasticX(true)
             .elasticY(true);
         this.annoChart
             .xAxis()

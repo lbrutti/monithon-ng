@@ -333,7 +333,10 @@ export class MonithonMapService {
 
     filtraPerReport(reportFlags: Array<any>) {
         this.reportFlags = reportFlags;
-        this.filtraProgetti();
+        let progetti = this.filtraProgetti();
+        //SM-84 : attenzione: non aggiornare i grafici!
+        this.publishUpdate(progetti);
+
     }
 
     filtraProgetti(): Array<any> {
