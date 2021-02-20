@@ -1,3 +1,4 @@
+
 // ion-content{
 //     overflow-y: hidden;
 //     height: 100vh;
@@ -84,9 +85,18 @@
     width: 100%;
 }
 
-#budgetChartContanier {
+#budgetChartContainer,
+#annoChartContainer {
     width: 100%;
-    height: 240px;
+    height: calc(50%);
+
+    svg {
+        g {
+            g.axis.y {
+                display: none;
+            }
+        }
+    }
 }
 
 
@@ -132,12 +142,15 @@
 }
 
 .mat-chip.monithon-tema,
-.mat-chip.monithon-categoria {
+.mat-chip.monithon-categoria,
+.mat-chip.monithon-filtro-stato-avanzamento,
+.mat-chip.monithon-filtro-report {
 
     background-color: transparent;
     border-width: 1px;
     border-style: solid;
 
+    // temi
     &[data-oc-cod-tema-sintetico="4"] {
         color: var(--monithon-tema-energia-background) !important;
         border-color: var(--monithon-tema-energia-background);
@@ -154,8 +167,19 @@
         border-color: var(--monithon-tema-attrazione-background);
     }
 
+    // stati e flag report
+    &[data-oc-cod-stato-progetto],
+    &[data-has-report] {
+        background-color: transparent;
+        color: var(--monithon-filtro-secondario-unselected-color);
+        border-color: var(--monithon-filtro-secondario-unselected-color);
+    }
+
+
     &.mat-chip-selected {
-        color: var(--monithon-tema-color) !important;
+        &[data-oc-cod-tema-sintetico] {
+            color: var(--monithon-tema-color) !important;
+        }
 
         &[data-oc-cod-tema-sintetico="4"] {
             background-color: var(--monithon-tema-energia-background);
@@ -167,6 +191,12 @@
 
         &[data-oc-cod-tema-sintetico="6"] {
             background-color: var(--monithon-tema-attrazione-background);
+        }
+
+        &[data-oc-cod-stato-progetto],
+        &[data-has-report] {
+            background-color: var(--monithon-filtro-secondario-selected-color) !important;
+            border-color: var(--monithon-filtro-secondario-selected-color);
         }
     }
 }
@@ -187,7 +217,7 @@
     border-radius: 0;
 }
 
-ion-row.monithon-filtri-secondari{
+ion-row.monithon-filtri-secondari {
     display: flex;
     justify-content: space-between;
 }

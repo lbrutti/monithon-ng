@@ -80,14 +80,14 @@
                                             <ion-row>
                                                 <ion-col>
                                                     <h3>{{'budgetChartTitle' |transloco}}</h3>
-                                                    <div #budgetChart id='budgetChartContanier'></div>
+                                                    <div #budgetChart id='budgetChartContainer'></div>
                                                 </ion-col>
                                             </ion-row>
 
                                             <ion-row>
                                                 <ion-col>
                                                     <h3>{{'annoChartTitle'|transloco}}</h3>
-                                                    <div #annoChart id='annoChartContanier'></div>
+                                                    <div #annoChart id='annoChartContainer'></div>
                                                 </ion-col>
                                             </ion-row>
                                         </ion-grid>
@@ -100,7 +100,7 @@
                                                     <mat-chip-list [ngClass]="{'monithon-filtro-stato-avanzamento': true}" multiple="true" aria-orientation="horizontal">
                                                         <mat-chip [ngClass]="{'monithon-filtro-stato-avanzamento': true}" selectable="true" *ngFor="let stato of this.statiAvanzamento"
                                                             [selected]="stato.isSelected" (click)="this.filterByStato(stato)"
-                                                            [attr.data-oc-cod-tema-sintetico]="stato.ocCodStatoProgetto" disableRipple="true">
+                                                            [attr.data-oc-cod-stato-progetto]="stato.ocCodStatoProgetto" disableRipple="true">
                                                             {{'statiAvanzamento.'+stato.ocCodStatoProgetto | transloco}}
                                                         </mat-chip>
                                                     </mat-chip-list>
@@ -110,7 +110,7 @@
                                                     <mat-chip-list [ngClass]="{'monithon-filtro-report': true}" multiple="true" aria-orientation="horizontal">
                                                         <mat-chip [ngClass]="{'monithon-filtro-report': true}" selectable="true" *ngFor="let flag of this.reportFlags"
                                                             [selected]="flag.isSelected" (click)="this.filterByReportFlag(flag)"
-                                                            [attr.data-oc-cod-tema-sintetico]="flag.hasReport" disableRipple="true">
+                                                            [attr.data-has-report]="flag.hasReport" disableRipple="true">
                                                             {{'reportFlags.'+flag.hasReport | transloco}}
                                                         </mat-chip>
                                                     </mat-chip-list>

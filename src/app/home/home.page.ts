@@ -164,6 +164,11 @@ export class HomePage implements OnInit, AfterViewInit {
         this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
         this.renderCounter(this.progettiCrossFilter)
         dc.renderAll();
+        d3.select((this.budgetChartContainer as any).nativeElement)
+            .selectAll('g.axis.y').remove();
+        d3.select((this.annoChartContainer as any).nativeElement)
+            .selectAll('g.axis.y').remove();
+
     }
 
     private renderAnnoChart(crossFilterData: any, listaProgetti: any) {
@@ -213,11 +218,11 @@ export class HomePage implements OnInit, AfterViewInit {
         this.budgetChart = new dc.BarChart((this.budgetChartContainer as any).nativeElement);
 
         let budgetBin = d3.bin();
-
+        let chartHeight = (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height;
         //creo bin usando arrotondamento del budget
         budgetBin.value((d: any) => +d.ocFinanzTotPubNetto);
         //inserire soglie per non avere troppi bin: parametrizzare qui quantili?
-        let dieciQuantili = d3.range(0, 1.1, 0.25); //.map((n) => +d3.format(".1f")(n));
+        let dieciQuantili = d3.range(0, 1.1, 0.125); //.map((n) => +d3.format(".1f")(n));
         let binThresholds = dieciQuantili.map((quant) => d3.quantile(listaProgetti, quant, (p: any) => +p.ocFinanzTotPubNetto)
         );
         binThresholds = [...new Set(binThresholds)];
@@ -241,10 +246,14 @@ export class HomePage implements OnInit, AfterViewInit {
             .brushOn(true)
             .x(d3.scaleLinear().domain([0, numQuantili]))
             .elasticY(true)
-            .margins({ top: 10, right: 10, bottom: 20, left: 20 })
+            .elasticX(true)
+            .margins({ top: 0, right: 0, bottom: 20, left: 40 })
             .xAxis()
             .tickFormat((v: any) => `${binThresholds[v] / 1000} K`)
 
+        this.budgetChart.yAxis().tickFormat(() => undefined)
+
+        this.budgetChart.height(() => chartHeight+50);
 
 
         // this.budgetChart
