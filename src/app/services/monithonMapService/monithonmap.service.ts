@@ -24,7 +24,7 @@ import { COLOR_MAP } from 'src/app/utils/colorMap';
     providedIn: 'root'
 })
 export class MonithonMapService {
-
+   
 
 
 
@@ -42,6 +42,7 @@ export class MonithonMapService {
     categorieAttive: { ocCodCategoriaSpesa: any; ocCodTemaSintetico: any; isSelected: boolean; }[];
     filtroPerRaggioEnabled: boolean = false;
     reportFlags: any[] = [];
+    statiAvanzamento: any[] = [];
 
 
     constructor() {
@@ -334,10 +335,18 @@ export class MonithonMapService {
     filtraPerReport(reportFlags: Array<any>) {
         this.reportFlags = reportFlags;
         let progetti = this.filtraProgetti();
-        //SM-84 : attenzione: non aggiornare i grafici!
+        //SM-84 : attenzione: verificare se aggiornare i grafici!
         this.publishUpdate(progetti);
 
     }
+
+     filtraPerStato(statiAvanzamento: any[]) {
+         this.statiAvanzamento = statiAvanzamento;
+        let progetti = this.filtraProgetti();
+        //SM-83 : attenzione: verificare se aggiornare i grafici!
+        this.publishUpdate(progetti);
+    }
+
 
     filtraProgetti(): Array<any> {
         let temiSelezionati = this.temi.filter(t => t.isSelected).map(t => t.ocCodTemaSintetico);
@@ -345,6 +354,8 @@ export class MonithonMapService {
             return (temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico)) && c.isSelected;
         }).map(c => c.ocCodCategoriaSpesa);
         let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);
+
+        let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.ocCodStatoProgetto);
         this.progetti.features
             .map(f => {
                 let progetto = f.properties;
@@ -352,6 +363,8 @@ export class MonithonMapService {
                 progetto.isSelected = progetto.isSelected && ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, progetto.ocCodCategoriaSpesa).length > 0));
 
                 progetto.isSelected = progetto.isSelected && ((reportFlagSelezionate.length == 0) || lodash.includes(reportFlagSelezionate, progetto.hasReports));
+                progetto.isSelected = progetto.isSelected && ((statiAvanzamentoSelezionati.length == 0) || lodash.includes(statiAvanzamentoSelezionati, progetto.ocCodStatoProgetto));
+
                 if (this.filtroPerRaggioEnabled) {
                     progetto.isSelected = progetto.isSelected && progetto.isWithinRange;
                 }

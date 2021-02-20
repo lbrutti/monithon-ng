@@ -41,18 +41,18 @@ export class HomePage implements OnInit, AfterViewInit {
     categorie: Array<any> = [];
     statiAvanzamento: Array<any> = [{
         isSelected: false,
-        ocCodStatoAvanzamento: 4
+        ocCodStatoProgetto: 4
     },
     {
         isSelected: false,
-        ocCodStatoAvanzamento: 2
+        ocCodStatoProgetto: 2
     },
     {
         isSelected: false,
-        ocCodStatoAvanzamento: 1
+        ocCodStatoProgetto: 1
     }, {
         isSelected: false,
-        ocCodStatoAvanzamento: 3
+        ocCodStatoProgetto: 3
     }];
 
     reportFlags: Array<any> = [
@@ -290,15 +290,11 @@ export class HomePage implements OnInit, AfterViewInit {
 
     public filterByStato(stato) {
         stato.isSelected = !stato.isSelected;
-        console.dir(stato);
-
+        this.monithonMap.filtraPerStato(this.statiAvanzamento);
     }
     public filterByReportFlag(reportFlag) {
         reportFlag.isSelected = !reportFlag.isSelected;
         this.monithonMap.filtraPerReport(this.reportFlags);
-
-        console.dir(reportFlag);
-
     }
     /**
      * onProgettoClick

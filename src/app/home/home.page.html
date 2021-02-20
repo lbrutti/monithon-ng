@@ -100,8 +100,8 @@
                                                     <mat-chip-list [ngClass]="{'monithon-filtro-stato-avanzamento': true}" multiple="true" aria-orientation="horizontal">
                                                         <mat-chip [ngClass]="{'monithon-filtro-stato-avanzamento': true}" selectable="true" *ngFor="let stato of this.statiAvanzamento"
                                                             [selected]="stato.isSelected" (click)="this.filterByStato(stato)"
-                                                            [attr.data-oc-cod-tema-sintetico]="stato.ocCodStatoAvanzamento" disableRipple="true">
-                                                            {{'statiAvanzamento.'+stato.ocCodStatoAvanzamento | transloco}}
+                                                            [attr.data-oc-cod-tema-sintetico]="stato.ocCodStatoProgetto" disableRipple="true">
+                                                            {{'statiAvanzamento.'+stato.ocCodStatoProgetto | transloco}}
                                                         </mat-chip>
                                                     </mat-chip-list>
                                                 </ion-col>
