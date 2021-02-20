@@ -39,21 +39,20 @@ export class HomePage implements OnInit, AfterViewInit {
 
     temi: Array<any> = [];
     categorie: Array<any> = [];
-    stati: Array<any> = [{
+    statiAvanzamento: Array<any> = [{
         isSelected: false,
-        ocCodStatoAvanzamento: 0
-    }, {
+        ocCodStatoAvanzamento: 4
+    },
+    {
+        isSelected: false,
+        ocCodStatoAvanzamento: 2
+    },
+    {
         isSelected: false,
         ocCodStatoAvanzamento: 1
     }, {
         isSelected: false,
-        ocCodStatoAvanzamento: 2
-    }, {
-        isSelected: false,
         ocCodStatoAvanzamento: 3
-    }, {
-        isSelected: false,
-        ocCodStatoAvanzamento: 4
     }];
 
     reportFlags: Array<any> = [

@@ -1,10 +1,9 @@
 {
-    "temi":{
+    "temi": {
         "4": "Energia",
         "5": "Ambiente",
         "6": "Cultura e turismo"
     },
-
     "categorie": {
         "17": "Gestione dei rifiuti domestici (prevenzione e riciclaggio)",
         "18": "Gestione dei rifiuti domestici (impianti)",
@@ -36,15 +35,29 @@
         "68": "Efficienza energetica e progetti dimostrativi nelle PMI e misure di sostegno",
         "70": "Promozione dell'efficienza energetica nelle grandi imprese"
     },
-    "statiAvanzamento":{
-        "0":"Non terminabile",
-        "1":"Non avviato",
-        "2":"In corso",
-        "3":"Liquidato",
+    "statiAvanzamento": {
+        "0": "Non terminabile",
+        "1": "Non avviato",
+        "2": "In corso",
+        "3": "Liquidato",
         "4": "Concluso"
     },
-    "reportFlags":{
+    "reportFlags": {
         "0": "No",
-        "1":"Si"
-    }
+        "1": "Si"
+    },
+    "statoAvanzamento": "Stato avanzamento",
+    "monitorati": "Monitorati",
+    "schedaProgetto": "Scheda progetto",
+    "monithonFiltriTitle": "Categorie",
+    "chartPanelTitle": "Budget, anno e stato",
+    "budgetChartTitle": "Budget",
+    "annoChartTitle": "Anno",
+    "resultContainerTitle": "Progetti disponibili",
+    "comune": "comune",
+    "ordinati": "ordinati",
+    "distanza": "Distanza",
+    "categoria": "Categoria",
+    "budget": "Budget",
+    "anno": "Anno"
 }
