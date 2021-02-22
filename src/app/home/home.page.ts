@@ -170,7 +170,6 @@ export class HomePage implements OnInit, AfterViewInit {
         this.progettiCrossFilter = crossfilter(listaProgetti);
         this.renderBudgetChart(this.progettiCrossFilter, listaProgetti);
         this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
-        // this.renderCounter(this.progettiCrossFilter)
         dc.renderAll();
         d3.select((this.budgetChartContainer as any).nativeElement)
             .selectAll('g.axis.y').remove();
@@ -212,20 +211,6 @@ export class HomePage implements OnInit, AfterViewInit {
         });
     }
 
-    private renderCounter(crossFilterData: any) {
-        if (this.redrawCharts) {
-
-            this.resultCounter = new dc.DataCount((this.resultCounterElem as any).nativeElement);
-            let all = crossFilterData.groupAll();
-            this.resultCounter.crossfilter(crossFilterData).groupAll(all).html({
-                some: "%filter-count",
-                all: "%total-count"
-            });
-        } else {
-            this.counterValue = crossFilterData.groupAll().reduceCount().value();
-        }
-
-    }
     private renderBudgetChart(crossFilterData: any, listaProgetti: any) {
         this.budgetChart = new dc.BarChart((this.budgetChartContainer as any).nativeElement);
 
