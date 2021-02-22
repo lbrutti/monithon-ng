@@ -205,11 +205,15 @@ export class HomePage implements OnInit, AfterViewInit {
         this.annoChart.on("filtered", (chart, filter) => {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
+            this.evidenziaRisultatiSuMappa();
+
         });
 
         this.annoChart.on("renderlet", (chart, filter) => {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
+            this.evidenziaRisultatiSuMappa();
+
         });
     }
 
@@ -273,12 +277,16 @@ export class HomePage implements OnInit, AfterViewInit {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
+            this.evidenziaRisultatiSuMappa();
+
         });
 
         this.budgetChart.on("filtered", (chart, filter) => {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
+            this.evidenziaRisultatiSuMappa();
+
 
         });
         return crossFilterData;
@@ -305,18 +313,21 @@ export class HomePage implements OnInit, AfterViewInit {
     public filterByStato(stato) {
         stato.isSelected = !stato.isSelected;
         this.filtraRisultati();
-        let idRisultati = this.risultatiRicerca.map(p=>p.codLocaleProgetto);
-        this.monithonMap.highlightById(idRisultati);
+        this.evidenziaRisultatiSuMappa();
 
     }
     public filterByReportFlag(reportFlag) {
         reportFlag.isSelected = !reportFlag.isSelected;
         this.filtraRisultati();
-        let idRisultati = this.risultatiRicerca.map(p=>p.codLocaleProgetto);
-        this.monithonMap.highlightById(idRisultati);
+        this.evidenziaRisultatiSuMappa();
 
     }
 
+    evidenziaRisultatiSuMappa() {
+        let idRisultati = this.risultatiRicerca.map(p => p.codLocaleProgetto);
+        this.monithonMap.highlightById(idRisultati);
+    }
+    
     filtraRisultati() {
         let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.ocCodStatoProgetto);
         let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);

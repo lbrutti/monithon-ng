@@ -24,7 +24,7 @@ import { COLOR_MAP } from 'src/app/utils/colorMap';
     providedIn: 'root'
 })
 export class MonithonMapService {
-   
+
     map: mapboxgl.Map;
     geocoder: any;
     // geolocator: mapboxgl.GeolocateControl;
@@ -72,7 +72,7 @@ export class MonithonMapService {
             this.drawRangeProgetti(center);
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
-       
+
         this.draw = new MapboxDraw({
             userProperties: true,
             modes: {
@@ -129,6 +129,8 @@ export class MonithonMapService {
                         'circle-radius': 3,
                         'circle-color': [
                             'case',
+                            ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
+                            'transparent',
                             ['all', ['boolean', ['feature-state', 'isSelected'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
                             COLOR_MAP.temi.default,
                             ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 4]],
@@ -406,11 +408,11 @@ export class MonithonMapService {
     }
 
     highlightById(idRisultati: string[]) {
-            this.progetti.features
+        this.progetti.features
             .map(f => {
                 let progetto = f.properties;
-                progetto.isHighlighted = (idRisultati.length == 0 )|| lodash.includes(idRisultati, progetto.codLocaleProgetto);
-               
+                progetto.isHighlighted = progetto.isSelected && (idRisultati.length == 0) || lodash.includes(idRisultati, progetto.codLocaleProgetto);
+
                 this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isHighlighted: progetto.isHighlighted });
             });
     }
