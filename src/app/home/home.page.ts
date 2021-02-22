@@ -180,6 +180,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     private renderAnnoChart(crossFilterData: any, listaProgetti: any) {
         this.annoChart = new dc.BarChart((this.annoChartContainer as any).nativeElement);
+        let chartHeight = (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
 
         let annoDim = crossFilterData.dimension((d) => moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year()
         ),
@@ -196,20 +197,24 @@ export class HomePage implements OnInit, AfterViewInit {
             .controlsUseVisibility(true)
             .x(d3.scaleLinear().domain(annoRange))
             .xUnits(dc.units.integers)
-            // .elasticX(true)
-            .elasticY(true);
+            .elasticX(true)
+            .elasticY(true)
+            .margins({ top: 0, right: 0, bottom: 20, left: 40 })
+;
         this.annoChart
             .xAxis()
             .tickFormat((anno) => `${parseInt(anno)}`);
 
-        this.annoChart.on("filtered", (chart, filter) => {
+        this.annoChart.height(() => chartHeight + 50);
+
+        this.annoChart.on("filtered", () => {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
 
         });
 
-        this.annoChart.on("renderlet", (chart, filter) => {
+        this.annoChart.on("renderlet", () => {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
@@ -273,7 +278,7 @@ export class HomePage implements OnInit, AfterViewInit {
         //         height *= 0.5;
         //         return (height && height > this.budgetChart.minHeight()) ? height : this.budgetChart.minHeight();
         //     });
-        this.budgetChart.on("renderlet", (chart, filter) => {
+        this.budgetChart.on("renderlet", () => {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
@@ -281,7 +286,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
         });
 
-        this.budgetChart.on("filtered", (chart, filter) => {
+        this.budgetChart.on("filtered", () => {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
@@ -327,7 +332,7 @@ export class HomePage implements OnInit, AfterViewInit {
         let idRisultati = this.risultatiRicerca.map(p => p.codLocaleProgetto);
         this.monithonMap.highlightById(idRisultati);
     }
-    
+
     filtraRisultati() {
         let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.ocCodStatoProgetto);
         let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);
