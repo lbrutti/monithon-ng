@@ -203,11 +203,13 @@ export class HomePage implements OnInit, AfterViewInit {
             .tickFormat((anno) => `${parseInt(anno)}`);
 
         this.annoChart.on("filtered", (chart, filter) => {
-            this.risultatiRicerca = annoDim.top(Infinity);
+            this.progetti = annoDim.top(Infinity);
+            this.filtraRisultati();
         });
 
         this.annoChart.on("renderlet", (chart, filter) => {
-            this.risultatiRicerca = annoDim.top(Infinity);
+            this.progetti = annoDim.top(Infinity);
+            this.filtraRisultati();
         });
     }
 
@@ -270,11 +272,13 @@ export class HomePage implements OnInit, AfterViewInit {
         this.budgetChart.on("renderlet", (chart, filter) => {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
+            this.filtraRisultati();
         });
 
         this.budgetChart.on("filtered", (chart, filter) => {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
+            this.filtraRisultati();
 
         });
         return crossFilterData;
@@ -284,6 +288,7 @@ export class HomePage implements OnInit, AfterViewInit {
         return this.monithonApiService.getProgetti();
     }
 
+    //Filtri di primo livello:
     public filterByTema(tema: any): void {
         tema.isSelected = !tema.isSelected;
         this.redrawCharts = true;
@@ -296,16 +301,38 @@ export class HomePage implements OnInit, AfterViewInit {
         this.monithonMap.filtraPerCategoria();
     }
 
+    //Filtri di secondo livello:
     public filterByStato(stato) {
         stato.isSelected = !stato.isSelected;
-        this.redrawCharts = false;
-        this.monithonMap.filtraPerStato(this.statiAvanzamento);
+        this.filtraRisultati();
+        let idRisultati = this.risultatiRicerca.map(p=>p.codLocaleProgetto);
+        this.monithonMap.highlightById(idRisultati);
+
     }
     public filterByReportFlag(reportFlag) {
         reportFlag.isSelected = !reportFlag.isSelected;
-        this.redrawCharts = false;
-        this.monithonMap.filtraPerReport(this.reportFlags);
+        this.filtraRisultati();
+        let idRisultati = this.risultatiRicerca.map(p=>p.codLocaleProgetto);
+        this.monithonMap.highlightById(idRisultati);
+
     }
+
+    filtraRisultati() {
+        let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.ocCodStatoProgetto);
+        let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);
+
+        this.risultatiRicerca = this.progetti.filter(progetto => {
+            let matchesStato = ((reportFlagSelezionate.length == 0) || lodash.includes(reportFlagSelezionate, progetto.hasReports));
+            let matchesReportFlags = ((statiAvanzamentoSelezionati.length == 0) || lodash.includes(statiAvanzamentoSelezionati, progetto.ocCodStatoProgetto))
+
+            return matchesStato && matchesReportFlags;
+        });
+
+    }
+
+
+
+
     /**
      * onProgettoClick
      */

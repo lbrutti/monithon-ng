@@ -24,6 +24,9 @@ import { COLOR_MAP } from 'src/app/utils/colorMap';
     providedIn: 'root'
 })
 export class MonithonMapService {
+    highlightById(idRisultati: string[]) {
+        throw new Error('Method not implemented.');
+    }
    
 
 
@@ -332,20 +335,20 @@ export class MonithonMapService {
         this.publishUpdate(progetti);
     }
 
-    filtraPerReport(reportFlags: Array<any>) {
-        this.reportFlags = reportFlags;
-        let progetti = this.filtraProgetti();
-        //SM-84 : attenzione: verificare se aggiornare i grafici!
-        this.publishUpdate(progetti);
+    // filtraPerReport(reportFlags: Array<any>) {
+    //     this.reportFlags = reportFlags;
+    //     let progetti = this.filtraProgetti();
+    //     //SM-84 : attenzione: verificare se aggiornare i grafici!
+    //     this.publishUpdate(progetti);
 
-    }
+    // }
 
-     filtraPerStato(statiAvanzamento: any[]) {
-         this.statiAvanzamento = statiAvanzamento;
-        let progetti = this.filtraProgetti();
-        //SM-83 : attenzione: verificare se aggiornare i grafici!
-        this.publishUpdate(progetti);
-    }
+    //  filtraPerStato(statiAvanzamento: any[]) {
+    //      this.statiAvanzamento = statiAvanzamento;
+    //     let progetti = this.filtraProgetti();
+    //     //SM-83 : attenzione: verificare se aggiornare i grafici!
+    //     this.publishUpdate(progetti);
+    // }
 
 
     filtraProgetti(): Array<any> {
@@ -353,18 +356,12 @@ export class MonithonMapService {
         let categorieSelezionate = this.categorie.filter(c => {
             return (temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico)) && c.isSelected;
         }).map(c => c.ocCodCategoriaSpesa);
-        let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);
 
-        let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.ocCodStatoProgetto);
         this.progetti.features
             .map(f => {
                 let progetto = f.properties;
                 progetto.isSelected = (temiSelezionati.length == 0) || lodash.includes(temiSelezionati, progetto.ocCodTemaSintetico);
                 progetto.isSelected = progetto.isSelected && ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, progetto.ocCodCategoriaSpesa).length > 0));
-
-                progetto.isSelected = progetto.isSelected && ((reportFlagSelezionate.length == 0) || lodash.includes(reportFlagSelezionate, progetto.hasReports));
-                progetto.isSelected = progetto.isSelected && ((statiAvanzamentoSelezionati.length == 0) || lodash.includes(statiAvanzamentoSelezionati, progetto.ocCodStatoProgetto));
-
                 if (this.filtroPerRaggioEnabled) {
                     progetto.isSelected = progetto.isSelected && progetto.isWithinRange;
                 }

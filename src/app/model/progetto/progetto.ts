@@ -10,5 +10,8 @@ export class Progetto {
     ocDescrCategoriaSpesa: string;
     lat: number; 
     long: number ;
-    hasReport: boolean;
+    hasReport: boolean = false;
+    isSelected: boolean = false;
+    hasReports: any = false;
+    ocCodStatoProgetto?: any;
 }
