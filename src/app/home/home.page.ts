@@ -31,6 +31,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
     progetti: Array<Progetto> = [];
+    risultatiRicerca: Array<Progetto> = [];
 
     //variabili charts
     budgetChart: any;
@@ -69,6 +70,8 @@ export class HomePage implements OnInit, AfterViewInit {
     visualizzaDettaglio: boolean = false;
 
     panelOpenState: boolean = false;
+    redrawCharts: boolean = true;
+    counterValue: any;
 
     constructor(
         private monitonMockedService: MonithonMockedService,
@@ -83,7 +86,12 @@ export class HomePage implements OnInit, AfterViewInit {
                 this.temi = updateSubject.temi; // <- nessun problema di performance
                 this.categorie = updateSubject.categorie.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
-                this.renderCharts(this.progetti);
+                this.risultatiRicerca = this.progetti;
+                if (this.redrawCharts) {
+                    this.renderCharts(this.progetti);
+                } else {
+                    this.counterValue = this.progetti.length
+                }
             },
             error: err => console.error('subscribeToUpdates error: ', err),
             complete: () => console.log('subscribeToUpdates complete: ')
@@ -162,7 +170,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.progettiCrossFilter = crossfilter(listaProgetti);
         this.renderBudgetChart(this.progettiCrossFilter, listaProgetti);
         this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
-        this.renderCounter(this.progettiCrossFilter)
+        // this.renderCounter(this.progettiCrossFilter)
         dc.renderAll();
         d3.select((this.budgetChartContainer as any).nativeElement)
             .selectAll('g.axis.y').remove();
@@ -196,22 +204,26 @@ export class HomePage implements OnInit, AfterViewInit {
             .tickFormat((anno) => `${parseInt(anno)}`);
 
         this.annoChart.on("filtered", (chart, filter) => {
-            this.progetti = annoDim.top(Infinity);
+            this.risultatiRicerca = annoDim.top(Infinity);
         });
 
         this.annoChart.on("renderlet", (chart, filter) => {
-            this.progetti = annoDim.top(Infinity);
+            this.risultatiRicerca = annoDim.top(Infinity);
         });
     }
 
     private renderCounter(crossFilterData: any) {
-        this.resultCounter = new dc.DataCount((this.resultCounterElem as any).nativeElement);
-        let all = crossFilterData.groupAll();
+        if (this.redrawCharts) {
 
-        this.resultCounter.crossfilter(crossFilterData).groupAll(all).html({
-            some: "%filter-count",
-            all: "%total-count"
-        });
+            this.resultCounter = new dc.DataCount((this.resultCounterElem as any).nativeElement);
+            let all = crossFilterData.groupAll();
+            this.resultCounter.crossfilter(crossFilterData).groupAll(all).html({
+                some: "%filter-count",
+                all: "%total-count"
+            });
+        } else {
+            this.counterValue = crossFilterData.groupAll().reduceCount().value();
+        }
 
     }
     private renderBudgetChart(crossFilterData: any, listaProgetti: any) {
@@ -253,7 +265,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
         this.budgetChart.yAxis().tickFormat(() => undefined)
 
-        this.budgetChart.height(() => chartHeight+50);
+        this.budgetChart.height(() => chartHeight + 50);
 
 
         // this.budgetChart
@@ -289,20 +301,24 @@ export class HomePage implements OnInit, AfterViewInit {
 
     public filterByTema(tema: any): void {
         tema.isSelected = !tema.isSelected;
+        this.redrawCharts = true;
         this.monithonMap.filtraPerTema();
     }
 
     public filterByCategoria(categoria: any): void {
         categoria.isSelected = !categoria.isSelected;
+        this.redrawCharts = true;
         this.monithonMap.filtraPerCategoria();
     }
 
     public filterByStato(stato) {
         stato.isSelected = !stato.isSelected;
+        this.redrawCharts = false;
         this.monithonMap.filtraPerStato(this.statiAvanzamento);
     }
     public filterByReportFlag(reportFlag) {
         reportFlag.isSelected = !reportFlag.isSelected;
+        this.redrawCharts = false;
         this.monithonMap.filtraPerReport(this.reportFlags);
     }
     /**

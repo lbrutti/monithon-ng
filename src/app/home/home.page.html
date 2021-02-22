@@ -137,7 +137,7 @@
                     <ion-grid>
                         <ion-row>
                             <ion-col>
-                                <h1 class="monithon-contatore-risultati" #resultCounter></h1>
+                                <h1 class="monithon-contatore-risultati" #resultCounter>{{this.risultatiRicerca.length}}</h1>
                             </ion-col>
                             <ion-col><span>{{'comune'|transloco}}</span>; <span>{{'distanza'|transloco}}</span>
                             </ion-col>
@@ -169,7 +169,7 @@
                 <!-- <ion-list #listaProgetti class="monithon-lista-progetti"> -->
                 <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
                     class="monithon-lista-progetti">
-                    <ion-item *cdkVirtualFor="let progetto of progetti;
+                    <ion-item *cdkVirtualFor="let progetto of risultatiRicerca;
                         let index = index;">
                         <ion-label class="monithon-lista-risultato"
                             [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
