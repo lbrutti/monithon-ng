@@ -24,13 +24,7 @@ import { COLOR_MAP } from 'src/app/utils/colorMap';
     providedIn: 'root'
 })
 export class MonithonMapService {
-    highlightById(idRisultati: string[]) {
-        throw new Error('Method not implemented.');
-    }
    
-
-
-
     map: mapboxgl.Map;
     geocoder: any;
     // geolocator: mapboxgl.GeolocateControl;
@@ -424,4 +418,15 @@ export class MonithonMapService {
             };
         }
     }
+
+    highlightById(idRisultati: string[]) {
+            this.progetti.features
+            .map(f => {
+                let progetto = f.properties;
+                progetto.isHighlighted = (idRisultati.length == 0 )|| lodash.includes(idRisultati, progetto.codLocaleProgetto);
+               
+                this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isHighlighted: progetto.isHighlighted });
+            });
+    }
+
 }
