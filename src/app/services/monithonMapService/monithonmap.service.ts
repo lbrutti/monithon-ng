@@ -72,21 +72,7 @@ export class MonithonMapService {
             this.drawRangeProgetti(center);
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
-        // this.map.addControl(
-        //     this.geocoder
-        // );
-
-        // this.geolocator = new mapboxgl.GeolocateControl({
-        //     positionOptions: {
-        //         enableHighAccuracy: true
-        //     },
-        //     trackUserLocation: false
-        // });
-        // this.geolocator.on('geolocate', (evt: any) => {
-        //     let center = [evt.coords.longitude, evt.coords.latitude];
-        //     this.drawRangeProgetti(center);
-        // });
-        // this.map.addControl(this.geolocator);
+       
         this.draw = new MapboxDraw({
             userProperties: true,
             modes: {
