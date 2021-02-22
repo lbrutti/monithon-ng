@@ -1,8 +1,8 @@
 {
-    "name": "monithon-ng",
+    "name": "monithon",
     "version": "0.0.1",
-    "author": "Ionic Framework",
-    "homepage": "https://ionicframework.com/",
+    "author": "Lorenzo Brutti for Sheldon.studio",
+    "homepage": "https://monithon.dev.sheldon.studio/",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",

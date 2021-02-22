@@ -200,13 +200,52 @@ export class HomePage implements OnInit, AfterViewInit {
             .elasticX(true)
             .elasticY(true)
             .margins({ top: 0, right: 0, bottom: 20, left: 40 })
-;
+            ;
         this.annoChart
             .xAxis()
             .tickFormat((anno) => `${parseInt(anno)}`);
 
         this.annoChart.height(() => chartHeight + 50);
 
+        this.annoChart.on('pretransition', function (chart) {
+            let brushBegin = [], brushEnd = []; // 1
+            if (chart.filter()) {
+                brushBegin = [chart.filter()[0]]; // 2
+                brushEnd = [chart.filter()[1]];
+            }
+            let beginLabel = chart.select('g.brush') // 3
+                .selectAll('text.brush-begin')
+                .data(brushBegin); // 4
+            beginLabel.exit().remove(); // 5
+            beginLabel = beginLabel.enter()
+                .append('text') // 6
+                .attr('class', 'brush-begin') // 7
+                .attr('text-anchor', 'end')
+                .attr('dominant-baseline', 'text-top')
+                .attr('fill', 'black')
+                .attr('y', chart.margins().top)
+                .attr('dy', 4)
+                .merge(beginLabel); // 8
+            beginLabel
+                .attr('x', d => chart.x()(d))
+                .text(d => d.toFixed(2)); // 9
+            let endLabel = chart.select('g.brush')
+                .selectAll('text.brush-end')
+                .data(brushEnd);
+            endLabel.exit().remove();
+            endLabel = endLabel.enter()
+                .append('text')
+                .attr('class', 'brush-end')
+                .attr('text-anchor', 'begin')
+                .attr('dominant-baseline', 'text-top')
+                .attr('fill', 'black')
+                .attr('y', chart.margins().top)
+                .attr('dy', 4)
+                .merge(endLabel);
+            endLabel
+                .attr('x', d => chart.x()(d))
+                .text(d => d.toFixed(2));
+        })
         this.annoChart.on("filtered", () => {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
@@ -293,6 +332,46 @@ export class HomePage implements OnInit, AfterViewInit {
             this.evidenziaRisultatiSuMappa();
 
 
+        });
+
+        this.budgetChart.on('pretransition', function (chart) {
+            let brushBegin = [], brushEnd = []; // 1
+            if (chart.filter()) {
+                brushBegin = [chart.filter()[0]]; // 2
+                brushEnd = [chart.filter()[1]];
+            }
+            let beginLabel = chart.select('g.brush') // 3
+                .selectAll('text.brush-begin')
+                .data(brushBegin); // 4
+            beginLabel.exit().remove(); // 5
+            beginLabel = beginLabel.enter()
+                .append('text') // 6
+                .attr('class', 'brush-begin') // 7
+                .attr('text-anchor', 'end')
+                .attr('dominant-baseline', 'text-top')
+                .attr('fill', 'black')
+                .attr('y', chart.margins().top)
+                .attr('dy', 4)
+                .merge(beginLabel); // 8
+            beginLabel
+                .attr('x', d => chart.x()(d))
+                .text(d => d.toFixed(2)); // 9
+            let endLabel = chart.select('g.brush')
+                .selectAll('text.brush-end')
+                .data(brushEnd);
+            endLabel.exit().remove();
+            endLabel = endLabel.enter()
+                .append('text')
+                .attr('class', 'brush-end')
+                .attr('text-anchor', 'begin')
+                .attr('dominant-baseline', 'text-top')
+                .attr('fill', 'black')
+                .attr('y', chart.margins().top)
+                .attr('dy', 4)
+                .merge(endLabel);
+            endLabel
+                .attr('x', d => chart.x()(d))
+                .text(d => d.toFixed(2));
         });
         return crossFilterData;
     }
