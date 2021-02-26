@@ -40,6 +40,11 @@ export class MonithonMapService {
     filtroPerRaggioEnabled: boolean = false;
     reportFlags: any[] = [];
     statiAvanzamento: any[] = [];
+    radiusFilterData: any = {
+        "type": "FeatureCollection",
+        "features": []
+    };
+    circle: any;
 
 
     constructor() {
@@ -72,7 +77,110 @@ export class MonithonMapService {
             this.drawRangeProgetti(center);
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
-        
+        let circleStyle = [ // ACTIVE (being drawn)
+            // line stroke
+            {
+                "id": "gl-draw-line",
+                "type": "line",
+                "filter": ["all", ["==", "$type", "LineString"], ["!=", "mode", "static"]],
+                "layout": {
+                    "line-cap": "round",
+                    "line-join": "round"
+                },
+                "paint": {
+                    "line-color": "#D20C0C",
+                    "line-dasharray": [0.2, 2],
+                    "line-width": 2
+                }
+            },
+            // polygon fill
+            {
+                "id": "gl-draw-polygon-fill",
+                "type": "fill",
+                "filter": ["all", ["==", "$type", "Polygon"], ["!=", "mode", "static"]],
+                "paint": {
+                    "fill-color": "#D20C0C",
+                    "fill-outline-color": "#D20C0C",
+                    "fill-opacity": 0.1
+                }
+            },
+            // polygon outline stroke
+            // This doesn't style the first edge of the polygon, which uses the line stroke styling instead
+            {
+                "id": "gl-draw-polygon-stroke-active",
+                "type": "line",
+                "filter": ["all", ["==", "$type", "Polygon"], ["!=", "mode", "static"]],
+                "layout": {
+                    "line-cap": "round",
+                    "line-join": "round"
+                },
+                "paint": {
+                    "line-color": "#D20C0C",
+                    "line-dasharray": [0.2, 2],
+                    "line-width": 2
+                }
+            },
+            // vertex point halos
+            {
+                "id": "gl-draw-polygon-and-line-vertex-halo-active",
+                "type": "circle",
+                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
+                "paint": {
+                    "circle-radius": 20,
+                    "circle-color": "#FFF"
+                }
+            },
+            // vertex points
+            {
+                "id": "gl-draw-polygon-and-line-vertex-active",
+                "type": "circle",
+                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
+                "paint": {
+                    "circle-radius": 20,
+                    "circle-color": "#D20C0C",
+                }
+            },
+
+            // INACTIVE (static, already drawn)
+            // line stroke
+            {
+                "id": "gl-draw-line-static",
+                "type": "line",
+                "filter": ["all", ["==", "$type", "LineString"], ["==", "mode", "static"]],
+                "layout": {
+                    "line-cap": "round",
+                    "line-join": "round"
+                },
+                "paint": {
+                    "line-color": "#000",
+                    "line-width": 3
+                }
+            },
+            // polygon fill
+            {
+                "id": "gl-draw-polygon-fill-static",
+                "type": "fill",
+                "filter": ["all", ["==", "$type", "Polygon"], ["==", "mode", "static"]],
+                "paint": {
+                    "fill-color": "#000",
+                    "fill-outline-color": "#000",
+                    "fill-opacity": 0.1
+                }
+            },
+            // polygon outline
+            {
+                "id": "gl-draw-polygon-stroke-static",
+                "type": "line",
+                "filter": ["all", ["==", "$type", "Polygon"], ["==", "mode", "static"]],
+                "layout": {
+                    "line-cap": "round",
+                    "line-join": "round"
+                },
+                "paint": {
+                    "line-color": "#000",
+                    "line-width": 3
+                }
+            }];
         let modes = MapboxDraw.modes;
         modes = MapboxDrawGeodesic.enable(modes);
         const draw = new MapboxDraw({ modes });
@@ -85,7 +193,8 @@ export class MonithonMapService {
             //     direct_select: DirectMode,
             //     simple_select: SimpleSelectMode
             // },
-            modes:modes
+            styles: circleStyle,
+            modes: modes
         });
         this.map.addControl(this.draw, 'top-left');
         this.map.on('draw.update', (evt) => {
@@ -94,7 +203,7 @@ export class MonithonMapService {
                 center: MapboxDrawGeodesic.getCircleCenter(geojson),
                 radius: MapboxDrawGeodesic.getCircleRadius(geojson)
             };
-           
+
             this.filtroPerRaggioEnabled = true;
             this.filtraPerDistanza(circleData);
         });
@@ -123,6 +232,11 @@ export class MonithonMapService {
                     promoteId: 'codLocaleProgetto'
                 });
 
+            this.map
+                .addSource('radiusFilterData', {
+                    type: 'geojson',
+                    data: this.radiusFilterData
+                });
             //refactoring come singolo layer di progetti:
 
 
@@ -164,6 +278,18 @@ export class MonithonMapService {
                     }
                 });
 
+            this.map
+                .addLayer({
+                    id: 'radius',
+                    type: 'symbol',
+                    source: 'radiusFilterData',
+                    'layout': {
+                        'text-field': ['get', 'radius'],
+                        'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+                        'text-radial-offset': 0.5,
+                        'text-justify': 'center'
+                    }
+                });
             this.map.on('click', e => {
                 this.publishSelectedProject(null);
             });
@@ -237,8 +363,9 @@ export class MonithonMapService {
      * @param center 
      */
     private drawRangeProgetti(center: any) {
-        const circle = MapboxDrawGeodesic.createCircle(center, 10);
-        this.draw.add(circle);
+        this.circle = MapboxDrawGeodesic.createCircle(center, 10);
+        this.circle.id="range-center";
+        this.draw.add(this.circle);
 
         this.filtroPerRaggioEnabled = true;
         this.filtraPerDistanza({
@@ -298,6 +425,16 @@ export class MonithonMapService {
      */
     filtraPerDistanza(circleData?: any) {
         if (circleData) {
+           ( this.map.getSource('radiusFilterData') as any).setData({
+                'type': 'Feature',
+                'properties': {
+                    ...circleData
+                },
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [circleData.center]
+                }
+            });
             let centerPoint = point(circleData.center);
             let radius = circleData.radius;
             this.progetti.features.map(f => {
@@ -317,21 +454,6 @@ export class MonithonMapService {
         this.aggiornaVisibilitaCategorie();
         this.publishUpdate(progetti);
     }
-
-    // filtraPerReport(reportFlags: Array<any>) {
-    //     this.reportFlags = reportFlags;
-    //     let progetti = this.filtraProgetti();
-    //     //SM-84 : attenzione: verificare se aggiornare i grafici!
-    //     this.publishUpdate(progetti);
-
-    // }
-
-    //  filtraPerStato(statiAvanzamento: any[]) {
-    //      this.statiAvanzamento = statiAvanzamento;
-    //     let progetti = this.filtraProgetti();
-    //     //SM-83 : attenzione: verificare se aggiornare i grafici!
-    //     this.publishUpdate(progetti);
-    // }
 
 
     filtraProgetti(): Array<any> {
