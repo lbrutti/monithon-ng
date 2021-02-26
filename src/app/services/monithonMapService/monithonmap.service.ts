@@ -4,13 +4,6 @@ import { environment } from 'src/environments/environment';
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js';
 import * as MapboxDrawGeodesic from 'mapbox-gl-draw-geodesic';
-import {
-    CircleMode,
-    DragCircleMode,
-    DirectMode,
-    SimpleSelectMode
-} from 'mapbox-gl-draw-circle';
-import circle from '@turf/circle';
 import { Progetto } from 'src/app/model/progetto/progetto';
 import lodash from 'lodash';
 import { Observer, Subject } from 'rxjs';
@@ -88,8 +81,7 @@ export class MonithonMapService {
                     "line-join": "round"
                 },
                 "paint": {
-                    "line-color": "#D20C0C",
-                    "line-dasharray": [0.2, 2],
+                    "line-color": "#fff",
                     "line-width": 2
                 }
             },
@@ -99,8 +91,8 @@ export class MonithonMapService {
                 "type": "fill",
                 "filter": ["all", ["==", "$type", "Polygon"], ["!=", "mode", "static"]],
                 "paint": {
-                    "fill-color": "#D20C0C",
-                    "fill-outline-color": "#D20C0C",
+                    "fill-color": "#235ba6",
+                    "fill-outline-color": "#fff",
                     "fill-opacity": 0.1
                 }
             },
@@ -115,8 +107,8 @@ export class MonithonMapService {
                     "line-join": "round"
                 },
                 "paint": {
-                    "line-color": "#D20C0C",
-                    "line-dasharray": [0.2, 2],
+                    "line-color": "#fff",
+                    // "line-dasharray": [0.2, 2],
                     "line-width": 2
                 }
             },
@@ -124,7 +116,7 @@ export class MonithonMapService {
             {
                 "id": "gl-draw-polygon-and-line-vertex-halo-active",
                 "type": "circle",
-                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
+                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"]],
                 "paint": {
                     "circle-radius": 20,
                     "circle-color": "#FFF"
@@ -136,49 +128,8 @@ export class MonithonMapService {
                 "type": "circle",
                 "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
                 "paint": {
-                    "circle-radius": 20,
-                    "circle-color": "#D20C0C",
-                }
-            },
-
-            // INACTIVE (static, already drawn)
-            // line stroke
-            {
-                "id": "gl-draw-line-static",
-                "type": "line",
-                "filter": ["all", ["==", "$type", "LineString"], ["==", "mode", "static"]],
-                "layout": {
-                    "line-cap": "round",
-                    "line-join": "round"
-                },
-                "paint": {
-                    "line-color": "#000",
-                    "line-width": 3
-                }
-            },
-            // polygon fill
-            {
-                "id": "gl-draw-polygon-fill-static",
-                "type": "fill",
-                "filter": ["all", ["==", "$type", "Polygon"], ["==", "mode", "static"]],
-                "paint": {
-                    "fill-color": "#000",
-                    "fill-outline-color": "#000",
-                    "fill-opacity": 0.1
-                }
-            },
-            // polygon outline
-            {
-                "id": "gl-draw-polygon-stroke-static",
-                "type": "line",
-                "filter": ["all", ["==", "$type", "Polygon"], ["==", "mode", "static"]],
-                "layout": {
-                    "line-cap": "round",
-                    "line-join": "round"
-                },
-                "paint": {
-                    "line-color": "#000",
-                    "line-width": 3
+                    "circle-radius": 19,
+                    "circle-color": "#235ba6",
                 }
             }];
         let modes = MapboxDraw.modes;
@@ -286,9 +237,9 @@ export class MonithonMapService {
                         'circle-stroke-width': 1
                     }
                 });
-            this.map.on('zoom',  ()=> {
-                console.log(this.map.getZoom());
-            });
+            // this.map.on('zoom',  ()=> {
+            //     console.log(this.map.getZoom());
+            // });
             this.map
                 .addLayer({
                     id: 'radius',
