@@ -310,13 +310,13 @@ export class MonithonMapService {
                 let properties: any = Object.assign({}, p);
                 properties.isSelected = true;
                 properties.isWithinRange = true;
-                // let jitteredCoords = this.addJitter()(p.lat, p.long, 0.5, false);
+                let jitteredCoords = this.addJitter()(p.lat, p.long, 0.1, false);
                 return {
                     "type": "Feature",
                     "properties": properties,
                     "geometry": {
                         "type": "Point",
-                        "coordinates": [p.long, p.lat]
+                        "coordinates": [jitteredCoords.lng, jitteredCoords.lat]
                     }
                 };
             })
