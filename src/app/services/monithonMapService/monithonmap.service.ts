@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js';
-
+import * as MapboxDrawGeodesic from 'mapbox-gl-draw-geodesic';
 import {
     CircleMode,
     DragCircleMode,
@@ -72,30 +72,37 @@ export class MonithonMapService {
             this.drawRangeProgetti(center);
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
-
+        
+        let modes = MapboxDraw.modes;
+        modes = MapboxDrawGeodesic.enable(modes);
+        const draw = new MapboxDraw({ modes });
         this.draw = new MapboxDraw({
             userProperties: true,
-            modes: {
-                ...MapboxDraw.modes,
-                draw_circle: CircleMode,
-                drag_circle: DragCircleMode,
-                direct_select: DirectMode,
-                simple_select: SimpleSelectMode
-            }
+            // modes: {
+            //     ...MapboxDraw.modes,
+            //     draw_circle: CircleMode,
+            //     drag_circle: DragCircleMode,
+            //     direct_select: DirectMode,
+            //     simple_select: SimpleSelectMode
+            // },
+            modes:modes
         });
         this.map.addControl(this.draw, 'top-left');
         this.map.on('draw.update', (evt) => {
+            const geojson = evt.features[0];
             let circleData = {
-                center: lodash.get(evt, 'features[0].properties.center'),
-                radius: lodash.get(evt, 'features[0].properties.radiusInKm')
+                center: MapboxDrawGeodesic.getCircleCenter(geojson),
+                radius: MapboxDrawGeodesic.getCircleRadius(geojson)
             };
+           
             this.filtroPerRaggioEnabled = true;
             this.filtraPerDistanza(circleData);
         });
         this.map.on('draw.create', (evt) => {
+            const geojson = evt.features[0];
             let circleData = {
-                center: lodash.get(evt, 'features[0].properties.center'),
-                radius: lodash.get(evt, 'features[0].properties.radiusInKm')
+                center: MapboxDrawGeodesic.getCircleCenter(geojson),
+                radius: MapboxDrawGeodesic.getCircleRadius(geojson)
             };
             this.filtroPerRaggioEnabled = true;
             this.filtraPerDistanza(circleData);
@@ -230,15 +237,9 @@ export class MonithonMapService {
      * @param center 
      */
     private drawRangeProgetti(center: any) {
-        this.rangeProgetti = {
-            id: 'range_progetti',
-            type: 'Feature',
-            properties: { center: center, isCircle: true, radiusInKm: 10 },
-            geometry: {
-                type: 'Polygon', coordinates: circle(center, 10).geometry.coordinates
-            }
-        };
-        this.draw.add(this.rangeProgetti);
+        const circle = MapboxDrawGeodesic.createCircle(center, 10);
+        this.draw.add(circle);
+
         this.filtroPerRaggioEnabled = true;
         this.filtraPerDistanza({
             center: center,
