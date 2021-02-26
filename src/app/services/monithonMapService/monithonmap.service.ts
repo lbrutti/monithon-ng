@@ -116,22 +116,42 @@ export class MonithonMapService {
             {
                 "id": "gl-draw-polygon-and-line-vertex-halo-active",
                 "type": "circle",
-                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"]],
+                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"], ['==', 'isHandle', "true"]],
                 "paint": {
                     "circle-radius": 20,
                     "circle-color": "#FFF"
                 }
             },
             // vertex points
+
+            {
+                "id": "gl-draw-polygon-and-line-vertex-active",
+                "type": "circle",
+                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"], ['==', 'isHandle', "true"]],
+                "paint": {
+                    "circle-radius": 19,
+                    "circle-color": "#235ba6",
+                }
+            },
+
+            {
+                "id": "gl-draw-polygon-and-line-vertex-halo-active",
+                "type": "circle",
+                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
+                "paint": {
+                    "circle-radius": 0,
+                    "circle-color": "#FFF"
+                },
+            },
             {
                 "id": "gl-draw-polygon-and-line-vertex-active",
                 "type": "circle",
                 "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
                 "paint": {
-                    "circle-radius": 19,
+                    "circle-radius": 0,
                     "circle-color": "#235ba6",
                 }
-            }];
+            },];
         let modes = MapboxDraw.modes;
         modes = MapboxDrawGeodesic.enable(modes);
         const draw = new MapboxDraw({ modes });
