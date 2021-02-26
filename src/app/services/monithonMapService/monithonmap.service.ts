@@ -57,7 +57,7 @@ export class MonithonMapService {
             container: container,
             style: environment.mapbox.style,
             center: [12.3959144, 41.909986], //roma
-            zoom: 6,
+            zoom: 4.8,
             antialias: false,
             attributionControl: false
         });
@@ -247,7 +247,16 @@ export class MonithonMapService {
                     'type': 'circle',
                     'source': 'progetti',
                     'paint': {
-                        'circle-radius': 3,
+                        'circle-radius': {
+                            'base': 1.75,
+                            'stops': [
+                                [0, 0],
+                                [6, 1],
+                                [8, 2],
+                                [11, 4],
+                                [12, 5]
+                            ]
+                        },
                         'circle-color': [
                             'case',
                             ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
@@ -277,7 +286,9 @@ export class MonithonMapService {
                         'circle-stroke-width': 1
                     }
                 });
-
+            this.map.on('zoom',  ()=> {
+                console.log(this.map.getZoom());
+            });
             this.map
                 .addLayer({
                     id: 'radius',
@@ -364,7 +375,7 @@ export class MonithonMapService {
      */
     private drawRangeProgetti(center: any) {
         this.circle = MapboxDrawGeodesic.createCircle(center, 10);
-        this.circle.id="range-center";
+        this.circle.id = "range-center";
         this.draw.add(this.circle);
 
         this.filtroPerRaggioEnabled = true;
@@ -425,7 +436,7 @@ export class MonithonMapService {
      */
     filtraPerDistanza(circleData?: any) {
         if (circleData) {
-           ( this.map.getSource('radiusFilterData') as any).setData({
+            (this.map.getSource('radiusFilterData') as any).setData({
                 'type': 'Feature',
                 'properties': {
                     ...circleData
