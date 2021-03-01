@@ -334,3 +334,8 @@ ion-row.monithon-filtri-secondari {
 .mapboxgl-ctrl-geocoder {
     min-width: 100%;
 }
+
+monithon-drawer{
+    z-index: 1999;
+    position: absolute;
+}

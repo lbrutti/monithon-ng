@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -23,6 +23,7 @@ import { TranslocoRootModule } from './transloco/transloco-root.module';
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         MonithonMockedService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    schemas:  [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
