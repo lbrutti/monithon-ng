@@ -54,7 +54,7 @@
                     </mat-expansion-panel-header>
                     <ion-grid>
                         <ion-row>
-                            <ion-col size="6">
+                            <ion-col size="6" class="ion-no-margin">
                                 <div #categorieDiSpesaContainer id="categorieDiSpesaContainer">
                                     <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
@@ -69,25 +69,25 @@
                                     </mat-chip-list>
                                 </div>
                             </ion-col>
-                            <ion-col size="6">
+                            <ion-col size="6" class="ion-no-margin">
                                 <mat-expansion-panel class="monithon-filtri-charts" id="chartPanel">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title>
                                             {{'chartPanelTitle'|transloco}}
                                         </mat-panel-title>
                                     </mat-expansion-panel-header>
-                                    <div id="chartContainer">
-                                        <ion-grid>
-                                            <ion-row>
-                                                <ion-col>
-                                                    <h3>{{'budgetChartTitle' |transloco}}</h3>
+                                    <div id="chartsContainer">
+                                        <ion-grid class="ion-no-margin">
+                                            <ion-row class="ion-no-margin monithon-chart-container">
+                                                <ion-col class="ion-no-margin">
+                                                    <h5 class="chart-title">{{'budgetChartTitle' |transloco}}</h5>
                                                     <div #budgetChart id='budgetChartContainer'></div>
                                                 </ion-col>
                                             </ion-row>
 
-                                            <ion-row>
-                                                <ion-col>
-                                                    <h3>{{'annoChartTitle'|transloco}}</h3>
+                                            <ion-row class="ion-no-margin monithon-chart-container">
+                                                <ion-col class="ion-no-margin">
+                                                    <h5 class="chart-title">{{'annoChartTitle'|transloco}}</h5>
                                                     <div #annoChart id='annoChartContainer'></div>
                                                 </ion-col>
                                             </ion-row>

@@ -180,7 +180,8 @@ export class HomePage implements OnInit, AfterViewInit {
 
     private renderAnnoChart(crossFilterData: any, listaProgetti: any) {
         this.annoChart = new dc.BarChart((this.annoChartContainer as any).nativeElement);
-        let chartHeight = (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
+        // let chartHeight = (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
+        let chartHeight = (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
 
         let annoDim = crossFilterData.dimension((d) => moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year()
         ),
@@ -199,13 +200,12 @@ export class HomePage implements OnInit, AfterViewInit {
             .xUnits(dc.units.integers)
             .elasticX(true)
             .elasticY(true)
-            .margins({ top: 0, right: 0, bottom: 20, left: 40 })
-            ;
+            .margins({ top: 0, right: 0, bottom: 10, left: 0 });
         this.annoChart
             .xAxis()
             .tickFormat((anno) => `${parseInt(anno)}`);
 
-        this.annoChart.height(() => chartHeight + 50);
+        this.annoChart.height(chartHeight);
 
         this.annoChart.on('pretransition', function (chart) {
             let brushBegin = [], brushEnd = []; // 1
@@ -246,17 +246,21 @@ export class HomePage implements OnInit, AfterViewInit {
                 .attr('x', d => chart.x()(d))
                 .text(d => d.toFixed(2));
         })
-        this.annoChart.on("filtered", () => {
+        this.annoChart.on("filtered", (chart) => {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
+            chart.selectAll('g.axis.y').remove();
+            chart.selectAll('g.axis.y').remove();
 
         });
 
-        this.annoChart.on("renderlet", () => {
+        this.annoChart.on("renderlet", (chart) => {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
+            chart.selectAll('g.axis.y').remove();
+            chart.selectAll('g.axis.y').remove();
 
         });
     }
@@ -265,7 +269,9 @@ export class HomePage implements OnInit, AfterViewInit {
         this.budgetChart = new dc.BarChart((this.budgetChartContainer as any).nativeElement);
 
         let budgetBin = d3.bin();
-        let chartHeight = (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height;
+        // let chartHeight = (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height;
+        let chartHeight = (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height;
+
         //creo bin usando arrotondamento del budget
         budgetBin.value((d: any) => +d.ocFinanzTotPubNetto);
         //inserire soglie per non avere troppi bin: parametrizzare qui quantili?
@@ -294,13 +300,13 @@ export class HomePage implements OnInit, AfterViewInit {
             .x(d3.scaleLinear().domain([0, numQuantili]))
             .elasticY(true)
             .elasticX(true)
-            .margins({ top: 0, right: 0, bottom: 20, left: 40 })
+            .margins({ top: 0, right: 0, bottom: 10, left: 0 })
             .xAxis()
             .tickFormat((v: any) => `${binThresholds[v] / 1000} K`)
 
         this.budgetChart.yAxis().tickFormat(() => undefined)
 
-        this.budgetChart.height(() => chartHeight + 50);
+        this.budgetChart.height(chartHeight);
 
 
         // this.budgetChart
