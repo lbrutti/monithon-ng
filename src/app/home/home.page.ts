@@ -181,7 +181,7 @@ export class HomePage implements OnInit, AfterViewInit {
     private renderAnnoChart(crossFilterData: any, listaProgetti: any) {
         this.annoChart = new dc.BarChart((this.annoChartContainer as any).nativeElement);
         // let chartHeight = (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
-        let chartHeight = (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
+        let chartHeight = 72 ||(this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
 
         let annoDim = crossFilterData.dimension((d) => moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year()
         ),
@@ -200,7 +200,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .xUnits(dc.units.integers)
             .elasticX(true)
             .elasticY(true)
-            .margins({ top: 0, right: 0, bottom: 10, left: 0 });
+            .margins({ top: 0, right: 0, bottom: 20, left: 0 });
         this.annoChart
             .xAxis()
             .tickFormat((anno) => `${parseInt(anno)}`);
@@ -251,7 +251,6 @@ export class HomePage implements OnInit, AfterViewInit {
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
             chart.selectAll('g.axis.y').remove();
-            chart.selectAll('g.axis.y').remove();
 
         });
 
@@ -259,7 +258,6 @@ export class HomePage implements OnInit, AfterViewInit {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-            chart.selectAll('g.axis.y').remove();
             chart.selectAll('g.axis.y').remove();
 
         });
@@ -270,7 +268,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
         let budgetBin = d3.bin();
         // let chartHeight = (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height;
-        let chartHeight = (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height;
+        let chartHeight = 72 || (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height;
 
         //creo bin usando arrotondamento del budget
         budgetBin.value((d: any) => +d.ocFinanzTotPubNetto);
@@ -300,7 +298,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .x(d3.scaleLinear().domain([0, numQuantili]))
             .elasticY(true)
             .elasticX(true)
-            .margins({ top: 0, right: 0, bottom: 10, left: 0 })
+            .margins({ top: 0, right: 0, bottom: 20, left: 0 })
             .xAxis()
             .tickFormat((v: any) => `${binThresholds[v] / 1000} K`)
 
@@ -309,33 +307,21 @@ export class HomePage implements OnInit, AfterViewInit {
         this.budgetChart.height(chartHeight);
 
 
-        // this.budgetChart
-        //     .width('120')
-        //controllare dimensioni
-        // this.budgetChart
-        // .width((element) => {
-        //     var width = element && element.getBoundingClientRect && element.getBoundingClientRect().width;
-        //     return (width && width > this.budgetChart.minWidth()) ? width : this.budgetChart.minWidth();
-        // });
-        // this.budgetChart
-        //     .height(function (element) {
-        //         var height = element && element.getBoundingClientRect && element.getBoundingClientRect().height;
-        //         height *= 0.5;
-        //         return (height && height > this.budgetChart.minHeight()) ? height : this.budgetChart.minHeight();
-        //     });
-        this.budgetChart.on("renderlet", () => {
+        this.budgetChart.on("renderlet", (chart) => {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
+            chart.selectAll('g.axis.y').remove();
 
         });
 
-        this.budgetChart.on("filtered", () => {
+        this.budgetChart.on("filtered", (chart) => {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
+            chart.selectAll('g.axis.y').remove();
 
 
         });

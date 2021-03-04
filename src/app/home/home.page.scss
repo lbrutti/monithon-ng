@@ -48,7 +48,7 @@
 #filterContainer {
     margin-top: auto;
     width: 66vw;
-    max-height: 55vh;
+    max-height: 60vh;
 }
 
 #resultContainer {
@@ -66,16 +66,21 @@
 
 ::ng-deep .mat-expansion-panel-header,
 ::ng-deep .mat-expansion-panel-header.mat-expanded {
-    margin: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    height: 48px;
+    height: 32px;
 }
 
+::ng-deep .mat-standard-chip{
+    padding: 3px 6px !important;
+    min-height: 28px !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: inherit;
+}
 
 #chartPanel {
     align-self: flex-end;
-
+    max-height: 50vh;
     .mat-expansion-panel-content {
         overflow-y: scroll;
     }
@@ -99,20 +104,17 @@
     width: 100%;
     min-height: 34px;
 
-    svg {
-        g {
-            g.axis.y {
-                display: none;
-            }
-        }
+    g.axis.y {
+        display: none !important;
     }
+
 }
 
 .chart-title {
     font-size: small;
     text-align: left;
     font-weight: normal;
-    margin-top:0;
+    margin-top: 0;
     margin-bottom: 5px;
 }
 
@@ -218,7 +220,7 @@
 }
 
 .mat-chip.monithon-filtro-stato-avanzamento {
-    width: 45%;
+    width: 33%;
     text-align: center;
     display: inline-block;
 }
@@ -239,7 +241,7 @@ ion-row.monithon-filtri-secondari {
 }
 
 .mat-chip-list.monithon-categorie {
-    height: 33vh;
+    height: 50vh;
     display: inline-block;
     overflow-x: hidden;
     scrollbar-width: none;

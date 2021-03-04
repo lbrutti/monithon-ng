@@ -95,9 +95,9 @@
                                     </div>
                                     <div id="filtriSecondariContainer">
                                         <ion-grid>
-                                            <ion-row class="monithon-filtri-secondari">
-                                                <ion-col size="8">
-                                                     <h3>{{'statoAvanzamento' |transloco}}</h3>
+                                            <ion-row class="monithon-filtri-secondari ion-no-margin ">
+                                                <ion-col size="8" class="ion-no-margin ">
+                                                     <h5 class="chart-title">{{'statoAvanzamento' |transloco}}</h5>
                                                     <mat-chip-list [ngClass]="{'monithon-filtro-stato-avanzamento': true}" multiple="true" aria-orientation="horizontal">
                                                         <mat-chip [ngClass]="{'monithon-filtro-stato-avanzamento': true}" selectable="true" *ngFor="let stato of this.statiAvanzamento"
                                                             [selected]="stato.isSelected" (click)="this.filterByStato(stato)"
@@ -106,8 +106,8 @@
                                                         </mat-chip>
                                                     </mat-chip-list>
                                                 </ion-col>
-                                                <ion-col size="3">
-                                                     <h3>{{'monitorati' |transloco}}</h3>
+                                                <ion-col size="3" class="ion-no-margin" >
+                                                     <h5 class="chart-title">{{'monitorati' |transloco}}</h5>
                                                     <mat-chip-list [ngClass]="{'monithon-filtro-report': true}" multiple="true" aria-orientation="horizontal">
                                                         <mat-chip [ngClass]="{'monithon-filtro-report': true}" selectable="true" *ngFor="let flag of this.reportFlags"
                                                             [selected]="flag.isSelected" (click)="this.filterByReportFlag(flag)"
