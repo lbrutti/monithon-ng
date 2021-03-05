@@ -1,7 +1,15 @@
 <ion-content [fullscreen]="true" [scrollY]="false">
     <!-- <ion-toolbar class="monithon-header" >
     </ion-toolbar> -->
-    <monithon-drawer></monithon-drawer>
+    <monithon-drawer>
+        <div slot="menu-entries">
+
+            <h3 class="menu-entry"> slot - uno </h3>
+            <h3 class="menu-entry"> slot - due </h3>
+            <h3 class="menu-entry"> slot - tre </h3>
+            <h3 class="menu-entry"> slot - quattro </h3>
+        </div>
+    </monithon-drawer>
     <div #geocoder id="geocoder" class="geocoder"></div>
     <div id="container">
         <!-- Mappa -->
@@ -97,21 +105,32 @@
                                         <ion-grid>
                                             <ion-row class="monithon-filtri-secondari ion-no-margin ">
                                                 <ion-col size="8" class="ion-no-margin ">
-                                                     <h5 class="chart-title">{{'statoAvanzamento' |transloco}}</h5>
-                                                    <mat-chip-list [ngClass]="{'monithon-filtro-stato-avanzamento': true}" multiple="true" aria-orientation="horizontal">
-                                                        <mat-chip [ngClass]="{'monithon-filtro-stato-avanzamento': true}" selectable="true" *ngFor="let stato of this.statiAvanzamento"
-                                                            [selected]="stato.isSelected" (click)="this.filterByStato(stato)"
-                                                            [attr.data-oc-cod-stato-progetto]="stato.ocCodStatoProgetto" disableRipple="true">
+                                                    <h5 class="chart-title">{{'statoAvanzamento' |transloco}}</h5>
+                                                    <mat-chip-list
+                                                        [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
+                                                        multiple="true" aria-orientation="horizontal">
+                                                        <mat-chip
+                                                            [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
+                                                            selectable="true"
+                                                            *ngFor="let stato of this.statiAvanzamento"
+                                                            [selected]="stato.isSelected"
+                                                            (click)="this.filterByStato(stato)"
+                                                            [attr.data-oc-cod-stato-progetto]="stato.ocCodStatoProgetto"
+                                                            disableRipple="true">
                                                             {{'statiAvanzamento.'+stato.ocCodStatoProgetto | transloco}}
                                                         </mat-chip>
                                                     </mat-chip-list>
                                                 </ion-col>
-                                                <ion-col size="3" class="ion-no-margin" >
-                                                     <h5 class="chart-title">{{'monitorati' |transloco}}</h5>
-                                                    <mat-chip-list [ngClass]="{'monithon-filtro-report': true}" multiple="true" aria-orientation="horizontal">
-                                                        <mat-chip [ngClass]="{'monithon-filtro-report': true}" selectable="true" *ngFor="let flag of this.reportFlags"
-                                                            [selected]="flag.isSelected" (click)="this.filterByReportFlag(flag)"
-                                                            [attr.data-has-report]="flag.hasReport" disableRipple="true">
+                                                <ion-col size="3" class="ion-no-margin">
+                                                    <h5 class="chart-title">{{'monitorati' |transloco}}</h5>
+                                                    <mat-chip-list [ngClass]="{'monithon-filtro-report': true}"
+                                                        multiple="true" aria-orientation="horizontal">
+                                                        <mat-chip [ngClass]="{'monithon-filtro-report': true}"
+                                                            selectable="true" *ngFor="let flag of this.reportFlags"
+                                                            [selected]="flag.isSelected"
+                                                            (click)="this.filterByReportFlag(flag)"
+                                                            [attr.data-has-report]="flag.hasReport"
+                                                            disableRipple="true">
                                                             {{'reportFlags.'+flag.hasReport | transloco}}
                                                         </mat-chip>
                                                     </mat-chip-list>
@@ -138,7 +157,8 @@
                     <ion-grid>
                         <ion-row>
                             <ion-col>
-                                <h1 class="monithon-contatore-risultati" #resultCounter>{{this.risultatiRicerca.length}}</h1>
+                                <h1 class="monithon-contatore-risultati" #resultCounter>{{this.risultatiRicerca.length}}
+                                </h1>
                             </ion-col>
                             <ion-col><span>{{'comune'|transloco}}</span>; <span>{{'distanza'|transloco}}</span>
                             </ion-col>
