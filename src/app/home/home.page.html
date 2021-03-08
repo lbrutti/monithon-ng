@@ -21,50 +21,65 @@
             [attr.data-oc-cod-tema-sintetico]="this.progettoSelezionato.ocCodTemaSintetico"
             class="monithon-dettaglio-progetto">
 
-            <h5>{{'schedaProgetto' | transloco}}</h5>
+            <h5 class="monithon-dettaglio-progetto__titolo_scheda">{{'schedaProgetto' | transloco}}</h5>
             <div #dettagliProgetto>
+
                 <ion-grid>
                     <ion-row>
-                        <ion-col col-6 class="monithon-dettaglio-progetto__titolo">
-                            <h4>{{progettoSelezionato.ocTitoloProgetto}}</h4>
-                            <hr />
-                            <div #sintesiProgetto class="monithon-dettaglio-progetto__sinstesi">
+                        <ion-col col-6>
+                            <div class="monithon-dettaglio-progetto__titolo_container">
+                                <h4 class="monithon-dettaglio-progetto__titolo">{{progettoSelezionato.ocTitoloProgetto}}
+                                </h4>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-6 class="monithon-dettaglio-progetto__sintesi_container">
+                            <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
                                 <span>{{progettoSelezionato.ocSintesiProgetto}}</span>
+                            </div>
+                            <div>
+                                <button class="monithon-dettaglio-progetto__inizia_monitoraggio" mat-button color="primary">{{'iniziaMonitoraggio' | transloco}}</button>
                             </div>
                         </ion-col>
                         <ion-col col-6 class="monithon-dettaglio-progetto__dettagli">
                             <div class="monithon-dettaglio-progetto__data_inizio">
-                                <ion-label>{{'dataInizio' | transloco}}</ion-label>
+                                <ion-label class="monithon-dettaglio-progetto__label">{{'dataInizio' | transloco}}
+                                </ion-label>
                                 <ion-label>{{progettoSelezionato.ocDataInizioProgetto}}</ion-label>
                             </div>
 
                             <div class="monithon-dettaglio-progetto__categoria">
-                                <ion-label>{{'categoria' | transloco}}</ion-label>
+                                <ion-label class="monithon-dettaglio-progetto__label">{{'categoria' | transloco}}
+                                </ion-label>
                                 <ion-label>{{'categorie.'+progettoSelezionato.ocCodCategoriaSpesa | transloco}}
                                 </ion-label>
                             </div>
 
                             <div class="monithon-dettaglio-progetto__tema">
-                                <ion-label>{{'tema' | transloco}}</ion-label>
+                                <ion-label class="monithon-dettaglio-progetto__label">{{'tema' | transloco}}</ion-label>
                                 <ion-label>{{'temi.'+progettoSelezionato.ocCodTemaSintetico | transloco}}
                                 </ion-label>
                             </div>
 
                             <div class="monithon-dettaglio-progetto__finanziamento">
-                                <ion-label>{{'finanziamento' | transloco}}</ion-label>
-                                <div id="finanziamentoPubblicoChartContainer"></div>
+                                <ion-label class="monithon-dettaglio-progetto__label">{{'finanziamento' | transloco}}
+                                </ion-label>
+                                <div #finanziamentoPubblicoChartContainer></div>
                             </div>
 
                             <div class="monithon-dettaglio-progetto__pagamenti">
-                                <ion-label>{{'pagamenti' | transloco}}</ion-label>
-                                <div id="pagamentiChartContainer"></div>
+                                <ion-label class="monithon-dettaglio-progetto__label">{{'pagamenti' | transloco}}
+                                </ion-label>
+                                <div #pagamentiChartContainer></div>
                             </div>
 
                             <div id="flagProgetto">
                                 <ion-grid>
                                     <ion-row class="monithon-filtri-secondari ion-no-margin ">
                                         <ion-col size="8" class="ion-no-margin ">
-                                            <h5 class="chart-title">{{'statoAvanzamento' |transloco}}</h5>
+                                            <ion-label class="chart-title monithon-dettaglio-progetto__label">
+                                                {{'statoAvanzamento' |transloco}}</ion-label>
                                             <mat-chip-list [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
                                                 multiple="true" aria-orientation="horizontal">
                                                 <mat-chip [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
@@ -79,7 +94,9 @@
                                             </mat-chip-list>
                                         </ion-col>
                                         <ion-col size="3" class="ion-no-margin">
-                                            <h5 class="chart-title">{{'monitorati' |transloco}}</h5>
+                                            <ion-label class="chart-title monithon-dettaglio-progetto__label"
+                                                monithon-dettaglio-progetto__label>{{'monitorati' |transloco}}
+                                            </ion-label>
                                             <mat-chip-list [ngClass]="{'monithon-filtro-report': true}" multiple="false"
                                                 aria-orientation="horizontal">
                                                 <mat-chip [ngClass]="{'monithon-filtro-report': true}"

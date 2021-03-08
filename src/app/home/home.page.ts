@@ -26,8 +26,10 @@ export class HomePage implements OnInit, AfterViewInit {
     @ViewChild('mapContainer') mapContainer: ElementRef;
     @ViewChild('geocoder') geocoder: ElementRef;
 
-    @ViewChild('dettagliProgetto') dettagliProgetto: ElementRef;
     @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
+    @ViewChild('dettagliProgetto') dettagliProgetto: ElementRef;
+    @ViewChild('finanziamentoPubblicoChartContainer') finanziamentoPubblicoChartContainer: HTMLElement;
+    @ViewChild('pagamentiChartContainer') pagamentiChartContainer: HTMLElement;
 
 
     progetti: Array<Progetto> = [];
@@ -36,6 +38,9 @@ export class HomePage implements OnInit, AfterViewInit {
     //variabili charts
     budgetChart: any;
     annoChart: any;
+    finanziamentoPubblicoChart: any;
+    pagamentiChart: any;
+
     resultCounter: any;
 
     temi: Array<any> = [];
@@ -71,8 +76,9 @@ export class HomePage implements OnInit, AfterViewInit {
 
     panelOpenState: boolean = false;
     redrawCharts: boolean = true;
-    counterValue: any;
 
+
+    counterValue: any;
     constructor(
         private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
@@ -129,8 +135,10 @@ export class HomePage implements OnInit, AfterViewInit {
                     next: progetto => {
                         if (progetto && progetto.length) {
                             this.progettoSelezionato = progetto[0];
-                            this.progettoSelezionato.hasReports = this.progettoSelezionato.monithonReports.length>0;
+                            this.progettoSelezionato.hasReports = this.progettoSelezionato.monithonReports.length > 0;
                             this.visualizzaDettaglio = true;
+
+                            this.renderDettaglioProgettoCharts();
                         } else {
                             this.visualizzaDettaglio = false;
 
@@ -144,6 +152,55 @@ export class HomePage implements OnInit, AfterViewInit {
             this.visualizzaDettaglio = false;
         }
 
+    }
+
+    private renderDettaglioProgettoCharts() {
+        this.renderFinanziamentoChart();
+        this.renderPagamentiChart();
+    }
+
+    renderFinanziamentoChart() {
+        // render chart finanziamento/spesa
+        this.finanziamentoPubblicoChart = d3.select((this.finanziamentoPubblicoChartContainer as any).nativeElement).append('svg');
+        this.finanziamentoPubblicoChart
+            .attr('width', null)
+            .attr('height', null);
+        let chartG = this.finanziamentoPubblicoChart.append('g');
+        chartG.append('rect')
+            .attr('width', '300')
+            .attr('height', '100')
+            .attr('fill', 'grey');
+        chartG.selectAll('text.finanziamento').remove();
+        chartG.selectAll('text.finanziamento')
+            .data([this.progettoSelezionato])
+            .enter()
+            .append('text')
+            .attr('class', 'finanziamento')
+            .attr('x', '300')
+            .attr('y', '100')
+            .attr('text-anchor', 'end')
+            .text(d => d.ocFinanzTotPubNetto)
+    }
+    renderPagamentiChart() {
+        this.pagamentiChart = d3.select((this.pagamentiChartContainer as any).nativeElement).append('svg');
+        this.pagamentiChart
+            .attr('width', null)
+            .attr('height', null);
+        let chartG = this.pagamentiChart.append('g');
+        chartG.append('rect')
+            .attr('width', '300')
+            .attr('height', '100')
+            .attr('fill', 'grey');
+        chartG.selectAll('text.pagamenti').remove();
+        chartG.selectAll('text.pagamenti')
+            .data([this.progettoSelezionato])
+            .enter()
+            .append('text')
+            .attr('class', 'pagamenti')
+            .attr('x', '300')
+            .attr('y', '100')
+            .attr('text-anchor', 'end')
+            .text(d => d.ocFinanzTotPubNetto);
     }
 
 
@@ -233,9 +290,9 @@ export class HomePage implements OnInit, AfterViewInit {
                 .merge(beginLabel); // 8
             beginLabel
                 .attr('x', d => chart.x()(d))
-                .text(d => parseInt(d+1)); // 9
+                .text(d => parseInt(d + 1)); // 9
 
-                
+
             let endLabel = chart.select('g.brush')
                 .selectAll('text.brush-end')
                 .data(brushEnd);
@@ -356,7 +413,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
             beginLabel
                 .attr('x', d => chart.x()(d))
-                .text(d => binThresholds[parseInt(d)+1] ); // 9
+                .text(d => binThresholds[parseInt(d) + 1]); // 9
 
 
             let endLabel = chart.select('g.brush')
@@ -434,7 +491,7 @@ export class HomePage implements OnInit, AfterViewInit {
     /**
      * onProgettoClick
      */
-    public onProgettoClick(progetto:Progetto) {
+    public onProgettoClick(progetto: Progetto) {
         this.monithonMap.highlightById([progetto.codLocaleProgetto]);
         this.showDettaglioProgetto(progetto);
 

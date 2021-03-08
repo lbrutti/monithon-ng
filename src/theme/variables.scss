@@ -286,9 +286,12 @@ body {
     --monithon-tema-color: #00172A;
     --monithon-tema-sfondo-filtri: #004039;
     --monithon-tema-sfondo-charts: #00CEB8;
+    --monithon-font-color:#041729;
+    --monithon-label-color:#ffffff;
     --background: transparent;
     --ion-toolbar-background: transparent;
     --ion-background-color: transparent;
+
     
     //SM-66 : settare classe all'elemento <html> per switch delle variabili
     &.monochrome{
