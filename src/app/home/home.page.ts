@@ -182,6 +182,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .text(d => d.ocFinanzTotPubNetto)
     }
     renderPagamentiChart() {
+        //TODO: aggiungere scala rispetto al finanziato
         this.pagamentiChart = d3.select((this.pagamentiChartContainer as any).nativeElement).append('svg');
         this.pagamentiChart
             .attr('width', null)
