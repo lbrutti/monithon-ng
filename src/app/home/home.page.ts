@@ -129,6 +129,7 @@ export class HomePage implements OnInit, AfterViewInit {
                     next: progetto => {
                         if (progetto && progetto.length) {
                             this.progettoSelezionato = progetto[0];
+                            this.progettoSelezionato.hasReports = this.progettoSelezionato.monithonReports.length>0;
                             this.visualizzaDettaglio = true;
                         } else {
                             this.visualizzaDettaglio = false;
