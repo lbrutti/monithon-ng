@@ -181,9 +181,12 @@ export class HomePage implements OnInit, AfterViewInit {
     private renderAnnoChart(crossFilterData: any, listaProgetti: any) {
         this.annoChart = new dc.BarChart((this.annoChartContainer as any).nativeElement);
         // let chartHeight = (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
-        let chartHeight = 72 ||(this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
+        let chartHeight = 72 || (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
 
-        let annoDim = crossFilterData.dimension((d) => moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year()
+        let annoDim = crossFilterData.dimension((d) => {
+            let anno = moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year();
+            return anno < 2014 ? 2013 : anno;
+        }
         ),
             progettiPerAnno = annoDim.group().reduceCount(),
             all = crossFilterData.groupAll();
@@ -200,14 +203,15 @@ export class HomePage implements OnInit, AfterViewInit {
             .xUnits(dc.units.integers)
             .elasticX(true)
             .elasticY(true)
-            .margins({ top: 0, right: 0, bottom: 20, left: 0 });
+            .margins({ top: 10, right: 20, bottom: 20, left: 20 });
         this.annoChart
             .xAxis()
-            .tickFormat((anno) => `${parseInt(anno)}`);
+            .tickFormat(anno => anno <= 2013 ? `...${parseInt(anno)}` : anno);
 
         this.annoChart.height(chartHeight);
 
         this.annoChart.on('pretransition', function (chart) {
+            chart.selectAll('g.axis.y').remove();
             let brushBegin = [], brushEnd = []; // 1
             if (chart.filter()) {
                 brushBegin = [chart.filter()[0]]; // 2
@@ -228,7 +232,9 @@ export class HomePage implements OnInit, AfterViewInit {
                 .merge(beginLabel); // 8
             beginLabel
                 .attr('x', d => chart.x()(d))
-                .text(d => d.toFixed(2)); // 9
+                .text(d => parseInt(d+1)); // 9
+
+                
             let endLabel = chart.select('g.brush')
                 .selectAll('text.brush-end')
                 .data(brushEnd);
@@ -244,7 +250,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 .merge(endLabel);
             endLabel
                 .attr('x', d => chart.x()(d))
-                .text(d => d.toFixed(2));
+                .text(d => parseInt(d));
         })
         this.annoChart.on("filtered", (chart) => {
             this.progetti = annoDim.top(Infinity);
@@ -298,7 +304,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .x(d3.scaleLinear().domain([0, numQuantili]))
             .elasticY(true)
             .elasticX(true)
-            .margins({ top: 0, right: 0, bottom: 20, left: 0 })
+            .margins({ top: 10, right: 20, bottom: 20, left: 20 })
             .xAxis()
             .tickFormat((v: any) => `${binThresholds[v] / 1000} K`)
 
@@ -327,6 +333,7 @@ export class HomePage implements OnInit, AfterViewInit {
         });
 
         this.budgetChart.on('pretransition', function (chart) {
+            chart.selectAll('g.axis.y').remove();
             let brushBegin = [], brushEnd = []; // 1
             if (chart.filter()) {
                 brushBegin = [chart.filter()[0]]; // 2
@@ -345,9 +352,12 @@ export class HomePage implements OnInit, AfterViewInit {
                 .attr('y', chart.margins().top)
                 .attr('dy', 4)
                 .merge(beginLabel); // 8
+                
             beginLabel
                 .attr('x', d => chart.x()(d))
-                .text(d => d.toFixed(2)); // 9
+                .text(d => binThresholds[parseInt(d)+1] ); // 9
+
+
             let endLabel = chart.select('g.brush')
                 .selectAll('text.brush-end')
                 .data(brushEnd);
@@ -363,7 +373,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 .merge(endLabel);
             endLabel
                 .attr('x', d => chart.x()(d))
-                .text(d => d.toFixed(2));
+                .text(d => binThresholds[parseInt(d)]); // 9
         });
         return crossFilterData;
     }
