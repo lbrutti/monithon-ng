@@ -352,7 +352,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 .attr('y', chart.margins().top)
                 .attr('dy', 4)
                 .merge(beginLabel); // 8
-                
+
             beginLabel
                 .attr('x', d => chart.x()(d))
                 .text(d => binThresholds[parseInt(d)+1] ); // 9
@@ -433,11 +433,9 @@ export class HomePage implements OnInit, AfterViewInit {
     /**
      * onProgettoClick
      */
-    public onProgettoClick(evt, progetto) {
-        console.dir(evt);
-        console.dir(progetto);
-
-        console.log('onProgettoClick');
+    public onProgettoClick(progetto:Progetto) {
+        this.monithonMap.highlightById([progetto.codLocaleProgetto]);
+        this.showDettaglioProgetto(progetto);
 
     }
 
