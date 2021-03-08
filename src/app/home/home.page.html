@@ -19,21 +19,46 @@
         <!-- dettaglio progetto -->
         <div [ngClass]="{'hidden': !this.visualizzaDettaglio, 'visible': this.visualizzaDettaglio}" #schedaProgetto
             [attr.data-oc-cod-tema-sintetico]="this.progettoSelezionato.ocCodTemaSintetico"
-            class="monithon-scheda-progetto">
+            class="monithon-dettaglio-progetto">
 
             <h5>{{'schedaProgetto' | transloco}}</h5>
             <div #dettagliProgetto>
                 <ion-grid>
                     <ion-row>
-                        <ion-col col-6>
+                        <ion-col col-6 class="monithon-dettaglio-progetto__titolo">
                             <h4>{{progettoSelezionato.ocTitoloProgetto}}</h4>
                             <hr />
-                            <div #sintesiProgetto>
+                            <div #sintesiProgetto class="monithon-dettaglio-progetto__sinstesi">
                                 <span>{{progettoSelezionato.ocSintesiProgetto}}</span>
                             </div>
                         </ion-col>
-                        <ion-col col-6>
-                            <ion-label>{{progettoSelezionato.ocDataInizioProgetto}}</ion-label>
+                        <ion-col col-6 class="monithon-dettaglio-progetto__dettagli">
+                            <div class="monithon-dettaglio-progetto__data_inizio">
+                                <ion-label>{{'dataInizio' | transloco}}</ion-label>
+                                <ion-label>{{progettoSelezionato.ocDataInizioProgetto}}</ion-label>
+                            </div>
+
+                            <div class="monithon-dettaglio-progetto__categoria">
+                                <ion-label>{{'categoria' | transloco}}</ion-label>
+                                <ion-label>{{'categorie.'+progettoSelezionato.ocCodCategoriaSpesa | transloco}}
+                                </ion-label>
+                            </div>
+
+                            <div class="monithon-dettaglio-progetto__tema">
+                                <ion-label>{{'tema' | transloco}}</ion-label>
+                                <ion-label>{{'temi.'+progettoSelezionato.ocCodTemaSintetico | transloco}}
+                                </ion-label>
+                            </div>
+
+                            <div class="monithon-dettaglio-progetto__finanziamento">
+                                <ion-label>{{'finanziamento' | transloco}}</ion-label>
+                                <div id="finanziamentoPubblicoChartContainer"></div>
+                            </div>
+
+                            <div class="monithon-dettaglio-progetto__pagamenti">
+                                <ion-label>{{'pagamenti' | transloco}}</ion-label>
+                                <div id="pagamentiChartContainer"></div>
+                            </div>
 
                             <div id="flagProgetto">
                                 <ion-grid>
@@ -61,8 +86,7 @@
                                                     selectable="false" *ngFor="let flag of this.reportFlags"
                                                     [matTooltip]="'tooltip.reportFlags.'+flag.hasReport | transloco"
                                                     [selected]="progettoSelezionato.hasReports==flag.hasReport"
-                                                    [attr.data-has-report]="flag.hasReport"
-                                                    disableRipple="true">
+                                                    [attr.data-has-report]="flag.hasReport" disableRipple="true">
                                                     {{'reportFlags.'+flag.hasReport | transloco}}
                                                 </mat-chip>
                                             </mat-chip-list>

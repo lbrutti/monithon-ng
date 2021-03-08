@@ -69,7 +69,15 @@
     height: 32px;
 }
 
-::ng-deep .mat-standard-chip{
+::ng-deep .mat-chip.mat-standard-chip::after {
+    background: transparent;
+}
+
+::ng-deep .mat-chip.mat-standard-chip:active {
+    box-shadow: none;
+}
+
+::ng-deep .mat-standard-chip {
     padding: 3px 6px !important;
     min-height: 28px !important;
     text-overflow: ellipsis;
@@ -88,6 +96,7 @@
 #chartPanel {
     align-self: flex-end;
     max-height: 50vh;
+
     .mat-expansion-panel-content {
         overflow-y: scroll;
     }
@@ -134,7 +143,7 @@
     padding: 0;
 }
 
-.monithon-scheda-progetto {
+.monithon-dettaglio-progetto {
     position: absolute;
     bottom: 0;
     width: 66vw;
@@ -145,7 +154,7 @@
     }
 
     &.visible {
-        height: 50vh;
+        height: 60vh;
         left: 0;
         z-index: 1001;
 
