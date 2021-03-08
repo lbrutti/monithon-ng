@@ -112,6 +112,7 @@
                                                         <mat-chip
                                                             [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
                                                             selectable="true"
+                                                            [matTooltip]="'tooltip.statiAvanzamento.'+stato.ocCodStatoProgetto | transloco" 
                                                             *ngFor="let stato of this.statiAvanzamento"
                                                             [selected]="stato.isSelected"
                                                             (click)="this.filterByStato(stato)"
@@ -127,6 +128,7 @@
                                                         multiple="true" aria-orientation="horizontal">
                                                         <mat-chip [ngClass]="{'monithon-filtro-report': true}"
                                                             selectable="true" *ngFor="let flag of this.reportFlags"
+                                                            [matTooltip]="'tooltip.reportFlags.'+flag.hasReport | transloco" 
                                                             [selected]="flag.isSelected"
                                                             (click)="this.filterByReportFlag(flag)"
                                                             [attr.data-has-report]="flag.hasReport"

@@ -59,5 +59,18 @@
     "distanza": "Distanza",
     "categoria": "Categoria",
     "budget": "Budget",
-    "anno": "Anno"
+    "anno": "Anno",
+    "tooltip": {
+        "statiAvanzamento": {
+            "0": "Mollit officia reprehenderit voluptate et ex consequat. Minim voluptate adipisicing non occaecat aliqua. In officia magna reprehenderit officia ullamco qui non proident fugiat irure. Cupidatat id incididunt ullamco eiusmod et et quis enim. Deserunt laborum pariatur eu exercitation sunt ad exercitation officia consectetur aliquip aliquip. Aliquip excepteur id voluptate eiusmod cillum laborum est commodo. Enim exercitation cillum cupidatat id fugiat exercitation cillum dolore qui laborum.",
+            "1": "Quis do ea et aliquip fugiat. Excepteur adipisicing adipisicing irure consectetur dolor tempor aute aute. Sit sint non non dolore ut incididunt. Dolor ea consequat magna irure aute ad Lorem nostrud excepteur pariatur duis. Ex et commodo enim non ea incididunt cupidatat qui.",
+            "2": "Dolor adipisicing laboris Lorem nostrud. Ex voluptate excepteur amet occaecat. Ullamco ut labore labore qui occaecat cillum tempor commodo elit exercitation excepteur cillum. Aute elit velit quis adipisicing ullamco. Laborum excepteur cillum ea tempor in sint enim voluptate id sunt. Non excepteur quis elit in amet. Enim Lorem Lorem sunt in nostrud non ut sint eiusmod sint tempor ea Lorem consequat.",
+            "3": "Id magna ex id ad amet consequat esse voluptate. Velit esse id id cupidatat eu velit ipsum excepteur. Aute dolor tempor officia proident nostrud incididunt voluptate elit eiusmod fugiat est incididunt ad ad. Fugiat elit veniam magna quis culpa.",
+            "4": "Aliqua amet veniam nostrud elit nisi esse consectetur eiusmod fugiat commodo. Irure consequat elit voluptate occaecat esse tempor do esse aliquip. Laboris dolor exercitation ad reprehenderit deserunt esse enim culpa elit irure dolor deserunt consectetur nisi. Ea cupidatat ea aliqua excepteur proident pariatur cillum laboris Lorem ullamco duis nisi. Eu dolore aliqua ad pariatur nisi ex enim eiusmod officia aliquip."
+        },
+        "reportFlags": {
+            "false": "Eiusmod culpa exercitation voluptate laborum laborum aliqua deserunt enim occaecat deserunt minim ea incididunt. Irure consectetur velit magna in commodo consequat esse commodo consequat voluptate. Eiusmod dolore anim nisi laborum tempor nisi ipsum mollit velit exercitation aliqua aliquip adipisicing. Nulla dolore voluptate adipisicing exercitation proident dolore minim magna Lorem consequat velit magna. Ut minim occaecat qui eu sint sunt adipisicing ad voluptate minim.",
+            "true": "Sunt incididunt aute proident ea ipsum Lorem aute Lorem cillum laboris ea anim cupidatat culpa. Duis ex laborum elit eu aliqua laborum mollit minim duis do reprehenderit fugiat. Irure quis do laboris sit officia eu aute. Commodo est ut nulla occaecat ipsum pariatur et labore dolor cupidatat. Exercitation dolor Lorem ullamco et. Pariatur in pariatur esse sunt enim in nisi excepteur."
+        }
+    }
 }

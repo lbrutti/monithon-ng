@@ -11,6 +11,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { TranslocoModule } from '@ngneat/transloco';
 
+
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
     imports: [
         CommonModule,
@@ -21,7 +23,8 @@ import { TranslocoModule } from '@ngneat/transloco';
         MatChipsModule,
         MatListModule,
         TranslocoModule,
-        ScrollingModule
+        ScrollingModule,
+        MatTooltipModule
         
     ],
     declarations: [HomePage],

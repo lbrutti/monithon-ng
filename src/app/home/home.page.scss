@@ -78,6 +78,13 @@
     word-break: inherit;
 }
 
+::ng-deep .mat-tooltip {
+    /* your own custom styles here */
+    /* e.g. */
+    color: yellow;
+    font-size: small;
+}
+
 #chartPanel {
     align-self: flex-end;
     max-height: 50vh;
