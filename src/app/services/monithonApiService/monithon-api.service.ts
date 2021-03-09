@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import temi from '../../../assets/mock/temi';
 import categorie from '../../../assets/mock/categorie';
-import listaProgettiTotaliCodCategorieFixed from '../../../assets/mock/listaProgetti';
-import dettaglioProgetti from '../../../assets/mock/dettaglioProgetti';
+import listaProgettiTotaliCodCategorieFixed from '../../../assets/mock/listaProgetti_v3';
+import dettaglioProgetti from '../../../assets/mock/dettaglioProgetti_v3';
 import lodash from 'lodash';
 @Injectable({
     providedIn: 'root'
