@@ -184,6 +184,13 @@
         display: block;
     }
 
+    svg{
+        &.monithon-finanziamenti-chart,
+        &.monithon-pagamenti-chart {
+            height: 36px;
+        }
+    }
+
 }
 
 .mat-chip.monithon-tema,

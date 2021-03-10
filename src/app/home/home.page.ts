@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Observable, Observer } from 'rxjs';
 import { Progetto } from '../model/progetto/progetto';
 import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
-import { MonithonMockedService } from '../services/monithonMockService/monithon-mocked.service';
+// import { MonithonMockedService } from '../services/monithonMockService/monithon-mocked.service';
 
 import { MonithonMapService } from '../services/monithonMapService/monithonmap.service';
 import lodash from 'lodash';
@@ -80,7 +80,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     counterValue: any;
     constructor(
-        private monitonMockedService: MonithonMockedService,
+        // private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
         private monithonMap: MonithonMapService) { }
 
@@ -135,7 +135,6 @@ export class HomePage implements OnInit, AfterViewInit {
                     next: progetto => {
                         if (progetto && progetto.length) {
                             this.progettoSelezionato = progetto[0];
-                            this.progettoSelezionato.hasReports = this.progettoSelezionato.monithonReports.length > 0;
                             this.visualizzaDettaglio = true;
 
                             this.renderDettaglioProgettoCharts();
@@ -161,14 +160,19 @@ export class HomePage implements OnInit, AfterViewInit {
 
     renderFinanziamentoChart() {
         // render chart finanziamento/spesa
+        d3.select('.monithon-finanziamenti-chart').remove();
         this.finanziamentoPubblicoChart = d3.select((this.finanziamentoPubblicoChartContainer as any).nativeElement).append('svg');
         this.finanziamentoPubblicoChart
             .attr('width', null)
-            .attr('height', null);
+            .attr('height', null)
+            .attr('viewBox', '0 0 300 36')
+            .attr('class', 'monithon-finanziamenti-chart');
+
         let chartG = this.finanziamentoPubblicoChart.append('g');
+
         chartG.append('rect')
             .attr('width', '300')
-            .attr('height', '100')
+            .attr('height', '36')
             .attr('fill', 'grey');
         chartG.selectAll('text.finanziamento').remove();
         chartG.selectAll('text.finanziamento')
@@ -177,31 +181,34 @@ export class HomePage implements OnInit, AfterViewInit {
             .append('text')
             .attr('class', 'finanziamento')
             .attr('x', '300')
-            .attr('y', '100')
+            .attr('y', '36')
             .attr('text-anchor', 'end')
             .text(d => d.ocFinanzTotPubNetto)
     }
     renderPagamentiChart() {
         //TODO: aggiungere scala rispetto al finanziato
+        d3.select('.monithon-pagamenti-chart').remove();
         this.pagamentiChart = d3.select((this.pagamentiChartContainer as any).nativeElement).append('svg');
         this.pagamentiChart
             .attr('width', null)
-            .attr('height', null);
+            .attr('height', null)
+            .attr('viewBox', '0 0 300 36')
+            .attr('class','monithon-pagamenti-chart');
+
         let chartG = this.pagamentiChart.append('g');
         chartG.append('rect')
             .attr('width', '300')
-            .attr('height', '100')
+            .attr('height', '36')
             .attr('fill', 'grey');
-        chartG.selectAll('text.pagamenti').remove();
         chartG.selectAll('text.pagamenti')
             .data([this.progettoSelezionato])
             .enter()
             .append('text')
             .attr('class', 'pagamenti')
             .attr('x', '300')
-            .attr('y', '100')
+            .attr('y', '36')
             .attr('text-anchor', 'end')
-            .text(d => d.ocFinanzTotPubNetto);
+            .text(d => lodash.isNil(d.totPagamenti) ? 0 : d.totPagamenti);
     }
 
 
@@ -265,7 +272,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .margins({ top: 10, right: 20, bottom: 20, left: 20 });
         this.annoChart
             .xAxis()
-            .tickFormat(anno => anno <= 2013 ? `...${parseInt(anno)}` : anno);
+            .tickFormat(anno => anno <= 2013 ? `...${parseInt(anno)}` : parseInt(anno));
 
         this.annoChart.height(chartHeight);
 
