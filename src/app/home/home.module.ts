@@ -13,6 +13,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 
 
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MomentdateModule } from '../momentdate.pipe.module';
 @NgModule({
     imports: [
         CommonModule,
@@ -24,7 +25,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatListModule,
         TranslocoModule,
         ScrollingModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MomentdateModule
         
     ],
     declarations: [HomePage],

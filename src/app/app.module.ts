@@ -12,17 +12,19 @@ import { MonithonMockedService } from './services/monithonMockService/monithon-m
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslocoRootModule } from './transloco/transloco-root.module';
+import { MomentdateModule } from './momentdate.pipe.module';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, BrowserAnimationsModule, TranslocoRootModule],
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, BrowserAnimationsModule, TranslocoRootModule, MomentdateModule],
     providers: [
         StatusBar,
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         MonithonMockedService
     ],
+    exports: [ MomentdateModule],
     bootstrap: [AppComponent],
     schemas:  [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -46,7 +46,7 @@
                             <div class="monithon-dettaglio-progetto__data_inizio">
                                 <ion-label class="monithon-dettaglio-progetto__label">{{'dataInizio' | transloco}}
                                 </ion-label>
-                                <ion-label>{{progettoSelezionato.ocDataInizioProgetto}}</ion-label>
+                                <ion-label>{{progettoSelezionato.ocDataInizioProgetto | momentdate | date}}</ion-label>
                             </div>
 
                             <div class="monithon-dettaglio-progetto__categoria">
