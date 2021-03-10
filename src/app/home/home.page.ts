@@ -3,13 +3,11 @@ import moment from 'moment';
 import { Observable, Observer } from 'rxjs';
 import { Progetto } from '../model/progetto/progetto';
 import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
-// import { MonithonMockedService } from '../services/monithonMockService/monithon-mocked.service';
 
 import { MonithonMapService } from '../services/monithonMapService/monithonmap.service';
 import lodash from 'lodash';
 
 import * as d3 from 'd3';
-import { COLOR_MAP } from '../utils/colorMap';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -168,8 +166,8 @@ export class HomePage implements OnInit, AfterViewInit {
             .attr('height', null)
             .attr('viewBox', '0 0 300 36')
             .attr('class', 'monithon-finanziamenti-chart');
-            
-            let chartG = this.finanziamentoPubblicoChart.append('g');
+
+        let chartG = this.finanziamentoPubblicoChart.append('g');
 
         chartG.append('rect')
             .attr('width', '300')
@@ -185,12 +183,13 @@ export class HomePage implements OnInit, AfterViewInit {
             .attr('x', '300')
             .attr('y', '36')
             .attr('text-anchor', 'end')
+            .attr('dy', '-3')
             .text(d => d.ocFinanzTotPubNetto)
             .attr('data-oc-cod-tema-sintetico', d => d.ocCodTemaSintetico)
-        }
+    }
+
     renderPagamentiChart() {
-        //TODO: aggiungere scala rispetto al finanziato
-        let scale = d3.scaleLinear([0,300]);
+        let scale = d3.scaleLinear([0, 300]);
         scale.domain([0, this.progettoSelezionato.ocFinanzTotPubNetto]);
         d3.select('.monithon-pagamenti-chart').remove();
         this.pagamentiChart = d3.select((this.pagamentiChartContainer as any).nativeElement).append('svg');
@@ -198,7 +197,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .attr('width', null)
             .attr('height', null)
             .attr('viewBox', '0 0 300 36')
-            .attr('class','monithon-pagamenti-chart');
+            .attr('class', 'monithon-pagamenti-chart');
 
         let chartG = this.pagamentiChart.append('g');
         chartG.append('rect')
@@ -208,7 +207,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .attr('fill', 'grey');
         chartG.append('rect')
             .data([this.progettoSelezionato])
-            .attr('width', d=>scale(d.totPagamenti))
+            .attr('width', d => scale(d.totPagamenti))
             .attr('height', '36')
             .attr('fill', 'black');
         chartG.selectAll('text.pagamenti')
@@ -216,13 +215,14 @@ export class HomePage implements OnInit, AfterViewInit {
             .enter()
             .append('text')
             .attr('class', 'pagamenti')
-            .attr('data-oc-cod-tema-sintetico', d=>d.ocCodTemaSintetico)
+            .attr('data-oc-cod-tema-sintetico', d => d.ocCodTemaSintetico)
             .attr('x', d => scale(d.totPagamenti))
             .attr('y', '36')
             .attr('text-anchor', d => {
                 let position = scale(d.totPagamenti);
-                return position < 80 ? 'start': 'end'; 
+                return position < 80 ? 'start' : 'end';
             })
+            .attr('dy', '-3')
             .text(d => lodash.isNil(d.totPagamenti) ? 0 : d.totPagamenti);
     }
 
@@ -269,8 +269,7 @@ export class HomePage implements OnInit, AfterViewInit {
             return anno < 2014 ? 2013 : anno;
         }
         ),
-            progettiPerAnno = annoDim.group().reduceCount(),
-            all = crossFilterData.groupAll();
+            progettiPerAnno = annoDim.group().reduceCount();
 
         let annoRange = d3.extent(listaProgetti, (d: any) => moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year()
         );
