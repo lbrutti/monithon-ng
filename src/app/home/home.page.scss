@@ -1,7 +1,3 @@
-// ion-content{
-//     overflow-y: hidden;
-//     height: 100vh;
-// }
 
 #container {
     text-align: center;
@@ -89,13 +85,11 @@
 ::ng-deep .mat-tooltip {
     /* your own custom styles here */
     /* e.g. */
-    color: yellow;
     font-size: small;
 }
 
 #chartPanel {
     align-self: flex-end;
-    // max-height: 50vh;
 
     .mat-expansion-panel-content {
         overflow-y: scroll;
@@ -170,28 +164,42 @@
             background-color: var(--monithon-tema-attrazione-background);
         }
 
-    }
-    text-align: left;
-    color:var(--monithon-font-color);
-    .monithon-dettaglio-progetto__titolo_container{
-        width: 50%;
-        border-bottom: 1px ;
+        
+
     }
 
-    .monithon-dettaglio-progetto__label{
+    text-align: left;
+    color:var(--monithon-font-color);
+
+    .monithon-dettaglio-progetto__titolo_container {
+        width: 50%;
+        border-bottom: 1px;
+    }
+
+    .monithon-dettaglio-progetto__sintesi {
+        height: 50%;
+        overflow-y: scroll;
+        scrollbar-width: none;
+    }
+
+    .monithon-dettaglio-progetto__label {
         color: var(--monithon-label-color);
         text-transform: uppercase;
         display: block;
     }
 
-    svg{
-        &.monithon-finanziamenti-chart,
-        &.monithon-pagamenti-chart {
-            height: 36px;
-        }
-    }
 
+    &.monithon-finanziamenti-chart,
+    &.monithon-pagamenti-chart {
+        height: 36px;
+    }
+    
+    
 }
+
+
+
+
 
 .mat-chip.monithon-tema,
 .mat-chip.monithon-categoria,
@@ -368,7 +376,8 @@ ion-row.monithon-filtri-secondari {
         scrollbar-width: none;
         height: 55vh;
     }
-    .monithon-lista-progetti__progetto{
+
+    .monithon-lista-progetti__progetto {
         height: auto !important;
     }
 }

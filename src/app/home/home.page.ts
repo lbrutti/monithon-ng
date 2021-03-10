@@ -9,6 +9,7 @@ import { MonithonMapService } from '../services/monithonMapService/monithonmap.s
 import lodash from 'lodash';
 
 import * as d3 from 'd3';
+import { COLOR_MAP } from '../utils/colorMap';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -167,14 +168,15 @@ export class HomePage implements OnInit, AfterViewInit {
             .attr('height', null)
             .attr('viewBox', '0 0 300 36')
             .attr('class', 'monithon-finanziamenti-chart');
-
-        let chartG = this.finanziamentoPubblicoChart.append('g');
+            
+            let chartG = this.finanziamentoPubblicoChart.append('g');
 
         chartG.append('rect')
             .attr('width', '300')
             .attr('height', '36')
             .attr('fill', 'grey');
         chartG.selectAll('text.finanziamento').remove();
+
         chartG.selectAll('text.finanziamento')
             .data([this.progettoSelezionato])
             .enter()
@@ -184,9 +186,12 @@ export class HomePage implements OnInit, AfterViewInit {
             .attr('y', '36')
             .attr('text-anchor', 'end')
             .text(d => d.ocFinanzTotPubNetto)
-    }
+            .attr('data-oc-cod-tema-sintetico', d => d.ocCodTemaSintetico)
+        }
     renderPagamentiChart() {
         //TODO: aggiungere scala rispetto al finanziato
+        let scale = d3.scaleLinear([0,300]);
+        scale.domain([0, this.progettoSelezionato.ocFinanzTotPubNetto]);
         d3.select('.monithon-pagamenti-chart').remove();
         this.pagamentiChart = d3.select((this.pagamentiChartContainer as any).nativeElement).append('svg');
         this.pagamentiChart
@@ -197,17 +202,27 @@ export class HomePage implements OnInit, AfterViewInit {
 
         let chartG = this.pagamentiChart.append('g');
         chartG.append('rect')
+            .data([this.progettoSelezionato])
             .attr('width', '300')
             .attr('height', '36')
             .attr('fill', 'grey');
+        chartG.append('rect')
+            .data([this.progettoSelezionato])
+            .attr('width', d=>scale(d.totPagamenti))
+            .attr('height', '36')
+            .attr('fill', 'black');
         chartG.selectAll('text.pagamenti')
             .data([this.progettoSelezionato])
             .enter()
             .append('text')
             .attr('class', 'pagamenti')
-            .attr('x', '300')
+            .attr('data-oc-cod-tema-sintetico', d=>d.ocCodTemaSintetico)
+            .attr('x', d => scale(d.totPagamenti))
             .attr('y', '36')
-            .attr('text-anchor', 'end')
+            .attr('text-anchor', d => {
+                let position = scale(d.totPagamenti);
+                return position < 80 ? 'start': 'end'; 
+            })
             .text(d => lodash.isNil(d.totPagamenti) ? 0 : d.totPagamenti);
     }
 
