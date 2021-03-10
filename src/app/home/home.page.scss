@@ -48,7 +48,7 @@
 #filterContainer {
     margin-top: auto;
     width: 66vw;
-    max-height: 60vh;
+    max-height: 66vh;
 }
 
 #resultContainer {
@@ -95,7 +95,7 @@
 
 #chartPanel {
     align-self: flex-end;
-    max-height: 50vh;
+    // max-height: 50vh;
 
     .mat-expansion-panel-content {
         overflow-y: scroll;
@@ -275,7 +275,7 @@ ion-row.monithon-filtri-secondari {
 }
 
 .mat-chip-list.monithon-categorie {
-    height: 50vh;
+    max-height: 60vh;
     display: inline-block;
     overflow-x: hidden;
     scrollbar-width: none;
@@ -366,7 +366,10 @@ ion-row.monithon-filtri-secondari {
         }
 
         scrollbar-width: none;
-        height: 40vh;
+        height: 55vh;
+    }
+    .monithon-lista-progetti__progetto{
+        height: auto !important;
     }
 }
 

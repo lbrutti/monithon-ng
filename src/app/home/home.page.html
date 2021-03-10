@@ -102,7 +102,7 @@
                                                 <mat-chip [ngClass]="{'monithon-filtro-report': true}"
                                                     selectable="false" *ngFor="let flag of this.reportFlags"
                                                     [matTooltip]="'tooltip.reportFlags.'+flag.hasReport | transloco"
-                                                    [selected]="progettoSelezionato.hasReports==flag.hasReport"
+                                                    [selected]="progettoSelezionato.hasReport==flag.hasReport"
                                                     [attr.data-has-report]="flag.hasReport" disableRipple="true">
                                                     {{'reportFlags.'+flag.hasReport | transloco}}
                                                 </mat-chip>
@@ -269,7 +269,7 @@
                 <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
                     class="monithon-lista-progetti">
                     <ion-item *cdkVirtualFor="let progetto of risultatiRicerca;
-                        let index = index;" (click)="onProgettoClick(progetto)">
+                        let index = index;" (click)="onProgettoClick(progetto)" class="monithon-lista-progetti__progetto">
                         <ion-label class="monithon-lista-risultato"
                             [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
                             <h2>{{progetto.ocTitoloProgetto}}</h2>

@@ -12,6 +12,5 @@ export class Progetto {
     long: number ;
     hasReport: boolean = false;
     isSelected: boolean = false;
-    hasReports: any = false;
     ocCodStatoProgetto?: any;
 }
