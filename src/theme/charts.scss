@@ -1,0 +1,21 @@
+@import 'variables.scss';
+
+.monithon-dettaglio-progetto {
+
+    .monithon-finanziamenti-chart,
+    .monithon-pagamenti-chart {
+        height: 36px;
+
+        text[data-oc-cod-tema-sintetico="4"] {
+            fill: var(--monithon-tema-energia-background);
+        }
+
+        text[data-oc-cod-tema-sintetico="5"] {
+            fill: var(--monithon-tema-ambiente-background);
+        }
+
+        text[data-oc-cod-tema-sintetico="6"] {
+            fill: var(--monithon-tema-attrazione-background);
+        }
+    }
+}
