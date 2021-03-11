@@ -1,4 +1,3 @@
-
 #container {
     text-align: center;
     position: absolute;
@@ -72,7 +71,9 @@
 ::ng-deep .mat-chip.mat-standard-chip:active {
     box-shadow: none;
 }
-
+::ng-deep .mat-chip-selected{
+    font-weight: unset;
+}
 ::ng-deep .mat-standard-chip {
     padding: 3px 6px !important;
     min-height: 28px !important;
@@ -164,12 +165,42 @@
             background-color: var(--monithon-tema-attrazione-background);
         }
 
-        
+
 
     }
 
     text-align: left;
     color:var(--monithon-font-color);
+
+    .mat-chip.monithon-dettaglio-progetto__stato-avanzamento,
+    .mat-chip.monithon-dettaglio-progetto__has-report {
+        background-color: transparent;
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--monithon-font-color);
+        text-align: center;
+        display: inline-block;
+        opacity: 0.3;
+        &.mat-chip-selected{
+            background-color: var(--monithon-label-color);
+            color:var(--monithon-font-color);
+            border: 0;
+            opacity: 1;
+        }
+    }
+
+    .mat-chip.monithon-dettaglio-progetto__stato-avanzamento {
+        width: 33%;
+    }
+
+    .mat-chip.monithon-dettaglio-progetto__has-report {
+        width: 100%;
+    }
+
+    .monithon-dettaglio-progetto__dettagli {
+        display: flex;
+        flex-direction: column;
+    }
 
     .monithon-dettaglio-progetto__titolo_container {
         border-bottom: 1px;
@@ -192,8 +223,8 @@
     &.monithon-pagamenti-chart {
         height: 36px;
     }
-    
-    
+
+
 }
 
 
@@ -236,9 +267,9 @@
 
 
     &.mat-chip-selected {
-        &[data-oc-cod-tema-sintetico] {
-            color: var(--monithon-tema-color) !important;
-        }
+        // &[data-oc-cod-tema-sintetico] {
+        color: var(--monithon-tema-color) !important;
+        // }
 
         &[data-oc-cod-tema-sintetico="4"] {
             background-color: var(--monithon-tema-energia-background);

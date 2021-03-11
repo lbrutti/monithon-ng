@@ -44,8 +44,7 @@
                             <div class="monithon-dettaglio-progetto__data_inizio">
                                 <ion-label class="monithon-dettaglio-progetto__label">{{'dataInizio' | transloco}}
                                 </ion-label>
-                                <ion-label>{{progettoSelezionato.ocDataInizioProgetto | momentdate:'YYYYMMDD' | date:'d
-                                    MMMM y':'+0100': 'it'}}</ion-label>
+                                <ion-label>{{progettoSelezionato.ocDataInizioProgetto | momentdate:'YYYYMMDD' | date:'d MMMM y':'+0100': 'it'}}</ion-label>
                             </div>
                         
                             <div class="monithon-dettaglio-progetto__categoria">
@@ -79,9 +78,9 @@
                                         <ion-col size="8" class="ion-no-margin ">
                                             <ion-label class="chart-title monithon-dettaglio-progetto__label">
                                                 {{'statoAvanzamento' |transloco}}</ion-label>
-                                            <mat-chip-list [ngClass]="{'monithon-filtro-stato-avanzamento': true}" multiple="true"
+                                            <mat-chip-list class="monithon-dettaglio-progetto__stato-avanzamento" multiple="true"
                                                 aria-orientation="horizontal">
-                                                <mat-chip [ngClass]="{'monithon-filtro-stato-avanzamento': true}" selectable="false"
+                                                <mat-chip class="monithon-dettaglio-progetto__stato-avanzamento" selectable="false"
                                                     *ngFor="let stato of this.statiAvanzamento"
                                                     [selected]="progettoSelezionato.ocCodStatoProgetto==stato.ocCodStatoProgetto"
                                                     [attr.data-oc-cod-stato-progetto]="stato.ocCodStatoProgetto" disableRipple="true">
@@ -93,9 +92,9 @@
                                             <ion-label class="chart-title monithon-dettaglio-progetto__label"
                                                 monithon-dettaglio-progetto__label>{{'monitorati' |transloco}}
                                             </ion-label>
-                                            <mat-chip-list [ngClass]="{'monithon-filtro-report': true}" multiple="false"
+                                            <mat-chip-list class="monithon-dettaglio-progetto__has-report" multiple="false"
                                                 aria-orientation="horizontal">
-                                                <mat-chip [ngClass]="{'monithon-filtro-report': true}" selectable="false"
+                                                <mat-chip class="monithon-dettaglio-progetto__has-report" selectable="false"
                                                     *ngFor="let flag of this.reportFlags"
                                                     [selected]="progettoSelezionato.hasReport==flag.hasReport"
                                                     [attr.data-has-report]="flag.hasReport" disableRipple="true">
