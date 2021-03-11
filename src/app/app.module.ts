@@ -12,14 +12,23 @@ import { MonithonMockedService } from './services/monithonMockService/monithon-m
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslocoRootModule } from './transloco/transloco-root.module';
-import { MomentdateModule } from './momentdate.pipe.module';
+import { MomentdateModule } from './pipes/momentdate/momentdate.pipe.module';
 import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
+import { CapitalizePipeModule } from './pipes/capitalize/capitalize.pipe.module';
 registerLocaleData(localeIt);
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, BrowserAnimationsModule, TranslocoRootModule, MomentdateModule],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        TranslocoRootModule,
+        MomentdateModule,
+        CapitalizePipeModule],
     providers: [
         StatusBar,
         SplashScreen,
@@ -28,7 +37,7 @@ registerLocaleData(localeIt);
         { provide: LOCALE_ID, useValue: "it" },
         CurrencyPipe,
     ],
-    exports: [MomentdateModule],
+    exports: [MomentdateModule, CapitalizePipeModule],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

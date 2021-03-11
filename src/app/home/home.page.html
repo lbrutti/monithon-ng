@@ -84,7 +84,6 @@
                                                 multiple="true" aria-orientation="horizontal">
                                                 <mat-chip [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
                                                     selectable="false"
-                                                    [matTooltip]="'tooltip.statiAvanzamento.'+stato.ocCodStatoProgetto | transloco"
                                                     *ngFor="let stato of this.statiAvanzamento"
                                                     [selected]="progettoSelezionato.ocCodStatoProgetto==stato.ocCodStatoProgetto"
                                                     [attr.data-oc-cod-stato-progetto]="stato.ocCodStatoProgetto"
@@ -101,7 +100,6 @@
                                                 aria-orientation="horizontal">
                                                 <mat-chip [ngClass]="{'monithon-filtro-report': true}"
                                                     selectable="false" *ngFor="let flag of this.reportFlags"
-                                                    [matTooltip]="'tooltip.reportFlags.'+flag.hasReport | transloco"
                                                     [selected]="progettoSelezionato.hasReport==flag.hasReport"
                                                     [attr.data-has-report]="flag.hasReport" disableRipple="true">
                                                     {{'reportFlags.'+flag.hasReport | transloco}}
@@ -235,7 +233,7 @@
                     <ion-grid>
                         <ion-row>
                             <ion-col>
-                                <h1 class="monithon-contatore-risultati" #resultCounter>{{this.risultatiRicerca.length}}
+                                <h1 class="monithon-contatore-risultati" #resultCounter>{{this.risultatiRicerca.length | number}}
                                 </h1>
                             </ion-col>
                             <ion-col><span>{{'comune'|transloco}}</span>; <span>{{'distanza'|transloco}}</span>

@@ -314,6 +314,7 @@ ion-row.monithon-filtri-secondari {
     color: #EA4A3E;
     font-size: 80px;
     font-weight: bolder;
+    text-align: left;
 }
 
 .monithon-lista-risultato {
@@ -388,10 +389,10 @@ ion-row.monithon-filtri-secondari {
 
 .geocoder {
     position: absolute;
-    z-index: 1;
+    z-index: 100;
     width: 50%;
-    left: 50%;
-    margin-left: -25%;
+    left: 5%;
+    //margin-left: -25%;
     top: 10px;
 }
 
@@ -400,6 +401,6 @@ ion-row.monithon-filtri-secondari {
 }
 
 monithon-drawer {
-    z-index: 1999;
+    z-index: 90;
     position: absolute;
 }
