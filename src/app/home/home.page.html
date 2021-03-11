@@ -32,16 +32,12 @@
                                     capitalize}}
                                 </h4>
                             </div>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-6 class="monithon-dettaglio-progetto__sintesi_container">
                             <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
                                 <span>{{progettoSelezionato.ocSintesiProgetto | capitalize}}</span>
                             </div>
                             <div>
-                                <button class="monithon-dettaglio-progetto__inizia_monitoraggio" mat-button
-                                    color="primary">{{'iniziaMonitoraggio' | transloco}}</button>
+                                <button class="monithon-dettaglio-progetto__inizia_monitoraggio" mat-button color="primary">{{'iniziaMonitoraggio' |
+                                    transloco}}</button>
                             </div>
                         </ion-col>
                         <ion-col col-6 class="monithon-dettaglio-progetto__dettagli">
@@ -51,45 +47,44 @@
                                 <ion-label>{{progettoSelezionato.ocDataInizioProgetto | momentdate:'YYYYMMDD' | date:'d
                                     MMMM y':'+0100': 'it'}}</ion-label>
                             </div>
-
+                        
                             <div class="monithon-dettaglio-progetto__categoria">
                                 <ion-label class="monithon-dettaglio-progetto__label">{{'categoria' | transloco}}
                                 </ion-label>
                                 <ion-label>{{'categorie.'+progettoSelezionato.ocCodCategoriaSpesa | transloco}}
                                 </ion-label>
                             </div>
-
+                        
                             <div class="monithon-dettaglio-progetto__tema">
                                 <ion-label class="monithon-dettaglio-progetto__label">{{'tema' | transloco}}</ion-label>
                                 <ion-label>{{'temi.'+progettoSelezionato.ocCodTemaSintetico | transloco}}
                                 </ion-label>
                             </div>
-
+                        
                             <div class="monithon-dettaglio-progetto__finanziamento">
                                 <ion-label class="monithon-dettaglio-progetto__label">{{'finanziamento' | transloco}}
                                 </ion-label>
                                 <div #finanziamentoPubblicoChartContainer></div>
                             </div>
-
+                        
                             <div class="monithon-dettaglio-progetto__pagamenti">
                                 <ion-label class="monithon-dettaglio-progetto__label">{{'pagamenti' | transloco}}
                                 </ion-label>
                                 <div #pagamentiChartContainer></div>
                             </div>
-
+                        
                             <div id="flagProgetto">
                                 <ion-grid>
                                     <ion-row class="monithon-filtri-secondari ion-no-margin ">
                                         <ion-col size="8" class="ion-no-margin ">
                                             <ion-label class="chart-title monithon-dettaglio-progetto__label">
                                                 {{'statoAvanzamento' |transloco}}</ion-label>
-                                            <mat-chip-list [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
-                                                multiple="true" aria-orientation="horizontal">
-                                                <mat-chip [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
-                                                    selectable="false" *ngFor="let stato of this.statiAvanzamento"
+                                            <mat-chip-list [ngClass]="{'monithon-filtro-stato-avanzamento': true}" multiple="true"
+                                                aria-orientation="horizontal">
+                                                <mat-chip [ngClass]="{'monithon-filtro-stato-avanzamento': true}" selectable="false"
+                                                    *ngFor="let stato of this.statiAvanzamento"
                                                     [selected]="progettoSelezionato.ocCodStatoProgetto==stato.ocCodStatoProgetto"
-                                                    [attr.data-oc-cod-stato-progetto]="stato.ocCodStatoProgetto"
-                                                    disableRipple="true">
+                                                    [attr.data-oc-cod-stato-progetto]="stato.ocCodStatoProgetto" disableRipple="true">
                                                     {{'statiAvanzamento.'+stato.ocCodStatoProgetto | transloco}}
                                                 </mat-chip>
                                             </mat-chip-list>
@@ -100,8 +95,8 @@
                                             </ion-label>
                                             <mat-chip-list [ngClass]="{'monithon-filtro-report': true}" multiple="false"
                                                 aria-orientation="horizontal">
-                                                <mat-chip [ngClass]="{'monithon-filtro-report': true}"
-                                                    selectable="false" *ngFor="let flag of this.reportFlags"
+                                                <mat-chip [ngClass]="{'monithon-filtro-report': true}" selectable="false"
+                                                    *ngFor="let flag of this.reportFlags"
                                                     [selected]="progettoSelezionato.hasReport==flag.hasReport"
                                                     [attr.data-has-report]="flag.hasReport" disableRipple="true">
                                                     {{'reportFlags.'+flag.hasReport | transloco}}
@@ -266,7 +261,6 @@
                     </ion-grid>
                 </div>
                 <!-- lista risultati -->
-                <!-- <ion-list #listaProgetti class="monithon-lista-progetti"> -->
                 <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
                     class="monithon-lista-progetti">
                     <ion-item *cdkVirtualFor="let progetto of risultatiRicerca;" (click)="onProgettoClick(progetto)"
