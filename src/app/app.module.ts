@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -13,7 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslocoRootModule } from './transloco/transloco-root.module';
 import { MomentdateModule } from './momentdate.pipe.module';
-
+import { registerLocaleData } from '@angular/common';
+import localeIt from '@angular/common/locales/it';
+registerLocaleData(localeIt);
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
@@ -22,7 +24,8 @@ import { MomentdateModule } from './momentdate.pipe.module';
         StatusBar,
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        MonithonMockedService
+        MonithonMockedService,
+        { provide: LOCALE_ID, useValue: "it" }
     ],
     exports: [ MomentdateModule],
     bootstrap: [AppComponent],
