@@ -60,7 +60,11 @@ export class MonithonMapService {
             mapboxgl: mapboxgl,
             countries: 'it',
             minLength: 3,
-            language:'it'
+            language:'it',
+            zoom: 3, 
+            filter: function (item) {
+                return item.place_type[0] === 'place';
+            },
             
         };
 
