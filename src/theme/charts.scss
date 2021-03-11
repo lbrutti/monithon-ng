@@ -8,14 +8,33 @@
 
         text[data-oc-cod-tema-sintetico="4"] {
             fill: var(--monithon-tema-energia-background);
+            &[text-anchor="start"]{
+            fill: var(--monithon-finanziamenti-foreground);
+            }
         }
 
         text[data-oc-cod-tema-sintetico="5"] {
             fill: var(--monithon-tema-ambiente-background);
+            &[text-anchor="start"]{
+            fill: var(--monithon-finanziamenti-foreground);
+            }
         }
 
         text[data-oc-cod-tema-sintetico="6"] {
             fill: var(--monithon-tema-attrazione-background);
+            &[text-anchor="start"]{
+            fill: var(--monithon-finanziamenti-foreground);
+            }
         }
+        rect.foreground{
+            fill:var(--monithon-finanziamenti-foreground);
+            opacity: .78;
+        }
+
+        rect.background {
+            fill: var(--monithon-finanziamenti-foreground);
+            opacity: .1;
+        }
+
     }
 }

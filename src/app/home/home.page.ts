@@ -8,6 +8,7 @@ import { MonithonMapService } from '../services/monithonMapService/monithonmap.s
 import lodash from 'lodash';
 
 import * as d3 from 'd3';
+import { CurrencyPipe } from '@angular/common';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -81,7 +82,8 @@ export class HomePage implements OnInit, AfterViewInit {
     constructor(
         // private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
-        private monithonMap: MonithonMapService) { }
+        private monithonMap: MonithonMapService,
+        private currencyPipe: CurrencyPipe) { }
 
     ngOnInit(): void {
         // this.monitonMockedService.mirageJsServer();
@@ -172,6 +174,7 @@ export class HomePage implements OnInit, AfterViewInit {
         chartG.append('rect')
             .attr('width', '300')
             .attr('height', '36')
+            .attr('class','foreground')
             .attr('fill', 'grey');
         chartG.selectAll('text.finanziamento').remove();
 
@@ -184,7 +187,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .attr('y', '36')
             .attr('text-anchor', 'end')
             .attr('dy', '-3')
-            .text(d => d.ocFinanzTotPubNetto)
+            .text(d => this.currencyPipe.transform(d.ocFinanzTotPubNetto, 'EUR'))
             .attr('data-oc-cod-tema-sintetico', d => d.ocCodTemaSintetico)
     }
 
@@ -204,12 +207,14 @@ export class HomePage implements OnInit, AfterViewInit {
             .data([this.progettoSelezionato])
             .attr('width', '300')
             .attr('height', '36')
+            .attr('class','background')
+
             .attr('fill', 'grey');
         chartG.append('rect')
             .data([this.progettoSelezionato])
             .attr('width', d => scale(d.totPagamenti))
             .attr('height', '36')
-            .attr('fill', 'black');
+            .attr('class','foreground');
         chartG.selectAll('text.pagamenti')
             .data([this.progettoSelezionato])
             .enter()
@@ -223,7 +228,10 @@ export class HomePage implements OnInit, AfterViewInit {
                 return position < 80 ? 'start' : 'end';
             })
             .attr('dy', '-3')
-            .text(d => lodash.isNil(d.totPagamenti) ? 0 : d.totPagamenti);
+            .text(d => {
+                let pagamento = lodash.isNil(d.totPagamenti) ? 0 : d.totPagamenti;
+                return this.currencyPipe.transform(pagamento, 'EUR');
+            });
     }
 
 

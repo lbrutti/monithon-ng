@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslocoRootModule } from './transloco/transloco-root.module';
 import { MomentdateModule } from './momentdate.pipe.module';
-import { registerLocaleData } from '@angular/common';
+import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
 registerLocaleData(localeIt);
 @NgModule({
@@ -25,10 +25,11 @@ registerLocaleData(localeIt);
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         MonithonMockedService,
-        { provide: LOCALE_ID, useValue: "it" }
+        { provide: LOCALE_ID, useValue: "it" },
+        CurrencyPipe,
     ],
-    exports: [ MomentdateModule],
+    exports: [MomentdateModule],
     bootstrap: [AppComponent],
-    schemas:  [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
