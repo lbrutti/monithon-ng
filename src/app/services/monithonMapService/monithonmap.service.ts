@@ -65,6 +65,7 @@ export class MonithonMapService {
             filter: function (item) {
                 return item.place_type[0] === 'place';
             },
+            marker:false
             
         };
 
