@@ -55,11 +55,13 @@ export class MonithonMapService {
             attributionControl: false
         });
 
-        let geocoderOptions: any = {
+        let geocoderOptions = {
             accessToken: mapboxgl.accessToken,
             mapboxgl: mapboxgl,
             countries: 'it',
-            minLength: 3
+            minLength: 3,
+            language:'it'
+            
         };
 
         this.geocoder = new MapboxGeocoder(geocoderOptions);
