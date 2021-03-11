@@ -6,8 +6,8 @@ import moment from 'moment';
 })
 export class MomentdatePipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return moment(value, 'YYYYMMDD');
+  transform(value: unknown, inputFormat:string): unknown {
+      return moment(value, inputFormat);
   }
 
 }
