@@ -26,7 +26,7 @@
 
                 <ion-grid>
                     <ion-row>
-                        <ion-col col-6>
+                        <ion-col col-6 class="monithon-dettaglio-progetto__col">
                             <div class="monithon-dettaglio-progetto__titolo_container">
                                 <h4 class="monithon-dettaglio-progetto__titolo">{{progettoSelezionato.ocTitoloProgetto |
                                     capitalize}}
@@ -35,12 +35,9 @@
                             <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
                                 <span>{{progettoSelezionato.ocSintesiProgetto | capitalize}}</span>
                             </div>
-                            <div>
-                                <button class="monithon-dettaglio-progetto__inizia_monitoraggio" mat-button color="primary">{{'iniziaMonitoraggio' |
-                                    transloco}}</button>
-                            </div>
+                           
                         </ion-col>
-                        <ion-col col-6 class="monithon-dettaglio-progetto__dettagli">
+                        <ion-col col-6 class="monithon-dettaglio-progetto__col  monithon-dettaglio-progetto__dettagli">
                             <div class="monithon-dettaglio-progetto__data_inizio">
                                 <ion-label class="monithon-dettaglio-progetto__label">{{'dataInizio' | transloco}}
                                 </ion-label>
@@ -104,6 +101,15 @@
                                         </ion-col>
                                     </ion-row>
                                 </ion-grid>
+                            </div>
+                        </ion-col>
+                        
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
+                                <button class="monithon-dettaglio-progetto__inizia_monitoraggio__button" mat-button
+                                    color="primary">{{'iniziaMonitoraggio' | transloco}}</button>
                             </div>
                         </ion-col>
                     </ion-row>
