@@ -143,48 +143,48 @@
     bottom: 0;
     width: 66vw;
     transition: left 0.5s;
+    z-index: 1001;
+    height: 66vh;
+    text-align: left;
+    color: var(--monithon-font-color);
+
+    &[data-oc-cod-tema-sintetico="4"] {
+        background-color: var(--monithon-tema-energia-background);
+
+        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+            color: var(--monithon-tema-energia-background);
+        }
+    }
+
+    &[data-oc-cod-tema-sintetico="5"] {
+        background-color: var(--monithon-tema-ambiente-background);
+
+        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+            color: var(--monithon-tema-ambiente-background);
+        }
+    }
+
+    &[data-oc-cod-tema-sintetico="6"] {
+        background-color: var(--monithon-tema-attrazione-background);
+
+        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+            color: var(--monithon-tema-attrazione-background);
+        }
+    }
 
     &.hidden {
         left: -100vw;
-        height: 0;
     }
 
     &.visible {
-        // height: 60vh;
-        height: auto;
         left: 0;
-        z-index: 1001;
 
-        &[data-oc-cod-tema-sintetico="4"] {
-            background-color: var(--monithon-tema-energia-background);
 
-            .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-                color: var(--monithon-tema-energia-background);
-            }
-        }
-
-        &[data-oc-cod-tema-sintetico="5"] {
-            background-color: var(--monithon-tema-ambiente-background);
-
-            .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-                color: var(--monithon-tema-ambiente-background);
-            }
-        }
-
-        &[data-oc-cod-tema-sintetico="6"] {
-            background-color: var(--monithon-tema-attrazione-background);
-
-            .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-                color: var(--monithon-tema-attrazione-background);
-            }
-        }
 
 
 
     }
 
-    text-align: left;
-    color:var(--monithon-font-color);
 
     .mat-chip.monithon-dettaglio-progetto__stato-avanzamento,
     .mat-chip.monithon-dettaglio-progetto__has-report {
