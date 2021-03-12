@@ -544,7 +544,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     public iniziaMonitoraggioClicked(progetto:Progetto){
         console.log(progetto);
-        alert("iniziaMonitoraggioClicked: che famo?");
+        window.open("https://it.monithon.eu/user/login?r=1", "_blank");
     }
 
 }
