@@ -33,7 +33,10 @@
                                 </h4>
                             </div>
                             <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
-                                <span>{{progettoSelezionato.ocSintesiProgetto | capitalize}}</span>
+                                {{progettoSelezionato.ocSintesiProgetto | capitalize}}
+                                {{progettoSelezionato.ocSintesiProgetto | capitalize}}
+                                {{progettoSelezionato.ocSintesiProgetto | capitalize}}
+                                {{progettoSelezionato.ocSintesiProgetto | capitalize}}
                             </div>
                            
                         </ion-col>
@@ -108,7 +111,7 @@
                     <ion-row>
                         <ion-col>
                             <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
-                                <button class="monithon-dettaglio-progetto__inizia_monitoraggio__button" mat-button
+                                <button (click)="iniziaMonitoraggioClicked(progettoSelezionato)" class="monithon-dettaglio-progetto__inizia_monitoraggio__button" mat-button
                                     color="primary">{{'iniziaMonitoraggio' | transloco}}</button>
                             </div>
                         </ion-col>
