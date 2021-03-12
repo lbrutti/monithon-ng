@@ -179,7 +179,7 @@
         border-style: solid;
         border-color: var(--monithon-font-color);
         text-align: center;
-        display: inline-block;
+        justify-content: center;
         opacity: 0.3;
         &.mat-chip-selected{
             background-color: var(--monithon-label-color);
@@ -293,14 +293,14 @@
 
 .mat-chip.monithon-filtro-stato-avanzamento {
     width: 33%;
-    text-align: center;
-    display: inline-block;
+            justify-content: center;
+
 }
 
 .mat-chip.monithon-filtro-report {
     width: 100%;
-    text-align: center;
-    display: inline-block;
+           justify-content: center;
+
 }
 
 .mat-expansion-panel {
@@ -314,7 +314,8 @@ ion-row.monithon-filtri-secondari {
 
 .mat-chip-list.monithon-categorie {
     max-height: 60vh;
-    display: inline-block;
+         justify-content: center;
+
     overflow-x: hidden;
     scrollbar-width: none;
     width: 100%;
