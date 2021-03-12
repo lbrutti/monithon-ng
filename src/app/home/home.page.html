@@ -271,7 +271,7 @@
                 <!-- lista risultati -->
                 <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
                     class="monithon-lista-progetti">
-                    <ion-item *cdkVirtualFor="let progetto of risultatiRicerca;" (click)="onProgettoClick(progetto)"
+                    <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;" (click)="onProgettoClick(progetto)"
                         class="monithon-lista-progetti__progetto">
                         <ion-label class="monithon-lista-risultato"
                             [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">

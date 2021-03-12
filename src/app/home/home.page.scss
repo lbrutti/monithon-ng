@@ -48,12 +48,7 @@
     //min-height: 66vh;
 }
 
-#resultContainer {
-    width: 34vw;
-    max-height: 90vh;
-    align-self: flex-end;
-    overflow-y: hidden;
-}
+
 
 
 //https://stackoverflow.com/questions/53195131/angular-material-mat-expansion-panel-body-style-not-being-applied
@@ -451,18 +446,26 @@ ion-row.monithon-filtri-secondari {
 }
 
 #resultContainer {
+    width: 34vw;
+    align-self: flex-end;
+    overflow-y: hidden;
+
+    &.mat-expanded {
+        transition-property: height;
+        // height: 95vh;
+    }
 
     .monithon-lista-progetti {
-        ion-item {
-            height: 100px;
-        }
+
 
         @include hideScrollbar();
-        height: 55vh;
+        height: 60vh;
     }
 
     .monithon-lista-progetti__progetto {
         height: auto !important;
+        color: var(--monithon-font-color);
+
     }
 }
 
