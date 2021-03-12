@@ -542,6 +542,11 @@ export class HomePage implements OnInit, AfterViewInit {
         this.panelOpenState = !this.panelOpenState;
     }
 
+    public iniziaMonitoraggioClicked(progetto:Progetto){
+        console.log(progetto);
+        alert("iniziaMonitoraggioClicked: che famo?");
+    }
+
 }
 
 
