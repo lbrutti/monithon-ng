@@ -314,8 +314,7 @@ ion-row.monithon-filtri-secondari {
 
 .mat-chip-list.monithon-categorie {
     max-height: 60vh;
-         justify-content: center;
-
+    display: inline-block;
     overflow-x: hidden;
     scrollbar-width: none;
     width: 100%;
