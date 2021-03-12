@@ -295,7 +295,6 @@ export class HomePage implements OnInit, AfterViewInit {
             .dimension(annoDim)
             .group(progettiPerAnno)
             .brushOn(true)
-            .controlsUseVisibility(true)
             .x(d3.scaleLinear().domain(annoRange))
             .xUnits(dc.units.integers)
             .elasticX(true)

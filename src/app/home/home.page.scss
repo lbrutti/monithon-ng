@@ -45,7 +45,7 @@
 #filterContainer {
     margin-top: auto;
     width: 66vw;
-    max-height: 66vh;
+    //min-height: 66vh;
 }
 
 #resultContainer {
@@ -112,6 +112,7 @@
 
 #categorieDiSpesaContainer {
     width: 100%;
+    height: 100%;
 }
 
 #budgetChartContainer,
@@ -153,7 +154,7 @@
     }
 
     &.visible {
-       // height: 60vh;
+        // height: 60vh;
         height: auto;
         left: 0;
         z-index: 1001;
@@ -229,6 +230,7 @@
         padding-bottom: 15px;
         border-bottom: 1px solid var(--monithon-font-color);
     }
+
     .monithon-dettaglio-progetto__sintesi {
         // height: 50%;
         overflow-y: scroll;
@@ -368,6 +370,12 @@ ion-row.monithon-filtri-secondari {
 
 .monithon-filtri {
     background-color: var(--monithon-tema-sfondo-filtri);
+
+    &.mat-expanded {
+        .monithon-categorie-container {
+            height: 60vh;
+        }
+    }
 }
 
 .monithon-filtri-charts {
