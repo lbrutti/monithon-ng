@@ -224,16 +224,23 @@
         border-bottom: 1px;
     }
 
+    .monithon-dettaglio-progetto__titolo {
+        margin-top: 0;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--monithon-font-color);
+    }
     .monithon-dettaglio-progetto__sintesi {
-        height: 50%;
+        // height: 50%;
         overflow-y: scroll;
         @include hideScrollbar();
     }
 
     .monithon-dettaglio-progetto__col {
+        max-height: 60vh;
+        height: auto;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: start;
     }
 
     .monithon-dettaglio-progetto__label {
