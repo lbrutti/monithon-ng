@@ -79,6 +79,9 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
     counterValue: any;
+
+    criteriOrdinamento: Array<string> = ['distanza', 'ocCodCategoriaSpesa', 'ocFinanzTotPubNetto', 'ocDataInizioProgetto']
+    criterioSelezionato: string ='distanza';
     constructor(
         // private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
@@ -131,7 +134,7 @@ export class HomePage implements OnInit, AfterViewInit {
     }
     showDettaglioProgetto(progetto: any) {
         if (!lodash.isNil(progetto)) {
-            this.monithonApiService.getDettaglio(progetto.codLocaleProgetto)
+            this.monithonApiService.getDettaglio(progetto.uid)
                 .subscribe({
                     next: progetto => {
                         if (progetto && progetto.length) {
@@ -385,7 +388,7 @@ export class HomePage implements OnInit, AfterViewInit {
         let progettiBinned = budgetBin(listaProgetti);
 
         let budgetDim = crossFilterData.dimension((d) => {
-            let binIndex = progettiBinned.findIndex((bin) => bin.find((p: any) => p.codLocaleProgetto == d.codLocaleProgetto)
+            let binIndex = progettiBinned.findIndex((bin) => bin.find((p: any) => p.uid == d.uid)
             );
             d.binIndex = binIndex;
             return binIndex;
@@ -506,7 +509,7 @@ export class HomePage implements OnInit, AfterViewInit {
     }
 
     evidenziaRisultatiSuMappa() {
-        let idRisultati = this.risultatiRicerca.map(p => p.codLocaleProgetto);
+        let idRisultati = this.risultatiRicerca.map(p => p.uid);
         this.monithonMap.highlightById(idRisultati);
     }
 
@@ -530,7 +533,7 @@ export class HomePage implements OnInit, AfterViewInit {
      * onProgettoClick
      */
     public onProgettoClick(progetto: Progetto) {
-        this.monithonMap.highlightById([progetto.codLocaleProgetto]);
+        this.monithonMap.highlightById([progetto.uid]);
         this.showDettaglioProgetto(progetto);
 
     }
@@ -544,6 +547,10 @@ export class HomePage implements OnInit, AfterViewInit {
     public iniziaMonitoraggioClicked(progetto:Progetto){
         console.log(progetto);
         window.open("https://it.monithon.eu/user/login?r=1", "_blank");
+    }
+
+    public onCriterioSelezionatoClick(){
+        console.log('onCriterioSelezionatoClick');
     }
 
 }

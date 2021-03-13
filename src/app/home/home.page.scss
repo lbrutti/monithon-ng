@@ -378,10 +378,13 @@ ion-row.monithon-filtri-secondari {
     background-color: var(--monithon-tema-sfondo-charts);
 }
 
-// .monithon-criteri-ordinamento{
-//     display: flex;
-//     flex-direction: column;
-// }
+.monithon-criteri-ordinamento{
+    ::ng-deep .mat-chip-list-wrapper{
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+    }
+}
 .monithon-criterio-ordinamento-selezionato {
     &.hidden {
         display: none;

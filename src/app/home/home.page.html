@@ -252,16 +252,19 @@
                                     (closed)="this.reusultOpenHandler()">
                                     <mat-expansion-panel-header>
                                         <span>{{'ordinati'|transloco}}</span>
-                                        <mat-chip class="monithon-criterio-ordinamento-selezionato"
+                                        <mat-chip class="monithon-criterio-ordinamento-selezionato" (click)="onCriterioSelezionatoClick()"
                                             [ngClass]="{'visible': !this.panelOpenState, 'hidden':this.panelOpenState}">
-                                            Distanza</mat-chip>
+                                            {{criterioSelezionato|transloco}}</mat-chip>
                                     </mat-expansion-panel-header>
-                                    <mat-chip-list class="monithon-criteri-ordinamento">
-                                        <mat-chip>Distanza</mat-chip>
-                                        <mat-chip>Categoria</mat-chip>
-                                        <mat-chip>Budget</mat-chip>
-                                        <mat-chip>Anno</mat-chip>
-                                    </mat-chip-list>
+                                    <div class="monithon-criterio-ordinamento__selezione">
+                                        <ion-label>{{'ordinaPer'|transloco}}</ion-label>
+                                        <mat-chip-list class="monithon-criteri-ordinamento">
+                                            <mat-chip>Distanza</mat-chip>
+                                            <mat-chip>Categoria</mat-chip>
+                                            <mat-chip>Budget</mat-chip>
+                                            <mat-chip>Anno</mat-chip>
+                                        </mat-chip-list>
+                                    </div>
 
                                 </mat-expansion-panel>
                             </ion-col>

@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import temi from '../../../assets/mock/temi';
 import categorie from '../../../assets/mock/categorie';
-import listaProgettiTotaliCodCategorieFixed from '../../../assets/mock/listaProgetti_v3';
-import dettaglioProgetti from '../../../assets/mock/dettaglioProgetti_v3';
+import listaProgettiTotaliCodCategorieFixed from '../../../assets/mock/listaProgetti_v4';
+import dettaglioProgetti from '../../../assets/mock/dettaglioProgetti_v4';
 import lodash from 'lodash';
 @Injectable({
     providedIn: 'root'
@@ -24,9 +24,9 @@ export class MonithonApiService {
         return of(listaProgettiTotaliCodCategorieFixed);
     }
 
-    public getDettaglio(codLocaleProgetto: string): Observable<any> {
+    public getDettaglio(uid: string): Observable<any> {
         // return this.httpClient.get<any>(this.url + '/progetti/dettaglio/' + codLocaleProgetto);
-        return of(lodash.filter(dettaglioProgetti, p => p.codLocaleProgetto == codLocaleProgetto));
+        return of(lodash.filter(dettaglioProgetti, p => p.uid == uid));
 
     }
 

@@ -141,24 +141,25 @@ export class MonithonMapService {
                 }
             },
 
-            {
-                "id": "gl-draw-polygon-and-line-vertex-halo-active",
-                "type": "circle",
-                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
-                "paint": {
-                    "circle-radius": 0,
-                    "circle-color": "#FFF"
-                },
-            },
-            {
-                "id": "gl-draw-polygon-and-line-vertex-active",
-                "type": "circle",
-                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
-                "paint": {
-                    "circle-radius": 0,
-                    "circle-color": "#235ba6",
-                }
-            },];
+            // {
+            //     "id": "gl-draw-polygon-and-line-vertex-halo-active",
+            //     "type": "circle",
+            //     "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
+            //     "paint": {
+            //         "circle-radius": 0,
+            //         "circle-color": "#FFF"
+            //     },
+            // },
+            // {
+            //     "id": "gl-draw-polygon-and-line-vertex-active",
+            //     "type": "circle",
+            //     "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
+            //     "paint": {
+            //         "circle-radius": 0,
+            //         "circle-color": "#235ba6",
+            //     }
+            // },
+        ];
         let modes = MapboxDraw.modes;
         modes = MapboxDrawGeodesic.enable(modes);
         const draw = new MapboxDraw({ modes });
@@ -207,7 +208,7 @@ export class MonithonMapService {
                 .addSource('progetti', {
                     type: 'geojson',
                     data: this.progetti,
-                    promoteId: 'codLocaleProgetto'
+                    promoteId: 'uid'
                 });
 
             this.map
@@ -282,10 +283,21 @@ export class MonithonMapService {
             this.map.on('click', e => {
                 this.publishSelectedProject(null);
             });
+            this.map.on('click', 'radius', e=>{
+                e.originalEvent.cancelBubble = false;
+                console.log('click on radius');
+            });
             this.map.on('click', 'progetti-layer', e => {
+                console.log('click on progetti');
                 if (e.features.length) {
                     let feature = e.features[0];
-                    this.publishSelectedProject((feature.properties as Progetto));
+                    let progetto :Progetto= feature.properties as Progetto;
+                    console.log(progetto);  
+                    let match = this.progetti.features.filter(f => f.properties.uid == progetto.uid && f.properties.isWithinRange);
+                    match = match[0] ? match[0].properties : {};
+                    if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected){
+                        this.publishSelectedProject((match as Progetto));
+                    }
                 } else {
                     this.publishSelectedProject(null);
 
@@ -316,7 +328,7 @@ export class MonithonMapService {
             "features": data.map((p: Progetto, idx) => {
                 let properties: any = Object.assign({}, p);
                 properties.isSelected = true;
-                properties.isWithinRange = true;
+                properties.isWithinRange = false;
                 let jitteredCoords = this.addJitter()(p.lat, p.long, 0.1, false);
                 return {
                     "type": "Feature",
@@ -429,13 +441,13 @@ export class MonithonMapService {
             this.progetti.features.map(f => {
                 let progetto = f.properties;
                 progetto.isWithinRange = distance(point(f.geometry.coordinates), centerPoint) <= radius
-                this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isWithinRange: progetto.isWithinRange });
+                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: progetto.isWithinRange });
             });
         } else {
             this.progetti.features.map(f => {
                 let progetto = f.properties;
-                progetto.isWithinRange = true;
-                this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isWithinRange: progetto.isWithinRange });
+                progetto.isWithinRange = false;
+                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: progetto.isWithinRange, isSelected:true });
             });
         }
 
@@ -459,7 +471,7 @@ export class MonithonMapService {
                 if (this.filtroPerRaggioEnabled) {
                     progetto.isSelected = progetto.isSelected && progetto.isWithinRange;
                 }
-                this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isSelected: progetto.isSelected });
+                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isSelected: progetto.isSelected });
             });
         return this.progetti.features.filter(f => f.properties.isSelected).map(f => f.properties);
     }
@@ -484,8 +496,7 @@ export class MonithonMapService {
     }
 
     publishSelectedProject(progetto?: Progetto): void {
-        console.log(progetto);
-        if (progetto && lodash.isString(progetto.ocCodCategoriaSpesa)) {
+        if (progetto && progetto.isWithinRange && lodash.isString(progetto.ocCodCategoriaSpesa)) {
             progetto.ocCodCategoriaSpesa = JSON.parse(progetto.ocCodCategoriaSpesa);
         }
         this.projectSelected.next(progetto);
@@ -523,9 +534,9 @@ export class MonithonMapService {
         this.progetti.features
             .map(f => {
                 let progetto = f.properties;
-                progetto.isHighlighted = progetto.isSelected && (idRisultati.length == 0) || lodash.includes(idRisultati, progetto.codLocaleProgetto);
+                progetto.isHighlighted = progetto.isSelected && (idRisultati.length == 0) || lodash.includes(idRisultati, progetto.uid);
 
-                this.map.setFeatureState({ source: 'progetti', id: progetto.codLocaleProgetto }, { isHighlighted: progetto.isHighlighted });
+                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isHighlighted: progetto.isHighlighted });
             });
     }
 
