@@ -62,7 +62,7 @@ export class MonithonMapService {
             minLength: 3,
             language:'it',
             zoom: 3, 
-            filter: function (item) {
+            filter: function (item:any) {
                 return item.place_type[0] === 'place';
             },
             marker:false
@@ -77,7 +77,7 @@ export class MonithonMapService {
             this.drawRangeProgetti(center);
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
-        let circleStyle = [ // ACTIVE (being drawn)
+        let radiusFilterDrawStyle = [ // ACTIVE (being drawn)
             // line stroke
             {
                 "id": "gl-draw-line",
@@ -141,24 +141,6 @@ export class MonithonMapService {
                 }
             },
 
-            // {
-            //     "id": "gl-draw-polygon-and-line-vertex-halo-active",
-            //     "type": "circle",
-            //     "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
-            //     "paint": {
-            //         "circle-radius": 0,
-            //         "circle-color": "#FFF"
-            //     },
-            // },
-            // {
-            //     "id": "gl-draw-polygon-and-line-vertex-active",
-            //     "type": "circle",
-            //     "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
-            //     "paint": {
-            //         "circle-radius": 0,
-            //         "circle-color": "#235ba6",
-            //     }
-            // },
         ];
         let modes = MapboxDraw.modes;
         modes = MapboxDrawGeodesic.enable(modes);
@@ -172,7 +154,7 @@ export class MonithonMapService {
             //     direct_select: DirectMode,
             //     simple_select: SimpleSelectMode
             // },
-            styles: circleStyle,
+            styles: radiusFilterDrawStyle,
             modes: modes
         });
         this.map.addControl(this.draw, 'top-left');
@@ -285,15 +267,13 @@ export class MonithonMapService {
             });
             this.map.on('click', 'radius', e=>{
                 e.originalEvent.cancelBubble = false;
-                console.log('click on radius');
             });
             this.map.on('click', 'progetti-layer', e => {
                 console.log('click on progetti');
                 if (e.features.length) {
                     let feature = e.features[0];
                     let progetto :Progetto= feature.properties as Progetto;
-                    console.log(progetto);  
-                    let match = this.progetti.features.filter(f => f.properties.uid == progetto.uid && f.properties.isWithinRange);
+                    let match = this.progetti.features.filter(f => f.properties.uid == progetto.uid);
                     match = match[0] ? match[0].properties : {};
                     if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected){
                         this.publishSelectedProject((match as Progetto));
