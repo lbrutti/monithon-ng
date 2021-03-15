@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Server } from 'miragejs';
-import listaProgettiTotaliCodCategorieFixed from '../../../assets/mock/listaProgetti_v3';
-import dettagliProgettiTotaliCodCategorieFixed from '../../../assets/mock/dettaglioProgetti_v3';
+import listaProgettiTotaliCodCategorieFixed from '../../../assets/mock/listaProgetti_v4';
+import dettagliProgettiTotaliCodCategorieFixed from '../../../assets/mock/dettaglioProgetti_v4';
 import temi from '../../../assets/mock/temi';
 import categorie from '../../../assets/mock/categorie';
 import { environment } from 'src/environments/environment';

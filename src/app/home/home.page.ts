@@ -81,7 +81,7 @@ export class HomePage implements OnInit, AfterViewInit {
     counterValue: any;
 
     criteriOrdinamento: Array<string> = ['distanza', 'ocCodCategoriaSpesa', 'ocFinanzTotPubNetto', 'ocDataInizioProgetto']
-    criterioSelezionato: string ='distanza';
+    criterioSelezionato: string = 'distanza';
     constructor(
         // private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
@@ -130,6 +130,10 @@ export class HomePage implements OnInit, AfterViewInit {
                 this.monithonMap.setCategorie(data[2]);
                 this.monithonMap.setTemi(data[1]);
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement);
+                this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button')
+                    .addEventListener('click', e => {
+                        this.monithonMap.removeRadiusFilter();
+                    });
             });
     }
     showDettaglioProgetto(progetto: any) {
@@ -179,7 +183,7 @@ export class HomePage implements OnInit, AfterViewInit {
         chartG.append('rect')
             .attr('width', chartW)
             .attr('height', '56')
-            .attr('class','foreground')
+            .attr('class', 'foreground')
             .attr('fill', 'grey');
         chartG.selectAll('text.finanziamento').remove();
 
@@ -215,14 +219,14 @@ export class HomePage implements OnInit, AfterViewInit {
             .data([this.progettoSelezionato])
             .attr('width', `${chartW}`)
             .attr('height', '56')
-            .attr('class','background')
+            .attr('class', 'background')
 
             .attr('fill', 'grey');
         chartG.append('rect')
             .data([this.progettoSelezionato])
             .attr('width', d => scale(d.totPagamenti))
             .attr('height', '56')
-            .attr('class','foreground');
+            .attr('class', 'foreground');
         chartG.selectAll('text.pagamenti')
             .data([this.progettoSelezionato])
             .enter()
@@ -544,12 +548,12 @@ export class HomePage implements OnInit, AfterViewInit {
         this.panelOpenState = !this.panelOpenState;
     }
 
-    public iniziaMonitoraggioClicked(progetto:Progetto){
+    public iniziaMonitoraggioClicked(progetto: Progetto) {
         console.log(progetto);
         window.open("https://it.monithon.eu/user/login?r=1", "_blank");
     }
 
-    public onCriterioSelezionatoClick(){
+    public onCriterioSelezionatoClick() {
         console.log('onCriterioSelezionatoClick');
     }
 

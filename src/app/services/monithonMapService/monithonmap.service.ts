@@ -18,6 +18,7 @@ import { COLOR_MAP } from 'src/app/utils/colorMap';
 })
 export class MonithonMapService {
 
+
     map: mapboxgl.Map;
     geocoder: any;
     // geolocator: mapboxgl.GeolocateControl;
@@ -60,13 +61,13 @@ export class MonithonMapService {
             mapboxgl: mapboxgl,
             countries: 'it',
             minLength: 3,
-            language:'it',
-            zoom: 3, 
-            filter: function (item:any) {
+            language: 'it',
+            zoom: 3,
+            filter: function (item: any) {
                 return item.place_type[0] === 'place';
             },
-            marker:false
-            
+            marker: false
+
         };
 
         this.geocoder = new MapboxGeocoder(geocoderOptions);
@@ -147,13 +148,6 @@ export class MonithonMapService {
         const draw = new MapboxDraw({ modes });
         this.draw = new MapboxDraw({
             userProperties: true,
-            // modes: {
-            //     ...MapboxDraw.modes,
-            //     draw_circle: CircleMode,
-            //     drag_circle: DragCircleMode,
-            //     direct_select: DirectMode,
-            //     simple_select: SimpleSelectMode
-            // },
             styles: radiusFilterDrawStyle,
             modes: modes
         });
@@ -265,17 +259,17 @@ export class MonithonMapService {
             this.map.on('click', e => {
                 this.publishSelectedProject(null);
             });
-            this.map.on('click', 'radius', e=>{
+            this.map.on('click', 'radius', e => {
                 e.originalEvent.cancelBubble = false;
             });
             this.map.on('click', 'progetti-layer', e => {
                 console.log('click on progetti');
                 if (e.features.length) {
                     let feature = e.features[0];
-                    let progetto :Progetto= feature.properties as Progetto;
+                    let progetto: Progetto = feature.properties as Progetto;
                     let match = this.progetti.features.filter(f => f.properties.uid == progetto.uid);
                     match = match[0] ? match[0].properties : {};
-                    if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected){
+                    if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected) {
                         this.publishSelectedProject((match as Progetto));
                     }
                 } else {
@@ -426,8 +420,8 @@ export class MonithonMapService {
         } else {
             this.progetti.features.map(f => {
                 let progetto = f.properties;
-                progetto.isWithinRange = false;
-                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: progetto.isWithinRange, isSelected:true });
+                progetto.isWithinRange = true;
+                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: progetto.isWithinRange, isSelected: true });
             });
         }
 
@@ -520,4 +514,14 @@ export class MonithonMapService {
             });
     }
 
+    /**
+     * name
+     */
+    public removeRadiusFilter() {
+        this.draw.delete(this.circle.id);
+        this.circle = null;
+        this.filtroPerRaggioEnabled = false;
+        this.filtraPerDistanza();
+
+    }
 }
