@@ -169,12 +169,15 @@ export class MonithonMapService {
                 radius: MapboxDrawGeodesic.getCircleRadius(geojson)
             };
             this.filtroPerRaggioEnabled = true;
+            this.map.setLayoutProperty('radius-value', 'visibility', 'visible');
             this.filtraPerDistanza(circleData);
         });
         this.map.on('draw.delete', (evt) => {
 
             this.filtroPerRaggioEnabled = false;
             this.filtraPerDistanza();
+            this.map.setLayoutProperty('radius-value', 'visibility', 'visible');
+
 
         });
         this.map.on('load', () => {
@@ -246,22 +249,23 @@ export class MonithonMapService {
             // });
             this.map
                 .addLayer({
-                    id: 'radius',
+                    id: 'radius-value',
                     type: 'symbol',
                     source: 'radiusFilterData',
                     'layout': {
                         'text-field': ['get', 'radius'],
                         'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
                         'text-radial-offset': 0.5,
-                        'text-justify': 'center'
+                        'text-justify': 'center',
+                        'visibility': 'visible'
                     }
                 });
             this.map.on('click', e => {
                 this.publishSelectedProject(null);
             });
-            this.map.on('click', 'radius', e => {
-                e.originalEvent.cancelBubble = false;
-            });
+            // this.map.on('click', 'radius', e => {
+            //     e.originalEvent.cancelBubble = false;
+            // });
             this.map.on('click', 'progetti-layer', e => {
                 console.log('click on progetti');
                 if (e.features.length) {
@@ -521,6 +525,7 @@ export class MonithonMapService {
         this.draw.delete(this.circle.id);
         this.circle = null;
         this.filtroPerRaggioEnabled = false;
+        this.map.setLayoutProperty('radius-value', 'visibility', 'none');
         this.filtraPerDistanza();
 
     }
