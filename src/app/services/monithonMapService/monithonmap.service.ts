@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl, { CameraOptions, EaseToOptions, PaddingOptions } from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js';
@@ -275,8 +275,10 @@ export class MonithonMapService {
                     match = match[0] ? match[0].properties : {};
                     if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected) {
                         this.publishSelectedProject((match as Progetto));
+
                     }
                 } else {
+                    this.easeToProgetto(null, null);
                     this.publishSelectedProject(null);
 
                 }
@@ -527,6 +529,29 @@ export class MonithonMapService {
         this.filtroPerRaggioEnabled = false;
         this.map.setLayoutProperty('radius-value', 'visibility', 'none');
         this.filtraPerDistanza();
+
+    }
+
+    //sposta la mappa per mostrare il progetto  correntemente selezionato
+    public easeToProgetto(options: any, progetto: Progetto) {
+        if (options) {
+            //recupera coordinate progetto sullo schermo:
+            let feature = this.progetti.features.filter(f => f.properties.uid == progetto.uid)[0];
+            let markerScreenCoordinates = this.map.project([feature.properties.long, feature.properties.lat]);
+            console.log(markerScreenCoordinates);
+            console.log(options);
+
+            if (options.top - markerScreenCoordinates.y < 0) {
+                let offset = markerScreenCoordinates.y;
+                console.log(offset);
+
+                (this.map as any).easeTo({ padding: { top: offset }, duration: 1000 });
+            } else {
+                (this.map as any).easeTo({ padding: { top: 0 }, duration: 1000 });
+            }
+        } else {
+            (this.map as any).easeTo({ padding: { top: 0 }, duration: 1000 });
+        }
 
     }
 }

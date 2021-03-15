@@ -27,7 +27,7 @@ export class HomePage implements OnInit, AfterViewInit {
     @ViewChild('geocoder') geocoder: ElementRef;
 
     @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
-    @ViewChild('dettagliProgetto') dettagliProgetto: ElementRef;
+    @ViewChild('dettaglioProgetto') dettaglioProgetto: ElementRef;
     @ViewChild('finanziamentoPubblicoChartContainer') finanziamentoPubblicoChartContainer: HTMLElement;
     @ViewChild('pagamentiChartContainer') pagamentiChartContainer: HTMLElement;
 
@@ -161,7 +161,10 @@ export class HomePage implements OnInit, AfterViewInit {
                         if (progetto && progetto.length) {
                             this.progettoSelezionato = progetto[0];
                             this.visualizzaDettaglio = true;
-
+                            debugger;
+                            let dettaglioBoundingRect = this.dettaglioProgetto.nativeElement.getBoundingClientRect();
+                            console.log(dettaglioBoundingRect);
+                            this.monithonMap.easeToProgetto(dettaglioBoundingRect, this.progettoSelezionato);
                             this.renderDettaglioProgettoCharts();
                         } else {
                             this.visualizzaDettaglio = false;
