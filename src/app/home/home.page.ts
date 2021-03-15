@@ -130,9 +130,26 @@ export class HomePage implements OnInit, AfterViewInit {
                 this.monithonMap.setCategorie(data[2]);
                 this.monithonMap.setTemi(data[1]);
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement);
-                this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button')
-                    .addEventListener('click', e => {
+                let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
+                let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
+
+                geocoderClearBtn
+                    .addEventListener('click', () => {
                         this.monithonMap.removeRadiusFilter();
+                    });
+
+
+                geocoderInput
+                    .addEventListener('change', e => {
+                        if (!e.target.value) {
+                            this.monithonMap.removeRadiusFilter();
+                        }
+                    });
+                geocoderInput
+                    .addEventListener('keyup', e => {
+                        if (!geocoderInput.value) {
+                            this.monithonMap.removeRadiusFilter();
+                        }
                     });
             });
     }
