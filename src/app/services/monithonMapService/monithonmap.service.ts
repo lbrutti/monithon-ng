@@ -544,14 +544,14 @@ export class MonithonMapService {
             let markerScreenCoordinates = this.map.project([feature.properties.long, feature.properties.lat]);
 
             //devo spostare la mappa in alto in modo che il punto si trovi a 30px dal margine superiore della scheda progetto
-            if ((markerScreenCoordinates.x < options.width) && (options.y < markerScreenCoordinates.y)) {
-                let offset = options.height; // porto il punto al margine del div dettaglio
-                offset += ((markerScreenCoordinates.y - options.y) / 2); //aggiungo ulteriore padding per far emenergere il punto sopra il container
+            // if ((markerScreenCoordinates.x < options.width) && (options.y < markerScreenCoordinates.y)) {
+            let offset = options.height; // porto il punto al margine del div dettaglio
+            offset += ((markerScreenCoordinates.y - options.y) / 2); //aggiungo ulteriore padding per far emenergere il punto sopra il container
 
-                (this.map as any).flyTo({ center: [feature.properties.long, feature.properties.lat], padding: { bottom: offset }, duration: 1000 });
-            }
+            (this.map as any).flyTo({ center: [feature.properties.long, feature.properties.lat], padding: { bottom: offset }, duration: 1000, zoom: 13 });
+            // }
         } else if (!isOverlayPresent) {
-            (this.map as any).easeTo({ padding: { bottom: 0 }, duration: 1000 });
+            (this.map as any).easeTo({ padding: { bottom: 0 }, duration: 1000 , zoom:10});
         }
 
     }
