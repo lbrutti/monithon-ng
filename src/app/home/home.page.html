@@ -294,11 +294,11 @@
                 <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
                     class="monithon-lista-progetti">
                     <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;" (click)="onProgettoClick(progetto)"
-                        class="monithon-lista-progetti__progetto">
+                        class="monithon-lista-progetti__progetto" >
                         <ion-grid>
                             <ion-row>
-                                <ion-col><ion-label class="monithon-lista-risultato" [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico">
-                                    <h2>{{progetto.ocTitoloProgetto | capitalize}}</h2>
+                                <ion-col><ion-label class="monithon-lista-risultato" [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico" [ngClass]="{'selected': progetto.uid==progettoSelezionato.uid}">
+                                    <h2>{{progetto.ocTitoloProgetto | capitalize}} </h2>
                                 </ion-label></ion-col>
                             </ion-row>
                             <ion-row>
@@ -308,16 +308,12 @@
                                 </ion-col>
                                 <ion-col>
                                     <ion-label class="monithon-lista-progetti__progetto__dettagli__has_report">{{'hasReport'|transloco}}:
-                                        {{progetto.hasReport}}
+                                        {{progetto.hasReport ? "true" : "false" | transloco}}
                                     </ion-label>
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
                         
-                        <div class="monithon-lista-progetti__progetto__dettagli">
-                           
-
-                        </div>
                     </ion-item>
                 </cdk-virtual-scroll-viewport>
             </mat-expansion-panel>

@@ -81,5 +81,8 @@
     "ordinaPer":"Ordinati per",
     "ocCodCategoriaSpesa":"Categoria",
     "ocFinanzTotPubNetto":"Budget",
-    "ocDataInizioProgetto":"Anno"
+    "ocDataInizioProgetto":"Anno",
+    "hasReport": "Monitoraggi attivi",
+    "true":"Si",
+    "false":"No"
 }

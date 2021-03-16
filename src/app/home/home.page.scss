@@ -191,7 +191,7 @@
             margin-right: 1rem;
             background: transparent;
             border-radius: 50%;
-            width:28px;
+            width: 28px;
             height: 28px;
             color: var(--monithon-chevron-border-color);
             border: 1px solid var(--monithon-chevron-border-color)
@@ -434,16 +434,30 @@ ion-row.monithon-filtri-secondari {
 
     &[data-oc-cod-tema-sintetico="4"]::before {
         background-color: var(--monithon-tema-energia-background);
+
+    }
+
+    &[data-oc-cod-tema-sintetico="4"].selected {
+        color: var(--monithon-tema-energia-background);
     }
 
     &[data-oc-cod-tema-sintetico="5"]::before {
         background-color: var(--monithon-tema-ambiente-background);
+
+    }
+
+    &[data-oc-cod-tema-sintetico="5"].selected {
+        color: var(--monithon-tema-ambiente-background);
     }
 
     &[data-oc-cod-tema-sintetico="6"]::before {
         background-color: var(--monithon-tema-attrazione-background);
+
     }
 
+    &[data-oc-cod-tema-sintetico="6"].selected {
+        color: var(--monithon-tema-attrazione-background);
+    }
 
     h2 {
         margin-bottom: auto;
