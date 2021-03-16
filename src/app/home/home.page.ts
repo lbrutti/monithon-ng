@@ -97,6 +97,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 this.categorie = updateSubject.categorie.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
                 this.risultatiRicerca = this.progetti;
+                this.ordinaRisultatiPerCriterio();
                 if (this.redrawCharts) {
                     this.renderCharts(this.progetti);
                 } else {
@@ -553,7 +554,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
             return matchesStato && matchesReportFlags;
         });
-
+        this.ordinaRisultatiPerCriterio();
     }
 
 
@@ -572,7 +573,6 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
     public iniziaMonitoraggioClicked(progetto: Progetto) {
-        console.log(progetto);
         window.open("https://it.monithon.eu/user/login?r=1", "_blank");
     }
 
