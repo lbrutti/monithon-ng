@@ -266,7 +266,7 @@ export class MonithonMapService {
 
                 // set bbox as 5px reactangle area around clicked point
                 let lower: PointLike = new mapboxgl.Point(e.point.x - 5, e.point.y - 5);
-                let upper: PointLike = new mapboxgl.Point( e.point.x + 5, e.point.y + 5);
+                let upper: PointLike = new mapboxgl.Point(e.point.x + 5, e.point.y + 5);
                 var bbox: PointLike | [PointLike, PointLike] = [lower, upper];
                 var features = this.map.queryRenderedFeatures(bbox, {
                     layers: ['progetti-layer']
@@ -548,7 +548,7 @@ export class MonithonMapService {
                 let offset = options.height; // porto il punto al margine del div dettaglio
                 offset += ((markerScreenCoordinates.y - options.y) / 2); //aggiungo ulteriore padding per far emenergere il punto sopra il container
 
-                (this.map as any).easeTo({ padding: { bottom: offset }, duration: 1000 });
+                (this.map as any).flyTo({ center: [feature.properties.long, feature.properties.lat], padding: { bottom: offset }, duration: 1000 });
             }
         } else if (!isOverlayPresent) {
             (this.map as any).easeTo({ padding: { bottom: 0 }, duration: 1000 });
