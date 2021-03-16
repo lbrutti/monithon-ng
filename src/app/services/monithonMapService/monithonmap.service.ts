@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import mapboxgl, { CameraOptions, EaseToOptions, PaddingOptions } from 'mapbox-gl';
+import mapboxgl, { CameraOptions, EaseToOptions, PaddingOptions, PointLike } from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js';
@@ -260,13 +260,20 @@ export class MonithonMapService {
                         'visibility': 'visible'
                     }
                 });
-            // this.map.on('click', e => {
-            //     console.dir(e);
-            //     this.publishSelectedProject(null);
-            // });
-            this.map.on('click', 'progetti-layer', e => {
-                if (e.features.length) {
-                    let feature = e.features[0];
+            this.map.on('click', e => {
+                console.dir(e);
+                //this.publishSelectedProject(null);
+
+                // set bbox as 5px reactangle area around clicked point
+                let lower: PointLike = new mapboxgl.Point(e.point.x - 5, e.point.y - 5);
+                let upper: PointLike = new mapboxgl.Point( e.point.x + 5, e.point.y + 5);
+                var bbox: PointLike | [PointLike, PointLike] = [lower, upper];
+                var features = this.map.queryRenderedFeatures(bbox, {
+                    layers: ['progetti-layer']
+                });
+                console.log(features);
+                if (features.length) {
+                    let feature = features[0];
                     let progetto: Progetto = feature.properties as Progetto;
                     let match = this.progetti.features.filter(f => f.properties.uid == progetto.uid);
                     match = match[0] ? match[0].properties : {};
@@ -278,7 +285,6 @@ export class MonithonMapService {
                     }
                 } else {
                     this.publishSelectedProject(null);
-
                 }
             });
             this.map.resize();
