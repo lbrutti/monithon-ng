@@ -524,6 +524,16 @@ export class MonithonMapService {
             });
     }
 
+    selectById(idRisultati: string[]) {
+        this.progetti.features
+            .map(f => {
+                let progetto = f.properties;
+                progetto.isSelected = progetto.isSelected && (idRisultati.length == 0) || lodash.includes(idRisultati, progetto.uid);
+
+                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isSelected: progetto.isSelected });
+            });
+    }
+
     /**
      * name
      */
@@ -539,6 +549,7 @@ export class MonithonMapService {
     //sposta la mappa per mostrare il progetto  correntemente selezionato
     public easeToProgetto(options: any, progetto: Progetto, isOverlayPresent: boolean) {
         if (options && isOverlayPresent) {
+            this.highlightById([progetto.uid]);
             //recupera coordinate progetto sullo schermo:
             let feature = this.progetti.features.filter(f => f.properties.uid == progetto.uid)[0];
             let markerScreenCoordinates = this.map.project([feature.properties.long, feature.properties.lat]);
@@ -551,7 +562,8 @@ export class MonithonMapService {
             (this.map as any).flyTo({ center: [feature.properties.long, feature.properties.lat], padding: { bottom: offset }, duration: 1000, zoom: 13 });
             // }
         } else if (!isOverlayPresent) {
-            (this.map as any).easeTo({ padding: { bottom: 0 }, duration: 1000 , zoom:10});
+            // this.highlightById([]);
+            // (this.map as any).easeTo({ padding: { bottom: 0 }, duration: 1000 , zoom:10});
         }
 
     }

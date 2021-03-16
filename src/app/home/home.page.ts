@@ -153,6 +153,10 @@ export class HomePage implements OnInit, AfterViewInit {
                     });
             });
     }
+    onDettaglioProgettoHandleClick() {
+        this.visualizzaDettaglio = false;
+        this.monithonMap.highlightById([]);
+    };
     showDettaglioProgetto(progetto: any) {
         if (!lodash.isNil(progetto)) {
             this.monithonApiService.getDettaglio(progetto.uid)
@@ -166,7 +170,8 @@ export class HomePage implements OnInit, AfterViewInit {
                             this.renderDettaglioProgettoCharts();
                         } else {
                             this.visualizzaDettaglio = false;
-                            this.monithonMap.easeToProgetto(null, null, this.visualizzaDettaglio);
+                            this.monithonMap.highlightById([]);
+                            // this.monithonMap.easeToProgetto(null, null, this.visualizzaDettaglio);
                         }
                     },
                     error: err => {
@@ -175,7 +180,9 @@ export class HomePage implements OnInit, AfterViewInit {
                 });
         } else {
             this.visualizzaDettaglio = false;
-            this.monithonMap.easeToProgetto(null, null, this.visualizzaDettaglio);
+            this.monithonMap.highlightById([]);
+
+            // this.monithonMap.easeToProgetto(null, null, this.visualizzaDettaglio);
         }
 
     }
@@ -533,7 +540,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     evidenziaRisultatiSuMappa() {
         let idRisultati = this.risultatiRicerca.map(p => p.uid);
-        this.monithonMap.highlightById(idRisultati);
+        this.monithonMap.selectById(idRisultati);
     }
 
     filtraRisultati() {
@@ -556,7 +563,7 @@ export class HomePage implements OnInit, AfterViewInit {
      * onProgettoClick
      */
     public onProgettoClick(progetto: Progetto) {
-        this.monithonMap.highlightById([progetto.uid]);
+        // this.monithonMap.highlightById([progetto.uid]);
         this.showDettaglioProgetto(progetto);
 
     }

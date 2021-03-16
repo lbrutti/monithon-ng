@@ -178,13 +178,25 @@
 
     &.visible {
         left: 0;
-
-
-
-
-
     }
 
+    .monithon-dettaglio-progetto__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        ion-icon {
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-right: 1rem;
+            background: transparent;
+            border-radius: 50%;
+            width:28px;
+            height: 28px;
+            color: var(--monithon-chevron-border-color);
+            border: 1px solid var(--monithon-chevron-border-color)
+        }
+    }
 
     .mat-chip.monithon-dettaglio-progetto__stato-avanzamento,
     .mat-chip.monithon-dettaglio-progetto__has-report {
@@ -378,13 +390,14 @@ ion-row.monithon-filtri-secondari {
     background-color: var(--monithon-tema-sfondo-charts);
 }
 
-.monithon-criteri-ordinamento{
-    ::ng-deep .mat-chip-list-wrapper{
+.monithon-criteri-ordinamento {
+    ::ng-deep .mat-chip-list-wrapper {
         display: flex;
         flex-direction: column;
         align-content: flex-start;
     }
 }
+
 .monithon-criterio-ordinamento-selezionato {
     &.hidden {
         display: none;

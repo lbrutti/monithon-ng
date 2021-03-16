@@ -20,8 +20,10 @@
         <div [ngClass]="{'hidden': !this.visualizzaDettaglio, 'visible': this.visualizzaDettaglio}" #dettaglioProgetto
             [attr.data-oc-cod-tema-sintetico]="this.progettoSelezionato.ocCodTemaSintetico"
             class="monithon-dettaglio-progetto">
-
+        <div class="monithon-dettaglio-progetto__header">
             <h5 class="monithon-dettaglio-progetto__titolo_scheda">{{'schedaProgetto' | transloco}}</h5>
+        <ion-icon name="chevron-back-outline" (click)="onDettaglioProgettoHandleClick()"></ion-icon>
+        </div>
             <div #dettagliProgetto>
 
                 <ion-grid>
