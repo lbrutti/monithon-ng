@@ -74,7 +74,7 @@ export class HomePage implements OnInit, AfterViewInit {
     progettoSelezionato: any = {};
     visualizzaDettaglio: boolean = false;
 
-    panelOpenState: boolean = false;
+    ordinamentoPanelOpenState: boolean = false;
     redrawCharts: boolean = true;
 
 
@@ -570,17 +570,19 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
 
-    public reusultOpenHandler() {
-        this.panelOpenState = !this.panelOpenState;
-    }
 
     public iniziaMonitoraggioClicked(progetto: Progetto) {
         console.log(progetto);
         window.open("https://it.monithon.eu/user/login?r=1", "_blank");
     }
 
-    public onCriterioSelezionatoClick() {
-        console.log('onCriterioSelezionatoClick');
+    public onCriterioSelezionatoClick(criterio) {
+        this.ordinamentoPanelOpenState = !this.ordinamentoPanelOpenState;
+        this.criterioSelezionato = criterio;
+        this.ordinaRisultatiPerCriterio();
+    }
+    ordinaRisultatiPerCriterio() {
+        this.risultatiRicerca = lodash.sortBy(this.risultatiRicerca, (p: Progetto) => lodash.get(p, this.criterioSelezionato));
     }
 
 }
