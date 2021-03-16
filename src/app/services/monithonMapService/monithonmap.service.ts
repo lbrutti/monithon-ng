@@ -260,11 +260,9 @@ export class MonithonMapService {
                         'visibility': 'visible'
                     }
                 });
-            this.map.on('click', e => {
-                this.publishSelectedProject(null);
-            });
-            // this.map.on('click', 'radius', e => {
-            //     e.originalEvent.cancelBubble = false;
+            // this.map.on('click', e => {
+            //     console.dir(e);
+            //     this.publishSelectedProject(null);
             // });
             this.map.on('click', 'progetti-layer', e => {
                 if (e.features.length) {
@@ -274,6 +272,9 @@ export class MonithonMapService {
                     match = match[0] ? match[0].properties : {};
                     if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected) {
                         this.publishSelectedProject((match as Progetto));
+                    } else {
+                        this.publishSelectedProject(null);
+
                     }
                 } else {
                     this.publishSelectedProject(null);
@@ -530,20 +531,20 @@ export class MonithonMapService {
     }
 
     //sposta la mappa per mostrare il progetto  correntemente selezionato
-    public easeToProgetto(options: any, progetto: Progetto) {
-        if (options) {
+    public easeToProgetto(options: any, progetto: Progetto, isOverlayPresent: boolean) {
+        if (options && isOverlayPresent) {
             //recupera coordinate progetto sullo schermo:
             let feature = this.progetti.features.filter(f => f.properties.uid == progetto.uid)[0];
             let markerScreenCoordinates = this.map.project([feature.properties.long, feature.properties.lat]);
 
             //devo spostare la mappa in alto in modo che il punto si trovi a 30px dal margine superiore della scheda progetto
-            if (options.y < markerScreenCoordinates.y) {
+            if ((markerScreenCoordinates.x < options.width) && (options.y < markerScreenCoordinates.y)) {
                 let offset = options.height; // porto il punto al margine del div dettaglio
                 offset += ((markerScreenCoordinates.y - options.y) / 2); //aggiungo ulteriore padding per far emenergere il punto sopra il container
 
                 (this.map as any).easeTo({ padding: { bottom: offset }, duration: 1000 });
             }
-        } else {
+        } else if (!isOverlayPresent) {
             (this.map as any).easeTo({ padding: { bottom: 0 }, duration: 1000 });
         }
 

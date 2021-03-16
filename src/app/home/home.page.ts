@@ -162,11 +162,11 @@ export class HomePage implements OnInit, AfterViewInit {
                         if (progetto && progetto.length) {
                             this.progettoSelezionato = progetto[0];
                             this.visualizzaDettaglio = true;
-                            this.monithonMap.easeToProgetto(dettaglioBoundingRect, this.progettoSelezionato);
+                            this.monithonMap.easeToProgetto(dettaglioBoundingRect, this.progettoSelezionato, this.visualizzaDettaglio);
                             this.renderDettaglioProgettoCharts();
                         } else {
                             this.visualizzaDettaglio = false;
-                            this.monithonMap.easeToProgetto(null, null);
+                            this.monithonMap.easeToProgetto(null, null, this.visualizzaDettaglio);
                         }
                     },
                     error: err => {
@@ -175,7 +175,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 });
         } else {
             this.visualizzaDettaglio = false;
-            this.monithonMap.easeToProgetto(null, null);
+            this.monithonMap.easeToProgetto(null, null, this.visualizzaDettaglio);
         }
 
     }
