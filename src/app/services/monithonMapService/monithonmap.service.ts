@@ -424,12 +424,14 @@ export class MonithonMapService {
             let radius = circleData.radius;
             this.progetti.features.map(f => {
                 let progetto = f.properties;
-                progetto.isWithinRange = distance(point(f.geometry.coordinates), centerPoint) <= radius
+                progetto.distanza = distance(point(f.geometry.coordinates), centerPoint);
+                progetto.isWithinRange = progetto.distanza <= radius;
                 this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: progetto.isWithinRange });
             });
         } else {
             this.progetti.features.map(f => {
                 let progetto = f.properties;
+                progetto.distanza = null;
                 progetto.isWithinRange = true;
                 this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: progetto.isWithinRange, isSelected: true });
             });

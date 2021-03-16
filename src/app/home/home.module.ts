@@ -15,6 +15,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MomentdateModule } from '../pipes/momentdate/momentdate.pipe.module';
 import { CapitalizePipeModule } from '../pipes/capitalize/capitalize.pipe.module';
+import { FormatDistanzaPipeModule } from '../pipes/format-distanza/format-distanza.pipe.module';
 @NgModule({
     imports: [
         CommonModule,
@@ -28,7 +29,8 @@ import { CapitalizePipeModule } from '../pipes/capitalize/capitalize.pipe.module
         ScrollingModule,
         MatTooltipModule,
         MomentdateModule,
-        CapitalizePipeModule
+        CapitalizePipeModule,
+        FormatDistanzaPipeModule
     ],
     declarations: [HomePage],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

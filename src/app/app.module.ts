@@ -16,6 +16,7 @@ import { MomentdateModule } from './pipes/momentdate/momentdate.pipe.module';
 import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
 import { CapitalizePipeModule } from './pipes/capitalize/capitalize.pipe.module';
+import { FormatDistanzaPipeModule } from './pipes/format-distanza/format-distanza.pipe.module';
 registerLocaleData(localeIt);
 @NgModule({
     declarations: [AppComponent],
@@ -28,7 +29,8 @@ registerLocaleData(localeIt);
         BrowserAnimationsModule,
         TranslocoRootModule,
         MomentdateModule,
-        CapitalizePipeModule],
+        CapitalizePipeModule,
+        FormatDistanzaPipeModule],
     providers: [
         StatusBar,
         SplashScreen,
@@ -37,7 +39,7 @@ registerLocaleData(localeIt);
         { provide: LOCALE_ID, useValue: "it" },
         CurrencyPipe,
     ],
-    exports: [MomentdateModule, CapitalizePipeModule],
+    exports: [MomentdateModule, CapitalizePipeModule, FormatDistanzaPipeModule],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
