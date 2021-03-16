@@ -267,7 +267,6 @@ export class MonithonMapService {
             //     e.originalEvent.cancelBubble = false;
             // });
             this.map.on('click', 'progetti-layer', e => {
-                console.log('click on progetti');
                 if (e.features.length) {
                     let feature = e.features[0];
                     let progetto: Progetto = feature.properties as Progetto;
@@ -275,10 +274,8 @@ export class MonithonMapService {
                     match = match[0] ? match[0].properties : {};
                     if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected) {
                         this.publishSelectedProject((match as Progetto));
-
                     }
                 } else {
-                    this.easeToProgetto(null, null);
                     this.publishSelectedProject(null);
 
                 }
@@ -538,19 +535,16 @@ export class MonithonMapService {
             //recupera coordinate progetto sullo schermo:
             let feature = this.progetti.features.filter(f => f.properties.uid == progetto.uid)[0];
             let markerScreenCoordinates = this.map.project([feature.properties.long, feature.properties.lat]);
-            console.log(markerScreenCoordinates);
-            console.log(options);
 
-            if (options.top - markerScreenCoordinates.y < 0) {
-                let offset = markerScreenCoordinates.y;
-                console.log(offset);
+            //devo spostare la mappa in alto in modo che il punto si trovi a 30px dal margine superiore della scheda progetto
+            if (options.y < markerScreenCoordinates.y) {
+                let offset = options.height; // porto il punto al margine del div dettaglio
+                offset += ((markerScreenCoordinates.y - options.y) / 2); //aggiungo ulteriore padding per far emenergere il punto sopra il container
 
-                (this.map as any).easeTo({ padding: { top: offset }, duration: 1000 });
-            } else {
-                (this.map as any).easeTo({ padding: { top: 0 }, duration: 1000 });
+                (this.map as any).easeTo({ padding: { bottom: offset }, duration: 1000 });
             }
         } else {
-            (this.map as any).easeTo({ padding: { top: 0 }, duration: 1000 });
+            (this.map as any).easeTo({ padding: { bottom: 0 }, duration: 1000 });
         }
 
     }

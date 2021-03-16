@@ -100,7 +100,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 if (this.redrawCharts) {
                     this.renderCharts(this.progetti);
                 } else {
-                    this.counterValue = this.progetti.length
+                    this.counterValue = this.progetti.length;
                 }
             },
             error: err => console.error('subscribeToUpdates error: ', err),
@@ -158,17 +158,15 @@ export class HomePage implements OnInit, AfterViewInit {
             this.monithonApiService.getDettaglio(progetto.uid)
                 .subscribe({
                     next: progetto => {
+                        let dettaglioBoundingRect = this.dettaglioProgetto.nativeElement.getBoundingClientRect();
                         if (progetto && progetto.length) {
                             this.progettoSelezionato = progetto[0];
                             this.visualizzaDettaglio = true;
-                            debugger;
-                            let dettaglioBoundingRect = this.dettaglioProgetto.nativeElement.getBoundingClientRect();
-                            console.log(dettaglioBoundingRect);
                             this.monithonMap.easeToProgetto(dettaglioBoundingRect, this.progettoSelezionato);
                             this.renderDettaglioProgettoCharts();
                         } else {
                             this.visualizzaDettaglio = false;
-
+                            this.monithonMap.easeToProgetto(null, null);
                         }
                     },
                     error: err => {
@@ -177,6 +175,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 });
         } else {
             this.visualizzaDettaglio = false;
+            this.monithonMap.easeToProgetto(null, null);
         }
 
     }
