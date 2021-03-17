@@ -6,7 +6,7 @@ import { takeWhile } from 'lodash';
 })
 export class CapitalizePipe implements PipeTransform {
 
-    transform(value: string=''): unknown {
+    transform(value: string=''): string {
         let paragraphs = value.split('.');
         let capitalizedParagraphs = paragraphs.map(p => {
             let firstLetter = p[0] || '';

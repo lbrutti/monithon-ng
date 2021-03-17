@@ -560,8 +560,14 @@ export class MonithonMapService {
             // if ((markerScreenCoordinates.x < options.width) && (options.y < markerScreenCoordinates.y)) {
             let offset = options.height; // porto il punto al margine del div dettaglio
             offset += ((markerScreenCoordinates.y - options.y) / 2); //aggiungo ulteriore padding per far emenergere il punto sopra il container
-
-            (this.map as any).flyTo({ center: [feature.properties.long, feature.properties.lat], padding: { bottom: offset }, duration: 1000, zoom: 13 });
+            let easeOptions = { center: [feature.properties.long, feature.properties.lat], duration: 2000 };
+            if (this.map.getZoom() < 10) {
+                easeOptions['zoom'] = 10;
+            }
+            if (offset > 0) {
+                easeOptions['padding'] = { bottom: offset };
+            }
+            (this.map as any).easeTo(easeOptions);
             // }
         } else if (!isOverlayPresent) {
             // this.highlightById([]);
