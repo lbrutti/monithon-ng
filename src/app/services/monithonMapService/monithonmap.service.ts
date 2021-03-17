@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import mapboxgl, { CameraOptions, EaseToOptions, PaddingOptions, PointLike } from 'mapbox-gl';
+import mapboxgl, { PointLike } from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js';
@@ -39,6 +39,9 @@ export class MonithonMapService {
         "features": []
     };
     circle: any;
+    radius: any;
+    geocoderUpdate: Subject<any> = new Subject();
+    comuneCorrente: any;
 
 
     constructor() {
@@ -75,7 +78,9 @@ export class MonithonMapService {
 
         this.geocoder.on('result', evt => {
             let center = evt.result.center;
+            this.comuneCorrente = evt.result.place_name;
             this.drawRangeProgetti(center);
+            this.publishGeocoderUpdate()
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
         let radiusFilterDrawStyle = [ // ACTIVE (being drawn)
@@ -161,6 +166,7 @@ export class MonithonMapService {
 
             this.filtroPerRaggioEnabled = true;
             this.filtraPerDistanza(circleData);
+            this.publishGeocoderUpdate();
         });
         this.map.on('draw.create', (evt) => {
             const geojson = evt.features[0];
@@ -261,7 +267,6 @@ export class MonithonMapService {
                     }
                 });
             this.map.on('click', e => {
-                console.dir(e);
                 //this.publishSelectedProject(null);
 
                 // set bbox as 5px reactangle area around clicked point
@@ -271,7 +276,6 @@ export class MonithonMapService {
                 var features = this.map.queryRenderedFeatures(bbox, {
                     layers: ['progetti-layer']
                 });
-                console.log(features);
                 if (features.length) {
                     let feature = features[0];
                     let progetto: Progetto = feature.properties as Progetto;
@@ -292,6 +296,10 @@ export class MonithonMapService {
         });
 
 
+    }
+    publishGeocoderUpdate( ) {
+        let data = { comune: this.comuneCorrente, radius: this.radius }
+        this.geocoderUpdate.next(data);
     }
 
     public setTemi(temi: Array<any>) {
@@ -421,11 +429,11 @@ export class MonithonMapService {
                 }
             });
             let centerPoint = point(circleData.center);
-            let radius = circleData.radius;
+            this.radius = circleData.radius;
             this.progetti.features.map(f => {
                 let progetto = f.properties;
                 progetto.distanza = distance(point(f.geometry.coordinates), centerPoint);
-                progetto.isWithinRange = progetto.distanza <= radius;
+                progetto.isWithinRange = progetto.distanza <= this.radius;
                 this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: progetto.isWithinRange });
             });
         } else {
@@ -477,6 +485,12 @@ export class MonithonMapService {
         this.projectSelected.unsubscribe();
     }
 
+    public subscribeToGeocoderUpdates(obs: Observer<any>): void {
+        this.geocoderUpdate.subscribe(obs);
+    }
+    public unsubscribeToGeocoderUpdates(): void {
+        this.geocoderUpdate.unsubscribe();
+    }
     publishUpdate(progetti: Array<Progetto>): void {
         this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: progetti });
     }

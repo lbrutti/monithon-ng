@@ -246,7 +246,8 @@
                                     number}}
                                 </h1>
                             </ion-col>
-                            <ion-col><span>{{'comune'|transloco}}</span>; <span>{{'distanza'|transloco}}</span>
+                            <ion-col><span>{{'comune'|transloco}}:{{comuneCorrente|capitalize}}</span>;
+                                <span>{{'distanza'|transloco}}: {{raggioCorrente|formatDistanza}}</span>
                             </ion-col>
                         </ion-row>
                         <!-- ordinamento -->

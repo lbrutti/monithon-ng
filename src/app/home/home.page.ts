@@ -82,6 +82,9 @@ export class HomePage implements OnInit, AfterViewInit {
 
     criteriOrdinamento: Array<string> = ['distanza', 'ocCodCategoriaSpesa', 'ocFinanzTotPubNetto', 'ocDataInizioProgetto']
     criterioSelezionato: string = 'distanza';
+    geocoderData: any;
+    comuneCorrente: any;
+    raggioCorrente: any;
     constructor(
         // private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
@@ -113,8 +116,24 @@ export class HomePage implements OnInit, AfterViewInit {
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
         };
+
+        let geocoderObserver: Observer<any> = {
+            next: geocoderData => {
+            
+                console.log(geocoderData);
+                this.updateGeocoderBindindings(geocoderData);
+            },
+            error: err => console.error('gecoderObserver error: ', err),
+            complete: () => console.log('gecoderObserver complete')
+        };
         this.monithonMap.subscribeToUpdates(mapUpdateObserver);
         this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
+        this.monithonMap.subscribeToGeocoderUpdates(geocoderObserver);
+    }
+    updateGeocoderBindindings(geocoderData: any): void {
+        this.geocoderData = geocoderData; 
+        this.comuneCorrente = this.geocoderData.comune.split(',')[0];
+        this.raggioCorrente = this.geocoderData.radius;
     }
 
     getCategorie() {
