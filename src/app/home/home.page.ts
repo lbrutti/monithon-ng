@@ -322,10 +322,10 @@ export class HomePage implements OnInit, AfterViewInit {
         this.renderBudgetChart(this.progettiCrossFilter, listaProgetti);
         this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
         dc.renderAll();
-        d3.select((this.budgetChartContainer as any).nativeElement)
-            .selectAll('g.axis.y').remove();
-        d3.select((this.annoChartContainer as any).nativeElement)
-            .selectAll('g.axis.y').remove();
+        // d3.select((this.budgetChartContainer as any).nativeElement)
+        //     .selectAll('g.axis.y').remove();
+        // d3.select((this.annoChartContainer as any).nativeElement)
+        //     .selectAll('g.axis.y').remove();
 
     }
 
@@ -360,7 +360,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.annoChart.height(chartHeight);
 
         this.annoChart.on('pretransition', function (chart) {
-            chart.selectAll('g.axis.y').remove();
+            // chart.selectAll('g.axis.y').remove();
             let brushBegin = [], brushEnd = []; // 1
             if (chart.filter()) {
                 brushBegin = [chart.filter()[0]]; // 2
@@ -405,7 +405,7 @@ export class HomePage implements OnInit, AfterViewInit {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-            chart.selectAll('g.axis.y').remove();
+            // chart.selectAll('g.axis.y').remove();
 
         });
 
@@ -413,7 +413,7 @@ export class HomePage implements OnInit, AfterViewInit {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-            chart.selectAll('g.axis.y').remove();
+            // chart.selectAll('g.axis.y').remove();
 
         });
     }
@@ -467,7 +467,7 @@ export class HomePage implements OnInit, AfterViewInit {
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-            chart.selectAll('g.axis.y').remove();
+            // chart.selectAll('g.axis.y').remove();
 
         });
 
@@ -476,13 +476,13 @@ export class HomePage implements OnInit, AfterViewInit {
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-            chart.selectAll('g.axis.y').remove();
+            // chart.selectAll('g.axis.y').remove();
 
 
         });
 
         this.budgetChart.on('pretransition', function (chart) {
-            chart.selectAll('g.axis.y').remove();
+            // chart.selectAll('g.axis.y').remove();
             let brushBegin = [], brushEnd = []; // 1
             if (chart.filter()) {
                 brushBegin = [chart.filter()[0]]; // 2

@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 .dc-chart path.dc-symbol,
 .dc-legend g.dc-legend-item.fadeout {
     fill-opacity: 0.5;
@@ -7,6 +9,7 @@
 .dc-chart rect.bar {
     stroke: none;
     cursor: pointer;
+    fill: var(--monithon-chart-fill);
 }
 
 .dc-chart rect.bar:hover,
@@ -16,7 +19,13 @@
 
 .dc-chart rect.deselected {
     stroke: none;
-    fill: #ccc;
+    fill: var(--monithon-deselected-chart-fill);
+}
+
+.dc-chart {
+    .domain {
+        stroke: var(--monithon-chart-domain-stroke);
+    }
 }
 
 .dc-chart .pie-slice {
@@ -61,8 +70,13 @@
 .dc-chart .axis path,
 .dc-chart .axis line {
     fill: none;
-    stroke: #000;
+    stroke: var(--monithon-chart-domain-stroke);
     shape-rendering: crispEdges;
+}
+.dc-chart .axis .tick line,
+.dc-chart .axis.y *
+{
+    display: none;
 }
 
 .dc-chart .axis text {

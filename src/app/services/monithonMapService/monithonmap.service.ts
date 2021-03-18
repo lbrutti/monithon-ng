@@ -65,7 +65,7 @@ export class MonithonMapService {
             countries: 'it',
             minLength: 3,
             language: 'it',
-            zoom: 3,
+            //zoom: 3,
             filter: function (item: any) {
                 return item.place_type[0] === 'place';
             },
