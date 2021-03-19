@@ -119,7 +119,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
         let geocoderObserver: Observer<any> = {
             next: geocoderData => {
-            
+
                 console.log(geocoderData);
                 this.updateGeocoderBindindings(geocoderData);
             },
@@ -131,7 +131,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.monithonMap.subscribeToGeocoderUpdates(geocoderObserver);
     }
     updateGeocoderBindindings(geocoderData: any): void {
-        this.geocoderData = geocoderData; 
+        this.geocoderData = geocoderData;
         this.comuneCorrente = this.geocoderData.comune.split(',')[0];
         this.raggioCorrente = this.geocoderData.radius;
     }
@@ -355,6 +355,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .margins({ top: 10, right: 20, bottom: 20, left: 20 });
         this.annoChart
             .xAxis()
+            .tickSizeOuter(0)
             .tickFormat(anno => anno <= 2013 ? `...${parseInt(anno)}` : parseInt(anno));
 
         this.annoChart.height(chartHeight);
@@ -422,7 +423,6 @@ export class HomePage implements OnInit, AfterViewInit {
         this.budgetChart = new dc.BarChart((this.budgetChartContainer as any).nativeElement);
 
         let budgetBin = d3.bin();
-        // let chartHeight = (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height;
         let chartHeight = 72 || (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height;
 
         //creo bin usando arrotondamento del budget
@@ -453,11 +453,12 @@ export class HomePage implements OnInit, AfterViewInit {
             .x(d3.scaleLinear().domain([0, numQuantili]))
             .elasticY(true)
             .elasticX(true)
-            .margins({ top: 10, right: 20, bottom: 20, left: 20 })
-            .xAxis()
-            .tickFormat((v: any) => `${binThresholds[v] / 1000} K`)
+            .margins({ top: 10, right: 20, bottom: 20, left: 20 });
 
-        this.budgetChart.yAxis().tickFormat(() => undefined)
+        this.budgetChart.xAxis()
+            .tickSizeOuter(0)
+            .tickFormat((v: any) => `${binThresholds[v] / 1000} K`);
+
 
         this.budgetChart.height(chartHeight);
 
@@ -467,7 +468,6 @@ export class HomePage implements OnInit, AfterViewInit {
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-            // chart.selectAll('g.axis.y').remove();
 
         });
 
@@ -476,13 +476,11 @@ export class HomePage implements OnInit, AfterViewInit {
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-            // chart.selectAll('g.axis.y').remove();
 
 
         });
 
         this.budgetChart.on('pretransition', function (chart) {
-            // chart.selectAll('g.axis.y').remove();
             let brushBegin = [], brushEnd = []; // 1
             if (chart.filter()) {
                 brushBegin = [chart.filter()[0]]; // 2
