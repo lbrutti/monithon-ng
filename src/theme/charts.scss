@@ -38,3 +38,389 @@
 
     }
 }
+
+:hover .dc-chart .pie-slice.highlight {
+    fill-opacity: .8;
+}
+
+.dc-chart {
+
+    path.dc-symbol {
+        fill-opacity: 0.5;
+        stroke-opacity: 0.5;
+    }
+
+    rect.bar {
+        stroke: none;
+        cursor: pointer;
+        fill: var(--monithon-chart-fill);
+
+        &:hover,
+        &:focus {
+            fill-opacity: .5;
+        }
+    }
+
+    rect.deselected {
+        stroke: none;
+        fill: var(--monithon-deselected-chart-fill);
+    }
+
+
+    .domain {
+        stroke: var(--monithon-chart-domain-stroke);
+
+    }
+
+    .pie-slice {
+        fill: #fff;
+        font-size: 12px;
+        cursor: pointer;
+
+        &.external {
+            fill: #000;
+        }
+
+        &:focus {
+            fill-opacity: .8;
+        }
+    }
+
+
+
+
+    .pie-path {
+        fill: none;
+        stroke-width: 2px;
+        stroke: #000;
+        opacity: 0.4;
+    }
+
+    .selected path,
+    .selected circle {
+        stroke-width: 3;
+        stroke: #ccc;
+        fill-opacity: 1;
+    }
+
+    .deselected path,
+    .deselected circle {
+        stroke: none;
+        fill-opacity: .5;
+        fill: #ccc;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: var(--monithon-chart-domain-stroke);
+        shape-rendering: crispEdges;
+    }
+
+    .axis .tick line,
+    .axis.y * {
+        display: none;
+    }
+
+    .axis text {
+        font: 10px sans-serif;
+    }
+
+    .grid-line,
+    .axis .grid-line,
+    .grid-line line,
+    .axis .grid-line line {
+        fill: none;
+        stroke: #ccc;
+        shape-rendering: crispEdges;
+    }
+
+    .brush {
+
+        rect.selection {
+            fill: #4682b4;
+            fill-opacity: .125;
+        }
+
+        .custom-brush-handle {
+            fill: #eee;
+            stroke: #666;
+            cursor: ew-resize;
+        }
+    }
+
+
+    path.line {
+        fill: none;
+        stroke-width: 1.5px;
+    }
+
+    path.area {
+        fill-opacity: .3;
+        stroke: none;
+    }
+
+    path.highlight {
+        stroke-width: 3;
+        fill-opacity: 1;
+        stroke-opacity: 1;
+    }
+
+    g.state {
+        cursor: pointer;
+
+        :hover,
+        :focus {
+            fill-opacity: .8;
+        }
+
+        path {
+            stroke: #fff;
+        }
+    }
+
+
+
+    g.deselected {
+        path {
+            fill: #808080;
+        }
+
+        text {
+            display: none;
+        }
+    }
+
+    g.row {
+
+        rect {
+            fill-opacity: 0.8;
+            cursor: pointer;
+
+            &:hover,
+            &:focus {
+                fill-opacity: 0.6;
+            }
+        }
+
+        text {
+            fill: #fff;
+            font-size: 12px;
+            cursor: pointer;
+        }
+    }
+
+
+    g.dc-tooltip path {
+        fill: none;
+        stroke: #808080;
+        stroke-opacity: .8;
+    }
+
+    g.county path {
+        stroke: #fff;
+        fill: none;
+    }
+
+    g.debug rect {
+        fill: #00f;
+        fill-opacity: .2;
+    }
+
+    g.axis text {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    .node {
+        font-size: 0.7em;
+        cursor: pointer;
+    }
+
+    .node :hover,
+    .node :focus {
+        fill-opacity: .8;
+    }
+
+    .bubble {
+        stroke: none;
+        fill-opacity: 0.6;
+    }
+
+    .highlight {
+        fill-opacity: 1;
+        stroke-opacity: 1;
+    }
+
+    .fadeout {
+        fill-opacity: 0.2;
+        stroke-opacity: 0.2;
+    }
+
+    .box text {
+        font: 10px sans-serif;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    .box line {
+        fill: #fff;
+    }
+
+    .box rect,
+    .box line,
+    .box circle {
+        stroke: #000;
+        stroke-width: 1.5px;
+    }
+
+    .box .center {
+        stroke-dasharray: 3, 3;
+    }
+
+    .box .data {
+        stroke: none;
+        stroke-width: 0px;
+    }
+
+    .box .outlier {
+        fill: none;
+        stroke: #ccc;
+    }
+
+    .box .outlierBold {
+        fill: red;
+        stroke: none;
+    }
+
+    .box.deselected {
+        opacity: 0.5;
+    }
+
+    .box.deselected .box {
+        fill: #ccc;
+    }
+
+    .symbol {
+        stroke: none;
+    }
+
+    .heatmap .box-group.deselected rect {
+        stroke: none;
+        fill-opacity: 0.5;
+        fill: #ccc;
+    }
+
+    .heatmap g.axis text {
+        pointer-events: all;
+        cursor: pointer;
+    }
+
+    .empty-chart .pie-slice {
+        cursor: default;
+    }
+
+    .empty-chart .pie-slice path {
+        fill: #fee;
+        cursor: default;
+    }
+}
+
+
+.dc-data-count {
+    float: right;
+    margin-top: 15px;
+    margin-right: 15px;
+
+    .filter-count,
+    .total-count {
+        color: #3182bd;
+        font-weight: bold;
+    }
+}
+
+
+.dc-legend {
+    font-size: 11px;
+
+    .dc-legend-item {
+        cursor: pointer;
+    }
+
+    g.dc-legend-item.selected {
+        fill: blue;
+    }
+
+    g.dc-legend-item.fadeout {
+        fill-opacity: 0.5;
+        stroke-opacity: 0.5;
+    }
+}
+
+.dc-hard .number-display {
+    float: none;
+}
+
+div.dc-html-legend {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: inherit;
+    float: right;
+    padding-right: 2px;
+
+    .dc-legend-item-horizontal {
+        display: inline-block;
+        margin-left: 5px;
+        margin-right: 5px;
+        cursor: pointer;
+
+        &.selected {
+            background-color: #3182bd;
+            color: white;
+        }
+    }
+
+
+    .dc-legend-item-vertical {
+        display: block;
+        margin-top: 5px;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        cursor: pointer;
+
+        &.selected {
+            background-color: #3182bd;
+            color: white;
+        }
+    }
+
+
+    .dc-legend-item-color {
+        display: table-cell;
+        width: 12px;
+        height: 12px;
+    }
+
+    .dc-legend-item-label {
+        line-height: 12px;
+        display: table-cell;
+        vertical-align: middle;
+        padding-left: 3px;
+        padding-right: 3px;
+        font-size: 0.75em;
+    }
+}
+
+.dc-html-legend-container {
+    height: inherit;
+}
