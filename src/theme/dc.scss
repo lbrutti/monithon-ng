@@ -1,5 +1,11 @@
 @import 'variables.scss';
 
+
+:hover .dc-chart .pie-slice.highlight {
+    fill-opacity: .8;
+}
+
+
 .dc-chart path.dc-symbol,
 .dc-legend g.dc-legend-item.fadeout {
     fill-opacity: 0.5;
@@ -42,9 +48,7 @@
     fill-opacity: .8;
 }
 
-:hover .dc-chart .pie-slice.highlight {
-    fill-opacity: .8;
-}
+
 
 .dc-chart .pie-path {
     fill: none;
@@ -73,9 +77,9 @@
     stroke: var(--monithon-chart-domain-stroke);
     shape-rendering: crispEdges;
 }
+
 .dc-chart .axis .tick line,
-.dc-chart .axis.y *
-{
+.dc-chart .axis.y * {
     display: none;
 }
 
