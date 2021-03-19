@@ -326,26 +326,6 @@ export class HomePage implements OnInit, AfterViewInit {
         this.renderBudgetChart(this.progettiCrossFilter, listaProgetti);
         this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
         dc.renderAll();
-
-        let initBudgetBrush = new Promise(resolve => {
-            setTimeout(() => {
-                this.budgetChart
-                    .select('.brush')
-                    .call(this.budgetChart.brush().move, [0, this.budgetChart.width() - (this.budgetChart.margins().right + this.budgetChart.margins().left)]);
-                resolve(true);
-            }, 0);
-        });
-        initBudgetBrush.then(() => {
-            setTimeout(() => {
-                this.annoChart
-                    .select('.brush')
-                    .call(this.annoChart.brush().move, [0, this.annoChart.width() - (this.annoChart.margins().right + this.annoChart.margins().left)]);
-            }, 50); 
-        });
-
-        (window as any).budgetChart = this.budgetChart;
-        (window as any).annoChart = this.annoChart;
-
     }
 
     private renderAnnoChart(crossFilterData: any, listaProgetti: any) {
@@ -392,48 +372,13 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
 
-        // this.annoChart.on('pretransition', function (chart) {
-        //     // chart.selectAll('g.axis.y').remove();
-        //     let brushBegin = [], brushEnd = []; // 1
-        //     if (chart.filter()) {
-        //         brushBegin = [chart.filter()[0]]; // 2
-        //         brushEnd = [chart.filter()[1]];
-        //     }
-        //     let beginLabel = chart.select('g.brush') // 3
-        //         .selectAll('text.brush-begin')
-        //         .data(brushBegin); // 4
-        //     beginLabel.exit().remove(); // 5
-        //     beginLabel = beginLabel.enter()
-        //         .append('text') // 6
-        //         .attr('class', 'brush-begin') // 7
-        //         .attr('text-anchor', 'end')
-        //         .attr('dominant-baseline', 'text-top')
-        //         .attr('fill', 'black')
-        //         .attr('y', chart.margins().top)
-        //         .attr('dy', 4)
-        //         .merge(beginLabel); // 8
-        //     beginLabel
-        //         .attr('x', d => chart.x()(d))
-        //         .text(d => parseInt(d + 1)); // 9
-
-
-        //     let endLabel = chart.select('g.brush')
-        //         .selectAll('text.brush-end')
-        //         .data(brushEnd);
-        //     endLabel.exit().remove();
-        //     endLabel = endLabel.enter()
-        //         .append('text')
-        //         .attr('class', 'brush-end')
-        //         .attr('text-anchor', 'begin')
-        //         .attr('dominant-baseline', 'text-top')
-        //         .attr('fill', 'black')
-        //         .attr('y', chart.margins().top)
-        //         .attr('dy', 4)
-        //         .merge(endLabel);
-        //     endLabel
-        //         .attr('x', d => chart.x()(d))
-        //         .text(d => parseInt(d));
-        // })
+        this.annoChart.on('pretransition', function (chart) {
+            if (!chart.filter()) {
+                chart
+                    .select('.brush')
+                    .call(chart.brush().move, [0, chart.width() - (chart.margins().right + chart.margins().left)]);
+            }
+        })
         this.annoChart.on("filtered", () => {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
@@ -528,44 +473,51 @@ export class HomePage implements OnInit, AfterViewInit {
             if (chart.filter()) {
                 brushBegin = [chart.filter()[0]]; // 2
                 brushEnd = [chart.filter()[1]];
+                let beginLabel = chart.select('g.brush') // 3
+                    .selectAll('text.brush-begin')
+                    .data(brushBegin); // 4
+                beginLabel.exit().remove(); // 5
+                beginLabel = beginLabel.enter()
+                    .append('text') // 6
+                    .attr('class', 'brush-begin') // 7
+                    .attr('text-anchor', 'end')
+                    .attr('dominant-baseline', 'text-top')
+                    .attr('fill', 'black')
+                    .attr('y', chart.margins().top)
+                    .attr('dy', 4)
+                    .merge(beginLabel); // 8
+
+                beginLabel
+                    .attr('x', d => chart.x()(d))
+                    .text(d => binThresholds[parseInt(d) + 1]); // 9
+
+
+                let endLabel = chart.select('g.brush')
+                    .selectAll('text.brush-end')
+                    .data(brushEnd);
+                endLabel.exit().remove();
+                endLabel = endLabel.enter()
+                    .append('text')
+                    .attr('class', 'brush-end')
+                    .attr('text-anchor', 'begin')
+                    .attr('dominant-baseline', 'text-top')
+                    .attr('fill', 'black')
+                    .attr('y', chart.margins().top)
+                    .attr('dy', 4)
+                    .merge(endLabel);
+                endLabel
+                    .attr('x', d => chart.x()(d))
+                    .text(d => binThresholds[parseInt(d)]); // 9
+            } else {
+                chart
+                    .select('.brush')
+                    .call(chart.brush().move, [0, chart.width() - (chart.margins().right + chart.margins().left)]);
             }
-            let beginLabel = chart.select('g.brush') // 3
-                .selectAll('text.brush-begin')
-                .data(brushBegin); // 4
-            beginLabel.exit().remove(); // 5
-            beginLabel = beginLabel.enter()
-                .append('text') // 6
-                .attr('class', 'brush-begin') // 7
-                .attr('text-anchor', 'end')
-                .attr('dominant-baseline', 'text-top')
-                .attr('fill', 'black')
-                .attr('y', chart.margins().top)
-                .attr('dy', 4)
-                .merge(beginLabel); // 8
 
-            beginLabel
-                .attr('x', d => chart.x()(d))
-                .text(d => binThresholds[parseInt(d) + 1]); // 9
-
-
-            let endLabel = chart.select('g.brush')
-                .selectAll('text.brush-end')
-                .data(brushEnd);
-            endLabel.exit().remove();
-            endLabel = endLabel.enter()
-                .append('text')
-                .attr('class', 'brush-end')
-                .attr('text-anchor', 'begin')
-                .attr('dominant-baseline', 'text-top')
-                .attr('fill', 'black')
-                .attr('y', chart.margins().top)
-                .attr('dy', 4)
-                .merge(endLabel);
-            endLabel
-                .attr('x', d => chart.x()(d))
-                .text(d => binThresholds[parseInt(d)]); // 9
         });
-        // this.budgetChart.render();
+
+
+
         return crossFilterData;
     }
 
