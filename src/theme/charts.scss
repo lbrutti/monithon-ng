@@ -146,13 +146,10 @@
     }
 
     .brush {
-
-
         rect.selection {
             fill: #4682b4;
             fill-opacity: .125;
         }
-
         .custom-brush-handle {
             display: none;
             fill: #eee;

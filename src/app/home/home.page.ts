@@ -333,25 +333,33 @@ export class HomePage implements OnInit, AfterViewInit {
         this.annoChart = new dc.BarChart((this.annoChartContainer as any).nativeElement);
         // let chartHeight = (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
         let chartHeight = 72 || (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
-
         let annoDim = crossFilterData.dimension((d) => {
             let anno = moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year();
             return anno < 2014 ? 2013 : anno;
-        }
-        ),
-            progettiPerAnno = annoDim.group().reduceCount();
+        });
+        let progettiPerAnno = annoDim.group().reduceCount();
 
         let annoRange = d3.extent(listaProgetti, (d: any) => moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year()
         );
         annoRange[1] += 2;
+        let maxCount = progettiPerAnno
+            .all()
+            .map(v => v.value)
+            .reduce((a, v) => Math.max(a, v), -Infinity);
+
+        maxCount += (maxCount / 2);
+
+        this.annoChart.height(chartHeight);
+
         this.annoChart
             .dimension(annoDim)
             .group(progettiPerAnno)
             .brushOn(true)
             .x(d3.scaleLinear().domain(annoRange))
+            .y(d3.scaleLinear().domain([0, maxCount]))
             .xUnits(dc.units.integers)
             .elasticX(true)
-            .elasticY(true)
+            .elasticY(false)
             .margins({ top: 10, right: 20, bottom: 20, left: 20 });
 
         this.annoChart
@@ -359,7 +367,6 @@ export class HomePage implements OnInit, AfterViewInit {
             .tickSizeOuter(0)
             .tickFormat(anno => anno <= 2013 ? `...${parseInt(anno)}` : parseInt(anno));
 
-        this.annoChart.height(chartHeight);
 
         this.annoChart.on('pretransition', function (chart) {
             // chart.selectAll('g.axis.y').remove();
@@ -447,13 +454,22 @@ export class HomePage implements OnInit, AfterViewInit {
             budgetGroup = budgetDim.group();
 
 
+        let maxCount = budgetGroup
+            .all()
+            .map(v => v.value)
+            .reduce((a, v) => Math.max(a, v), -Infinity);
+
+        maxCount += (maxCount / 2);
+
         this.budgetChart
             .dimension(budgetDim)
             .group(budgetGroup)
             .brushOn(true)
             .x(d3.scaleLinear().domain([0, numQuantili]))
-            .elasticY(true)
+            .y(d3.scaleLinear().domain([0, maxCount]))
+
             .elasticX(true)
+            .elasticY(false)
             .margins({ top: 10, right: 20, bottom: 20, left: 20 });
 
         this.budgetChart.xAxis()
