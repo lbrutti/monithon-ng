@@ -201,8 +201,6 @@ export class HomePage implements OnInit, AfterViewInit {
         } else {
             this.visualizzaDettaglio = false;
             this.monithonMap.highlightById([]);
-
-            // this.monithonMap.easeToProgetto(null, null, this.visualizzaDettaglio);
         }
 
     }
@@ -300,6 +298,12 @@ export class HomePage implements OnInit, AfterViewInit {
 
     private renderCharts(data: any) {
         let baseArrotondamento = 10000;
+        //override della funzione resizeHandlePath per personalizzare aspetto degli handle del brush
+        dc.BarChart.prototype.resizeHandlePath = function () {
+            const s = this.effectiveHeight();
+            return `M0.5,${s}L0.5,0`;
+
+        };
         let arrotonda = (val, multiplo) => {
             let arrotondamento = multiplo * Math.floor(val / multiplo);
             return arrotondamento;
@@ -322,17 +326,32 @@ export class HomePage implements OnInit, AfterViewInit {
         this.renderBudgetChart(this.progettiCrossFilter, listaProgetti);
         this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
         dc.renderAll();
-        // d3.select((this.budgetChartContainer as any).nativeElement)
-        //     .selectAll('g.axis.y').remove();
-        // d3.select((this.annoChartContainer as any).nativeElement)
-        //     .selectAll('g.axis.y').remove();
+
+        let initBudgetBrush = new Promise(resolve => {
+            setTimeout(() => {
+                this.budgetChart
+                    .select('.brush')
+                    .call(this.budgetChart.brush().move, [0, this.budgetChart.width() - (this.budgetChart.margins().right + this.budgetChart.margins().left)]);
+                resolve(true);
+            }, 0);
+        });
+        initBudgetBrush.then(() => {
+            setTimeout(() => {
+                this.annoChart
+                    .select('.brush')
+                    .call(this.annoChart.brush().move, [0, this.annoChart.width() - (this.annoChart.margins().right + this.annoChart.margins().left)]);
+            }, 50); 
+        });
+
+        (window as any).budgetChart = this.budgetChart;
+        (window as any).annoChart = this.annoChart;
 
     }
 
     private renderAnnoChart(crossFilterData: any, listaProgetti: any) {
         this.annoChart = new dc.BarChart((this.annoChartContainer as any).nativeElement);
-        // let chartHeight = (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height < 50 ? 50 : (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
-        let chartHeight = 72 || (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height;
+        let chartHeight = 72;
+        let chartWidth = 432;
         let annoDim = crossFilterData.dimension((d) => {
             let anno = moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year();
             return anno < 2014 ? 2013 : anno;
@@ -350,13 +369,17 @@ export class HomePage implements OnInit, AfterViewInit {
         maxCount += (maxCount / 2);
 
         this.annoChart.height(chartHeight);
+        this.annoChart.width(chartWidth);
+        this.annoChart.useViewBoxResizing(true)
 
+        let xScale = d3.scaleLinear().domain(annoRange);
+        let yScale = d3.scaleLinear().domain([0, maxCount]);
         this.annoChart
             .dimension(annoDim)
             .group(progettiPerAnno)
             .brushOn(true)
-            .x(d3.scaleLinear().domain(annoRange))
-            .y(d3.scaleLinear().domain([0, maxCount]))
+            .x(xScale)
+            .y(yScale)
             .xUnits(dc.units.integers)
             .elasticX(true)
             .elasticY(false)
@@ -368,53 +391,53 @@ export class HomePage implements OnInit, AfterViewInit {
             .tickFormat(anno => anno <= 2013 ? `...${parseInt(anno)}` : parseInt(anno));
 
 
-        this.annoChart.on('pretransition', function (chart) {
-            // chart.selectAll('g.axis.y').remove();
-            let brushBegin = [], brushEnd = []; // 1
-            if (chart.filter()) {
-                brushBegin = [chart.filter()[0]]; // 2
-                brushEnd = [chart.filter()[1]];
-            }
-            let beginLabel = chart.select('g.brush') // 3
-                .selectAll('text.brush-begin')
-                .data(brushBegin); // 4
-            beginLabel.exit().remove(); // 5
-            beginLabel = beginLabel.enter()
-                .append('text') // 6
-                .attr('class', 'brush-begin') // 7
-                .attr('text-anchor', 'end')
-                .attr('dominant-baseline', 'text-top')
-                .attr('fill', 'black')
-                .attr('y', chart.margins().top)
-                .attr('dy', 4)
-                .merge(beginLabel); // 8
-            beginLabel
-                .attr('x', d => chart.x()(d))
-                .text(d => parseInt(d + 1)); // 9
+
+        // this.annoChart.on('pretransition', function (chart) {
+        //     // chart.selectAll('g.axis.y').remove();
+        //     let brushBegin = [], brushEnd = []; // 1
+        //     if (chart.filter()) {
+        //         brushBegin = [chart.filter()[0]]; // 2
+        //         brushEnd = [chart.filter()[1]];
+        //     }
+        //     let beginLabel = chart.select('g.brush') // 3
+        //         .selectAll('text.brush-begin')
+        //         .data(brushBegin); // 4
+        //     beginLabel.exit().remove(); // 5
+        //     beginLabel = beginLabel.enter()
+        //         .append('text') // 6
+        //         .attr('class', 'brush-begin') // 7
+        //         .attr('text-anchor', 'end')
+        //         .attr('dominant-baseline', 'text-top')
+        //         .attr('fill', 'black')
+        //         .attr('y', chart.margins().top)
+        //         .attr('dy', 4)
+        //         .merge(beginLabel); // 8
+        //     beginLabel
+        //         .attr('x', d => chart.x()(d))
+        //         .text(d => parseInt(d + 1)); // 9
 
 
-            let endLabel = chart.select('g.brush')
-                .selectAll('text.brush-end')
-                .data(brushEnd);
-            endLabel.exit().remove();
-            endLabel = endLabel.enter()
-                .append('text')
-                .attr('class', 'brush-end')
-                .attr('text-anchor', 'begin')
-                .attr('dominant-baseline', 'text-top')
-                .attr('fill', 'black')
-                .attr('y', chart.margins().top)
-                .attr('dy', 4)
-                .merge(endLabel);
-            endLabel
-                .attr('x', d => chart.x()(d))
-                .text(d => parseInt(d));
-        })
+        //     let endLabel = chart.select('g.brush')
+        //         .selectAll('text.brush-end')
+        //         .data(brushEnd);
+        //     endLabel.exit().remove();
+        //     endLabel = endLabel.enter()
+        //         .append('text')
+        //         .attr('class', 'brush-end')
+        //         .attr('text-anchor', 'begin')
+        //         .attr('dominant-baseline', 'text-top')
+        //         .attr('fill', 'black')
+        //         .attr('y', chart.margins().top)
+        //         .attr('dy', 4)
+        //         .merge(endLabel);
+        //     endLabel
+        //         .attr('x', d => chart.x()(d))
+        //         .text(d => parseInt(d));
+        // })
         this.annoChart.on("filtered", () => {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-            // chart.selectAll('g.axis.y').remove();
 
         });
 
@@ -422,16 +445,16 @@ export class HomePage implements OnInit, AfterViewInit {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-            // chart.selectAll('g.axis.y').remove();
 
         });
+        // this.annoChart.render();
     }
 
     private renderBudgetChart(crossFilterData: any, listaProgetti: any) {
         this.budgetChart = new dc.BarChart((this.budgetChartContainer as any).nativeElement);
-
+        let chartHeight = 72;
+        let chartWidth = 432;
         let budgetBin = d3.bin();
-        let chartHeight = 72 || (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height;
 
         //creo bin usando arrotondamento del budget
         budgetBin.value((d: any) => +d.ocFinanzTotPubNetto);
@@ -478,6 +501,9 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
         this.budgetChart.height(chartHeight);
+        this.budgetChart.width(chartWidth);
+        this.budgetChart.useViewBoxResizing(true)
+
 
 
         this.budgetChart.on("renderlet", () => {
@@ -539,6 +565,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 .attr('x', d => chart.x()(d))
                 .text(d => binThresholds[parseInt(d)]); // 9
         });
+        // this.budgetChart.render();
         return crossFilterData;
     }
 
