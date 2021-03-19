@@ -8,26 +8,30 @@
 
         text[data-oc-cod-tema-sintetico="4"] {
             fill: var(--monithon-tema-energia-background);
-            &[text-anchor="start"]{
-            fill: var(--monithon-finanziamenti-foreground);
+
+            &[text-anchor="start"] {
+                fill: var(--monithon-finanziamenti-foreground);
             }
         }
 
         text[data-oc-cod-tema-sintetico="5"] {
             fill: var(--monithon-tema-ambiente-background);
-            &[text-anchor="start"]{
-            fill: var(--monithon-finanziamenti-foreground);
+
+            &[text-anchor="start"] {
+                fill: var(--monithon-finanziamenti-foreground);
             }
         }
 
         text[data-oc-cod-tema-sintetico="6"] {
             fill: var(--monithon-tema-attrazione-background);
-            &[text-anchor="start"]{
-            fill: var(--monithon-finanziamenti-foreground);
+
+            &[text-anchor="start"] {
+                fill: var(--monithon-finanziamenti-foreground);
             }
         }
-        rect.foreground{
-            fill:var(--monithon-finanziamenti-foreground);
+
+        rect.foreground {
+            fill: var(--monithon-finanziamenti-foreground);
             opacity: .78;
         }
 
@@ -44,7 +48,13 @@
 }
 
 .dc-chart {
+    g.brush text {
+        fill: var(--monithon-dc-chart-brush-text-fill);
+    }
+.axis text {
+        fill: var(--monithon-dc-chart-text-fill);
 
+}
     path.dc-symbol {
         fill-opacity: 0.5;
         stroke-opacity: 0.5;
@@ -136,6 +146,7 @@
     }
 
     .brush {
+
 
         rect.selection {
             fill: #4682b4;

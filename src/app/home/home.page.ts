@@ -353,6 +353,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .elasticX(true)
             .elasticY(true)
             .margins({ top: 10, right: 20, bottom: 20, left: 20 });
+
         this.annoChart
             .xAxis()
             .tickSizeOuter(0)
@@ -402,7 +403,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 .attr('x', d => chart.x()(d))
                 .text(d => parseInt(d));
         })
-        this.annoChart.on("filtered", (chart) => {
+        this.annoChart.on("filtered", () => {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
@@ -410,7 +411,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
         });
 
-        this.annoChart.on("renderlet", (chart) => {
+        this.annoChart.on("renderlet", () => {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
@@ -463,7 +464,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.budgetChart.height(chartHeight);
 
 
-        this.budgetChart.on("renderlet", (chart) => {
+        this.budgetChart.on("renderlet", () => {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
@@ -471,7 +472,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
         });
 
-        this.budgetChart.on("filtered", (chart) => {
+        this.budgetChart.on("filtered", () => {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
