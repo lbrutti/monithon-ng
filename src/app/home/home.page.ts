@@ -392,7 +392,6 @@ export class HomePage implements OnInit, AfterViewInit {
             this.evidenziaRisultatiSuMappa();
 
         });
-        // this.annoChart.render();
     }
 
     private renderBudgetChart(crossFilterData: any, listaProgetti: any) {
@@ -470,9 +469,12 @@ export class HomePage implements OnInit, AfterViewInit {
 
         this.budgetChart.on('pretransition', function (chart) {
             let brushBegin = [], brushEnd = []; // 1
+            let maxBrushExtent = chart.width() - (chart.margins().right + chart.margins().left);
             if (chart.filter()) {
-                brushBegin = [chart.filter()[0]]; // 2
-                brushEnd = [chart.filter()[1]];
+                // non mostro label quando il brush è al 100%
+                brushBegin = chart.filter()[0] == 0 ? [] : [chart.filter()[0]]; // 2
+                brushEnd = chart.filter()[1] == binThresholds.length - 1 ? [] : [chart.filter()[1]];
+
                 let beginLabel = chart.select('g.brush') // 3
                     .selectAll('text.brush-begin')
                     .data(brushBegin); // 4
@@ -511,7 +513,7 @@ export class HomePage implements OnInit, AfterViewInit {
             } else {
                 chart
                     .select('.brush')
-                    .call(chart.brush().move, [0, chart.width() - (chart.margins().right + chart.margins().left)]);
+                    .call(chart.brush().move, [0, maxBrushExtent]);
             }
 
         });
