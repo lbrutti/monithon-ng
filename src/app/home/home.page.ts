@@ -9,6 +9,7 @@ import lodash from 'lodash';
 
 import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
+import { environment } from 'src/environments/environment';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -85,11 +86,12 @@ export class HomePage implements OnInit, AfterViewInit {
     geocoderData: any;
     comuneCorrente: any;
     raggioCorrente: any;
+    monithonReportUrl: any;
     constructor(
         // private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
         private monithonMap: MonithonMapService,
-        private currencyPipe: CurrencyPipe) { }
+        private currencyPipe: CurrencyPipe) { this.monithonReportUrl = environment.monithonReportUrl;}
 
     ngOnInit(): void {
         // this.monitonMockedService.mirageJsServer();

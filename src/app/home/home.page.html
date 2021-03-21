@@ -336,8 +336,10 @@
                                         <ion-list class="monithon-lista-progetti__progetto__dettagli__lista_report">
                                             <ion-item *ngFor="let report of progetto.reports; let i =index">
                                                 <ion-label>
-                                                    <span class="monithon-lista-progetti__progetto__dettagli__lista_report_indice-report"> #{{i}} </span>
-                                                    <span class="monithon-lista-progetti__progetto__dettagli__lista_report_data-report"> inserire data </span>
+                                                    <a href="{{monithonReportUrl}}/{{report}}" target="_blank">
+                                                        <span class="monithon-lista-progetti__progetto__dettagli__lista_report_indice-report"> #{{i}} </span>
+                                                        <span class="monithon-lista-progetti__progetto__dettagli__lista_report_data-report"> inserire data </span>
+                                                    </a>
                                                 </ion-label>
                                             </ion-item>
                                         </ion-list>
