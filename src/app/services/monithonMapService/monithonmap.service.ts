@@ -233,6 +233,8 @@ export class MonithonMapService {
                             COLOR_MAP.temi.ambiente,
                             ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 6]],
                             COLOR_MAP.temi.attrazione,
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 7]],
+                            COLOR_MAP.temi.mobilita,
                             'transparent'
                         ],
                         'circle-stroke-color': [
@@ -245,6 +247,8 @@ export class MonithonMapService {
                             COLOR_MAP.temi.ambiente,
                             ['==', ['get', 'ocCodTemaSintetico'], 6],
                             COLOR_MAP.temi.attrazione,
+                            ['==', ['get', 'ocCodTemaSintetico'], 7],
+                            COLOR_MAP.temi.mobilita,
                             'transparent'
                         ],
                         'circle-stroke-width': 1
