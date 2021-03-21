@@ -25,18 +25,17 @@ export class MonithonApiService {
     }
 
     public getProgetti(): Observable<any[]> {
-        // return of(mapdata);
         return this.httpClient.get<any[]>(this.url + '/mapdata')
             .pipe(
                 map((res) => {
-                    res = res.map((p: any) => {
+                    return res.map((p: any) => {
                         p.lat = parseFloat(p.lat);
                         p.long = parseFloat(p.long);
                         p.ocDataInizioProgetto = parseInt(p.ocDataInizioProgetto);
                         p.ocFinanzTotPubNetto = parseFloat(p.ocFinanzTotPubNetto);
+                        p.hasReport = p.reports.length>0 && p.reports[0]!=0;
                         return p;
                     });
-                    return res;
                 }),
                 catchError(e => {
                     console.error(e);

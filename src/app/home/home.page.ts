@@ -191,7 +191,6 @@ export class HomePage implements OnInit, AfterViewInit {
                         } else {
                             this.visualizzaDettaglio = false;
                             this.monithonMap.highlightById([]);
-                            // this.monithonMap.easeToProgetto(null, null, this.visualizzaDettaglio);
                         }
                     },
                     error: err => {
