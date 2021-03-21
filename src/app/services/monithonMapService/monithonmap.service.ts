@@ -317,7 +317,7 @@ export class MonithonMapService {
     private progettiToFeatureCollection(data: Array<Progetto>): any {
         this.progetti = {
             "type": "FeatureCollection",
-            "features": data.map((p: Progetto, idx) => {
+            "features": data.map((p: Progetto) => {
                 let properties: any = Object.assign({}, p);
                 properties.isSelected = true;
                 properties.isWithinRange = false;

@@ -469,7 +469,6 @@ export class HomePage implements OnInit, AfterViewInit {
 
         this.budgetChart.on('pretransition', function (chart) {
             let brushBegin = [], brushEnd = []; // 1
-            let maxBrushExtent = chart.width() - (chart.margins().right + chart.margins().left);
             if (chart.filter()) {
                 // non mostro label quando il brush è al 100%
                 brushBegin = chart.filter()[0] == 0 ? [] : [chart.filter()[0]]; // 2
@@ -511,6 +510,8 @@ export class HomePage implements OnInit, AfterViewInit {
                     .attr('x', d => chart.x()(d))
                     .text(d => binThresholds[parseInt(d)]); // 9
             } else {
+                //reset al default
+                let maxBrushExtent = chart.width() - (chart.margins().right + chart.margins().left);
                 chart
                     .select('.brush')
                     .call(chart.brush().move, [0, maxBrushExtent]);

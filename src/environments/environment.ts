@@ -9,9 +9,10 @@ export const environment = {
         style: 'mapbox://styles/lbrutti/ckioi1m7m4o0g17nrz5wydq5g/draft?optimize=true'
     },
     server:{
-        protocol:"http",
-        ip:"localhost",
-        port:"4200"
+        protocol:"https",
+        ip:"api.monithon.eu",
+        port:"80",
+        apiroute: "api"
     }
 };
 
