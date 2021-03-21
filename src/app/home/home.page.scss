@@ -498,6 +498,13 @@ ion-row.monithon-filtri-secondari {
         color: var(--monithon-font-color);
 
     }
+
+    .monithon-lista-progetti__progetto__dettagli__contatore_report{
+        text-align: right;
+        &[data-mostra-icona="true"]::after{
+            content: ' ↓';
+        }
+    }
 }
 
 .monithon-header * {
