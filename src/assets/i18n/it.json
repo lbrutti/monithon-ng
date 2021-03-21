@@ -2,7 +2,8 @@
     "temi": {
         "4": "Energia",
         "5": "Ambiente",
-        "6": "Cultura e turismo"
+        "6": "Cultura e turismo",
+        "7": "Mobilità sostenibile"
     },
     "categorie": {
         "17": "Gestione dei rifiuti domestici (prevenzione e riciclaggio)",
@@ -33,7 +34,9 @@
         "15": "Sistemi di distribuzione di energia intelligenti a media e bassa tensione",
         "16": "Cogenerazione e teleriscaldamento",
         "68": "Efficienza energetica e progetti dimostrativi nelle PMI e misure di sostegno",
-        "70": "Promozione dell'efficienza energetica nelle grandi imprese"
+        "70": "Promozione dell'efficienza energetica nelle grandi imprese",
+        "43": "mobilita sostenibile cat 1",
+        "44": "mobilita sostenibile cat 2"
     },
     "statiAvanzamento": {
         "0": "Non terminabile",

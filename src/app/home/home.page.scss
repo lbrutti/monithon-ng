@@ -144,7 +144,7 @@
     width: 66vw;
     transition: left 0.5s;
     z-index: 1001;
-   // height: 66vh;
+    // height: 66vh;
     text-align: left;
     color: var(--monithon-font-color);
 
@@ -171,6 +171,14 @@
             color: var(--monithon-tema-attrazione-background);
         }
     }
+
+     &[data-oc-cod-tema-sintetico="7"] {
+         background-color: var(--monithon-tema-mobilita-background);
+
+         .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+             color: var(--monithon-tema-mobilita-background);
+         }
+     }
 
     &.hidden {
         left: -100vw;
@@ -311,6 +319,11 @@
         border-color: var(--monithon-tema-attrazione-background);
     }
 
+    &[data-oc-cod-tema-sintetico="7"] {
+        color: var(--monithon-tema-mobilita-background) !important;
+        border-color: var(--monithon-tema-mobilita-background);
+    }
+
     // stati e flag report
     &[data-oc-cod-stato-progetto],
     &[data-has-report] {
@@ -335,6 +348,9 @@
 
         &[data-oc-cod-tema-sintetico="6"] {
             background-color: var(--monithon-tema-attrazione-background);
+        }
+        &[data-oc-cod-tema-sintetico="7"] {
+            background-color: var(--monithon-tema-mobilita-background);
         }
 
         &[data-oc-cod-stato-progetto],
@@ -459,6 +475,15 @@ ion-row.monithon-filtri-secondari {
         color: var(--monithon-tema-attrazione-background);
     }
 
+     &[data-oc-cod-tema-sintetico="7"]::before {
+         background-color: var(--monithon-tema-mobilita-background);
+
+     }
+
+     &[data-oc-cod-tema-sintetico="7"].selected {
+         color: var(--monithon-tema-mobilita-background);
+     }
+
     h2 {
         margin-bottom: auto;
         width: 90%;
@@ -499,14 +524,16 @@ ion-row.monithon-filtri-secondari {
 
     }
 
-    .monithon-lista-progetti__progetto__dettagli__contatore_report{
+    .monithon-lista-progetti__progetto__dettagli__contatore_report {
         text-align: right;
-        &[data-mostra-icona="true"]::after{
+
+        &[data-mostra-icona="true"]::after {
             content: ' ↓';
         }
     }
-    .monithon-lista-progetti__progetto__dettagli__lista_report *{
-        color:var(--monithon-lista-report-in-dettaglio-font-color);
+
+    .monithon-lista-progetti__progetto__dettagli__lista_report * {
+        color: var(--monithon-lista-report-in-dettaglio-font-color);
     }
 }
 

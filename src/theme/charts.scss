@@ -30,6 +30,15 @@
             }
         }
 
+        text[data-oc-cod-tema-sintetico="7"] {
+            fill: var(--monithon-tema-mobilita-background);
+
+            &[text-anchor="start"] {
+                fill: var(--monithon-mobilita-foreground);
+            }
+        }
+
+
         rect.foreground {
             fill: var(--monithon-finanziamenti-foreground);
             opacity: .78;
@@ -51,10 +60,12 @@
     g.brush text {
         fill: var(--monithon-dc-chart-brush-text-fill);
     }
-.axis text {
+
+    .axis text {
         fill: var(--monithon-dc-chart-text-fill);
 
-}
+    }
+
     path.dc-symbol {
         fill-opacity: 0.5;
         stroke-opacity: 0.5;
@@ -149,8 +160,9 @@
         rect.selection {
             fill: var(--monithon-dc-chart-brush-text-fill);
             fill-opacity: .2335;
-            stroke:transparent;
+            stroke: transparent;
         }
+
         .custom-brush-handle {
             stroke: var(--monithon-dc-chart-brush-text-fill);
             cursor: ew-resize;

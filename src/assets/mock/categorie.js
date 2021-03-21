@@ -1,4 +1,15 @@
 let categorie = [
+    { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 9 },
+    { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 10 },
+    { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 11 },
+    { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 12 },
+    { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 13 },
+    { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 14 },
+    { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 15 },
+    { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 16 },
+    { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 68 },
+    { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 70 },
+
             { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': 17 },
             { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': 18 },
             { 'ocCodTemaSintetico': 5, 'ocCodCategoriaSpesa': 19 },
@@ -20,15 +31,8 @@ let categorie = [
             { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': 94 },
             { 'ocCodTemaSintetico': 6, 'ocCodCategoriaSpesa': 95 },
 
-            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 9 },
-            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 10 },
-            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 11 },
-            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 12 },
-            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 13 },
-            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 14 },
-            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 15 },
-            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 16 },
-            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 68 },
-            { 'ocCodTemaSintetico': 4, 'ocCodCategoriaSpesa': 70 }];
+    { 'ocCodTemaSintetico': 7, 'ocCodCategoriaSpesa': 43 },
+    { 'ocCodTemaSintetico': 7, 'ocCodCategoriaSpesa': 44 },
+        ];
 
 export default categorie;
