@@ -99,12 +99,18 @@ export class HomePage implements OnInit, AfterViewInit {
             next: updateSubject => {
 
                 this.temi = updateSubject.temi; // <- nessun problema di performance
-                this.categorie = updateSubject.categorie.filter(c => c.isVisible);
+                this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
                 this.risultatiRicerca = this.progetti;
+
                 this.ordinaRisultatiPerCriterio();
                 if (this.redrawCharts) {
-                    this.renderCharts(this.progetti);
+                    try {
+                        
+                        this.renderCharts(this.progetti);
+                    } catch (error) {
+                        console.error(error);
+                    }
                 } else {
                     this.counterValue = this.progetti.length;
                 }
@@ -121,8 +127,6 @@ export class HomePage implements OnInit, AfterViewInit {
 
         let geocoderObserver: Observer<any> = {
             next: geocoderData => {
-
-                console.log(geocoderData);
                 this.updateGeocoderBindindings(geocoderData);
             },
             error: err => console.error('gecoderObserver error: ', err),
@@ -340,8 +344,13 @@ export class HomePage implements OnInit, AfterViewInit {
         let chartHeight = 72;
         let chartWidth = 432;
         let annoDim = crossFilterData.dimension((d) => {
-            let anno = moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year();
-            return anno < 2014 ? 2013 : anno;
+            try {
+                
+                let anno = moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year();
+                return anno < 2014 ? 2013 : anno;
+            } catch (error) {
+             console.error(error);   
+            }
         });
         let progettiPerAnno = annoDim.group().reduceCount();
 
@@ -549,6 +558,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     public filterByCategoria(categoria: any): void {
         categoria.isSelected = !categoria.isSelected;
+        console.dir(categoria);
         if (lodash.every(this.categorie, c => !c.isSelected)) {
             lodash.map(this.categorie, c => { c.isSelected = true; })
         }

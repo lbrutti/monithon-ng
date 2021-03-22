@@ -471,8 +471,9 @@ export class MonithonMapService {
         this.progetti.features
             .map(f => {
                 let progetto = f.properties;
-                progetto.isSelected = (temiSelezionati.length == 0) || lodash.includes(temiSelezionati, progetto.ocCodTemaSintetico);
-                progetto.isSelected = progetto.isSelected && ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, progetto.ocCodCategoriaSpesa).length > 0));
+                // progetto.isSelected = (temiSelezionati.length == 0) || lodash.includes(temiSelezionati, progetto.ocCodTemaSintetico);
+                // progetto.isSelected = progetto.isSelected && ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, progetto.ocCodCategoriaSpesa).length > 0));
+                progetto.isSelected = ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, progetto.ocCodCategoriaSpesa).length > 0));
                 if (this.filtroPerRaggioEnabled) {
                     progetto.isSelected = progetto.isSelected && progetto.isWithinRange;
                 }
@@ -503,7 +504,7 @@ export class MonithonMapService {
         this.geocoderUpdate.unsubscribe();
     }
     publishUpdate(progetti: Array<Progetto>): void {
-        this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: progetti });
+        this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: lodash.uniqBy(progetti, p=>p.uid) });
     }
 
     publishSelectedProject(progetto?: Progetto): void {
