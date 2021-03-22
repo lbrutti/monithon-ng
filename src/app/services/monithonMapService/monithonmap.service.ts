@@ -17,6 +17,7 @@ import { COLOR_MAP } from 'src/app/utils/colorMap';
     providedIn: 'root'
 })
 export class MonithonMapService {
+  
 
 
     map: mapboxgl.Map;
@@ -377,9 +378,14 @@ export class MonithonMapService {
         // rimuovi filtro su categorie non associate ai temi selezionati
         this.filtraCategorie();
         let progetti = this.filtraProgetti();
-        this.aggiornaVisibilitaCategorie();
+       // this.aggiornaVisibilitaCategorie();
         lodash.remove(progetti, p => !p.isSelected);
         this.publishUpdate(progetti);
+    }
+    resetFiltriTemi() {
+        lodash.map(this.temi, t => { t.isSelected = true; });
+        lodash.map(this.categorie, c => { c.isSelected = true; });
+        // this.filtraCategorie();
     }
 
     aggiornaVisibilitaCategorie() {
@@ -405,7 +411,7 @@ export class MonithonMapService {
                     c.isVisible = true;
                 } else {
                     c.isSelected = lodash.includes(temiSelezionati, c.ocCodTemaSintetico) && c.isSelected;
-                    c.isVisible = lodash.includes(temiSelezionati, c.ocCodTemaSintetico);
+                    c.isVisible = true;//lodash.includes(temiSelezionati, c.ocCodTemaSintetico);
                 }
             });
         }

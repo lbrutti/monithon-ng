@@ -539,8 +539,9 @@ export class HomePage implements OnInit, AfterViewInit {
     public filterByTema(tema: any): void {
         tema.isSelected = !tema.isSelected;
         if (lodash.every(this.temi, t => !t.isSelected)) {
-            lodash.map(this.temi, t => { t.isSelected = true; })
-        }
+            this.monithonMap.resetFiltriTemi();
+        } 
+        
         //TODO : resettare categorie quando un tema torna attivo
         this.redrawCharts = true;
         this.monithonMap.filtraPerTema();
