@@ -120,7 +120,8 @@ export class HomePage implements OnInit, AfterViewInit {
         };
 
         let projectSelectionObserver: Observer<any> = {
-            next: progetto => this.showDettaglioProgetto(progetto),
+            // next: progetto => this.showDettaglioProgetto(progetto),
+            next: progetto => this.evidenziaProgettoInLista(progetto),
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
         };
@@ -189,6 +190,10 @@ export class HomePage implements OnInit, AfterViewInit {
         this.visualizzaDettaglio = false;
         this.monithonMap.highlightById([]);
     };
+
+    evidenziaProgettoInLista(progetto:any){
+        this.progettoSelezionato = progetto;
+    }
     showDettaglioProgetto(progetto: any) {
         if (!lodash.isNil(progetto)) {
             this.monithonApiService.getDettaglio(progetto.uid)
@@ -551,14 +556,12 @@ export class HomePage implements OnInit, AfterViewInit {
             this.monithonMap.resetFiltriTemi();
         } 
         
-        //TODO : resettare categorie quando un tema torna attivo
         this.redrawCharts = true;
         this.monithonMap.filtraPerTema();
     }
 
     public filterByCategoria(categoria: any): void {
         categoria.isSelected = !categoria.isSelected;
-        console.dir(categoria);
         if (lodash.every(this.categorie, c => !c.isSelected)) {
             lodash.map(this.categorie, c => { c.isSelected = true; })
         }
