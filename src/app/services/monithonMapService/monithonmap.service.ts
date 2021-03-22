@@ -374,9 +374,9 @@ export class MonithonMapService {
     }
 
 
-    filtraPerTema() {
+    filtraPerTema(tema) {
         // rimuovi filtro su categorie non associate ai temi selezionati
-        this.filtraCategorie();
+        this.filtraCategorie(tema);
         let progetti = this.filtraProgetti();
        // this.aggiornaVisibilitaCategorie();
         lodash.remove(progetti, p => !p.isSelected);
@@ -395,7 +395,7 @@ export class MonithonMapService {
 
 
 
-    filtraCategorie() {
+    filtraCategorie(tema) {
         let categorieSelezionate = this.categorie.filter(c => c.isSelected);
         let temiSelezionati = this.temi.filter(t => t.isSelected).map(t => t.ocCodTemaSintetico);
 
@@ -404,16 +404,23 @@ export class MonithonMapService {
             this.categorie.map(c => c.isVisible = temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico));
         } else {
             // se ho categorie selezionate, le mantengo tali sse il loro tema di pertinenza è selezionato o non ci sono temi selezionati
-            this.categorie.map(c => {
-                // se non ho temi selezionati: tutte le categorie sono DESELEZIONATE  e visibili:
-                if (temiSelezionati.length == 0) {
-                    c.isSelected = false;
-                    c.isVisible = true;
-                } else {
-                    c.isSelected = lodash.includes(temiSelezionati, c.ocCodTemaSintetico) && c.isSelected;
-                    c.isVisible = true;//lodash.includes(temiSelezionati, c.ocCodTemaSintetico);
-                }
+           
+            let categoriePerTema = lodash.groupBy(this.categorie,c => c.ocCodTemaSintetico);
+            categoriePerTema[tema.ocCodTemaSintetico].map(c=>{
+                c.isSelected=tema.isSelected;
+                c.isVisible = true;
             });
+              
+            // this.categorie.map(c => {
+            //     // se non ho temi selezionati: tutte le categorie sono DESELEZIONATE  e visibili:
+            //     if (temiSelezionati.length == 0) {
+            //         c.isSelected = true;
+            //         c.isVisible = true;
+            //     } else {
+            //         c.isSelected =  lodash.includes(temiSelezionati, c.ocCodTemaSintetico);// && c.isSelected;
+            //         c.isVisible = true;//lodash.includes(temiSelezionati, c.ocCodTemaSintetico);
+            //     }
+            // });
         }
     }
     filtraPerCategoria() {
