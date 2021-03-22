@@ -377,7 +377,7 @@ export class MonithonMapService {
         // rimuovi filtro su categorie non associate ai temi selezionati
         this.filtraCategorie();
         let progetti = this.filtraProgetti();
-        this.aggiornaVisibilitaCategorie();
+       // this.aggiornaVisibilitaCategorie();
         lodash.remove(progetti, p => !p.isSelected);
         this.publishUpdate(progetti);
     }
@@ -395,7 +395,7 @@ export class MonithonMapService {
 
         if (categorieSelezionate.length == 0) {
             //nascondo le categorie non pertinenti al tema
-            this.categorie.map(c => c.isVisible = temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico));
+            //this.categorie.map(c => c.isVisible = temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico));
         } else {
             // se ho categorie selezionate, le mantengo tali sse il loro tema di pertinenza è selezionato o non ci sono temi selezionati
             this.categorie.map(c => {
@@ -405,7 +405,7 @@ export class MonithonMapService {
                     c.isVisible = true;
                 } else {
                     c.isSelected = lodash.includes(temiSelezionati, c.ocCodTemaSintetico);// && c.isSelected;
-                    c.isVisible = lodash.includes(temiSelezionati, c.ocCodTemaSintetico);
+                    c.isVisible = true;
                 }
             });
         }
