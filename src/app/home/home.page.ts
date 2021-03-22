@@ -10,6 +10,7 @@ import lodash from 'lodash';
 import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -31,6 +32,10 @@ export class HomePage implements OnInit, AfterViewInit {
     @ViewChild('dettaglioProgetto') dettaglioProgetto: ElementRef;
     @ViewChild('finanziamentoPubblicoChartContainer') finanziamentoPubblicoChartContainer: HTMLElement;
     @ViewChild('pagamentiChartContainer') pagamentiChartContainer: HTMLElement;
+
+
+    @ViewChild('listaRisultati') listaRisultati: CdkVirtualScrollViewport;
+
 
 
     progetti: Array<Progetto> = [];
@@ -102,11 +107,11 @@ export class HomePage implements OnInit, AfterViewInit {
                 this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
                 this.risultatiRicerca = this.progetti;
-
+                console.log(this.risultatiRicerca);
                 this.ordinaRisultatiPerCriterio();
                 if (this.redrawCharts) {
                     try {
-                        
+
                         this.renderCharts(this.progetti);
                     } catch (error) {
                         console.error(error);
@@ -191,8 +196,12 @@ export class HomePage implements OnInit, AfterViewInit {
         this.monithonMap.highlightById([]);
     };
 
-    evidenziaProgettoInLista(progetto:any){
-        this.progettoSelezionato = progetto;
+    evidenziaProgettoInLista(progetto: any) {
+        if (!lodash.isNil(progetto)){
+            this.progettoSelezionato = progetto;
+            let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === progetto.uid);
+            this.listaRisultati.scrollToIndex(indexRisultato);
+        }
     }
     showDettaglioProgetto(progetto: any) {
         if (!lodash.isNil(progetto)) {
@@ -350,11 +359,11 @@ export class HomePage implements OnInit, AfterViewInit {
         let chartWidth = 432;
         let annoDim = crossFilterData.dimension((d) => {
             try {
-                
+
                 let anno = moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year();
                 return anno < 2014 ? 2013 : anno;
             } catch (error) {
-             console.error(error);   
+                console.error(error);
             }
         });
         let progettiPerAnno = annoDim.group().reduceCount();
@@ -554,8 +563,8 @@ export class HomePage implements OnInit, AfterViewInit {
         tema.isSelected = !tema.isSelected;
         if (lodash.every(this.temi, t => !t.isSelected)) {
             this.monithonMap.resetFiltriTemi();
-        } 
-        
+        }
+
         this.redrawCharts = true;
         this.monithonMap.filtraPerTema();
     }

@@ -312,7 +312,7 @@
                     </ion-grid>
                 </div>
                 <!-- lista risultati -->
-                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                <cdk-virtual-scroll-viewport #listaRisultati itemSize="50" minBufferPx="200" maxBufferPx="400"
                     class="monithon-lista-progetti">
                     <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;"
                         class="monithon-lista-progetti__progetto">
