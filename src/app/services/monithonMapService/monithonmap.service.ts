@@ -401,10 +401,10 @@ export class MonithonMapService {
             this.categorie.map(c => {
                 // se non ho temi selezionati: tutte le categorie sono DESELEZIONATE  e visibili:
                 if (temiSelezionati.length == 0) {
-                    c.isSelected = false;
+                    c.isSelected = true;
                     c.isVisible = true;
                 } else {
-                    c.isSelected = lodash.includes(temiSelezionati, c.ocCodTemaSintetico) && c.isSelected;
+                    c.isSelected = lodash.includes(temiSelezionati, c.ocCodTemaSintetico);// && c.isSelected;
                     c.isVisible = lodash.includes(temiSelezionati, c.ocCodTemaSintetico);
                 }
             });
