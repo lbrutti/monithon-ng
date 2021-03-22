@@ -41,7 +41,7 @@
                             </div>
 
                             <div class="monithon-dettaglio-progetto__oc_link">
-                                <a href="{{progettoSelezionato.ocLink}}" target="_blank"> {{'readmore' | transloco }}</a>
+                                <a href="http://{{progettoSelezionato.ocLink}}" target="_blank"> {{'readmore' | transloco }}</a>
                             </div>
 
                         </ion-col>
@@ -107,14 +107,22 @@
                                                     {{'reportFlags.'+flag.hasReport | transloco}}
                                                 </mat-chip>
                                             </mat-chip-list>
+
+                                           
                                         </ion-col>
                                     </ion-row>
                                 </ion-grid>
                             </div>
+                            <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
+                                <button (click)="iniziaMonitoraggioClicked(progettoSelezionato)"
+                                    class="monithon-dettaglio-progetto__inizia_monitoraggio__button" mat-button
+                                    color="primary">{{'iniziaMonitoraggio' | transloco}}
+                                </button>
+                            </div>
                         </ion-col>
 
                     </ion-row>
-                    <ion-row>
+                    <!-- <ion-row>
                         <ion-col>
                             <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
                                 <button (click)="iniziaMonitoraggioClicked(progettoSelezionato)"
@@ -123,7 +131,7 @@
                                 </button>
                             </div>
                         </ion-col>
-                    </ion-row>
+                    </ion-row> -->
                 </ion-grid>
 
             </div>
