@@ -40,13 +40,16 @@
                                 {{progettoSelezionato.ocSintesiProgetto | capitalize}}
                             </div>
 
+                            <div class="monithon-dettaglio-progetto__oc_link">
+                                <a href="{{progettoSelezionato.ocLink}}" target="_blank"> {{'readmore' | transloco }}</a>
+                            </div>
+
                         </ion-col>
                         <ion-col col-6 class="monithon-dettaglio-progetto__col  monithon-dettaglio-progetto__dettagli">
                             <div class="monithon-dettaglio-progetto__data_inizio">
                                 <ion-label class="monithon-dettaglio-progetto__label">{{'dataInizio' | transloco}}
                                 </ion-label>
-                                <ion-label>{{progettoSelezionato.ocDataInizioProgetto | momentdate:'YYYYMMDD' | date:'d
-                                    MMMM y':'+0100': 'it'}}</ion-label>
+                                <ion-label>{{progettoSelezionato.ocDataInizioProgetto | momentdate:'YYYYMMDD' | date:'MMMM y':'+0100': 'it'}}</ion-label>
                             </div>
 
                             <div class="monithon-dettaglio-progetto__categoria">
@@ -343,8 +346,12 @@
                                             <ion-item *ngFor="let report of progetto.reports; let i =index">
                                                 <ion-label>
                                                     <a href="{{monithonReportUrl}}/{{report}}" target="_blank">
-                                                        <span class="monithon-lista-progetti__progetto__dettagli__lista_report_indice-report"> #{{i}} </span>
-                                                        <span class="monithon-lista-progetti__progetto__dettagli__lista_report_data-report"> inserire data </span>
+                                                        <span
+                                                            class="monithon-lista-progetti__progetto__dettagli__lista_report_indice-report">
+                                                            #{{i}} </span>
+                                                        <span
+                                                            class="monithon-lista-progetti__progetto__dettagli__lista_report_data-report">
+                                                            inserire data </span>
                                                     </a>
                                                 </ion-label>
                                             </ion-item>
