@@ -17,7 +17,7 @@ import { COLOR_MAP } from 'src/app/utils/colorMap';
     providedIn: 'root'
 })
 export class MonithonMapService {
-  
+
 
 
     map: mapboxgl.Map;
@@ -302,7 +302,7 @@ export class MonithonMapService {
 
 
     }
-    publishGeocoderUpdate( ) {
+    publishGeocoderUpdate() {
         let data = { comune: this.comuneCorrente, radius: this.radius }
         this.geocoderUpdate.next(data);
     }
@@ -378,7 +378,7 @@ export class MonithonMapService {
         // rimuovi filtro su categorie non associate ai temi selezionati
         this.filtraCategorie(tema);
         let progetti = this.filtraProgetti();
-       // this.aggiornaVisibilitaCategorie();
+        // this.aggiornaVisibilitaCategorie();
         lodash.remove(progetti, p => !p.isSelected);
         this.publishUpdate(progetti);
     }
@@ -404,13 +404,13 @@ export class MonithonMapService {
             this.categorie.map(c => c.isVisible = temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico));
         } else {
             // se ho categorie selezionate, le mantengo tali sse il loro tema di pertinenza è selezionato o non ci sono temi selezionati
-           
-            let categoriePerTema = lodash.groupBy(this.categorie,c => c.ocCodTemaSintetico);
-            categoriePerTema[tema.ocCodTemaSintetico].map(c=>{
-                c.isSelected=tema.isSelected;
+
+            let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
+            categoriePerTema[tema.ocCodTemaSintetico].map(c => {
+                c.isSelected = tema.isSelected;
                 c.isVisible = true;
             });
-              
+
             // this.categorie.map(c => {
             //     // se non ho temi selezionati: tutte le categorie sono DESELEZIONATE  e visibili:
             //     if (temiSelezionati.length == 0) {
@@ -424,6 +424,23 @@ export class MonithonMapService {
         }
     }
     filtraPerCategoria() {
+        let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
+
+        lodash.map(categoriePerTema, (categorie, codiceTema) => {
+            //quando deseleziono tutte le categorie di un tema-> lo deseleziono
+            if (lodash.every(categorie, c => !c.isSelected)) {
+                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => t.isSelected = false);
+            }
+            //se ho selezionato almeno una categoria di un tema deselezioanato-> lo seleziono
+            if (lodash.some(categorie, c => c.isSelected)) {
+                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
+                    if (!t.isSelected) {
+                        t.isSelected = true;
+                    }
+                });
+
+            }
+        })
         let progetti = this.filtraProgetti();
         lodash.remove(progetti, p => !p.isSelected);
         this.publishUpdate(progetti);
@@ -511,7 +528,7 @@ export class MonithonMapService {
         this.geocoderUpdate.unsubscribe();
     }
     publishUpdate(progetti: Array<Progetto>): void {
-        this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: lodash.uniqBy(progetti, p=>p.uid) });
+        this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: lodash.uniqBy(progetti, p => p.uid) });
     }
 
     publishSelectedProject(progetto?: Progetto): void {

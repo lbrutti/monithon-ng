@@ -571,9 +571,12 @@ export class HomePage implements OnInit, AfterViewInit {
 
     public filterByCategoria(categoria: any): void {
         categoria.isSelected = !categoria.isSelected;
-        // if (lodash.every(this.categorie, c => !c.isSelected)) {
-        //     lodash.map(this.categorie, c => { c.isSelected = true; })
-        // }
+        if (lodash.every(this.categorie, c => !c.isSelected)) {
+           
+            this.monithonMap.resetFiltriTemi();
+
+            // lodash.map(this.categorie, c => { c.isSelected = true; })
+        }
         this.redrawCharts = true;
         this.monithonMap.filtraPerCategoria();
     }
