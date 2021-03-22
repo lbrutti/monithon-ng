@@ -91,7 +91,7 @@ export class HomePage implements OnInit, AfterViewInit {
         // private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
         private monithonMap: MonithonMapService,
-        private currencyPipe: CurrencyPipe) { this.monithonReportUrl = environment.monithonReportUrl;}
+        private currencyPipe: CurrencyPipe) { this.monithonReportUrl = environment.monithonReportUrl; }
 
     ngOnInit(): void {
         // this.monitonMockedService.mirageJsServer();
@@ -149,8 +149,14 @@ export class HomePage implements OnInit, AfterViewInit {
         Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise(), this.getCategorie().toPromise()])
             .then(data => {
 
-                this.monithonMap.setCategorie(data[2]);
-                this.monithonMap.setTemi(data[1]);
+                this.monithonMap.setCategorie(data[2].map(c => {
+                    c.isSelected = true;
+                    return c;
+                }));
+                this.monithonMap.setTemi(data[1].map(t => {
+                    t.isSelected = true;
+                    return t;
+                }));
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
@@ -532,12 +538,19 @@ export class HomePage implements OnInit, AfterViewInit {
     //Filtri di primo livello:
     public filterByTema(tema: any): void {
         tema.isSelected = !tema.isSelected;
+        if (lodash.every(this.temi, t => !t.isSelected)) {
+            lodash.map(this.temi, t => { t.isSelected = true; })
+        }
+        //TODO : resettare categorie quando un tema torna attivo
         this.redrawCharts = true;
         this.monithonMap.filtraPerTema();
     }
 
     public filterByCategoria(categoria: any): void {
         categoria.isSelected = !categoria.isSelected;
+        if (lodash.every(this.categorie, c => !c.isSelected)) {
+            lodash.map(this.categorie, c => { c.isSelected = true; })
+        }
         this.redrawCharts = true;
         this.monithonMap.filtraPerCategoria();
     }

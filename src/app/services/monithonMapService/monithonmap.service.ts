@@ -307,14 +307,14 @@ export class MonithonMapService {
     }
 
     public setTemi(temi: Array<any>) {
-        this.temi = temi.map((t) => ({ 'ocCodTemaSintetico': t.ocCodTemaSintetico, 'isSelected': false }));
+        this.temi = temi.map((t) => ({ 'ocCodTemaSintetico': t.ocCodTemaSintetico, 'isSelected': true }));
     }
 
     public setCategorie(categorie: Array<any>) {
         this.categorie = categorie.map((c) => ({
             'ocCodCategoriaSpesa': c.ocCodCategoriaSpesa,
             'ocCodTemaSintetico': c.ocCodTemaSintetico,
-            'isSelected': false,
+            'isSelected': true,
             'isVisible': true
         }));
     }
@@ -323,8 +323,9 @@ export class MonithonMapService {
             "type": "FeatureCollection",
             "features": data.map((p: Progetto) => {
                 let properties: any = Object.assign({}, p);
-                properties.isSelected = true;
+                properties.isSelected = false;
                 properties.isWithinRange = false;
+                properties.isHighlighted = false;
                 let jitteredCoords = this.addJitter()(p.lat, p.long, 0.1, false);
                 return {
                     "type": "Feature",

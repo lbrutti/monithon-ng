@@ -162,7 +162,8 @@
                                 </div>
                             </ion-col>
                             <ion-col size="6" class="ion-no-margin">
-                                <mat-expansion-panel class="monithon-filtri-charts" id="chartPanel">
+                                <!-- INIZIALIZZARE COME ESPANSO -->
+                                <mat-expansion-panel expanded="true" class="monithon-filtri-charts" id="chartPanel">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title>
                                             {{'chartPanelTitle'|transloco}}
@@ -234,9 +235,13 @@
         </div>
         <div class="right-column">
             <mat-expansion-panel id="resultContainer">
-                <mat-expansion-panel-header>
+                <mat-expansion-panel-header class="monithon-risultati-header">
                     <mat-panel-title>
                         <h2>{{'resultContainerTitle' | transloco}}</h2>
+                        <!-- nascondere  monithon-contatore-risultati se il pannello è espanso -->
+                        <h1 class="monithon-contatore-risultati" #resultCounter>{{this.risultatiRicerca.length |
+                            number}}
+                        </h1>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="monithon-lista-header">
@@ -247,6 +252,7 @@
                                     number}}
                                 </h1>
                             </ion-col>
+                            <!-- comune:; Distanza: - -->
                             <ion-col><span>{{'comune'|transloco}}:{{comuneCorrente|capitalize}}</span>;
                                 <span>{{'distanza'|transloco}}: {{raggioCorrente|formatDistanza}}</span>
                             </ion-col>

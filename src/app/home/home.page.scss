@@ -420,6 +420,12 @@ ion-row.monithon-filtri-secondari {
     }
 }
 
+.monithon-risultati-header{
+    height: 5rem;
+    .monithon-contatore-risultati{
+        display: block;
+    }
+}
 .monithon-contatore-risultati {
     color: var(--monithon-contatore-risultati-color);
     font-size: 80px;
