@@ -182,8 +182,9 @@ export class MonithonMapService {
         this.map.on('draw.delete', (evt) => {
 
             this.filtroPerRaggioEnabled = false;
+            this.resetFiltriTemi();
             this.filtraPerDistanza();
-            this.map.setLayoutProperty('radius-value', 'visibility', 'visible');
+            this.map.setLayoutProperty('radius-value', 'visibility', 'none');
 
 
         });
@@ -316,7 +317,7 @@ export class MonithonMapService {
             'ocCodCategoriaSpesa': c.ocCodCategoriaSpesa,
             'ocCodTemaSintetico': c.ocCodTemaSintetico,
             'isSelected': true,
-            'isVisible': true
+            'isActive': true
         }));
     }
     private progettiToFeatureCollection(data: Array<Progetto>): any {
@@ -378,19 +379,29 @@ export class MonithonMapService {
         // rimuovi filtro su categorie non associate ai temi selezionati
         this.filtraCategorie(tema);
         let progetti = this.filtraProgetti();
-        // this.aggiornaVisibilitaCategorie();
+        this.aggiornaAttivabilitaCategorie();
         lodash.remove(progetti, p => !p.isSelected);
         this.publishUpdate(progetti);
     }
     resetFiltriTemi() {
-        lodash.map(this.temi, t => { t.isSelected = true; });
-        lodash.map(this.categorie, c => { c.isSelected = true; });
-        // this.filtraCategorie();
+        lodash.map(this.temi, t => { t.isSelected = true; t.isActive=true; });
+        lodash.map(this.categorie, c => { c.isSelected = true; c.isActive = true;});
     }
 
-    aggiornaVisibilitaCategorie() {
+    aggiornaAttivabilitaCategorie() {
         let categorieVisibili = lodash.uniq(this.progetti.features.filter(f => f.properties.isSelected).reduce((acc, f) => [...acc, ...f.properties.ocCodCategoriaSpesa], []));
-        this.categorie.map(c => c.isVisible = lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa));
+        this.categorie.map(c => c.isActive = lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa));
+
+        let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
+
+        lodash.map(categoriePerTema, (categorie, codiceTema) => {
+            //quando deseleziono tutte le categorie di un tema-> lo deseleziono
+            if (lodash.every(categorie, c => !c.isActive)) {
+                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => t.isActive = false);
+            }
+            
+        })
+
     }
 
 
@@ -401,24 +412,24 @@ export class MonithonMapService {
 
         if (categorieSelezionate.length == 0) {
             //nascondo le categorie non pertinenti al tema
-            this.categorie.map(c => c.isVisible = temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico));
+            this.categorie.map(c => c.isActive = temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico));
         } else {
             // se ho categorie selezionate, le mantengo tali sse il loro tema di pertinenza è selezionato o non ci sono temi selezionati
 
             let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
             categoriePerTema[tema.ocCodTemaSintetico].map(c => {
-                c.isSelected = tema.isSelected;
-                c.isVisible = true;
+                c.isSelected = c.isActive && tema.isSelected;
+                // c.isActive = true;
             });
 
             // this.categorie.map(c => {
             //     // se non ho temi selezionati: tutte le categorie sono DESELEZIONATE  e visibili:
             //     if (temiSelezionati.length == 0) {
             //         c.isSelected = true;
-            //         c.isVisible = true;
+            //         c.isActive = true;
             //     } else {
             //         c.isSelected =  lodash.includes(temiSelezionati, c.ocCodTemaSintetico);// && c.isSelected;
-            //         c.isVisible = true;//lodash.includes(temiSelezionati, c.ocCodTemaSintetico);
+            //         c.isActive = true;//lodash.includes(temiSelezionati, c.ocCodTemaSintetico);
             //     }
             // });
         }
@@ -428,19 +439,23 @@ export class MonithonMapService {
 
         lodash.map(categoriePerTema, (categorie, codiceTema) => {
             //quando deseleziono tutte le categorie di un tema-> lo deseleziono
-            if (lodash.every(categorie, c => !c.isSelected)) {
+            if (lodash.every(categorie, c => !c.isSelected) || lodash.every(categorie, c => !c.isActive)) {
                 this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => t.isSelected = false);
             }
             //se ho selezionato almeno una categoria di un tema deselezioanato-> lo seleziono
-            if (lodash.some(categorie, c => c.isSelected)) {
+            if (lodash.some(categorie, c => c.isSelected && c.isActive)) {
                 this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
                     if (!t.isSelected) {
                         t.isSelected = true;
+                        
+                    } 
+                    if(!t.isActive){
+                        t.isActive = true;
                     }
                 });
 
             }
-        })
+        });
         let progetti = this.filtraProgetti();
         lodash.remove(progetti, p => !p.isSelected);
         this.publishUpdate(progetti);
@@ -481,7 +496,7 @@ export class MonithonMapService {
         }
 
         let progetti = this.filtraProgetti();
-        this.aggiornaVisibilitaCategorie();
+        this.aggiornaAttivabilitaCategorie();
         this.publishUpdate(progetti);
     }
 

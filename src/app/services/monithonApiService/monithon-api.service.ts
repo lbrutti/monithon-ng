@@ -33,22 +33,22 @@ export class MonithonApiService {
                         p.long = parseFloat(p.long);
                         try {
                             p.ocDataInizioProgetto = parseInt(p.ocDataInizioProgetto);
-                            
+
                         } catch (error) {
                             console.error(p.uid);
                             console.error(error);
                         }
                         try {
                             p.ocFinanzTotPubNetto = parseFloat(p.ocFinanzTotPubNetto);
-                            
+
                         } catch (error) {
                             console.error(p.uid);
                             console.error(error);
 
                         }
                         try {
-                            
-                            p.hasReport = p.reports.length>0 && p.reports[0]!=0;
+
+                            p.hasReport = p.reports.length > 0 && p.reports[0] != 0;
                         } catch (error) {
                             console.error(p.uid);
                             console.error(error);
@@ -76,6 +76,9 @@ export class MonithonApiService {
     }
     getTemi() {
         // return this.httpClient.get<any[]>(this.url + '/temi');
-        return of(temi);
+        return of(temi.map(t => {
+            t.isActive = true;
+            return t;
+        }));
     }
 }

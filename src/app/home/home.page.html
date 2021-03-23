@@ -142,6 +142,7 @@
                 <!-- Temi -->
                 <mat-chip-list [ngClass]="{'monithon-temi': true}" aria-label="Temi progetto" multiple="true">
                     <mat-chip [ngClass]="{'monithon-tema': true}" *ngFor="let tema of this.temi"
+                        [selectable]="tema.isActive"
                         [selected]="tema.isSelected" (click)="this.filterByTema(tema)"
                         [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico" disableRipple="true">
                         {{'temi.'+tema.ocCodTemaSintetico | transloco}}</mat-chip>
@@ -162,7 +163,7 @@
                                     <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
                                         aria-orientation="horizontal">
-                                        <mat-chip [ngClass]="{'monithon-categoria': true}" selectable="true"
+                                        <mat-chip [ngClass]="{'monithon-categoria': true}" [selectable]="categoria.isActive"
                                             *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected"
                                             (click)="this.filterByCategoria(categoria)"
                                             [attr.data-oc-cod-tema-sintetico]="categoria.ocCodTemaSintetico"
