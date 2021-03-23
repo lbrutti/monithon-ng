@@ -379,7 +379,7 @@ export class MonithonMapService {
         // rimuovi filtro su categorie non associate ai temi selezionati
         this.filtraCategorie(tema);
         let progetti = this.filtraProgetti();
-        this.aggiornaAttivabilitaCategorie();
+        //this.aggiornaAttivabilitaCategorie();
         lodash.remove(progetti, p => !p.isSelected);
         this.publishUpdate(progetti);
     }
