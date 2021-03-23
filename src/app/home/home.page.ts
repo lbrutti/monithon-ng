@@ -106,12 +106,8 @@ export class HomePage implements OnInit, AfterViewInit {
                 this.temi = updateSubject.temi; // <- nessun problema di performance
                 this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
-                this.risultatiRicerca = this.progetti;
-                console.log(this.risultatiRicerca);
-                this.ordinaRisultatiPerCriterio();
                 if (this.redrawCharts) {
                     try {
-
                         this.renderCharts(this.progetti);
                     } catch (error) {
                         console.error(error);
@@ -367,10 +363,10 @@ export class HomePage implements OnInit, AfterViewInit {
             }
         });
         let progettiPerAnno = annoDim.group().reduceCount();
-
         let annoRange = d3.extent(listaProgetti, (d: any) => moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year()
         );
-        annoRange[1] += 2;
+        annoRange[0] = 2013;
+        annoRange[1] += 1;
         let maxCount = progettiPerAnno
             .all()
             .map(v => v.value)
@@ -391,7 +387,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .x(xScale)
             .y(yScale)
             .xUnits(dc.units.integers)
-            .elasticX(true)
+            .elasticX(false)
             .elasticY(false)
             .margins({ top: 10, right: 20, bottom: 20, left: 20 });
 
@@ -413,15 +409,8 @@ export class HomePage implements OnInit, AfterViewInit {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-
         });
 
-        this.annoChart.on("renderlet", () => {
-            this.progetti = annoDim.top(Infinity);
-            this.filtraRisultati();
-            this.evidenziaRisultatiSuMappa();
-
-        });
     }
 
     private renderBudgetChart(crossFilterData: any, listaProgetti: any) {
@@ -464,8 +453,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .brushOn(true)
             .x(d3.scaleLinear().domain([0, numQuantili]))
             .y(d3.scaleLinear().domain([0, maxCount]))
-
-            .elasticX(true)
+            .elasticX(false)
             .elasticY(false)
             .margins({ top: 10, right: 20, bottom: 20, left: 20 });
 
@@ -479,22 +467,11 @@ export class HomePage implements OnInit, AfterViewInit {
         this.budgetChart.useViewBoxResizing(true)
 
 
-
-        this.budgetChart.on("renderlet", () => {
-            //propagare evento per aggiornare la lista dei progetti
-            this.progetti = budgetDim.top(Infinity);
-            this.filtraRisultati();
-            this.evidenziaRisultatiSuMappa();
-
-        });
-
         this.budgetChart.on("filtered", () => {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-
-
         });
 
         this.budgetChart.on('pretransition', function (chart) {

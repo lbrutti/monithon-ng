@@ -384,8 +384,8 @@ export class MonithonMapService {
         this.publishUpdate(progetti);
     }
     resetFiltriTemi() {
-        lodash.map(this.temi, t => { t.isSelected = true; t.isActive=true; });
-        lodash.map(this.categorie, c => { c.isSelected = true; c.isActive = true;});
+        lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
+        lodash.map(this.categorie, c => { c.isSelected = true; c.isActive = true; });
     }
 
     aggiornaAttivabilitaCategorie() {
@@ -399,7 +399,7 @@ export class MonithonMapService {
             if (lodash.every(categorie, c => !c.isActive)) {
                 this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => t.isActive = false);
             }
-            
+
         })
 
     }
@@ -447,9 +447,9 @@ export class MonithonMapService {
                 this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
                     if (!t.isSelected) {
                         t.isSelected = true;
-                        
-                    } 
-                    if(!t.isActive){
+
+                    }
+                    if (!t.isActive) {
                         t.isActive = true;
                     }
                 });
@@ -484,7 +484,10 @@ export class MonithonMapService {
                 let progetto = f.properties;
                 progetto.distanza = distance(point(f.geometry.coordinates), centerPoint);
                 progetto.isWithinRange = progetto.distanza <= this.radius;
-                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: progetto.isWithinRange });
+                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, {
+                    isWithinRange: progetto.isWithinRange,
+                    isSelected: progetto.isWithinRange
+                });
             });
         } else {
             this.progetti.features.map(f => {
@@ -595,7 +598,7 @@ export class MonithonMapService {
         this.progetti.features
             .map(f => {
                 let progetto = f.properties;
-                progetto.isSelected = progetto.isSelected && (idRisultati.length == 0) || lodash.includes(idRisultati, progetto.uid);
+                progetto.isSelected = ((idRisultati.length == 0) && progetto.isSelected)  || lodash.includes(idRisultati, progetto.uid);
 
                 this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isSelected: progetto.isSelected });
             });
