@@ -78,10 +78,11 @@ export class MonithonMapService {
 
 
         this.geocoder.on('result', evt => {
+            this.resetFiltroDistanza(false);
             let center = evt.result.center;
             this.comuneCorrente = evt.result.place_name;
             this.drawRangeProgetti(center);
-            this.publishGeocoderUpdate()
+            this.publishGeocoderUpdate();
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
         let radiusFilterDrawStyle = [ // ACTIVE (being drawn)
@@ -630,7 +631,7 @@ export class MonithonMapService {
         this.resetFiltroDistanza();
     }
 
-    private resetFiltroDistanza() {
+    private resetFiltroDistanza(publishUpdate:boolean=true) {
         this.circle = null;
         this.filtroPerRaggioEnabled = false;
 
@@ -643,7 +644,9 @@ export class MonithonMapService {
         this.map.setLayoutProperty('radius-value', 'visibility', 'none');
         let progetti = this.resetFiltroProgetti();
         this.aggiornaAttivabilitaCategorie(true);
-        this.publishUpdate(progetti);
+        if (publishUpdate){
+            this.publishUpdate(progetti);
+        }
     }
 
     //sposta la mappa per mostrare il progetto  correntemente selezionato
