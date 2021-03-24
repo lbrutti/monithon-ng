@@ -180,18 +180,9 @@ export class MonithonMapService {
             this.filtraPerDistanza(circleData);
         });
         this.map.on('draw.delete', (evt) => {
-
-            this.filtroPerRaggioEnabled = false;
-            
-            lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
-            lodash.map(this.categorie, c => {
-                c.isSelected = true;
-                c.isActive = true;
-            });
-            this.filtraPerDistanza();
-            this.map.setLayoutProperty('radius-value', 'visibility', 'none');
-
-
+            //invocato alla cancellazione manuale del cerchio
+            console.log('draw delete non viene mai invocato')
+            this.resetFiltroDistanza();
         });
         this.map.on('load', () => {
             this.progettiToFeatureCollection(data);
@@ -391,21 +382,36 @@ export class MonithonMapService {
     }
     resetFiltriTemi() {
         lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
-        lodash.map(this.categorie, c => { c.isSelected = c.isActive && true; 
+        lodash.map(this.categorie, c => {
+            c.isSelected = c.isActive && true;
             // c.isActive = true;
-         });
+        });
     }
 
-    aggiornaAttivabilitaCategorie() {
+    aggiornaAttivabilitaCategorie(reset: boolean = false) {
         let categorieVisibili = lodash.uniq(this.progetti.features.filter(f => f.properties.isSelected).reduce((acc, f) => [...acc, ...f.properties.ocCodCategoriaSpesa], []));
-        this.categorie.map(c => c.isActive = lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa));
+        this.categorie.map(c => {
+            //una categoria è attiva (selezionabile) quando esiste almeno un progetto che ce l'ha
+            c.isActive = lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa);
+            if (reset) {
+                c.isSelected = c.isActive;
+            }
+        });
 
         let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
 
         lodash.map(categoriePerTema, (categorie, codiceTema) => {
             //quando nessuna categoria del tema è attiva -> inattivo il tema
             if (lodash.every(categorie, c => !c.isActive)) {
-                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => t.isActive = false);
+                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
+                    t.isActive = false;
+                    t.isSelected = false;
+                });
+            } else if (lodash.every(categorie, c => !c.isSelected)) {
+                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
+                    t.isActive = true;
+                    t.isSelected = reset;
+                });
             }
 
         })
@@ -497,18 +503,12 @@ export class MonithonMapService {
                     isSelected: progetto.isWithinRange
                 });
             });
-        } else {
-            this.progetti.features.map(f => {
-                let progetto = f.properties;
-                progetto.distanza = null;
-                progetto.isWithinRange = true;
-                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: progetto.isWithinRange, isSelected: true });
-            });
+            let progetti = this.filtraProgetti();
+            this.aggiornaAttivabilitaCategorie();
+            this.publishUpdate(progetti);
         }
 
-        let progetti = this.filtraProgetti();
-        this.aggiornaAttivabilitaCategorie();
-        this.publishUpdate(progetti);
+
     }
 
 
@@ -529,6 +529,17 @@ export class MonithonMapService {
                 }
                 this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isSelected: progetto.isSelected });
             });
+        return this.progetti.features.filter(f => f.properties.isSelected).map(f => f.properties);
+    }
+
+    resetFiltroProgetti(): Array<any> {
+        this.progetti.features.map(f => {
+            let progetto = f.properties;
+            progetto.distanza = null;
+            progetto.isWithinRange = true;
+            progetto.isSelected = true;
+            this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: progetto.isWithinRange, isSelected: true });
+        });
         return this.progetti.features.filter(f => f.properties.isSelected).map(f => f.properties);
     }
 
@@ -606,22 +617,34 @@ export class MonithonMapService {
         this.progetti.features
             .map(f => {
                 let progetto = f.properties;
-                progetto.isSelected = ((idRisultati.length == 0) && progetto.isSelected)  || lodash.includes(idRisultati, progetto.uid);
+                progetto.isSelected = ((idRisultati.length == 0) && progetto.isSelected) || lodash.includes(idRisultati, progetto.uid);
 
                 this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isSelected: progetto.isSelected });
             });
     }
 
     /**
-     * name
+     * invocato programmaticamente allo svuotamento del gecoder
      */
     public removeRadiusFilter() {
         this.draw.delete(this.circle.id);
+        this.resetFiltroDistanza();
+    }
+
+    private resetFiltroDistanza() {
         this.circle = null;
         this.filtroPerRaggioEnabled = false;
-        this.map.setLayoutProperty('radius-value', 'visibility', 'none');
-        this.filtraPerDistanza();
 
+        lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
+        lodash.map(this.categorie, c => {
+            c.isSelected = true;
+            c.isActive = true;
+        });
+
+        this.map.setLayoutProperty('radius-value', 'visibility', 'none');
+        let progetti = this.resetFiltroProgetti();
+        this.aggiornaAttivabilitaCategorie(true);
+        this.publishUpdate(progetti);
     }
 
     //sposta la mappa per mostrare il progetto  correntemente selezionato
