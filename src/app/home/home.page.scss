@@ -583,6 +583,15 @@ ion-row.monithon-filtri-secondari {
     top: 10px;
 }
 
+.navigation-control {
+    position: absolute;
+    z-index: 100;
+    width: auto;
+    right: 5%;
+    top: 20px;
+   
+}
+
 .mapboxgl-ctrl-geocoder {
     min-width: 100%;
 }

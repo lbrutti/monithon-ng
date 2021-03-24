@@ -47,8 +47,8 @@ export class MonithonApiService {
 
                         }
                         try {
-
-                            p.hasReport = p.reports.length > 0 && p.reports[0] != 0;
+                            p.reports = lodash.map(p.reports, (data, reportId)=>({id:reportId, dataAggiornamento:data}));
+                            p.hasReport = p.reports.length > 0;
                         } catch (error) {
                             console.error(p.uid);
                             console.error(error);

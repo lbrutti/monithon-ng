@@ -1,8 +1,12 @@
 <ion-content [fullscreen]="true" [scrollY]="false">
     <!-- <ion-toolbar class="monithon-header" >
     </ion-toolbar> -->
-     <div #geocoder id="geocoder" class="geocoder">
+    <div #geocoder id="geocoder" class="geocoder">
         <ion-label>{{'comune'|transloco}}</ion-label>
+    </div>
+
+    <div #navigationControl id="navigationControl" class="navigation-control">
+       
     </div>
     <div id="container">
         <!-- Mappa -->
@@ -347,13 +351,14 @@
                                         <ion-list class="monithon-lista-progetti__progetto__dettagli__lista_report">
                                             <ion-item *ngFor="let report of progetto.reports; let i =index">
                                                 <ion-label>
-                                                    <a href="{{monithonReportUrl}}/{{report}}" target="_blank">
+                                                    <a href="{{monithonReportUrl}}/{{report.id}}" target="_blank">
                                                         <span
                                                             class="monithon-lista-progetti__progetto__dettagli__lista_report_indice-report">
-                                                            #{{i}} </span>
+                                                            #{{i+1}} </span>
                                                         <span
                                                             class="monithon-lista-progetti__progetto__dettagli__lista_report_data-report">
-                                                            inserire data </span>
+                                                            <!-- [2021-03-20 17:18:57 ] -->
+                                                            {{'monitoraggio' | transloco}} {{report.dataAggiornamento | momentdate:'YYYY-MM-DD HH:mm:ss' | date:'d/MM/y':'+0100': 'it'}} </span>
                                                     </a>
                                                 </ion-label>
                                             </ion-item>

@@ -43,13 +43,15 @@ export class MonithonMapService {
     radius: any;
     geocoderUpdate: Subject<any> = new Subject();
     comuneCorrente: any;
+    navigationControl: mapboxgl.NavigationControl;
+    geolocate: mapboxgl.GeolocateControl;
 
 
     constructor() {
         mapboxgl.accessToken = environment.mapbox.accessToken;
     }
 
-    public renderMap(container, data, geocoderContainer): void {
+    public renderMap(container, data, geocoderContainer, navigationControlContainer): void {
 
         this.map = new mapboxgl.Map({
             container: container,
@@ -75,8 +77,17 @@ export class MonithonMapService {
         };
 
         this.geocoder = new MapboxGeocoder(geocoderOptions);
-
-
+        this.navigationControl = new mapboxgl.NavigationControl({showCompass:false, visualizePitch:false});
+        this.geolocate = new mapboxgl.GeolocateControl({
+            showUserLocation: false,
+            trackUserLocation: false,
+            positionOptions: {
+                enableHighAccuracy: false
+            },
+            fitBoundsOptions:{
+                maxZoom:8
+            }
+        });
         this.geocoder.on('result', evt => {
             this.resetFiltroDistanza(false);
             let center = evt.result.center;
@@ -85,6 +96,9 @@ export class MonithonMapService {
             this.publishGeocoderUpdate();
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
+        navigationControlContainer.appendChild(this.navigationControl.onAdd(this.map));
+        navigationControlContainer.appendChild(this.geolocate.onAdd(this.map));
+
         let radiusFilterDrawStyle = [ // ACTIVE (being drawn)
             // line stroke
             {
@@ -293,6 +307,8 @@ export class MonithonMapService {
                     this.publishSelectedProject(null);
                 }
             });
+
+            this.map.scrollZoom.disable();
             this.map.resize();
             this.aggiornaAttivabilitaCategorie();
             this.publishUpdate(this.featureCollectionToProgetti());

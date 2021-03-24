@@ -27,6 +27,7 @@ export class HomePage implements OnInit, AfterViewInit {
     @ViewChild('categorieDiSpesaContainer') categorieDiSpesaContainer: ElementRef;
     @ViewChild('mapContainer') mapContainer: ElementRef;
     @ViewChild('geocoder') geocoder: ElementRef;
+    @ViewChild('navigationControl') navigationControl: ElementRef;
 
     @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
     @ViewChild('dettaglioProgetto') dettaglioProgetto: ElementRef;
@@ -119,7 +120,6 @@ export class HomePage implements OnInit, AfterViewInit {
         };
 
         let projectSelectionObserver: Observer<any> = {
-            // next: progetto => this.showDettaglioProgetto(progetto),
             next: progetto => this.evidenziaProgettoInLista(progetto),
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
@@ -161,7 +161,7 @@ export class HomePage implements OnInit, AfterViewInit {
                     t.isSelected = true;
                     return t;
                 }));
-                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement);
+                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement, this.navigationControl.nativeElement);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
                 

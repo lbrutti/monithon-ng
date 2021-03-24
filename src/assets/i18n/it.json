@@ -87,5 +87,6 @@
     "ocDataInizioProgetto":"Anno",
     "hasReport": "Monitoraggi attivi",
     "true":"Si",
-    "false":"No"
+    "false":"No",
+    "monitoraggio": "Monitoraggio"
 }
