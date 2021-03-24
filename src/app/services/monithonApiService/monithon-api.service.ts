@@ -64,10 +64,9 @@ export class MonithonApiService {
     }
 
     public getDettaglio(uid: string): Observable<any> {
-        return this.httpClient.get<any>(this.url + '/mdProject' + uid)
+        return this.httpClient.get<any>(this.url + '/mdProject/' + uid)
             .pipe(
                 map((p) => {
-
                     p.codStatoProgetto = p.ocCodStatoProgetto;
                     delete (p.ocCodStatoProgetto);
                     try {
@@ -76,7 +75,6 @@ export class MonithonApiService {
                     } catch (error) {
                         console.error(p.uid);
                         console.error(error);
-
                     }
                     return p;
 

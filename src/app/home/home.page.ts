@@ -203,8 +203,8 @@ export class HomePage implements OnInit, AfterViewInit {
                 .subscribe({
                     next: progetto => {
                         let dettaglioBoundingRect = this.dettaglioProgetto.nativeElement.getBoundingClientRect();
-                        if (progetto && progetto.length) {
-                            this.progettoSelezionato = progetto[0];
+                        if (progetto) {
+                            this.progettoSelezionato = progetto;
                             this.visualizzaDettaglio = true;
                             this.monithonMap.easeToProgetto(dettaglioBoundingRect, this.progettoSelezionato, this.visualizzaDettaglio);
                             this.renderDettaglioProgettoCharts();
