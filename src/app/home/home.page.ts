@@ -10,6 +10,7 @@ import lodash from 'lodash';
 import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -31,6 +32,10 @@ export class HomePage implements OnInit, AfterViewInit {
     @ViewChild('dettaglioProgetto') dettaglioProgetto: ElementRef;
     @ViewChild('finanziamentoPubblicoChartContainer') finanziamentoPubblicoChartContainer: HTMLElement;
     @ViewChild('pagamentiChartContainer') pagamentiChartContainer: HTMLElement;
+
+
+    @ViewChild('listaRisultati') listaRisultati: CdkVirtualScrollViewport;
+
 
 
     progetti: Array<Progetto> = [];
@@ -99,12 +104,14 @@ export class HomePage implements OnInit, AfterViewInit {
             next: updateSubject => {
 
                 this.temi = updateSubject.temi; // <- nessun problema di performance
-                this.categorie = updateSubject.categorie.filter(c => c.isVisible);
+                this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
-                this.risultatiRicerca = this.progetti;
-                this.ordinaRisultatiPerCriterio();
                 if (this.redrawCharts) {
-                    this.renderCharts(this.progetti);
+                    try {
+                        this.renderCharts(this.progetti);
+                    } catch (error) {
+                        console.error(error);
+                    }
                 } else {
                     this.counterValue = this.progetti.length;
                 }
@@ -114,15 +121,14 @@ export class HomePage implements OnInit, AfterViewInit {
         };
 
         let projectSelectionObserver: Observer<any> = {
-            next: progetto => this.showDettaglioProgetto(progetto),
+            // next: progetto => this.showDettaglioProgetto(progetto),
+            next: progetto => this.evidenziaProgettoInLista(progetto),
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
         };
 
         let geocoderObserver: Observer<any> = {
             next: geocoderData => {
-
-                console.log(geocoderData);
                 this.updateGeocoderBindindings(geocoderData);
             },
             error: err => console.error('gecoderObserver error: ', err),
@@ -160,6 +166,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
+                
 
                 geocoderClearBtn
                     .addEventListener('click', () => {
@@ -185,6 +192,14 @@ export class HomePage implements OnInit, AfterViewInit {
         this.visualizzaDettaglio = false;
         this.monithonMap.highlightById([]);
     };
+
+    evidenziaProgettoInLista(progetto: any) {
+        if (!lodash.isNil(progetto)){
+            this.progettoSelezionato = progetto;
+            let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === progetto.uid);
+            this.listaRisultati.scrollToIndex(indexRisultato);
+        }
+    }
     showDettaglioProgetto(progetto: any) {
         if (!lodash.isNil(progetto)) {
             this.monithonApiService.getDettaglio(progetto.uid)
@@ -340,14 +355,19 @@ export class HomePage implements OnInit, AfterViewInit {
         let chartHeight = 72;
         let chartWidth = 432;
         let annoDim = crossFilterData.dimension((d) => {
-            let anno = moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year();
-            return anno < 2014 ? 2013 : anno;
+            try {
+
+                let anno = moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year();
+                return anno < 2014 ? 2013 : anno;
+            } catch (error) {
+                console.error(error);
+            }
         });
         let progettiPerAnno = annoDim.group().reduceCount();
-
         let annoRange = d3.extent(listaProgetti, (d: any) => moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year()
         );
-        annoRange[1] += 2;
+        annoRange[0] = 2013;
+        annoRange[1] += 1;
         let maxCount = progettiPerAnno
             .all()
             .map(v => v.value)
@@ -368,7 +388,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .x(xScale)
             .y(yScale)
             .xUnits(dc.units.integers)
-            .elasticX(true)
+            .elasticX(false)
             .elasticY(false)
             .margins({ top: 10, right: 20, bottom: 20, left: 20 });
 
@@ -390,15 +410,8 @@ export class HomePage implements OnInit, AfterViewInit {
             this.progetti = annoDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-
         });
 
-        this.annoChart.on("renderlet", () => {
-            this.progetti = annoDim.top(Infinity);
-            this.filtraRisultati();
-            this.evidenziaRisultatiSuMappa();
-
-        });
     }
 
     private renderBudgetChart(crossFilterData: any, listaProgetti: any) {
@@ -408,10 +421,18 @@ export class HomePage implements OnInit, AfterViewInit {
         let budgetBin = d3.bin();
 
         //creo bin usando arrotondamento del budget
-        budgetBin.value((d: any) => +d.ocFinanzTotPubNetto);
+        budgetBin.value((d: any) => {
+            try {
+                
+                return parseInt(d.ocFinanzTotPubNetto);
+            } catch (error) {
+                console.log('budgetBin.value: ',error);
+                return 0;
+            }
+        });
         //inserire soglie per non avere troppi bin: parametrizzare qui quantili?
         let dieciQuantili = d3.range(0, 1.1, 0.125); //.map((n) => +d3.format(".1f")(n));
-        let binThresholds = dieciQuantili.map((quant) => d3.quantile(listaProgetti, quant, (p: any) => +p.ocFinanzTotPubNetto)
+        let binThresholds = dieciQuantili.map((quant) => d3.quantile(listaProgetti, quant, (p: any) => parseInt(p.ocFinanzTotPubNetto))
         );
         binThresholds = [...new Set(binThresholds)];
         let numQuantili = binThresholds.length;
@@ -441,8 +462,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .brushOn(true)
             .x(d3.scaleLinear().domain([0, numQuantili]))
             .y(d3.scaleLinear().domain([0, maxCount]))
-
-            .elasticX(true)
+            .elasticX(false)
             .elasticY(false)
             .margins({ top: 10, right: 20, bottom: 20, left: 20 });
 
@@ -456,22 +476,11 @@ export class HomePage implements OnInit, AfterViewInit {
         this.budgetChart.useViewBoxResizing(true)
 
 
-
-        this.budgetChart.on("renderlet", () => {
-            //propagare evento per aggiornare la lista dei progetti
-            this.progetti = budgetDim.top(Infinity);
-            this.filtraRisultati();
-            this.evidenziaRisultatiSuMappa();
-
-        });
-
         this.budgetChart.on("filtered", () => {
             //propagare evento per aggiornare la lista dei progetti
             this.progetti = budgetDim.top(Infinity);
             this.filtraRisultati();
             this.evidenziaRisultatiSuMappa();
-
-
         });
 
         this.budgetChart.on('pretransition', function (chart) {
@@ -539,17 +548,20 @@ export class HomePage implements OnInit, AfterViewInit {
     public filterByTema(tema: any): void {
         tema.isSelected = !tema.isSelected;
         if (lodash.every(this.temi, t => !t.isSelected)) {
-            lodash.map(this.temi, t => { t.isSelected = true; })
+            this.monithonMap.resetFiltriTemi();
         }
-        //TODO : resettare categorie quando un tema torna attivo
+
         this.redrawCharts = true;
-        this.monithonMap.filtraPerTema();
+        this.monithonMap.filtraPerTema(tema);
     }
 
     public filterByCategoria(categoria: any): void {
         categoria.isSelected = !categoria.isSelected;
         if (lodash.every(this.categorie, c => !c.isSelected)) {
-            lodash.map(this.categorie, c => { c.isSelected = true; })
+           
+            this.monithonMap.resetFiltriTemi();
+
+            // lodash.map(this.categorie, c => { c.isSelected = true; })
         }
         this.redrawCharts = true;
         this.monithonMap.filtraPerCategoria();

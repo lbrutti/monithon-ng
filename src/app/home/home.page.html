@@ -1,16 +1,7 @@
 <ion-content [fullscreen]="true" [scrollY]="false">
     <!-- <ion-toolbar class="monithon-header" >
     </ion-toolbar> -->
-    <monithon-drawer>
-        <div slot="menu-entries">
-
-            <h3 class="menu-entry"> slot - uno </h3>
-            <h3 class="menu-entry"> slot - due </h3>
-            <h3 class="menu-entry"> slot - tre </h3>
-            <h3 class="menu-entry"> slot - quattro </h3>
-        </div>
-    </monithon-drawer>
-    <div #geocoder id="geocoder" class="geocoder">
+     <div #geocoder id="geocoder" class="geocoder">
         <ion-label>{{'comune'|transloco}}</ion-label>
     </div>
     <div id="container">
@@ -142,6 +133,7 @@
                 <!-- Temi -->
                 <mat-chip-list [ngClass]="{'monithon-temi': true}" aria-label="Temi progetto" multiple="true">
                     <mat-chip [ngClass]="{'monithon-tema': true}" *ngFor="let tema of this.temi"
+                        [selectable]="tema.isActive"
                         [selected]="tema.isSelected" (click)="this.filterByTema(tema)"
                         [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico" disableRipple="true">
                         {{'temi.'+tema.ocCodTemaSintetico | transloco}}</mat-chip>
@@ -162,7 +154,7 @@
                                     <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
                                         aria-orientation="horizontal">
-                                        <mat-chip [ngClass]="{'monithon-categoria': true}" selectable="true"
+                                        <mat-chip [ngClass]="{'monithon-categoria': true}" [selectable]="categoria.isActive"
                                             *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected"
                                             (click)="this.filterByCategoria(categoria)"
                                             [attr.data-oc-cod-tema-sintetico]="categoria.ocCodTemaSintetico"
@@ -312,7 +304,7 @@
                     </ion-grid>
                 </div>
                 <!-- lista risultati -->
-                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                <cdk-virtual-scroll-viewport #listaRisultati itemSize="50" minBufferPx="200" maxBufferPx="400"
                     class="monithon-lista-progetti">
                     <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;"
                         class="monithon-lista-progetti__progetto">

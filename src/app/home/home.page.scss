@@ -290,8 +290,33 @@
 }
 
 
+.mat-chip.monithon-tema[ng-reflect-selectable="false"],
+.mat-chip.monithon-categoria[ng-reflect-selectable="false"]{
+    pointer-events: none;
+    background-color: transparent !important;
+    opacity: 0.5;
+    // &[data-oc-cod-tema-sintetico="4"] {
+    //     color: var(--monithon-tema-energia-background) !important;
+    //     border-color: var(--monithon-tema-energia-background);
+    // }
 
+    // &[data-oc-cod-tema-sintetico="5"] {
 
+    //     color: var(--monithon-tema-ambiente-background) !important;
+    //     border-color: var(--monithon-tema-ambiente-background);
+    // }
+
+    // &[data-oc-cod-tema-sintetico="6"] {
+    //     color: var(--monithon-tema-attrazione-background) !important;
+    //     border-color: var(--monithon-tema-attrazione-background);
+    // }
+
+    // &[data-oc-cod-tema-sintetico="7"] {
+    //     color: var(--monithon-tema-mobilita-background) !important;
+    //     border-color: var(--monithon-tema-mobilita-background);
+    // }
+
+}
 
 .mat-chip.monithon-tema,
 .mat-chip.monithon-categoria,
@@ -454,6 +479,9 @@ ion-row.monithon-filtri-secondari {
 
     }
 
+    &.selected{
+        font-weight: bolder;
+    }
     &[data-oc-cod-tema-sintetico="4"]::before {
         background-color: var(--monithon-tema-energia-background);
 

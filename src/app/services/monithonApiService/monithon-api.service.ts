@@ -31,9 +31,29 @@ export class MonithonApiService {
                     return res.map((p: any) => {
                         p.lat = parseFloat(p.lat);
                         p.long = parseFloat(p.long);
-                        p.ocDataInizioProgetto = parseInt(p.ocDataInizioProgetto);
-                        p.ocFinanzTotPubNetto = parseFloat(p.ocFinanzTotPubNetto);
-                        p.hasReport = p.reports.length>0 && p.reports[0]!=0;
+                        try {
+                            p.ocDataInizioProgetto = parseInt(p.ocDataInizioProgetto);
+
+                        } catch (error) {
+                            console.error(p.uid);
+                            console.error(error);
+                        }
+                        try {
+                            p.ocFinanzTotPubNetto = parseFloat(p.ocFinanzTotPubNetto);
+
+                        } catch (error) {
+                            console.error(p.uid);
+                            console.error(error);
+
+                        }
+                        try {
+
+                            p.hasReport = p.reports.length > 0 && p.reports[0] != 0;
+                        } catch (error) {
+                            console.error(p.uid);
+                            console.error(error);
+
+                        }
                         return p;
                     });
                 }),
@@ -56,6 +76,9 @@ export class MonithonApiService {
     }
     getTemi() {
         // return this.httpClient.get<any[]>(this.url + '/temi');
-        return of(temi);
+        return of(temi.map(t => {
+            t.isActive = true;
+            return t;
+        }));
     }
 }
