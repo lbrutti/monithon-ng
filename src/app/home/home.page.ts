@@ -166,6 +166,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
+                
 
                 geocoderClearBtn
                     .addEventListener('click', () => {
@@ -420,10 +421,18 @@ export class HomePage implements OnInit, AfterViewInit {
         let budgetBin = d3.bin();
 
         //creo bin usando arrotondamento del budget
-        budgetBin.value((d: any) => +d.ocFinanzTotPubNetto);
+        budgetBin.value((d: any) => {
+            try {
+                
+                return parseInt(d.ocFinanzTotPubNetto);
+            } catch (error) {
+                console.log('budgetBin.value: ',error);
+                return 0;
+            }
+        });
         //inserire soglie per non avere troppi bin: parametrizzare qui quantili?
         let dieciQuantili = d3.range(0, 1.1, 0.125); //.map((n) => +d3.format(".1f")(n));
-        let binThresholds = dieciQuantili.map((quant) => d3.quantile(listaProgetti, quant, (p: any) => +p.ocFinanzTotPubNetto)
+        let binThresholds = dieciQuantili.map((quant) => d3.quantile(listaProgetti, quant, (p: any) => parseInt(p.ocFinanzTotPubNetto))
         );
         binThresholds = [...new Set(binThresholds)];
         let numQuantili = binThresholds.length;

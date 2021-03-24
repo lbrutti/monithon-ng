@@ -182,7 +182,12 @@ export class MonithonMapService {
         this.map.on('draw.delete', (evt) => {
 
             this.filtroPerRaggioEnabled = false;
-            this.resetFiltriTemi();
+            
+            lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
+            lodash.map(this.categorie, c => {
+                c.isSelected = true;
+                c.isActive = true;
+            });
             this.filtraPerDistanza();
             this.map.setLayoutProperty('radius-value', 'visibility', 'none');
 
@@ -298,6 +303,7 @@ export class MonithonMapService {
                 }
             });
             this.map.resize();
+            this.aggiornaAttivabilitaCategorie();
             this.publishUpdate(this.featureCollectionToProgetti());
         });
 
@@ -325,7 +331,7 @@ export class MonithonMapService {
             "type": "FeatureCollection",
             "features": data.map((p: Progetto) => {
                 let properties: any = Object.assign({}, p);
-                properties.isSelected = false;
+                properties.isSelected = true;
                 properties.isWithinRange = false;
                 properties.isHighlighted = false;
                 let jitteredCoords = this.addJitter()(p.lat, p.long, 0.1, false);
@@ -385,7 +391,9 @@ export class MonithonMapService {
     }
     resetFiltriTemi() {
         lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
-        lodash.map(this.categorie, c => { c.isSelected = true; c.isActive = true; });
+        lodash.map(this.categorie, c => { c.isSelected = c.isActive && true; 
+            // c.isActive = true;
+         });
     }
 
     aggiornaAttivabilitaCategorie() {
@@ -395,7 +403,7 @@ export class MonithonMapService {
         let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
 
         lodash.map(categoriePerTema, (categorie, codiceTema) => {
-            //quando deseleziono tutte le categorie di un tema-> lo deseleziono
+            //quando nessuna categoria del tema è attiva -> inattivo il tema
             if (lodash.every(categorie, c => !c.isActive)) {
                 this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => t.isActive = false);
             }
