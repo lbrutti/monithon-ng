@@ -8,7 +8,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { MonithonMockedService } from './services/monithonMockService/monithon-mocked.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslocoRootModule } from './transloco/transloco-root.module';
@@ -35,7 +34,6 @@ registerLocaleData(localeIt);
         StatusBar,
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        MonithonMockedService,
         { provide: LOCALE_ID, useValue: "it" },
         CurrencyPipe,
     ],

@@ -93,13 +93,11 @@ export class HomePage implements OnInit, AfterViewInit {
     raggioCorrente: any;
     monithonReportUrl: any;
     constructor(
-        // private monitonMockedService: MonithonMockedService,
         private monithonApiService: MonithonApiService,
         private monithonMap: MonithonMapService,
         private currencyPipe: CurrencyPipe) { this.monithonReportUrl = environment.monithonReportUrl; }
 
     ngOnInit(): void {
-        // this.monitonMockedService.mirageJsServer();
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
