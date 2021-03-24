@@ -290,8 +290,8 @@
 }
 
 
-.mat-chip.monithon-tema[ng-reflect-selectable="false"],
-.mat-chip.monithon-categoria[ng-reflect-selectable="false"]{
+.mat-chip.monithon-tema[data-active="false"],
+.mat-chip.monithon-categoria[data-active="false"]{
     pointer-events: none;
     background-color: transparent !important;
     opacity: 0.5;
