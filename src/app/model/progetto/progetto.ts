@@ -12,7 +12,7 @@ export class Progetto {
     long: number ;
     hasReport: boolean = false;
     isSelected: boolean = false;
-    ocCodStatoProgetto?: any;
+    codStatoProgetto?: any;
     distanza:number = Infinity;
     isWithinRange:boolean = false;
     uid: string;

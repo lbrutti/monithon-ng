@@ -54,18 +54,18 @@ export class HomePage implements OnInit, AfterViewInit {
     categorie: Array<any> = [];
     statiAvanzamento: Array<any> = [{
         isSelected: false,
-        ocCodStatoProgetto: 4
+        codStatoProgetto: 4
     },
     {
         isSelected: false,
-        ocCodStatoProgetto: 2
+        codStatoProgetto: 2
     },
     {
         isSelected: false,
-        ocCodStatoProgetto: 1
+        codStatoProgetto: 1
     }, {
         isSelected: false,
-        ocCodStatoProgetto: 3
+        codStatoProgetto: 3
     }];
 
     reportFlags: Array<any> = [
@@ -581,12 +581,12 @@ export class HomePage implements OnInit, AfterViewInit {
     }
 
     filtraRisultati() {
-        let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.ocCodStatoProgetto);
+        let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.codStatoProgetto);
         let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);
 
         this.risultatiRicerca = this.progetti.filter(progetto => {
             let matchesStato = ((reportFlagSelezionate.length == 0) || lodash.includes(reportFlagSelezionate, progetto.hasReport));
-            let matchesReportFlags = ((statiAvanzamentoSelezionati.length == 0) || lodash.includes(statiAvanzamentoSelezionati, progetto.ocCodStatoProgetto))
+            let matchesReportFlags = ((statiAvanzamentoSelezionati.length == 0) || lodash.includes(statiAvanzamentoSelezionati, progetto.codStatoProgetto))
 
             return matchesStato && matchesReportFlags;
         });

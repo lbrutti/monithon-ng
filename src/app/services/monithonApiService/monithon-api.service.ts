@@ -19,7 +19,6 @@ export class MonithonApiService {
 
     constructor(httpClient: HttpClient) {
         this.httpClient = httpClient;
-        //https://api.monithon.eu/api/mapdata
         this.url = `${environment.server.protocol}://${environment.server.ip}/${environment.server.apiroute}`;
 
     }
@@ -47,7 +46,7 @@ export class MonithonApiService {
 
                         }
                         try {
-                            p.reports = lodash.map(p.reports, (data, reportId)=>({id:reportId, dataAggiornamento:data}));
+                            p.reports = lodash.map(p.reports, (data, reportId) => ({ id: reportId, dataAggiornamento: data }));
                             p.hasReport = p.reports.length > 0;
                         } catch (error) {
                             console.error(p.uid);
@@ -65,8 +64,29 @@ export class MonithonApiService {
     }
 
     public getDettaglio(uid: string): Observable<any> {
-        // return this.httpClient.get<any>(this.url + '/progetti/dettaglio/' + codLocaleProgetto);
-        return of(lodash.filter(dettaglioProgetti, p => p.uid == uid));
+        return this.httpClient.get<any>(this.url + '/mdProject' + uid)
+            .pipe(
+                map((p) => {
+
+                    p.codStatoProgetto = p.ocCodStatoProgetto;
+                    delete (p.ocCodStatoProgetto);
+                    try {
+                        p.reports = lodash.map(p.reports, (data, reportId) => ({ id: reportId, dataAggiornamento: data }));
+                        p.hasReport = p.reports.length > 0;
+                    } catch (error) {
+                        console.error(p.uid);
+                        console.error(error);
+
+                    }
+                    return p;
+
+                }),
+                catchError(e => {
+                    console.error(e);
+                    return of(e);
+                })
+            );
+        // return of(lodash.filter(dettaglioProgetti, p => p.uid == uid));
 
     }
 

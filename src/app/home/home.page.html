@@ -82,10 +82,10 @@
                                                 multiple="true" aria-orientation="horizontal">
                                                 <mat-chip class="monithon-dettaglio-progetto__stato-avanzamento"
                                                     selectable="false" *ngFor="let stato of this.statiAvanzamento"
-                                                    [selected]="progettoSelezionato.ocCodStatoProgetto==stato.ocCodStatoProgetto"
-                                                    [attr.data-oc-cod-stato-progetto]="stato.ocCodStatoProgetto"
+                                                    [selected]="progettoSelezionato.codStatoProgetto==stato.codStatoProgetto"
+                                                    [attr.data-oc-cod-stato-progetto]="stato.codStatoProgetto"
                                                     disableRipple="true">
-                                                    {{'statiAvanzamento.'+stato.ocCodStatoProgetto | transloco}}
+                                                    {{'statiAvanzamento.'+stato.codStatoProgetto | transloco}}
                                                 </mat-chip>
                                             </mat-chip-list>
                                         </ion-col>
@@ -206,13 +206,13 @@
                                                         <mat-chip
                                                             [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
                                                             selectable="true"
-                                                            [matTooltip]="'tooltip.statiAvanzamento.'+stato.ocCodStatoProgetto | transloco"
+                                                            [matTooltip]="'tooltip.statiAvanzamento.'+stato.codStatoProgetto | transloco"
                                                             *ngFor="let stato of this.statiAvanzamento"
                                                             [selected]="stato.isSelected"
                                                             (click)="this.filterByStato(stato)"
-                                                            [attr.data-oc-cod-stato-progetto]="stato.ocCodStatoProgetto"
+                                                            [attr.data-oc-cod-stato-progetto]="stato.codStatoProgetto"
                                                             disableRipple="true">
-                                                            {{'statiAvanzamento.'+stato.ocCodStatoProgetto | transloco}}
+                                                            {{'statiAvanzamento.'+stato.codStatoProgetto | transloco}}
                                                         </mat-chip>
                                                     </mat-chip-list>
                                                 </ion-col>
