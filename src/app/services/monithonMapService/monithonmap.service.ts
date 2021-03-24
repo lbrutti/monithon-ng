@@ -181,7 +181,6 @@ export class MonithonMapService {
         });
         this.map.on('draw.delete', (evt) => {
             //invocato alla cancellazione manuale del cerchio
-            console.log('draw delete non viene mai invocato')
             this.resetFiltroDistanza();
         });
         this.map.on('load', () => {
