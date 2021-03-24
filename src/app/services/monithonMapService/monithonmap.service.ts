@@ -401,10 +401,37 @@ export class MonithonMapService {
             c.isSelected = true;
             c.isActive = categorieVisibili.indexOf(c.ocCodCategoriaSpesa) > -1;
         });
+
+        let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
+
+        lodash.map(categoriePerTema, (categorie, codiceTema) => {
+            //quando nessuna categoria del tema è attiva -> inattivo il tema
+            if (lodash.every(categorie, c => !c.isActive)) {
+                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
+                    t.isActive = false;
+                    t.isSelected = false;
+                });
+            } else if (lodash.every(categorie, c => !c.isSelected)) {
+                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
+                    t.isActive = true;
+                    t.isSelected = true;
+                });
+            }
+
+        });
     }
 
     aggiornaAttivabilitaCategorie(reset: boolean = false) {
-        let categorieVisibili = lodash.uniq(this.progetti.features.filter(f => f.properties.isSelected).reduce((acc, f) => [...acc, ...f.properties.ocCodCategoriaSpesa], []));
+        let categorieVisibili = lodash.uniq(
+            this.progetti.features.filter(f => f.properties.isSelected)
+                .reduce((acc, f) => {
+                    f.properties.ocCodCategoriaSpesa.map(c => {
+                        if (acc.indexOf(c) == -1) {
+                            acc.push(c);
+                        }
+                    });
+                    return acc;
+                }, []));
         this.categorie.map(c => {
             //una categoria è attiva (selezionabile) quando esiste almeno un progetto che ce l'ha
             c.isActive = lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa);
@@ -429,7 +456,7 @@ export class MonithonMapService {
                 });
             }
 
-        })
+        });
 
     }
 
