@@ -295,26 +295,26 @@
     pointer-events: none;
     background-color: transparent !important;
     opacity: 0.5;
-    // &[data-oc-cod-tema-sintetico="4"] {
-    //     color: var(--monithon-tema-energia-background) !important;
-    //     border-color: var(--monithon-tema-energia-background);
-    // }
+    &[data-oc-cod-tema-sintetico="4"] {
+        color: var(--monithon-tema-energia-background) !important;
+        border-color: var(--monithon-tema-energia-background);
+    }
 
-    // &[data-oc-cod-tema-sintetico="5"] {
+    &[data-oc-cod-tema-sintetico="5"] {
 
-    //     color: var(--monithon-tema-ambiente-background) !important;
-    //     border-color: var(--monithon-tema-ambiente-background);
-    // }
+        color: var(--monithon-tema-ambiente-background) !important;
+        border-color: var(--monithon-tema-ambiente-background);
+    }
 
-    // &[data-oc-cod-tema-sintetico="6"] {
-    //     color: var(--monithon-tema-attrazione-background) !important;
-    //     border-color: var(--monithon-tema-attrazione-background);
-    // }
+    &[data-oc-cod-tema-sintetico="6"] {
+        color: var(--monithon-tema-attrazione-background) !important;
+        border-color: var(--monithon-tema-attrazione-background);
+    }
 
-    // &[data-oc-cod-tema-sintetico="7"] {
-    //     color: var(--monithon-tema-mobilita-background) !important;
-    //     border-color: var(--monithon-tema-mobilita-background);
-    // }
+    &[data-oc-cod-tema-sintetico="7"] {
+        color: var(--monithon-tema-mobilita-background) !important;
+        border-color: var(--monithon-tema-mobilita-background);
+    }
 
 }
 

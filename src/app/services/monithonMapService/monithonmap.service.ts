@@ -376,15 +376,30 @@ export class MonithonMapService {
         // rimuovi filtro su categorie non associate ai temi selezionati
         this.filtraCategorie(tema);
         let progetti = this.filtraProgetti();
-        //this.aggiornaAttivabilitaCategorie();
         lodash.remove(progetti, p => !p.isSelected);
         this.publishUpdate(progetti);
     }
-    resetFiltriTemi() {
+    resetFiltroTemi() {
         lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
+        let progettiSelezionati = [];
+        if (this.filtroPerRaggioEnabled) {
+            progettiSelezionati = this.progetti.features.filter(p => p.properties.isWithinRange);
+        } else {
+            progettiSelezionati = this.progetti.features;
+        }
+        let categorieVisibili = lodash
+            .uniq(progettiSelezionati.reduce((acc, f) => {
+                f.properties.ocCodCategoriaSpesa.map(c => {
+                    if (acc.indexOf(c) == -1) {
+                        acc.push(c);
+                    }
+                });
+                return acc;
+            }, []));
+
         lodash.map(this.categorie, c => {
-            c.isSelected = c.isActive && true;
-            // c.isActive = true;
+            c.isSelected = true;
+            c.isActive = categorieVisibili.indexOf(c.ocCodCategoriaSpesa) > -1;
         });
     }
 
@@ -631,7 +646,7 @@ export class MonithonMapService {
         this.resetFiltroDistanza();
     }
 
-    private resetFiltroDistanza(publishUpdate:boolean=true) {
+    private resetFiltroDistanza(publishUpdate: boolean = true) {
         this.circle = null;
         this.filtroPerRaggioEnabled = false;
 
@@ -644,7 +659,7 @@ export class MonithonMapService {
         this.map.setLayoutProperty('radius-value', 'visibility', 'none');
         let progetti = this.resetFiltroProgetti();
         this.aggiornaAttivabilitaCategorie(true);
-        if (publishUpdate){
+        if (publishUpdate) {
             this.publishUpdate(progetti);
         }
     }
