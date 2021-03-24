@@ -164,7 +164,6 @@ export class HomePage implements OnInit, AfterViewInit {
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement, this.navigationControl.nativeElement);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
-                
 
                 geocoderClearBtn
                     .addEventListener('click', () => {

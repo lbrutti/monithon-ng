@@ -311,6 +311,8 @@ export class MonithonMapService {
             this.map.scrollZoom.disable();
             this.map.resize();
             this.aggiornaAttivabilitaCategorie();
+            navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
+
             this.publishUpdate(this.featureCollectionToProgetti());
         });
 
