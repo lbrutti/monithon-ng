@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import dettaglioProgetti from '../../../assets/mock/dettaglioProgetti_v4';
 import temi from '../../../assets/mock/temi';
 import categorie from '../../../assets/mock/categorie';
 import lodash from 'lodash';
 import { environment } from 'src/environments/environment';
-import { Progetto } from 'src/app/model/progetto/progetto';
 @Injectable({
     providedIn: 'root'
 })
