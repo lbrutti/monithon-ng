@@ -120,7 +120,10 @@ export class HomePage implements OnInit, AfterViewInit {
         };
 
         let projectSelectionObserver: Observer<any> = {
-            next: progetto => this.evidenziaProgettoInLista(progetto),
+            next: progetto => {
+                this.evidenziaProgettoInLista(progetto);
+                this.onDettaglioProgettoHandleClick();
+            },
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
         };
@@ -191,7 +194,7 @@ export class HomePage implements OnInit, AfterViewInit {
     };
 
     evidenziaProgettoInLista(progetto: any) {
-        if (!lodash.isNil(progetto)){
+        if (!lodash.isNil(progetto)) {
             this.progettoSelezionato = progetto;
             let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === progetto.uid);
             this.listaRisultati.scrollToIndex(indexRisultato);
@@ -420,10 +423,10 @@ export class HomePage implements OnInit, AfterViewInit {
         //creo bin usando arrotondamento del budget
         budgetBin.value((d: any) => {
             try {
-                
+
                 return parseInt(d.ocFinanzTotPubNetto);
             } catch (error) {
-                console.log('budgetBin.value: ',error);
+                console.log('budgetBin.value: ', error);
                 return 0;
             }
         });
@@ -554,7 +557,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     public filterByCategoria(categoria: any): void {
         categoria.isSelected = !categoria.isSelected;
-        if (lodash.every(this.categorie, c => !c.isSelected)) {           
+        if (lodash.every(this.categorie, c => !c.isSelected)) {
             this.monithonMap.resetFiltroTemi();
         }
         this.redrawCharts = true;
