@@ -1,5 +1,4 @@
 export class Progetto {
-    codLocaleProgetto: string;
     ocTitoloProgetto: string;
     ocStatoProgetto: string;
     ocDataInizioProgetto: number;
@@ -16,4 +15,6 @@ export class Progetto {
     distanza:number = Infinity;
     isWithinRange:boolean = false;
     uid: string;
+    codLocaleProgetto?: string;
+    ocLink?:string;
 }

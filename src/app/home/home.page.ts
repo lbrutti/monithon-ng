@@ -202,7 +202,7 @@ export class HomePage implements OnInit, AfterViewInit {
     }
     showDettaglioProgetto(progetto: any) {
         if (!lodash.isNil(progetto)) {
-            this.monithonApiService.getDettaglio(progetto.uid)
+            this.monithonApiService.getDettaglio(progetto)
                 .subscribe({
                     next: progetto => {
                         let dettaglioBoundingRect = this.dettaglioProgetto.nativeElement.getBoundingClientRect();
@@ -612,7 +612,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
     public iniziaMonitoraggioClicked(progetto: Progetto) {
-        window.open("https://it.monithon.eu/user/login?r=1", "_blank");
+        window.open("https://it.monithon.eu/user/login?r=1&"+encodeURI(progetto.ocLink), "_blank");
     }
 
     public onCriterioSelezionatoClick(criterio) {

@@ -6,6 +6,7 @@ import temi from '../../../assets/mock/temi';
 import categorie from '../../../assets/mock/categorie';
 import lodash from 'lodash';
 import { environment } from 'src/environments/environment';
+import { Progetto } from 'src/app/model/progetto/progetto';
 @Injectable({
     providedIn: 'root'
 })
@@ -61,29 +62,18 @@ export class MonithonApiService {
             );
     }
 
-    public getDettaglio(uid: string): Observable<any> {
-        return this.httpClient.get<any>(this.url + '/mdProject/' + uid)
+    public getDettaglio(progetto: Progetto): Observable<any> {
+        return this.httpClient.get<any>(this.url + '/mdProject/' + progetto.uid)
             .pipe(
                 map((p) => {
-                    p.codStatoProgetto = p.ocCodStatoProgetto;
-                    delete (p.ocCodStatoProgetto);
-                    try {
-                        p.reports = lodash.map(p.reports, (data, reportId) => ({ id: reportId, dataAggiornamento: data }));
-                        p.hasReport = p.reports.length > 0;
-                    } catch (error) {
-                        console.error(p.uid);
-                        console.error(error);
-                    }
+                    p.hasReport = progetto.hasReport;
                     return p;
-
                 }),
                 catchError(e => {
                     console.error(e);
                     return of(e);
                 })
             );
-        // return of(lodash.filter(dettaglioProgetti, p => p.uid == uid));
-
     }
 
     getCategorie() {
