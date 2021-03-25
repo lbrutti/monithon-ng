@@ -53,27 +53,33 @@ export class HomePage implements OnInit, AfterViewInit {
     temi: Array<any> = [];
     categorie: Array<any> = [];
     statiAvanzamento: Array<any> = [{
-        isSelected: false,
+        isSelected: true,
+        isActive: true,
         codStatoProgetto: 4
     },
     {
-        isSelected: false,
+        isSelected: true,
+        isActive: true,
         codStatoProgetto: 2
     },
     {
-        isSelected: false,
+        isSelected: true,
+        isActive: true,
         codStatoProgetto: 1
     }, {
-        isSelected: false,
+        isSelected: true,
+        isActive: true,
         codStatoProgetto: 3
     }];
 
     reportFlags: Array<any> = [
         {
-            isSelected: false,
+            isSelected: true,
+            isActive: true,
             hasReport: true
         }, {
-            isSelected: false,
+            isSelected: true,
+            isActive: true,
             hasReport: false
         }]
 
@@ -105,6 +111,15 @@ export class HomePage implements OnInit, AfterViewInit {
                 this.temi = updateSubject.temi; // <- nessun problema di performance
                 this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
+                this.statiAvanzamento.map(s => {
+                    s.isActive = lodash.some(this.progetti, p => p.codStatoProgetto == s.codStatoProgetto);
+                    s.isSelected = s.isActive;
+                });
+
+                this.reportFlags.map(flag => {
+                    flag.isActive = lodash.some(this.progetti, p => p.hasReport == flag.hasReport);
+                    flag.isSelected = flag.isActive;
+                });
                 if (this.redrawCharts) {
                     try {
                         this.renderCharts(this.progetti);
@@ -567,12 +582,19 @@ export class HomePage implements OnInit, AfterViewInit {
     //Filtri di secondo livello:
     public filterByStato(stato) {
         stato.isSelected = !stato.isSelected;
+        if(lodash.every(this.statiAvanzamento,s =>!s.isSelected)){
+            this.statiAvanzamento.map(s=>s.isSelected = s.isActive);
+        }
         this.filtraRisultati();
         this.evidenziaRisultatiSuMappa();
 
     }
     public filterByReportFlag(reportFlag) {
         reportFlag.isSelected = !reportFlag.isSelected;
+
+        if (lodash.every(this.reportFlags, f => !f.isSelected)) {
+            this.reportFlags.map(f => f.isSelected = f.isActive);
+        }
         this.filtraRisultati();
         this.evidenziaRisultatiSuMappa();
 
@@ -593,6 +615,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
             return matchesStato && matchesReportFlags;
         });
+       
         this.ordinaRisultatiPerCriterio();
     }
 
@@ -612,7 +635,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
     public iniziaMonitoraggioClicked(progetto: Progetto) {
-        window.open("https://it.monithon.eu/user/login?r=1&"+encodeURI(progetto.ocLink), "_blank");
+        window.open("https://it.monithon.eu/user/login?r=1&" + encodeURI(progetto.ocLink), "_blank");
     }
 
     public onCriterioSelezionatoClick(criterio) {

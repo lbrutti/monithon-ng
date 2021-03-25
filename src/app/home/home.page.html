@@ -203,10 +203,12 @@
                                                         [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
                                                         multiple="true" aria-orientation="horizontal">
                                                         <mat-chip
-                                                            [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
-                                                            selectable="true"
-                                                            [matTooltip]="'tooltip.statiAvanzamento.'+stato.codStatoProgetto | transloco"
                                                             *ngFor="let stato of this.statiAvanzamento"
+                                                            [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
+                                                            selectable="{{stato.isActive}}"
+                                                            [attr.data-active]="stato.isActive"
+
+                                                            [matTooltip]="'tooltip.statiAvanzamento.'+stato.codStatoProgetto | transloco"
                                                             [selected]="stato.isSelected"
                                                             (click)="this.filterByStato(stato)"
                                                             [attr.data-oc-cod-stato-progetto]="stato.codStatoProgetto"
@@ -223,6 +225,7 @@
                                                             selectable="true" *ngFor="let flag of this.reportFlags"
                                                             [matTooltip]="'tooltip.reportFlags.'+flag.hasReport | transloco"
                                                             [selected]="flag.isSelected"
+                                                            [attr.data-active]="flag.isActive"
                                                             (click)="this.filterByReportFlag(flag)"
                                                             [attr.data-has-report]="flag.hasReport"
                                                             disableRipple="true">

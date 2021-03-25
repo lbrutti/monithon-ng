@@ -172,13 +172,13 @@
         }
     }
 
-     &[data-oc-cod-tema-sintetico="7"] {
-         background-color: var(--monithon-tema-mobilita-background);
+    &[data-oc-cod-tema-sintetico="7"] {
+        background-color: var(--monithon-tema-mobilita-background);
 
-         .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-             color: var(--monithon-tema-mobilita-background);
-         }
-     }
+        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+            color: var(--monithon-tema-mobilita-background);
+        }
+    }
 
     &.hidden {
         left: -100vw;
@@ -290,11 +290,15 @@
 }
 
 
-.mat-chip.monithon-tema[data-active="false"],
-.mat-chip.monithon-categoria[data-active="false"]{
+.mat-chip[data-active="false"] {
     pointer-events: none;
     background-color: transparent !important;
     opacity: 0.5;
+}
+
+.mat-chip.monithon-tema[data-active="false"],
+.mat-chip.monithon-categoria[data-active="false"] {
+
     &[data-oc-cod-tema-sintetico="4"] {
         color: var(--monithon-tema-energia-background) !important;
         border-color: var(--monithon-tema-energia-background);
@@ -374,6 +378,7 @@
         &[data-oc-cod-tema-sintetico="6"] {
             background-color: var(--monithon-tema-attrazione-background);
         }
+
         &[data-oc-cod-tema-sintetico="7"] {
             background-color: var(--monithon-tema-mobilita-background);
         }
@@ -445,12 +450,14 @@ ion-row.monithon-filtri-secondari {
     }
 }
 
-.monithon-risultati-header{
+.monithon-risultati-header {
     height: 5rem;
-    .monithon-contatore-risultati{
+
+    .monithon-contatore-risultati {
         display: block;
     }
 }
+
 .monithon-contatore-risultati {
     color: var(--monithon-contatore-risultati-color);
     font-size: 80px;
@@ -479,9 +486,10 @@ ion-row.monithon-filtri-secondari {
 
     }
 
-    &.selected{
+    &.selected {
         font-weight: bolder;
     }
+
     &[data-oc-cod-tema-sintetico="4"]::before {
         background-color: var(--monithon-tema-energia-background);
 
@@ -509,14 +517,14 @@ ion-row.monithon-filtri-secondari {
         color: var(--monithon-tema-attrazione-background);
     }
 
-     &[data-oc-cod-tema-sintetico="7"]::before {
-         background-color: var(--monithon-tema-mobilita-background);
+    &[data-oc-cod-tema-sintetico="7"]::before {
+        background-color: var(--monithon-tema-mobilita-background);
 
-     }
+    }
 
-     &[data-oc-cod-tema-sintetico="7"].selected {
-         color: var(--monithon-tema-mobilita-background);
-     }
+    &[data-oc-cod-tema-sintetico="7"].selected {
+        color: var(--monithon-tema-mobilita-background);
+    }
 
     h2 {
         margin-bottom: auto;
@@ -589,7 +597,7 @@ ion-row.monithon-filtri-secondari {
     width: auto;
     right: 5%;
     top: 20px;
-   
+
 }
 
 .mapboxgl-ctrl-geocoder {
