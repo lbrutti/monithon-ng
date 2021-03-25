@@ -16,6 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MomentdateModule } from '../pipes/momentdate/momentdate.pipe.module';
 import { CapitalizePipeModule } from '../pipes/capitalize/capitalize.pipe.module';
 import { FormatDistanzaPipeModule } from '../pipes/format-distanza/format-distanza.pipe.module';
+import { UnescapePipeModule } from '../pipes/unescape/unescape.pipe.module';
 @NgModule({
     imports: [
         CommonModule,
@@ -30,7 +31,8 @@ import { FormatDistanzaPipeModule } from '../pipes/format-distanza/format-distan
         MatTooltipModule,
         MomentdateModule,
         CapitalizePipeModule,
-        FormatDistanzaPipeModule
+        FormatDistanzaPipeModule,
+        UnescapePipeModule
     ],
     declarations: [HomePage],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
