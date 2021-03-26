@@ -160,22 +160,19 @@ export class HomePage implements OnInit, AfterViewInit {
         this.raggioCorrente = this.geocoderData.radius;
     }
 
-    getCategorie() {
-        return this.monithonApiService.getCategorie();
-    }
     getTemi() {
         return this.monithonApiService.getTemi();
     }
 
     ngAfterViewInit(): void {
-        Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise(), this.getCategorie().toPromise()])
+        Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise()])
             .then(data => {
 
-                this.monithonMap.setCategorie(data[2].map(c => {
+                this.monithonMap.setCategorie(data[1].categorie.map(c => {
                     c.isSelected = true;
                     return c;
                 }));
-                this.monithonMap.setTemi(data[1].map(t => {
+                this.monithonMap.setTemi(data[1].temi.map(t => {
                     t.isSelected = true;
                     return t;
                 }));

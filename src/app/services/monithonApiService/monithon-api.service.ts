@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import temi from '../../../assets/mock/temi';
-import categorie from '../../../assets/mock/categorie';
 import lodash from 'lodash';
 import { environment } from 'src/environments/environment';
 import { Progetto } from 'src/app/model/progetto/progetto';
@@ -76,15 +74,32 @@ export class MonithonApiService {
             );
     }
 
-    getCategorie() {
-        // return this.httpClient.get<any[]>(this.url + '/categorie');
-        return of(categorie);
-    }
-    getTemi() {
-        // return this.httpClient.get<any[]>(this.url + '/temi');
-        return of(temi.map(t => {
-            t.isActive = true;
-            return t;
-        }));
+   public getTemi() {
+        let res = { temi: [], categorie: [] };
+        //{"4":[12,10,15,14,11,13,16],"6":[95,91,94,93,92],"5":[87,86,85,19,20,84,22,17,18,88,21,89,23,500],"7":[43]}
+
+        return this.httpClient.get<any>(this.url + '/mdTemi')
+            .pipe(
+                map((res: any) => {
+                    let temi = lodash.chain(res)
+                        .keys()
+                        .map(tema => ({ 'ocCodTemaSintetico': tema, 'isActive': true }))
+                        .value();
+                    let categorie = lodash.chain(res).map((cat, tema) => {
+                        let categorie = cat.map(c => ({ 'ocCodTemaSintetico': tema, 'ocCodCategoriaSpesa': c }));
+                        return categorie;
+                    }).flatten()
+                    .value();
+                    return {
+                        temi: temi,
+                        categorie: categorie
+                    }
+                }),
+                catchError(e => {
+                    console.error(e);
+                    return of(e);
+                })
+            );
+
     }
 }
