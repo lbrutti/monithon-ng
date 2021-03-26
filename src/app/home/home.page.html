@@ -6,7 +6,7 @@
     </div>
 
     <div #navigationControl id="navigationControl" class="navigation-control">
-       
+
     </div>
     <div id="container">
         <!-- Mappa -->
@@ -27,7 +27,8 @@
                     <ion-row>
                         <ion-col col-6 class="monithon-dettaglio-progetto__col">
                             <div class="monithon-dettaglio-progetto__titolo_container">
-                                <h4 class="monithon-dettaglio-progetto__titolo">{{progettoSelezionato.ocTitoloProgetto | unescape | capitalize}}
+                                <h4 class="monithon-dettaglio-progetto__titolo">{{progettoSelezionato.ocTitoloProgetto |
+                                    unescape | capitalize}}
                                 </h4>
                             </div>
                             <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
@@ -35,7 +36,8 @@
                             </div>
 
                             <div class="monithon-dettaglio-progetto__oc_link">
-                                <a href="{{progettoSelezionato.ocLink}}" target="_blank"> {{'readmore' | transloco }}</a>
+                                <a href="{{progettoSelezionato.ocLink}}" target="_blank"> {{'readmore' | transloco
+                                    }}</a>
                             </div>
 
                         </ion-col>
@@ -43,7 +45,8 @@
                             <div class="monithon-dettaglio-progetto__data_inizio">
                                 <ion-label class="monithon-dettaglio-progetto__label">{{'dataInizio' | transloco}}
                                 </ion-label>
-                                <ion-label>{{progettoSelezionato.ocDataInizioProgetto | momentdate:'YYYYMMDD' | date:'MMMM y':'+0100': 'it'}}</ion-label>
+                                <ion-label>{{progettoSelezionato.ocDataInizioProgetto | momentdate:'YYYYMMDD' |
+                                    date:'MMMM y':'+0100': 'it'}}</ion-label>
                             </div>
 
                             <div class="monithon-dettaglio-progetto__categoria">
@@ -102,7 +105,7 @@
                                                 </mat-chip>
                                             </mat-chip-list>
 
-                                           
+
                                         </ion-col>
                                     </ion-row>
                                 </ion-grid>
@@ -136,10 +139,9 @@
                 <!-- Temi -->
                 <mat-chip-list [ngClass]="{'monithon-temi': true}" aria-label="Temi progetto" multiple="true">
                     <mat-chip [ngClass]="{'monithon-tema': true}" *ngFor="let tema of this.temi"
-                        [selectable]="tema.isActive"
-                        [attr.data-active]="tema.isActive"
-                        [selected]="tema.isSelected" (click)="this.filterByTema(tema)"
-                        [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico" disableRipple="true">
+                        [selectable]="tema.isActive" [attr.data-active]="tema.isActive" [selected]="tema.isSelected"
+                        (click)="this.filterByTema(tema)" [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico"
+                        disableRipple="true">
                         {{'temi.'+tema.ocCodTemaSintetico | transloco}}</mat-chip>
                 </mat-chip-list>
 
@@ -158,8 +160,8 @@
                                     <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
                                         aria-orientation="horizontal">
-                                        <mat-chip [ngClass]="{'monithon-categoria': true}" [selectable]="categoria.isActive"
-                                        [attr.data-active]="categoria.isActive"
+                                        <mat-chip [ngClass]="{'monithon-categoria': true}"
+                                            [selectable]="categoria.isActive" [attr.data-active]="categoria.isActive"
                                             *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected"
                                             (click)="this.filterByCategoria(categoria)"
                                             [attr.data-oc-cod-tema-sintetico]="categoria.ocCodTemaSintetico"
@@ -202,12 +204,10 @@
                                                     <mat-chip-list
                                                         [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
                                                         multiple="true" aria-orientation="horizontal">
-                                                        <mat-chip
-                                                            *ngFor="let stato of this.statiAvanzamento"
+                                                        <mat-chip *ngFor="let stato of this.statiAvanzamento"
                                                             [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
                                                             selectable="{{stato.isActive}}"
                                                             [attr.data-active]="stato.isActive"
-
                                                             [matTooltip]="'tooltip.statiAvanzamento.'+stato.codStatoProgetto | transloco"
                                                             [selected]="stato.isSelected"
                                                             (click)="this.filterByStato(stato)"
@@ -247,32 +247,36 @@
         <div class="right-column">
             <mat-expansion-panel id="resultContainer" [(expanded)]="espandiListaRisultati">
                 <mat-expansion-panel-header class="monithon-risultati-header">
-                    <mat-panel-title>
-                        <h2>{{'resultContainerTitle' | transloco}}</h2>
-                        <!-- nascondere  monithon-contatore-risultati se il pannello è espanso -->
-                        <h1 class="monithon-contatore-risultati" #resultCounter>{{this.risultatiRicerca.length |
-                            number}}
-                        </h1>
-                    </mat-panel-title>
+                        <ion-grid class="ion-no-margin">
+                            <ion-row class="ion-no-margin">
+                                <ion-col class="ion-no-margin monithon-header-col">
+                                    <h2 class="monithon-risultati-header-titolo">{{'resultContainerTitle' | transloco}}
+                                    </h2>
+                                    <h1 class="monithon-risultati-contatore" [attr.data-hidden]="espandiListaRisultati"
+                                        #resultCounter>{{this.risultatiRicerca.length | number}} </h1>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
                 </mat-expansion-panel-header>
                 <div class="monithon-lista-header">
                     <ion-grid>
                         <ion-row>
-                            <ion-col>
-                                <h1 class="monithon-contatore-risultati" #resultCounter>{{this.risultatiRicerca.length |
+                            <ion-col size="8">
+                                <h1 class="monithon-risultati-contatore" [attr.data-hidden]="!espandiListaRisultati"
+                                    #resultCounter>{{this.risultatiRicerca.length |
                                     number}}
                                 </h1>
                             </ion-col>
+
                             <!-- comune:; Distanza: - -->
-                            <ion-col><span>{{'comune'|transloco}}:{{comuneCorrente | unescape | capitalize}}</span>;
-                                <span>{{'distanza'|transloco}}: {{raggioCorrente|formatDistanza}}</span>
+                            <ion-col size="4" class="monithon-geolocator-data-container">
+                                <span class="monithon-comune-corrente">{{comuneCorrente | unescape | capitalize}}</span>
+                                <span class="monithon-raggio-corrente">{{raggioCorrente|formatDistanza}}</span>
                             </ion-col>
                         </ion-row>
                         <!-- ordinamento -->
                         <ion-row>
                             <ion-col>
-
-
                                 <mat-expansion-panel [(expanded)]="ordinamentoPanelOpenState">
                                     <mat-expansion-panel-header>
                                         <ion-grid>
@@ -360,7 +364,10 @@
                                                         <span
                                                             class="monithon-lista-progetti__progetto__dettagli__lista_report_data-report">
                                                             <!-- [2021-03-20 17:18:57 ] -->
-                                                            {{'monitoraggio' | transloco}} {{report.dataAggiornamento | momentdate:'YYYY-MM-DD HH:mm:ss' | date:'d/MM/y':'+0100': 'it'}} </span>
+                                                            {{'monitoraggio' | transloco}} {{report.dataAggiornamento |
+                                                            momentdate:'YYYY-MM-DD HH:mm:ss' | date:'d/MM/y':'+0100':
+                                                            'it'}}
+                                                        </span>
                                                     </a>
                                                 </ion-label>
                                             </ion-item>

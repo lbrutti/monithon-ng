@@ -451,14 +451,29 @@ ion-row.monithon-filtri-secondari {
 }
 
 .monithon-risultati-header {
-    height: 5rem;
+    height: auto;
 
-    .monithon-contatore-risultati {
-        display: block;
+    .monithon-header-col {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .monithon-risultati-header-titolo,
+    .monithon-risultati-contatore {
+        margin-top: auto;
+        margin-bottom: auto;
+        align-self: flex-start;
+    }
+
+    .monithon-risultati-contatore {
+        &[data-hidden="true"] {
+            display: none;
+        }
     }
 }
 
-.monithon-contatore-risultati {
+.monithon-risultati-contatore {
     color: var(--monithon-contatore-risultati-color);
     font-size: 80px;
     font-weight: bolder;
@@ -526,12 +541,12 @@ ion-row.monithon-filtri-secondari {
         color: var(--monithon-tema-mobilita-background);
     }
 
-    h2 {
-        margin-bottom: auto;
-        width: 90%;
-        margin-left: 0;
-        margin-top: 0;
-    }
+    // h2 {
+    //     margin-bottom: auto;
+    //     width: 90%;
+    //     margin-left: 0;
+    //     margin-top: 0;
+    // }
 
 }
 
@@ -577,6 +592,40 @@ ion-row.monithon-filtri-secondari {
     .monithon-lista-progetti__progetto__dettagli__lista_report * {
         color: var(--monithon-lista-report-in-dettaglio-font-color);
     }
+
+    .monithon-geolocator-data-container {
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        justify-content: flex-start;
+
+        .monithon-comune-corrente,
+        .monithon-raggio-corrente {
+            margin-bottom: 10px;
+            margin-left: auto;
+        }
+
+        .monithon-comune-corrente::before,
+        .monithon-raggio-corrente::before {
+            content: ' ';
+            display: inline-block;
+            background-repeat: no-repeat;
+            margin-right: 5px;
+        }
+
+        .monithon-comune-corrente::before {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 5.33614C0 2.12957 2.2687 0.0703125 5 0.0703125C7.7313 0.0703125 10 2.12957 10 5.33614C10 6.48342 9.73692 7.27552 9.275 8.15894L5.35624 15.6526C5.28787 15.7881 5.15027 15.8734 5 15.8734C4.84973 15.8734 4.71213 15.7881 4.64376 15.6526L0.725 8.15894C0.26306 7.27554 0 6.48342 0 5.33614ZM9.2 5.33614C9.2 2.50252 7.34974 0.880439 5 0.880439C2.65026 0.880439 0.8 2.50252 0.8 5.33614C0.8 6.36579 1.00468 6.95145 1.4375 7.77919L5 14.5893L8.5625 7.77919C8.99534 6.95141 9.2 6.36579 9.2 5.33614ZM5 2.70322C3.67926 2.70322 2.6 3.79616 2.6 5.13361C2.6 6.47107 3.67926 7.564 5 7.564C6.32074 7.564 7.4 6.47107 7.4 5.13361C7.4 3.79616 6.32074 2.70322 5 2.70322ZM6.6 5.13361C6.6 4.234 5.88838 3.51335 5 3.51335C4.11162 3.51335 3.4 4.234 3.4 5.13361C3.4 6.03324 4.11162 6.75386 5 6.75386C5.88838 6.75386 6.6 6.03324 6.6 5.13361Z' fill='black'/%3E%3C/svg%3E%0A");
+            width: 10px;
+            height: 16px;
+        }
+
+        .monithon-raggio-corrente::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 11'%3E%3Cpath stroke='%23005bac' d='M 9.5,5.5 C 9.5,7.98528 7.48528,10 5,10 2.51472,10 0.5,7.98528 0.5,5.5 0.5,3.01472 2.51472,1 5,1 7.48528,1 9.5,3.01472 9.5,5.5 Z' /%3E%3Cpath stroke='%23005bac' d='M 5.5,5.5 C 5.5,5.77614 5.27614,6 5,6 4.72386,6 4.5,5.77614 4.5,5.5 4.5,5.22386 4.72386,5 5,5 5.27614,5 5.5,5.22386 5.5,5.5 Z' /%3E%3C/svg%3E%0A");
+            width: 10px;
+            height: 10px;
+        }
+    }
+
 }
 
 .monithon-header * {

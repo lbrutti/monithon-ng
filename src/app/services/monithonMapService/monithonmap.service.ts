@@ -22,7 +22,6 @@ export class MonithonMapService {
 
     map: mapboxgl.Map;
     geocoder: any;
-    // geolocator: mapboxgl.GeolocateControl;
     draw: any;
     rangeProgetti: any;
     temi: Array<any> = [];
@@ -44,7 +43,7 @@ export class MonithonMapService {
     geocoderUpdate: Subject<any> = new Subject();
     comuneCorrente: any;
     navigationControl: mapboxgl.NavigationControl;
-    geolocate: mapboxgl.GeolocateControl;
+    geolocator: mapboxgl.GeolocateControl;
 
 
     constructor() {
@@ -78,7 +77,7 @@ export class MonithonMapService {
 
         this.geocoder = new MapboxGeocoder(geocoderOptions);
         this.navigationControl = new mapboxgl.NavigationControl({ showCompass: false, visualizePitch: false });
-        this.geolocate = new mapboxgl.GeolocateControl({
+        this.geolocator = new mapboxgl.GeolocateControl({
             showUserLocation: false,
             trackUserLocation: false,
             positionOptions: {
@@ -92,14 +91,15 @@ export class MonithonMapService {
             this.resetFiltroDistanza(false);
             let center = evt.result.center;
             this.comuneCorrente = evt.result.place_name;
-            this.map.easeTo({ center: center , duration:1200});
+            this.map.easeTo({ center: center, duration: 1200 });
             this.drawRangeProgetti(center);
             this.publishGeocoderUpdate();
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
         navigationControlContainer.appendChild(this.navigationControl.onAdd(this.map));
-        navigationControlContainer.appendChild(this.geolocate.onAdd(this.map));
+        navigationControlContainer.appendChild(this.geolocator.onAdd(this.map));
 
+      
         let radiusFilterDrawStyle = [ // ACTIVE (being drawn)
             // line stroke
             {
@@ -687,7 +687,7 @@ export class MonithonMapService {
      * invocato programmaticamente allo svuotamento del gecoder
      */
     public removeRadiusFilter() {
-        if (this.circle){
+        if (this.circle) {
             this.draw.delete(this.circle.id);
             this.resetFiltroDistanza();
         }
