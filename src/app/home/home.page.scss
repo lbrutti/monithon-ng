@@ -598,7 +598,7 @@ ion-row.monithon-filtri-secondari {
     .monithon-geolocator-data-container {
         display: flex;
         flex-direction: row;
-        align-items: end;
+        align-items: flex-end;
         justify-content: flex-start;
 
         .monithon-comune-corrente,
