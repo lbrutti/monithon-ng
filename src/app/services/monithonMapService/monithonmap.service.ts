@@ -77,21 +77,22 @@ export class MonithonMapService {
         };
 
         this.geocoder = new MapboxGeocoder(geocoderOptions);
-        this.navigationControl = new mapboxgl.NavigationControl({showCompass:false, visualizePitch:false});
+        this.navigationControl = new mapboxgl.NavigationControl({ showCompass: false, visualizePitch: false });
         this.geolocate = new mapboxgl.GeolocateControl({
             showUserLocation: false,
             trackUserLocation: false,
             positionOptions: {
                 enableHighAccuracy: false
             },
-            fitBoundsOptions:{
-                maxZoom:8
+            fitBoundsOptions: {
+                maxZoom: 8
             }
         });
         this.geocoder.on('result', evt => {
             this.resetFiltroDistanza(false);
             let center = evt.result.center;
             this.comuneCorrente = evt.result.place_name;
+            this.map.easeTo({ center: center , duration:1200});
             this.drawRangeProgetti(center);
             this.publishGeocoderUpdate();
         });
@@ -266,9 +267,7 @@ export class MonithonMapService {
                         'circle-stroke-width': 1
                     }
                 });
-            // this.map.on('zoom',  ()=> {
-            //     console.log(this.map.getZoom());
-            // });
+
             this.map
                 .addLayer({
                     id: 'radius-value',
@@ -308,6 +307,7 @@ export class MonithonMapService {
                 }
             });
 
+            //check se impedisce anche 
             this.map.scrollZoom.disable();
             this.map.resize();
             this.aggiornaAttivabilitaCategorie();
@@ -687,8 +687,10 @@ export class MonithonMapService {
      * invocato programmaticamente allo svuotamento del gecoder
      */
     public removeRadiusFilter() {
-        this.draw.delete(this.circle.id);
-        this.resetFiltroDistanza();
+        if (this.circle){
+            this.draw.delete(this.circle.id);
+            this.resetFiltroDistanza();
+        }
     }
 
     private resetFiltroDistanza(publishUpdate: boolean = true) {
