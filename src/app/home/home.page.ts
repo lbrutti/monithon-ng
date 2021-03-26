@@ -38,7 +38,7 @@ export class HomePage implements OnInit, AfterViewInit {
     @ViewChild('listaRisultati') listaRisultati: CdkVirtualScrollViewport;
 
 
-
+    public espandiListaRisultati:boolean=false;
     progetti: Array<Progetto> = [];
     risultatiRicerca: Array<Progetto> = [];
 
@@ -207,6 +207,9 @@ export class HomePage implements OnInit, AfterViewInit {
 
     evidenziaProgettoInLista(progetto: any) {
         if (!lodash.isNil(progetto)) {
+            if (!this.espandiListaRisultati){
+                this.espandiListaRisultati=true;
+            }
             this.progettoSelezionato = progetto;
             let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === progetto.uid);
             this.listaRisultati.scrollToIndex(indexRisultato);
