@@ -479,6 +479,8 @@ ion-row.monithon-filtri-secondari {
     font-weight: bolder;
     text-align: left;
     opacity: .9;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .monithon-lista-risultato {
@@ -541,12 +543,12 @@ ion-row.monithon-filtri-secondari {
         color: var(--monithon-tema-mobilita-background);
     }
 
-    // h2 {
-    //     margin-bottom: auto;
-    //     width: 90%;
-    //     margin-left: 0;
-    //     margin-top: 0;
-    // }
+    h2 {
+        margin-bottom: auto;
+        width: 90%;
+        margin-left: 0;
+        margin-top: 0;
+    }
 
 }
 
