@@ -436,6 +436,9 @@ ion-row.monithon-filtri-secondari {
     background-color: var(--monithon-tema-sfondo-charts);
 }
 
+.monithon-form-field-ordinamento{
+    width: 100%;
+}
 .monithon-criteri-ordinamento {
     ::ng-deep .mat-chip-list-wrapper {
         display: flex;
