@@ -5,9 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class UnescapePipe implements PipeTransform {
 
-    transform(value: any, args?: any): any {
-        const doc = new DOMParser().parseFromString(value, 'text/html');
-        return doc.documentElement.textContent;
+    transform(value: any='',): any {
+        if (value) {
+            const doc = new DOMParser().parseFromString(value, 'text/html');
+            return doc.documentElement.textContent || '';
+        } else {
+            return '-';
+        }
     }
 
 }
