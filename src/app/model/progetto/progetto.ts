@@ -17,4 +17,5 @@ export class Progetto {
     uid: string;
     codLocaleProgetto?: string;
     ocLink?:string;
+    ocSintesiProgetto: any;
 }

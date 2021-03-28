@@ -19,6 +19,7 @@ import { MomentdateModule } from '../pipes/momentdate/momentdate.pipe.module';
 import { CapitalizePipeModule } from '../pipes/capitalize/capitalize.pipe.module';
 import { FormatDistanzaPipeModule } from '../pipes/format-distanza/format-distanza.pipe.module';
 import { UnescapePipeModule } from '../pipes/unescape/unescape.pipe.module';
+import { FixencodedcharsPipeModule } from '../pipes/fixencodedchars/fixencodedchars.pipe.module';
 @NgModule({
     imports: [
         CommonModule,
@@ -35,7 +36,8 @@ import { UnescapePipeModule } from '../pipes/unescape/unescape.pipe.module';
         MomentdateModule,
         CapitalizePipeModule,
         FormatDistanzaPipeModule,
-        UnescapePipeModule
+        UnescapePipeModule,
+        FixencodedcharsPipeModule
     ],
     declarations: [HomePage],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -25,6 +25,7 @@ export class MonithonApiService {
             .pipe(
                 map((res) => {
                     return res.map((p: any) => {
+
                         p.lat = parseFloat(p.lat);
                         p.long = parseFloat(p.long);
                         try {
@@ -63,7 +64,10 @@ export class MonithonApiService {
     public getDettaglio(progetto: Progetto): Observable<any> {
         return this.httpClient.get<any>(this.url + '/mdProject/' + progetto.uid)
             .pipe(
-                map((p) => {
+                map((p:Progetto) => {
+                    p.ocTitoloProgetto = p.ocTitoloProgetto.replace(/√Ç¬ø/g, '"');
+                    p.ocSintesiProgetto = p.ocSintesiProgetto.replace(/√Ç¬ø/g, '"');
+
                     p.hasReport = progetto.hasReport;
                     return p;
                 }),

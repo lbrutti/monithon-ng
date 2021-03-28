@@ -144,7 +144,7 @@
     width: 66vw;
     transition: left 0.5s;
     z-index: 1001;
-    // height: 66vh;
+    height: 70vh;
     text-align: left;
     color: var(--monithon-font-color);
 
@@ -436,9 +436,10 @@ ion-row.monithon-filtri-secondari {
     background-color: var(--monithon-tema-sfondo-charts);
 }
 
-.monithon-form-field-ordinamento{
+.monithon-form-field-ordinamento {
     width: 100%;
 }
+
 .monithon-criteri-ordinamento {
     ::ng-deep .mat-chip-list-wrapper {
         display: flex;
