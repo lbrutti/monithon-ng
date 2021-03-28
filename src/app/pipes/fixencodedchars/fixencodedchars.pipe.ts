@@ -9,9 +9,7 @@ export class FixencodedcharsPipe implements PipeTransform {
         { 'searchFor': /√É¬©/gi, 'with': 'é' },
         { 'searchFor': /√É¬Æ/gi, 'with': 'é' },
         { 'searchFor': /Â/gi, 'with': '-' },
-        
-
-
+        { 'searchFor': /ã/gi, 'with': 'à' }
     ];
     transform(value: string = ''): string {
         let res = '';
