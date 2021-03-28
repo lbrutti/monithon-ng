@@ -668,6 +668,14 @@ ion-row.monithon-filtri-secondari {
     top: 10px;
 }
 
+#raggioContainer {
+    position: absolute;
+    z-index: 100;
+    width: auto;
+    left: 5%;
+    top: 80px;
+}
+
 .navigation-control {
     position: absolute;
     z-index: 100;

@@ -38,7 +38,7 @@ export class HomePage implements OnInit, AfterViewInit {
     @ViewChild('listaRisultati') listaRisultati: CdkVirtualScrollViewport;
 
 
-    public espandiListaRisultati:boolean=false;
+    public espandiListaRisultati: boolean = false;
     progetti: Array<Progetto> = [];
     risultatiRicerca: Array<Progetto> = [];
 
@@ -97,7 +97,7 @@ export class HomePage implements OnInit, AfterViewInit {
     criterioSelezionato: string = 'distanza';
     geocoderData: any;
     comuneCorrente: any;
-    raggioCorrente: any;
+    raggioCorrente: number = 10;
     monithonReportUrl: any;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -207,8 +207,8 @@ export class HomePage implements OnInit, AfterViewInit {
 
     evidenziaProgettoInLista(progetto: any) {
         if (!lodash.isNil(progetto)) {
-            if (!this.espandiListaRisultati){
-                this.espandiListaRisultati=true;
+            if (!this.espandiListaRisultati) {
+                this.espandiListaRisultati = true;
             }
             this.progettoSelezionato = progetto;
             let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === progetto.uid);
@@ -582,8 +582,8 @@ export class HomePage implements OnInit, AfterViewInit {
     //Filtri di secondo livello:
     public filterByStato(stato) {
         stato.isSelected = !stato.isSelected;
-        if(lodash.every(this.statiAvanzamento,s =>!s.isSelected)){
-            this.statiAvanzamento.map(s=>s.isSelected = s.isActive);
+        if (lodash.every(this.statiAvanzamento, s => !s.isSelected)) {
+            this.statiAvanzamento.map(s => s.isSelected = s.isActive);
         }
         this.filtraRisultati();
         this.evidenziaRisultatiSuMappa();
@@ -615,7 +615,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
             return matchesStato && matchesReportFlags;
         });
-       
+
         this.ordinaRisultatiPerCriterio();
     }
 
@@ -645,6 +645,12 @@ export class HomePage implements OnInit, AfterViewInit {
     }
     ordinaRisultatiPerCriterio() {
         this.risultatiRicerca = lodash.sortBy(this.risultatiRicerca, (p: Progetto) => lodash.get(p, this.criterioSelezionato));
+    }
+
+    minRadius: number = 1;
+    maxRadius: number = 20;
+    onRadiusChange() {
+        this.monithonMap.updateRadius(this.raggioCorrente)
     }
 
 }

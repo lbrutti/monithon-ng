@@ -39,11 +39,12 @@ export class MonithonMapService {
         "features": []
     };
     circle: any;
-    radius: any;
+    radius: number = 10;
     geocoderUpdate: Subject<any> = new Subject();
     comuneCorrente: any;
     navigationControl: mapboxgl.NavigationControl;
     geolocator: mapboxgl.GeolocateControl;
+    center: any;
 
 
     constructor() {
@@ -89,10 +90,10 @@ export class MonithonMapService {
         });
         this.geocoder.on('result', evt => {
             this.resetFiltroDistanza(false);
-            let center = evt.result.center;
+            this.center = evt.result.center;
             this.comuneCorrente = evt.result.place_name;
-            this.map.easeTo({ center: center, duration: 1200 });
-            this.drawRangeProgetti(center);
+            this.drawRangeProgetti(this.center);
+            this.map.easeTo({ center: this.center, duration: 1200 });
             this.publishGeocoderUpdate();
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
@@ -192,7 +193,7 @@ export class MonithonMapService {
                 radius: MapboxDrawGeodesic.getCircleRadius(geojson)
             };
             this.filtroPerRaggioEnabled = true;
-            this.map.setLayoutProperty('radius-value', 'visibility', 'visible');
+            // this.map.setLayoutProperty('radius-value', 'visibility', 'visible');
             this.filtraPerDistanza(circleData);
         });
         this.map.on('draw.delete', (evt) => {
@@ -268,19 +269,19 @@ export class MonithonMapService {
                     }
                 });
 
-            this.map
-                .addLayer({
-                    id: 'radius-value',
-                    type: 'symbol',
-                    source: 'radiusFilterData',
-                    'layout': {
-                        'text-field': ['get', 'radius'],
-                        'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
-                        'text-radial-offset': 0.5,
-                        'text-justify': 'center',
-                        'visibility': 'visible'
-                    }
-                });
+            // this.map
+            //     .addLayer({
+            //         id: 'radius-value',
+            //         type: 'symbol',
+            //         source: 'radiusFilterData',
+            //         'layout': {
+            //             'text-field': ['get', 'radius'],
+            //             'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+            //             'text-radial-offset': 0.5,
+            //             'text-justify': 'center',
+            //             'visibility': 'visible'
+            //         }
+            //     });
             this.map.on('click', e => {
                 //this.publishSelectedProject(null);
 
@@ -378,17 +379,25 @@ export class MonithonMapService {
      * @param center 
      */
     private drawRangeProgetti(center: any) {
-        this.circle = MapboxDrawGeodesic.createCircle(center, 10);
+        this.circle = MapboxDrawGeodesic.createCircle(center, this.radius);
         this.circle.id = "range-center";
         this.draw.add(this.circle);
 
         this.filtroPerRaggioEnabled = true;
         this.filtraPerDistanza({
             center: center,
-            radius: 10
+            radius: this.radius
         });
     }
 
+    public updateRadius(newRadiusValue:number){
+        this.resetFiltroDistanza(false);
+        this.radius = newRadiusValue;
+        // let center = evt.result.center;
+        // this.comuneCorrente = evt.result.place_name;
+        // this.map.easeTo({ center: center, duration: 1200 });
+        this.drawRangeProgetti(this.center);
+    }
 
     filtraPerTema(tema) {
         // rimuovi filtro su categorie non associate ai temi selezionati
@@ -542,16 +551,16 @@ export class MonithonMapService {
      */
     filtraPerDistanza(circleData?: any) {
         if (circleData) {
-            (this.map.getSource('radiusFilterData') as any).setData({
-                'type': 'Feature',
-                'properties': {
-                    ...circleData
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [circleData.center]
-                }
-            });
+            // (this.map.getSource('radiusFilterData') as any).setData({
+            //     'type': 'Feature',
+            //     'properties': {
+            //         ...circleData
+            //     },
+            //     'geometry': {
+            //         'type': 'Point',
+            //         'coordinates': [circleData.center]
+            //     }
+            // });
             let centerPoint = point(circleData.center);
             this.radius = circleData.radius;
             this.progetti.features.map(f => {
@@ -694,16 +703,18 @@ export class MonithonMapService {
     }
 
     private resetFiltroDistanza(publishUpdate: boolean = true) {
+        if (this.circle){
+            this.draw.delete(this.circle.id);
+        }
         this.circle = null;
         this.filtroPerRaggioEnabled = false;
-
         lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
         lodash.map(this.categorie, c => {
             c.isSelected = true;
             c.isActive = true;
         });
 
-        this.map.setLayoutProperty('radius-value', 'visibility', 'none');
+        // this.map.setLayoutProperty('radius-value', 'visibility', 'none');
         let progetti = this.resetFiltroProgetti();
         this.aggiornaAttivabilitaCategorie(true);
         if (publishUpdate) {

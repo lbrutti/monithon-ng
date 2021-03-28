@@ -14,6 +14,8 @@ import { TranslocoModule } from '@ngneat/transloco';
 
 import { MatSelectModule } from '@angular/material/select';
 
+import { MatSliderModule } from '@angular/material/slider';
+
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MomentdateModule } from '../pipes/momentdate/momentdate.pipe.module';
 import { CapitalizePipeModule } from '../pipes/capitalize/capitalize.pipe.module';
@@ -37,7 +39,8 @@ import { FixencodedcharsPipeModule } from '../pipes/fixencodedchars/fixencodedch
         CapitalizePipeModule,
         FormatDistanzaPipeModule,
         UnescapePipeModule,
-        FixencodedcharsPipeModule
+        FixencodedcharsPipeModule,
+        MatSliderModule
     ],
     declarations: [HomePage],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
