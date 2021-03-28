@@ -31,7 +31,7 @@ export class MonithonMapService {
     private mapUpdated: Subject<any> = new Subject();
     private projectSelected: Subject<any> = new Subject();
     categorieAttive: { ocCodCategoriaSpesa: any; ocCodTemaSintetico: any; isSelected: boolean; }[];
-    filtroPerRaggioEnabled: boolean = false;
+    public filtroPerRaggioEnabled: boolean = false;
     reportFlags: any[] = [];
     statiAvanzamento: any[] = [];
     radiusFilterData: any = {

@@ -101,7 +101,7 @@ export class HomePage implements OnInit, AfterViewInit {
     monithonReportUrl: any;
     constructor(
         private monithonApiService: MonithonApiService,
-        private monithonMap: MonithonMapService,
+        public monithonMap: MonithonMapService,
         private currencyPipe: CurrencyPipe) { this.monithonReportUrl = environment.monithonReportUrl; }
 
     ngOnInit(): void {
