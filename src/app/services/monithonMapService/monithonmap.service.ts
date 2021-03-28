@@ -186,6 +186,12 @@ export class MonithonMapService {
             this.filtraPerDistanza(circleData);
             this.publishGeocoderUpdate();
         });
+
+        this.map.on('mousemove', 'progetti-layer', function (e) {
+            if (e.features.length > 0) {
+                console.log(e.features);
+            }
+        });
         this.map.on('draw.create', (evt) => {
             const geojson = evt.features[0];
             let circleData = {
@@ -344,7 +350,7 @@ export class MonithonMapService {
                 properties.isSelected = true;
                 properties.isWithinRange = false;
                 properties.isHighlighted = false;
-                let jitteredCoords = this.addJitter()(p.lat, p.long, 0.1, false);
+                let jitteredCoords = this.addJitter()(p.lat, p.long, 0.5, false);
                 return {
                     "type": "Feature",
                     "properties": properties,
@@ -379,6 +385,8 @@ export class MonithonMapService {
      * @param center 
      */
     private drawRangeProgetti(center: any) {
+        console.log('drawRangeProgetti: ', Date.now());
+        
         this.circle = MapboxDrawGeodesic.createCircle(center, this.radius);
         this.circle.id = "range-center";
         this.draw.add(this.circle);
@@ -391,11 +399,11 @@ export class MonithonMapService {
     }
 
     public updateRadius(newRadiusValue:number){
+        console.log('updateRadius: ', Date.now());
+        
         this.resetFiltroDistanza(false);
         this.radius = newRadiusValue;
-        // let center = evt.result.center;
-        // this.comuneCorrente = evt.result.place_name;
-        // this.map.easeTo({ center: center, duration: 1200 });
+       
         this.drawRangeProgetti(this.center);
     }
 
@@ -502,19 +510,8 @@ export class MonithonMapService {
             let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
             categoriePerTema[tema.ocCodTemaSintetico].map(c => {
                 c.isSelected = c.isActive && tema.isSelected;
-                // c.isActive = true;
             });
 
-            // this.categorie.map(c => {
-            //     // se non ho temi selezionati: tutte le categorie sono DESELEZIONATE  e visibili:
-            //     if (temiSelezionati.length == 0) {
-            //         c.isSelected = true;
-            //         c.isActive = true;
-            //     } else {
-            //         c.isSelected =  lodash.includes(temiSelezionati, c.ocCodTemaSintetico);// && c.isSelected;
-            //         c.isActive = true;//lodash.includes(temiSelezionati, c.ocCodTemaSintetico);
-            //     }
-            // });
         }
     }
     filtraPerCategoria() {
@@ -550,6 +547,8 @@ export class MonithonMapService {
      * @param circleData : 
      */
     filtraPerDistanza(circleData?: any) {
+        console.log('filtraPerDistanza: ', Date.now());
+        
         if (circleData) {
             // (this.map.getSource('radiusFilterData') as any).setData({
             //     'type': 'Feature',
@@ -602,6 +601,8 @@ export class MonithonMapService {
     }
 
     resetFiltroProgetti(): Array<any> {
+        console.log('resetFiltroProgetti : ', Date.now());
+
         this.progetti.features.map(f => {
             let progetto = f.properties;
             progetto.distanza = null;
@@ -634,6 +635,8 @@ export class MonithonMapService {
         this.geocoderUpdate.unsubscribe();
     }
     publishUpdate(progetti: Array<Progetto>): void {
+        console.log('publishUpdate: ', Date.now());
+        
         this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: lodash.uniqBy(progetti, p => p.uid) });
     }
 
@@ -696,6 +699,8 @@ export class MonithonMapService {
      * invocato programmaticamente allo svuotamento del gecoder
      */
     public removeRadiusFilter() {
+        console.log('removeRadiusFilter : ', Date.now());
+
         if (this.circle) {
             this.draw.delete(this.circle.id);
             this.resetFiltroDistanza();
@@ -703,6 +708,7 @@ export class MonithonMapService {
     }
 
     private resetFiltroDistanza(publishUpdate: boolean = true) {
+        console.log('resetFiltroDistanza : ' , Date.now());
         if (this.circle){
             this.draw.delete(this.circle.id);
         }
@@ -714,7 +720,6 @@ export class MonithonMapService {
             c.isActive = true;
         });
 
-        // this.map.setLayoutProperty('radius-value', 'visibility', 'none');
         let progetti = this.resetFiltroProgetti();
         this.aggiornaAttivabilitaCategorie(true);
         if (publishUpdate) {
@@ -731,7 +736,6 @@ export class MonithonMapService {
             let markerScreenCoordinates = this.map.project([feature.properties.long, feature.properties.lat]);
 
             //devo spostare la mappa in alto in modo che il punto si trovi a 30px dal margine superiore della scheda progetto
-            // if ((markerScreenCoordinates.x < options.width) && (options.y < markerScreenCoordinates.y)) {
             let offset = options.height; // porto il punto al margine del div dettaglio
             offset += ((markerScreenCoordinates.y - options.y) / 2); //aggiungo ulteriore padding per far emenergere il punto sopra il container
             let easeOptions = { center: [feature.properties.long, feature.properties.lat], duration: 2000 };
@@ -742,11 +746,7 @@ export class MonithonMapService {
                 easeOptions['padding'] = { bottom: offset };
             }
             (this.map as any).easeTo(easeOptions);
-            // }
-        } else if (!isOverlayPresent) {
-            // this.highlightById([]);
-            // (this.map as any).easeTo({ padding: { bottom: 0 }, duration: 1000 , zoom:10});
-        }
+        } 
 
     }
 }
