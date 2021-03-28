@@ -144,9 +144,21 @@
     width: 66vw;
     transition: left 0.5s;
     z-index: 1001;
-    height: 70vh;
+    height: 71vh;
     text-align: left;
     color: var(--monithon-font-color);
+
+    .monithon-dettaglio-progetto__dettagli_container {
+        height: 90%;
+
+        ion-grid {
+            height: 100%;
+
+            ion-row {
+                height: 100%;
+            }
+        }
+    }
 
     &[data-oc-cod-tema-sintetico="4"] {
         background-color: var(--monithon-tema-energia-background);
@@ -192,17 +204,18 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
+        height: 2rem;
 
         ion-icon {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' version='1.1' fill='none' viewBox='0 0 29 29'%3E%3Cpath style='stroke-width:0.965516' id='path883' stroke='%23ffffff' fill='transparent' d='M 28.017242,14.5 C 28.017242,21.965373 21.96538,28.017242 14.5,28.017242 7.0346299,28.017242 0.98275807,21.965373 0.98275807,14.5 0.98275807,7.0346278 7.0346299,0.98275807 14.5,0.98275807 c 7.46538,0 13.517242,6.05186973 13.517242,13.51724193 z' /%3E%3Cpath style='stroke-width:0.965516;fill:%23ffffff;fill-opacity:1' id='path885' stroke='%23ffffff' fill='transparent' d='m 19.810345,5.6533406 c 0,0.2056564 -0.08004,0.4155974 -0.240221,0.5715536 l -8.399942,8.2750598 8.398977,8.27523 c 0.320648,0.317054 0.320648,0.827338 0,1.143107 -0.320649,0.317053 -0.839807,0.317053 -1.160069,0 L 9.4298755,15.071636 c -0.153913,-0.149958 -0.2402206,-0.355615 -0.2402206,-0.571554 0,-0.214225 0.086636,-0.419882 0.2402206,-0.571553 L 18.409669,5.0818299 c 0.320648,-0.3170538 0.840193,-0.3170538 1.160166,0 0.160469,0.1585268 0.24051,0.3641832 0.24051,0.5715107 z' /%3E%3C/svg%3E%0A");
+            background-repeat: no-repeat;
+            background-size: contain;
             margin-top: auto;
             margin-bottom: auto;
             margin-right: 1rem;
-            background: transparent;
-            border-radius: 50%;
             width: 28px;
             height: 28px;
-            color: var(--monithon-chevron-border-color);
-            border: 1px solid var(--monithon-chevron-border-color)
         }
     }
 
@@ -237,6 +250,10 @@
         flex-direction: column;
     }
 
+    .monithon-dettaglio-progetto__titolo_scheda {
+        margin-left: 10px;
+    }
+
     .monithon-dettaglio-progetto__titolo_container {
         border-bottom: 1px;
     }
@@ -248,17 +265,18 @@
     }
 
     .monithon-dettaglio-progetto__sintesi {
-        // height: 50%;
         overflow-y: scroll;
         @include hideScrollbar();
     }
 
     .monithon-dettaglio-progetto__col {
-        max-height: 60vh;
-        height: auto;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+    }
+
+    .monithon-dettaglio-progetto__dettagli {
+        justify-content: space-between;
     }
 
     .monithon-dettaglio-progetto__label {
@@ -271,6 +289,10 @@
     &.monithon-finanziamenti-chart,
     &.monithon-pagamenti-chart {
         height: 36px;
+    }
+
+    .monithon-dettaglio-progetto__oc_link {
+        margin-top: auto;
     }
 
     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
