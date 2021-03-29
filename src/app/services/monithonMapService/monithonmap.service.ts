@@ -149,8 +149,10 @@ export class MonithonMapService {
                 "type": "circle",
                 "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"], ['==', 'isHandle', "true"]],
                 "paint": {
-                    "circle-radius": 20,
-                    "circle-color": "#FFF"
+                    // 'visibility': 'hidden'
+                    "circle-radius": 0,
+                    // "circle-color": "#FFF"
+
                 }
             },
             // vertex points
@@ -160,8 +162,10 @@ export class MonithonMapService {
                 "type": "circle",
                 "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"], ['==', 'isHandle', "true"]],
                 "paint": {
-                    "circle-radius": 19,
-                    "circle-color": "#235ba6",
+                    // 'visibility': 'hidden'
+
+                    "circle-radius": 0,
+                    // "circle-color": "#235ba6",
                 }
             },
 
