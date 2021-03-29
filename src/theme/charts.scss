@@ -59,6 +59,7 @@
 .dc-chart {
     g.brush text {
         fill: var(--monithon-dc-chart-brush-text-fill);
+        font-size: 10px;
     }
 
     .axis text {

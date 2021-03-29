@@ -409,7 +409,8 @@ export class HomePage implements OnInit, AfterViewInit {
             .xUnits(dc.units.integers)
             .elasticX(false)
             .elasticY(false)
-            .margins({ top: 10, right: 20, bottom: 20, left: 20 });
+            .margins({ top: 2, right: 10, bottom: 20, left: 10 })
+            .transitionDuration(250);
 
         this.annoChart
             .xAxis()
@@ -500,7 +501,8 @@ export class HomePage implements OnInit, AfterViewInit {
             .y(d3.scaleLinear().domain([0, maxCount]))
             .elasticX(false)
             .elasticY(false)
-            .margins({ top: 10, right: 20, bottom: 20, left: 20 });
+            .margins({ top: 2, right: 10, bottom: 20, left: 10 })
+            .transitionDuration(250);
 
 
         this.budgetChart.xAxis()
@@ -539,6 +541,7 @@ export class HomePage implements OnInit, AfterViewInit {
                     .attr('fill', 'black')
                     .attr('y', chart.margins().top)
                     .attr('dy', 4)
+                    .attr('dx', -1)
                     .merge(beginLabel); // 8
 
                 beginLabel
@@ -557,7 +560,8 @@ export class HomePage implements OnInit, AfterViewInit {
                     .attr('dominant-baseline', 'text-top')
                     .attr('fill', 'black')
                     .attr('y', chart.margins().top)
-                    .attr('dy', 4)
+                    .attr('dy', 4   )
+                    .attr('dx', 2)
                     .merge(endLabel);
                 endLabel
                     .attr('x', d => chart.x()(d))
