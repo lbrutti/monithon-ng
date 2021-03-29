@@ -699,8 +699,6 @@ export class MonithonMapService {
      * invocato programmaticamente allo svuotamento del gecoder
      */
     public removeRadiusFilter() {
-        console.log('removeRadiusFilter : ', Date.now());
-
         if (this.circle) {
             this.draw.delete(this.circle.id);
             this.resetFiltroDistanza();
@@ -708,7 +706,6 @@ export class MonithonMapService {
     }
 
     private resetFiltroDistanza(publishUpdate: boolean = true) {
-        console.log('resetFiltroDistanza : ' , Date.now());
         if (this.circle){
             this.draw.delete(this.circle.id);
         }

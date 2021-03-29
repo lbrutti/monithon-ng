@@ -7,7 +7,8 @@
     <div id="raggioContainer">
 
         <mat-slider [min]="minRadius" [max]="maxRadius" thumbLabel="true" step="1" [(ngModel)]="raggioCorrente"
-            (change)="onRadiusChange()" [disabled]="!monithonMap.filtroPerRaggioEnabled">
+            [displayWith]="formatLabelSliderRaggio" (change)="onRadiusChange()"
+            [disabled]="!monithonMap.filtroPerRaggioEnabled">
         </mat-slider>
 
     </div>
@@ -280,10 +281,16 @@
                                 </h1>
                             </ion-col>
 
-                            <!-- comune:; Distanza: - -->
-                            <ion-col size="4" class="monithon-geolocator-data-container">
+                            <!-- comune:; Distanza: mostrati solo se filtro per distanza attivo -->
+                            <ion-col size="4" class="monithon-geolocator-data-container"
+                                *ngIf="monithonMap.filtroPerRaggioEnabled">
                                 <span class="monithon-comune-corrente">{{comuneCorrente | unescape | capitalize}}</span>
                                 <span class="monithon-raggio-corrente">{{raggioCorrente|formatDistanza}}</span>
+                            </ion-col>
+                            <ion-col size="4" class="monithon-geolocator-data-container"
+                                *ngIf="!monithonMap.filtroPerRaggioEnabled">
+                                <span class="monithon-comune-corrente">-</span>
+                                <span class="monithon-raggio-corrente">-</span>
                             </ion-col>
                         </ion-row>
                         <!-- ordinamento -->

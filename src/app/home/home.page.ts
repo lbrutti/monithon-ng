@@ -182,6 +182,8 @@ export class HomePage implements OnInit, AfterViewInit {
 
                 geocoderClearBtn
                     .addEventListener('click', () => {
+                        this.comuneCorrente='';
+                        this.raggioCorrente=1;
                         this.monithonMap.removeRadiusFilter();
                     });
 
@@ -189,6 +191,8 @@ export class HomePage implements OnInit, AfterViewInit {
                 geocoderInput
                     .addEventListener('change', e => {
                         if (!e.target.value) {
+                            this.comuneCorrente='';
+                            this.raggioCorrente=1;
                             this.monithonMap.removeRadiusFilter();
                         }
                     });
@@ -669,6 +673,9 @@ export class HomePage implements OnInit, AfterViewInit {
     maxRadius: number = 20;
     onRadiusChange() {
         this.monithonMap.updateRadius(this.raggioCorrente)
+    }
+    formatLabelSliderRaggio(val) {
+        return `${val} km`;
     }
 
 }

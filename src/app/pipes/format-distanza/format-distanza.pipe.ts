@@ -9,7 +9,7 @@ export class FormatDistanzaPipe implements PipeTransform {
     transform(value: number, uom: string = 'km'): string {
         let res = '-';
         if (!lodash.isNil(value)) {
-            res = value.toFixed(2) + ' ' + uom;
+            res = value.toFixed(0) + ' ' + uom;
         }
         return res;
     }
