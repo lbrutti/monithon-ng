@@ -671,9 +671,45 @@ ion-row.monithon-filtri-secondari {
 #raggioContainer {
     position: absolute;
     z-index: 100;
-    width: auto;
+    width: 500px;
     left: 5%;
     top: 80px;
+
+    mat-slider {
+        width: 500px;
+    }
+
+    ::ng-deep mat-slider {
+        .mat-slider-horizontal {
+            width: 300px;
+        }
+
+        .mat-slider-thumb-container {
+            top: 0px !important;
+        }
+
+        .mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label {}
+
+        .mat-slider-thumb-label {
+            top: -15px !important;
+            transform: rotate(45deg) !important;
+            width: 30px !important;
+            height: 30px !important;
+            border-radius: 100% !important;
+            border-color: white !important;
+            border-width: 3px !important;
+            border-style: solid !important;
+            opacity: 1 !important;
+        }
+
+        .mat-slider-thumb {
+            transform: scale(0) !important;
+        }
+
+        .mat-slider-thumb-label-text {
+            opacity: 1 !important;
+        }
+    }
 }
 
 .navigation-control {
