@@ -471,6 +471,23 @@ export class HomePage implements OnInit, AfterViewInit {
 
         maxCount += (maxCount / 2);
 
+        let xFormatter = (v: any) => {
+            let label = '';
+            if (!lodash.isNil(binThresholds[v]) && !lodash.isNaN(binThresholds[v])) {
+                let val = binThresholds[v] / 1000;
+                if (val >= 1000) {
+                    val /= 1000;
+                    label = `${Math.floor(val)} M`;
+                }
+                else if (val < 1000) {
+                    label = `${Math.floor(val)} K`;
+                }
+                else if (val == 0) {
+                    label = '0';
+                }
+            }
+            return label;
+        };
         this.budgetChart
             .dimension(budgetDim)
             .group(budgetGroup)
@@ -481,9 +498,10 @@ export class HomePage implements OnInit, AfterViewInit {
             .elasticY(false)
             .margins({ top: 10, right: 20, bottom: 20, left: 20 });
 
+
         this.budgetChart.xAxis()
             .tickSizeOuter(0)
-            .tickFormat((v: any) => `${binThresholds[v] / 1000} K`);
+            .tickFormat(xFormatter);
 
 
         this.budgetChart.height(chartHeight);
@@ -521,7 +539,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
                 beginLabel
                     .attr('x', d => chart.x()(d))
-                    .text(d => binThresholds[parseInt(d) + 1]); // 9
+                    .text(d => xFormatter(parseInt(d) + 1)); // 9
 
 
                 let endLabel = chart.select('g.brush')
@@ -539,7 +557,7 @@ export class HomePage implements OnInit, AfterViewInit {
                     .merge(endLabel);
                 endLabel
                     .attr('x', d => chart.x()(d))
-                    .text(d => binThresholds[parseInt(d)]); // 9
+                    .text(d => xFormatter(parseInt(d) + 1)); // 9
             } else {
                 //reset al default
                 let maxBrushExtent = chart.width() - (chart.margins().right + chart.margins().left);

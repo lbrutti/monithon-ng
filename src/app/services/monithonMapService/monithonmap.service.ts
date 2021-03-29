@@ -187,11 +187,11 @@ export class MonithonMapService {
             this.publishGeocoderUpdate();
         });
 
-        this.map.on('mousemove', 'progetti-layer', function (e) {
-            if (e.features.length > 0) {
-                console.log(e.features);
-            }
-        });
+        // this.map.on('mousemove', 'progetti-layer', function (e) {
+        //     if (e.features.length > 0) {
+        //         console.log(e.features);
+        //     }
+        // });
         this.map.on('draw.create', (evt) => {
             const geojson = evt.features[0];
             let circleData = {

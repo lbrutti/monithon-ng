@@ -33,4 +33,9 @@
     display: none !important;
 }
 
+.mapboxgl-ctrl-geocoder {
+    width: 432px !important;
+    border-radius: 20px !important;
+}
+
 @import './theme/charts.scss';

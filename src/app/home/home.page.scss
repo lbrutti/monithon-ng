@@ -663,20 +663,21 @@ ion-row.monithon-filtri-secondari {
 .geocoder {
     position: absolute;
     z-index: 100;
-    width: auto;
+    width: 432px;
     left: 5%;
     top: 10px;
+
 }
 
 #raggioContainer {
     position: absolute;
     z-index: 100;
-    width: 500px;
+    width: 432px;
     left: 5%;
     top: 80px;
 
     mat-slider {
-        width: 500px;
+        width: 432px;
     }
 
     ::ng-deep mat-slider {
@@ -688,7 +689,9 @@ ion-row.monithon-filtri-secondari {
             top: 0px !important;
         }
 
-        .mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label {}
+        .mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label {
+            background: var(--monithon-range-thumb-label-background) !important
+        }
 
         .mat-slider-thumb-label {
             top: -15px !important;
@@ -700,6 +703,7 @@ ion-row.monithon-filtri-secondari {
             border-width: 3px !important;
             border-style: solid !important;
             opacity: 1 !important;
+            background: var(--monithon-range-thumb-label-background) !important
         }
 
         .mat-slider-thumb {

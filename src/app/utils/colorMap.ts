@@ -3,7 +3,7 @@ export const COLOR_MAP={
         ambiente: '#EA4A3E',
         attrazione: '#FDD0B3',
         energia: '#FFC921',
-        mobilita:'purple',
+        mobilita:'#FF8035',
         default:'#006FD2'
     }
 };
