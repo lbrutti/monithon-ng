@@ -719,6 +719,11 @@ ion-row.monithon-filtri-secondari {
         .mat-slider-thumb-label-text {
             opacity: 1 !important;
         }
+
+        .mat-slider-track-fill,
+        .mat-slider-track-background {
+            background: var(--monithon-range-track-fill) !important;
+        }
     }
 }
 
@@ -733,6 +738,7 @@ ion-row.monithon-filtri-secondari {
 
 .mapboxgl-ctrl-geocoder {
     min-width: 100%;
+
 }
 
 monithon-drawer {

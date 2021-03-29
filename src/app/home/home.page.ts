@@ -182,8 +182,8 @@ export class HomePage implements OnInit, AfterViewInit {
 
                 geocoderClearBtn
                     .addEventListener('click', () => {
-                        this.comuneCorrente='';
-                        this.raggioCorrente=1;
+                        this.comuneCorrente = '';
+                        this.raggioCorrente = 1;
                         this.monithonMap.removeRadiusFilter();
                     });
 
@@ -191,8 +191,8 @@ export class HomePage implements OnInit, AfterViewInit {
                 geocoderInput
                     .addEventListener('change', e => {
                         if (!e.target.value) {
-                            this.comuneCorrente='';
-                            this.raggioCorrente=1;
+                            this.comuneCorrente = '';
+                            this.raggioCorrente = 1;
                             this.monithonMap.removeRadiusFilter();
                         }
                     });
@@ -287,12 +287,12 @@ export class HomePage implements OnInit, AfterViewInit {
     }
 
     renderPagamentiChart() {
-        let scale = d3.scaleLinear([0, 300]);
+        let chartContainer = (this.pagamentiChartContainer as any).nativeElement;
+        let chartW = chartContainer.getBoundingClientRect().width
+        let scale = d3.scaleLinear([0, chartW]);
         scale.domain([0, this.progettoSelezionato.ocFinanzTotPubNetto]);
         d3.select('.monithon-pagamenti-chart').remove();
-        let chartContainer = (this.pagamentiChartContainer as any).nativeElement;
         this.pagamentiChart = d3.select(chartContainer).append('svg');
-        let chartW = chartContainer.getBoundingClientRect().width
         this.pagamentiChart
             .attr('width', null)
             .attr('height', null)
@@ -669,9 +669,12 @@ export class HomePage implements OnInit, AfterViewInit {
         this.risultatiRicerca = lodash.sortBy(this.risultatiRicerca, (p: Progetto) => lodash.get(p, this.criterioSelezionato));
     }
 
-    minRadius: number = 1;
+    minRadius: number = -1;
     maxRadius: number = 20;
     onRadiusChange() {
+        if (this.raggioCorrente < 1) {
+            this.raggioCorrente = 1;
+        }
         this.monithonMap.updateRadius(this.raggioCorrente)
     }
     formatLabelSliderRaggio(val) {
