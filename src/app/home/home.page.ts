@@ -108,8 +108,10 @@ export class HomePage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
-                this.temi = updateSubject.temi; // <- nessun problema di performance
-                this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
+                if(!this.temi.length){
+                    this.temi = updateSubject.temi; // <- nessun problema di performance
+                    this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
+                }
                 this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
                 this.statiAvanzamento.map(s => {
                     s.isActive = lodash.some(this.progetti, p => p.codStatoProgetto == s.codStatoProgetto);

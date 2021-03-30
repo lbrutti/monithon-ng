@@ -607,14 +607,15 @@ export class MonithonMapService {
     resetFiltroProgetti(): Array<any> {
         console.log('resetFiltroProgetti : ', Date.now());
 
-        this.progetti.features.map(f => {
+       return this.progetti.features.map(f => {
             let progetto = f.properties;
             progetto.distanza = null;
             progetto.isWithinRange = true;
             progetto.isSelected = true;
-            this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: progetto.isWithinRange, isSelected: true });
+            this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: true, isSelected: true });
+            return progetto;
         });
-        return this.progetti.features.filter(f => f.properties.isSelected).map(f => f.properties);
+        // return this.progetti.features.map(f => f.properties);
     }
 
 
