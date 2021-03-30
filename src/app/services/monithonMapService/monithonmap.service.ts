@@ -71,7 +71,7 @@ export class MonithonMapService {
             language: 'it',
             //zoom: 3,
             filter: function (item: any) {
-                return item.place_type[0] === 'place';
+                return (item.place_type[0] === 'place' || item.place_type[0] === 'region');
             },
             marker: false
 
