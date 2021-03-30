@@ -40,3 +40,21 @@
 }
 
 @import './theme/charts.scss';
+
+ion-content {
+    background: var(--monithon-finanziamenti-foreground) !important;
+}
+
+#container.visible *,
+#navigationControl.visible * {
+    opacity: 1;
+    transition-property: all;
+    transition-duration: 250ms;
+}
+
+#container.hidden *,
+#navigationControl.hidden * {
+    opacity: 0;
+    transition-property: all;
+    transition-duration: 500ms;
+}

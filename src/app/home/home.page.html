@@ -12,10 +12,10 @@
         </mat-slider>
 
     </div>
-    <div #navigationControl id="navigationControl" class="navigation-control">
+    <div #navigationControl id="navigationControl" class="navigation-control" [ngClass]="{'hidden': !monithonMap.filtroPerRaggioEnabled,'visible': monithonMap.filtroPerRaggioEnabled}">
 
     </div>
-    <div id="container">
+    <div id="container" [ngClass]="{'hidden': !monithonMap.filtroPerRaggioEnabled,'visible': monithonMap.filtroPerRaggioEnabled}">
         <!-- Mappa -->
         <div #mapContainer id="mapContainer">
 
