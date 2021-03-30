@@ -45,6 +45,7 @@ export class MonithonMapService {
     navigationControl: mapboxgl.NavigationControl;
     geolocator: mapboxgl.GeolocateControl;
     center: any;
+    centerPoint: any;
 
 
     constructor() {
@@ -100,7 +101,7 @@ export class MonithonMapService {
         navigationControlContainer.appendChild(this.navigationControl.onAdd(this.map));
         navigationControlContainer.appendChild(this.geolocator.onAdd(this.map));
 
-      
+
         let radiusFilterDrawStyle = [ // ACTIVE (being drawn)
             // line stroke
             {
@@ -390,7 +391,7 @@ export class MonithonMapService {
      */
     private drawRangeProgetti(center: any) {
         console.log('drawRangeProgetti: ', Date.now());
-        
+
         this.circle = MapboxDrawGeodesic.createCircle(center, this.radius);
         this.circle.id = "range-center";
         this.draw.add(this.circle);
@@ -402,12 +403,12 @@ export class MonithonMapService {
         });
     }
 
-    public updateRadius(newRadiusValue:number){
+    public updateRadius(newRadiusValue: number) {
         console.log('updateRadius: ', Date.now());
-        
+
         this.resetFiltroDistanza(false);
         this.radius = newRadiusValue;
-       
+
         this.drawRangeProgetti(this.center);
     }
 
@@ -551,30 +552,10 @@ export class MonithonMapService {
      * @param circleData : 
      */
     filtraPerDistanza(circleData?: any) {
-        console.log('filtraPerDistanza: ', Date.now());
-        
+
         if (circleData) {
-            // (this.map.getSource('radiusFilterData') as any).setData({
-            //     'type': 'Feature',
-            //     'properties': {
-            //         ...circleData
-            //     },
-            //     'geometry': {
-            //         'type': 'Point',
-            //         'coordinates': [circleData.center]
-            //     }
-            // });
-            let centerPoint = point(circleData.center);
+            this.centerPoint = point(circleData.center);
             this.radius = circleData.radius;
-            this.progetti.features.map(f => {
-                let progetto = f.properties;
-                progetto.distanza = distance(point(f.geometry.coordinates), centerPoint);
-                progetto.isWithinRange = progetto.distanza <= this.radius;
-                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, {
-                    isWithinRange: progetto.isWithinRange,
-                    isSelected: progetto.isWithinRange
-                });
-            });
             let progetti = this.filtraProgetti();
             this.aggiornaAttivabilitaCategorie();
             this.publishUpdate(progetti);
@@ -590,32 +571,36 @@ export class MonithonMapService {
             return (temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico)) && c.isSelected;
         }).map(c => c.ocCodCategoriaSpesa);
 
-        this.progetti.features
+        return this.progetti.features
             .map(f => {
                 let progetto = f.properties;
-                // progetto.isSelected = (temiSelezionati.length == 0) || lodash.includes(temiSelezionati, progetto.ocCodTemaSintetico);
-                // progetto.isSelected = progetto.isSelected && ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, progetto.ocCodCategoriaSpesa).length > 0));
                 progetto.isSelected = ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, progetto.ocCodCategoriaSpesa).length > 0));
+                let featureStates = { isSelected: progetto.isSelected, isWithinRange: true };
                 if (this.filtroPerRaggioEnabled) {
+                    progetto.distanza = distance(point(f.geometry.coordinates), this.centerPoint);
+                    progetto.isWithinRange = progetto.distanza <= this.radius;
+                    featureStates.isWithinRange = progetto.isWithinRange;
+                    featureStates.isSelected = progetto.isSelected && progetto.isWithinRange;
                     progetto.isSelected = progetto.isSelected && progetto.isWithinRange;
                 }
-                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isSelected: progetto.isSelected });
-            });
-        return this.progetti.features.filter(f => f.properties.isSelected).map(f => f.properties);
+                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, featureStates);
+                return f;
+            })
+            .filter(f => f.properties.isSelected)
+            .map(f => f.properties);
     }
 
     resetFiltroProgetti(): Array<any> {
-        console.log('resetFiltroProgetti : ', Date.now());
 
-       return this.progetti.features.map(f => {
+        return this.progetti.features.map(f => {
             let progetto = f.properties;
             progetto.distanza = null;
+            progetto.isHighlighted = true;
             progetto.isWithinRange = true;
             progetto.isSelected = true;
-            this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: true, isSelected: true });
+            this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: true, isSelected: true, isHighlighted: true });
             return progetto;
         });
-        // return this.progetti.features.map(f => f.properties);
     }
 
 
@@ -641,7 +626,7 @@ export class MonithonMapService {
     }
     publishUpdate(progetti: Array<Progetto>): void {
         console.log('publishUpdate: ', Date.now());
-        
+
         this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: lodash.uniqBy(progetti, p => p.uid) });
     }
 
@@ -711,7 +696,7 @@ export class MonithonMapService {
     }
 
     private resetFiltroDistanza(publishUpdate: boolean = true) {
-        if (this.circle){
+        if (this.circle) {
             this.draw.delete(this.circle.id);
         }
         this.circle = null;
@@ -748,7 +733,7 @@ export class MonithonMapService {
                 easeOptions['padding'] = { bottom: offset };
             }
             (this.map as any).easeTo(easeOptions);
-        } 
+        }
 
     }
 }
