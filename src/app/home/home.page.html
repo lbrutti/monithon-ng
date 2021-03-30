@@ -42,13 +42,16 @@
                                 </h4>
                             </div>
                             <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
-                                {{progettoSelezionato.ocSintesiProgetto | fixencodedchars | unescape | capitalize}}
-                            </div>
-
-                            <div class="monithon-dettaglio-progetto__oc_link">
+                                <div>{{progettoSelezionato.ocSintesiProgetto | fixencodedchars | unescape | capitalize}}
+                                </div>
                                 <a href="{{progettoSelezionato.ocLink}}" target="_blank"> {{'readmore' | transloco
                                     }}</a>
                             </div>
+
+                            <!-- <div class="monithon-dettaglio-progetto__oc_link">
+                                <a href="{{progettoSelezionato.ocLink}}" target="_blank"> {{'readmore' | transloco
+                                    }}</a>
+                            </div> -->
 
                         </ion-col>
                         <ion-col col-6 class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli">

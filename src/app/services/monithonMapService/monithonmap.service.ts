@@ -321,7 +321,7 @@ export class MonithonMapService {
             });
 
             //check se impedisce anche 
-            this.map.scrollZoom.disable();
+            // this.map.scrollZoom.disable();
             this.map.resize();
             this.aggiornaAttivabilitaCategorie();
             navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
