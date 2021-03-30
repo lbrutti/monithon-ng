@@ -369,6 +369,8 @@ export class HomePage implements OnInit, AfterViewInit {
         this.renderBudgetChart(this.progettiCrossFilter, listaProgetti);
         this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
         dc.renderAll();
+        this.filtraRisultati();
+        this.evidenziaRisultatiSuMappa();
     }
 
     private renderAnnoChart(crossFilterData: any, listaProgetti: any) {
@@ -422,16 +424,21 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
         this.annoChart.on('pretransition', function (chart) {
-            if (!chart.filter()) {
-                chart
-                    .select('.brush')
-                    .call(chart.brush().move, [0, chart.width() - (chart.margins().right + chart.margins().left)]);
-            }
+            // if (!chart.filter()) {
+            //     chart
+            //         .select('.brush')
+            //         .call(chart.brush().move, [0, chart.width() - (chart.margins().right + chart.margins().left)]);
+            // }
         })
         this.annoChart.on("filtered", () => {
-            this.progetti = annoDim.top(Infinity);
-            this.filtraRisultati();
-            this.evidenziaRisultatiSuMappa();
+          
+          setTimeout(() => {    
+              console.log('this.annoChart.on("filtered", () => {');
+   
+               this.progetti = annoDim.top(Infinity);
+               this.filtraRisultati();
+               this.evidenziaRisultatiSuMappa();
+          }, 0); 
         });
 
     }
@@ -518,10 +525,13 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
         this.budgetChart.on("filtered", () => {
-            //propagare evento per aggiornare la lista dei progetti
-            this.progetti = budgetDim.top(Infinity);
-            this.filtraRisultati();
-            this.evidenziaRisultatiSuMappa();
+            setTimeout(() => {
+                console.log('this.budgetChart.on("filtered", () => {');
+                //propagare evento per aggiornare la lista dei progetti
+                this.progetti = budgetDim.top(Infinity);
+                this.filtraRisultati();
+                this.evidenziaRisultatiSuMappa();
+            }, 0);
         });
 
         this.budgetChart.on('pretransition', function (chart) {
@@ -570,10 +580,12 @@ export class HomePage implements OnInit, AfterViewInit {
                     .text(d => xFormatter(parseInt(d) + 1)); // 9
             } else {
                 //reset al default
-                let maxBrushExtent = chart.width() - (chart.margins().right + chart.margins().left);
-                chart
-                    .select('.brush')
-                    .call(chart.brush().move, [0, maxBrushExtent]);
+                chart.select('.brush-begin').remove();
+                chart.select('.brush-end').remove();
+                // let maxBrushExtent = chart.width() - (chart.margins().right + chart.margins().left);
+                // chart
+                //     .select('.brush')
+                //     .call(chart.brush().move, [0, maxBrushExtent]);
             }
 
         });
