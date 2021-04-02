@@ -686,12 +686,12 @@ export class HomePage implements OnInit, AfterViewInit {
         this.risultatiRicerca = lodash.sortBy(this.risultatiRicerca, (p: Progetto) => lodash.get(p, this.criterioSelezionato));
     }
 
-    minRadius: number = -1;
+    minRadius: number = 1;
     maxRadius: number = 20;
-    onRadiusChange() {
-        if (this.raggioCorrente < 1) {
-            this.raggioCorrente = 1;
-        }
+    onRadiusChange(event:any) {
+        debugger;
+        console.log(event);
+        this.raggioCorrente = event.value;
         this.monithonMap.updateRadius(this.raggioCorrente)
     }
     formatLabelSliderRaggio(val) {

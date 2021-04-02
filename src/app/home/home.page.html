@@ -6,8 +6,10 @@
     </div>
     <div id="raggioContainer">
 
-        <mat-slider [min]="minRadius" [max]="maxRadius" thumbLabel="true" step="1" [(ngModel)]="raggioCorrente"
-            [displayWith]="formatLabelSliderRaggio" (change)="onRadiusChange()"
+        <mat-slider [min]="minRadius" [max]="maxRadius" thumbLabel="true" step="1"
+            [displayWith]="formatLabelSliderRaggio" 
+            [value]="raggioCorrente"
+            (input)="onRadiusChange($event)"
             [disabled]="!monithonMap.filtroPerRaggioEnabled">
         </mat-slider>
 
