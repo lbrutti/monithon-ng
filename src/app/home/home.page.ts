@@ -678,9 +678,9 @@ export class HomePage implements OnInit, AfterViewInit {
         window.open("https://it.monithon.eu/user/login?r=1&" + encodeURI(progetto.ocLink), "_blank");
     }
 
-    public onCriterioSelezionatoClick() {
+    public onCriterioSelezionatoClick(criterio:string) {
         // this.ordinamentoPanelOpenState = !this.ordinamentoPanelOpenState;
-        // this.criterioSelezionato = criterio;
+        this.criterioSelezionato = criterio;
         this.ordinaRisultatiPerCriterio();
     }
     ordinaRisultatiPerCriterio() {

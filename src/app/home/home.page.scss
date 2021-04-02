@@ -465,7 +465,7 @@ ion-row.monithon-filtri-secondari {
 .monithon-criteri-ordinamento {
     ::ng-deep .mat-chip-list-wrapper {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-content: flex-start;
     }
 }
