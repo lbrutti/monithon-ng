@@ -458,15 +458,21 @@ ion-row.monithon-filtri-secondari {
     background-color: var(--monithon-tema-sfondo-charts);
 }
 
-.monithon-form-field-ordinamento {
-    width: 100%;
+.monithon-criterio-ordinamento__selezione {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    mat-label{
+        align-self: flex-start;
+    }
 }
+
 
 .monithon-criteri-ordinamento {
     ::ng-deep .mat-chip-list-wrapper {
-        display: flex;
-        flex-direction: row;
-        align-content: flex-start;
+        display: flex !important;
+        flex-direction: row !important;
+        //align-content: flex-start !important;
     }
 }
 
@@ -685,6 +691,7 @@ ion-row.monithon-filtri-secondari {
         &.mat-slider-horizontal {
             width: 432px;
         }
+
         &.mat-slider-disabled {
             display: none !important;
         }
@@ -710,7 +717,7 @@ ion-row.monithon-filtri-secondari {
             background: var(--monithon-range-thumb-label-background) !important
         }
 
-        
+
 
         .mat-slider-thumb {
             transform: scale(0) !important;

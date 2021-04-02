@@ -302,14 +302,15 @@
                         <ion-row>
                             <ion-col>
                                 <div class="monithon-criterio-ordinamento__selezione">
-
-                                    <mat-chip-list class="monithon-criteri-ordinamento">
-                                        <mat-chip *ngFor="let criterio of criteriOrdinamento"
-                                            (click)="onCriterioSelezionatoClick(criterio)" disableRipple="true">
-                                            {{criterio | transloco}}
-                                        </mat-chip>
-                                    </mat-chip-list>
-
+                                    <!-- <mat-form-field class="monithon-form-field-ordinamento" appearance="standard"> -->
+                                        <mat-label>{{'ordinaPer' | transloco}}</mat-label>
+                                        <mat-chip-list class="monithon-criteri-ordinamento">
+                                            <mat-chip *ngFor="let criterio of criteriOrdinamento"
+                                                (click)="onCriterioSelezionatoClick(criterio)" disableRipple="true">
+                                                {{criterio | transloco}}
+                                            </mat-chip>
+                                        </mat-chip-list>
+                                    <!-- </mat-form-field> -->
                                 </div>
 
                             </ion-col>
