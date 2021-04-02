@@ -305,7 +305,7 @@
                                     <mat-label>{{'ordinaPer' | transloco}}</mat-label>
                                     <mat-chip-list class="monithon-criteri-ordinamento">
                                         <mat-chip *ngFor="let criterio of criteriOrdinamento"
-                                        class="monithon-criterio-ordinamento"
+                                            class="monithon-criterio-ordinamento"
                                             (click)="onCriterioSelezionatoClick(criterio)" disableRipple="true"
                                             [ngClass]="{'selected': criterio==criterioSelezionato}">
                                             {{criterio | transloco}}
@@ -321,10 +321,12 @@
                 <cdk-virtual-scroll-viewport #listaRisultati itemSize="100" minBufferPx="500" maxBufferPx="1000"
                     class="monithon-lista-progetti">
                     <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;"
-                        class="monithon-lista-progetti__progetto">
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col>
+                        class="monithon-lista-progetti__progetto"
+                        [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico"
+                         [ngClass]="{'selected': progetto.uid==progettoSelezionato.uid}">
+                        <ion-grid class="ion-no-margin">
+                            <ion-row class="ion-no-margin">
+                                <ion-col class="ion-no-margin">
                                     <ion-label class="monithon-lista-risultato" (click)="onProgettoClick(progetto)"
                                         [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico"
                                         [ngClass]="{'selected': progetto.uid==progettoSelezionato.uid}">
@@ -333,20 +335,21 @@
                                     </ion-label>
                                 </ion-col>
                             </ion-row>
-                            <ion-row>
-                                <ion-col>
-                                    <mat-expansion-panel [disabled]="!progetto.hasReport" hideToggle="true" class="monithon-lista-progetti__progetto__dettagli mat-elevation-z">
+                            <ion-row class="ion-no-margin">
+                                <ion-col class="ion-no-margin">
+                                    <mat-expansion-panel [disabled]="!progetto.hasReport" hideToggle="true"
+                                        class="monithon-lista-progetti__progetto__dettagli mat-elevation-z">
                                         <mat-expansion-panel-header>
-                                            <ion-grid>
-                                                <ion-row>
-                                                    <ion-col size="6">
+                                            <ion-grid class="ion-no-margin">
+                                                <ion-row class="ion-no-margin">
+                                                    <ion-col size="6" class="ion-no-margin">
                                                         <ion-label
                                                             class="monithon-lista-progetti__progetto__dettagli__distanza">
                                                             {{'distanza'|transloco}}: {{progetto.distanza |
                                                             formatDistanza }}
                                                         </ion-label>
                                                     </ion-col>
-                                                    <ion-col size="6">
+                                                    <ion-col size="6" class="ion-no-margin">
                                                         <ion-label
                                                             class="monithon-lista-progetti__progetto__dettagli__contatore_report"
                                                             [attr.data-mostra-icona]="progetto.hasReport">
@@ -357,7 +360,7 @@
                                                 </ion-row>
                                             </ion-grid>
                                         </mat-expansion-panel-header>
-                                        <ion-list class="monithon-lista-progetti__progetto__dettagli__lista_report">
+                                        <ion-list class="monithon-lista-progetti__progetto__dettagli__lista_report" class="ion-no-margin">
                                             <ion-item *ngFor="let report of progetto.reports; let i =index">
                                                 <ion-label>
                                                     <a href="{{monithonReportUrl}}/{{report.id}}" target="_blank">

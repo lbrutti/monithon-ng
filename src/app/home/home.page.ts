@@ -271,7 +271,6 @@ export class HomePage implements OnInit, AfterViewInit {
             .attr('width', chartW)
             .attr('height', '56')
             .attr('class', 'foreground')
-            .attr('fill', 'grey');
         chartG.selectAll('text.finanziamento').remove();
 
         chartG.selectAll('text.finanziamento')

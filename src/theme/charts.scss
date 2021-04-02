@@ -41,12 +41,12 @@
 
         rect.foreground {
             fill: var(--monithon-finanziamenti-foreground);
-            opacity: .78;
+            fill-opacity: 0.78;
         }
 
         rect.background {
             fill: var(--monithon-finanziamenti-foreground);
-            opacity: .1;
+            fill-opacity: 0.1;
         }
 
     }

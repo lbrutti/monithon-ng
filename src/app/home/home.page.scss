@@ -548,7 +548,9 @@ ion-row.monithon-filtri-secondari {
     }
 
     &.selected {
-        font-weight: bolder;
+        h2 {
+            font-weight: bolder;
+        }
     }
 
     &[data-oc-cod-tema-sintetico="4"]::before {
@@ -618,18 +620,44 @@ ion-row.monithon-filtri-secondari {
 
         @include hideScrollbar();
         height: 60vh;
+
+        // * {
+        //     border: none;
+        // }
     }
 
     .monithon-lista-progetti__progetto {
         min-height: 100px !important;
         color: var(--monithon-font-color);
+        --ion-item-border-color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
 
+        border-left: 12px solid;
+        border-color: white;
+
+        &.selected {
+
+            &[data-oc-cod-tema-sintetico="4"] {
+                border-color: var(--monithon-tema-energia-background);
+            }
+
+            &[data-oc-cod-tema-sintetico="5"] {
+                border-color: var(--monithon-tema-ambiente-background);
+            }
+
+            &[data-oc-cod-tema-sintetico="6"] {
+                border-color: var(--monithon-tema-attrazione-background);
+            }
+
+            &[data-oc-cod-tema-sintetico="7"] {
+                border-color: var(--monithon-tema-mobilita-background);
+            }
+        }
     }
 
     .monithon-lista-progetti__progetto__dettagli {
         * {
             color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
-        } 
+        }
 
         .monithon-lista-progetti__progetto__dettagli__contatore_report {
             text-align: right;
