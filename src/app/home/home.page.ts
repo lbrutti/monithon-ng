@@ -411,7 +411,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .x(xScale)
             .y(yScale)
             .xUnits(dc.units.integers)
-            .elasticX(false)
+            .elasticX(true)
             .elasticY(false)
             .margins({ top: 2, right: 10, bottom: 20, left: 10 })
             .transitionDuration(250);
@@ -508,7 +508,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .brushOn(true)
             .x(d3.scaleLinear().domain([0, numQuantili]))
             .y(d3.scaleLinear().domain([0, maxCount]))
-            .elasticX(false)
+            .elasticX(true)
             .elasticY(false)
             .margins({ top: 2, right: 10, bottom: 20, left: 10 })
             .transitionDuration(250);
