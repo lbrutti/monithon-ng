@@ -46,8 +46,10 @@
                             <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
                                 <div>{{progettoSelezionato.ocSintesiProgetto | fixencodedchars | unescape | capitalize}}
                                 </div>
-                                <a href="{{progettoSelezionato.ocLink}}" target="_blank"> {{'readmore' | transloco
-                                    }}</a>
+                                <div class="monithon-dettaglio-progetto__sintesi__oc_link">
+                                    <a href="{{progettoSelezionato.ocLink}}" target="_blank">→ {{'readmore' | transloco
+                                        }}</a>
+                                </div>
                             </div>
 
 

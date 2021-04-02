@@ -317,6 +317,15 @@
     .monithon-dettaglio-progetto__sintesi {
         overflow-y: scroll;
         @include hideScrollbar();
+
+        .monithon-dettaglio-progetto__sintesi__oc_link {
+            margin-top: 12px;
+            font-weight: bold;
+
+            a {
+                color: var(--monithon-font-color) !important;
+            }
+        }
     }
 
     .monithon-dettaglio-progetto__col {
