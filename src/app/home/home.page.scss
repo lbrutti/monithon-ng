@@ -627,16 +627,22 @@ ion-row.monithon-filtri-secondari {
 
     }
 
-    .monithon-lista-progetti__progetto__dettagli__contatore_report {
-        text-align: right;
+    .monithon-lista-progetti__progetto__dettagli {
+        * {
+            color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
+        } 
 
-        &[data-mostra-icona="true"]::after {
-            content: ' ↓';
+        .monithon-lista-progetti__progetto__dettagli__contatore_report {
+            text-align: right;
+
+            &[data-mostra-icona="true"]::after {
+                content: ' ↓';
+            }
         }
-    }
 
-    .monithon-lista-progetti__progetto__dettagli__lista_report * {
-        color: var(--monithon-lista-report-in-dettaglio-font-color);
+        .monithon-lista-progetti__progetto__dettagli__lista_report * {
+            color: var(--monithon-lista-report-in-dettaglio-font-color);
+        }
     }
 
     .monithon-geolocator-data-container {
