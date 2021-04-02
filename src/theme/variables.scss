@@ -303,31 +303,30 @@ body {
 
 //monithon:
 :root {
-    --monithon-filtro-secondario-unselected-color: #38817c;
-    --monithon-filtro-secondario-selected-color: #d9fefc;
 
-    --monithon-tema-energia-background: #FFC921;
-    --monithon-tema-ambiente-background: #EA4A3E;
-    --monithon-tema-attrazione-background: #FDD0B3;
 
-    --monithon-tema-mobilita-background: #006FD2;
-    --monithon-tema-color: #00172A;
-    --monithon-tema-sfondo-filtri: #004039;
-    --monithon-tema-sfondo-charts: #00CEB8;
-    --monithon-font-color: #041729;
-    --monithon-label-color: #ffffff;
+    --monithon-chart-domain-stroke: #8FE0E3;
+    --monithon-chart-fill: #D0FFFD;
     --monithon-chevron-border-color: #ffffff;
     --monithon-contatore-risultati-color: #EA4A3E;
-    --monithon-finanziamenti-foreground: #00172A;
-    --monithon-chart-fill: #D0FFFD;
-    --monithon-deselected-chart-fill: #00837C;
-    --monithon-chart-domain-stroke: #8FE0E3;
     --monithon-dc-chart-brush-text-fill: #D0FFFD;
     --monithon-dc-chart-text-fill: #00837C;
-
+    --monithon-deselected-chart-fill: #00837C;
+    --monithon-filtro-secondario-selected-color: #d9fefc;
+    --monithon-filtro-secondario-unselected-color: #38817c;
+    --monithon-finanziamenti-foreground: #00172A;
+    --monithon-font-color: #041729;
+    --monithon-label-color: #ffffff;
     --monithon-lista-report-in-dettaglio-font-color: #00837C;
     --monithon-range-thumb-label-background: #00172A;
     --monithon-range-track-fill: #ffffff;
+    --monithon-tema-ambiente-background: #EA4A3E;
+    --monithon-tema-attrazione-background: #FDD0B3;
+    --monithon-tema-color: #00172A;
+    --monithon-tema-energia-background: #FFC921;
+    --monithon-tema-mobilita-background: #006FD2;
+    --monithon-tema-sfondo-charts: #00CEB8;
+    --monithon-tema-sfondo-filtri: #004039;
 
 
     --background: transparent;
@@ -400,30 +399,28 @@ body {
 
     //SM-66 : settare classe all'elemento <html> per switch delle variabili
     &.monochrome {
-        --monithon-filtro-secondario-unselected-color: #000000;
-        --monithon-filtro-secondario-selected-color: #ffffff;
 
-        --monithon-tema-energia-background: #FFC921;
-        --monithon-tema-ambiente-background: #EA4A3E;
-        --monithon-tema-attrazione-background: #FDD0B3;
-        --monithon-tema-mobilita-background: #006FD2;
-
-        --monithon-tema-color: #00172A;
-        --monithon-tema-sfondo-filtri: #ffffff;
-        --monithon-tema-sfondo-charts: #ffffff;
-        --monithon-finanziamenti-foreground: #00172A;
         --background: transparent;
-        --ion-toolbar-background: transparent;
         --ion-background-color: transparent;
-        --monithon-chevron-border-color: black;
-        --monithon-chart-fill: #D0FFFD;
-        --monithon-deselected-chart-fill: #00837C;
+        --ion-toolbar-background: transparent;
         --monithon-chart-domain-stroke: #8FE0E3;
+        --monithon-chart-fill: #D0FFFD;
+        --monithon-chevron-border-color: black;
         --monithon-dc-chart-brush-text-fill: #D0FFFD;
         --monithon-dc-chart-text-fill: #00837C;
-
+        --monithon-deselected-chart-fill: #00837C;
+        --monithon-filtro-secondario-selected-color: #ffffff;
+        --monithon-filtro-secondario-unselected-color: #000000;
+        --monithon-finanziamenti-foreground: #00172A;
         --monithon-range-thumb-label-background: #00172A;
         --monithon-range-track-fill: #000000;
+        --monithon-tema-ambiente-background: #EA4A3E;
+        --monithon-tema-attrazione-background: #FDD0B3;
+        --monithon-tema-color: #00172A;
+        --monithon-tema-energia-background: #FFC921;
+        --monithon-tema-mobilita-background: #006FD2;
+        --monithon-tema-sfondo-charts: #ffffff;
+        --monithon-tema-sfondo-filtri: #ffffff;
     }
 
 }

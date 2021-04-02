@@ -462,11 +462,23 @@ ion-row.monithon-filtri-secondari {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    mat-label{
+
+    mat-label {
         align-self: flex-start;
     }
 }
 
+.monithon-criterio-ordinamento {
+    transition-delay: 0;
+    color: var(--monithon-tema-color);
+    border: 1px solid var(--monithon-tema-color);
+    background: var(--monithon-label-color);
+
+    &.selected {
+        background: var(--monithon-tema-color);
+        color: var(--monithon-label-color);
+    }
+}
 
 .monithon-criteri-ordinamento {
     ::ng-deep .mat-chip-list-wrapper {
