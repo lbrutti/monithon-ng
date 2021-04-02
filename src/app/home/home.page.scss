@@ -219,6 +219,56 @@
         }
     }
 
+    .monithon-dettaglio-progetto__categoria {
+
+
+        .monithon-dettaglio-progetto__lista__categorie {
+            &.inactive {
+                .monithon-dettaglio-progetto__lista__categorie__header {
+                    pointer-events: none;
+                    cursor: default;
+                }
+            }
+
+            &[data-oc-cod-tema-sintetico="4"] * {
+                background: var(--monithon-tema-energia-background) !important;
+            }
+
+            &[data-oc-cod-tema-sintetico="5"] * {
+
+                background: var(--monithon-tema-ambiente-background) !important;
+            }
+
+            &[data-oc-cod-tema-sintetico="6"] * {
+                background: var(--monithon-tema-attrazione-background) !important;
+            }
+
+            &[data-oc-cod-tema-sintetico="7"] * {
+                background: var(--monithon-tema-mobilita-background) !important;
+            }
+
+
+
+            .monithon-dettaglio-progetto__lista__categorie__header {
+                padding: 0;
+
+                .monithon-dettaglio-progetto__arrow {
+                    margin-left: 10px
+                }
+
+                &.mat-expanded {
+                    .monithon-dettaglio-progetto__arrow {
+                        transform: translateY(0px) rotateX(180deg)
+                    }
+                }
+            }
+
+
+        }
+
+
+    }
+
     .mat-chip.monithon-dettaglio-progetto__stato-avanzamento,
     .mat-chip.monithon-dettaglio-progetto__has-report {
         background-color: transparent;

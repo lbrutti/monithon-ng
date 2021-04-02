@@ -7,9 +7,7 @@
     <div id="raggioContainer">
 
         <mat-slider [min]="minRadius" [max]="maxRadius" thumbLabel="true" step="1"
-            [displayWith]="formatLabelSliderRaggio" 
-            [value]="raggioCorrente"
-            (input)="onRadiusChange($event)"
+            [displayWith]="formatLabelSliderRaggio" [value]="raggioCorrente" (input)="onRadiusChange($event)"
             [disabled]="!monithonMap.filtroPerRaggioEnabled">
         </mat-slider>
 
@@ -52,10 +50,6 @@
                                     }}</a>
                             </div>
 
-                            <!-- <div class="monithon-dettaglio-progetto__oc_link">
-                                <a href="{{progettoSelezionato.ocLink}}" target="_blank"> {{'readmore' | transloco
-                                    }}</a>
-                            </div> -->
 
                         </ion-col>
                         <ion-col col-6 class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli">
@@ -69,11 +63,33 @@
                             <div class="monithon-dettaglio-progetto__categoria">
                                 <ion-label class="monithon-dettaglio-progetto__label">{{'categoria' | transloco}}
                                 </ion-label>
-                                <div *ngFor="let categoria of progettoSelezionato.ocCodCategoriaSpesa">
+
+                                <mat-expansion-panel hideToggle="true"
+                                    [attr.data-oc-cod-tema-sintetico]="progettoSelezionato.ocCodTemaSintetico"
+                                    class="monithon-dettaglio-progetto__lista__categorie mat-elevation-z"
+                                    [ngClass]="{'inactive': getCategorieTail().length==1}">
+                                    <mat-expansion-panel-header class="monithon-dettaglio-progetto__lista__categorie__header">
+                                        <ion-label
+                                            class="monithon-dettaglio-progetto__categoria__singola monithon-dettaglio-progetto__prima__categoria">
+                                            {{'categorie.'+getCategorieHead() |transloco }}
+                                        </ion-label>
+                                        <ion-label
+                                            class="monithon-dettaglio-progetto__categoria__singola monithon-dettaglio-progetto__arrow"
+                                            *ngIf="getCategorieTail().length>1"> ↓ </ion-label>
+
+                                    </mat-expansion-panel-header>
+                                    <div *ngFor="let categoria of getCategorieTail()">
+                                        <ion-label class="monithon-dettaglio-progetto__categoria__singola">
+                                            {{'categorie.'+categoria | transloco}}
+                                        </ion-label>
+                                    </div>
+                                </mat-expansion-panel>
+
+                                <!-- <div *ngFor="let categoria of progettoSelezionato.ocCodCategoriaSpesa">
                                     <ion-label>
                                         {{'categorie.'+categoria | transloco}}
                                     </ion-label>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="monithon-dettaglio-progetto__tema">
@@ -325,7 +341,7 @@
                     <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;"
                         class="monithon-lista-progetti__progetto"
                         [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico"
-                         [ngClass]="{'selected': progetto.uid==progettoSelezionato.uid}">
+                        [ngClass]="{'selected': progetto.uid==progettoSelezionato.uid}">
                         <ion-grid class="ion-no-margin">
                             <ion-row class="ion-no-margin">
                                 <ion-col class="ion-no-margin">
@@ -362,7 +378,8 @@
                                                 </ion-row>
                                             </ion-grid>
                                         </mat-expansion-panel-header>
-                                        <ion-list class="monithon-lista-progetti__progetto__dettagli__lista_report" class="ion-no-margin">
+                                        <ion-list class="monithon-lista-progetti__progetto__dettagli__lista_report"
+                                            class="ion-no-margin">
                                             <ion-item *ngFor="let report of progetto.reports; let i =index">
                                                 <ion-label>
                                                     <a href="{{monithonReportUrl}}/{{report.id}}" target="_blank">

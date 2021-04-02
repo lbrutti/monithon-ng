@@ -698,6 +698,13 @@ export class HomePage implements OnInit, AfterViewInit {
         return `${val} km`;
     }
 
+    getCategorieTail(){
+        return lodash.tail(this.progettoSelezionato.ocCodCategoriaSpesa);
+    }
+    getCategorieHead() {
+        return lodash.first(this.progettoSelezionato.ocCodCategoriaSpesa);
+    }
+
 }
 
 

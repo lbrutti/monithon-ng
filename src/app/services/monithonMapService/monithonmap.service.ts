@@ -100,7 +100,7 @@ export class MonithonMapService {
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
         navigationControlContainer.appendChild(this.navigationControl.onAdd(this.map));
-        navigationControlContainer.appendChild(this.geolocator.onAdd(this.map));
+      //  navigationControlContainer.appendChild(this.geolocator.onAdd(this.map));
 
 
         let radiusFilterDrawStyle = [ // ACTIVE (being drawn)
@@ -281,21 +281,7 @@ export class MonithonMapService {
                     }
                 });
 
-            // this.map
-            //     .addLayer({
-            //         id: 'radius-value',
-            //         type: 'symbol',
-            //         source: 'radiusFilterData',
-            //         'layout': {
-            //             'text-field': ['get', 'radius'],
-            //             'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
-            //             'text-radial-offset': 0.5,
-            //             'text-justify': 'center',
-            //             'visibility': 'visible'
-            //         }
-            //     });
             this.map.on('click', e => {
-                //this.publishSelectedProject(null);
 
                 // set bbox as 5px reactangle area around clicked point
                 let lower: PointLike = new mapboxgl.Point(e.point.x - 5, e.point.y - 5);
@@ -320,11 +306,11 @@ export class MonithonMapService {
                 }
             });
 
-            //check se impedisce anche 
-            // this.map.scrollZoom.disable();
+            this.map.dragRotate.disable();
+            this.map.touchZoomRotate.disableRotation();
             this.map.resize();
             this.aggiornaAttivabilitaCategorie();
-            navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
+          //  navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
 
             this.publishUpdate(this.featureCollectionToProgetti());
         });
