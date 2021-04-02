@@ -93,7 +93,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     counterValue: any;
 
-    criteriOrdinamento: Array<string> = ['distanza', 'ocCodCategoriaSpesa', 'ocFinanzTotPubNetto', 'ocDataInizioProgetto']
+    criteriOrdinamento: Array<string> = ['distanza', 'ocCodTemaSintetico', 'ocFinanzTotPubNetto', 'ocDataInizioProgetto']
     criterioSelezionato: string = 'distanza';
     geocoderData: any;
     comuneCorrente: any;

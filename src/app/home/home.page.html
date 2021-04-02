@@ -318,7 +318,7 @@
                     </ion-grid>
                 </div>
                 <!-- lista risultati -->
-                <cdk-virtual-scroll-viewport #listaRisultati itemSize="50" minBufferPx="200" maxBufferPx="400"
+                <cdk-virtual-scroll-viewport #listaRisultati itemSize="100" minBufferPx="500" maxBufferPx="1000"
                     class="monithon-lista-progetti">
                     <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;"
                         class="monithon-lista-progetti__progetto">
@@ -335,7 +335,7 @@
                             </ion-row>
                             <ion-row>
                                 <ion-col>
-                                    <mat-expansion-panel [disabled]="!progetto.hasReport" hideToggle="true" class="monithon-lista-progetti__progetto__dettagli">
+                                    <mat-expansion-panel [disabled]="!progetto.hasReport" hideToggle="true" class="monithon-lista-progetti__progetto__dettagli mat-elevation-z">
                                         <mat-expansion-panel-header>
                                             <ion-grid>
                                                 <ion-row>
