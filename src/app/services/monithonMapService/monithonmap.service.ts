@@ -326,15 +326,18 @@ export class MonithonMapService {
 
             this.map.on('mousemove', e => {
 
-                // set bbox as 5px reactangle area around clicked point
-                let lower: PointLike = new mapboxgl.Point(e.point.x - 5, e.point.y - 5);
-                let upper: PointLike = new mapboxgl.Point(e.point.x + 5, e.point.y + 5);
-                var bbox: PointLike | [PointLike, PointLike] = [lower, upper];
-                var features = this.map.queryRenderedFeatures(bbox, {
-                    layers: ['progetti-layer']
-                });
-                if (features.length) {
-                    this.map.getCanvas().style.cursor = 'pointer'
+                if (e.features && e.features.length && this.map.getZoom() >= 10) {
+                    let feature = e.features[0];
+                    console.log('feature = ', feature);
+
+                    let progetto: any = (this.progetti.features.find(p => p.properties.uid == feature.properties.uid) || {}).properties;
+                    console.log('progetto = ', progetto);
+                    let isOnActiveMarker = (this.filtroPerRaggioEnabled && progetto.isWithinRange && progetto.isSelected) || (!this.filtroPerRaggioEnabled && progetto.isSelected);
+                    if (isOnActiveMarker) {
+                        this.map.getCanvas().style.cursor = 'pointer'
+                    } else {
+                        this.map.getCanvas().style.cursor = '';
+                    }
                 } else {
                     this.map.getCanvas().style.cursor = '';
                 }
