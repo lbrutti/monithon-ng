@@ -92,10 +92,11 @@ export class MonithonMapService {
         });
         this.geocoder.on('result', evt => {
             this.resetFiltroDistanza(false);
+            this.rangeProgetti = 10;
             this.center = evt.result.center;
             this.comuneCorrente = evt.result.place_name;
             this.drawRangeProgetti(this.center);
-            this.map.easeTo({ center: this.center, duration: 1200 });
+            this.map.easeTo({ center: this.center, duration: 1200 , zoom:10});
             this.publishGeocoderUpdate();
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
