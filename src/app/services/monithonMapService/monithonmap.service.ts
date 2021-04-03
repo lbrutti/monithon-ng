@@ -397,13 +397,9 @@ export class MonithonMapService {
      * @param center 
      */
     private drawRangeProgetti(center: any) {
-        let turfCircle = circle(this.center, this.radius);
-        let coords = turfCircle.geometry.coordinates;
-        let line = lineString(coords[0]);
-        (this.map.getSource('radiusFilterData') as any).setData(turfCircle);
-        this.circle = MapboxDrawGeodesic.createCircle(center, this.radius);
+        this.circle = circle(this.center, this.radius);
         this.circle.id = "range-center";
-        this.draw.add(this.circle);
+        (this.map.getSource('radiusFilterData') as any).setData(this.circle);
 
         this.filtroPerRaggioEnabled = true;
         this.filtraPerDistanza({
@@ -413,11 +409,8 @@ export class MonithonMapService {
     }
 
     public updateRadius(newRadiusValue: number) {
-        console.log('updateRadius: ', Date.now());
-
         this.resetFiltroDistanza(false);
         this.radius = newRadiusValue;
-
         this.drawRangeProgetti(this.center);
     }
 
