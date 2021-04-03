@@ -336,7 +336,7 @@
                                 <ion-col class="ion-no-margin">
                                     <ion-label class="monithon-lista-risultato" (click)="onProgettoClick(progetto)"
                                         [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico"
-                                        [ngClass]="{'selected': progetto.uid==progettoSelezionato.uid}">
+                                        [ngClass]="{'selected': visualizzaDettaglio && (progetto.uid==progettoSelezionato.uid)}">
                                         <h2>{{progetto.ocTitoloProgetto | fixencodedchars | unescape | capitalize}}
                                         </h2>
                                     </ion-label>
