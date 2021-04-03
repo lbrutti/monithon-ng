@@ -541,8 +541,6 @@ export class MonithonMapService {
         this.geocoderUpdate.unsubscribe();
     }
     publishUpdate(progetti: Array<Progetto>): void {
-        console.log('publishUpdate: ', Date.now());
-
         this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: lodash.uniqBy(progetti, p => p.uid) });
     }
 

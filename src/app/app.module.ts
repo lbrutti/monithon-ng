@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -39,10 +39,8 @@ registerLocaleData(localeIt);
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         { provide: LOCALE_ID, useValue: "it" },
-        CurrencyPipe,
-    ],
+        CurrencyPipe    ],
     exports: [MomentdateModule, CapitalizePipeModule, FormatDistanzaPipeModule, FixencodedcharsPipeModule],
     bootstrap: [AppComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

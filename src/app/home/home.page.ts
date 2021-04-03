@@ -12,6 +12,7 @@ import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
 import { LoadingController } from '@ionic/angular';
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -107,6 +108,7 @@ export class HomePage implements OnInit, AfterViewInit {
         private monithonApiService: MonithonApiService,
         public monithonMap: MonithonMapService,
         private currencyPipe: CurrencyPipe,
+        private translocoService: TranslocoService,
         public loadingController: LoadingController) { this.monithonReportUrl = environment.monithonReportUrl; }
 
     ngOnInit(): void {
@@ -142,7 +144,6 @@ export class HomePage implements OnInit, AfterViewInit {
                 } else {
                     this.counterValue = this.progetti.length;
                 }
-                console.log('tolgo loader');
                 this.loading.dismiss();
             },
             error: err => console.error('subscribeToUpdates error: ', err),
@@ -263,7 +264,7 @@ export class HomePage implements OnInit, AfterViewInit {
     }
 
     private renderDettaglioProgettoCharts() {
-        this.renderFinanziamentoChart();
+        // this.renderFinanziamentoChart();
         this.renderPagamentiChart();
     }
 
@@ -327,6 +328,26 @@ export class HomePage implements OnInit, AfterViewInit {
             .attr('width', d => scale(d.totPagamenti))
             .attr('height', '56')
             .attr('class', 'foreground');
+        chartG.selectAll('text.pagamenti-label')
+            .data([this.progettoSelezionato])
+            .enter()
+            .append('text')
+            .attr('class', 'pagamenti-label')
+            .attr('data-oc-cod-tema-sintetico', d => d.ocCodTemaSintetico)
+            .attr('x', d => scale(d.totPagamenti))
+            .attr('y', '28')
+            .attr('text-anchor', d => {
+                let position = scale(d.totPagamenti);
+                return position < 80 ? 'start' : 'end';
+            })
+            .attr('dy', '-3')
+            .attr('dx', d => {
+                let position = scale(d.totPagamenti);
+                return position < 80 ? '0' : '-3';
+            })
+            .text(d => {
+                return this.translocoService.translate('pagamenti');
+            });
         chartG.selectAll('text.pagamenti')
             .data([this.progettoSelezionato])
             .enter()

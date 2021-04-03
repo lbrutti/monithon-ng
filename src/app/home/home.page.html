@@ -87,11 +87,6 @@
                                     </div>
                                 </mat-expansion-panel>
 
-                                <!-- <div *ngFor="let categoria of progettoSelezionato.ocCodCategoriaSpesa">
-                                    <ion-label>
-                                        {{'categorie.'+categoria | transloco}}
-                                    </ion-label>
-                                </div> -->
                             </div>
 
                             <div class="monithon-dettaglio-progetto__tema">
@@ -101,16 +96,16 @@
                             </div>
 
                             <div class="monithon-dettaglio-progetto__finanziamento">
-                                <ion-label class="monithon-dettaglio-progetto__label">{{'finanziamento' | transloco}}
-                                </ion-label>
-                                <div #finanziamentoPubblicoChartContainer></div>
-                            </div>
-
-                            <div class="monithon-dettaglio-progetto__pagamenti">
-                                <ion-label class="monithon-dettaglio-progetto__label">{{'pagamenti' | transloco}}
+                                <ion-label class="monithon-dettaglio-progetto__label">{{'finanziamento' | transloco}} {{progettoSelezionato.ocFinanzTotPubNetto | currency:'EUR' }}
                                 </ion-label>
                                 <div #pagamentiChartContainer></div>
                             </div>
+
+                            <!-- <div class="monithon-dettaglio-progetto__pagamenti">
+                                <ion-label class="monithon-dettaglio-progetto__label">{{'pagamenti' | transloco}}
+                                </ion-label>
+                                <div #pagamentiChartContainer></div>
+                            </div> -->
 
                             <div id="flagProgetto">
                                 <ion-grid>
@@ -157,16 +152,7 @@
                         </ion-col>
 
                     </ion-row>
-                    <!-- <ion-row>
-                        <ion-col>
-                            <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
-                                <button (click)="iniziaMonitoraggioClicked(progettoSelezionato)"
-                                    class="monithon-dettaglio-progetto__inizia_monitoraggio__button" mat-button
-                                    color="primary">{{'iniziaMonitoraggio' | transloco}}
-                                </button>
-                            </div>
-                        </ion-col>
-                    </ion-row> -->
+                  
                 </ion-grid>
 
             </div>
