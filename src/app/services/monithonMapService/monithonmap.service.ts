@@ -104,115 +104,115 @@ export class MonithonMapService {
         //  navigationControlContainer.appendChild(this.geolocator.onAdd(this.map));
 
 
-        let radiusFilterDrawStyle = [ // ACTIVE (being drawn)
-            // line stroke
-            {
-                "id": "gl-draw-line",
-                "type": "line",
-                "filter": ["all", ["==", "$type", "LineString"], ["!=", "mode", "static"]],
-                "layout": {
-                    "line-cap": "round",
-                    "line-join": "round"
-                },
-                "paint": {
-                    "line-color": "#fff",
-                    "line-width": 2
-                }
-            },
-            // polygon fill
-            {
-                "id": "gl-draw-polygon-fill",
-                "type": "fill",
-                "filter": ["all", ["==", "$type", "Polygon"], ["!=", "mode", "static"]],
-                "paint": {
-                    "fill-color": "#235ba6",
-                    "fill-outline-color": "#fff",
-                    "fill-opacity": 0.1
-                }
-            },
-            // polygon outline stroke
-            // This doesn't style the first edge of the polygon, which uses the line stroke styling instead
-            {
-                "id": "gl-draw-polygon-stroke-active",
-                "type": "line",
-                "filter": ["all", ["==", "$type", "Polygon"], ["!=", "mode", "static"]],
-                "layout": {
-                    "line-cap": "round",
-                    "line-join": "round"
-                },
-                "paint": {
-                    "line-color": "#fff",
-                    // "line-dasharray": [0.2, 2],
-                    "line-width": 2
-                }
-            },
-            // vertex point halos
-            {
-                "id": "gl-draw-polygon-and-line-vertex-halo-active",
-                "type": "circle",
-                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"], ['==', 'isHandle', "true"]],
-                "paint": {
-                    // 'visibility': 'hidden'
-                    "circle-radius": 0,
-                    // "circle-color": "#FFF"
+        // let radiusFilterDrawStyle = [ // ACTIVE (being drawn)
+        //     // line stroke
+        //     {
+        //         "id": "gl-draw-line",
+        //         "type": "line",
+        //         "filter": ["all", ["==", "$type", "LineString"], ["!=", "mode", "static"]],
+        //         "layout": {
+        //             "line-cap": "round",
+        //             "line-join": "round"
+        //         },
+        //         "paint": {
+        //             "line-color": "#fff",
+        //             "line-width": 2
+        //         }
+        //     },
+        //     // polygon fill
+        //     {
+        //         "id": "gl-draw-polygon-fill",
+        //         "type": "fill",
+        //         "filter": ["all", ["==", "$type", "Polygon"], ["!=", "mode", "static"]],
+        //         "paint": {
+        //             "fill-color": "#235ba6",
+        //             "fill-outline-color": "#fff",
+        //             "fill-opacity": 0.1
+        //         }
+        //     },
+        //     // polygon outline stroke
+        //     // This doesn't style the first edge of the polygon, which uses the line stroke styling instead
+        //     {
+        //         "id": "gl-draw-polygon-stroke-active",
+        //         "type": "line",
+        //         "filter": ["all", ["==", "$type", "Polygon"], ["!=", "mode", "static"]],
+        //         "layout": {
+        //             "line-cap": "round",
+        //             "line-join": "round"
+        //         },
+        //         "paint": {
+        //             "line-color": "#fff",
+        //             // "line-dasharray": [0.2, 2],
+        //             "line-width": 2
+        //         }
+        //     },
+        //     // vertex point halos
+        //     {
+        //         "id": "gl-draw-polygon-and-line-vertex-halo-active",
+        //         "type": "circle",
+        //         "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"], ['==', 'isHandle', "true"]],
+        //         "paint": {
+        //             // 'visibility': 'hidden'
+        //             "circle-radius": 0,
+        //             // "circle-color": "#FFF"
 
-                }
-            },
-            // vertex points
+        //         }
+        //     },
+        //     // vertex points
 
-            {
-                "id": "gl-draw-polygon-and-line-vertex-active",
-                "type": "circle",
-                "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"], ['==', 'isHandle', "true"]],
-                "paint": {
-                    // 'visibility': 'hidden'
+        //     {
+        //         "id": "gl-draw-polygon-and-line-vertex-active",
+        //         "type": "circle",
+        //         "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"], ['==', 'isHandle', "true"]],
+        //         "paint": {
+        //             // 'visibility': 'hidden'
 
-                    "circle-radius": 0,
-                    // "circle-color": "#235ba6",
-                }
-            },
+        //             "circle-radius": 0,
+        //             // "circle-color": "#235ba6",
+        //         }
+        //     },
 
-        ];
-        let modes = MapboxDraw.modes;
-        modes = MapboxDrawGeodesic.enable(modes);
-        const draw = new MapboxDraw({ modes });
-        this.draw = new MapboxDraw({
-            userProperties: true,
-            styles: radiusFilterDrawStyle,
-            modes: modes
-        });
-        this.map.addControl(this.draw, 'top-left');
-        this.map.on('draw.update', (evt) => {
-            const geojson = evt.features[0];
-            let circleData = {
-                center: MapboxDrawGeodesic.getCircleCenter(geojson),
-                radius: MapboxDrawGeodesic.getCircleRadius(geojson)
-            };
+        // ];
+        // let modes = MapboxDraw.modes;
+        // modes = MapboxDrawGeodesic.enable(modes);
+        // const draw = new MapboxDraw({ modes });
+        // this.draw = new MapboxDraw({
+        //     userProperties: true,
+        //     styles: radiusFilterDrawStyle,
+        //     modes: modes
+        // });
+        // this.map.addControl(this.draw, 'top-left');
+        // this.map.on('draw.update', (evt) => {
+        //     const geojson = evt.features[0];
+        //     let circleData = {
+        //         center: MapboxDrawGeodesic.getCircleCenter(geojson),
+        //         radius: MapboxDrawGeodesic.getCircleRadius(geojson)
+        //     };
 
-            this.filtroPerRaggioEnabled = true;
-            this.filtraPerDistanza(circleData);
-            this.publishGeocoderUpdate();
-        });
+        //     this.filtroPerRaggioEnabled = true;
+        //     this.filtraPerDistanza(circleData);
+        //     this.publishGeocoderUpdate();
+        // });
 
         // this.map.on('mousemove', 'progetti-layer', function (e) {
         //     if (e.features.length > 0) {
         //         console.log(e.features);
         //     }
         // });
-        this.map.on('draw.create', (evt) => {
-            const geojson = evt.features[0];
-            let circleData = {
-                center: MapboxDrawGeodesic.getCircleCenter(geojson),
-                radius: MapboxDrawGeodesic.getCircleRadius(geojson)
-            };
-            this.filtroPerRaggioEnabled = true;
-            // this.map.setLayoutProperty('radius-value', 'visibility', 'visible');
-            this.filtraPerDistanza(circleData);
-        });
-        this.map.on('draw.delete', (evt) => {
-            //invocato alla cancellazione manuale del cerchio
-            this.resetFiltroDistanza();
-        });
+        // this.map.on('draw.create', (evt) => {
+        //     const geojson = evt.features[0];
+        //     let circleData = {
+        //         center: MapboxDrawGeodesic.getCircleCenter(geojson),
+        //         radius: MapboxDrawGeodesic.getCircleRadius(geojson)
+        //     };
+        //     this.filtroPerRaggioEnabled = true;
+        //     // this.map.setLayoutProperty('radius-value', 'visibility', 'visible');
+        //     this.filtraPerDistanza(circleData);
+        // });
+        // this.map.on('draw.delete', (evt) => {
+        //     //invocato alla cancellazione manuale del cerchio
+        //     this.resetFiltroDistanza();
+        // });
         this.map.on('load', () => {
             this.progettiToFeatureCollection(data);
 

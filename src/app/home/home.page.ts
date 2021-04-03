@@ -90,6 +90,8 @@ export class HomePage implements OnInit, AfterViewInit {
     ordinamentoPanelOpenState: boolean = false;
     redrawCharts: boolean = true;
 
+    minRadius: number = 1;
+    maxRadius: number = 20;
 
     counterValue: any;
 
@@ -108,7 +110,7 @@ export class HomePage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
-                if(!this.temi.length){
+                if (!this.temi.length) {
                     this.temi = updateSubject.temi; // <- nessun problema di performance
                     this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
                 }
@@ -430,14 +432,14 @@ export class HomePage implements OnInit, AfterViewInit {
             // }
         })
         this.annoChart.on("filtered", () => {
-          
-          setTimeout(() => {    
-              console.log('this.annoChart.on("filtered", () => {');
-   
-               this.progetti = annoDim.top(Infinity);
-               this.filtraRisultati();
-               this.evidenziaRisultatiSuMappa();
-          }, 0); 
+
+            setTimeout(() => {
+                console.log('this.annoChart.on("filtered", () => {');
+
+                this.progetti = annoDim.top(Infinity);
+                this.filtraRisultati();
+                this.evidenziaRisultatiSuMappa();
+            }, 0);
         });
 
     }
@@ -571,7 +573,7 @@ export class HomePage implements OnInit, AfterViewInit {
                     .attr('dominant-baseline', 'text-top')
                     .attr('fill', 'black')
                     .attr('y', chart.margins().top)
-                    .attr('dy', 4   )
+                    .attr('dy', 4)
                     .attr('dx', 2)
                     .merge(endLabel);
                 endLabel
@@ -677,7 +679,7 @@ export class HomePage implements OnInit, AfterViewInit {
         window.open("https://it.monithon.eu/user/login?r=1&" + encodeURI(progetto.ocLink), "_blank");
     }
 
-    public onCriterioSelezionatoClick(criterio:string) {
+    public onCriterioSelezionatoClick(criterio: string) {
         // this.ordinamentoPanelOpenState = !this.ordinamentoPanelOpenState;
         this.criterioSelezionato = criterio;
         this.ordinaRisultatiPerCriterio();
@@ -686,11 +688,8 @@ export class HomePage implements OnInit, AfterViewInit {
         this.risultatiRicerca = lodash.sortBy(this.risultatiRicerca, (p: Progetto) => lodash.get(p, this.criterioSelezionato));
     }
 
-    minRadius: number = 1;
-    maxRadius: number = 20;
-    onRadiusChange(event:any) {
-        debugger;
-        console.log(event);
+
+    onRadiusChange(event: any) {
         this.raggioCorrente = event.value;
         this.monithonMap.updateRadius(this.raggioCorrente)
     }
@@ -698,7 +697,7 @@ export class HomePage implements OnInit, AfterViewInit {
         return `${val} km`;
     }
 
-    getCategorieTail(){
+    getCategorieTail() {
         return lodash.tail(this.progettoSelezionato.ocCodCategoriaSpesa);
     }
     getCategorieHead() {
