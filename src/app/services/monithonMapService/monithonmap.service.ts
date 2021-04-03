@@ -9,7 +9,7 @@ import lodash from 'lodash';
 import { Observer, Subject } from 'rxjs';
 
 import '@turf/distance';
-import { distance, point } from '@turf/turf';
+import { circle, distance, lineString, point } from '@turf/turf';
 import { COLOR_MAP } from 'src/app/utils/colorMap';
 
 
@@ -96,12 +96,12 @@ export class MonithonMapService {
             this.center = evt.result.center;
             this.comuneCorrente = evt.result.place_name;
             this.drawRangeProgetti(this.center);
-            this.map.easeTo({ center: this.center, duration: 1200 , zoom:10});
+            this.map.easeTo({ center: this.center, duration: 1200, zoom: 10 });
             this.publishGeocoderUpdate();
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
         navigationControlContainer.appendChild(this.navigationControl.onAdd(this.map));
-      //  navigationControlContainer.appendChild(this.geolocator.onAdd(this.map));
+        //  navigationControlContainer.appendChild(this.geolocator.onAdd(this.map));
 
 
         let radiusFilterDrawStyle = [ // ACTIVE (being drawn)
@@ -230,6 +230,25 @@ export class MonithonMapService {
                 });
             //refactoring come singolo layer di progetti:
 
+            this.map.addLayer({
+                'id': 'filterCircleFill',
+                'type': 'fill',
+                'source': 'radiusFilterData',
+                "paint": {
+                    "fill-color": "#235ba6",
+                    "fill-outline-color": "#fff",
+                    "fill-opacity": 0.1
+                }
+            })
+            this.map.addLayer({
+                'id': 'filterCircleStroke',
+                'type': 'line',
+                'source': 'radiusFilterData',
+                "paint": {
+                    "line-color": "#fff",
+                    "line-width": 2
+                }
+            })
 
             let layerId = 'progetti-layer'
             this.map
@@ -311,7 +330,7 @@ export class MonithonMapService {
             this.map.touchZoomRotate.disableRotation();
             this.map.resize();
             this.aggiornaAttivabilitaCategorie();
-          //  navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
+            //  navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
 
             this.publishUpdate(this.featureCollectionToProgetti());
         });
@@ -378,8 +397,10 @@ export class MonithonMapService {
      * @param center 
      */
     private drawRangeProgetti(center: any) {
-        console.log('drawRangeProgetti: ', Date.now());
-
+        let turfCircle = circle(this.center, this.radius);
+        let coords = turfCircle.geometry.coordinates;
+        let line = lineString(coords[0]);
+        (this.map.getSource('radiusFilterData') as any).setData(turfCircle);
         this.circle = MapboxDrawGeodesic.createCircle(center, this.radius);
         this.circle.id = "range-center";
         this.draw.add(this.circle);
