@@ -11,6 +11,7 @@ import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
+import { LoadingController } from '@ionic/angular';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -101,12 +102,20 @@ export class HomePage implements OnInit, AfterViewInit {
     comuneCorrente: any;
     raggioCorrente: number = 10;
     monithonReportUrl: any;
+    loading: HTMLIonLoadingElement;
     constructor(
         private monithonApiService: MonithonApiService,
         public monithonMap: MonithonMapService,
-        private currencyPipe: CurrencyPipe) { this.monithonReportUrl = environment.monithonReportUrl; }
+        private currencyPipe: CurrencyPipe,
+        public loadingController: LoadingController) { this.monithonReportUrl = environment.monithonReportUrl; }
 
     ngOnInit(): void {
+        this.loadingController.create({
+            message: 'Please wait...'
+        }).then((loading) => {
+            this.loading = loading;
+            loading.present()
+        });
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
@@ -133,6 +142,8 @@ export class HomePage implements OnInit, AfterViewInit {
                 } else {
                     this.counterValue = this.progetti.length;
                 }
+                console.log('tolgo loader');
+                this.loading.dismiss();
             },
             error: err => console.error('subscribeToUpdates error: ', err),
             complete: () => console.log('subscribeToUpdates complete: ')
@@ -206,6 +217,7 @@ export class HomePage implements OnInit, AfterViewInit {
                             this.monithonMap.removeRadiusFilter();
                         }
                     });
+
             });
     }
     onDettaglioProgettoHandleClick() {
