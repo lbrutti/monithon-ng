@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import mapboxgl, { PointLike } from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
-import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js';
-import * as MapboxDrawGeodesic from 'mapbox-gl-draw-geodesic';
 import { Progetto } from 'src/app/model/progetto/progetto';
 import lodash from 'lodash';
 import { Observer, Subject } from 'rxjs';
 
 import '@turf/distance';
-import { circle, distance, lineString, point } from '@turf/turf';
+import { circle, distance, point } from '@turf/turf';
 import { COLOR_MAP } from 'src/app/utils/colorMap';
 
 
