@@ -39,6 +39,7 @@ export class MonithonMapService {
     circle: any;
     radius: number = 10;
     geocoderUpdate: Subject<any> = new Subject();
+    geocoderResults: Subject<any> = new Subject();
     comuneCorrente: any;
     navigationControl: mapboxgl.NavigationControl;
     geolocator: mapboxgl.GeolocateControl;
@@ -96,6 +97,10 @@ export class MonithonMapService {
             this.drawRangeProgetti(this.center);
             this.map.easeTo({ center: this.center, duration: 1200, zoom: 10 });
             this.publishGeocoderUpdate();
+        });
+
+        this.geocoder.on('results', evt => {
+            this.publishGeocoderResults(evt.features);
         });
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
         navigationControlContainer.appendChild(this.navigationControl.onAdd(this.map));
@@ -250,6 +255,9 @@ export class MonithonMapService {
         });
 
 
+    }
+    publishGeocoderResults(features: any) {
+        this.geocoderResults.next(features);
     }
     publishGeocoderUpdate() {
         let data = { comune: this.comuneCorrente, radius: this.radius }
@@ -539,6 +547,14 @@ export class MonithonMapService {
     }
     public unsubscribeToGeocoderUpdates(): void {
         this.geocoderUpdate.unsubscribe();
+    }
+
+
+    public subscribeToGeocoderResults(obs: Observer<any>): void {
+        this.geocoderResults.subscribe(obs);
+    }
+    public unsubscribeToGeocoderResults(): void {
+        this.geocoderResults.unsubscribe();
     }
     publishUpdate(progetti: Array<Progetto>): void {
         this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: lodash.uniqBy(progetti, p => p.uid) });

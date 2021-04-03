@@ -37,6 +37,10 @@
     max-width: 432px !important;
     width: 432px !important;
     border-radius: 20px !important;
+
+    .mapbox-gl-geocoder--no-results {
+        line-height: 40px !important;
+    }
 }
 
 @import './theme/charts.scss';

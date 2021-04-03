@@ -104,6 +104,7 @@ export class HomePage implements OnInit, AfterViewInit {
     raggioCorrente: number = 10;
     monithonReportUrl: any;
     loading: HTMLIonLoadingElement;
+    hideSlider: boolean = true;
     constructor(
         private monithonApiService: MonithonApiService,
         public monithonMap: MonithonMapService,
@@ -161,17 +162,29 @@ export class HomePage implements OnInit, AfterViewInit {
 
         let geocoderObserver: Observer<any> = {
             next: geocoderData => {
+                this.hideDettaglioProgetto();
                 this.updateGeocoderBindindings(geocoderData);
             },
             error: err => console.error('gecoderObserver error: ', err),
             complete: () => console.log('gecoderObserver complete')
         };
+
+        let geocoderResultsObserver: Observer<any> = {
+            next: () => {
+                this.hideSlider = true;
+            },
+            error: err => console.error('geocoderResultsObserver error: ', err),
+            complete: () => console.log('geocoderResultsObserver complete')
+        };
         this.monithonMap.subscribeToUpdates(mapUpdateObserver);
         this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
         this.monithonMap.subscribeToGeocoderUpdates(geocoderObserver);
+        this.monithonMap.subscribeToGeocoderResults(geocoderResultsObserver);
+
     }
     updateGeocoderBindindings(geocoderData: any): void {
         this.geocoderData = geocoderData;
+        this.hideSlider = false;
         this.comuneCorrente = this.geocoderData.comune.split(',')[0];
         this.raggioCorrente = this.geocoderData.radius;
     }
@@ -199,8 +212,18 @@ export class HomePage implements OnInit, AfterViewInit {
                 geocoderClearBtn
                     .addEventListener('click', () => {
                         this.comuneCorrente = '';
-                        this.raggioCorrente = 1;
+                        this.raggioCorrente = 10;
                         this.monithonMap.removeRadiusFilter();
+                    });
+
+                geocoderInput
+                    .addEventListener('focus', e => {
+                        this.hideSlider = true;
+                    });
+
+                geocoderInput
+                    .addEventListener('blur', e => {
+                        this.hideSlider = false;
                     });
 
 
@@ -208,7 +231,7 @@ export class HomePage implements OnInit, AfterViewInit {
                     .addEventListener('change', e => {
                         if (!e.target.value) {
                             this.comuneCorrente = '';
-                            this.raggioCorrente = 1;
+                            this.raggioCorrente = 10;
                             this.monithonMap.removeRadiusFilter();
                         }
                     });
@@ -222,7 +245,7 @@ export class HomePage implements OnInit, AfterViewInit {
             });
     }
     onDettaglioProgettoHandleClick() {
-        this.visualizzaDettaglio = false;
+        this.hideDettaglioProgetto();
         this.monithonMap.highlightById([]);
     };
 
@@ -236,6 +259,10 @@ export class HomePage implements OnInit, AfterViewInit {
             this.listaRisultati.scrollToIndex(indexRisultato);
         }
     }
+    hideDettaglioProgetto(){
+        this.visualizzaDettaglio = false;
+        this.progettoSelezionato = {};
+    }
     showDettaglioProgetto(progetto: any) {
         if (!lodash.isNil(progetto)) {
             this.monithonApiService.getDettaglio(progetto)
@@ -248,16 +275,16 @@ export class HomePage implements OnInit, AfterViewInit {
                             this.monithonMap.easeToProgetto(dettaglioBoundingRect, this.progettoSelezionato, this.visualizzaDettaglio);
                             this.renderDettaglioProgettoCharts();
                         } else {
-                            this.visualizzaDettaglio = false;
+                            this.hideDettaglioProgetto()
                             this.monithonMap.highlightById([]);
                         }
                     },
                     error: err => {
-                        this.visualizzaDettaglio = false;
+                        this.hideDettaglioProgetto();
                     }
                 });
         } else {
-            this.visualizzaDettaglio = false;
+            this.hideDettaglioProgetto();
             this.monithonMap.highlightById([]);
         }
 
@@ -338,12 +365,12 @@ export class HomePage implements OnInit, AfterViewInit {
             .attr('y', '28')
             .attr('text-anchor', d => {
                 let position = scale(d.totPagamenti);
-                return position < 80 ? 'start' : 'end';
+                return position < 120 ? 'start' : 'end';
             })
             .attr('dy', '-3')
             .attr('dx', d => {
                 let position = scale(d.totPagamenti);
-                return position < 80 ? '0' : '-3';
+                return position < 120 ? '0' : '-3';
             })
             .text(d => {
                 return this.translocoService.translate('pagamenti');
@@ -358,12 +385,12 @@ export class HomePage implements OnInit, AfterViewInit {
             .attr('y', '56')
             .attr('text-anchor', d => {
                 let position = scale(d.totPagamenti);
-                return position < 80 ? 'start' : 'end';
+                return position < 120 ? 'start' : 'end';
             })
             .attr('dy', '-3')
             .attr('dx', d => {
                 let position = scale(d.totPagamenti);
-                return position < 80 ? '0' : '-3';
+                return position < 120 ? '0' : '-3';
             })
             .text(d => {
                 let pagamento = lodash.isNil(d.totPagamenti) ? 0 : d.totPagamenti;
@@ -616,10 +643,6 @@ export class HomePage implements OnInit, AfterViewInit {
                 //reset al default
                 chart.select('.brush-begin').remove();
                 chart.select('.brush-end').remove();
-                // let maxBrushExtent = chart.width() - (chart.margins().right + chart.margins().left);
-                // chart
-                //     .select('.brush')
-                //     .call(chart.brush().move, [0, maxBrushExtent]);
             }
 
         });
@@ -724,6 +747,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     onRadiusChange(event: any) {
         this.raggioCorrente = event.value;
+        this.hideDettaglioProgetto();
         this.monithonMap.updateRadius(this.raggioCorrente)
     }
     formatLabelSliderRaggio(val) {

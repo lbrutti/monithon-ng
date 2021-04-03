@@ -683,7 +683,7 @@ ion-row.monithon-filtri-secondari {
     }
 
     .monithon-lista-progetti__progetto {
-        cursor:pointer !important;
+        cursor: pointer !important;
         min-height: 100px !important;
         color: var(--monithon-font-color);
         --ion-item-border-color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
@@ -788,8 +788,11 @@ ion-row.monithon-filtri-secondari {
         width: 432px;
     }
 
-    ::ng-deep mat-slider {
+    &.backgrounded {
+        z-index: 10;
+    }
 
+    ::ng-deep mat-slider {
         &.mat-slider-horizontal {
             width: 432px;
         }
@@ -861,6 +864,9 @@ ion-row.monithon-filtri-secondari {
 .mapboxgl-ctrl-geocoder {
     min-width: 100%;
 
+    .mapbox-gl-geocoder--no-results {
+        line-height: 40px !important;
+    }
 }
 
 monithon-drawer {
