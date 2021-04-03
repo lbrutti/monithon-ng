@@ -324,6 +324,22 @@ export class MonithonMapService {
                 }
             });
 
+            this.map.on('mousemove', e => {
+
+                // set bbox as 5px reactangle area around clicked point
+                let lower: PointLike = new mapboxgl.Point(e.point.x - 5, e.point.y - 5);
+                let upper: PointLike = new mapboxgl.Point(e.point.x + 5, e.point.y + 5);
+                var bbox: PointLike | [PointLike, PointLike] = [lower, upper];
+                var features = this.map.queryRenderedFeatures(bbox, {
+                    layers: ['progetti-layer']
+                });
+                if (features.length) {
+                    this.map.getCanvas().style.cursor = 'pointer'
+                } else {
+                    this.map.getCanvas().style.cursor = '';
+                }
+            });
+
             this.map.dragRotate.disable();
             this.map.touchZoomRotate.disableRotation();
             this.map.resize();
