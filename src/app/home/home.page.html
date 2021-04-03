@@ -4,13 +4,13 @@
     <div #geocoder id="geocoder" class="geocoder">
         <ion-label>{{'comune'|transloco}}</ion-label>
     </div>
-    <div id="raggioContainer" [ngClass]="{'backgrounded': hideSlider}" >
+    <div id="raggioContainer" [ngClass]="{'backgrounded': hideSlider}">
         <mat-slider [min]="minRadius" [max]="maxRadius" thumbLabel="true" step="1"
             [displayWith]="formatLabelSliderRaggio" [value]="raggioCorrente" (input)="onRadiusChange($event)"
             [disabled]="!monithonMap.filtroPerRaggioEnabled">
         </mat-slider>
     </div>
-    
+
     <div #navigationControl id="navigationControl" class="navigation-control"
         [ngClass]="{'hidden': !monithonMap.filtroPerRaggioEnabled,'visible': monithonMap.filtroPerRaggioEnabled}">
 
@@ -69,7 +69,8 @@
                                     [attr.data-oc-cod-tema-sintetico]="progettoSelezionato.ocCodTemaSintetico"
                                     class="monithon-dettaglio-progetto__lista__categorie mat-elevation-z"
                                     [ngClass]="{'inactive': getCategorieTail().length==1}">
-                                    <mat-expansion-panel-header class="monithon-dettaglio-progetto__lista__categorie__header">
+                                    <mat-expansion-panel-header
+                                        class="monithon-dettaglio-progetto__lista__categorie__header">
                                         <ion-label
                                             class="monithon-dettaglio-progetto__categoria__singola monithon-dettaglio-progetto__prima__categoria">
                                             {{'categorie.'+getCategorieHead() |transloco }}
@@ -95,7 +96,8 @@
                             </div>
 
                             <div class="monithon-dettaglio-progetto__finanziamento">
-                                <ion-label class="monithon-dettaglio-progetto__label">{{'finanziamento' | transloco}} {{progettoSelezionato.ocFinanzTotPubNetto | currency:'EUR' }}
+                                <ion-label class="monithon-dettaglio-progetto__label">{{'finanziamento' | transloco}}
+                                    {{progettoSelezionato.ocFinanzTotPubNetto | currency:'EUR' }}
                                 </ion-label>
                                 <div #pagamentiChartContainer></div>
                             </div>
@@ -151,7 +153,7 @@
                         </ion-col>
 
                     </ion-row>
-                  
+
                 </ion-grid>
 
             </div>
@@ -328,7 +330,7 @@
                     <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;"
                         class="monithon-lista-progetti__progetto"
                         [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico"
-                        [ngClass]="{'selected': progetto.uid==progettoSelezionato.uid}">
+                        [ngClass]="{'selected': visualizzaDettaglio && (progetto.uid==progettoSelezionato.uid)}">
                         <ion-grid class="ion-no-margin">
                             <ion-row class="ion-no-margin">
                                 <ion-col class="ion-no-margin">

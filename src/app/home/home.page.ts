@@ -261,7 +261,6 @@ export class HomePage implements OnInit, AfterViewInit {
     }
     hideDettaglioProgetto(){
         this.visualizzaDettaglio = false;
-        this.progettoSelezionato = {};
     }
     showDettaglioProgetto(progetto: any) {
         if (!lodash.isNil(progetto)) {
