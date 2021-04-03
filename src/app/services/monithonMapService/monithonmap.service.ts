@@ -690,17 +690,19 @@ export class MonithonMapService {
      */
     public removeRadiusFilter() {
         if (this.circle) {
-            this.draw.delete(this.circle.id);
+            // this.draw.delete(this.circle.id);
             this.resetFiltroDistanza();
+            this.filtroPerRaggioEnabled = false;
         }
     }
 
     private resetFiltroDistanza(publishUpdate: boolean = true) {
-        if (this.circle) {
-            this.draw.delete(this.circle.id);
-        }
-        this.circle = null;
-        this.filtroPerRaggioEnabled = false;
+        // if (this.circle) {
+        //     this.draw.delete(this.circle.id);
+        // }
+        // this.circle = null;
+        // this.filtroPerRaggioEnabled = false;
+        this.radius = 10;
         lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
         lodash.map(this.categorie, c => {
             c.isSelected = true;
