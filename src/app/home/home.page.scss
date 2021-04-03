@@ -680,12 +680,10 @@ ion-row.monithon-filtri-secondari {
         @include hideScrollbar();
         height: 60vh;
 
-        // * {
-        //     border: none;
-        // }
     }
 
     .monithon-lista-progetti__progetto {
+        cursor:pointer !important;
         min-height: 100px !important;
         color: var(--monithon-font-color);
         --ion-item-border-color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
