@@ -24,7 +24,8 @@
         <!-- dettaglio progetto -->
         <div [ngClass]="{'hidden': !this.visualizzaDettaglio, 'visible': this.visualizzaDettaglio}" #dettaglioProgetto
             [attr.data-oc-cod-tema-sintetico]="this.progettoSelezionato.ocCodTemaSintetico"
-            class="monithon-dettaglio-progetto">
+            class="monithon-dettaglio-progetto"
+            #dettaglioProgettoContainer>
             <div class="monithon-dettaglio-progetto__header">
                 <h5 class="monithon-dettaglio-progetto__titolo_scheda">{{'schedaProgetto' | transloco}}</h5>
 
@@ -330,13 +331,13 @@
                     <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;"
                         class="monithon-lista-progetti__progetto"
                         [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico"
-                        [ngClass]="{'selected': visualizzaDettaglio && (progetto.uid==progettoSelezionato.uid)}">
+                        [ngClass]="{'selected': (progetto.uid==progettoSelezionato.uid)}">
                         <ion-grid class="ion-no-margin">
                             <ion-row class="ion-no-margin">
                                 <ion-col class="ion-no-margin">
                                     <ion-label class="monithon-lista-risultato" (click)="onProgettoClick(progetto)"
                                         [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico"
-                                        [ngClass]="{'selected': visualizzaDettaglio && (progetto.uid==progettoSelezionato.uid)}">
+                                        [ngClass]="{'selected': (progetto.uid==progettoSelezionato.uid)}">
                                         <h2>{{progetto.ocTitoloProgetto | fixencodedchars | unescape | capitalize}}
                                         </h2>
                                     </ion-label>

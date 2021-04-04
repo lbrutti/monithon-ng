@@ -33,10 +33,9 @@ export class HomePage implements OnInit, AfterViewInit {
 
     @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
     @ViewChild('dettaglioProgetto') dettaglioProgetto: ElementRef;
+    @ViewChild('dettaglioProgettoContainer') dettaglioProgettoContainer: ElementRef;
     @ViewChild('finanziamentoPubblicoChartContainer') finanziamentoPubblicoChartContainer: HTMLElement;
     @ViewChild('pagamentiChartContainer') pagamentiChartContainer: HTMLElement;
-
-
     @ViewChild('listaRisultati') listaRisultati: CdkVirtualScrollViewport;
 
 
@@ -242,6 +241,12 @@ export class HomePage implements OnInit, AfterViewInit {
                         }
                     });
 
+                this.dettaglioProgettoContainer.nativeElement.ontransitionend = (e: TransitionEvent) => {
+                    if ((e.target as HTMLElement).classList.contains('hidden')) {
+                        this.progettoSelezionato = {};
+                    }
+                };
+
             });
     }
     onDettaglioProgettoHandleClick() {
@@ -259,7 +264,7 @@ export class HomePage implements OnInit, AfterViewInit {
             this.listaRisultati.scrollToIndex(indexRisultato);
         }
     }
-    hideDettaglioProgetto(){
+    hideDettaglioProgetto() {
         this.visualizzaDettaglio = false;
     }
     showDettaglioProgetto(progetto: any) {
