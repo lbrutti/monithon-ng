@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
     {
-        path: 'wizard',
+        path: '#wizard',
         loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
     },
     {
