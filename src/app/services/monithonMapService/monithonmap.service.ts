@@ -210,10 +210,10 @@ export class MonithonMapService {
                     let match = this.progetti.features.filter(f => f.properties.uid == progetto.uid);
                     match = match[0] ? match[0].properties : {};
                     if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected) {
+                        this.highlightById([progetto.uid]);
                         this.publishSelectedProject((match as Progetto));
                     } else {
                         this.publishSelectedProject(null);
-
                     }
                 } else {
                     this.publishSelectedProject(null);

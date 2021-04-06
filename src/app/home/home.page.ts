@@ -104,6 +104,7 @@ export class HomePage implements OnInit, AfterViewInit {
     monithonReportUrl: any;
     loading: HTMLIonLoadingElement;
     hideSlider: boolean = true;
+    isAppReady: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
         public monithonMap: MonithonMapService,
@@ -144,7 +145,10 @@ export class HomePage implements OnInit, AfterViewInit {
                 } else {
                     this.counterValue = this.progetti.length;
                 }
-                this.loading.dismiss();
+                
+                this.loading.dismiss()
+                    .then(() => this.isAppReady = true);
+
             },
             error: err => console.error('subscribeToUpdates error: ', err),
             complete: () => console.log('subscribeToUpdates complete: ')
