@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
 import { LoadingController } from '@ionic/angular';
 import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
+import { Router } from '@angular/router';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -105,12 +106,19 @@ export class HomePage implements OnInit, AfterViewInit {
     loading: HTMLIonLoadingElement;
     hideSlider: boolean = true;
     isAppReady: boolean = false;
+    isWizardMode: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
         public monithonMap: MonithonMapService,
         private currencyPipe: CurrencyPipe,
         private translocoService: TranslocoService,
-        public loadingController: LoadingController) { this.monithonReportUrl = environment.monithonReportUrl; }
+        public loadingController: LoadingController,
+        private router: Router
+    ) {
+        this.monithonReportUrl = environment.monithonReportUrl;
+        this.isWizardMode = this.router.url == '/wizard';
+        console.log(this.router.url);
+    }
 
     ngOnInit(): void {
         this.loadingController.create({
@@ -145,7 +153,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 } else {
                     this.counterValue = this.progetti.length;
                 }
-
+                this.isAppReady = true;
                 this.loading.dismiss();
 
             },
@@ -252,9 +260,9 @@ export class HomePage implements OnInit, AfterViewInit {
 
             });
     }
-    onDettaglioProgettoHandleClick(progetto:Progetto=undefined) {
+    onDettaglioProgettoHandleClick(progetto: Progetto = undefined) {
         this.hideDettaglioProgetto();
-        if (!lodash.isNil(progetto)){
+        if (!lodash.isNil(progetto)) {
             this.monithonMap.highlightById([progetto.uid]);
         } else {
             this.monithonMap.highlightById([]);
