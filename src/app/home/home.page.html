@@ -1,8 +1,8 @@
 <ion-content [fullscreen]="true" [scrollY]="false">
     <!-- <ion-toolbar class="monithon-header" >
     </ion-toolbar> -->
-    <div #geocoder id="geocoder" class="geocoder" *ngIf="isAppReady">
-        <ion-label>{{'comune'|transloco}}</ion-label>
+    <div #geocoder id="geocoder" class="geocoder" >
+    <ion-label>{{'comune'|transloco}}</ion-label>
     </div>
     <div id="raggioContainer" [ngClass]="{'backgrounded': hideSlider}">
         <mat-slider [min]="minRadius" [max]="maxRadius" thumbLabel="true" step="1"

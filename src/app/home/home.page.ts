@@ -145,9 +145,8 @@ export class HomePage implements OnInit, AfterViewInit {
                 } else {
                     this.counterValue = this.progetti.length;
                 }
-                
-                this.loading.dismiss()
-                    .then(() => this.isAppReady = true);
+
+                this.loading.dismiss();
 
             },
             error: err => console.error('subscribeToUpdates error: ', err),

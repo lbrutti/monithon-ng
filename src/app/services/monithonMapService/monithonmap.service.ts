@@ -45,6 +45,7 @@ export class MonithonMapService {
     geolocator: mapboxgl.GeolocateControl;
     center: any;
     centerPoint: any;
+    freeMode: boolean = false;
 
 
     constructor() {
@@ -102,9 +103,12 @@ export class MonithonMapService {
         this.geocoder.on('results', evt => {
             this.publishGeocoderResults(evt.features);
         });
+        geocoderContainer.classList.toggle('geocoder-ready');
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
         navigationControlContainer.appendChild(this.navigationControl.onAdd(this.map));
-        //  navigationControlContainer.appendChild(this.geolocator.onAdd(this.map));
+        if(this.freeMode){
+            navigationControlContainer.appendChild(this.geolocator.onAdd(this.map));
+        }
 
 
         this.map.on('load', () => {
