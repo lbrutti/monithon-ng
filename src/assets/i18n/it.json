@@ -94,5 +94,6 @@
     "true":"Si",
     "false":"No",
     "monitoraggio": "Monitoraggio",
-    "readmore": "read more"
+    "readmore": "read more",
+    "loaderMessage": "Ci siamo quasi..."
 }

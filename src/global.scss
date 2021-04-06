@@ -49,16 +49,28 @@ ion-content {
     background: var(--monithon-tema-sfondo-charts) !important;
 }
 
-#container.visible ,
-#navigationControl.visible  {
+#container.visible,
+#navigationControl.visible {
     opacity: 1;
     transition-property: all;
     transition-duration: 250ms;
 }
 
-#container.hidden ,
-#navigationControl.hidden  {
+#container.hidden,
+#navigationControl.hidden {
     opacity: 0;
     transition-property: all;
     transition-duration: 500ms;
+}
+
+.monithon-loader {
+    --backdrop-opacity: 1;
+    background: var(--monithon-sfondo-loader);
+
+    .loading-wrapper {
+        background-image: url('https://www.w3schools.com/images/colorpicker.gif');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
 }

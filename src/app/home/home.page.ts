@@ -12,7 +12,7 @@ import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
 import { LoadingController } from '@ionic/angular';
-import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
@@ -117,15 +117,18 @@ export class HomePage implements OnInit, AfterViewInit {
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = this.router.url == '/wizard';
-        console.log(this.router.url);
     }
 
     ngOnInit(): void {
         this.loadingController.create({
-            message: 'Please wait...'
+            message: "Loading...",
+            cssClass: 'monithon-loader',
+            spinner: null
+
         }).then((loading) => {
             this.loading = loading;
-            loading.present()
+            loading.present();
+
         });
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
@@ -153,8 +156,11 @@ export class HomePage implements OnInit, AfterViewInit {
                 } else {
                     this.counterValue = this.progetti.length;
                 }
-                this.isAppReady = true;
                 this.loading.dismiss();
+                this.loading.onDidDismiss()
+                    .then(() => {
+                        this.isAppReady = true;
+                    })
 
             },
             error: err => console.error('subscribeToUpdates error: ', err),
