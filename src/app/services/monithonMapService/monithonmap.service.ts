@@ -214,7 +214,6 @@ export class MonithonMapService {
                     let match = this.progetti.features.filter(f => f.properties.uid == progetto.uid);
                     match = match[0] ? match[0].properties : {};
                     if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected) {
-                        this.highlightById([progetto.uid]);
                         this.publishSelectedProject((match as Progetto));
                     } else {
                         this.publishSelectedProject(null);
@@ -603,7 +602,7 @@ export class MonithonMapService {
         this.progetti.features
             .map(f => {
                 let progetto = f.properties;
-                progetto.isHighlighted = progetto.isSelected && (idRisultati.length == 0) || lodash.includes(idRisultati, progetto.uid);
+                progetto.isHighlighted = (progetto.isSelected && (idRisultati.length == 0)) || lodash.includes(idRisultati, progetto.uid);
 
                 this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isHighlighted: progetto.isHighlighted });
             });

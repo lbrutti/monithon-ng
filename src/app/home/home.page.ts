@@ -156,7 +156,7 @@ export class HomePage implements OnInit, AfterViewInit {
         let projectSelectionObserver: Observer<any> = {
             next: progetto => {
                 this.evidenziaProgettoInLista(progetto);
-                this.onDettaglioProgettoHandleClick();
+                this.onDettaglioProgettoHandleClick(progetto);
             },
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
@@ -252,12 +252,16 @@ export class HomePage implements OnInit, AfterViewInit {
 
             });
     }
-    onDettaglioProgettoHandleClick() {
+    onDettaglioProgettoHandleClick(progetto:Progetto=undefined) {
         this.hideDettaglioProgetto();
-        this.monithonMap.highlightById([]);
+        if (!lodash.isNil(progetto)){
+            this.monithonMap.highlightById([progetto.uid]);
+        } else {
+            this.monithonMap.highlightById([]);
+        }
     };
 
-    evidenziaProgettoInLista(progetto: any) {
+    evidenziaProgettoInLista(progetto: Progetto) {
         if (!lodash.isNil(progetto)) {
             if (!this.espandiListaRisultati) {
                 this.espandiListaRisultati = true;
