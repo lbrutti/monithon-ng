@@ -45,15 +45,15 @@ export class MonithonMapService {
     geolocator: mapboxgl.GeolocateControl;
     center: any;
     centerPoint: any;
-    freeMode: boolean = false;
+    isFreeMode: boolean = false;
 
 
     constructor() {
         mapboxgl.accessToken = environment.mapbox.accessToken;
     }
 
-    public renderMap(container, data, geocoderContainer, navigationControlContainer): void {
-
+    public renderMap(container, data, geocoderContainer, navigationControlContainer, isFreeMode: boolean = false): void {
+        this.isFreeMode  = isFreeMode;
         this.map = new mapboxgl.Map({
             container: container,
             style: environment.mapbox.style,
@@ -106,7 +106,7 @@ export class MonithonMapService {
         geocoderContainer.classList.toggle('geocoder-ready');
         geocoderContainer.appendChild(this.geocoder.onAdd(this.map));
         navigationControlContainer.appendChild(this.navigationControl.onAdd(this.map));
-        if(this.freeMode){
+        if (this.isFreeMode) {
             navigationControlContainer.appendChild(this.geolocator.onAdd(this.map));
         }
 
@@ -252,7 +252,10 @@ export class MonithonMapService {
             this.map.touchZoomRotate.disableRotation();
             this.map.resize();
             this.aggiornaAttivabilitaCategorie();
-            //  navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
+
+            if (this.isFreeMode) {
+                navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
+            }
 
             this.publishUpdate(this.featureCollectionToProgetti());
         });
