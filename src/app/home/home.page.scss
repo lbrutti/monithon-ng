@@ -775,6 +775,15 @@ ion-row.monithon-filtri-secondari {
     left: 5%;
     top: 10px;
 
+    ion-label {
+        opacity: 0;
+    }
+    &.geocoder-ready{
+        ion-label{
+            opacity: 1;
+        }
+    }
+
 }
 
 #raggioContainer {
