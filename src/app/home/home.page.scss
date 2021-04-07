@@ -528,11 +528,12 @@ ion-row.monithon-filtri-secondari {
 }
 
 .monithon-criterio-ordinamento {
+    flex-grow:1;
     transition-delay: 0;
     color: var(--monithon-tema-color);
     border: 1px solid var(--monithon-tema-color);
     background: var(--monithon-label-color);
-
+    justify-content: center;
     &.selected {
         background: var(--monithon-tema-color);
         color: var(--monithon-label-color);
