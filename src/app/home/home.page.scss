@@ -797,9 +797,9 @@ ion-row.monithon-filtri-secondari {
         width: 432px;
     }
 
-    &.backgrounded {
-        z-index: 10;
-    }
+    z-index: 10;
+    // &.backgrounded {
+    // }
 
     ::ng-deep mat-slider {
         &.mat-slider-horizontal {
