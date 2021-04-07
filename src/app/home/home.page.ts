@@ -284,7 +284,12 @@ export class HomePage implements OnInit, AfterViewInit {
             this.progettoSelezionato = progetto;
             let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === progetto.uid);
             this.listaRisultati.scrollToIndex(indexRisultato);
+        } else {
+            if (!this.visualizzaDettaglio) {
+                this.progettoSelezionato = {};
+            }
         }
+
     }
     hideDettaglioProgetto() {
         this.visualizzaDettaglio = false;
