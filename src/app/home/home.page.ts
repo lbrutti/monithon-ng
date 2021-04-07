@@ -511,6 +511,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .xUnits(dc.units.integers)
             .elasticX(true)
             .elasticY(false)
+            .centerBar(true)
             .margins({ top: 2, right: 10, bottom: 20, left: 10 })
             .transitionDuration(250);
 
@@ -531,8 +532,6 @@ export class HomePage implements OnInit, AfterViewInit {
         this.annoChart.on("filtered", () => {
 
             setTimeout(() => {
-                console.log('this.annoChart.on("filtered", () => {');
-
                 this.progetti = annoDim.top(Infinity);
                 this.filtraRisultati();
                 this.evidenziaRisultatiSuMappa();
@@ -606,6 +605,7 @@ export class HomePage implements OnInit, AfterViewInit {
             .brushOn(true)
             .x(d3.scaleLinear().domain([0, numQuantili]))
             .y(d3.scaleLinear().domain([0, maxCount]))
+            .centerBar(true)
             .elasticX(true)
             .elasticY(false)
             .margins({ top: 2, right: 10, bottom: 20, left: 10 })
