@@ -1,0 +1,10 @@
+@import 'variables.scss';
+.monithon-titolo-sezione {
+    font-family: $font1;
+    font-size: 18px;
+    font-weight: 300;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-transform: uppercase;
+    color: $white;
+}
