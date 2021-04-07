@@ -165,8 +165,8 @@
             <div id="filterContainer">
                 <!-- Temi -->
                 <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true">
-                    <mat-chip class="monithon-tema" *ngFor="let tema of this.temi"
-                        [selectable]="tema.isActive" [attr.data-active]="tema.isActive" [selected]="tema.isSelected"
+                    <mat-chip class="monithon-tema" *ngFor="let tema of this.temi" [selectable]="tema.isActive"
+                        [attr.data-active]="tema.isActive" [selected]="tema.isSelected"
                         (click)="this.filterByTema(tema)" [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico"
                         disableRipple="true">
                         {{'temi.'+tema.ocCodTemaSintetico | transloco}}</mat-chip>
@@ -231,8 +231,7 @@
                                                 <ion-col size="8" class="ion-no-margin ">
                                                     <h5 class="chart-title monithon-titolo-sezione">{{'statoAvanzamento'
                                                         |transloco}}</h5>
-                                                    <mat-chip-list
-                                                        class="monithon-filtro-stato-avanzamento"
+                                                    <mat-chip-list class="monithon-filtro-stato-avanzamento"
                                                         multiple="true" aria-orientation="horizontal">
                                                         <mat-chip *ngFor="let stato of this.statiAvanzamento"
                                                             class="monithon-filtro-stato-avanzamento monithon-small-chip"
@@ -250,10 +249,10 @@
                                                 <ion-col size="3" class="ion-no-margin">
                                                     <h5 class="chart-title monithon-titolo-sezione">{{'monitorati'
                                                         |transloco}}</h5>
-                                                    <mat-chip-list class="monithon-filtro-report"
-                                                        multiple="true" aria-orientation="horizontal">
+                                                    <mat-chip-list class="monithon-filtro-report" multiple="true"
+                                                        aria-orientation="horizontal">
                                                         <mat-chip class="monithon-filtro-report monithon-small-chip"
-                                                            selectable="true" *ngFor="let flag of this.reportFlags"
+                                                            *ngFor="let flag of this.reportFlags"
                                                             [matTooltip]="'tooltip.reportFlags.'+flag.hasReport | transloco"
                                                             [selected]="flag.isSelected"
                                                             [attr.data-active]="flag.isActive"
@@ -318,6 +317,7 @@
                                     <mat-label>{{'ordinaPer' | transloco}}</mat-label>
                                     <mat-chip-list class="monithon-criteri-ordinamento">
                                         <mat-chip *ngFor="let criterio of criteriOrdinamento"
+                                            [attr.data-active]="(criterio!='distanza') || !hideSlider"
                                             class="monithon-criterio-ordinamento"
                                             (click)="onCriterioSelezionatoClick(criterio)" disableRipple="true"
                                             [ngClass]="{'selected': criterio==criterioSelezionato}">

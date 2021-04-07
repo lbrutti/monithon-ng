@@ -53,7 +53,7 @@ export class MonithonMapService {
     }
 
     public renderMap(container, data, geocoderContainer, navigationControlContainer, isFreeMode: boolean = false): void {
-        this.isFreeMode  = isFreeMode;
+        this.isFreeMode = isFreeMode;
         this.map = new mapboxgl.Map({
             container: container,
             style: environment.mapbox.style,
@@ -271,7 +271,7 @@ export class MonithonMapService {
     }
 
     public setTemi(temi: Array<any>) {
-        this.temi = temi.map((t) => ({ 'ocCodTemaSintetico': t.ocCodTemaSintetico, 'isSelected': true }));
+        this.temi = temi.map((t) => ({ 'ocCodTemaSintetico': t.ocCodTemaSintetico, 'isSelected': true , 'isActive': true }));
     }
 
     public setCategorie(categorie: Array<any>) {

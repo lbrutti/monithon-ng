@@ -370,9 +370,13 @@
 
 }
 
+.mat-chip[data-active="true"] {
+    cursor: pointer;
+}
 
 .mat-chip[data-active="false"] {
     pointer-events: none;
+    cursor: default;
     background-color: transparent !important;
     opacity: 0.5;
 }
@@ -528,12 +532,13 @@ ion-row.monithon-filtri-secondari {
 }
 
 .monithon-criterio-ordinamento {
-    flex-grow:1;
+    flex-grow: 1;
     transition-delay: 0;
     color: var(--monithon-tema-color);
     border: 1px solid var(--monithon-tema-color);
     background: var(--monithon-label-color);
     justify-content: center;
+
     &.selected {
         background: var(--monithon-tema-color);
         color: var(--monithon-label-color);

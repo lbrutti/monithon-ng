@@ -98,7 +98,7 @@ export class HomePage implements OnInit, AfterViewInit {
     counterValue: any;
 
     criteriOrdinamento: Array<string> = ['distanza', 'ocCodTemaSintetico', 'ocFinanzTotPubNetto', 'ocDataInizioProgetto']
-    criterioSelezionato: string = 'distanza';
+    criterioSelezionato: string = 'ocCodTemaSintetico';
     geocoderData: any;
     comuneCorrente: any;
     raggioCorrente: number = 10;
@@ -157,6 +157,7 @@ export class HomePage implements OnInit, AfterViewInit {
                     this.counterValue = this.progetti.length;
                 }
 
+
                 this.loading.dismiss();
                 this.loading.onDidDismiss()
                     .then(() => {
@@ -204,6 +205,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.hideSlider = false;
         this.comuneCorrente = this.geocoderData.comune.split(',')[0];
         this.raggioCorrente = this.geocoderData.radius;
+        this.criterioSelezionato = 'distanza';
     }
 
     getTemi() {
@@ -220,6 +222,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 }));
                 this.monithonMap.setTemi(data[1].temi.map(t => {
                     t.isSelected = true;
+                    t.isActive = true;
                     return t;
                 }));
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
