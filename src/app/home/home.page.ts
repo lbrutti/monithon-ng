@@ -233,6 +233,7 @@ export class HomePage implements OnInit, AfterViewInit {
                     .addEventListener('click', () => {
                         this.comuneCorrente = '';
                         this.raggioCorrente = 10;
+                        this.criterioSelezionato = 'ocCodTemaSintetico';
                         this.monithonMap.removeRadiusFilter();
                     });
 
@@ -252,12 +253,14 @@ export class HomePage implements OnInit, AfterViewInit {
                         if (!e.target.value) {
                             this.comuneCorrente = '';
                             this.raggioCorrente = 10;
+                            this.criterioSelezionato='ocCodTemaSintetico';
                             this.monithonMap.removeRadiusFilter();
                         }
                     });
                 geocoderInput
                     .addEventListener('keyup', e => {
                         if (!geocoderInput.value) {
+                            this.criterioSelezionato='ocCodTemaSintetico';
                             this.monithonMap.removeRadiusFilter();
                         }
                     });

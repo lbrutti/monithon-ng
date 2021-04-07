@@ -317,7 +317,7 @@
                                     <mat-label>{{'ordinaPer' | transloco}}</mat-label>
                                     <mat-chip-list class="monithon-criteri-ordinamento">
                                         <mat-chip *ngFor="let criterio of criteriOrdinamento"
-                                            [attr.data-active]="(criterio!='distanza') || !hideSlider"
+                                            [attr.data-active]="(criterio!='distanza') || monithonMap.filtroPerRaggioEnabled"
                                             class="monithon-criterio-ordinamento"
                                             (click)="onCriterioSelezionatoClick(criterio)" disableRipple="true"
                                             [ngClass]="{'selected': criterio==criterioSelezionato}">
