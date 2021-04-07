@@ -300,6 +300,21 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+// FONTS
+// $font1: IBM Plex Mono,
+// monospace;
+// $font2: Roboto,
+// sans-serif;
+
+// COLOURS
+$white: white;
+$light-green: #00CEB8;
+$mid-green: #00837C;
+$dark-green: #004039;
+$red: #EA4A3E;
+$yellow: #FFC921;
+$pink: #FDD0B3;
+$dark-blue: #00172A;
 
 //monithon:
 :root {
@@ -308,26 +323,26 @@ body {
     --monithon-chart-domain-stroke: #8FE0E3;
     --monithon-chart-fill: #D0FFFD;
     --monithon-chevron-border-color: #ffffff;
-    --monithon-contatore-risultati-color: #EA4A3E;
+    --monithon-contatore-risultati-color: #{$red};
     --monithon-dc-chart-brush-text-fill: #D0FFFD;
-    --monithon-dc-chart-text-fill: #00837C;
-    --monithon-deselected-chart-fill: #00837C;
+    --monithon-dc-chart-text-fill: #{$mid-green};
+    --monithon-deselected-chart-fill: #{$mid-green};
     --monithon-filtro-secondario-selected-color: #d9fefc;
     --monithon-filtro-secondario-unselected-color: #38817c;
-    --monithon-finanziamenti-foreground: #00172A;
+    --monithon-finanziamenti-foreground: #{$dark-blue};
     --monithon-font-color: #041729;
-    --monithon-label-color: #ffffff;
-    --monithon-lista-report-in-dettaglio-font-color: #00837C;
-    --monithon-range-thumb-label-background: #00172A;
-    --monithon-range-track-fill: #ffffff;
-    --monithon-tema-ambiente-background: #EA4A3E;
-    --monithon-tema-attrazione-background: #FDD0B3;
-    --monithon-tema-color: #00172A;
-    --monithon-tema-energia-background: #FFC921;
+    --monithon-label-color: #{$white};
+    --monithon-lista-report-in-dettaglio-font-color: #{$mid-green};
+    --monithon-range-thumb-label-background: #{$dark-blue};
+    --monithon-range-track-fill: #{$white};
+    --monithon-tema-ambiente-background: #{$red};
+    --monithon-tema-attrazione-background: #{$pink};
+    --monithon-tema-color: #{$dark-blue};
+    --monithon-tema-energia-background: #{$yellow};
     --monithon-tema-mobilita-background: #006FD2;
-    --monithon-tema-sfondo-charts: #00CEB8;
-    --monithon-tema-sfondo-filtri: #004039;
-    --ion-backdrop-color: #00CEB8;
+    --monithon-tema-sfondo-charts: #{$light-green};
+    --monithon-tema-sfondo-filtri: #{$dark-green};
+    --ion-backdrop-color: #{$light-green};
 
 
     --background: transparent;
@@ -336,28 +351,28 @@ body {
 
     --ion-color-primary: #3880ff;
     --ion-color-primary-rgb: 56, 128, 255;
-    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast: #{$white};
     --ion-color-primary-contrast-rgb: 255, 255, 255;
     --ion-color-primary-shade: #3171e0;
     --ion-color-primary-tint: #4c8dff;
 
     --ion-color-secondary: #3dc2ff;
     --ion-color-secondary-rgb: 61, 194, 255;
-    --ion-color-secondary-contrast: #ffffff;
+    --ion-color-secondary-contrast: #{$white};
     --ion-color-secondary-contrast-rgb: 255, 255, 255;
     --ion-color-secondary-shade: #36abe0;
     --ion-color-secondary-tint: #50c8ff;
 
     --ion-color-tertiary: #5260ff;
     --ion-color-tertiary-rgb: 82, 96, 255;
-    --ion-color-tertiary-contrast: #ffffff;
+    --ion-color-tertiary-contrast: #{$white};
     --ion-color-tertiary-contrast-rgb: 255, 255, 255;
     --ion-color-tertiary-shade: #4854e0;
     --ion-color-tertiary-tint: #6370ff;
 
     --ion-color-success: #2dd36f;
     --ion-color-success-rgb: 45, 211, 111;
-    --ion-color-success-contrast: #ffffff;
+    --ion-color-success-contrast: #{$white};
     --ion-color-success-contrast-rgb: 255, 255, 255;
     --ion-color-success-shade: #28ba62;
     --ion-color-success-tint: #42d77d;
@@ -371,31 +386,31 @@ body {
 
     --ion-color-danger: #eb445a;
     --ion-color-danger-rgb: 235, 68, 90;
-    --ion-color-danger-contrast: #ffffff;
+    --ion-color-danger-contrast: #{$white};
     --ion-color-danger-contrast-rgb: 255, 255, 255;
     --ion-color-danger-shade: #cf3c4f;
     --ion-color-danger-tint: #ed576b;
 
     --ion-color-dark: #222428;
     --ion-color-dark-rgb: 34, 36, 40;
-    --ion-color-dark-contrast: #ffffff;
+    --ion-color-dark-contrast: #{$white};
     --ion-color-dark-contrast-rgb: 255, 255, 255;
     --ion-color-dark-shade: #1e2023;
     --ion-color-dark-tint: #383a3e;
 
     --ion-color-medium: #92949c;
     --ion-color-medium-rgb: 146, 148, 156;
-    --ion-color-medium-contrast: #ffffff;
+    --ion-color-medium-contrast: #{$white};
     --ion-color-medium-contrast-rgb: 255, 255, 255;
     --ion-color-medium-shade: #808289;
     --ion-color-medium-tint: #9d9fa6;
 
-    --ion-color-light: #ffffff;
+    --ion-color-light: #{$white};
     --ion-color-light-rgb: 255, 255, 255;
     --ion-color-light-contrast: #000000;
     --ion-color-light-contrast-rgb: 0, 0, 0;
     --ion-color-light-shade: #e0e0e0;
-    --ion-color-light-tint: #ffffff;
+    --ion-color-light-tint: #{$white};
 
 
     //SM-66 : settare classe all'elemento <html> per switch delle variabili
@@ -408,20 +423,20 @@ body {
         --monithon-chart-fill: #D0FFFD;
         --monithon-chevron-border-color: black;
         --monithon-dc-chart-brush-text-fill: #D0FFFD;
-        --monithon-dc-chart-text-fill: #00837C;
-        --monithon-deselected-chart-fill: #00837C;
-        --monithon-filtro-secondario-selected-color: #ffffff;
+        --monithon-dc-chart-text-fill: #{$mid-green};
+        --monithon-deselected-chart-fill: #{$mid-green};
+        --monithon-filtro-secondario-selected-color: #{$white};
         --monithon-filtro-secondario-unselected-color: #000000;
-        --monithon-finanziamenti-foreground: #00172A;
-        --monithon-range-thumb-label-background: #00172A;
+        --monithon-finanziamenti-foreground: #{$dark-blue};
+        --monithon-range-thumb-label-background: #{$dark-blue};
         --monithon-range-track-fill: #000000;
-        --monithon-tema-ambiente-background: #EA4A3E;
-        --monithon-tema-attrazione-background: #FDD0B3;
-        --monithon-tema-color: #00172A;
-        --monithon-tema-energia-background: #FFC921;
+        --monithon-tema-ambiente-background: #{$red};
+        --monithon-tema-attrazione-background: #{$pink};
+        --monithon-tema-color: #{$dark-blue};
+        --monithon-tema-energia-background: #{$yellow};
         --monithon-tema-mobilita-background: #006FD2;
-        --monithon-tema-sfondo-charts: #ffffff;
-        --monithon-tema-sfondo-filtri: #ffffff;
+        --monithon-tema-sfondo-charts: #{$white};
+        --monithon-tema-sfondo-filtri: #{$white};
     }
 
 }
