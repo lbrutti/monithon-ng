@@ -606,6 +606,9 @@ ion-row.monithon-filtri-secondari {
 
     }
 
+
+    color: var(--monithon-lista-risultato-color);
+
     &.selected {
         h2 {
             font-weight: bolder;
@@ -778,8 +781,9 @@ ion-row.monithon-filtri-secondari {
     ion-label {
         opacity: 0;
     }
-    &.geocoder-ready{
-        ion-label{
+
+    &.geocoder-ready {
+        ion-label {
             opacity: 1;
         }
     }

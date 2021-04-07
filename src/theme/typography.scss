@@ -4,7 +4,7 @@
     font-family: $font1;
     font-size: 18px;
     font-weight: 300;
-    text-decoration: underline;
+    text-decoration: underline !important;
     text-underline-offset: 3px;
     text-transform: uppercase;
     color: $white;
@@ -43,4 +43,48 @@
 .font-mono-budget,
 .font-mono-anno {
     font-family: $font1;
+}
+
+.monithon-risultati-header-titolo {
+    font-family: $font1;
+    font-size: 18px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: $dark-blue;
+}
+
+.monithon-risultati-contatore {
+    font-family: $font1;
+    font-size: 140px;
+    font-weight: 700;
+    color: $red;
+    margin: 0;
+}
+
+
+
+.monithon-comune-corrente {
+    color: var(--monithon-comune-corrente-color);
+}
+
+.monithon-raggio-corrente {
+    color: var(--monithon-raggio-corrente-color);
+}
+
+.monithon-comune-corrente,
+.monithon-raggio-corrente {
+    font-family: $font2;
+}
+
+.monithon-lista-progetti {
+    .monithon-lista-risultato {
+        h2 {
+            font-family: $font2;
+            font-style: normal;
+            // font-weight: 600;
+            font-size: 21px;
+        }
+    }
 }
