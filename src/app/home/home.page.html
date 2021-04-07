@@ -38,7 +38,8 @@
                         <ion-col col-6
                             class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__col__titolo ">
                             <div class="monithon-dettaglio-progetto__titolo_container">
-                                <h4 class="monithon-dettaglio-progetto__titolo">{{progettoSelezionato.ocTitoloProgetto |
+                                <h4 class="monithon-dettaglio-progetto__titolo monithon-titolo-singolo-progetto ">
+                                    {{progettoSelezionato.ocTitoloProgetto |
                                     fixencodedchars |
                                     unescape | capitalize}}
                                 </h4>
@@ -163,8 +164,8 @@
         <div id="panelContainer">
             <div id="filterContainer">
                 <!-- Temi -->
-                <mat-chip-list [ngClass]="{'monithon-temi': true}" aria-label="Temi progetto" multiple="true">
-                    <mat-chip [ngClass]="{'monithon-tema': true}" *ngFor="let tema of this.temi"
+                <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true">
+                    <mat-chip class="monithon-tema" *ngFor="let tema of this.temi"
                         [selectable]="tema.isActive" [attr.data-active]="tema.isActive" [selected]="tema.isSelected"
                         (click)="this.filterByTema(tema)" [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico"
                         disableRipple="true">
@@ -209,14 +210,16 @@
                                         <ion-grid class="ion-no-margin">
                                             <ion-row class="ion-no-margin monithon-chart-container">
                                                 <ion-col class="ion-no-margin">
-                                                    <h5 class="chart-title monithon-titolo-sezione">{{'budgetChartTitle' |transloco}}</h5>
+                                                    <h5 class="chart-title monithon-titolo-sezione">{{'budgetChartTitle'
+                                                        |transloco}}</h5>
                                                     <div #budgetChart id='budgetChartContainer'></div>
                                                 </ion-col>
                                             </ion-row>
 
                                             <ion-row class="ion-no-margin monithon-chart-container">
                                                 <ion-col class="ion-no-margin">
-                                                    <h5 class="chart-title monithon-titolo-sezione">{{'annoChartTitle'|transloco}}</h5>
+                                                    <h5 class="chart-title monithon-titolo-sezione">
+                                                        {{'annoChartTitle'|transloco}}</h5>
                                                     <div #annoChart id='annoChartContainer'></div>
                                                 </ion-col>
                                             </ion-row>
@@ -226,12 +229,13 @@
                                         <ion-grid>
                                             <ion-row class="monithon-filtri-secondari ion-no-margin ">
                                                 <ion-col size="8" class="ion-no-margin ">
-                                                    <h5 class="chart-title monithon-titolo-sezione">{{'statoAvanzamento' |transloco}}</h5>
+                                                    <h5 class="chart-title monithon-titolo-sezione">{{'statoAvanzamento'
+                                                        |transloco}}</h5>
                                                     <mat-chip-list
-                                                        [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
+                                                        class="monithon-filtro-stato-avanzamento"
                                                         multiple="true" aria-orientation="horizontal">
                                                         <mat-chip *ngFor="let stato of this.statiAvanzamento"
-                                                            [ngClass]="{'monithon-filtro-stato-avanzamento': true}"
+                                                            class="monithon-filtro-stato-avanzamento monithon-small-chip"
                                                             selectable="{{stato.isActive}}"
                                                             [attr.data-active]="stato.isActive"
                                                             [matTooltip]="'tooltip.statiAvanzamento.'+stato.codStatoProgetto | transloco"
@@ -244,10 +248,11 @@
                                                     </mat-chip-list>
                                                 </ion-col>
                                                 <ion-col size="3" class="ion-no-margin">
-                                                    <h5 class="chart-title monithon-titolo-sezione">{{'monitorati' |transloco}}</h5>
-                                                    <mat-chip-list [ngClass]="{'monithon-filtro-report': true}"
+                                                    <h5 class="chart-title monithon-titolo-sezione">{{'monitorati'
+                                                        |transloco}}</h5>
+                                                    <mat-chip-list class="monithon-filtro-report"
                                                         multiple="true" aria-orientation="horizontal">
-                                                        <mat-chip [ngClass]="{'monithon-filtro-report': true}"
+                                                        <mat-chip class="monithon-filtro-report monithon-small-chip"
                                                             selectable="true" *ngFor="let flag of this.reportFlags"
                                                             [matTooltip]="'tooltip.reportFlags.'+flag.hasReport | transloco"
                                                             [selected]="flag.isSelected"

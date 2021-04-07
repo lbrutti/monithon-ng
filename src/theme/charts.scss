@@ -60,11 +60,12 @@
     g.brush text {
         fill: var(--monithon-dc-chart-brush-text-fill);
         font-size: 10px;
+        font-family: $font1;
     }
 
     .axis text {
+        font-family: $font1;
         fill: var(--monithon-dc-chart-text-fill);
-
     }
 
     path.dc-symbol {
@@ -144,9 +145,7 @@
         display: none;
     }
 
-    .axis text {
-        font: 10px sans-serif;
-    }
+
 
     .grid-line,
     .axis .grid-line,

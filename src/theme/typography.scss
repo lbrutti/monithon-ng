@@ -1,4 +1,5 @@
 @import 'variables.scss';
+
 .monithon-titolo-sezione {
     font-family: $font1;
     font-size: 18px;
@@ -7,4 +8,39 @@
     text-underline-offset: 3px;
     text-transform: uppercase;
     color: $white;
+}
+
+.monithon-titolo-singolo-progetto {
+    font-family: $font2;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 21px;
+    color: $dark-blue;
+}
+
+.monithon-tema {
+    font-family: $font1;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    color: $dark-blue;
+}
+
+.monithon-categoria {
+    font-family: $font2;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.monithon-small-chip {
+    font-family: $font2;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.font-mono-budget,
+.font-mono-anno {
+    font-family: $font1;
 }
