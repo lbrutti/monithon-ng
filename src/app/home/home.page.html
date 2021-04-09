@@ -98,9 +98,13 @@
                             </div>
 
                             <div class="monithon-dettaglio-progetto__finanziamento">
-                                <ion-label class="monithon-dettaglio-progetto__label">{{'finanziamento' | transloco}}
-                                    {{progettoSelezionato.ocFinanzTotPubNetto | currency:'EUR' }}
-                                </ion-label>
+                                <div class="monithon-label-container">
+                                    <ion-label class="monithon-dettaglio-progetto__label">{{'finanziamento' | transloco}}:
+                                    </ion-label>
+                                    <ion-label class="monithon-dettaglio-progetto__label monithon-dettaglio-progetto__finanziamento">
+                                        {{progettoSelezionato.ocFinanzTotPubNetto | currency:'EUR' }}
+                                    </ion-label>
+                                </div>
                                 <div #pagamentiChartContainer></div>
                             </div>
 

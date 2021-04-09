@@ -357,6 +357,12 @@
         height: 36px;
     }
 
+    .monithon-label-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
     .monithon-dettaglio-progetto__oc_link {
         margin-top: auto;
     }
@@ -626,6 +632,11 @@ ion-row.monithon-filtri-secondari {
     margin-bottom: auto;
 }
 
+.monithon-lista-header {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
 .monithon-lista-risultato {
     // text-transform: lowercase;
     white-space: pre-line;
@@ -633,7 +644,7 @@ ion-row.monithon-filtri-secondari {
     flex-direction: row;
     align-content: center;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
 
     &::before {
         content: '\0000a0';
@@ -694,8 +705,9 @@ ion-row.monithon-filtri-secondari {
     h2 {
         margin-bottom: auto;
         width: 90%;
-        margin-left: 0;
+        margin-left: 12px;
         margin-top: 0;
+
     }
 
 }
@@ -733,6 +745,12 @@ ion-row.monithon-filtri-secondari {
 
         border-left: 12px solid;
         border-color: white;
+
+        ion-grid,
+        ion-row,
+        ion-col {
+            padding: 0 !important;
+        }
 
         &.selected {
 
