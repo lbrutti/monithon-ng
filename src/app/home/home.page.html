@@ -26,7 +26,7 @@
             [attr.data-oc-cod-tema-sintetico]="this.progettoSelezionato.ocCodTemaSintetico"
             class="monithon-dettaglio-progetto" #dettaglioProgettoContainer>
             <div class="monithon-dettaglio-progetto__header">
-                <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">{{'schedaProgetto' |
+                <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">{{isWizardMode ? '#5 ' : '' }}{{'schedaProgetto' |
                     transloco}}</h5>
 
                 <ion-icon (click)="onDettaglioProgettoHandleClick()"></ion-icon>
