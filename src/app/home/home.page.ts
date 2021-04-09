@@ -374,9 +374,9 @@ export class HomePage implements OnInit, AfterViewInit {
         d3.select('.monithon-pagamenti-chart').remove();
         this.pagamentiChart = d3.select(chartContainer).append('svg');
         this.pagamentiChart
-            .attr('width', null)
-            .attr('height', null)
-            .attr('viewBox', `0 0 ${chartW} 56`)
+            .attr('width', chartW)
+            .attr('height', '56')
+            //  .attr('viewBox', `0 0 ${chartW} 56`)
             .attr('class', 'monithon-pagamenti-chart');
 
         let chartG = this.pagamentiChart.append('g');
@@ -404,7 +404,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 let position = scale(d.totPagamenti);
                 return position < 120 ? 'start' : 'end';
             })
-            .attr('dy', '-3')
+            .attr('dy', '-10')
             .attr('dx', d => {
                 let position = scale(d.totPagamenti);
                 return position < 120 ? '0' : '-3';
@@ -424,7 +424,7 @@ export class HomePage implements OnInit, AfterViewInit {
                 let position = scale(d.totPagamenti);
                 return position < 120 ? 'start' : 'end';
             })
-            .attr('dy', '-3')
+            .attr('dy', '-10')
             .attr('dx', d => {
                 let position = scale(d.totPagamenti);
                 return position < 120 ? '0' : '-3';
