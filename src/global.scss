@@ -43,6 +43,22 @@
     }
 }
 
+.navigation-control {
+    position: absolute;
+    z-index: 100;
+    width: auto;
+    right: 24px;
+    top: 40px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    .mapboxgl-ctrl {
+        margin-right: 5px;
+        display: flex;
+    }
+}
+
 @import './theme/charts.scss';
 @import './theme/typography.scss';
 
@@ -83,7 +99,9 @@ ion-content {
     height: 27px !important;
     border-radius: 100% !important;
     background-color: var(--monithon-panel-chevron-background) !important;
-    display: inline-flex;
+    display: inline-flex !important;
+    align-self: flex-start !important;
+    margin-top: 14px !important;
     &::after{
         color: var(--monithon-panel-chevron-color) !important;
         margin: auto !important;

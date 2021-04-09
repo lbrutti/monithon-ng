@@ -40,6 +40,12 @@
     margin-top: auto;
     z-index: 100;
     width: 66vw;
+
+    .monithon-temi {
+        ::ng-deep .mat-chip-list-wrapper {
+            padding-left: 24px !important;
+        }
+    }
 }
 
 #filterContainer {
@@ -505,10 +511,18 @@ ion-row.monithon-filtri-secondari {
     width: 100%;
     margin: 0;
     padding: 0;
+
+    ::ng-deep .mat-chip-list-wrapper {
+        padding-left: 12px !important;
+    }
 }
 
 .monithon-filtri {
     background-color: var(--monithon-tema-sfondo-filtri);
+
+    .mat-expansion-panel-header {
+        height: 50px !important;
+    }
 
     &.mat-expanded {
         .monithon-categorie-container {
@@ -781,7 +795,7 @@ ion-row.monithon-filtri-secondari {
     position: absolute;
     z-index: 100;
     width: 432px;
-    left: 5%;
+    left: 24px;
     top: 10px;
 
     ion-label {
@@ -871,14 +885,7 @@ ion-row.monithon-filtri-secondari {
     }
 }
 
-.navigation-control {
-    position: absolute;
-    z-index: 100;
-    width: auto;
-    right: 5%;
-    top: 20px;
 
-}
 
 .mapboxgl-ctrl-geocoder {
     min-width: 100%;

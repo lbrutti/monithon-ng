@@ -2,7 +2,7 @@
     <!-- <ion-toolbar class="monithon-header" >
     </ion-toolbar> -->
     <div #geocoder id="geocoder" class="geocoder">
-        <ion-label class="monithon-titolo-sezione">{{'comune'|transloco}}</ion-label>
+        <ion-label class="monithon-titolo-sezione">{{isWizardMode ? '#1 ' : '' }}{{'comune'|transloco}}</ion-label>
     </div>
     <div id="raggioContainer" [ngClass]="{'backgrounded': hideSlider}">
         <mat-slider [min]="minRadius" [max]="maxRadius" thumbLabel="true" step="1"
@@ -176,7 +176,7 @@
                 <mat-expansion-panel class="monithon-filtri">
                     <mat-expansion-panel-header>
                         <mat-panel-title class="monithon-titolo-sezione">
-                            {{'monithonFiltriTitle'|transloco}}
+                            {{isWizardMode ? '#2 ' : '' }}{{'monithonFiltriTitle'|transloco}}
                         </mat-panel-title>
 
                     </mat-expansion-panel-header>
@@ -203,7 +203,7 @@
                                 <mat-expansion-panel expanded="true" class="monithon-filtri-charts" id="chartPanel">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title class="monithon-titolo-sezione">
-                                            {{'chartPanelTitle'|transloco}}
+                                            {{isWizardMode ? '#3 ' : '' }}{{'chartPanelTitle'|transloco}}
                                         </mat-panel-title>
                                     </mat-expansion-panel-header>
                                     <div id="chartsContainer">
@@ -278,7 +278,7 @@
                     <ion-grid class="ion-no-margin">
                         <ion-row class="ion-no-margin">
                             <ion-col class="ion-no-margin monithon-header-col">
-                                <h2 class="monithon-risultati-header-titolo">{{'resultContainerTitle' | transloco}}
+                                <h2 class="monithon-risultati-header-titolo">{{isWizardMode ? '#4 ' : '' }}{{'resultContainerTitle' | transloco}}
                                 </h2>
                                 <h1 class="monithon-risultati-contatore" [attr.data-hidden]="espandiListaRisultati"
                                     #resultCounter>{{this.risultatiRicerca.length | number}} </h1>
