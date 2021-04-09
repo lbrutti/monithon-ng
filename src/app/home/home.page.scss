@@ -133,6 +133,7 @@
     font-weight: normal;
     margin-top: 0;
     margin-bottom: 5px;
+    padding-left: 3px;
 }
 
 #mapContainer {
@@ -298,7 +299,7 @@
     }
 
     .mat-chip.monithon-dettaglio-progetto__has-report {
-        width: 100%;
+        width: 50%;
     }
 
     .monithon-dettaglio-progetto__dettagli {
@@ -482,16 +483,24 @@
     }
 }
 
+.monithon-filtro-stato-avanzamento,
+.monithon-filtro-report {
+    ::ng-deep .mat-chip-list-wrapper {
+        padding-left: 2px !important;
+    }
+}
+
 .mat-chip.monithon-filtro-stato-avanzamento {
     width: 33%;
     justify-content: center;
 
+
+
 }
 
 .mat-chip.monithon-filtro-report {
-    width: 100%;
+    width: 50%;
     justify-content: center;
-
 }
 
 .mat-expansion-panel {
@@ -508,9 +517,16 @@ ion-row.monithon-filtri-secondari {
     display: inline-block;
     overflow-x: hidden;
     @include hideScrollbar();
-    width: 100%;
+    // width: 100%;
     margin: 0;
     padding: 0;
+
+    //width: 432px;
+    .mat-chip {
+        &.monithon-categoria {
+            max-width: 432px;
+        }
+    }
 
     ::ng-deep .mat-chip-list-wrapper {
         padding-left: 12px !important;
@@ -533,6 +549,10 @@ ion-row.monithon-filtri-secondari {
 
 .monithon-filtri-charts {
     background-color: var(--monithon-tema-sfondo-charts);
+
+    .mat-expansion-panel-header {
+        padding-left: 12px;
+    }
 }
 
 .monithon-criterio-ordinamento__selezione {
