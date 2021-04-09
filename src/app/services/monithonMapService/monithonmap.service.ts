@@ -9,6 +9,7 @@ import { Observer, Subject } from 'rxjs';
 import '@turf/distance';
 import { circle, distance, point } from '@turf/turf';
 import { COLOR_MAP } from 'src/app/utils/colorMap';
+import { TranslocoService } from '@ngneat/transloco';
 
 
 @Injectable({
@@ -48,7 +49,9 @@ export class MonithonMapService {
     isFreeMode: boolean = false;
 
 
-    constructor() {
+    constructor(
+        private translocoService: TranslocoService,
+    ) {
         mapboxgl.accessToken = environment.mapbox.accessToken;
     }
 
@@ -69,6 +72,8 @@ export class MonithonMapService {
             countries: 'it',
             minLength: 3,
             language: 'it',
+            placeholder: this.translocoService.translate('gecoderPlaceholder'),
+            types:'place,locality',
             //zoom: 3,
             filter: function (item: any) {
                 //workaround per non escludere aosta
