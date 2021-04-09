@@ -237,7 +237,6 @@
                                                             class="monithon-filtro-stato-avanzamento monithon-small-chip"
                                                             selectable="{{stato.isActive}}"
                                                             [attr.data-active]="stato.isActive"
-                                                            [matTooltip]="'tooltip.statiAvanzamento.'+stato.codStatoProgetto | transloco"
                                                             [selected]="stato.isSelected"
                                                             (click)="this.filterByStato(stato)"
                                                             [attr.data-oc-cod-stato-progetto]="stato.codStatoProgetto"
@@ -253,7 +252,6 @@
                                                         aria-orientation="horizontal">
                                                         <mat-chip class="monithon-filtro-report monithon-small-chip"
                                                             *ngFor="let flag of this.reportFlags"
-                                                            [matTooltip]="'tooltip.reportFlags.'+flag.hasReport | transloco"
                                                             [selected]="flag.isSelected"
                                                             [attr.data-active]="flag.isActive"
                                                             (click)="this.filterByReportFlag(flag)"
