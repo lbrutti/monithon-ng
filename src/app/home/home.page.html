@@ -378,7 +378,7 @@
                                         </mat-expansion-panel-header>
                                         <ion-list class="monithon-lista-progetti__progetto__dettagli__lista_report"
                                             class="ion-no-margin">
-                                            <ion-item *ngFor="let report of progetto.reports; let i =index" lines="none">
+                                            <ion-item *ngFor="let report of progetto.reports; let i =index" lines="none" class="monithon-lista-progetti__progetto__dettagli__lista_report_report_container">
                                                 <ion-label>
                                                     <a href="{{monithonReportUrl}}/{{report.id}}" target="_blank">
                                                         <span
