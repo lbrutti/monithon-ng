@@ -338,7 +338,8 @@
                     <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;"
                         class="monithon-lista-progetti__progetto"
                         [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico"
-                        [ngClass]="{'selected': (progetto.uid==progettoSelezionato.uid)}">
+                        [ngClass]="{'selected': (progetto.uid==progettoSelezionato.uid)}"
+                        lines="inset">
                         <ion-grid class="ion-no-margin">
                             <ion-row class="ion-no-margin">
                                 <ion-col class="ion-no-margin">
@@ -377,7 +378,7 @@
                                         </mat-expansion-panel-header>
                                         <ion-list class="monithon-lista-progetti__progetto__dettagli__lista_report"
                                             class="ion-no-margin">
-                                            <ion-item *ngFor="let report of progetto.reports; let i =index">
+                                            <ion-item *ngFor="let report of progetto.reports; let i =index" lines="none">
                                                 <ion-label>
                                                     <a href="{{monithonReportUrl}}/{{report.id}}" target="_blank">
                                                         <span

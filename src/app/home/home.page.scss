@@ -305,6 +305,7 @@
     .monithon-dettaglio-progetto__dettagli {
         display: flex;
         flex-direction: column;
+
     }
 
     .monithon-dettaglio-progetto__titolo_scheda {
@@ -776,7 +777,9 @@ ion-row.monithon-filtri-secondari {
         * {
             color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
         }
-
+        .mat-expansion-panel-header{
+            // height: 50px !important;
+        }
         .monithon-lista-progetti__progetto__dettagli__contatore_report {
             text-align: right;
 
@@ -787,6 +790,11 @@ ion-row.monithon-filtri-secondari {
 
         .monithon-lista-progetti__progetto__dettagli__lista_report * {
             color: var(--monithon-lista-report-in-dettaglio-font-color);
+        }
+
+        ::ng-deep .mat-expansion-panel-content{
+            padding-left:12px !important;
+            padding-right:12px !important;
         }
     }
 

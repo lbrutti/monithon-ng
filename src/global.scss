@@ -37,7 +37,7 @@
     max-width: 432px !important;
     width: 432px !important;
     border-radius: 20px !important;
-
+    top:10px;
     .mapbox-gl-geocoder--no-results {
         line-height: 40px !important;
     }
@@ -48,7 +48,7 @@
     z-index: 100;
     width: auto;
     right: 24px;
-    top: 40px;
+    top: 50px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -92,6 +92,7 @@ ion-content {
         background-size: contain;
     }
 }
+
 
 .mat-expansion-indicator {
     border: 1px solid transparent !important;
