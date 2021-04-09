@@ -87,7 +87,7 @@ export class MonithonMapService {
                 enableHighAccuracy: false
             },
             fitBoundsOptions: {
-                maxZoom: 8
+                maxZoom: 10
             }
         });
         this.geocoder.on('result', evt => {
