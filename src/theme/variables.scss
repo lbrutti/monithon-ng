@@ -301,8 +301,10 @@ body {
 }
 
 // FONTS
-$font1: IBM Plex Mono, monospace;
-$font2: Roboto, sans-serif;
+$font1: IBM Plex Mono,
+monospace;
+$font2: Roboto,
+sans-serif;
 
 // COLOURS
 $white: white;
@@ -340,9 +342,11 @@ $dark-blue: #00172A;
     --monithon-tema-mobilita-background: #006FD2;
     --monithon-tema-sfondo-charts: #{$light-green};
     --monithon-tema-sfondo-filtri: #{$dark-green};
+    --monithon-panel-chevron-color:#{$white};
+    --monithon-panel-chevron-background:#{$red};
 
-    --monithon-comune-corrente-color : #005BAC;
-    --monithon-raggio-corrente-color : #005BAC;
+    --monithon-comune-corrente-color: #005BAC;
+    --monithon-raggio-corrente-color: #005BAC;
     --ion-backdrop-color: #{$light-green};
 
     --monithon-lista-risultato-color : #{$dark-blue};
@@ -440,6 +444,8 @@ $dark-blue: #00172A;
         --monithon-tema-mobilita-background: #006FD2;
         --monithon-tema-sfondo-charts: #{$white};
         --monithon-tema-sfondo-filtri: #{$white};
+        --monithon-panel-chevron-color:#{$white};
+        --monithon-panel-chevron-background:#{$red};
     }
 
 }

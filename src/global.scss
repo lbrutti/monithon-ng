@@ -76,3 +76,19 @@ ion-content {
         background-size: contain;
     }
 }
+
+.mat-expansion-indicator {
+    border: 1px solid transparent !important;
+    width: 27px !important;
+    height: 27px !important;
+    border-radius: 100% !important;
+    background-color: var(--monithon-panel-chevron-background) !important;
+    display: inline-flex;
+    &::after{
+        color: var(--monithon-panel-chevron-color) !important;
+        margin: auto !important;
+        border-width: 1px 0 0 1px !important;
+        padding-top: 9px !important; 
+        padding-left: 9px !important; 
+    }
+}
