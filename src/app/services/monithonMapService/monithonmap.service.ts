@@ -73,7 +73,7 @@ export class MonithonMapService {
             minLength: 3,
             language: 'it',
             placeholder: this.translocoService.translate('gecoderPlaceholder'),
-            types:'place,locality',
+            types: 'place,locality',
             //zoom: 3,
             filter: function (item: any) {
                 //workaround per non escludere aosta
@@ -172,8 +172,8 @@ export class MonithonMapService {
                         },
                         'circle-color': [
                             'case',
-                            ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
-                            'transparent',
+                            // ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
+                            // 'transparent',
                             ['all', ['boolean', ['feature-state', 'isSelected'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
                             COLOR_MAP.temi.default,
                             ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 4]],
@@ -188,7 +188,10 @@ export class MonithonMapService {
                         ],
                         'circle-stroke-color': [
                             'case',
-                            ['!', ['boolean', ['feature-state', 'isWithinRange'], true]],
+                            ['any',
+                                // ['!', ['boolean', ['feature-state', 'isSelected'], true]],
+                                ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]
+                            ],
                             COLOR_MAP.temi.default,
                             ['==', ['get', 'ocCodTemaSintetico'], 4],
                             COLOR_MAP.temi.energia,
@@ -200,7 +203,20 @@ export class MonithonMapService {
                             COLOR_MAP.temi.mobilita,
                             'transparent'
                         ],
-                        'circle-stroke-width': 1
+                        'circle-stroke-width': 1,
+
+                        'circle-stroke-opacity': [
+                            'case',
+                            ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
+                            0.5,
+                            1
+                        ],
+                        'circle-opacity': [
+                            'case',
+                            ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
+                            0.5,
+                            1
+                        ]
                     }
                 });
 
@@ -276,7 +292,7 @@ export class MonithonMapService {
     }
 
     public setTemi(temi: Array<any>) {
-        this.temi = temi.map((t) => ({ 'ocCodTemaSintetico': t.ocCodTemaSintetico, 'isSelected': true , 'isActive': true }));
+        this.temi = temi.map((t) => ({ 'ocCodTemaSintetico': t.ocCodTemaSintetico, 'isSelected': true, 'isActive': true }));
     }
 
     public setCategorie(categorie: Array<any>) {
