@@ -107,6 +107,7 @@ export class HomePage implements OnInit, AfterViewInit {
     hideSlider: boolean = true;
     isAppReady: boolean = false;
     isWizardMode: boolean = false;
+    // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
         public monithonMap: MonithonMapService,
@@ -171,8 +172,9 @@ export class HomePage implements OnInit, AfterViewInit {
 
         let projectSelectionObserver: Observer<any> = {
             next: progetto => {
-                this.evidenziaProgettoInLista(progetto);
+                // this.keepProgetto = !lodash.isNil(progetto);
                 this.onDettaglioProgettoHandleClick(progetto);
+                this.evidenziaProgettoInLista(progetto);
             },
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
@@ -265,11 +267,11 @@ export class HomePage implements OnInit, AfterViewInit {
                         }
                     });
 
-                this.dettaglioProgettoContainer.nativeElement.ontransitionend = (e: TransitionEvent) => {
-                    if ((e.target as HTMLElement).classList.contains('hidden')) {
-                        this.progettoSelezionato = {};
-                    }
-                };
+                // this.dettaglioProgettoContainer.nativeElement.ontransitionend = (e: TransitionEvent) => {
+                //     if ((e.target as HTMLElement).classList.contains('hidden') && !this.keepProgetto) {
+                //         this.progettoSelezionato = {};
+                //     }
+                // };
 
             });
     }
@@ -277,9 +279,10 @@ export class HomePage implements OnInit, AfterViewInit {
         this.hideDettaglioProgetto();
         if (!lodash.isNil(progetto)) {
             this.monithonMap.highlightById([progetto.uid]);
-        } else {
-            this.monithonMap.highlightById([]);
-        }
+        } 
+        // else {
+        //     this.monithonMap.highlightById([]);
+        // }
     };
 
     evidenziaProgettoInLista(progetto: Progetto) {
@@ -287,6 +290,7 @@ export class HomePage implements OnInit, AfterViewInit {
             if (!this.espandiListaRisultati) {
                 this.espandiListaRisultati = true;
             }
+            //FIXME
             this.progettoSelezionato = progetto;
             let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === progetto.uid);
             this.listaRisultati.scrollToIndex(indexRisultato);
