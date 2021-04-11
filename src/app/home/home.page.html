@@ -26,7 +26,8 @@
             [attr.data-oc-cod-tema-sintetico]="this.progettoSelezionato.ocCodTemaSintetico"
             class="monithon-dettaglio-progetto" #dettaglioProgettoContainer>
             <div class="monithon-dettaglio-progetto__header">
-                <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">{{isWizardMode ? '#5 ' : '' }}{{'schedaProgetto' |
+                <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">{{isWizardMode ? '#5 ' :
+                    '' }}{{'schedaProgetto' |
                     transloco}}</h5>
 
                 <ion-icon (click)="onDettaglioProgettoHandleClick()"></ion-icon>
@@ -57,14 +58,16 @@
                         </ion-col>
                         <ion-col col-6 class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli">
                             <div class="monithon-dettaglio-progetto__data_inizio">
-                                <ion-label class="monithon-dettaglio-progetto__label monithon-titolo-sezione">{{'dataInizio' | transloco}}
+                                <ion-label class="monithon-dettaglio-progetto__label monithon-titolo-sezione">
+                                    {{'dataInizio' | transloco}}
                                 </ion-label>
                                 <ion-label>{{progettoSelezionato.ocDataInizioProgetto | momentdate:'YYYYMMDD' |
                                     date:'MMMM y':'+0100': 'it'}}</ion-label>
                             </div>
 
                             <div class="monithon-dettaglio-progetto__categoria">
-                                <ion-label class="monithon-dettaglio-progetto__label">{{'categoria' | transloco}}
+                                <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
+                                    {{'categoria' | transloco}}
                                 </ion-label>
 
                                 <mat-expansion-panel hideToggle="true"
@@ -92,16 +95,20 @@
                             </div>
 
                             <div class="monithon-dettaglio-progetto__tema">
-                                <ion-label class="monithon-dettaglio-progetto__label">{{'tema' | transloco}}</ion-label>
+                                <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">{{'tema'
+                                    | transloco}}</ion-label>
                                 <ion-label>{{'temi.'+progettoSelezionato.ocCodTemaSintetico | transloco}}
                                 </ion-label>
                             </div>
 
                             <div class="monithon-dettaglio-progetto__finanziamento">
                                 <div class="monithon-label-container">
-                                    <ion-label class="monithon-dettaglio-progetto__label">{{'finanziamento' | transloco}}:
+                                    <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
+                                        {{'finanziamento' |
+                                        transloco}}:
                                     </ion-label>
-                                    <ion-label class="monithon-dettaglio-progetto__label monithon-dettaglio-progetto__finanziamento">
+                                    <ion-label
+                                        class="monithon-dettaglio-progetto__label monithon-dettaglio-progetto__finanziamento  monithon-titolo-sezione">
                                         {{progettoSelezionato.ocFinanzTotPubNetto | currency:'EUR' }}
                                     </ion-label>
                                 </div>
@@ -118,7 +125,8 @@
                                 <ion-grid>
                                     <ion-row class="monithon-filtri-secondari ion-no-margin ">
                                         <ion-col size="8" class="ion-no-margin ">
-                                            <ion-label class="chart-title monithon-dettaglio-progetto__label">
+                                            <ion-label
+                                                class="chart-title monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                                 {{'statoAvanzamento' |transloco}}</ion-label>
                                             <mat-chip-list class="monithon-dettaglio-progetto__stato-avanzamento"
                                                 multiple="true" aria-orientation="horizontal">
@@ -132,7 +140,8 @@
                                             </mat-chip-list>
                                         </ion-col>
                                         <ion-col size="4" class="ion-no-margin">
-                                            <ion-label class="chart-title monithon-dettaglio-progetto__label"
+                                            <ion-label
+                                                class="chart-title monithon-dettaglio-progetto__label  monithon-titolo-sezione"
                                                 monithon-dettaglio-progetto__label>{{'monitorati' |transloco}}
                                             </ion-label>
                                             <mat-chip-list class="monithon-dettaglio-progetto__has-report"
@@ -144,15 +153,13 @@
                                                     {{'reportFlags.'+flag.hasReport | transloco}}
                                                 </mat-chip>
                                             </mat-chip-list>
-
-
                                         </ion-col>
                                     </ion-row>
                                 </ion-grid>
                             </div>
                             <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
                                 <button (click)="iniziaMonitoraggioClicked(progettoSelezionato)"
-                                    class="monithon-dettaglio-progetto__inizia_monitoraggio__button" mat-button
+                                    class="monithon-dettaglio-progetto__inizia_monitoraggio__button monithon-titolo-sezione" mat-button
                                     color="primary">{{'iniziaMonitoraggio' | transloco}}
                                 </button>
                             </div>
@@ -282,7 +289,8 @@
                     <ion-grid class="ion-no-margin">
                         <ion-row class="ion-no-margin">
                             <ion-col class="ion-no-margin monithon-header-col">
-                                <h2 class="monithon-risultati-header-titolo">{{isWizardMode ? '#4 ' : '' }}{{'resultContainerTitle' | transloco}}
+                                <h2 class="monithon-risultati-header-titolo">{{isWizardMode ? '#4 ' : ''
+                                    }}{{'resultContainerTitle' | transloco}}
                                 </h2>
                                 <h1 class="monithon-risultati-contatore" [attr.data-hidden]="espandiListaRisultati"
                                     #resultCounter>{{this.risultatiRicerca.length | number}} </h1>
@@ -338,8 +346,7 @@
                     <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;"
                         class="monithon-lista-progetti__progetto"
                         [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico"
-                        [ngClass]="{'selected': (progetto.uid==progettoSelezionato.uid)}"
-                        lines="inset">
+                        [ngClass]="{'selected': (progetto.uid==progettoSelezionato.uid)}" lines="inset">
                         <ion-grid class="ion-no-margin">
                             <ion-row class="ion-no-margin">
                                 <ion-col class="ion-no-margin">
@@ -355,7 +362,8 @@
                                 <ion-col class="ion-no-margin">
                                     <mat-expansion-panel [disabled]="!progetto.hasReport" hideToggle="true"
                                         class="monithon-lista-progetti__progetto__dettagli mat-elevation-z">
-                                        <mat-expansion-panel-header class="monithon-lista-progetti__progetto__dettagli__header">
+                                        <mat-expansion-panel-header
+                                            class="monithon-lista-progetti__progetto__dettagli__header">
                                             <ion-grid class="ion-no-margin">
                                                 <ion-row class="ion-no-margin">
                                                     <ion-col size="6" class="ion-no-margin">
@@ -378,7 +386,8 @@
                                         </mat-expansion-panel-header>
                                         <ion-list class="monithon-lista-progetti__progetto__dettagli__lista_report"
                                             class="ion-no-margin">
-                                            <ion-item *ngFor="let report of progetto.reports; let i =index" lines="none" class="monithon-lista-progetti__progetto__dettagli__lista_report_report_container">
+                                            <ion-item *ngFor="let report of progetto.reports; let i =index" lines="none"
+                                                class="monithon-lista-progetti__progetto__dettagli__lista_report_report_container">
                                                 <ion-label>
                                                     <a href="{{monithonReportUrl}}/{{report.id}}" target="_blank">
                                                         <span

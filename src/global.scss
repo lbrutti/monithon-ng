@@ -37,7 +37,8 @@
     max-width: 432px !important;
     width: 432px !important;
     border-radius: 20px !important;
-    top:10px;
+    top: 10px;
+
     .mapbox-gl-geocoder--no-results {
         line-height: 40px !important;
     }
@@ -56,6 +57,7 @@
     .mapboxgl-ctrl {
         margin-right: 5px;
         display: flex;
+        flex-direction: row-reverse;
     }
 }
 
@@ -103,11 +105,12 @@ ion-content {
     display: inline-flex !important;
     align-self: flex-start !important;
     margin-top: 14px !important;
-    &::after{
+
+    &::after {
         color: var(--monithon-panel-chevron-color) !important;
         margin: auto !important;
         border-width: 1px 0 0 1px !important;
-        padding-top: 9px !important; 
-        padding-left: 9px !important; 
+        padding-top: 9px !important;
+        padding-left: 9px !important;
     }
 }

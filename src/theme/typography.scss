@@ -4,10 +4,15 @@
     font-family: $font1;
     font-size: 18px;
     font-weight: 300;
-    text-decoration: underline !important;
+    text-decoration: underline !important; //necessario !important per sovrascrivere stile angular in header
     text-underline-offset: 3px;
     text-transform: uppercase;
     color: $white;
+
+    &.monithon-dettaglio-progetto__label,
+    &.monithon-dettaglio-progetto__inizia_monitoraggio__button {
+        text-decoration: none !important;
+    }
 }
 
 .monithon-titolo-singolo-progetto {
