@@ -56,6 +56,12 @@
     fill-opacity: .8;
 }
 
+#annoChartContainer {
+    .axis.x .tick:last-child {
+        display: none;
+    }
+}
+
 .dc-chart {
     g.brush text {
         fill: var(--monithon-dc-chart-brush-text-fill);
