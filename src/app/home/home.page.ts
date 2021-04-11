@@ -255,14 +255,14 @@ export class HomePage implements OnInit, AfterViewInit {
                         if (!e.target.value) {
                             this.comuneCorrente = '';
                             this.raggioCorrente = 10;
-                            this.criterioSelezionato='ocCodTemaSintetico';
+                            this.criterioSelezionato = 'ocCodTemaSintetico';
                             this.monithonMap.removeRadiusFilter();
                         }
                     });
                 geocoderInput
                     .addEventListener('keyup', e => {
                         if (!geocoderInput.value) {
-                            this.criterioSelezionato='ocCodTemaSintetico';
+                            this.criterioSelezionato = 'ocCodTemaSintetico';
                             this.monithonMap.removeRadiusFilter();
                         }
                     });
@@ -279,7 +279,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.hideDettaglioProgetto();
         if (!lodash.isNil(progetto)) {
             this.monithonMap.highlightById([progetto.uid]);
-        } 
+        }
         // else {
         //     this.monithonMap.highlightById([]);
         // }
@@ -589,30 +589,21 @@ export class HomePage implements OnInit, AfterViewInit {
         let xFormatter = (v: any) => {
             let label = '';
             if (!lodash.isNil(binThresholds[v]) && !lodash.isNaN(binThresholds[v])) {
-                let val = binThresholds[v] / 1000;
-                if (val >= 1000) {
-                    val /= 1000;
-                    label = `${Math.floor(val)} M`;
-                }
-                else if (val < 1000) {
-                    label = `${Math.floor(val)} K`;
-                }
-                else if (val == 0) {
-                    label = '0';
-                }
+                label = d3.format(".2s")(binThresholds[v]);
             }
             return label;
         };
+        let chartMargins = { top: 2, right: 20, bottom: 20, left: 20 };
         this.budgetChart
             .dimension(budgetDim)
             .group(budgetGroup)
             .brushOn(true)
-            .x(d3.scaleLinear().domain([0, numQuantili]))
+            .x(d3.scaleLinear().domain([0, numQuantili]).range([chartMargins.left, chartWidth - chartMargins.left - chartMargins.right]))
             .y(d3.scaleLinear().domain([0, maxCount]))
             .centerBar(true)
-            .elasticX(true)
+            .elasticX(false)
             .elasticY(false)
-            .margins({ top: 2, right: 10, bottom: 20, left: 10 })
+            .margins(chartMargins)
             .transitionDuration(250);
 
 

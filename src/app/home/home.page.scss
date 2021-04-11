@@ -559,6 +559,7 @@ ion-row.monithon-filtri-secondari {
 
     .mat-expansion-panel-header {
         padding-left: 12px;
+        padding-right: 14px;
     }
 }
 
@@ -746,6 +747,7 @@ ion-row.monithon-filtri-secondari {
 
         border-left: 12px solid;
         border-color: white;
+        width:460px;
 
         ion-grid,
         ion-row,
@@ -793,6 +795,9 @@ ion-row.monithon-filtri-secondari {
         ::ng-deep .mat-expansion-panel-content{
             padding-left:12px !important;
             padding-right:12px !important;
+        }
+        .monithon-lista-progetti__progetto__dettagli__header{
+            padding-right: 0;
         }
     }
 
