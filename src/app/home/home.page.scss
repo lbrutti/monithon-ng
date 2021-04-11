@@ -128,12 +128,13 @@
 }
 
 .chart-title {
-    font-size: small;
+    // font-size: small;
     text-align: left;
     font-weight: normal;
     margin-top: 0;
     margin-bottom: 5px;
     padding-left: 3px;
+    text-decoration: none !important;
 }
 
 #mapContainer {
@@ -561,6 +562,10 @@ ion-row.monithon-filtri-secondari {
         padding-left: 12px;
         padding-right: 14px;
     }
+
+    .monithon-titolo-sezione-budget {
+        height: 21px;
+    }
 }
 
 .monithon-criterio-ordinamento__selezione {
@@ -747,7 +752,7 @@ ion-row.monithon-filtri-secondari {
 
         border-left: 12px solid;
         border-color: white;
-        width:460px;
+        width: 460px;
 
         ion-grid,
         ion-row,
@@ -779,7 +784,7 @@ ion-row.monithon-filtri-secondari {
         * {
             color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
         }
-   
+
         .monithon-lista-progetti__progetto__dettagli__contatore_report {
             text-align: right;
 
@@ -792,11 +797,12 @@ ion-row.monithon-filtri-secondari {
             color: var(--monithon-lista-report-in-dettaglio-font-color);
         }
 
-        ::ng-deep .mat-expansion-panel-content{
-            padding-left:12px !important;
-            padding-right:12px !important;
+        ::ng-deep .mat-expansion-panel-content {
+            padding-left: 12px !important;
+            padding-right: 12px !important;
         }
-        .monithon-lista-progetti__progetto__dettagli__header{
+
+        .monithon-lista-progetti__progetto__dettagli__header {
             padding-right: 0;
         }
     }
