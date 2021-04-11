@@ -66,6 +66,7 @@
     .axis text {
         font-family: $font1;
         fill: var(--monithon-dc-chart-text-fill);
+        text-anchor: start;
     }
 
     path.dc-symbol {

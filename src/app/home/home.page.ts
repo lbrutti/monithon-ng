@@ -504,7 +504,8 @@ export class HomePage implements OnInit, AfterViewInit {
         this.annoChart.width(chartWidth);
         this.annoChart.useViewBoxResizing(true)
 
-        let xScale = d3.scaleLinear().domain(annoRange);
+        let chartMargins = { top: 2, right: 10, bottom: 20, left: 0 };
+        let xScale = d3.scaleLinear().domain(annoRange).range([chartMargins.left, chartWidth]);
         let yScale = d3.scaleLinear().domain([0, maxCount]);
         this.annoChart
             .dimension(annoDim)
@@ -513,10 +514,10 @@ export class HomePage implements OnInit, AfterViewInit {
             .x(xScale)
             .y(yScale)
             .xUnits(dc.units.integers)
-            .elasticX(true)
+            .elasticX(false)
             .elasticY(false)
-            .centerBar(true)
-            .margins({ top: 2, right: 10, bottom: 20, left: 10 })
+            .centerBar(false)
+            .margins(chartMargins)
             .transitionDuration(250);
 
         this.annoChart
@@ -525,14 +526,6 @@ export class HomePage implements OnInit, AfterViewInit {
             .tickFormat(anno => anno <= 2013 ? `...${parseInt(anno)}` : parseInt(anno));
 
 
-
-        this.annoChart.on('pretransition', function (chart) {
-            // if (!chart.filter()) {
-            //     chart
-            //         .select('.brush')
-            //         .call(chart.brush().move, [0, chart.width() - (chart.margins().right + chart.margins().left)]);
-            // }
-        })
         this.annoChart.on("filtered", () => {
 
             setTimeout(() => {
@@ -593,14 +586,14 @@ export class HomePage implements OnInit, AfterViewInit {
             }
             return label;
         };
-        let chartMargins = { top: 2, right: 20, bottom: 20, left: 20 };
+        let chartMargins = { top: 2, right: 10, bottom: 20, left: 0 };
         this.budgetChart
             .dimension(budgetDim)
             .group(budgetGroup)
             .brushOn(true)
-            .x(d3.scaleLinear().domain([0, numQuantili]).range([chartMargins.left, chartWidth - chartMargins.left - chartMargins.right]))
+            .x(d3.scaleLinear().domain([0, numQuantili]).range([chartMargins.left, chartWidth]))
             .y(d3.scaleLinear().domain([0, maxCount]))
-            .centerBar(true)
+            .centerBar(false)
             .elasticX(false)
             .elasticY(false)
             .margins(chartMargins)
@@ -619,7 +612,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
         this.budgetChart.on("filtered", () => {
             setTimeout(() => {
-                console.log('this.budgetChart.on("filtered", () => {');
+                // console.log('this.budgetChart.on("filtered", () => {');
                 //propagare evento per aggiornare la lista dei progetti
                 this.progetti = budgetDim.top(Infinity);
                 this.filtraRisultati();
