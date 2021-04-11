@@ -240,6 +240,7 @@ export class MonithonMapService {
                         this.publishSelectedProject(null);
                     }
                 } else {
+                    this.highlightById([]);
                     this.publishSelectedProject(null);
                 }
             });
