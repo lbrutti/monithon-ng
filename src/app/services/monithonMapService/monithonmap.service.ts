@@ -74,7 +74,7 @@ export class MonithonMapService {
             language: 'it',
             placeholder: this.translocoService.translate('gecoderPlaceholder'),
             types: 'place,locality',
-            enableEventLogging:false,
+            enableEventLogging: false,
             //zoom: 3,
             filter: function (item: any) {
                 //workaround per non escludere aosta
@@ -351,6 +351,18 @@ export class MonithonMapService {
         this.circle = circle(this.center, this.radius);
         this.circle.id = "range-center";
         (this.map.getSource('radiusFilterData') as any).setData(this.circle);
+
+        this.map.setLayoutProperty(
+            'filterCircleStroke',
+            'visibility',
+            'visible'
+        );
+        this.map.setLayoutProperty(
+            'filterCircleFill',
+            'visibility',
+            'visible'
+        );
+
 
         this.filtroPerRaggioEnabled = true;
         this.filtraPerDistanza({
@@ -649,18 +661,22 @@ export class MonithonMapService {
      */
     public removeRadiusFilter() {
         if (this.circle) {
-            // this.draw.delete(this.circle.id);
+            this.map.setLayoutProperty(
+                'filterCircleStroke',
+                'visibility',
+                'none'
+            );
+            this.map.setLayoutProperty(
+                'filterCircleFill',
+                'visibility',
+                'none'
+            );
             this.resetFiltroDistanza();
             this.filtroPerRaggioEnabled = false;
         }
     }
 
     private resetFiltroDistanza(publishUpdate: boolean = true) {
-        // if (this.circle) {
-        //     this.draw.delete(this.circle.id);
-        // }
-        // this.circle = null;
-        // this.filtroPerRaggioEnabled = false;
         this.radius = 10;
         lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
         lodash.map(this.categorie, c => {
