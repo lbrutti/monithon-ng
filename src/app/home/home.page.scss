@@ -932,11 +932,12 @@ ion-row.monithon-filtri-secondari {
             background: var(--monithon-range-thumb-label-background) !important;
 
             .mat-slider-thumb-label-text {
-                margin-top: 5px;
+                margin-top: 6px;
                 transform: rotate(0deg);
                 width: 100%;
                 height: 100%;
                 text-align: center;
+                font-size: 16px;
             }
         }
 

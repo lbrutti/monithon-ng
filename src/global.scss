@@ -42,6 +42,14 @@
     .mapbox-gl-geocoder--no-results {
         line-height: 40px !important;
     }
+
+    svg{
+        display: none;
+    }
+
+    .mapboxgl-ctrl-geocoder--input{
+        padding-left: 15px;
+    }
 }
 
 .navigation-control {

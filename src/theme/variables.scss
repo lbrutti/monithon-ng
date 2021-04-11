@@ -31,13 +31,14 @@ $app-theme: mat-light-theme((color: (primary: $app-primary,
 
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
-:host{
+:host {
     --inner-border-width: 0 !important;
 }
+
 /** Ionic CSS Variables **/
 :root {
     :root {
-        
+
         --ion-color-primary: #3880ff;
         --ion-color-primary-rgb: 56, 128, 255;
         --ion-color-primary-contrast: #ffffff;
@@ -321,7 +322,7 @@ $dark-blue: #00172A;
 
 //monithon:
 :root {
-    
+
 
     --monithon-chart-domain-stroke: #8FE0E3;
     --monithon-chart-fill: #D0FFFD;
@@ -354,6 +355,7 @@ $dark-blue: #00172A;
 
     --monithon-lista-risultato-color : #{$dark-blue};
 
+    --monithon-default-font-color : #{$dark-blue};
 
     --background: transparent;
     --ion-toolbar-background: transparent;
@@ -449,6 +451,8 @@ $dark-blue: #00172A;
         --monithon-tema-sfondo-filtri: #{$white};
         --monithon-panel-chevron-color:#{$white};
         --monithon-panel-chevron-background:#{$red};
+        --monithon-default-font-color : #{$dark-blue};
+
     }
 
 }

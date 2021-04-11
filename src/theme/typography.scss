@@ -70,6 +70,17 @@
     margin: 0;
 }
 
+.mat-slider-thumb-label-text {
+    font-size: 16px;
+    font-family: $font2;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+    font-size: 18px;
+    font-family: $font2;
+    color: var(--monithon-default-font-color);
+
+}
 
 
 .monithon-comune-corrente {
@@ -105,6 +116,6 @@
     font-weight: 400 !important;
 }
 
-.monithon-dettaglio-progetto__lista__categorie__header{
+.monithon-dettaglio-progetto__lista__categorie__header {
     font-size: unset;
 }
