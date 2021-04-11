@@ -35,7 +35,7 @@
             <div #dettagliProgetto class="monithon-dettaglio-progetto__dettagli_container">
 
                 <ion-grid>
-                    <ion-row>
+                    <ion-row class="monithon-dettaglio-progetto__row">
                         <ion-col col-6
                             class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__col__titolo ">
                             <div class="monithon-dettaglio-progetto__titolo_container">
@@ -75,7 +75,8 @@
                                     class="monithon-dettaglio-progetto__lista__categorie mat-elevation-z"
                                     [ngClass]="{'inactive': getCategorieTail().length==1}">
                                     <mat-expansion-panel-header
-                                        class="monithon-dettaglio-progetto__lista__categorie__header">
+                                        class="monithon-dettaglio-progetto__lista__categorie__header"
+                                        [ngClass]="{'monithon-dettaglio-progetto__unica__categoria': getCategorieTail().length==0}">
                                         <ion-label
                                             class="monithon-dettaglio-progetto__categoria__singola monithon-dettaglio-progetto__prima__categoria">
                                             {{'categorie.'+getCategorieHead() |transloco }}
@@ -159,8 +160,8 @@
                             </div>
                             <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
                                 <button (click)="iniziaMonitoraggioClicked(progettoSelezionato)"
-                                    class="monithon-dettaglio-progetto__inizia_monitoraggio__button monithon-titolo-sezione" mat-button
-                                    color="primary">{{'iniziaMonitoraggio' | transloco}}
+                                    class="monithon-dettaglio-progetto__inizia_monitoraggio__button monithon-titolo-sezione"
+                                    mat-button color="primary">{{'iniziaMonitoraggio' | transloco}}
                                 </button>
                             </div>
                         </ion-col>
