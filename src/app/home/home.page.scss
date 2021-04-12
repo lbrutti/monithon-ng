@@ -800,7 +800,9 @@ ion-row.monithon-filtri-secondari {
         --ion-item-border-color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
 
         border-left: 12px solid;
-        border-color: white;
+        border-left-color: white;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
         width: 460px;
 
         ion-grid,
@@ -809,6 +811,21 @@ ion-row.monithon-filtri-secondari {
             padding: 0 !important;
         }
 
+        &[data-oc-cod-tema-sintetico="4"] {
+            border-bottom-color: var(--monithon-tema-energia-background);
+        }
+
+        &[data-oc-cod-tema-sintetico="5"] {
+            border-bottom-color: var(--monithon-tema-ambiente-background);
+        }
+
+        &[data-oc-cod-tema-sintetico="6"] {
+            border-bottom-color: var(--monithon-tema-attrazione-background);
+        }
+
+        &[data-oc-cod-tema-sintetico="7"] {
+            border-bottom-color: var(--monithon-tema-mobilita-background);
+        }
         &.selected {
 
             &[data-oc-cod-tema-sintetico="4"] {
