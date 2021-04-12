@@ -408,10 +408,10 @@ export class HomePage implements OnInit, AfterViewInit {
                 let position = scale(d.totPagamenti);
                 return position < 120 ? 'start' : 'end';
             })
-            .attr('dy', '-10')
+            .attr('dy', '-7')
             .attr('dx', d => {
                 let position = scale(d.totPagamenti);
-                return position < 120 ? '0' : '-3';
+                return position < 120 ? '7' : '-7';
             })
             .text(d => {
                 return this.translocoService.translate('pagamenti');
@@ -428,10 +428,10 @@ export class HomePage implements OnInit, AfterViewInit {
                 let position = scale(d.totPagamenti);
                 return position < 120 ? 'start' : 'end';
             })
-            .attr('dy', '-10')
+            .attr('dy', '-15')
             .attr('dx', d => {
                 let position = scale(d.totPagamenti);
-                return position < 120 ? '0' : '-3';
+                return position < 120 ? '7' : '-7';
             })
             .text(d => {
                 let pagamento = lodash.isNil(d.totPagamenti) ? 0 : d.totPagamenti;
