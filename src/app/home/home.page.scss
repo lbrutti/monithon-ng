@@ -47,6 +47,8 @@
             margin-bottom: 5px !important;
         }
     }
+
+
 }
 
 #filterContainer {
@@ -159,9 +161,20 @@
     width: 66vw;
     transition: left 0.5s;
     z-index: 1001;
-    height: 71vh;
+    height: 72vh;
     text-align: left;
     color: var(--monithon-font-color);
+
+    @media not screen and (-webkit-min-device-pixel-ratio: 2),
+    not screen and (min--moz-device-pixel-ratio: 2),
+    not screen and (-o-min-device-pixel-ratio: 2/1),
+    not screen and (min-device-pixel-ratio: 2),
+    not screen and (min-resolution: 192dpi),
+    not screen and (min-resolution: 2dppx) {
+
+        height: 74vh;
+
+    }
 
     .monithon-dettaglio-progetto__dettagli_container {
         height: 90%;
@@ -749,6 +762,17 @@ ion-row.monithon-filtri-secondari {
     right: 0;
     position: absolute;
     bottom: 0;
+
+    @media not screen and (-webkit-min-device-pixel-ratio: 2),
+    not screen and (min--moz-device-pixel-ratio: 2),
+    not screen and (-o-min-device-pixel-ratio: 2/1),
+    not screen and (min-device-pixel-ratio: 2),
+    not screen and (min-resolution: 192dpi),
+    not screen and (min-resolution: 2dppx) {
+
+        max-height: 85vh;
+
+    }
 }
 
 #resultContainer {
