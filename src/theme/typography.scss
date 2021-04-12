@@ -116,6 +116,23 @@
     font-weight: 400 !important;
 }
 
-.monithon-dettaglio-progetto__lista__categorie__header {
-    font-size: unset;
+
+.monithon-dettaglio-progetto {
+    .monithon-dettaglio-progetto__lista__categorie__header {
+        font-size: unset; //deve essere resettato per poterlo poi sovrascrivere con la regola successiva
+    }
+
+    .monithon-dettaglio-progetto__sintesi,
+    .monithon-dettaglio-progetto__sintesi__oc_link,
+    .monithon-dettaglio-progetto__data_inizio,
+    .monithon-dettaglio-progetto__tema__progetto,
+    .monithon-dettaglio-progetto__lista__categorie,
+    .monithon-dettaglio-progetto__lista__categorie__header {
+        font-size: 18px;
+    }
+
+    .monithon-dettaglio-progetto__data_inizio {
+        text-transform: capitalize;
+    }
+
 }
