@@ -43,11 +43,11 @@
         line-height: 40px !important;
     }
 
-    .mapboxgl-ctrl-geocoder--icon-search{
+    .mapboxgl-ctrl-geocoder--icon-search {
         display: none;
     }
 
-    .mapboxgl-ctrl-geocoder--input{
+    .mapboxgl-ctrl-geocoder--input {
         padding-left: 15px;
     }
 }
@@ -116,7 +116,11 @@ ion-content {
 
     &::after {
         color: var(--monithon-panel-chevron-color) !important;
-        margin: auto !important;
+        // margin: auto !important;
+        margin-left: auto;
+        margin-top: auto;
+        margin-bottom: 4.5px;
+        margin-right: auto;
         border-width: 1px 0 0 1px !important;
         padding-top: 9px !important;
         padding-left: 9px !important;
