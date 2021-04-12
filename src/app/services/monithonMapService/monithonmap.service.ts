@@ -75,6 +75,7 @@ export class MonithonMapService {
             placeholder: this.translocoService.translate('gecoderPlaceholder'),
             types: 'place,locality',
             enableEventLogging: false,
+            trackProximity:false,
             //zoom: 3,
             filter: function (item: any) {
                 //workaround per non escludere aosta
