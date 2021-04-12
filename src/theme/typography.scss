@@ -3,7 +3,7 @@
 .monithon-titolo-sezione {
     font-family: $font1;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 400;
     text-decoration: underline !important; //necessario !important per sovrascrivere stile angular in header
     text-underline-offset: 3px;
     text-transform: uppercase;
@@ -71,7 +71,7 @@
 }
 
 .mat-slider-thumb-label-text {
-    font-size: 16px;
+    // font-size: 16px;
     font-family: $font2;
 }
 
