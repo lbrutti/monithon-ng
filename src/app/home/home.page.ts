@@ -122,7 +122,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.loadingController.create({
-            message: "Loading...",
+            message: "",
             cssClass: 'monithon-loader',
             spinner: null
 
