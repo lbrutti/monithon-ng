@@ -262,29 +262,30 @@
                     cursor: default;
                 }
             }
-
+            
             &[data-oc-cod-tema-sintetico="4"] * {
                 background: var(--monithon-tema-energia-background) !important;
             }
-
+            
             &[data-oc-cod-tema-sintetico="5"] * {
-
+                
                 background: var(--monithon-tema-ambiente-background) !important;
             }
-
+            
             &[data-oc-cod-tema-sintetico="6"] * {
                 background: var(--monithon-tema-attrazione-background) !important;
             }
-
+            
             &[data-oc-cod-tema-sintetico="7"] * {
                 background: var(--monithon-tema-mobilita-background) !important;
             }
-
-
-
+            
+            
+            
             .monithon-dettaglio-progetto__lista__categorie__header {
                 padding: 0;
-
+                height: auto;
+                
                 .monithon-dettaglio-progetto__arrow {
                     margin-left: 10px
                 }
