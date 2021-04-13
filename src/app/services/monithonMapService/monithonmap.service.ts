@@ -651,7 +651,7 @@ export class MonithonMapService {
         this.progetti.features
             .map(f => {
                 let progetto = f.properties;
-                progetto.isSelected = ((idRisultati.length == 0) && progetto.isSelected) || lodash.includes(idRisultati, progetto.uid);
+                progetto.isSelected = ((!lodash.isNil(idRisultati) && idRisultati.length == 0) && progetto.isSelected) || lodash.includes(idRisultati, progetto.uid);
 
                 this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isSelected: progetto.isSelected });
             });

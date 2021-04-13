@@ -724,6 +724,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     evidenziaRisultatiSuMappa() {
         let idRisultati = this.risultatiRicerca.map(p => p.uid);
+        idRisultati = idRisultati.length == 0 ? null : idRisultati;
         this.monithonMap.selectById(idRisultati);
     }
 
