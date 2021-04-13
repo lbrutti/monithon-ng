@@ -263,30 +263,30 @@
                     cursor: default;
                 }
             }
-            
+
             &[data-oc-cod-tema-sintetico="4"] * {
                 background: var(--monithon-tema-energia-background) !important;
             }
-            
+
             &[data-oc-cod-tema-sintetico="5"] * {
-                
+
                 background: var(--monithon-tema-ambiente-background) !important;
             }
-            
+
             &[data-oc-cod-tema-sintetico="6"] * {
                 background: var(--monithon-tema-attrazione-background) !important;
             }
-            
+
             &[data-oc-cod-tema-sintetico="7"] * {
                 background: var(--monithon-tema-mobilita-background) !important;
             }
-            
-            
-            
+
+
+
             .monithon-dettaglio-progetto__lista__categorie__header {
                 padding: 0;
                 height: auto;
-                
+
                 .monithon-dettaglio-progetto__arrow {
                     margin-left: 10px
                 }
@@ -598,6 +598,7 @@ ion-row.monithon-filtri-secondari {
 
 .monithon-filtri-charts {
     background-color: var(--monithon-tema-sfondo-charts);
+    width: 100%;
 
     .mat-expansion-panel-header {
         padding-left: 12px;
@@ -606,6 +607,23 @@ ion-row.monithon-filtri-secondari {
 
     .monithon-titolo-sezione-budget {
         height: 21px;
+    }
+
+    &.mat-expanded {
+        ::ng-deep .mat-expansion-panel-content {
+            height: 54vh;
+
+            @media not screen and (-webkit-min-device-pixel-ratio: 2),
+            not screen and (min--moz-device-pixel-ratio: 2),
+            not screen and (-o-min-device-pixel-ratio: 2/1),
+            not screen and (min-device-pixel-ratio: 2),
+            not screen and (min-resolution: 192dpi),
+            not screen and (min-resolution: 2dppx) {
+
+                height: 52vh;
+
+            }
+        }
     }
 }
 
@@ -829,6 +847,7 @@ ion-row.monithon-filtri-secondari {
         &[data-oc-cod-tema-sintetico="7"] {
             border-bottom-color: var(--monithon-tema-mobilita-background);
         }
+
         &.selected {
 
             &[data-oc-cod-tema-sintetico="4"] {
