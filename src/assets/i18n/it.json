@@ -60,7 +60,7 @@
     "chartPanelTitle": "Budget, anno e stato",
     "budgetChartTitle": "Budget",
     "annoChartTitle": "Anno",
-    "resultContainerTitle": "Progetti disponibili",
+    "resultContainerTitle": "Progetti finanziati",
     "comune": "comune",
     "ordinati": "ordinati",
     "distanza": "Distanza",
@@ -94,7 +94,8 @@
     "true":"Si",
     "false":"No",
     "monitoraggio": "Monitoraggio",
-    "readmore": "read more",
+    "readmore": "vedi il progetto su OpenCoesione",
     "loaderMessage": "Ci siamo quasi...",
-    "gecoderPlaceholder":"cerca per comune"
+    "gecoderPlaceholder":"cerca per comune",
+    "gecoderPlaceholderWizard": "inizia inserendo il tuo comune"
 }

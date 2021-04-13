@@ -208,6 +208,7 @@ export class HomePage implements OnInit, AfterViewInit {
         this.comuneCorrente = this.geocoderData.comune.split(',')[0];
         this.raggioCorrente = this.geocoderData.radius;
         this.criterioSelezionato = 'distanza';
+        this.ordinaRisultatiPerCriterio();
     }
 
     getTemi() {

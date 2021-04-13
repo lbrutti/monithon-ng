@@ -66,21 +66,17 @@ export class MonithonMapService {
             attributionControl: false
         });
 
+        let gecoderPlaceholder = this.isFreeMode ? 'gecoderPlaceholder' : 'gecoderPlaceholderWizard';
         let geocoderOptions = {
             accessToken: mapboxgl.accessToken,
             mapboxgl: mapboxgl,
             countries: 'it',
             minLength: 3,
             language: 'it',
-            placeholder: this.translocoService.translate('gecoderPlaceholder'),
+            placeholder: this.translocoService.translate(gecoderPlaceholder),
             types: 'place,locality',
             enableEventLogging: false,
             trackProximity:false,
-            //zoom: 3,
-            filter: function (item: any) {
-                //workaround per non escludere aosta
-                return true; // (item.place_type[0] !== 'poi');
-            },
             marker: false
 
         };
