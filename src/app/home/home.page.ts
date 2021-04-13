@@ -759,7 +759,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
     public iniziaMonitoraggioClicked(progetto: Progetto) {
-        window.open("https://it.monithon.eu/user/login?pfurl=" + encodeURI(progetto.ocLink), "_blank");
+        window.open("https://it.monithon.eu/report/create?pfurl=" + encodeURI(progetto.ocLink), "_blank");
     }
 
     public onCriterioSelezionatoClick(criterio: string) {
