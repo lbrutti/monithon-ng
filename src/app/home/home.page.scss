@@ -815,6 +815,8 @@ ion-row.monithon-filtri-secondari {
     }
 
     .monithon-lista-progetti__progetto {
+        display: flex;
+        align-content: center;
         cursor: pointer !important;
         min-height: 100px !important;
         color: var(--monithon-font-color);
