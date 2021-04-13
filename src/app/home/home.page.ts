@@ -117,7 +117,7 @@ export class HomePage implements OnInit, AfterViewInit {
         private router: Router
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
-        this.isWizardMode = this.router.url == '/#wizard';
+        this.isWizardMode = this.router.url == '/#wizard' || this.router.url == '/wizard';
     }
 
     ngOnInit(): void {
