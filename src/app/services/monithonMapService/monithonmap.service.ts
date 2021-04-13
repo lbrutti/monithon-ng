@@ -486,7 +486,9 @@ export class MonithonMapService {
 
         lodash.map(categoriePerTema, (categorie, codiceTema) => {
             //quando deseleziono tutte le categorie di un tema-> lo deseleziono
-            if (lodash.every(categorie, c => !c.isSelected) || lodash.every(categorie, c => !c.isActive)) {
+           let isTemaSelezionato =  lodash.some(categorie, c => c.isSelected && c.isActive)
+            // if (lodash.every(categorie, c => !c.isSelected) || lodash.every(categorie, c => !c.isActive)) {
+            if (!isTemaSelezionato) {
                 this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => t.isSelected = false);
             }
             //se ho selezionato almeno una categoria di un tema deselezioanato-> lo seleziono
