@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-about-page',
@@ -12,6 +13,7 @@ export class AboutPage implements OnInit {
 
     constructor(
         private modalController: ModalController,
+        private translocoService: TranslocoService
     ) { }
 
     ngOnInit() { }

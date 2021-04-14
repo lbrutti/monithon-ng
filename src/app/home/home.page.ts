@@ -796,6 +796,7 @@ export class HomePage implements OnInit, AfterViewInit {
     async openIonModal() {
         const modal = await this.modalController.create({
             component: AboutPage,
+            cssClass: 'fullscreen',
             componentProps: {
                 'model_title': "Nomadic model's reveberation"
             }

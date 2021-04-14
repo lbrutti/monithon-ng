@@ -31,7 +31,6 @@
                             "@mapbox/geojsonhint",
                             "@mapbox/geojson-extent",
                             "@mapbox/geojson-area"
-
                         ],
                         "styles": [
                             {

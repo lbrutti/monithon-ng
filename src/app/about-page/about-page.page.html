@@ -1,19 +1,16 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title>Ionic Modal Popup Example</ion-title>
-    </ion-toolbar>
-</ion-header>
+<!-- <ion-header>
+</ion-header> -->
 
-<ion-content>
+<ion-content [fullscreen]="true">
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-icon  class="monithon-close-modal" (click)="closeModal()"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
     <ion-grid>
         <ion-row>
             <ion-col text-center>
                 Modal Title : {{ modal_title }}
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col text-center>
-                <ion-button (click)="closeModal()">Close</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
