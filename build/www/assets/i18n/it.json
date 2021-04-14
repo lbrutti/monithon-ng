@@ -85,17 +85,25 @@
     "tema": "Tema",
     "finanziamento": "Finanziamento",
     "pagamenti": "Pagamenti erogati",
-    "ordinaPer":"Ordinati per",
-    "ocCodCategoriaSpesa":"Categoria",
+    "ordinaPer": "Ordinati per",
+    "ocCodCategoriaSpesa": "Categoria",
     "ocCodTemaSintetico": "Tema",
-    "ocFinanzTotPubNetto":"Budget",
-    "ocDataInizioProgetto":"Anno",
+    "ocFinanzTotPubNetto": "Budget",
+    "ocDataInizioProgetto": "Anno",
     "hasReport": "Monitoraggi attivi",
-    "true":"Si",
-    "false":"No",
+    "true": "Si",
+    "false": "No",
     "monitoraggio": "Monitoraggio",
     "readmore": "vedi il progetto su OpenCoesione",
     "loaderMessage": "Ci siamo quasi...",
-    "gecoderPlaceholder":"cerca per comune",
-    "gecoderPlaceholderWizard": "inizia inserendo il tuo comune"
+    "gecoderPlaceholder": "cerca per comune",
+    "gecoderPlaceholderWizard": "inizia inserendo il tuo comune",
+    "about": {
+        "titolo": "Monithon",
+        "sottotitolo": "Scopri i progetti europei sui temi dell'ambiente, dell'energia, della valorizzazione del patrimonio naturale e culturale, e della mobilità sostenibile!",
+        "cosaPuoiFare": "Cosa puoi fare",
+        "metodologia": "Metodologia",
+        "colophon": "Irure esse mollit esse laboris consectetur occaecat veniam sit cillum commodo laborum aute. Velit ad ipsum do culpa laborum exercitation officia. Mollit dolore duis culpa ea aute sit culpa velit. Non excepteur ad ipsum quis elit aliqua quis incididunt esse id officia. Laboris cillum tempor sint ullamco aliqua reprehenderit Lorem aliquip ex pariatur. Cillum ex dolor commodo velit sint cillum cillum elit pariatur sit sint pariatur cillum.",
+        "credits": "Credits"
+    }
 }
