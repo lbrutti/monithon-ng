@@ -11,9 +11,10 @@ import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
+import { AboutPage } from '../about-page/about-page.page';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -107,6 +108,8 @@ export class HomePage implements OnInit, AfterViewInit {
     hideSlider: boolean = true;
     isAppReady: boolean = false;
     isWizardMode: boolean = false;
+
+    modelData: any;
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -114,7 +117,8 @@ export class HomePage implements OnInit, AfterViewInit {
         private currencyPipe: CurrencyPipe,
         private translocoService: TranslocoService,
         public loadingController: LoadingController,
-        private router: Router
+        private router: Router,
+        public modalController: ModalController
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = this.router.url == '/#wizard' || this.router.url == '/wizard';
@@ -786,6 +790,25 @@ export class HomePage implements OnInit, AfterViewInit {
     }
     getCategorieHead() {
         return lodash.first(this.progettoSelezionato.ocCodCategoriaSpesa);
+    }
+
+    //metodi per modale
+    async openIonModal() {
+        const modal = await this.modalController.create({
+            component: AboutPage,
+            componentProps: {
+                'model_title': "Nomadic model's reveberation"
+            }
+        });
+
+        modal.onDidDismiss().then((modelData) => {
+            if (modelData !== null) {
+                this.modelData = modelData.data;
+                console.log('Modal Data : ' + modelData.data);
+            }
+        });
+
+        return await modal.present();
     }
 
 }

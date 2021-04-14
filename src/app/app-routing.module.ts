@@ -18,7 +18,11 @@ const routes: Routes = [
         path: '',
         redirectTo: '',
         pathMatch: 'full'
-    }
+    },
+  {
+    path: 'about-page',
+    loadChildren: () => import('./about-page/about-page.module').then( m => m.AboutPagePageModule)
+  }
 ];
 
 @NgModule({

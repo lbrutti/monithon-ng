@@ -10,7 +10,11 @@
             [disabled]="!monithonMap.filtroPerRaggioEnabled">
         </mat-slider>
     </div>
+    <div>
+        <ion-button (click)="openIonModal()">Open Modal</ion-button>
 
+        <strong *ngIf="modelData">{{modelData}}</strong>
+    </div>
     <div #navigationControl id="navigationControl" class="navigation-control"
         [ngClass]="{'hidden': (isWizardMode && !monithonMap.filtroPerRaggioEnabled) || (!isWizardMode && !isAppReady),'visible': ((!isWizardMode && isAppReady) || monithonMap.filtroPerRaggioEnabled)}">
 
@@ -20,6 +24,11 @@
         <!-- Mappa -->
         <div #mapContainer id="mapContainer">
 
+        </div>
+        <div>
+            <ion-button (click)="openIonModal()">Open Modal</ion-button>
+        
+            <strong *ngIf="modelData">{{modelData}}</strong>
         </div>
         <!-- dettaglio progetto -->
         <div [ngClass]="{'hidden': !this.visualizzaDettaglio, 'visible': this.visualizzaDettaglio}" #dettaglioProgetto
@@ -60,7 +69,8 @@
                                 <ion-label class="monithon-dettaglio-progetto__label monithon-titolo-sezione">
                                     {{'dataInizio' | transloco}}
                                 </ion-label>
-                                <ion-label class="monithon-dettaglio-progetto__data_inizio">{{progettoSelezionato.ocDataInizioProgetto | momentdate:'YYYYMMDD' |
+                                <ion-label class="monithon-dettaglio-progetto__data_inizio">
+                                    {{progettoSelezionato.ocDataInizioProgetto | momentdate:'YYYYMMDD' |
                                     date:'MMMM y':'+0100': 'it'}}</ion-label>
                             </div>
 
@@ -97,7 +107,8 @@
                             <div class="monithon-dettaglio-progetto__tema">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">{{'tema'
                                     | transloco}}</ion-label>
-                                <ion-label class="monithon-dettaglio-progetto__tema__progetto">{{'temi.'+progettoSelezionato.ocCodTemaSintetico | transloco}}
+                                <ion-label class="monithon-dettaglio-progetto__tema__progetto">
+                                    {{'temi.'+progettoSelezionato.ocCodTemaSintetico | transloco}}
                                 </ion-label>
                             </div>
 
@@ -139,7 +150,8 @@
                                                 </mat-chip>
                                             </mat-chip-list>
                                         </ion-col>
-                                        <ion-col size="4"  class="ion-no-margin monithon-dettaglio-progetto__flag_report">
+                                        <ion-col size="4"
+                                            class="ion-no-margin monithon-dettaglio-progetto__flag_report">
                                             <ion-label
                                                 class="chart-title monithon-dettaglio-progetto__label  monithon-titolo-sezione"
                                                 monithon-dettaglio-progetto__label>{{'monitorati' |transloco}}
@@ -209,12 +221,13 @@
                                     </mat-chip-list>
                                 </div>
                             </ion-col>
-                            <ion-col size-lg="6" size-md="12" size-sm="12" class="ion-no-margin monithon-chart-container-col">
+                            <ion-col size-lg="6" size-md="12" size-sm="12"
+                                class="ion-no-margin monithon-chart-container-col">
                                 <!-- INIZIALIZZARE COME ESPANSO -->
                                 <mat-expansion-panel expanded="true" class="monithon-filtri-charts" id="chartPanel">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title class="monithon-titolo-sezione monithon-titolo-sezione-budget">
-                                           3-{{'chartPanelTitle'|transloco}}
+                                            3-{{'chartPanelTitle'|transloco}}
                                         </mat-panel-title>
                                     </mat-expansion-panel-header>
                                     <div id="chartsContainer">
