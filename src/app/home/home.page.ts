@@ -109,7 +109,7 @@ export class HomePage implements OnInit, AfterViewInit {
     isAppReady: boolean = false;
     isWizardMode: boolean = false;
 
-    modelData: any;
+    modalData: any;
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -796,15 +796,12 @@ export class HomePage implements OnInit, AfterViewInit {
     async openIonModal() {
         const modal = await this.modalController.create({
             component: AboutPage,
-            cssClass: 'fullscreen',
-            componentProps: {
-                'model_title': "Nomadic model's reveberation"
-            }
+            cssClass: 'monithon-about-modal'
         });
 
         modal.onDidDismiss().then((modelData) => {
             if (modelData !== null) {
-                this.modelData = modelData.data;
+                this.modalData = modelData.data;
                 console.log('Modal Data : ' + modelData.data);
             }
         });

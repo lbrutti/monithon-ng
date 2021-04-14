@@ -136,3 +136,25 @@
     }
 
 }
+
+
+//modale:
+.monithon-about-modal .modal-wrapper {
+
+    .monithon-about-modal-content {
+        font-family: $font2 !important;
+        .monithon-about-col {
+            color: var(--monithon-default-font-color) !important;
+        }
+        .monithon-about-titolo{
+            color: var(--monithon-about-titolo-color) !important;
+            font-size: 23px;
+        }
+        .monithon-about-titolo-sezione{
+            font-size: 16px;
+        }
+            .monithon-about-colophon {
+                font-size: 12px;
+            }
+    }
+}
