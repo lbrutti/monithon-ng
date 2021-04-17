@@ -11,7 +11,7 @@ import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, Platform } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
 import { AboutPage } from '../about-page/about-page.page';
@@ -118,23 +118,33 @@ export class HomePage implements OnInit, AfterViewInit {
         private translocoService: TranslocoService,
         public loadingController: LoadingController,
         private router: Router,
-        public modalController: ModalController
+        public modalController: ModalController,
+        private platform: Platform
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = this.router.url == '/#wizard' || this.router.url == '/wizard';
+
     }
 
     ngOnInit(): void {
-        this.loadingController.create({
+
+        let loaderOptions = {
             message: "",
             cssClass: 'monithon-loader',
             spinner: null
 
-        }).then((loading) => {
-            this.loading = loading;
-            loading.present();
+        };
+        if (!(this.platform.is('desktop') || this.platform.is('tablet'))) {
+            loaderOptions.message = "Project Finder è disponibile solo in versione desktop";
+            loaderOptions.cssClass = 'monithon-loader monithon-loader-only-desktop';
+        }
+        this.loadingController
+            .create(loaderOptions)
+            .then((loading) => {
+                this.loading = loading;
+                this.loading.present();
 
-        });
+            });
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
@@ -220,6 +230,9 @@ export class HomePage implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+        if (!(this.platform.is('desktop') || this.platform.is('tablet'))) {
+            return;
+        }
         Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise()])
             .then(data => {
 
