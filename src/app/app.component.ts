@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslocoService } from '@ngneat/transloco';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -13,9 +14,10 @@ import { TranslocoService } from '@ngneat/transloco';
 export class AppComponent {
     constructor(
         private platform: Platform,
-        private splashScreen: SplashScreen,
+        // private splashScreen: SplashScreen,
         private statusBar: StatusBar,
-        private translocoService: TranslocoService
+        private translocoService: TranslocoService,
+        private router: Router
     ) {
         this.initializeApp();
     }
@@ -25,7 +27,10 @@ export class AppComponent {
             this.translocoService.setDefaultLang('it');
             this.translocoService.setActiveLang('it');
             this.statusBar.styleDefault();
-            this.splashScreen.hide();
+
+            if (!this.platform.is('desktop')) {
+                this.router.navigate(['/courtesy']);
+            }
 
         });
     }

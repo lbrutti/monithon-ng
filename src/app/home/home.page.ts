@@ -11,7 +11,7 @@ import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
-import { LoadingController, ModalController, Platform } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
 import { AboutPage } from '../about-page/about-page.page';
@@ -118,8 +118,7 @@ export class HomePage implements OnInit, AfterViewInit {
         private translocoService: TranslocoService,
         public loadingController: LoadingController,
         private router: Router,
-        public modalController: ModalController,
-        private platform: Platform
+        public modalController: ModalController
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = this.router.url == '/#wizard' || this.router.url == '/wizard';
@@ -134,13 +133,7 @@ export class HomePage implements OnInit, AfterViewInit {
             spinner: null
 
         };
-        if (!(this.platform.is('desktop') || this.platform.is('tablet'))) {
-            this.router.navigate(['/courtesy']);
-            this.loading.dismiss();
 
-            // loaderOptions.message = "Project Finder è disponibile solo in versione desktop";
-            // loaderOptions.cssClass = 'monithon-loader monithon-loader-only-desktop';
-        }
         this.loadingController
             .create(loaderOptions)
             .then((loading) => {
@@ -233,9 +226,6 @@ export class HomePage implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        if (!(this.platform.is('desktop') || this.platform.is('tablet'))) {
-            return;
-        }
         Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise()])
             .then(data => {
 
