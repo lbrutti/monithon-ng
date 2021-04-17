@@ -133,12 +133,15 @@ export class HomePage implements OnInit, AfterViewInit {
             spinner: null
 
         };
-
+        // if (!(isPlatform('desktop') || isPlatform('tablet'))) {
+        //     loaderOptions.message = this.translocoService.translate("onlyDesktopAvailable")
+        //     loaderOptions.cssClass = 'monithon-loader monithon-loader-only-desktop'
+        // }
         this.loadingController
             .create(loaderOptions)
             .then((loading) => {
                 this.loading = loading;
-                this.loading.present();
+                loading.present();
 
             });
         let mapUpdateObserver: Observer<any> = {
