@@ -135,8 +135,11 @@ export class HomePage implements OnInit, AfterViewInit {
 
         };
         if (!(this.platform.is('desktop') || this.platform.is('tablet'))) {
-            loaderOptions.message = "Project Finder è disponibile solo in versione desktop";
-            loaderOptions.cssClass = 'monithon-loader monithon-loader-only-desktop';
+            this.router.navigate(['/courtesy']);
+            this.loading.dismiss();
+
+            // loaderOptions.message = "Project Finder è disponibile solo in versione desktop";
+            // loaderOptions.cssClass = 'monithon-loader monithon-loader-only-desktop';
         }
         this.loadingController
             .create(loaderOptions)

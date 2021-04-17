@@ -112,9 +112,8 @@ ion-content {
         --max-width: 100vw !important;
         background: white;
 
-        .loading-content {
-        }
-        
+        .loading-content {}
+
         .loading-wrapper {
             width: 100%;
             margin: 0;
@@ -157,7 +156,8 @@ ion-content {
     }
 }
 
-ion-modal.monithon-about-modal {
+ion-modal.monithon-about-modal,
+app-courtesy {
     --width: 100%;
     --height: 100%;
     --border-radius: 0;
@@ -171,7 +171,8 @@ ion-modal.monithon-about-modal {
 
 @import './theme/scrollbar-width-mixin.scss';
 
-.monithon-about-modal .modal-wrapper {
+.monithon-about-modal .modal-wrapper,
+app-courtesy {
     --background: white;
 
 

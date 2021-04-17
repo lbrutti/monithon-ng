@@ -106,5 +106,9 @@
         "colophon": "Irure esse mollit esse laboris consectetur occaecat veniam sit cillum commodo laborum aute. Velit ad ipsum do culpa laborum exercitation officia. Mollit dolore duis culpa ea aute sit culpa velit. Non excepteur ad ipsum quis elit aliqua quis incididunt esse id officia. Laboris cillum tempor sint ullamco aliqua reprehenderit Lorem aliquip ex pariatur. Cillum ex dolor commodo velit sint cillum cillum elit pariatur sit sint pariatur cillum.",
         "credits": "Credits"
     },
-    "onlyDesktopAvailable":"Project Finder è disponibile solo in per desktop"
+    "onlyDesktopAvailable":"Project Finder è disponibile solo in per desktop",
+    "courtesy":{
+        "titolo":"Ci dispiace!",
+        "sottotitolo": "Project finder è consultabile solo da desktop"
+    }
 }
