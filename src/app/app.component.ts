@@ -29,7 +29,7 @@ export class AppComponent {
             this.statusBar.styleDefault();
 
             if (!this.platform.is('desktop')) {
-                this.router.navigate(['/courtesy']);
+                this.router.navigate(['/courtesy'], {skipLocationChange:true});
             }
 
         });
