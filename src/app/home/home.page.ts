@@ -746,7 +746,7 @@ export class HomePage implements OnInit, AfterViewInit {
         let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.codStatoProgetto);
         let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);
 
-        this.risultatiRicerca = this.progetti.filter(progetto => {
+        this.risultatiRicerca = this.progetti.filter((progetto: Progetto) => {
             let matchesStato = ((reportFlagSelezionate.length == 0) || lodash.includes(reportFlagSelezionate, progetto.hasReport));
             let matchesReportFlags = ((statiAvanzamentoSelezionati.length == 0) || lodash.includes(statiAvanzamentoSelezionati, progetto.codStatoProgetto))
 

@@ -5,6 +5,8 @@ import { map, catchError } from 'rxjs/operators';
 import lodash from 'lodash';
 import { environment } from 'src/environments/environment';
 import { Progetto } from 'src/app/model/progetto/progetto';
+import { Tema } from 'src/app/model/tema/tema.interface';
+import { Categoria } from 'src/app/model/categoria/categoria.interface';
 @Injectable({
     providedIn: 'root'
 })
@@ -64,7 +66,7 @@ export class MonithonApiService {
     public getDettaglio(progetto: Progetto): Observable<any> {
         return this.httpClient.get<any>(this.url + '/mdProject/' + progetto.uid)
             .pipe(
-                map((p:Progetto) => {
+                map((p: Progetto) => {
                     p.ocTitoloProgetto = p.ocTitoloProgetto.replace(/√Ç¬ø/g, '"');
                     p.ocSintesiProgetto = p.ocSintesiProgetto.replace(/√Ç¬ø/g, '"');
 
@@ -78,22 +80,21 @@ export class MonithonApiService {
             );
     }
 
-   public getTemi() {
-        let res = { temi: [], categorie: [] };
+    public getTemi() {
         //{"4":[12,10,15,14,11,13,16],"6":[95,91,94,93,92],"5":[87,86,85,19,20,84,22,17,18,88,21,89,23,500],"7":[43]}
 
         return this.httpClient.get<any>(this.url + '/mdTemi')
             .pipe(
                 map((res: any) => {
-                    let temi = lodash.chain(res)
+                    let temi: Tema[] = lodash.chain(res)
                         .keys()
                         .map(tema => ({ 'ocCodTemaSintetico': tema, 'isActive': true }))
                         .value();
-                    let categorie = lodash.chain(res).map((cat, tema) => {
-                        let categorie = cat.map(c => ({ 'ocCodTemaSintetico': tema, 'ocCodCategoriaSpesa': c }));
+                    let categorie: Categoria[] = lodash.chain(res).map((cat, tema) => {
+                        let categorie: Categoria[] = cat.map(c => ({ 'ocCodTemaSintetico': tema, 'ocCodCategoriaSpesa': c }));
                         return categorie;
                     }).flatten()
-                    .value();
+                        .value();
                     return {
                         temi: temi,
                         categorie: categorie

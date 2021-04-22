@@ -76,7 +76,7 @@ export class MonithonMapService {
             placeholder: this.translocoService.translate(gecoderPlaceholder),
             types: 'place,locality',
             enableEventLogging: false,
-            trackProximity:false,
+            trackProximity: false,
             marker: false
 
         };
@@ -378,14 +378,14 @@ export class MonithonMapService {
         // rimuovi filtro su categorie non associate ai temi selezionati
         this.filtraCategorie(tema);
         let progetti = this.filtraProgetti();
-        lodash.remove(progetti, p => !p.isSelected);
+        lodash.remove(progetti, (p: Progetto) => !p.isSelected);
         this.publishUpdate(progetti);
     }
     resetFiltroTemi() {
         lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
         let progettiSelezionati = [];
         if (this.filtroPerRaggioEnabled) {
-            progettiSelezionati = this.progetti.features.filter(p => p.properties.isWithinRange);
+            progettiSelezionati = this.progetti.features.filter((p: any) => (p.properties as Progetto).isWithinRange);
         } else {
             progettiSelezionati = this.progetti.features;
         }
@@ -486,7 +486,7 @@ export class MonithonMapService {
 
         lodash.map(categoriePerTema, (categorie, codiceTema) => {
             //quando deseleziono tutte le categorie di un tema-> lo deseleziono
-           let isTemaSelezionato =  lodash.some(categorie, c => c.isSelected && c.isActive)
+            let isTemaSelezionato = lodash.some(categorie, c => c.isSelected && c.isActive)
             // if (lodash.every(categorie, c => !c.isSelected) || lodash.every(categorie, c => !c.isActive)) {
             if (!isTemaSelezionato) {
                 this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => t.isSelected = false);
@@ -506,7 +506,7 @@ export class MonithonMapService {
             }
         });
         let progetti = this.filtraProgetti();
-        lodash.remove(progetti, p => !p.isSelected);
+        lodash.remove(progetti, (p: Progetto) => !p.isSelected);
         this.publishUpdate(progetti);
     }
 
@@ -537,7 +537,7 @@ export class MonithonMapService {
 
         return this.progetti.features
             .map(f => {
-                let progetto = f.properties;
+                let progetto: Progetto = f.properties;
                 progetto.isSelected = ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, progetto.ocCodCategoriaSpesa).length > 0));
                 let featureStates = { isSelected: progetto.isSelected, isWithinRange: true };
                 if (this.filtroPerRaggioEnabled) {
@@ -557,7 +557,7 @@ export class MonithonMapService {
     resetFiltroProgetti(): Array<any> {
 
         return this.progetti.features.map(f => {
-            let progetto = f.properties;
+            let progetto: Progetto = f.properties;
             progetto.distanza = null;
             progetto.isHighlighted = true;
             progetto.isWithinRange = true;
@@ -597,7 +597,7 @@ export class MonithonMapService {
         this.geocoderResults.unsubscribe();
     }
     publishUpdate(progetti: Array<Progetto>): void {
-        this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: lodash.uniqBy(progetti, p => p.uid) });
+        this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: lodash.uniqBy(progetti, (p: Progetto) => p.uid) });
     }
 
     publishSelectedProject(progetto?: Progetto): void {
@@ -638,7 +638,7 @@ export class MonithonMapService {
     highlightById(idRisultati: string[]) {
         this.progetti.features
             .map(f => {
-                let progetto = f.properties;
+                let progetto: Progetto = f.properties;
                 progetto.isHighlighted = (progetto.isSelected && (idRisultati.length == 0)) || lodash.includes(idRisultati, progetto.uid);
 
                 this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isHighlighted: progetto.isHighlighted });
@@ -648,7 +648,7 @@ export class MonithonMapService {
     selectById(idRisultati: string[]) {
         this.progetti.features
             .map(f => {
-                let progetto = f.properties;
+                let progetto: Progetto = f.properties;
                 progetto.isSelected = ((!lodash.isNil(idRisultati) && idRisultati.length == 0) && progetto.isSelected) || lodash.includes(idRisultati, progetto.uid);
 
                 this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isSelected: progetto.isSelected });

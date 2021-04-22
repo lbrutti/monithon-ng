@@ -2,14 +2,15 @@
     "name": "monithon",
     "version": "0.0.2",
     "author": "Lorenzo Brutti for Sheldon.studio",
-    "homepage": "https://monithon.dev.sheldon.studio/",
+    "homepage": "https://projectfinder.monithon.eu/",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e"
+        "e2e": "ng e2e",
+        "release": "ionic build --prod --release --config=production"
     },
     "private": true,
     "dependencies": {
