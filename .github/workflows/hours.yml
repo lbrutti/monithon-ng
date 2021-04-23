@@ -1,0 +1,3 @@
+- name: Git hours
+  uses: denstorti/git-hours-action@v1.1
+
