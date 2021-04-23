@@ -577,7 +577,7 @@ ion-row.monithon-filtri-secondari {
 
 .mat-chip-list.monithon-categorie {
     max-height: 60vh;
-    display: inline-block;
+    display:block;
     overflow-x: hidden;
     @include hideScrollbar();
     // width: 100%;
