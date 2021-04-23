@@ -210,7 +210,9 @@
                                             (click)="this.filterByCategoria(categoria)"
                                             [attr.data-oc-cod-tema-sintetico]="categoria.ocCodTemaSintetico"
                                             disableRipple="true">
-                                            {{'categorie.'+categoria.ocCodCategoriaSpesa | transloco}}
+                                            <span class="monithon-categoria-wrapper">
+                                                {{'categorie.'+categoria.ocCodCategoriaSpesa | transloco}}
+                                            </span>
                                         </mat-chip>
                                     </mat-chip-list>
                                 </div>
