@@ -52,6 +52,9 @@ export class AppComponent {
             this.translocoService.setActiveLang('it');
             this.statusBar.styleDefault();
 
+            if (!this.platform.is('desktop') && !this.platform.is('tablet')) {
+                this.router.navigate(['/courtesy'], {skipLocationChange:true});
+            }
 
         });
     }

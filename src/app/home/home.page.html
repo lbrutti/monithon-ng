@@ -210,13 +210,14 @@
                                             (click)="this.filterByCategoria(categoria)"
                                             [attr.data-oc-cod-tema-sintetico]="categoria.ocCodTemaSintetico"
                                             disableRipple="true">
-                                            {{'categorie.'+categoria.ocCodCategoriaSpesa | transloco}}
+                                            <span class="monithon-categoria-wrapper">
+                                                {{'categorie.'+categoria.ocCodCategoriaSpesa | transloco}}
+                                            </span>
                                         </mat-chip>
                                     </mat-chip-list>
                                 </div>
                             </ion-col>
-                            <ion-col size-lg="6" size-md="12" size-sm="12"
-                                class="ion-no-margin monithon-chart-container-col">
+                            <ion-col size="6" class="ion-no-margin monithon-chart-container-col">
                                 <!-- INIZIALIZZARE COME ESPANSO -->
                                 <mat-expansion-panel expanded="true" class="monithon-filtri-charts" id="chartPanel">
                                     <mat-expansion-panel-header>
