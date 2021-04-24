@@ -387,12 +387,14 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        // max-width: 432px;
         max-height: 100%;
+        
     }
-
+    
     .monithon-dettaglio-progetto__dettagli {
         justify-content: space-between;
+        //inserire mediaquery per schermi xl per evitare aletzza estrema
+        max-height: 600px;
     }
 
     .monithon-dettaglio-progetto__label {
