@@ -1,8 +1,8 @@
 {
     "name": "monithon",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "author": "Lorenzo Brutti for Sheldon.studio",
-    "homepage": "https://monithon.dev.sheldon.studio/",
+    "homepage": "https://projectfinder.monithon.eu/",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
