@@ -11,7 +11,7 @@
     <ion-grid class="monithon-about-grid">
         <ion-row>
             <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
-                <h1 class="monithon-about-titolo">{{'about.titolo' | transloco}}</h1><span class="monithon-about-version-number">v.{{version}}</span>
+                <h1 class="monithon-about-titolo">{{'about.titolo' | transloco}}</h1>
             </ion-col>
         </ion-row>
         <ion-row>
@@ -102,11 +102,14 @@
 
         <ion-row class="monithon-colophon-row">
             <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container">
-                <!-- <img class="monithon-about-eu-flag" src="../../assets/img/Flag_of_Europe.svg"> -->
                 <img class="monithon-about-eu-flag" src="../../assets/img/eu_flag.png">
 
-                <!-- <p class="monithon-about-colophon"> {{"about.colophon" | transloco}} </p> -->
+            </ion-col>
+        </ion-row>
 
+        <ion-row class="monithon-colophon-row">
+            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container monithon-app-info-container">
+                <div class="monithon-about-version-number">Project Finder - v.{{version}}</div>        
             </ion-col>
         </ion-row>
 
