@@ -32,11 +32,9 @@ export class AppComponent {
             } else if ("msMaxTouchPoints" in navigator) {
                 hasTouchScreen = navigator['msMaxTouchPoints'] > 0;
             } else {
-                let mQ = window.matchMedia && matchMedia("(pointer:coarse)");
+                let mQ = window.matchMedia && matchMedia("(pointer:coarse)"); //commentare se chrome viene ancora visto come mobile
                 if (mQ && mQ.media === "(pointer:coarse)") {
                     hasTouchScreen = !!mQ.matches;
-                } else if ('orientation' in window) {
-                    hasTouchScreen = true; // deprecated, but good fallback
                 }
             }
 
@@ -44,7 +42,7 @@ export class AppComponent {
             const isMobileDetected = !lodash.isNil(md.mobile()) || !lodash.isNil(md.phone());
             // let isTablet = !lodash.isNil(md.tablet());
 
-            if (isMobileDetected) {
+            if (isMobileDetected && hasTouchScreen) {
                 this.router.navigate(['/courtesy'], { skipLocationChange: true });
             }
 
