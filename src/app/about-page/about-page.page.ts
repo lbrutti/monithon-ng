@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { TranslocoService } from '@ngneat/transloco';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-about-page',
@@ -10,10 +10,9 @@ import { TranslocoService } from '@ngneat/transloco';
 export class AboutPage implements OnInit {
 
     @Input() modal_title: string;
-
+    public version: string = environment.version;
     constructor(
-        private modalController: ModalController,
-        private translocoService: TranslocoService
+        private modalController: ModalController
     ) { }
 
     ngOnInit() { }
