@@ -195,8 +195,13 @@ app-courtesy {
 
         .monithon-about-grid {
             height: calc(100vh - 56px);
+            display: flex;
+            flex-direction: column;
             overflow-y: scroll;
             @include hideScrollbar();
+        }
+        .monithon-app-info-row{
+            margin-top: auto;
         }
 
         background: white !important;
