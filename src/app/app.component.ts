@@ -26,32 +26,23 @@ export class AppComponent {
     initializeApp() {
         this.platform.ready().then(() => {
 
+            this.translocoService.setDefaultLang('it');
+            this.translocoService.setActiveLang('it');
+            this.statusBar.styleDefault();
+
             let hasTouchScreen = false;
             if ("maxTouchPoints" in navigator) {
                 hasTouchScreen = navigator.maxTouchPoints > 0;
             } else if ("msMaxTouchPoints" in navigator) {
                 hasTouchScreen = navigator['msMaxTouchPoints'] > 0;
+            }
+
+        
+            
+            if (this.platform.is('desktop') || this.platform.is('tablet') || !hasTouchScreen){
+                console.log('tutto ok');
             } else {
-                let mQ = window.matchMedia && matchMedia("(pointer:coarse)"); //commentare se chrome viene ancora visto come mobile
-                if (mQ && mQ.media === "(pointer:coarse)") {
-                    hasTouchScreen = !!mQ.matches;
-                }
-            }
-
-            const md = new MobileDetect(window.navigator.userAgent);
-            const isMobileDetected = !lodash.isNil(md.mobile()) || !lodash.isNil(md.phone());
-            // let isTablet = !lodash.isNil(md.tablet());
-
-            if (isMobileDetected && hasTouchScreen) {
                 this.router.navigate(['/courtesy'], { skipLocationChange: true });
-            }
-
-            this.translocoService.setDefaultLang('it');
-            this.translocoService.setActiveLang('it');
-            this.statusBar.styleDefault();
-
-            if (!this.platform.is('desktop') && !this.platform.is('tablet')) {
-                this.router.navigate(['/courtesy'], {skipLocationChange:true});
             }
 
         });
