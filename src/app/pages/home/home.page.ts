@@ -4,7 +4,7 @@ import { Observable, Observer } from 'rxjs';
 import { Progetto } from '../../model/progetto/progetto';
 import { MonithonApiService } from '../../services/monithonApiService/monithon-api.service';
 
-import { MonithonMapService } from '../../services/monithonMapService/monithonmap.service';
+import { ProgettiMapService } from '../../services/progettiMapService/progettimap.service';
 import lodash from 'lodash';
 
 import * as d3 from 'd3';
@@ -113,7 +113,7 @@ export class HomePage implements OnInit, AfterViewInit {
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
-        public monithonMap: MonithonMapService,
+        public monithonMap: ProgettiMapService,
         private currencyPipe: CurrencyPipe,
         private translocoService: TranslocoService,
         public loadingController: LoadingController,

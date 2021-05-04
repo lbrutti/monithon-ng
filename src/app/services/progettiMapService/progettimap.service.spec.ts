@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MonithonMapService } from './monithonmap.service';
+import { ProgettiMapService } from './progettimap.service';
 
-describe('MonithonmapService', () => {
-  let service: MonithonMapService;
+describe('ProgettiMapService', () => {
+  let service: ProgettiMapService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MonithonMapService);
+    service = TestBed.inject(ProgettiMapService);
   });
 
   it('should be created', () => {

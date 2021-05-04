@@ -15,7 +15,7 @@ import { TranslocoService } from '@ngneat/transloco';
 @Injectable({
     providedIn: 'root'
 })
-export class MonithonMapService {
+export class ProgettiMapService {
 
 
 
