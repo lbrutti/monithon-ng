@@ -1,6 +1,6 @@
 {
     "name": "monithon",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "author": "Lorenzo Brutti for Sheldon.studio",
     "homepage": "https://projectfinder.monithon.eu/",
     "scripts": {
@@ -39,6 +39,7 @@
         "fs": "0.0.1-security",
         "lodash": "^4.17.20",
         "mapbox-gl": "^2.0.1",
+        "mobile-detect": "^1.4.5",
         "moment": "^2.29.1",
         "numeral": "^2.0.6",
         "rxjs": "~6.5.5",

@@ -1,3 +1,5 @@
+import { version } from "package.json";
+
 export const environment = {
     production: true,
     monithonReportUrl: 'https://it.monithon.eu/report/view',
@@ -10,5 +12,6 @@ export const environment = {
         ip: "api.monithon.eu",
         port: "80",
         apiroute: "api"
-    }
+    },
+    version: version
 };

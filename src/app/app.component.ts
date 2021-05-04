@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
@@ -24,12 +23,24 @@ export class AppComponent {
 
     initializeApp() {
         this.platform.ready().then(() => {
+
             this.translocoService.setDefaultLang('it');
             this.translocoService.setActiveLang('it');
             this.statusBar.styleDefault();
 
-            if (!this.platform.is('desktop')) {
-                this.router.navigate(['/courtesy'], {skipLocationChange:true});
+            let hasTouchScreen = false;
+            if ("maxTouchPoints" in navigator) {
+                hasTouchScreen = navigator.maxTouchPoints > 0;
+            } else if ("msMaxTouchPoints" in navigator) {
+                hasTouchScreen = navigator['msMaxTouchPoints'] > 0;
+            }
+
+        
+            
+            if (this.platform.is('desktop') || this.platform.is('tablet') || !hasTouchScreen){
+                console.log('tutto ok');
+            } else {
+                this.router.navigate(['/courtesy'], { skipLocationChange: true });
             }
 
         });
