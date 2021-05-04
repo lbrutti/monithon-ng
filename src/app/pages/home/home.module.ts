@@ -26,8 +26,8 @@ import { FixencodedcharsPipeModule } from '../../pipes/fixencodedchars/fixencode
     imports: [
         CommonModule,
         FormsModule,
-        IonicModule,
         HomePageRoutingModule,
+        IonicModule,
         MatExpansionModule,
         MatChipsModule,
         MatListModule,

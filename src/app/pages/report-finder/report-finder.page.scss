@@ -1,0 +1,1072 @@
+@import '../../../theme/scrollbar-width-mixin.scss';
+
+#container {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    // top: 50%;
+    // transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#container strong {
+    font-size: 20px;
+    line-height: 26px;
+}
+
+#container p {
+    font-size: 16px;
+    line-height: 22px;
+
+    color: #8c8c8c;
+
+    margin: 0;
+}
+
+#container a {
+    text-decoration: none;
+}
+
+
+#aboutBtnContainer {
+    z-index: 100;
+    position: absolute;
+    right: 24px;
+    top: 6px;
+
+    .monithon-about-icon {
+        background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ccircle cx='14' cy='14' r='12' stroke='white' stroke-width='2'/%3E%3Cpath d='M13.375 18.2351H15.2031V18.1136C15.2287 16.6435 15.6506 15.9851 16.7372 15.3139C17.8814 14.6236 18.5845 13.652 18.5845 12.2138C18.5845 10.1364 17.0121 8.73011 14.6662 8.73011C12.5121 8.73011 10.7862 9.98935 10.7031 12.2905H12.6463C12.723 10.9354 13.6882 10.3409 14.6662 10.3409C15.7528 10.3409 16.6349 11.0632 16.6349 12.1946C16.6349 13.147 16.0405 13.8182 15.2798 14.2912C14.0909 15.0199 13.3878 15.7422 13.375 18.1136V18.2351ZM14.3402 22.1214C15.0369 22.1214 15.6186 21.5526 15.6186 20.843C15.6186 20.1463 15.0369 19.571 14.3402 19.571C13.6371 19.571 13.0618 20.1463 13.0618 20.843C13.0618 21.5526 13.6371 22.1214 14.3402 22.1214Z' fill='white'/%3E%3C/g%3E%3C/svg%3E%0A");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+    }
+}
+
+#panelContainer {
+    display: flex;
+    align-items: baseline;
+    margin-top: auto;
+    z-index: 100;
+    width: 66vw;
+
+    .monithon-temi {
+        ::ng-deep .mat-chip-list-wrapper {
+            padding-left: 24px !important;
+            margin-bottom: 5px !important;
+        }
+    }
+
+
+}
+
+#filterContainer {
+    margin-top: auto;
+    width: 66vw;
+    //min-height: 66vh;
+}
+
+
+
+
+//https://stackoverflow.com/questions/53195131/angular-material-mat-expansion-panel-body-style-not-being-applied
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 !important;
+}
+
+::ng-deep .mat-expansion-panel-header,
+::ng-deep .mat-expansion-panel-header.mat-expanded {
+    height: 32px;
+}
+
+::ng-deep .mat-chip.mat-standard-chip::after {
+    background: transparent;
+}
+
+::ng-deep .mat-chip.mat-standard-chip:active {
+    box-shadow: none;
+}
+
+::ng-deep .mat-chip-selected {
+    font-weight: unset;
+}
+
+::ng-deep .mat-standard-chip {
+    padding: 3px 6px !important;
+    min-height: 28px !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: inherit;
+}
+
+::ng-deep .mat-tooltip {
+    /* your own custom styles here */
+    /* e.g. */
+    font-size: small;
+}
+
+#chartPanel {
+    align-self: flex-end;
+    margin-top: auto;
+
+    .mat-expansion-panel-content {
+        overflow-y: scroll;
+    }
+}
+
+#chartsContainer {
+    overflow-y: scroll;
+    @include hideScrollbar();
+}
+
+.monithon-chart-container-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.monithon-chart-container {
+    height: 50%;
+}
+
+#categorieDiSpesaContainer {
+    width: 100%;
+    height: 100%;
+}
+
+#budgetChartContainer,
+#annoChartContainer {
+    width: 100%;
+    min-height: 34px;
+
+    g.axis.y {
+        display: none !important;
+    }
+
+}
+
+.chart-title {
+    // font-size: small;
+    text-align: left;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 5px;
+    padding-left: 3px;
+    text-decoration: none !important;
+}
+
+#mapContainer {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.monithon-dettaglio-progetto {
+    position: absolute;
+    bottom: 0;
+    width: 66vw;
+    transition: left 0.5s;
+    z-index: 1001;
+    height: 72vh;
+    text-align: left;
+    color: var(--monithon-font-color);
+
+    @media not screen and (-webkit-min-device-pixel-ratio: 2),
+    not screen and (min--moz-device-pixel-ratio: 2),
+    not screen and (-o-min-device-pixel-ratio: 2/1),
+    not screen and (min-device-pixel-ratio: 2),
+    not screen and (min-resolution: 192dpi),
+    not screen and (min-resolution: 2dppx) {
+
+        height: 74vh;
+
+    }
+
+    .monithon-dettaglio-progetto__dettagli_container {
+        height: 90%;
+        overflow-y: scroll;
+        padding-left: 12px;
+        padding-right: 12px;
+        @include hideScrollbar();
+
+        ion-grid {
+            height: 100%;
+
+            ion-row {
+                height: 100%;
+            }
+        }
+    }
+
+    &[data-oc-cod-tema-sintetico="4"] {
+        background-color: var(--monithon-tema-energia-background);
+
+        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+            color: var(--monithon-tema-energia-background);
+        }
+    }
+
+    &[data-oc-cod-tema-sintetico="5"] {
+        background-color: var(--monithon-tema-ambiente-background);
+
+        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+            color: var(--monithon-tema-ambiente-background);
+        }
+    }
+
+    &[data-oc-cod-tema-sintetico="6"] {
+        background-color: var(--monithon-tema-attrazione-background);
+
+        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+            color: var(--monithon-tema-attrazione-background);
+        }
+    }
+
+    &[data-oc-cod-tema-sintetico="7"] {
+        background-color: var(--monithon-tema-mobilita-background);
+
+        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+            color: var(--monithon-tema-mobilita-background);
+        }
+    }
+
+    &.hidden {
+        left: -100vw;
+    }
+
+    &.visible {
+        left: 0;
+    }
+
+    .monithon-dettaglio-progetto__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 2rem;
+        padding-left: 12px;
+
+        ion-icon {
+            // background-image: url("data:image/svg+xml,%3Csvg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' version='1.1' fill='none' viewBox='0 0 29 29'%3E%3Cpath style='stroke-width:0.965516' id='path883' stroke='%23ffffff' fill='transparent' d='M 28.017242,14.5 C 28.017242,21.965373 21.96538,28.017242 14.5,28.017242 7.0346299,28.017242 0.98275807,21.965373 0.98275807,14.5 0.98275807,7.0346278 7.0346299,0.98275807 14.5,0.98275807 c 7.46538,0 13.517242,6.05186973 13.517242,13.51724193 z' /%3E%3Cpath style='stroke-width:0.965516;fill:%23ffffff;fill-opacity:1' id='path885' stroke='%23ffffff' fill='transparent' d='m 19.810345,5.6533406 c 0,0.2056564 -0.08004,0.4155974 -0.240221,0.5715536 l -8.399942,8.2750598 8.398977,8.27523 c 0.320648,0.317054 0.320648,0.827338 0,1.143107 -0.320649,0.317053 -0.839807,0.317053 -1.160069,0 L 9.4298755,15.071636 c -0.153913,-0.149958 -0.2402206,-0.355615 -0.2402206,-0.571554 0,-0.214225 0.086636,-0.419882 0.2402206,-0.571553 L 18.409669,5.0818299 c 0.320648,-0.3170538 0.840193,-0.3170538 1.160166,0 0.160469,0.1585268 0.24051,0.3641832 0.24051,0.5715107 z' /%3E%3C/svg%3E%0A");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' height='30' width='30'%3E%3Ccircle id='circle924' stroke='%23ffffff'%0Afill='transparent' r='14' cy='15' cx='15' /%3E%3Cpath id='path1499' d='m 19.13653,4.8027803 -9.698229,9.7266967 9.626505,9.539828' style='fill:transparent;stroke:%23ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /%3E%3C/svg%3E%0A");
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin-top: 6px;
+            margin-bottom: auto;
+            margin-right: 12px;
+            width: 28px;
+            height: 28px;
+        }
+    }
+
+    .monithon-dettaglio-progetto__categoria {
+
+
+        .monithon-dettaglio-progetto__lista__categorie {
+            &.inactive {
+                .monithon-dettaglio-progetto__lista__categorie__header {
+                    pointer-events: none;
+                    cursor: default;
+                }
+            }
+
+            &[data-oc-cod-tema-sintetico="4"] * {
+                background: var(--monithon-tema-energia-background) !important;
+            }
+
+            &[data-oc-cod-tema-sintetico="5"] * {
+
+                background: var(--monithon-tema-ambiente-background) !important;
+            }
+
+            &[data-oc-cod-tema-sintetico="6"] * {
+                background: var(--monithon-tema-attrazione-background) !important;
+            }
+
+            &[data-oc-cod-tema-sintetico="7"] * {
+                background: var(--monithon-tema-mobilita-background) !important;
+            }
+
+
+
+            .monithon-dettaglio-progetto__lista__categorie__header {
+                padding: 0;
+                height: auto;
+
+                .monithon-dettaglio-progetto__arrow {
+                    margin-left: 10px
+                }
+
+                &.mat-expanded {
+                    .monithon-dettaglio-progetto__arrow {
+                        transform: translateY(0px) rotateX(180deg)
+                    }
+                }
+            }
+
+
+        }
+
+
+    }
+
+    .mat-chip.monithon-dettaglio-progetto__stato-avanzamento,
+    .mat-chip.monithon-dettaglio-progetto__has-report {
+        background-color: transparent;
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--monithon-font-color);
+        text-align: center;
+        justify-content: center;
+        opacity: 0.3;
+
+        &.mat-chip-selected {
+            background-color: var(--monithon-label-color);
+            color: var(--monithon-font-color);
+            border: 0;
+            opacity: 1;
+        }
+    }
+
+    .mat-chip.monithon-dettaglio-progetto__stato-avanzamento {
+        width: 33%;
+    }
+
+    .mat-chip.monithon-dettaglio-progetto__has-report {
+        width: 50%;
+    }
+
+    .monithon-dettaglio-progetto__dettagli {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .monithon-dettaglio-progetto__titolo_scheda {
+        margin-left: 10px;
+    }
+
+    .monithon-dettaglio-progetto__titolo_container {
+        border-bottom: 1px;
+    }
+
+    .monithon-dettaglio-progetto__titolo {
+        margin-top: 0;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--monithon-font-color);
+    }
+
+    .monithon-dettaglio-progetto__sintesi {
+        overflow-y: scroll;
+        @include hideScrollbar();
+
+        .monithon-dettaglio-progetto__sintesi__oc_link {
+            margin-top: 12px;
+            font-weight: bold;
+
+            a {
+                color: var(--monithon-font-color) !important;
+            }
+        }
+    }
+
+    .monithon-dettaglio-progetto__row {
+        justify-content: space-between;
+    }
+
+    .monithon-dettaglio-progetto__col {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        max-height: 100%;
+
+    }
+
+    .monithon-dettaglio-progetto__dettagli {
+        justify-content: space-between;
+        //inserire mediaquery per schermi xl per evitare aletzza estrema
+        max-height: 600px;
+    }
+
+    .monithon-dettaglio-progetto__label {
+        color: var(--monithon-label-color);
+        text-transform: uppercase;
+        display: block;
+    }
+
+
+    &.monithon-finanziamenti-chart,
+    &.monithon-pagamenti-chart {
+        height: 36px;
+    }
+
+    .monithon-label-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .monithon-dettaglio-progetto__oc_link {
+        margin-top: auto;
+    }
+
+    .monithon-dettaglio-progetto__unica__categoria {
+        pointer-events: none;
+        cursor: default;
+    }
+
+    .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+        background: var(--monithon-font-color);
+        display: inline-flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        width: auto;
+        height: 44px;
+        border-radius: 22px;
+        text-transform: uppercase;
+        font-size: 17px;
+        font-weight: 400;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+}
+
+.mat-chip[data-active="true"] {
+    cursor: pointer;
+}
+
+.mat-chip[data-active="false"] {
+    pointer-events: none;
+    cursor: default;
+    background-color: transparent !important;
+    opacity: 0.5;
+}
+
+.mat-chip.monithon-tema[data-active="false"],
+.mat-chip.monithon-categoria[data-active="false"] {
+
+    &[data-oc-cod-tema-sintetico="4"] {
+        color: var(--monithon-tema-energia-background) !important;
+        border-color: var(--monithon-tema-energia-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="5"] {
+
+        color: var(--monithon-tema-ambiente-background) !important;
+        border-color: var(--monithon-tema-ambiente-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="6"] {
+        color: var(--monithon-tema-attrazione-background) !important;
+        border-color: var(--monithon-tema-attrazione-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="7"] {
+        color: var(--monithon-tema-mobilita-background) !important;
+        border-color: var(--monithon-tema-mobilita-background);
+    }
+
+}
+
+.mat-chip.monithon-tema,
+.mat-chip.monithon-categoria,
+.mat-chip.monithon-filtro-stato-avanzamento,
+.mat-chip.monithon-filtro-report {
+
+    background-color: transparent;
+    border-width: 1px;
+    border-style: solid;
+
+    // temi
+    &[data-oc-cod-tema-sintetico="4"] {
+        color: var(--monithon-tema-energia-background) !important;
+        border-color: var(--monithon-tema-energia-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="5"] {
+
+        color: var(--monithon-tema-ambiente-background) !important;
+        border-color: var(--monithon-tema-ambiente-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="6"] {
+        color: var(--monithon-tema-attrazione-background) !important;
+        border-color: var(--monithon-tema-attrazione-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="7"] {
+        color: var(--monithon-tema-mobilita-background) !important;
+        border-color: var(--monithon-tema-mobilita-background);
+    }
+
+    // stati e flag report
+    &[data-oc-cod-stato-progetto],
+    &[data-has-report] {
+        background-color: transparent;
+        color: var(--monithon-filtro-secondario-unselected-color);
+        border-color: var(--monithon-filtro-secondario-unselected-color);
+    }
+
+
+    &.mat-chip-selected {
+        // &[data-oc-cod-tema-sintetico] {
+        color: var(--monithon-tema-color) !important;
+        // }
+
+        &[data-oc-cod-tema-sintetico="4"] {
+            background-color: var(--monithon-tema-energia-background);
+        }
+
+        &[data-oc-cod-tema-sintetico="5"] {
+            background-color: var(--monithon-tema-ambiente-background);
+        }
+
+        &[data-oc-cod-tema-sintetico="6"] {
+            background-color: var(--monithon-tema-attrazione-background);
+        }
+
+        &[data-oc-cod-tema-sintetico="7"] {
+            background-color: var(--monithon-tema-mobilita-background);
+        }
+
+        &[data-oc-cod-stato-progetto],
+        &[data-has-report] {
+            background-color: var(--monithon-filtro-secondario-selected-color) !important;
+            border-color: var(--monithon-filtro-secondario-selected-color);
+        }
+    }
+}
+
+.monithon-filtro-stato-avanzamento,
+.monithon-filtro-report {
+    ::ng-deep .mat-chip-list-wrapper {
+        padding-left: 2px !important;
+    }
+}
+
+.mat-chip.monithon-filtro-stato-avanzamento {
+    width: 33%;
+    justify-content: center;
+
+
+
+}
+
+.mat-chip.monithon-filtro-report {
+    width: 50%;
+    justify-content: center;
+}
+
+.mat-expansion-panel {
+    border-radius: 0;
+}
+
+ion-row.monithon-filtri-secondari {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mat-chip-list.monithon-categorie {
+    max-height: 60vh;
+    display: block;
+    overflow-x: hidden;
+    @include hideScrollbar();
+    // width: 100%;
+    margin: 0;
+    padding: 0;
+
+    //width: 432px;
+    .mat-chip {
+        &.monithon-categoria {
+            max-width: 432px;
+        }
+    }
+
+    ::ng-deep .mat-chip-list-wrapper {
+        padding-left: 12px !important;
+        // max-width: 432px;
+    }
+
+    .monithon-categoria-wrapper {
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+}
+
+.monithon-filtri {
+    background-color: var(--monithon-tema-sfondo-filtri);
+
+    .mat-expansion-panel-header {
+        height: 50px !important;
+        padding-right: 14px;
+    }
+
+    &.mat-expanded {
+        .monithon-categorie-container {
+            height: 60vh;
+        }
+    }
+}
+
+.monithon-filtri-charts {
+    background-color: var(--monithon-tema-sfondo-charts);
+    width: 100%;
+
+    .mat-expansion-panel-header {
+        padding-left: 12px;
+        padding-right: 14px;
+    }
+
+    .monithon-titolo-sezione-budget {
+        height: 21px;
+    }
+
+    &.mat-expanded {
+        ::ng-deep .mat-expansion-panel-content {
+            height: 54vh;
+
+            @media not screen and (-webkit-min-device-pixel-ratio: 2),
+            not screen and (min--moz-device-pixel-ratio: 2),
+            not screen and (-o-min-device-pixel-ratio: 2/1),
+            not screen and (min-device-pixel-ratio: 2),
+            not screen and (min-resolution: 192dpi),
+            not screen and (min-resolution: 2dppx) {
+
+                height: 52vh;
+
+            }
+        }
+    }
+}
+
+.monithon-criterio-ordinamento__selezione {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    mat-label {
+        align-self: flex-start;
+    }
+}
+
+.monithon-criterio-ordinamento {
+    flex-grow: 1;
+    transition-delay: 0;
+    color: var(--monithon-tema-color);
+    border: 1px solid var(--monithon-tema-color);
+    background: var(--monithon-label-color);
+    justify-content: center;
+
+    &.selected {
+        background: var(--monithon-tema-color);
+        color: var(--monithon-label-color);
+    }
+}
+
+.monithon-criteri-ordinamento {
+    ::ng-deep .mat-chip-list-wrapper {
+        display: flex !important;
+        flex-direction: row !important;
+        //align-content: flex-start !important;
+    }
+}
+
+.monithon-criterio-ordinamento-selezionato {
+    &.hidden {
+        display: none;
+    }
+}
+
+.monithon-risultati-header {
+    height: auto;
+
+    .monithon-header-col {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .monithon-risultati-header-titolo,
+    .monithon-risultati-contatore {
+        margin-top: auto;
+        margin-bottom: auto;
+        align-self: flex-start;
+    }
+
+    .monithon-risultati-contatore {
+        &[data-hidden="true"] {
+            display: none;
+        }
+    }
+}
+
+.monithon-risultati-contatore {
+    color: var(--monithon-contatore-risultati-color);
+    font-size: 80px;
+    font-weight: bolder;
+    text-align: left;
+    opacity: .9;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.monithon-lista-header {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.monithon-lista-risultato {
+    // text-transform: lowercase;
+    white-space: pre-line;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+
+    &::before {
+        content: '\0000a0';
+        border-radius: 100%;
+        width: .5rem;
+        height: .5rem;
+        display: inline-block;
+        margin-bottom: auto;
+        margin-top: 6px;
+
+    }
+
+
+    color: var(--monithon-lista-risultato-color);
+
+    &.selected {
+        h2 {
+            font-weight: bolder;
+        }
+    }
+
+    &[data-oc-cod-tema-sintetico="4"]::before {
+        background-color: var(--monithon-tema-energia-background);
+
+    }
+
+    &[data-oc-cod-tema-sintetico="4"].selected {
+        color: var(--monithon-tema-energia-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="5"]::before {
+        background-color: var(--monithon-tema-ambiente-background);
+
+    }
+
+    &[data-oc-cod-tema-sintetico="5"].selected {
+        color: var(--monithon-tema-ambiente-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="6"]::before {
+        background-color: var(--monithon-tema-attrazione-background);
+
+    }
+
+    &[data-oc-cod-tema-sintetico="6"].selected {
+        color: var(--monithon-tema-attrazione-background);
+    }
+
+    &[data-oc-cod-tema-sintetico="7"]::before {
+        background-color: var(--monithon-tema-mobilita-background);
+
+    }
+
+    &[data-oc-cod-tema-sintetico="7"].selected {
+        color: var(--monithon-tema-mobilita-background);
+    }
+
+    h2 {
+        margin-bottom: auto;
+        width: 90%;
+        margin-left: 12px;
+        margin-top: 0;
+
+    }
+
+}
+
+.right-column {
+    margin-top: auto;
+    z-index: 100;
+    right: 0;
+    position: absolute;
+    bottom: 0;
+
+    @media not screen and (-webkit-min-device-pixel-ratio: 2),
+    not screen and (min--moz-device-pixel-ratio: 2),
+    not screen and (-o-min-device-pixel-ratio: 2/1),
+    not screen and (min-device-pixel-ratio: 2),
+    not screen and (min-resolution: 192dpi),
+    not screen and (min-resolution: 2dppx) {
+
+        max-height: 85vh;
+
+    }
+}
+
+#resultContainer {
+    width: 34vw;
+    align-self: flex-end;
+    overflow-y: hidden;
+
+    &.mat-expanded {
+        transition-property: height;
+        // height: 95vh;
+    }
+
+    .monithon-lista-progetti {
+
+        @include hideScrollbar();
+        height: 60vh;
+
+    }
+
+    .monithon-lista-progetti__progetto {
+        display: flex;
+        align-content: center;
+        cursor: pointer !important;
+        min-height: 100px !important;
+        color: var(--monithon-font-color);
+        --ion-item-border-color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
+
+        border-left: 12px solid;
+        border-left-color: white;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        // width: 460px;
+
+        ion-grid,
+        ion-row,
+        ion-col {
+            padding: 0 !important;
+        }
+
+        &[data-oc-cod-tema-sintetico="4"] {
+            border-bottom-color: var(--monithon-tema-energia-background);
+        }
+
+        &[data-oc-cod-tema-sintetico="5"] {
+            border-bottom-color: var(--monithon-tema-ambiente-background);
+        }
+
+        &[data-oc-cod-tema-sintetico="6"] {
+            border-bottom-color: var(--monithon-tema-attrazione-background);
+        }
+
+        &[data-oc-cod-tema-sintetico="7"] {
+            border-bottom-color: var(--monithon-tema-mobilita-background);
+        }
+
+        &.selected {
+
+            &[data-oc-cod-tema-sintetico="4"] {
+                border-color: var(--monithon-tema-energia-background);
+            }
+
+            &[data-oc-cod-tema-sintetico="5"] {
+                border-color: var(--monithon-tema-ambiente-background);
+            }
+
+            &[data-oc-cod-tema-sintetico="6"] {
+                border-color: var(--monithon-tema-attrazione-background);
+            }
+
+            &[data-oc-cod-tema-sintetico="7"] {
+                border-color: var(--monithon-tema-mobilita-background);
+            }
+        }
+    }
+
+    .monithon-lista-progetti__progetto__dettagli {
+        * {
+            color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
+        }
+
+        .monithon-lista-progetti__progetto__dettagli__contatore_report {
+            text-align: right;
+
+            &[data-mostra-icona="true"]::after {
+                content: ' ↓';
+            }
+        }
+
+        .monithon-lista-progetti__progetto__dettagli__lista_report * {
+            color: var(--monithon-lista-report-in-dettaglio-font-color);
+        }
+
+        ::ng-deep .mat-expansion-panel-content {
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+        }
+
+        .monithon-lista-progetti__progetto__dettagli__header {
+            padding-right: 0;
+        }
+    }
+
+    .monithon-geolocator-data-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: flex-start;
+
+        .monithon-comune-corrente,
+        .monithon-raggio-corrente {
+            margin-bottom: 10px;
+            margin-left: auto;
+        }
+
+        .monithon-comune-corrente::before,
+        .monithon-raggio-corrente::before {
+            content: ' ';
+            display: inline-block;
+            background-repeat: no-repeat;
+            margin-right: 5px;
+        }
+
+        .monithon-comune-corrente::before {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 5.33614C0 2.12957 2.2687 0.0703125 5 0.0703125C7.7313 0.0703125 10 2.12957 10 5.33614C10 6.48342 9.73692 7.27552 9.275 8.15894L5.35624 15.6526C5.28787 15.7881 5.15027 15.8734 5 15.8734C4.84973 15.8734 4.71213 15.7881 4.64376 15.6526L0.725 8.15894C0.26306 7.27554 0 6.48342 0 5.33614ZM9.2 5.33614C9.2 2.50252 7.34974 0.880439 5 0.880439C2.65026 0.880439 0.8 2.50252 0.8 5.33614C0.8 6.36579 1.00468 6.95145 1.4375 7.77919L5 14.5893L8.5625 7.77919C8.99534 6.95141 9.2 6.36579 9.2 5.33614ZM5 2.70322C3.67926 2.70322 2.6 3.79616 2.6 5.13361C2.6 6.47107 3.67926 7.564 5 7.564C6.32074 7.564 7.4 6.47107 7.4 5.13361C7.4 3.79616 6.32074 2.70322 5 2.70322ZM6.6 5.13361C6.6 4.234 5.88838 3.51335 5 3.51335C4.11162 3.51335 3.4 4.234 3.4 5.13361C3.4 6.03324 4.11162 6.75386 5 6.75386C5.88838 6.75386 6.6 6.03324 6.6 5.13361Z' fill='black'/%3E%3C/svg%3E%0A");
+            width: 10px;
+            height: 16px;
+        }
+
+        .monithon-raggio-corrente::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 11'%3E%3Cpath stroke='%23005bac' d='M 9.5,5.5 C 9.5,7.98528 7.48528,10 5,10 2.51472,10 0.5,7.98528 0.5,5.5 0.5,3.01472 2.51472,1 5,1 7.48528,1 9.5,3.01472 9.5,5.5 Z' /%3E%3Cpath stroke='%23005bac' d='M 5.5,5.5 C 5.5,5.77614 5.27614,6 5,6 4.72386,6 4.5,5.77614 4.5,5.5 4.5,5.22386 4.72386,5 5,5 5.27614,5 5.5,5.22386 5.5,5.5 Z' /%3E%3C/svg%3E%0A");
+            width: 10px;
+            height: 10px;
+        }
+    }
+
+}
+
+.monithon-header * {
+    background-color: transparent;
+}
+
+.geocoder {
+    position: absolute;
+    z-index: 100;
+    width: 432px;
+    left: 24px;
+    top: 10px;
+
+    ion-label {
+        opacity: 0;
+    }
+
+    &.geocoder-ready {
+        ion-label {
+            opacity: 1;
+        }
+    }
+
+}
+
+#raggioContainer {
+    position: absolute;
+    z-index: 100;
+    width: 432px;
+    left: 24px;
+    top: 80px;
+
+    mat-slider {
+        width: 432px;
+    }
+
+    z-index: 10;
+    // &.backgrounded {
+    // }
+
+    ::ng-deep mat-slider {
+        &.mat-slider-horizontal {
+            width: 432px;
+        }
+
+        &.mat-slider-disabled {
+            display: none !important;
+        }
+
+        .mat-slider-thumb-container {
+            top: 0px !important;
+        }
+
+        .mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label {
+            background: var(--monithon-range-thumb-label-background) !important
+        }
+
+        .mat-slider-thumb-label {
+            top: -15px !important;
+            transform: rotate(0deg) !important;
+            width: 75px !important;
+            height: 30px !important;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+
+
+            border-color: white !important;
+            border-width: 3px !important;
+            border-style: solid !important;
+            opacity: 1 !important;
+            background: var(--monithon-range-thumb-label-background) !important;
+
+            .mat-slider-thumb-label-text {
+                margin-top: 6px;
+                transform: rotate(0deg);
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                font-size: 16px;
+            }
+        }
+
+
+
+        .mat-slider-thumb {
+            transform: scale(0) !important;
+        }
+
+        .mat-slider-thumb-label-text {
+            opacity: 1 !important;
+        }
+
+        .mat-slider-track-fill,
+        .mat-slider-track-background {
+            background: var(--monithon-range-track-fill) !important;
+        }
+    }
+}
+
+
+
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+
+    .mapbox-gl-geocoder--no-results {
+        line-height: 40px !important;
+    }
+}
+
+monithon-drawer {
+    z-index: 90;
+    position: absolute;
+}
