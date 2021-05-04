@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import moment from 'moment';
 import { Observable, Observer } from 'rxjs';
-import { Progetto } from '../model/progetto/progetto';
-import { MonithonApiService } from '../services/monithonApiService/monithon-api.service';
+import { Progetto } from '../../model/progetto/progetto';
+import { MonithonApiService } from '../../services/monithonApiService/monithon-api.service';
 
-import { MonithonMapService } from '../services/monithonMapService/monithonmap.service';
+import { MonithonMapService } from '../../services/monithonMapService/monithonmap.service';
 import lodash from 'lodash';
 
 import * as d3 from 'd3';

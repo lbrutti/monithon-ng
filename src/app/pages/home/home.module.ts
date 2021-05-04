@@ -17,11 +17,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MomentdateModule } from '../pipes/momentdate/momentdate.pipe.module';
-import { CapitalizePipeModule } from '../pipes/capitalize/capitalize.pipe.module';
-import { FormatDistanzaPipeModule } from '../pipes/format-distanza/format-distanza.pipe.module';
-import { UnescapePipeModule } from '../pipes/unescape/unescape.pipe.module';
-import { FixencodedcharsPipeModule } from '../pipes/fixencodedchars/fixencodedchars.pipe.module';
+import { MomentdateModule } from '../../pipes/momentdate/momentdate.pipe.module';
+import { CapitalizePipeModule } from '../../pipes/capitalize/capitalize.pipe.module';
+import { FormatDistanzaPipeModule } from '../../pipes/format-distanza/format-distanza.pipe.module';
+import { UnescapePipeModule } from '../../pipes/unescape/unescape.pipe.module';
+import { FixencodedcharsPipeModule } from '../../pipes/fixencodedchars/fixencodedchars.pipe.module';
 @NgModule({
     imports: [
         CommonModule,
