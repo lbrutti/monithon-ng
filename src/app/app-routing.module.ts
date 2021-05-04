@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'courtesy',
     loadChildren: () => import('./pages/courtesy/courtesy.module').then( m => m.CourtesyPageModule)
+  },
+  {
+    path: 'report-finder',
+    loadChildren: () => import('./pages/report-finder/report-finder.module').then( m => m.ReportFinderPageModule)
   }
 ];
 
