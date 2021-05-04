@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AboutPagePageRoutingModule } from './about-page-routing.module';
+import { AboutPagePageRoutingModule } from './about-routing.module';
 
 import { TranslocoModule } from '@ngneat/transloco';
-import { AboutPage } from './about-page.page';
+import { AboutPage } from './about.page';
 
 @NgModule({
     imports: [

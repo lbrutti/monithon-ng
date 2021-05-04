@@ -21,7 +21,7 @@ const routes: Routes = [
     },
   {
     path: 'about-page',
-    loadChildren: () => import('./pages/about-page/about-page.module').then( m => m.AboutPagePageModule)
+    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPagePageModule)
   },
   {
     path: 'courtesy',

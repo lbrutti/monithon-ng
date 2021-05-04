@@ -14,7 +14,7 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-
 import { LoadingController, ModalController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
-import { AboutPage } from '../about-page/about-page.page';
+import { AboutPage } from '../about/about.page';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({

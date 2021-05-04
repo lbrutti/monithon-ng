@@ -4,8 +4,8 @@ import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-about-page',
-    templateUrl: './about-page.page.html',
-    styleUrls: ['./about-page.page.scss'],
+    templateUrl: './about.page.html',
+    styleUrls: ['./about.page.scss'],
 })
 export class AboutPage implements OnInit {
 
