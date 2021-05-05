@@ -291,7 +291,7 @@ export class ReportMapService {
 
 
 
-    public setCategorie(categorie: Array<any>) {
+    public setGiudiziSintetici(categorie: Array<any>) {
         this.categorie = categorie.map((c) => ({
             'ocCodCategoriaSpesa': c.ocCodCategoriaSpesa,
             'ocCodTemaSintetico': c.ocCodTemaSintetico,

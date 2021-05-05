@@ -136,11 +136,11 @@
                                             <mat-chip-list class="monithon-dettaglio-progetto__stato-avanzamento"
                                                 multiple="true" aria-orientation="horizontal">
                                                 <mat-chip class="monithon-dettaglio-progetto__stato-avanzamento"
-                                                    selectable="false" *ngFor="let stato of this.statiAvanzamento"
-                                                    [selected]="progettoSelezionato.codStatoProgetto==stato.codStatoProgetto"
-                                                    [attr.data-oc-cod-stato-progetto]="stato.codStatoProgetto"
+                                                    selectable="false" *ngFor="let ciclo of this.cicliProgrammazione"
+                                                    [selected]="progettoSelezionato.codStatoProgetto==ciclo.codCicloProgrammazione"
+                                                    [attr.data-oc-cod-stato-progetto]="ciclo.codCicloProgrammazione"
                                                     disableRipple="true">
-                                                    {{'statiAvanzamento.'+stato.codStatoProgetto | transloco}}
+                                                    {{'statiAvanzamento.'+ciclo.codCicloProgrammazione | transloco}}
                                                 </mat-chip>
                                             </mat-chip-list>
                                         </ion-col>
@@ -205,13 +205,14 @@
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
                                         aria-orientation="horizontal">
                                         <mat-chip [ngClass]="{'monithon-categoria': true}"
-                                            [selectable]="categoria.isActive" [attr.data-active]="categoria.isActive"
-                                            *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected"
-                                            (click)="this.filterByCategoria(categoria)"
-                                            [attr.data-oc-cod-tema-sintetico]="categoria.ocCodTemaSintetico"
+                                        *ngFor="let giudizio of this.giudiziSintetici" 
+                                        [selected]="giudizio.isSelected"
+                                            [selectable]="giudizio.isActive" [attr.data-active]="giudizio.isActive"
+                                            (click)="this.filterByGiudizio(giudizio)"
+                                            [attr.data-oc-cod-tema-sintetico]="giudizio.codGiudizioSintetico"
                                             disableRipple="true">
                                             <span class="monithon-categoria-wrapper">
-                                                {{'categorie.'+categoria.ocCodCategoriaSpesa | transloco}}
+                                                {{'giudiziSintetici.'+giudizio.codGiudizioSintetico | transloco}}
                                             </span>
                                         </mat-chip>
                                     </mat-chip-list>
@@ -248,35 +249,36 @@
                                         <ion-grid>
                                             <ion-row class="monithon-filtri-secondari ion-no-margin ">
                                                 <ion-col size="8" class="ion-no-margin ">
-                                                    <h5 class="chart-title monithon-titolo-sezione">{{'statoAvanzamento'
+                                                    <h5 class="chart-title monithon-titolo-sezione">
+                                                        {{'cicloProgrammazione'
                                                         |transloco}}</h5>
                                                     <mat-chip-list class="monithon-filtro-stato-avanzamento"
                                                         multiple="true" aria-orientation="horizontal">
-                                                        <mat-chip *ngFor="let stato of this.statiAvanzamento"
+                                                        <mat-chip *ngFor="let ciclo of this.cicliProgrammazione"
                                                             class="monithon-filtro-stato-avanzamento monithon-small-chip"
-                                                            selectable="{{stato.isActive}}"
-                                                            [attr.data-active]="stato.isActive"
-                                                            [selected]="stato.isSelected"
-                                                            (click)="this.filterByStato(stato)"
-                                                            [attr.data-oc-cod-stato-progetto]="stato.codStatoProgetto"
+                                                            selectable="{{ciclo.isActive}}"
+                                                            [attr.data-active]="ciclo.isActive"
+                                                            [selected]="ciclo.isSelected"
+                                                            (click)="this.filterByCiclo(ciclo)"
+                                                            [attr.data-oc-cod-stato-progetto]="ciclo.codCicloProgrammazione"
                                                             disableRipple="true">
-                                                            {{'statiAvanzamento.'+stato.codStatoProgetto | transloco}}
+                                                            {{ciclo.descCicloProgrammazione }}
                                                         </mat-chip>
                                                     </mat-chip-list>
                                                 </ion-col>
                                                 <ion-col size="4" class="ion-no-margin">
-                                                    <h5 class="chart-title monithon-titolo-sezione">{{'monitorati'
+                                                    <h5 class="chart-title monithon-titolo-sezione">{{'temiSintetici'
                                                         |transloco}}</h5>
                                                     <mat-chip-list class="monithon-filtro-report" multiple="true"
                                                         aria-orientation="horizontal">
                                                         <mat-chip class="monithon-filtro-report monithon-small-chip"
-                                                            *ngFor="let flag of this.reportFlags"
-                                                            [selected]="flag.isSelected"
-                                                            [attr.data-active]="flag.isActive"
-                                                            (click)="this.filterByReportFlag(flag)"
-                                                            [attr.data-has-report]="flag.hasReport"
+                                                            *ngFor="let temaSintetico of this.temiSintetici"
+                                                            [selected]="temaSintetico.isSelected"
+                                                            [attr.data-active]="temaSintetico.isActive"
+                                                            (click)="this.filterByReportFlag(temaSintetico)"
+                                                            [attr.data-has-report]="temaSintetico.codTemaSintetico"
                                                             disableRipple="true">
-                                                            {{'reportFlags.'+flag.hasReport | transloco}}
+                                                            {{'reportFlags.'+temaSintetico.codTemaSintetico | transloco}}
                                                         </mat-chip>
                                                     </mat-chip-list>
                                                 </ion-col>

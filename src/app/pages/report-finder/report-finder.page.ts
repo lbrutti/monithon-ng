@@ -7,8 +7,12 @@ import { TranslocoService } from '@ngneat/transloco';
 import * as d3 from 'd3';
 import lodash from 'lodash';
 import moment from 'moment';
-import { Observer, Observable } from 'rxjs';
+import { Observer } from 'rxjs';
+import { CicloProgrammazione } from 'src/app/model/cicloProgrammazione/cicloProgrammazione.interface';
+import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
 import { Progetto } from 'src/app/model/progetto/progetto';
+import { Report } from 'src/app/model/report/report';
+import { TemaSintetico } from 'src/app/model/temaSintetico/temaSintetico';
 import { MonithonApiService } from 'src/app/services/monithonApiService/monithon-api.service';
 import { ReportMapService } from 'src/app/services/reportMapService/reportmap.service';
 import { environment } from 'src/environments/environment';
@@ -40,8 +44,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
 
     public espandiListaRisultati: boolean = false;
-    progetti: Array<Progetto> = [];
-    risultatiRicerca: Array<Progetto> = [];
+    reports: Array<Report> = [];
+    risultatiRicerca: Array<Report> = [];
 
     //variabili charts
     budgetChart: any;
@@ -51,38 +55,10 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     resultCounter: any;
 
-    temi: Array<any> = [];
-    categorie: Array<any> = [];
-    statiAvanzamento: Array<any> = [{
-        isSelected: true,
-        isActive: true,
-        codStatoProgetto: 4
-    },
-    {
-        isSelected: true,
-        isActive: true,
-        codStatoProgetto: 2
-    },
-    {
-        isSelected: true,
-        isActive: true,
-        codStatoProgetto: 1
-    }, {
-        isSelected: true,
-        isActive: true,
-        codStatoProgetto: 3
-    }];
+    public giudiziSintetici: Array<GiudizioSintetico> = [];
+    public cicliProgrammazione: Array<CicloProgrammazione> = [];
 
-    reportFlags: Array<any> = [
-        {
-            isSelected: true,
-            isActive: true,
-            hasReport: true
-        }, {
-            isSelected: true,
-            isActive: true,
-            hasReport: false
-        }]
+    public temiSintetici: Array<TemaSintetico> = [];
 
     progettiCrossFilter: any;
     progettoSelezionato: any = {};
@@ -141,28 +117,24 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
-                if (!this.temi.length) {
-                    this.temi = updateSubject.temi; // <- nessun problema di performance
-                    this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
-                }
-                this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
-                this.statiAvanzamento.map(s => {
-                    s.isActive = lodash.some(this.progetti, p => p.codStatoProgetto == s.codStatoProgetto);
+                this.reports = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
+                this.cicliProgrammazione.map(s => {
+                    s.isActive = lodash.some(this.reports, p => p.codCicloProgrammazione == s.codCicloProgrammazione);
                     s.isSelected = s.isActive;
                 });
 
-                this.reportFlags.map(flag => {
-                    flag.isActive = lodash.some(this.progetti, p => p.hasReport == flag.hasReport);
-                    flag.isSelected = flag.isActive;
+                this.temiSintetici.map(tema => {
+                    tema.isActive = lodash.some(this.reports, p => p.codTemaSintetico == tema.codTemaSintetico);
+                    tema.isSelected = tema.isActive;
                 });
                 if (this.redrawCharts) {
                     try {
-                        this.renderCharts(this.progetti);
+                        this.renderCharts(this.reports);
                     } catch (error) {
                         console.error(error);
                     }
                 } else {
-                    this.counterValue = this.progetti.length;
+                    this.counterValue = this.reports.length;
                 }
 
 
@@ -237,12 +209,15 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 let cicliProgrammazione = data[2];
                 let programmiOperativi = data[3];
                 let giudiziSintetici = data[4];
-                this.reportMap.setCategorie(data[1].categorie.map(c => {
+                this.temiSintetici = temiSintetici;
+                this.cicliProgrammazione = cicliProgrammazione;
+                this.giudiziSintetici = giudiziSintetici;
+                this.reportMap.setGiudiziSintetici(giudiziSintetici.map(c => {
                     c.isSelected = true;
                     return c;
                 }));
 
-                this.reportMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
+                this.reportMap.renderMap(this.mapContainer.nativeElement, listaReport, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
 
@@ -535,7 +510,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.annoChart.on("filtered", () => {
 
             setTimeout(() => {
-                this.progetti = annoDim.top(Infinity);
+                this.reports = annoDim.top(Infinity);
                 this.filtraRisultati();
                 this.evidenziaRisultatiSuMappa();
             }, 0);
@@ -620,7 +595,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             setTimeout(() => {
                 // console.log('this.budgetChart.on("filtered", () => {');
                 //propagare evento per aggiornare la lista dei progetti
-                this.progetti = budgetDim.top(Infinity);
+                this.reports = budgetDim.top(Infinity);
                 this.filtraRisultati();
                 this.evidenziaRisultatiSuMappa();
             }, 0);
@@ -683,35 +658,20 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         return crossFilterData;
     }
 
-    private getProgetti(): Observable<any> {
-        return this.monithonApiService.getProgetti();
-    }
 
-    //Filtri di primo livello:
-    public filterByTema(tema: any): void {
-        tema.isSelected = !tema.isSelected;
-        if (lodash.every(this.temi, t => !t.isSelected)) {
-            this.reportMap.resetFiltroTemi();
-        }
 
-        this.redrawCharts = true;
-        this.reportMap.filtraPerTema(tema);
-    }
+    public filterByGiudizio(giudizioSintetico: GiudizioSintetico): void {
+        giudizioSintetico.isSelected = !giudizioSintetico.isSelected;
 
-    public filterByCategoria(categoria: any): void {
-        categoria.isSelected = !categoria.isSelected;
-        if (lodash.every(this.categorie, c => !c.isSelected)) {
-            this.reportMap.resetFiltroTemi();
-        }
         this.redrawCharts = true;
         this.reportMap.filtraPerCategoria();
     }
 
     //Filtri di secondo livello:
-    public filterByStato(stato) {
+    public filterByCiclo(stato) {
         stato.isSelected = !stato.isSelected;
-        if (lodash.every(this.statiAvanzamento, s => !s.isSelected)) {
-            this.statiAvanzamento.map(s => s.isSelected = s.isActive);
+        if (lodash.every(this.cicliProgrammazione, s => !s.isSelected)) {
+            this.cicliProgrammazione.map(s => s.isSelected = s.isActive);
         }
         this.filtraRisultati();
         this.evidenziaRisultatiSuMappa();
@@ -720,8 +680,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     public filterByReportFlag(reportFlag) {
         reportFlag.isSelected = !reportFlag.isSelected;
 
-        if (lodash.every(this.reportFlags, f => !f.isSelected)) {
-            this.reportFlags.map(f => f.isSelected = f.isActive);
+        if (lodash.every(this.temiSintetici, f => !f.isSelected)) {
+            this.temiSintetici.map(f => f.isSelected = f.isActive);
         }
         this.filtraRisultati();
         this.evidenziaRisultatiSuMappa();
@@ -735,14 +695,14 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
     filtraRisultati() {
-        let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.codStatoProgetto);
-        let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);
+        let cicliProgrammazioneSelezionati = this.cicliProgrammazione.filter(ciclo => ciclo.isSelected).map(flag => flag.codCicloProgrammazione);
+        let temiSinteticiSelezionati = this.temiSintetici.filter(flag => flag.isSelected).map(flag => flag.codTemaSintetico);
 
-        this.risultatiRicerca = this.progetti.filter((progetto: Progetto) => {
-            let matchesStato = ((reportFlagSelezionate.length == 0) || lodash.includes(reportFlagSelezionate, progetto.hasReport));
-            let matchesReportFlags = ((statiAvanzamentoSelezionati.length == 0) || lodash.includes(statiAvanzamentoSelezionati, progetto.codStatoProgetto))
+        this.risultatiRicerca = this.reports.filter((report: Report) => {
+            let matchesTemaSintetico = ((temiSinteticiSelezionati.length == 0) || lodash.includes(temiSinteticiSelezionati, report.codTemaSintetico));
+            let matchesCicloProgrammazione = ((cicliProgrammazioneSelezionati.length == 0) || lodash.includes(cicliProgrammazioneSelezionati, report.codCicloProgrammazione))
 
-            return matchesStato && matchesReportFlags;
+            return matchesTemaSintetico && matchesCicloProgrammazione;
         });
 
         this.ordinaRisultatiPerCriterio();
@@ -755,7 +715,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
      * onProgettoClick
      */
     public onProgettoClick(progetto: Progetto) {
-        // this.monithonMap.highlightById([progetto.uid]);
         this.showDettaglioProgetto(progetto);
 
     }
@@ -773,7 +732,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.ordinaRisultatiPerCriterio();
     }
     ordinaRisultatiPerCriterio() {
-        this.risultatiRicerca = lodash.sortBy(this.risultatiRicerca, (p: Progetto) => lodash.get(p, this.criterioSelezionato));
+        this.risultatiRicerca = lodash.sortBy(this.risultatiRicerca, (r: Report) => lodash.get(r, this.criterioSelezionato));
     }
 
 
