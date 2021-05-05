@@ -72,8 +72,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     counterValue: any;
 
-    criteriOrdinamento: Array<string> = ['distanza', 'ocCodTemaSintetico', 'ocFinanzTotPubNetto', 'ocDataInizioProgetto']
-    criterioSelezionato: string = 'ocCodTemaSintetico';
+    criteriOrdinamento: Array<string> = ['codGiudizioSintetico', 'ocFinanzTotPubNetto', 'dataInserimento']
+    criterioSelezionato: string = 'codGiudizioSintetico';
     geocoderData: any;
     comuneCorrente: any;
     raggioCorrente: number = 10;
