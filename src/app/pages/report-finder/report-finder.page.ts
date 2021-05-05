@@ -72,7 +72,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     counterValue: any;
 
-    criteriOrdinamento: Array<string> = ['codGiudizioSintetico', 'ocFinanzTotPubNetto', 'dataInserimento']
+    criteriOrdinamento: Array<string> = ['distanza', 'codGiudizioSintetico', 'ocFinanzTotPubNetto', 'dataInserimento'];
     criterioSelezionato: string = 'codGiudizioSintetico';
     geocoderData: any;
     comuneCorrente: any;
