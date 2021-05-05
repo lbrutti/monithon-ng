@@ -153,10 +153,10 @@
                                             <mat-chip-list class="monithon-dettaglio-progetto__has-report"
                                                 multiple="false" aria-orientation="horizontal">
                                                 <mat-chip class="monithon-dettaglio-progetto__has-report"
-                                                    selectable="false" *ngFor="let flag of this.reportFlags"
-                                                    [selected]="progettoSelezionato.hasReport==flag.hasReport"
-                                                    [attr.data-has-report]="flag.hasReport" disableRipple="true">
-                                                    {{'reportFlags.'+flag.hasReport | transloco}}
+                                                    selectable="false" *ngFor="let tema of this.temiSintetici"
+                                                    [selected]="progettoSelezionato.hasReport==tema.codTemaSintetico"
+                                                    [attr.data-has-report]="tema.codTemaSintetico" disableRipple="true">
+                                                    {{tema.descTemaSintetico}}
                                                 </mat-chip>
                                             </mat-chip-list>
                                         </ion-col>
@@ -180,14 +180,6 @@
 
         <div id="panelContainer">
             <div id="filterContainer">
-                <!-- Temi -->
-                <!-- <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true">
-                    <mat-chip class="monithon-tema" *ngFor="let tema of this.temi" [selectable]="tema.isActive"
-                        [attr.data-active]="tema.isActive" [selected]="tema.isSelected"
-                        (click)="this.filterByTema(tema)" [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico"
-                        disableRipple="true">
-                        {{'temi.'+tema.ocCodTemaSintetico | transloco}}</mat-chip>
-                </mat-chip-list> -->
 
                 <!-- Categorie dei temi attivi -->
                 <mat-expansion-panel class="monithon-filtri">
@@ -205,9 +197,9 @@
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
                                         aria-orientation="horizontal">
                                         <mat-chip [ngClass]="{'monithon-categoria': true}"
-                                        *ngFor="let giudizio of this.giudiziSintetici" 
-                                        [selected]="giudizio.isSelected"
-                                            [selectable]="giudizio.isActive" [attr.data-active]="giudizio.isActive"
+                                            *ngFor="let giudizio of this.giudiziSintetici"
+                                            [selected]="giudizio.isSelected" [selectable]="giudizio.isActive"
+                                            [attr.data-active]="giudizio.isActive"
                                             (click)="this.filterByGiudizio(giudizio)"
                                             [attr.data-oc-cod-tema-sintetico]="giudizio.codGiudizioSintetico"
                                             disableRipple="true">
@@ -278,7 +270,7 @@
                                                             (click)="this.filterByReportFlag(temaSintetico)"
                                                             [attr.data-has-report]="temaSintetico.codTemaSintetico"
                                                             disableRipple="true">
-                                                            {{'reportFlags.'+temaSintetico.codTemaSintetico | transloco}}
+                                                            {{ temaSintetico.descTemaSintetico}}
                                                         </mat-chip>
                                                     </mat-chip-list>
                                                 </ion-col>
