@@ -17,10 +17,9 @@ export class Report {
     codTemaSintetico: string | number; //ocCodTemaSintetico: number; mostrato in dettaglio e uusato per filtro secondario con chips
     codGiudizioSintetico: string; //ocCodCategoriaSpesa: Array<string>; mostrato in dettaglio, usato per filtro primario e per colore marker su mappa
     ocFinanzTotPubNetto: number | string; //ocFinanzTotPubNetto: number | string; mostrato in dettaglio, usato per filtro BUDGET
-    totPagamenti?: number; // totPagamenti?: number; mostrato in dettaglio, usato per filtro BUDGET
 
     codProgrammaOperativo?: string; //codStatoProgetto?: any; mostrato in dettaglio, usato per filtro con autocomplete?
-    codCicloProgrammazione?: number | string; //codLocaleProgetto?: string;  mostrato in dettaglio, usato per filtro secondario con chips
+    codCicloProgrammazione?: number | string; //codStatoProgetto?: string;  mostrato in dettaglio, usato per filtro secondario con chips
     link?: string; //ocLink?: string; usato in dettaglio per linkare alla pagina del report
 
     lat: number;

@@ -61,7 +61,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     public temiSintetici: Array<TemaSintetico> = [];
 
     progettiCrossFilter: any;
-    progettoSelezionato: any = {};
+    reportSelezionato: any = {};
     visualizzaDettaglio: boolean = false;
 
     ordinamentoPanelOpenState: boolean = false;
@@ -272,12 +272,12 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.espandiListaRisultati = true;
             }
             //FIXME
-            this.progettoSelezionato = progetto;
+            this.reportSelezionato = progetto;
             let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === progetto.uid);
             this.listaRisultati.scrollToIndex(indexRisultato);
         } else {
             if (!this.visualizzaDettaglio) {
-                this.progettoSelezionato = {};
+                this.reportSelezionato = {};
             }
         }
 
@@ -292,9 +292,9 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                     next: progetto => {
                         let dettaglioBoundingRect = this.dettaglioProgetto.nativeElement.getBoundingClientRect();
                         if (progetto) {
-                            this.progettoSelezionato = progetto;
+                            this.reportSelezionato = progetto;
                             this.visualizzaDettaglio = true;
-                            this.reportMap.easeToProgetto(dettaglioBoundingRect, this.progettoSelezionato, this.visualizzaDettaglio);
+                            this.reportMap.easeToProgetto(dettaglioBoundingRect, this.reportSelezionato, this.visualizzaDettaglio);
                             this.renderDettaglioProgettoCharts();
                         } else {
                             this.hideDettaglioReport()
@@ -338,7 +338,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         chartG.selectAll('text.finanziamento').remove();
 
         chartG.selectAll('text.finanziamento')
-            .data([this.progettoSelezionato])
+            .data([this.reportSelezionato])
             .enter()
             .append('text')
             .attr('class', 'finanziamento')
@@ -355,7 +355,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         let chartContainer = (this.pagamentiChartContainer as any).nativeElement;
         let chartW = chartContainer.getBoundingClientRect().width
         let scale = d3.scaleLinear([0, chartW]);
-        scale.domain([0, this.progettoSelezionato.ocFinanzTotPubNetto]);
+        scale.domain([0, this.reportSelezionato.ocFinanzTotPubNetto]);
         d3.select('.monithon-pagamenti-chart').remove();
         this.pagamentiChart = d3.select(chartContainer).append('svg');
         this.pagamentiChart
@@ -366,19 +366,19 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
         let chartG = this.pagamentiChart.append('g');
         chartG.append('rect')
-            .data([this.progettoSelezionato])
+            .data([this.reportSelezionato])
             .attr('width', `${chartW}`)
             .attr('height', '56')
             .attr('class', 'background')
 
             .attr('fill', 'grey');
         chartG.append('rect')
-            .data([this.progettoSelezionato])
+            .data([this.reportSelezionato])
             .attr('width', d => scale(d.totPagamenti))
             .attr('height', '56')
             .attr('class', 'foreground');
         chartG.selectAll('text.pagamenti-label')
-            .data([this.progettoSelezionato])
+            .data([this.reportSelezionato])
             .enter()
             .append('text')
             .attr('class', 'pagamenti-label')
@@ -398,7 +398,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 return this.translocoService.translate('pagamenti');
             });
         chartG.selectAll('text.pagamenti')
-            .data([this.progettoSelezionato])
+            .data([this.reportSelezionato])
             .enter()
             .append('text')
             .attr('class', 'pagamenti')
@@ -746,10 +746,10 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
     getCategorieTail() {
-        return lodash.tail(this.progettoSelezionato.ocCodCategoriaSpesa);
+        return lodash.tail(this.reportSelezionato.codGiudizioSintetico);
     }
     getCategorieHead() {
-        return lodash.first(this.progettoSelezionato.ocCodCategoriaSpesa);
+        return lodash.first(this.reportSelezionato.codGiudizioSintetico);
     }
 
     //metodi per modale
