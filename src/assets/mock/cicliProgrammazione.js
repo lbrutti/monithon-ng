@@ -1,4 +1,4 @@
-let cicloProgrammazione = [
+let cicliProgrammazione = [
   {
     "codCicloProgrammazione": 1,
     "descCicloProgrammazione": "2007-2013"
@@ -13,4 +13,4 @@ let cicloProgrammazione = [
   }
 ];
 
-export default cicloProgrammazione;
+export default cicliProgrammazione;

@@ -7,6 +7,12 @@ import { environment } from 'src/environments/environment';
 import { Progetto } from 'src/app/model/progetto/progetto';
 import { Tema } from 'src/app/model/tema/tema.interface';
 import { Categoria } from 'src/app/model/categoria/categoria.interface';
+
+import temiSintetici from '../../../assets/mock/temiSintetici';
+import cicliProgrammazione from '../../../assets/mock/cicliProgrammazione';
+import programmiOperativi from '../../../assets/mock/programmiOperativi';
+
+
 @Injectable({
     providedIn: 'root'
 })
@@ -113,35 +119,35 @@ export class MonithonApiService {
     /**
      * getListaReport
      */
-    public getListaReport() {
-        
+    public getListaReport(): Observable<any> {
+        return of([]);
     }
 
     /**
      * getDettaglioReport
      */
-    public getDettaglioReport(uid:string|number) {
-        
+    public getDettaglioReport(uid: string | number) {
+
     }
 
     /**
      * getProgrammiOperativi
      */
-    public getProgrammiOperativi() {
-        
+    public getProgrammiOperativi(): Observable<any> {
+        return of(programmiOperativi);
     }
 
     /**
      * getCicliProgrammazione
      */
-    public getCicliProgrammazione() {
-        
+    public getCicliProgrammazione(): Observable<any> {
+        return of(cicliProgrammazione);
     }
 
     /**
    * getTemiSintetici
    */
-    public getTemiSintetici(){
-
+    public getTemiSintetici(): Observable<any> {
+        return of(temiSintetici);
     }
 }

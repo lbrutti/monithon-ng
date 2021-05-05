@@ -1,4 +1,4 @@
-let cicloProgrammazione = [
+let temiSintetici = [
     {
         "codTemaSintetico": 1,
         "descTemaSintetico": "Trasporti e infrastrutture a rete"
@@ -53,4 +53,4 @@ let cicloProgrammazione = [
     }
 ];
 
-export default cicloProgrammazione;
+export default temiSintetici;

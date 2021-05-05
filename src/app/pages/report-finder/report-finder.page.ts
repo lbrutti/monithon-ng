@@ -131,10 +131,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             spinner: null
 
         };
-        // if (!(isPlatform('desktop') || isPlatform('tablet'))) {
-        //     loaderOptions.message = this.translocoService.translate("onlyDesktopAvailable")
-        //     loaderOptions.cssClass = 'monithon-loader monithon-loader-only-desktop'
-        // }
         this.loadingController
             .create(loaderOptions)
             .then((loading) => {
@@ -227,7 +223,12 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise()])
+        Promise.all([   
+            this.monithonApiService.getListaReport().toPromise(), 
+            this.monithonApiService.getTemiSintetici().toPromise(),
+            this.monithonApiService.getCicliProgrammazione().toPromise(),
+            this.monithonApiService.getProgrammiOperativi().toPromise(),
+        ])
             .then(data => {
 
                 this.monithonMap.setCategorie(data[1].categorie.map(c => {
