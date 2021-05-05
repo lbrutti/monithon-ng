@@ -151,7 +151,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
         let projectSelectionObserver: Observer<any> = {
             next: progetto => {
-                // this.keepProgetto = !lodash.isNil(progetto);
                 this.onDettaglioReportHandleClick(progetto);
                 this.evidenziaReportInLista(progetto);
             },
@@ -294,7 +293,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                         if (progetto) {
                             this.reportSelezionato = progetto;
                             this.visualizzaDettaglio = true;
-                            this.reportMap.easeToProgetto(dettaglioBoundingRect, this.reportSelezionato, this.visualizzaDettaglio);
+                            this.reportMap.easeToReport(dettaglioBoundingRect, this.reportSelezionato, this.visualizzaDettaglio);
                             this.renderDettaglioProgettoCharts();
                         } else {
                             this.hideDettaglioReport()
@@ -313,7 +312,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
     private renderDettaglioProgettoCharts() {
-        // this.renderFinanziamentoChart();
         this.renderPagamentiChart();
     }
 

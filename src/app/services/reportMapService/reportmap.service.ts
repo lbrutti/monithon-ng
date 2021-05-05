@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import mapboxgl, { PointLike } from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import { default as MapboxGeocoder } from '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js';
-import { Progetto } from 'src/app/model/progetto/progetto';
 import lodash from 'lodash';
 import { Observer, Subject } from 'rxjs';
 
@@ -227,8 +226,8 @@ export class ReportMapService {
                 });
                 if (features.length && this.map.getZoom() >= 10) { //https://www.meistertask.com/app/task/k9R9hJHO/markers-poter-cliccare-i-markers-solo-allultimo-livello-di-zoom-come-in-glocalclimatechange-eu
                     let feature = features[0];
-                    let progetto: Progetto = feature.properties as Progetto;
-                    let match = this.reports.features.filter(f => f.properties.uid == progetto.uid);
+                    let report: Report = feature.properties as Report;
+                    let match = this.reports.features.filter(f => f.properties.uid == report.uid);
                     match = match[0] ? match[0].properties : {};
                     if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected) {
                         this.publishSelectedReport((match as Report));
@@ -253,8 +252,8 @@ export class ReportMapService {
                 });
                 if (features.length && this.map.getZoom() >= 10) { //https://www.meistertask.com/app/task/k9R9hJHO/markers-poter-cliccare-i-markers-solo-allultimo-livello-di-zoom-come-in-glocalclimatechange-eu
                     let feature = features[0];
-                    let progetto: Progetto = feature.properties as Progetto;
-                    let match = this.reports.features.filter(f => f.properties.uid == progetto.uid);
+                    let report: Report = feature.properties as Report;
+                    let match = this.reports.features.filter(f => f.properties.uid == report.uid);
                     match = match[0] ? match[0].properties : {};
                     if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected) {
                         this.map.getCanvas().style.cursor = 'pointer';
@@ -380,7 +379,7 @@ export class ReportMapService {
                     return acc;
                 }, []));
         this.giudiziSintetici.map(c => {
-            //una categoria è attiva (selezionabile) quando esiste almeno un progetto che ce l'ha
+            //una categoria è attiva (selezionabile) quando esiste almeno un report che ce l'ha
             c.isActive = lodash.includes(categorieVisibili, c.codGiudizioSintetico);
             if (reset) {
                 c.isSelected = c.isActive;
@@ -395,7 +394,7 @@ export class ReportMapService {
 
     filtraPerCategoria() {
         let reports = this.filtraReport();
-        lodash.remove(reports, (p: Progetto) => !p.isSelected);
+        lodash.remove(reports, (p: Report) => !p.isSelected);
         this.publishUpdate(reports);
     }
 
@@ -445,13 +444,13 @@ export class ReportMapService {
     resetFiltroReport(): Array<any> {
 
         return this.reports.features.map(f => {
-            let progetto: Progetto = f.properties;
-            progetto.distanza = null;
-            progetto.isHighlighted = true;
-            progetto.isWithinRange = true;
-            progetto.isSelected = true;
-            this.map.setFeatureState({ source: 'reports', id: progetto.uid }, { isWithinRange: true, isSelected: true, isHighlighted: true });
-            return progetto;
+            let report: Report = f.properties;
+            report.distanza = null;
+            report.isHighlighted = true;
+            report.isWithinRange = true;
+            report.isSelected = true;
+            this.map.setFeatureState({ source: 'reports', id: report.uid }, { isWithinRange: true, isSelected: true, isHighlighted: true });
+            return report;
         });
     }
 
@@ -526,20 +525,20 @@ export class ReportMapService {
     highlightById(idRisultati: string[]) {
         this.reports.features
             .map(f => {
-                let progetto: Progetto = f.properties;
-                progetto.isHighlighted = (progetto.isSelected && (idRisultati.length == 0)) || lodash.includes(idRisultati, progetto.uid);
+                let report: Report = f.properties;
+                report.isHighlighted = (report.isSelected && (idRisultati.length == 0)) || lodash.includes(idRisultati, report.uid);
 
-                this.map.setFeatureState({ source: 'reports', id: progetto.uid }, { isHighlighted: progetto.isHighlighted });
+                this.map.setFeatureState({ source: 'reports', id: report.uid }, { isHighlighted: report.isHighlighted });
             });
     }
 
     selectById(idRisultati: string[]) {
         this.reports.features
             .map(f => {
-                let progetto: Progetto = f.properties;
-                progetto.isSelected = ((!lodash.isNil(idRisultati) && idRisultati.length == 0) && progetto.isSelected) || lodash.includes(idRisultati, progetto.uid);
+                let report: Report = f.properties;
+                report.isSelected = ((!lodash.isNil(idRisultati) && idRisultati.length == 0) && report.isSelected) || lodash.includes(idRisultati, report.uid);
 
-                this.map.setFeatureState({ source: 'reports', id: progetto.uid }, { isSelected: progetto.isSelected });
+                this.map.setFeatureState({ source: 'reports', id: report.uid }, { isSelected: report.isSelected });
             });
     }
 
@@ -577,15 +576,15 @@ export class ReportMapService {
         }
     }
 
-    //sposta la mappa per mostrare il progetto  correntemente selezionato
-    public easeToProgetto(options: any, progetto: Progetto, isOverlayPresent: boolean) {
+    //sposta la mappa per mostrare il report  correntemente selezionato
+    public easeToReport(options: any, report: Report, isOverlayPresent: boolean) {
         if (options && isOverlayPresent) {
-            this.highlightById([progetto.uid]);
-            //recupera coordinate progetto sullo schermo:
-            let feature = this.reports.features.filter(f => f.properties.uid == progetto.uid)[0];
+            this.highlightById([report.uid]);
+            //recupera coordinate report sullo schermo:
+            let feature = this.reports.features.filter(f => f.properties.uid == report.uid)[0];
             let markerScreenCoordinates = this.map.project([feature.properties.long, feature.properties.lat]);
 
-            //devo spostare la mappa in alto in modo che il punto si trovi a 30px dal margine superiore della scheda progetto
+            //devo spostare la mappa in alto in modo che il punto si trovi a 30px dal margine superiore della scheda report
             let offset = options.height; // porto il punto al margine del div dettaglio
             offset += ((markerScreenCoordinates.y - options.y) / 2); //aggiungo ulteriore padding per far emenergere il punto sopra il container
             let easeOptions = { center: [feature.properties.long, feature.properties.lat], duration: 2000 };
