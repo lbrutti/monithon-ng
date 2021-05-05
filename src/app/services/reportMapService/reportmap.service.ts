@@ -10,6 +10,7 @@ import '@turf/distance';
 import { circle, distance, point } from '@turf/turf';
 import { COLOR_MAP } from 'src/app/utils/colorMap';
 import { TranslocoService } from '@ngneat/transloco';
+import { Report } from 'src/app/model/report/report';
 
 
 @Injectable({
@@ -22,16 +23,15 @@ export class ReportMapService {
     map: mapboxgl.Map;
     geocoder: any;
     draw: any;
-    rangeProgetti: any;
-    progetti: any;
-    categorie: any;
+    rangeReport: any;
+    reports: any;
+    giudiziSintetici: any;
 
     private mapUpdated: Subject<any> = new Subject();
-    private projectSelected: Subject<any> = new Subject();
-    categorieAttive: { ocCodCategoriaSpesa: any; ocCodTemaSintetico: any; isSelected: boolean; }[];
+    private reportSelected: Subject<any> = new Subject();
     public filtroPerRaggioEnabled: boolean = false;
     reportFlags: any[] = [];
-    statiAvanzamento: any[] = [];
+    cicliProgrammazione?: any[] = [];
     radiusFilterData: any = {
         "type": "FeatureCollection",
         "features": []
@@ -94,10 +94,10 @@ export class ReportMapService {
         });
         this.geocoder.on('result', evt => {
             this.resetFiltroDistanza(false);
-            this.rangeProgetti = 10;
+            this.rangeReport = 10;
             this.center = evt.result.center;
             this.comuneCorrente = evt.result.place_name;
-            this.drawRangeProgetti(this.center);
+            this.drawRangeReport(this.center);
             this.map.easeTo({ center: this.center, duration: 1200, zoom: 10 });
             this.publishGeocoderUpdate();
         });
@@ -114,12 +114,12 @@ export class ReportMapService {
 
 
         this.map.on('load', () => {
-            this.progettiToFeatureCollection(data);
+            this.reportsToFeatureCollection(data);
 
             this.map
-                .addSource('progetti', {
+                .addSource('reports', {
                     type: 'geojson',
-                    data: this.progetti,
+                    data: this.reports,
                     promoteId: 'uid'
                 });
 
@@ -128,7 +128,7 @@ export class ReportMapService {
                     type: 'geojson',
                     data: this.radiusFilterData
                 });
-            //refactoring come singolo layer di progetti:
+            //refactoring come singolo layer di reports:
 
             this.map.addLayer({
                 'id': 'filterCircleFill',
@@ -150,12 +150,12 @@ export class ReportMapService {
                 }
             })
 
-            let layerId = 'progetti-layer'
+            let layerId = 'reports-layer'
             this.map
                 .addLayer({
                     'id': layerId,
                     'type': 'circle',
-                    'source': 'progetti',
+                    'source': 'reports',
                     'paint': {
                         'circle-radius': {
                             'base': 1.75,
@@ -186,7 +186,6 @@ export class ReportMapService {
                         'circle-stroke-color': [
                             'case',
                             ['any',
-                                // ['!', ['boolean', ['feature-state', 'isSelected'], true]],
                                 ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]
                             ],
                             COLOR_MAP.temi.default,
@@ -224,21 +223,21 @@ export class ReportMapService {
                 let upper: PointLike = new mapboxgl.Point(e.point.x + 5, e.point.y + 5);
                 var bbox: PointLike | [PointLike, PointLike] = [lower, upper];
                 var features = this.map.queryRenderedFeatures(bbox, {
-                    layers: ['progetti-layer']
+                    layers: ['reports-layer']
                 });
                 if (features.length && this.map.getZoom() >= 10) { //https://www.meistertask.com/app/task/k9R9hJHO/markers-poter-cliccare-i-markers-solo-allultimo-livello-di-zoom-come-in-glocalclimatechange-eu
                     let feature = features[0];
                     let progetto: Progetto = feature.properties as Progetto;
-                    let match = this.progetti.features.filter(f => f.properties.uid == progetto.uid);
+                    let match = this.reports.features.filter(f => f.properties.uid == progetto.uid);
                     match = match[0] ? match[0].properties : {};
                     if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected) {
-                        this.publishSelectedProject((match as Progetto));
+                        this.publishSelectedReport((match as Report));
                     } else {
-                        this.publishSelectedProject(null);
+                        this.publishSelectedReport(null);
                     }
                 } else {
                     this.highlightById([]);
-                    this.publishSelectedProject(null);
+                    this.publishSelectedReport(null);
                 }
             });
 
@@ -250,12 +249,12 @@ export class ReportMapService {
                 let upper: PointLike = new mapboxgl.Point(e.point.x + 5, e.point.y + 5);
                 var bbox: PointLike | [PointLike, PointLike] = [lower, upper];
                 var features = this.map.queryRenderedFeatures(bbox, {
-                    layers: ['progetti-layer']
+                    layers: ['reports-layer']
                 });
                 if (features.length && this.map.getZoom() >= 10) { //https://www.meistertask.com/app/task/k9R9hJHO/markers-poter-cliccare-i-markers-solo-allultimo-livello-di-zoom-come-in-glocalclimatechange-eu
                     let feature = features[0];
                     let progetto: Progetto = feature.properties as Progetto;
-                    let match = this.progetti.features.filter(f => f.properties.uid == progetto.uid);
+                    let match = this.reports.features.filter(f => f.properties.uid == progetto.uid);
                     match = match[0] ? match[0].properties : {};
                     if (((this.filtroPerRaggioEnabled && match.isWithinRange) || !this.filtroPerRaggioEnabled) && match.isSelected) {
                         this.map.getCanvas().style.cursor = 'pointer';
@@ -276,7 +275,7 @@ export class ReportMapService {
                 navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
             }
 
-            this.publishUpdate(this.featureCollectionToProgetti());
+            this.publishUpdate(this.featureCollectionToReports());
         });
 
 
@@ -292,22 +291,22 @@ export class ReportMapService {
 
 
     public setGiudiziSintetici(categorie: Array<any>) {
-        this.categorie = categorie.map((c) => ({
-            'ocCodCategoriaSpesa': c.ocCodCategoriaSpesa,
+        this.giudiziSintetici = categorie.map((c) => ({
+            'codGiudizioSintetico': c.codGiudizioSintetico,
             'ocCodTemaSintetico': c.ocCodTemaSintetico,
             'isSelected': true,
             'isActive': true
         }));
     }
-    private progettiToFeatureCollection(data: Array<Progetto>): any {
-        this.progetti = {
+    private reportsToFeatureCollection(data: Array<Report>): any {
+        this.reports = {
             "type": "FeatureCollection",
-            "features": data.map((p: Progetto) => {
-                let properties: any = Object.assign({}, p);
+            "features": data.map((r: Report) => {
+                let properties: any = Object.assign({}, r);
                 properties.isSelected = true;
                 properties.isWithinRange = false;
                 properties.isHighlighted = false;
-                let jitteredCoords = this.addJitter()(p.lat, p.long, 0.5, false);
+                let jitteredCoords = this.addJitter()(r.lat, r.long, 0.5, false);
                 return {
                     "type": "Feature",
                     "properties": properties,
@@ -320,16 +319,16 @@ export class ReportMapService {
         };
     }
 
-    private featureCollectionToProgetti(): Array<Progetto> {
-        let progetti: Array<Progetto> = this.progetti.features.map(feat => {
+    private featureCollectionToReports(): Array<Report> {
+        let reports: Array<Report> = this.reports.features.map(feat => {
             let data = feat.properties;
-            if (lodash.isString(data.ocCodCategoriaSpesa)) {
+            if (lodash.isString(data.codGiudizioSintetico)) {
                 //see : https://github.com/mapbox/mapbox-gl-js/issues/2434
-                data.ocCodCategoriaSpesa = JSON.parse(data.ocCodCategoriaSpesa);
+                data.codGiudizioSintetico = JSON.parse(data.codGiudizioSintetico);
             }
             return data;
         });
-        return progetti;
+        return reports;
     }
 
 
@@ -338,7 +337,7 @@ export class ReportMapService {
      * Disegna cerchio attorno alla località selezionata 
      * @param center 
      */
-    private drawRangeProgetti(center: any) {
+    private drawRangeReport(center: any) {
         this.circle = circle(this.center, this.radius);
         this.circle.id = "range-center";
         (this.map.getSource('radiusFilterData') as any).setData(this.circle);
@@ -365,24 +364,24 @@ export class ReportMapService {
     public updateRadius(newRadiusValue: number) {
         this.resetFiltroDistanza(false);
         this.radius = newRadiusValue;
-        this.drawRangeProgetti(this.center);
+        this.drawRangeReport(this.center);
     }
 
 
     aggiornaAttivabilitaCategorie(reset: boolean = false) {
         let categorieVisibili = lodash.uniq(
-            this.progetti.features.filter(f => f.properties.isSelected)
+            this.reports.features.filter(f => f.properties.isSelected)
                 .reduce((acc, f) => {
-                    f.properties.ocCodCategoriaSpesa.map(c => {
+                    f.properties.codGiudizioSintetico.map(c => {
                         if (acc.indexOf(c) == -1) {
                             acc.push(c);
                         }
                     });
                     return acc;
                 }, []));
-        this.categorie.map(c => {
+        this.giudiziSintetici.map(c => {
             //una categoria è attiva (selezionabile) quando esiste almeno un progetto che ce l'ha
-            c.isActive = lodash.includes(categorieVisibili, c.ocCodCategoriaSpesa);
+            c.isActive = lodash.includes(categorieVisibili, c.codGiudizioSintetico);
             if (reset) {
                 c.isSelected = c.isActive;
             }
@@ -395,9 +394,9 @@ export class ReportMapService {
 
 
     filtraPerCategoria() {
-        let progetti = this.filtraProgetti();
-        lodash.remove(progetti, (p: Progetto) => !p.isSelected);
-        this.publishUpdate(progetti);
+        let reports = this.filtraReport();
+        lodash.remove(reports, (p: Progetto) => !p.isSelected);
+        this.publishUpdate(reports);
     }
 
 
@@ -410,48 +409,48 @@ export class ReportMapService {
         if (circleData) {
             this.centerPoint = point(circleData.center);
             this.radius = circleData.radius;
-            let progetti = this.filtraProgetti();
+            let reports = this.filtraReport();
             this.aggiornaAttivabilitaCategorie();
-            this.publishUpdate(progetti);
+            this.publishUpdate(reports);
         }
 
 
     }
 
 
-    filtraProgetti(): Array<any> {
-        let categorieSelezionate = this.categorie.filter(c => {
+    filtraReport(): Array<any> {
+        let categorieSelezionate = this.giudiziSintetici.filter(c => {
             return c.isSelected;
-        }).map(c => c.ocCodCategoriaSpesa);
+        }).map(c => c.codGiudizioSintetico);
 
-        return this.progetti.features
+        return this.reports.features
             .map(f => {
-                let progetto: Progetto = f.properties;
-                progetto.isSelected = ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, progetto.ocCodCategoriaSpesa).length > 0));
-                let featureStates = { isSelected: progetto.isSelected, isWithinRange: true };
+                let report: Report = f.properties;
+                report.isSelected = ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, report.codGiudizioSintetico).length > 0));
+                let featureStates = { isSelected: report.isSelected, isWithinRange: true };
                 if (this.filtroPerRaggioEnabled) {
-                    progetto.distanza = distance(point(f.geometry.coordinates), this.centerPoint);
-                    progetto.isWithinRange = progetto.distanza <= this.radius;
-                    featureStates.isWithinRange = progetto.isWithinRange;
-                    featureStates.isSelected = progetto.isSelected && progetto.isWithinRange;
-                    progetto.isSelected = progetto.isSelected && progetto.isWithinRange;
+                    report.distanza = distance(point(f.geometry.coordinates), this.centerPoint);
+                    report.isWithinRange = report.distanza <= this.radius;
+                    featureStates.isWithinRange = report.isWithinRange;
+                    featureStates.isSelected = report.isSelected && report.isWithinRange;
+                    report.isSelected = report.isSelected && report.isWithinRange;
                 }
-                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, featureStates);
+                this.map.setFeatureState({ source: 'reports', id: report.uid }, featureStates);
                 return f;
             })
             .filter(f => f.properties.isSelected)
             .map(f => f.properties);
     }
 
-    resetFiltroProgetti(): Array<any> {
+    resetFiltroReport(): Array<any> {
 
-        return this.progetti.features.map(f => {
+        return this.reports.features.map(f => {
             let progetto: Progetto = f.properties;
             progetto.distanza = null;
             progetto.isHighlighted = true;
             progetto.isWithinRange = true;
             progetto.isSelected = true;
-            this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isWithinRange: true, isSelected: true, isHighlighted: true });
+            this.map.setFeatureState({ source: 'reports', id: progetto.uid }, { isWithinRange: true, isSelected: true, isHighlighted: true });
             return progetto;
         });
     }
@@ -464,11 +463,11 @@ export class ReportMapService {
         this.mapUpdated.unsubscribe();
     }
 
-    public subscribeProjectSelection(obs: Observer<any>): void {
-        this.projectSelected.subscribe(obs);
+    public subscribeReportSelection(obs: Observer<any>): void {
+        this.reportSelected.subscribe(obs);
     }
-    public unsubscribeProjectSelection(): void {
-        this.projectSelected.unsubscribe();
+    public unsubscribeReportSelection(): void {
+        this.reportSelected.unsubscribe();
     }
 
     public subscribeToGeocoderUpdates(obs: Observer<any>): void {
@@ -485,15 +484,15 @@ export class ReportMapService {
     public unsubscribeToGeocoderResults(): void {
         this.geocoderResults.unsubscribe();
     }
-    publishUpdate(progetti: Array<Progetto>): void {
-        this.mapUpdated.next({ categorie: this.categorie, progetti: lodash.uniqBy(progetti, (p: Progetto) => p.uid) });
+    publishUpdate(reports: Array<Report>): void {
+        this.mapUpdated.next({ giudiziSintetici: this.giudiziSintetici, reports: lodash.uniqBy(reports, (r: Report) => r.uid) });
     }
 
-    publishSelectedProject(progetto?: Progetto): void {
-        if (progetto && progetto.isWithinRange && lodash.isString(progetto.ocCodCategoriaSpesa)) {
-            progetto.ocCodCategoriaSpesa = JSON.parse(progetto.ocCodCategoriaSpesa);
+    publishSelectedReport(report?: Report): void {
+        if (report && report.isWithinRange && lodash.isString(report.codGiudizioSintetico)) {
+            report.codGiudizioSintetico = JSON.parse(report.codGiudizioSintetico);
         }
-        this.projectSelected.next(progetto);
+        this.reportSelected.next(report);
 
     }
 
@@ -525,22 +524,22 @@ export class ReportMapService {
     }
 
     highlightById(idRisultati: string[]) {
-        this.progetti.features
+        this.reports.features
             .map(f => {
                 let progetto: Progetto = f.properties;
                 progetto.isHighlighted = (progetto.isSelected && (idRisultati.length == 0)) || lodash.includes(idRisultati, progetto.uid);
 
-                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isHighlighted: progetto.isHighlighted });
+                this.map.setFeatureState({ source: 'reports', id: progetto.uid }, { isHighlighted: progetto.isHighlighted });
             });
     }
 
     selectById(idRisultati: string[]) {
-        this.progetti.features
+        this.reports.features
             .map(f => {
                 let progetto: Progetto = f.properties;
                 progetto.isSelected = ((!lodash.isNil(idRisultati) && idRisultati.length == 0) && progetto.isSelected) || lodash.includes(idRisultati, progetto.uid);
 
-                this.map.setFeatureState({ source: 'progetti', id: progetto.uid }, { isSelected: progetto.isSelected });
+                this.map.setFeatureState({ source: 'reports', id: progetto.uid }, { isSelected: progetto.isSelected });
             });
     }
 
@@ -566,15 +565,15 @@ export class ReportMapService {
 
     private resetFiltroDistanza(publishUpdate: boolean = true) {
         this.radius = 10;
-        lodash.map(this.categorie, c => {
+        lodash.map(this.giudiziSintetici, c => {
             c.isSelected = true;
             c.isActive = true;
         });
 
-        let progetti = this.resetFiltroProgetti();
+        let reports = this.resetFiltroReport();
         this.aggiornaAttivabilitaCategorie(true);
         if (publishUpdate) {
-            this.publishUpdate(progetti);
+            this.publishUpdate(reports);
         }
     }
 
@@ -583,7 +582,7 @@ export class ReportMapService {
         if (options && isOverlayPresent) {
             this.highlightById([progetto.uid]);
             //recupera coordinate progetto sullo schermo:
-            let feature = this.progetti.features.filter(f => f.properties.uid == progetto.uid)[0];
+            let feature = this.reports.features.filter(f => f.properties.uid == progetto.uid)[0];
             let markerScreenCoordinates = this.map.project([feature.properties.long, feature.properties.lat]);
 
             //devo spostare la mappa in alto in modo che il punto si trovi a 30px dal margine superiore della scheda progetto

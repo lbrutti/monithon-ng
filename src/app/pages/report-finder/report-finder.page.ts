@@ -60,7 +60,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     public temiSintetici: Array<TemaSintetico> = [];
 
-    progettiCrossFilter: any;
+    reportsCrossFilter: any;
     reportSelezionato: any = {};
     visualizzaDettaglio: boolean = false;
 
@@ -117,7 +117,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
-                this.reports = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
+                this.reports = updateSubject.reports; //lodash.take(updateSubject.progetti, 50);
                 this.cicliProgrammazione.map(s => {
                     s.isActive = lodash.some(this.reports, p => p.codCicloProgrammazione == s.codCicloProgrammazione);
                     s.isSelected = s.isActive;
@@ -155,8 +155,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.onDettaglioReportHandleClick(progetto);
                 this.evidenziaReportInLista(progetto);
             },
-            error: err => console.error('subscribeProjectSelection error: ', err),
-            complete: () => console.log('subscribeProjectSelection complete: ')
+            error: err => console.error('subscribeReportSelection error: ', err),
+            complete: () => console.log('subscribeReportSelection complete: ')
         };
 
         let geocoderObserver: Observer<any> = {
@@ -176,7 +176,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             complete: () => console.log('geocoderResultsObserver complete')
         };
         this.reportMap.subscribeToUpdates(mapUpdateObserver);
-        this.reportMap.subscribeProjectSelection(projectSelectionObserver);
+        this.reportMap.subscribeReportSelection(projectSelectionObserver);
         this.reportMap.subscribeToGeocoderUpdates(geocoderObserver);
         this.reportMap.subscribeToGeocoderResults(geocoderResultsObserver);
 
@@ -285,7 +285,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     hideDettaglioReport() {
         this.visualizzaDettaglio = false;
     }
-    showDettaglioProgetto(progetto: any) {
+    showDettaglioReport(progetto: any) {
         if (!lodash.isNil(progetto)) {
             this.monithonApiService.getDettaglio(progetto)
                 .subscribe({
@@ -422,7 +422,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
 
 
-    private renderCharts(data: any) {
+    private renderCharts(data: any = []) {
         let baseArrotondamento = 10000;
         //override della funzione resizeHandlePath per personalizzare aspetto degli handle del brush
         dc.BarChart.prototype.resizeHandlePath = function () {
@@ -434,47 +434,47 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             let arrotondamento = multiplo * Math.floor(val / multiplo);
             return arrotondamento;
         };
-        let listaProgetti = data.map((d: Progetto) => {
-            if (lodash.isString(d.ocFinanzTotPubNetto)) {
-                d.ocFinanzTotPubNetto = parseInt(d.ocFinanzTotPubNetto);
+        let listaReports = data.map((r: Report) => {
+            if (lodash.isString(r.ocFinanzTotPubNetto)) {
+                r.ocFinanzTotPubNetto = parseInt(r.ocFinanzTotPubNetto);
             }
-            d.ocFinanzTotPubNetto = arrotonda(
-                d.ocFinanzTotPubNetto,
+            r.ocFinanzTotPubNetto = arrotonda(
+                r.ocFinanzTotPubNetto,
                 baseArrotondamento
             );
-            if (lodash.isString(d.ocDataInizioProgetto)) {
-                d.ocDataInizioProgetto = parseInt(d.ocDataInizioProgetto);
+            if (lodash.isString(r.dataInserimento)) {
+                r.dataInserimento = parseInt(r.dataInserimento);
             }
-            return d;
+            return r;
         });
 
-        this.progettiCrossFilter = crossfilter(listaProgetti);
-        this.renderBudgetChart(this.progettiCrossFilter, listaProgetti);
-        this.renderAnnoChart(this.progettiCrossFilter, listaProgetti);
+        this.reportsCrossFilter = crossfilter(listaReports);
+        this.renderBudgetChart(this.reportsCrossFilter, listaReports);
+        this.renderAnnoChart(this.reportsCrossFilter, listaReports);
         dc.renderAll();
         this.filtraRisultati();
         this.evidenziaRisultatiSuMappa();
     }
 
-    private renderAnnoChart(crossFilterData: any, listaProgetti: any) {
+    private renderAnnoChart(crossFilterData: any, listaReports: any) {
         this.annoChart = new dc.BarChart((this.annoChartContainer as any).nativeElement);
         let chartHeight = 72;
         let chartWidth = 432;
         let annoDim = crossFilterData.dimension((d) => {
             try {
 
-                let anno = moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year();
+                let anno = moment(`${parseInt(d.dataInserimento)}`, "YYYYMMDD").year();
                 return anno < 2014 ? 2013 : anno;
             } catch (error) {
                 console.error(error);
             }
         });
-        let progettiPerAnno = annoDim.group().reduceCount();
-        let annoRange = d3.extent(listaProgetti, (d: any) => moment(`${parseInt(d.ocDataInizioProgetto)}`, "YYYYMMDD").year()
+        let reportPerAnno = annoDim.group().reduceCount();
+        let annoRange = d3.extent(listaReports, (d: any) => moment(`${parseInt(d.dataInserimento)}`, "YYYYMMDD").year()
         );
         annoRange[0] = 2013;
         annoRange[1] += 1;
-        let maxCount = progettiPerAnno
+        let maxCount = reportPerAnno
             .all()
             .map(v => v.value)
             .reduce((a, v) => Math.max(a, v), -Infinity);
@@ -490,7 +490,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         let yScale = d3.scaleLinear().domain([0, maxCount]);
         this.annoChart
             .dimension(annoDim)
-            .group(progettiPerAnno)
+            .group(reportPerAnno)
             .brushOn(true)
             .x(xScale)
             .y(yScale)
@@ -510,7 +510,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.annoChart.on("filtered", () => {
 
             setTimeout(() => {
-                this.reports = annoDim.top(Infinity);
+                this.reports = annoDim.top(Infinity) || [];
                 this.filtraRisultati();
                 this.evidenziaRisultatiSuMappa();
             }, 0);
@@ -518,7 +518,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     }
 
-    private renderBudgetChart(crossFilterData: any, listaProgetti: any) {
+    private renderBudgetChart(crossFilterData: any, listaReports: any) {
         this.budgetChart = new dc.BarChart((this.budgetChartContainer as any).nativeElement);
         let chartHeight = 72;
         let chartWidth = 432;
@@ -536,13 +536,13 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         });
         //inserire soglie per non avere troppi bin: parametrizzare qui quantili?
         let dieciQuantili = d3.range(0, 1.1, 0.125); //.map((n) => +d3.format(".1f")(n));
-        let binThresholds = dieciQuantili.map((quant) => d3.quantile(listaProgetti, quant, (p: any) => parseInt(p.ocFinanzTotPubNetto))
+        let binThresholds = dieciQuantili.map((quant) => d3.quantile(listaReports, quant, (p: any) => parseInt(p.ocFinanzTotPubNetto))
         );
         binThresholds = [...new Set(binThresholds)];
         let numQuantili = binThresholds.length;
 
         budgetBin.thresholds(binThresholds);
-        let progettiBinned = budgetBin(listaProgetti);
+        let progettiBinned = budgetBin(listaReports);
 
         let budgetDim = crossFilterData.dimension((d) => {
             let binIndex = progettiBinned.findIndex((bin) => bin.find((p: any) => p.uid == d.uid)
@@ -595,7 +595,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             setTimeout(() => {
                 // console.log('this.budgetChart.on("filtered", () => {');
                 //propagare evento per aggiornare la lista dei progetti
-                this.reports = budgetDim.top(Infinity);
+                this.reports = budgetDim.top(Infinity) || [];
                 this.filtraRisultati();
                 this.evidenziaRisultatiSuMappa();
             }, 0);
@@ -714,8 +714,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     /**
      * onProgettoClick
      */
-    public onProgettoClick(progetto: Progetto) {
-        this.showDettaglioProgetto(progetto);
+    public onReportClick(report: Report) {
+        this.showDettaglioReport(report);
 
     }
 
@@ -727,7 +727,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
     public onCriterioSelezionatoClick(criterio: string) {
-        // this.ordinamentoPanelOpenState = !this.ordinamentoPanelOpenState;
         this.criterioSelezionato = criterio;
         this.ordinaRisultatiPerCriterio();
     }
@@ -762,7 +761,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         modal.onDidDismiss().then((modelData) => {
             if (modelData !== null) {
                 this.modalData = modelData.data;
-                console.log('Modal Data : ' + modelData.data);
             }
         });
 
