@@ -106,9 +106,34 @@
         "colophon": "Irure esse mollit esse laboris consectetur occaecat veniam sit cillum commodo laborum aute. Velit ad ipsum do culpa laborum exercitation officia. Mollit dolore duis culpa ea aute sit culpa velit. Non excepteur ad ipsum quis elit aliqua quis incididunt esse id officia. Laboris cillum tempor sint ullamco aliqua reprehenderit Lorem aliquip ex pariatur. Cillum ex dolor commodo velit sint cillum cillum elit pariatur sit sint pariatur cillum.",
         "credits": "Credits"
     },
-    "onlyDesktopAvailable":"Project Finder è disponibile solo in per desktop",
-    "courtesy":{
-        "titolo":"Ci dispiace!",
+    "onlyDesktopAvailable": "Project Finder è disponibile solo in per desktop",
+    "courtesy": {
+        "titolo": "Ci dispiace!",
         "sottotitolo": "Project finder è consultabile solo da desktop"
+    },
+    "report": {
+        "temaSintetico": {
+            "1": "Trasporti e infrastrutture a rete",
+            "2": "Ambiente e prevenzione dei rischi",
+            "3": "Attrazione culturale, naturale e turistica",
+            "4": "Competitività per le imprese",
+            "5": "Ricerca e innovazione",
+            "6": "Energia e efficienza energetica",
+            "7": "Rafforzamento capacità della PA",
+            "8": "Istruzione",
+            "9": "Occupazione e mobilità dei lavoratori",
+            "10": "Inclusione sociale",
+            "11": "Agenda digitale",
+            "12": "Rinnovamento urbano  e rurale",
+            "13": "Servizi di cura infanzia e anziani "
+        },
+        "giudizioSintetico": {
+            "1": "Appena iniziato",
+            "2": "In corso e procede bene",
+            "3": "Procede con difficoltà",
+            "4": "Bloccato",
+            "5": "Concluso e utile",
+            "6": "Concluso e inefficace "
+        }
     }
 }
