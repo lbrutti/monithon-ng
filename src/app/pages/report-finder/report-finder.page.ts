@@ -225,7 +225,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                     .addEventListener('click', () => {
                         this.comuneCorrente = '';
                         this.raggioCorrente = 10;
-                        this.criterioSelezionato = 'ocCodTemaSintetico';
+                        this.criterioSelezionato = 'codGiudizioSintetico';
                         this.reportMap.removeRadiusFilter();
                     });
 
