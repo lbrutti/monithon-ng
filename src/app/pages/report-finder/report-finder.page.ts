@@ -10,7 +10,7 @@ import moment from 'moment';
 import { Observer, Observable } from 'rxjs';
 import { Progetto } from 'src/app/model/progetto/progetto';
 import { MonithonApiService } from 'src/app/services/monithonApiService/monithon-api.service';
-import { ProgettiMapService } from 'src/app/services/progettiMapService/progettimap.service';
+import { ReportMapService } from 'src/app/services/reportMapService/reportmap.service';
 import { environment } from 'src/environments/environment';
 import { AboutPage } from '../about/about.page';
 //librerie caricate come script per ottimizzare performance
@@ -111,7 +111,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
-        public monithonMap: ProgettiMapService,
+        public reportMap: ReportMapService,
         private currencyPipe: CurrencyPipe,
         private translocoService: TranslocoService,
         public loadingController: LoadingController,
@@ -180,8 +180,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         let projectSelectionObserver: Observer<any> = {
             next: progetto => {
                 // this.keepProgetto = !lodash.isNil(progetto);
-                this.onDettaglioProgettoHandleClick(progetto);
-                this.evidenziaProgettoInLista(progetto);
+                this.onDettaglioReportHandleClick(progetto);
+                this.evidenziaReportInLista(progetto);
             },
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
@@ -189,7 +189,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
         let geocoderObserver: Observer<any> = {
             next: geocoderData => {
-                this.hideDettaglioProgetto();
+                this.hideDettaglioReport();
                 this.updateGeocoderBindindings(geocoderData);
             },
             error: err => console.error('gecoderObserver error: ', err),
@@ -203,10 +203,10 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             error: err => console.error('geocoderResultsObserver error: ', err),
             complete: () => console.log('geocoderResultsObserver complete')
         };
-        this.monithonMap.subscribeToUpdates(mapUpdateObserver);
-        this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
-        this.monithonMap.subscribeToGeocoderUpdates(geocoderObserver);
-        this.monithonMap.subscribeToGeocoderResults(geocoderResultsObserver);
+        this.reportMap.subscribeToUpdates(mapUpdateObserver);
+        this.reportMap.subscribeProjectSelection(projectSelectionObserver);
+        this.reportMap.subscribeToGeocoderUpdates(geocoderObserver);
+        this.reportMap.subscribeToGeocoderResults(geocoderResultsObserver);
 
     }
     updateGeocoderBindindings(geocoderData: any): void {
@@ -230,17 +230,16 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             this.monithonApiService.getProgrammiOperativi().toPromise(),
         ])
             .then(data => {
-
-                this.monithonMap.setCategorie(data[1].categorie.map(c => {
+                let listaReport = data[0];
+                let temiSintetici = data[1];
+                let cicliProgrammazione = data[2];
+                let programmiOperativi = data[3];
+                this.reportMap.setCategorie(data[1].categorie.map(c => {
                     c.isSelected = true;
                     return c;
                 }));
-                this.monithonMap.setTemi(data[1].temi.map(t => {
-                    t.isSelected = true;
-                    t.isActive = true;
-                    return t;
-                }));
-                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
+
+                this.reportMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
 
@@ -249,7 +248,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                         this.comuneCorrente = '';
                         this.raggioCorrente = 10;
                         this.criterioSelezionato = 'ocCodTemaSintetico';
-                        this.monithonMap.removeRadiusFilter();
+                        this.reportMap.removeRadiusFilter();
                     });
 
                 geocoderInput
@@ -269,14 +268,14 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                             this.comuneCorrente = '';
                             this.raggioCorrente = 10;
                             this.criterioSelezionato = 'ocCodTemaSintetico';
-                            this.monithonMap.removeRadiusFilter();
+                            this.reportMap.removeRadiusFilter();
                         }
                     });
                 geocoderInput
                     .addEventListener('keyup', e => {
                         if (!geocoderInput.value) {
                             this.criterioSelezionato = 'ocCodTemaSintetico';
-                            this.monithonMap.removeRadiusFilter();
+                            this.reportMap.removeRadiusFilter();
                         }
                     });
 
@@ -288,17 +287,17 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
             });
     }
-    onDettaglioProgettoHandleClick(progetto: Progetto = undefined) {
-        this.hideDettaglioProgetto();
+    onDettaglioReportHandleClick(progetto: Progetto = undefined) {
+        this.hideDettaglioReport();
         if (!lodash.isNil(progetto)) {
-            this.monithonMap.highlightById([progetto.uid]);
+            this.reportMap.highlightById([progetto.uid]);
         }
         // else {
         //     this.monithonMap.highlightById([]);
         // }
     };
 
-    evidenziaProgettoInLista(progetto: Progetto) {
+    evidenziaReportInLista(progetto: Progetto) {
         if (!lodash.isNil(progetto)) {
             if (!this.espandiListaRisultati) {
                 this.espandiListaRisultati = true;
@@ -314,7 +313,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         }
 
     }
-    hideDettaglioProgetto() {
+    hideDettaglioReport() {
         this.visualizzaDettaglio = false;
     }
     showDettaglioProgetto(progetto: any) {
@@ -326,20 +325,20 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                         if (progetto) {
                             this.progettoSelezionato = progetto;
                             this.visualizzaDettaglio = true;
-                            this.monithonMap.easeToProgetto(dettaglioBoundingRect, this.progettoSelezionato, this.visualizzaDettaglio);
+                            this.reportMap.easeToProgetto(dettaglioBoundingRect, this.progettoSelezionato, this.visualizzaDettaglio);
                             this.renderDettaglioProgettoCharts();
                         } else {
-                            this.hideDettaglioProgetto()
-                            this.monithonMap.highlightById([]);
+                            this.hideDettaglioReport()
+                            this.reportMap.highlightById([]);
                         }
                     },
                     error: err => {
-                        this.hideDettaglioProgetto();
+                        this.hideDettaglioReport();
                     }
                 });
         } else {
-            this.hideDettaglioProgetto();
-            this.monithonMap.highlightById([]);
+            this.hideDettaglioReport();
+            this.reportMap.highlightById([]);
         }
 
     }
@@ -698,20 +697,20 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     public filterByTema(tema: any): void {
         tema.isSelected = !tema.isSelected;
         if (lodash.every(this.temi, t => !t.isSelected)) {
-            this.monithonMap.resetFiltroTemi();
+            this.reportMap.resetFiltroTemi();
         }
 
         this.redrawCharts = true;
-        this.monithonMap.filtraPerTema(tema);
+        this.reportMap.filtraPerTema(tema);
     }
 
     public filterByCategoria(categoria: any): void {
         categoria.isSelected = !categoria.isSelected;
         if (lodash.every(this.categorie, c => !c.isSelected)) {
-            this.monithonMap.resetFiltroTemi();
+            this.reportMap.resetFiltroTemi();
         }
         this.redrawCharts = true;
-        this.monithonMap.filtraPerCategoria();
+        this.reportMap.filtraPerCategoria();
     }
 
     //Filtri di secondo livello:
@@ -738,7 +737,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     evidenziaRisultatiSuMappa() {
         let idRisultati = this.risultatiRicerca.map(p => p.uid);
         idRisultati = idRisultati.length == 0 ? null : idRisultati; // evit
-        this.monithonMap.selectById(idRisultati);
+        this.reportMap.selectById(idRisultati);
     }
 
     filtraRisultati() {
@@ -786,8 +785,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     onRadiusChange(event: any) {
         this.raggioCorrente = event.value;
-        this.hideDettaglioProgetto();
-        this.monithonMap.updateRadius(this.raggioCorrente)
+        this.hideDettaglioReport();
+        this.reportMap.updateRadius(this.raggioCorrente)
     }
     formatLabelSliderRaggio(val) {
         return `${val} km`;

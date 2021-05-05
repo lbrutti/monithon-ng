@@ -8,10 +8,12 @@ import { Progetto } from 'src/app/model/progetto/progetto';
 import { Tema } from 'src/app/model/tema/tema.interface';
 import { Categoria } from 'src/app/model/categoria/categoria.interface';
 
+
+//MOCK
 import temiSintetici from '../../../assets/mock/temiSintetici';
 import cicliProgrammazione from '../../../assets/mock/cicliProgrammazione';
 import programmiOperativi from '../../../assets/mock/programmiOperativi';
-
+import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
 
 @Injectable({
     providedIn: 'root'
@@ -149,5 +151,12 @@ export class MonithonApiService {
    */
     public getTemiSintetici(): Observable<any> {
         return of(temiSintetici);
+    }
+
+    /**
+     * getGiudiziSintetici
+     */
+    public getGiudiziSintetici() : Observable<any> {
+        return of(giudiziSintetici);
     }
 }
