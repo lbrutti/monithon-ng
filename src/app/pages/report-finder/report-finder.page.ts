@@ -228,12 +228,15 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             this.monithonApiService.getTemiSintetici().toPromise(),
             this.monithonApiService.getCicliProgrammazione().toPromise(),
             this.monithonApiService.getProgrammiOperativi().toPromise(),
+            this.monithonApiService.getGiudiziSintetici().toPromise(),
+
         ])
             .then(data => {
                 let listaReport = data[0];
                 let temiSintetici = data[1];
                 let cicliProgrammazione = data[2];
                 let programmiOperativi = data[3];
+                let giudiziSintetici = data[4];
                 this.reportMap.setCategorie(data[1].categorie.map(c => {
                     c.isSelected = true;
                     return c;
@@ -279,12 +282,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                         }
                     });
 
-                // this.dettaglioProgettoContainer.nativeElement.ontransitionend = (e: TransitionEvent) => {
-                //     if ((e.target as HTMLElement).classList.contains('hidden') && !this.keepProgetto) {
-                //         this.progettoSelezionato = {};
-                //     }
-                // };
-
             });
     }
     onDettaglioReportHandleClick(progetto: Progetto = undefined) {
@@ -292,9 +289,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         if (!lodash.isNil(progetto)) {
             this.reportMap.highlightById([progetto.uid]);
         }
-        // else {
-        //     this.monithonMap.highlightById([]);
-        // }
     };
 
     evidenziaReportInLista(progetto: Progetto) {

@@ -23,7 +23,6 @@ export class ReportMapService {
     geocoder: any;
     draw: any;
     rangeProgetti: any;
-    temi: Array<any> = [];
     progetti: any;
     categorie: any;
 
@@ -290,9 +289,7 @@ export class ReportMapService {
         this.geocoderUpdate.next(data);
     }
 
-    public setTemi(temi: Array<any>) {
-        this.temi = temi.map((t) => ({ 'ocCodTemaSintetico': t.ocCodTemaSintetico, 'isSelected': true, 'isActive': true }));
-    }
+
 
     public setCategorie(categorie: Array<any>) {
         this.categorie = categorie.map((c) => ({
@@ -335,9 +332,6 @@ export class ReportMapService {
         return progetti;
     }
 
-    public getTemi(): Array<any> {
-        return this.temi;
-    }
 
     /**
      * 
@@ -374,54 +368,6 @@ export class ReportMapService {
         this.drawRangeProgetti(this.center);
     }
 
-    filtraPerTema(tema) {
-        // rimuovi filtro su categorie non associate ai temi selezionati
-        this.filtraCategorie(tema);
-        let progetti = this.filtraProgetti();
-        lodash.remove(progetti, (p: Progetto) => !p.isSelected);
-        this.publishUpdate(progetti);
-    }
-    resetFiltroTemi() {
-        lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
-        let progettiSelezionati = [];
-        if (this.filtroPerRaggioEnabled) {
-            progettiSelezionati = this.progetti.features.filter((p: any) => (p.properties as Progetto).isWithinRange);
-        } else {
-            progettiSelezionati = this.progetti.features;
-        }
-        let categorieVisibili = lodash
-            .uniq(progettiSelezionati.reduce((acc, f) => {
-                f.properties.ocCodCategoriaSpesa.map(c => {
-                    if (acc.indexOf(c) == -1) {
-                        acc.push(c);
-                    }
-                });
-                return acc;
-            }, []));
-
-        lodash.map(this.categorie, c => {
-            c.isSelected = true;
-            c.isActive = categorieVisibili.indexOf(c.ocCodCategoriaSpesa) > -1;
-        });
-
-        let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
-
-        lodash.map(categoriePerTema, (categorie, codiceTema) => {
-            //quando nessuna categoria del tema è attiva -> inattivo il tema
-            if (lodash.every(categorie, c => !c.isActive)) {
-                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
-                    t.isActive = false;
-                    t.isSelected = false;
-                });
-            } else if (lodash.every(categorie, c => !c.isSelected)) {
-                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
-                    t.isActive = true;
-                    t.isSelected = true;
-                });
-            }
-
-        });
-    }
 
     aggiornaAttivabilitaCategorie(reset: boolean = false) {
         let categorieVisibili = lodash.uniq(
@@ -442,69 +388,13 @@ export class ReportMapService {
             }
         });
 
-        let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
 
-        lodash.map(categoriePerTema, (categorie, codiceTema) => {
-            //quando nessuna categoria del tema è attiva -> inattivo il tema
-            if (lodash.every(categorie, c => !c.isActive)) {
-                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
-                    t.isActive = false;
-                    t.isSelected = false;
-                });
-            } else if (lodash.every(categorie, c => !c.isSelected)) {
-                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
-                    t.isActive = true;
-                    t.isSelected = reset;
-                });
-            }
-
-        });
 
     }
 
 
 
-    filtraCategorie(tema) {
-        let categorieSelezionate = this.categorie.filter(c => c.isSelected);
-        let temiSelezionati = this.temi.filter(t => t.isSelected).map(t => t.ocCodTemaSintetico);
-
-        if (categorieSelezionate.length == 0) {
-            //nascondo le categorie non pertinenti al tema
-            this.categorie.map(c => c.isActive = temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico));
-        } else {
-            // se ho categorie selezionate, le mantengo tali sse il loro tema di pertinenza è selezionato o non ci sono temi selezionati
-
-            let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
-            categoriePerTema[tema.ocCodTemaSintetico].map(c => {
-                c.isSelected = c.isActive && tema.isSelected;
-            });
-
-        }
-    }
     filtraPerCategoria() {
-        let categoriePerTema = lodash.groupBy(this.categorie, c => c.ocCodTemaSintetico);
-
-        lodash.map(categoriePerTema, (categorie, codiceTema) => {
-            //quando deseleziono tutte le categorie di un tema-> lo deseleziono
-            let isTemaSelezionato = lodash.some(categorie, c => c.isSelected && c.isActive)
-            // if (lodash.every(categorie, c => !c.isSelected) || lodash.every(categorie, c => !c.isActive)) {
-            if (!isTemaSelezionato) {
-                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => t.isSelected = false);
-            }
-            //se ho selezionato almeno una categoria di un tema deselezioanato-> lo seleziono
-            if (lodash.some(categorie, c => c.isSelected && c.isActive)) {
-                this.temi.filter(t => t.ocCodTemaSintetico == codiceTema).map(t => {
-                    if (!t.isSelected) {
-                        t.isSelected = true;
-
-                    }
-                    if (!t.isActive) {
-                        t.isActive = true;
-                    }
-                });
-
-            }
-        });
         let progetti = this.filtraProgetti();
         lodash.remove(progetti, (p: Progetto) => !p.isSelected);
         this.publishUpdate(progetti);
@@ -530,9 +420,8 @@ export class ReportMapService {
 
 
     filtraProgetti(): Array<any> {
-        let temiSelezionati = this.temi.filter(t => t.isSelected).map(t => t.ocCodTemaSintetico);
         let categorieSelezionate = this.categorie.filter(c => {
-            return (temiSelezionati.length == 0 || lodash.includes(temiSelezionati, c.ocCodTemaSintetico)) && c.isSelected;
+            return c.isSelected;
         }).map(c => c.ocCodCategoriaSpesa);
 
         return this.progetti.features
@@ -597,7 +486,7 @@ export class ReportMapService {
         this.geocoderResults.unsubscribe();
     }
     publishUpdate(progetti: Array<Progetto>): void {
-        this.mapUpdated.next({ temi: this.temi, categorie: this.categorie, progetti: lodash.uniqBy(progetti, (p: Progetto) => p.uid) });
+        this.mapUpdated.next({ categorie: this.categorie, progetti: lodash.uniqBy(progetti, (p: Progetto) => p.uid) });
     }
 
     publishSelectedProject(progetto?: Progetto): void {
@@ -677,7 +566,6 @@ export class ReportMapService {
 
     private resetFiltroDistanza(publishUpdate: boolean = true) {
         this.radius = 10;
-        lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
         lodash.map(this.categorie, c => {
             c.isSelected = true;
             c.isActive = true;

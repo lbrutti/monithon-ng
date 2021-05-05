@@ -10,16 +10,16 @@
     <div id="raggioContainer" [ngClass]="{'backgrounded': hideSlider}">
         <mat-slider [min]="minRadius" [max]="maxRadius" thumbLabel="true" step="1"
             [displayWith]="formatLabelSliderRaggio" [value]="raggioCorrente" (input)="onRadiusChange($event)"
-            [disabled]="!monithonMap.filtroPerRaggioEnabled">
+            [disabled]="!reportMap.filtroPerRaggioEnabled">
         </mat-slider>
     </div>
 
     <div #navigationControl id="navigationControl" class="navigation-control"
-        [ngClass]="{'hidden': (isWizardMode && !monithonMap.filtroPerRaggioEnabled) || (!isWizardMode && !isAppReady),'visible': ((!isWizardMode && isAppReady) || monithonMap.filtroPerRaggioEnabled)}">
+        [ngClass]="{'hidden': (isWizardMode && !reportMap.filtroPerRaggioEnabled) || (!isWizardMode && !isAppReady),'visible': ((!isWizardMode && isAppReady) || reportMap.filtroPerRaggioEnabled)}">
 
     </div>
     <div id="container"
-        [ngClass]="{'hidden': (isWizardMode && !monithonMap.filtroPerRaggioEnabled) || (!isWizardMode && !isAppReady),'visible': ((!isWizardMode && isAppReady) || monithonMap.filtroPerRaggioEnabled)}">
+        [ngClass]="{'hidden': (isWizardMode && !reportMap.filtroPerRaggioEnabled) || (!isWizardMode && !isAppReady),'visible': ((!isWizardMode && isAppReady) || reportMap.filtroPerRaggioEnabled)}">
         <!-- Mappa -->
         <div #mapContainer id="mapContainer">
 
@@ -32,7 +32,7 @@
                 <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">5-{{'schedaProgetto' |
                     transloco}}</h5>
 
-                <ion-icon (click)="onDettaglioProgettoHandleClick()"></ion-icon>
+                <ion-icon (click)="onDettaglioReportHandleClick()"></ion-icon>
             </div>
             <div #dettagliProgetto class="monithon-dettaglio-progetto__dettagli_container">
 
@@ -317,12 +317,12 @@
 
                             <!-- comune:; Distanza: mostrati solo se filtro per distanza attivo -->
                             <ion-col size="4" class="monithon-geolocator-data-container"
-                                *ngIf="monithonMap.filtroPerRaggioEnabled">
+                                *ngIf="reportMap.filtroPerRaggioEnabled">
                                 <span class="monithon-comune-corrente">{{comuneCorrente | unescape | capitalize}}</span>
                                 <span class="monithon-raggio-corrente">{{raggioCorrente|formatDistanza}}</span>
                             </ion-col>
                             <ion-col size="4" class="monithon-geolocator-data-container"
-                                *ngIf="!monithonMap.filtroPerRaggioEnabled">
+                                *ngIf="!reportMap.filtroPerRaggioEnabled">
                                 <span class="monithon-comune-corrente">-</span>
                                 <span class="monithon-raggio-corrente">-</span>
                             </ion-col>
@@ -334,7 +334,7 @@
                                     <mat-label>{{'ordinaPer' | transloco}}</mat-label>
                                     <mat-chip-list class="monithon-criteri-ordinamento">
                                         <mat-chip *ngFor="let criterio of criteriOrdinamento"
-                                            [attr.data-active]="(criterio!='distanza') || monithonMap.filtroPerRaggioEnabled"
+                                            [attr.data-active]="(criterio!='distanza') || reportMap.filtroPerRaggioEnabled"
                                             class="monithon-criterio-ordinamento"
                                             (click)="onCriterioSelezionatoClick(criterio)" disableRipple="true"
                                             [ngClass]="{'selected': criterio==criterioSelezionato}">
