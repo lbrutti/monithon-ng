@@ -26,7 +26,7 @@
         </div>
         <!-- dettaglio progetto -->
         <div [ngClass]="{'hidden': !this.visualizzaDettaglio, 'visible': this.visualizzaDettaglio}" #dettaglioProgetto
-            [attr.data-oc-cod-tema-sintetico]="this.reportSelezionato.ocCodTemaSintetico"
+            [attr.data-cod-giudizio-sintetico]="this.reportSelezionato.codGiudizioSintetico"
             class="monithon-dettaglio-progetto" #dettaglioProgettoContainer>
             <div class="monithon-dettaglio-progetto__header">
                 <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">5-{{'schedaProgetto' |
@@ -74,7 +74,7 @@
                                 </ion-label>
 
                                 <mat-expansion-panel hideToggle="true"
-                                    [attr.data-oc-cod-tema-sintetico]="reportSelezionato.ocCodTemaSintetico"
+                                    [attr.data-cod-giudizio-sintetico]="reportSelezionato.codGiudizioSintetico"
                                     class="monithon-dettaglio-progetto__lista__categorie mat-elevation-z"
                                     [ngClass]="{'inactive': getCategorieTail().length==1}">
                                     <mat-expansion-panel-header
@@ -191,14 +191,15 @@
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
                                         aria-orientation="horizontal">
                                         <mat-chip [ngClass]="{'monithon-categoria': true}"
-                                        *ngFor="let giudizio of this.giudiziSintetici" 
-                                        [selected]="giudizio.isSelected"
-                                            [selectable]="giudizio.isActive" [attr.data-active]="giudizio.isActive"
+                                            *ngFor="let giudizio of this.giudiziSintetici"
+                                            [selected]="giudizio.isSelected" [selectable]="giudizio.isActive"
+                                            [attr.data-active]="giudizio.isActive"
                                             (click)="this.filterByGiudizio(giudizio)"
-                                            [attr.data-oc-cod-tema-sintetico]="giudizio.codGiudizioSintetico"
+                                            [attr.data-cod-giudizio-sintetico]="giudizio.codGiudizioSintetico"
                                             disableRipple="true">
                                             <span class="monithon-categoria-wrapper">
-                                                {{'giudiziSintetici.'+giudizio.codGiudizioSintetico | transloco}}
+                                                {{'report.giudizioSintetico.'+giudizio.codGiudizioSintetico |
+                                                transloco}}
                                             </span>
                                         </mat-chip>
                                     </mat-chip-list>
@@ -264,7 +265,8 @@
                                                             (click)="this.filterByReportFlag(temaSintetico)"
                                                             [attr.data-has-report]="temaSintetico.codTemaSintetico"
                                                             disableRipple="true">
-                                                            {{ temaSintetico.descTemaSintetico}}
+                                                            {{ 'report.temaSintetico.'+temaSintetico.codTemaSintetico |
+                                                            transloco}}
                                                         </mat-chip>
                                                     </mat-chip-list>
                                                 </ion-col>
@@ -340,20 +342,20 @@
                     class="monithon-lista-progetti">
                     <ion-item color="light" *cdkVirtualFor="let report of risultatiRicerca;"
                         class="monithon-lista-progetti__progetto"
-                        [attr.data-oc-cod-tema-sintetico]="report.ocCodTemaSintetico"
+                        [attr.data-cod-giudizio-sintetico]="report.codGiudizioSintetico"
                         [ngClass]="{'selected': (report.uid==reportSelezionato.uid)}" lines="none">
                         <ion-grid class="ion-no-margin">
                             <ion-row class="ion-no-margin">
                                 <ion-col class="ion-no-margin">
                                     <ion-label class="monithon-lista-risultato" (click)="onReportClick(report)"
-                                        [attr.data-oc-cod-tema-sintetico]="report.ocCodTemaSintetico"
+                                        [attr.data-cod-giudizio-sintetico]="report.codGiudizioSintetico"
                                         [ngClass]="{'selected': (report.uid==reportSelezionato.uid)}">
                                         <h2>{{report.titoloReport | fixencodedchars | unescape | capitalize}}
                                         </h2>
                                     </ion-label>
                                 </ion-col>
                             </ion-row>
-                           
+
                         </ion-grid>
 
                     </ion-item>

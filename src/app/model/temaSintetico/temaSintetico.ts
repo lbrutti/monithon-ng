@@ -1,5 +1,5 @@
 export interface TemaSintetico {
-    codTemaSintetico: string | number;
+    codTemaSintetico:  number;
     descTemaSintetico: string;
     isActive: boolean;
     isSelected: boolean;

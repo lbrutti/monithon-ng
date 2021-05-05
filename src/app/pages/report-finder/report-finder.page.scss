@@ -207,37 +207,55 @@
         }
     }
 
-    &[data-oc-cod-tema-sintetico="4"] {
-        background-color: var(--monithon-tema-energia-background);
+    &[data-cod-giudizio-sintetico="1"] {
+        background-color: var(--monithon-giudizio-1-background);
 
         .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-tema-energia-background);
+            color: var(--monithon-giudizio-1-background);
         }
     }
 
-    &[data-oc-cod-tema-sintetico="5"] {
-        background-color: var(--monithon-tema-ambiente-background);
+    &[data-cod-giudizio-sintetico="2"] {
+        background-color: var(--monithon-giudizio-2-background);
 
         .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-tema-ambiente-background);
+            color: var(--monithon-giudizio-2-background);
         }
     }
 
-    &[data-oc-cod-tema-sintetico="6"] {
-        background-color: var(--monithon-tema-attrazione-background);
+    &[data-cod-giudizio-sintetico="3"] {
+        background-color: var(--monithon-giudizio-energia-background);
 
         .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-tema-attrazione-background);
+            color: var(--monithon-giudizio-energia-background);
         }
     }
 
-    &[data-oc-cod-tema-sintetico="7"] {
-        background-color: var(--monithon-tema-mobilita-background);
+    &[data-cod-giudizio-sintetico="4"] {
+        background-color: var(--monithon-giudizio-energia-background);
 
         .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-tema-mobilita-background);
+            color: var(--monithon-giudizio-energia-background);
         }
     }
+
+
+    &[data-cod-giudizio-sintetico="5"] {
+        background-color: var(--monithon-giudizio-ambiente-background);
+
+        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+            color: var(--monithon-giudizio-ambiente-background);
+        }
+    }
+
+    &[data-cod-giudizio-sintetico="6"] {
+        background-color: var(--monithon-giudizio-attrazione-background);
+
+        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+            color: var(--monithon-giudizio-attrazione-background);
+        }
+    }
+
 
     &.hidden {
         left: -100vw;
@@ -279,22 +297,39 @@
                 }
             }
 
-            &[data-oc-cod-tema-sintetico="4"] * {
-                background: var(--monithon-tema-energia-background) !important;
+            &[data-cod-giudizio-sintetico] * {
+                background: var(--monithon-giudizio-#{attr(data-cod-giudizio-sintetico)}-background) !important;
+
             }
 
-            &[data-oc-cod-tema-sintetico="5"] * {
-
-                background: var(--monithon-tema-ambiente-background) !important;
+            &[data-cod-giudizio-sintetico="1"] * {
+                background: var(--monithon-giudizio-1-background) !important;
             }
 
-            &[data-oc-cod-tema-sintetico="6"] * {
-                background: var(--monithon-tema-attrazione-background) !important;
+            &[data-cod-giudizio-sintetico="2"] * {
+
+                background: var(--monithon-giudizio-2-background) !important;
             }
 
-            &[data-oc-cod-tema-sintetico="7"] * {
-                background: var(--monithon-tema-mobilita-background) !important;
+            &[data-cod-giudizio-sintetico="3"] * {
+                background: var(--monithon-giudizio-3-background) !important;
             }
+
+
+
+            &[data-cod-giudizio-sintetico="4"] * {
+                background: var(--monithon-giudizio-4-background) !important;
+            }
+
+            &[data-cod-giudizio-sintetico="5"] * {
+
+                background: var(--monithon-giudizio-5-background) !important;
+            }
+
+            &[data-cod-giudizio-sintetico="6"] * {
+                background: var(--monithon-giudizio-6-background) !important;
+            }
+
 
 
 
@@ -456,26 +491,22 @@
 .mat-chip.monithon-tema[data-active="false"],
 .mat-chip.monithon-categoria[data-active="false"] {
 
-    &[data-oc-cod-tema-sintetico="4"] {
-        color: var(--monithon-tema-energia-background) !important;
-        border-color: var(--monithon-tema-energia-background);
+    &[data-cod-giudizio-sintetico="4"] {
+        color: var(--monithon-giudizio-energia-background) !important;
+        border-color: var(--monithon-giudizio-energia-background);
     }
 
-    &[data-oc-cod-tema-sintetico="5"] {
+    &[data-cod-giudizio-sintetico="5"] {
 
-        color: var(--monithon-tema-ambiente-background) !important;
-        border-color: var(--monithon-tema-ambiente-background);
+        color: var(--monithon-giudizio-ambiente-background) !important;
+        border-color: var(--monithon-giudizio-ambiente-background);
     }
 
-    &[data-oc-cod-tema-sintetico="6"] {
-        color: var(--monithon-tema-attrazione-background) !important;
-        border-color: var(--monithon-tema-attrazione-background);
+    &[data-cod-giudizio-sintetico="6"] {
+        color: var(--monithon-giudizio-attrazione-background) !important;
+        border-color: var(--monithon-giudizio-attrazione-background);
     }
 
-    &[data-oc-cod-tema-sintetico="7"] {
-        color: var(--monithon-tema-mobilita-background) !important;
-        border-color: var(--monithon-tema-mobilita-background);
-    }
 
 }
 
@@ -489,25 +520,35 @@
     border-style: solid;
 
     // temi
-    &[data-oc-cod-tema-sintetico="4"] {
-        color: var(--monithon-tema-energia-background) !important;
-        border-color: var(--monithon-tema-energia-background);
+    &[data-cod-giudizio-sintetico="1"] {
+        color: var(--monithon-giudizio-1-background) !important;
+        border-color: var(--monithon-giudizio-1-background);
     }
 
-    &[data-oc-cod-tema-sintetico="5"] {
-
-        color: var(--monithon-tema-ambiente-background) !important;
-        border-color: var(--monithon-tema-ambiente-background);
+    &[data-cod-giudizio-sintetico="2"] {
+        color: var(--monithon-giudizio-2-background) !important;
+        border-color: var(--monithon-giudizio-2-background);
     }
 
-    &[data-oc-cod-tema-sintetico="6"] {
-        color: var(--monithon-tema-attrazione-background) !important;
-        border-color: var(--monithon-tema-attrazione-background);
+    &[data-cod-giudizio-sintetico="3"] {
+        color: var(--monithon-giudizio-3-background) !important;
+        border-color: var(--monithon-giudizio-3-background);
     }
 
-    &[data-oc-cod-tema-sintetico="7"] {
-        color: var(--monithon-tema-mobilita-background) !important;
-        border-color: var(--monithon-tema-mobilita-background);
+    &[data-cod-giudizio-sintetico="4"] {
+        color: var(--monithon-giudizio-4-background) !important;
+        border-color: var(--monithon-giudizio-4-background);
+    }
+
+    &[data-cod-giudizio-sintetico="5"] {
+
+        color: var(--monithon-giudizio-5-background) !important;
+        border-color: var(--monithon-giudizio-5-background);
+    }
+
+    &[data-cod-giudizio-sintetico="6"] {
+        color: var(--monithon-giudizio-6-background) !important;
+        border-color: var(--monithon-giudizio-6-background);
     }
 
     // stati e flag report
@@ -520,25 +561,33 @@
 
 
     &.mat-chip-selected {
-        // &[data-oc-cod-tema-sintetico] {
         color: var(--monithon-tema-color) !important;
-        // }
 
-        &[data-oc-cod-tema-sintetico="4"] {
-            background-color: var(--monithon-tema-energia-background);
+        &[data-cod-giudizio-sintetico="1"] {
+            background-color: var(--monithon-giudizio-1-background);
         }
 
-        &[data-oc-cod-tema-sintetico="5"] {
-            background-color: var(--monithon-tema-ambiente-background);
+        &[data-cod-giudizio-sintetico="2"] {
+            background-color: var(--monithon-giudizio-2-background);
         }
 
-        &[data-oc-cod-tema-sintetico="6"] {
-            background-color: var(--monithon-tema-attrazione-background);
+        &[data-cod-giudizio-sintetico="3"] {
+            background-color: var(--monithon-giudizio-3-background);
         }
 
-        &[data-oc-cod-tema-sintetico="7"] {
-            background-color: var(--monithon-tema-mobilita-background);
+        &[data-cod-giudizio-sintetico="4"] {
+            background-color: var(--monithon-giudizio-4-background);
         }
+
+        &[data-cod-giudizio-sintetico="5"] {
+            background-color: var(--monithon-giudizio-5-background);
+        }
+
+        &[data-cod-giudizio-sintetico="6"] {
+            background-color: var(--monithon-giudizio-6-background);
+        }
+
+
 
         &[data-oc-cod-stato-progetto],
         &[data-has-report] {
@@ -757,41 +806,35 @@ ion-row.monithon-filtri-secondari {
         }
     }
 
-    &[data-oc-cod-tema-sintetico="4"]::before {
-        background-color: var(--monithon-tema-energia-background);
+    &[data-cod-giudizio-sintetico="4"]::before {
+        background-color: var(--monithon-giudizio-energia-background);
 
     }
 
-    &[data-oc-cod-tema-sintetico="4"].selected {
-        color: var(--monithon-tema-energia-background);
+    &[data-cod-giudizio-sintetico="4"].selected {
+        color: var(--monithon-giudizio-energia-background);
     }
 
-    &[data-oc-cod-tema-sintetico="5"]::before {
-        background-color: var(--monithon-tema-ambiente-background);
-
-    }
-
-    &[data-oc-cod-tema-sintetico="5"].selected {
-        color: var(--monithon-tema-ambiente-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="6"]::before {
-        background-color: var(--monithon-tema-attrazione-background);
+    &[data-cod-giudizio-sintetico="5"]::before {
+        background-color: var(--monithon-giudizio-ambiente-background);
 
     }
 
-    &[data-oc-cod-tema-sintetico="6"].selected {
-        color: var(--monithon-tema-attrazione-background);
+    &[data-cod-giudizio-sintetico="5"].selected {
+        color: var(--monithon-giudizio-ambiente-background);
     }
 
-    &[data-oc-cod-tema-sintetico="7"]::before {
-        background-color: var(--monithon-tema-mobilita-background);
+    &[data-cod-giudizio-sintetico="6"]::before {
+        background-color: var(--monithon-giudizio-attrazione-background);
 
     }
 
-    &[data-oc-cod-tema-sintetico="7"].selected {
-        color: var(--monithon-tema-mobilita-background);
+    &[data-cod-giudizio-sintetico="6"].selected {
+        color: var(--monithon-giudizio-attrazione-background);
     }
+
+
+
 
     h2 {
         margin-bottom: auto;
@@ -859,39 +902,57 @@ ion-row.monithon-filtri-secondari {
             padding: 0 !important;
         }
 
-        &[data-oc-cod-tema-sintetico="4"] {
-            border-bottom-color: var(--monithon-tema-energia-background);
+        &[data-cod-giudizio-sintetico="1"] {
+            border-bottom-color: var(--monithon-giudizio-1-background);
         }
 
-        &[data-oc-cod-tema-sintetico="5"] {
-            border-bottom-color: var(--monithon-tema-ambiente-background);
+        &[data-cod-giudizio-sintetico="2"] {
+            border-bottom-color: var(--monithon-giudizio-2-background);
         }
 
-        &[data-oc-cod-tema-sintetico="6"] {
-            border-bottom-color: var(--monithon-tema-attrazione-background);
+        &[data-cod-giudizio-sintetico="3"] {
+            border-bottom-color: var(--monithon-giudizio-3-background);
         }
 
-        &[data-oc-cod-tema-sintetico="7"] {
-            border-bottom-color: var(--monithon-tema-mobilita-background);
+        &[data-cod-giudizio-sintetico="4"] {
+            border-bottom-color: var(--monithon-giudizio-4-background);
         }
+
+        &[data-cod-giudizio-sintetico="5"] {
+            border-bottom-color: var(--monithon-giudizio-5-background);
+        }
+
+        &[data-cod-giudizio-sintetico="6"] {
+            border-bottom-color: var(--monithon-giudizio-6-background);
+        }
+
 
         &.selected {
 
-            &[data-oc-cod-tema-sintetico="4"] {
-                border-color: var(--monithon-tema-energia-background);
+            &[data-cod-giudizio-sintetico="1"] {
+                border-color: var(--monithon-giudizio-1-background);
             }
 
-            &[data-oc-cod-tema-sintetico="5"] {
-                border-color: var(--monithon-tema-ambiente-background);
+            &[data-cod-giudizio-sintetico="2"] {
+                border-color: var(--monithon-giudizio-2-background);
             }
 
-            &[data-oc-cod-tema-sintetico="6"] {
-                border-color: var(--monithon-tema-attrazione-background);
+            &[data-cod-giudizio-sintetico="3"] {
+                border-color: var(--monithon-giudizio-3-background);
             }
 
-            &[data-oc-cod-tema-sintetico="7"] {
-                border-color: var(--monithon-tema-mobilita-background);
+            &[data-cod-giudizio-sintetico="4"] {
+                border-color: var(--monithon-giudizio-4-background);
             }
+
+            &[data-cod-giudizio-sintetico="5"] {
+                border-color: var(--monithon-giudizio-5-background);
+            }
+
+            &[data-cod-giudizio-sintetico="6"] {
+                border-color: var(--monithon-giudizio-6-background);
+            }
+
         }
     }
 
