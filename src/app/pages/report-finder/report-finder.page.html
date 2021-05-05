@@ -353,55 +353,7 @@
                                     </ion-label>
                                 </ion-col>
                             </ion-row>
-                            <ion-row class="ion-no-margin">
-                                <ion-col class="ion-no-margin" size-xl="8">
-                                    <mat-expansion-panel [disabled]="!report.codTemaSintetico" hideToggle="true"
-                                        class="monithon-lista-progetti__progetto__dettagli mat-elevation-z">
-                                        <mat-expansion-panel-header
-                                            class="monithon-lista-progetti__progetto__dettagli__header">
-                                            <ion-grid class="ion-no-margin">
-                                                <ion-row class="ion-no-margin">
-                                                    <ion-col size="6" class="ion-no-margin">
-                                                        <ion-label
-                                                            class="monithon-lista-progetti__progetto__dettagli__distanza">
-                                                            {{'distanza'|transloco}}: {{report.distanza |
-                                                            formatDistanza }}
-                                                        </ion-label>
-                                                    </ion-col>
-                                                    <ion-col size="6" class="ion-no-margin">
-                                                        <ion-label
-                                                            class="monithon-lista-progetti__progetto__dettagli__contatore_report"
-                                                            [attr.data-mostra-icona]="report.codTemaSintetico">
-                                                            {{'codTemaSintetico'|transloco}}:
-                                                            {{report.reports.length}}
-                                                        </ion-label>
-                                                    </ion-col>
-                                                </ion-row>
-                                            </ion-grid>
-                                        </mat-expansion-panel-header>
-                                        <ion-list class="monithon-lista-progetti__progetto__dettagli__lista_report"
-                                            class="ion-no-margin">
-                                            <ion-item *ngFor="let report of progetto.reports; let i =index" lines="none"
-                                                class="monithon-lista-progetti__progetto__dettagli__lista_report_report_container">
-                                                <ion-label>
-                                                    <a href="{{monithonReportUrl}}/{{report.id}}" target="_blank">
-                                                        <span
-                                                            class="monithon-lista-progetti__progetto__dettagli__lista_report_indice-report">
-                                                            #{{i+1}} </span>
-                                                        <span
-                                                            class="monithon-lista-progetti__progetto__dettagli__lista_report_data-report">
-                                                            <!-- [2021-03-20 17:18:57 ] -->
-                                                            {{'monitoraggio' | transloco}} {{report.dataAggiornamento |
-                                                            momentdate:'YYYY-MM-DD HH:mm:ss' | date:'d/MM/y':'+0100':
-                                                            'it'}}
-                                                        </span>
-                                                    </a>
-                                                </ion-label>
-                                            </ion-item>
-                                        </ion-list>
-                                    </mat-expansion-panel>
-                                </ion-col>
-                            </ion-row>
+                           
                         </ion-grid>
 
                     </ion-item>
