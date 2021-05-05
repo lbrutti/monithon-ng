@@ -6,11 +6,12 @@ export class Progetto {
     ocDataInizioProgetto: number;
     ocCodTemaSintetico: number;
     ocFinanzTotPubNetto: number | string;
+    totPagamenti?:number;
     ocCodCategoriaSpesa: Array<string>;
     codStatoProgetto?: any;
     codLocaleProgetto?: string;
     ocLink?: string;
-    ocSintesiProgetto: any;
+    ocSintesiProgetto: string;
     hasReport: boolean = false;
     reports: Array<Report>
     lat: number;
@@ -19,5 +20,4 @@ export class Progetto {
     isWithinRange: boolean = false;
     isSelected: boolean = false;
     isHighlighted?: boolean;
-
 }
