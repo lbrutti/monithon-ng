@@ -80,7 +80,7 @@ export class MonithonApiService {
             );
     }
 
-    public getTemi() {
+    public getTemi(): Observable<any> {
         //{"4":[12,10,15,14,11,13,16],"6":[95,91,94,93,92],"5":[87,86,85,19,20,84,22,17,18,88,21,89,23,500],"7":[43]}
 
         return this.httpClient.get<any>(this.url + '/mdTemi')
@@ -105,6 +105,43 @@ export class MonithonApiService {
                     return of(e);
                 })
             );
+
+    }
+
+
+    /// metodi per report
+    /**
+     * getListaReport
+     */
+    public getListaReport() {
+        
+    }
+
+    /**
+     * getDettaglioReport
+     */
+    public getDettaglioReport(uid:string|number) {
+        
+    }
+
+    /**
+     * getProgrammiOperativi
+     */
+    public getProgrammiOperativi() {
+        
+    }
+
+    /**
+     * getCicliProgrammazione
+     */
+    public getCicliProgrammazione() {
+        
+    }
+
+    /**
+   * getTemiSintetici
+   */
+    public getTemiSintetici(){
 
     }
 }
