@@ -1,0 +1,3 @@
+@function cssvar($prefix, $key, $suffix) {
+    @return var(--#{$prefix}-#{$key}-#{$suffix});
+}

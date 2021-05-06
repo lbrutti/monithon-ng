@@ -1,4 +1,5 @@
 @import '../../../theme/scrollbar-width-mixin.scss';
+@import '../../../theme/cssvar.scss';
 
 #container {
     text-align: center;
@@ -519,37 +520,15 @@
     border-width: 1px;
     border-style: solid;
 
-    // temi
-    &[data-cod-giudizio-sintetico="1"] {
-        color: var(--monithon-giudizio-1-background) !important;
-        border-color: var(--monithon-giudizio-1-background);
+    // giudizi sintetici
+    @for $codGiudizioSintetico from 1 through 6 {
+
+        &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
+            color: cssvar(monithon-giudizio, $codGiudizioSintetico, background) !important;
+            border-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
+        }
     }
 
-    &[data-cod-giudizio-sintetico="2"] {
-        color: var(--monithon-giudizio-2-background) !important;
-        border-color: var(--monithon-giudizio-2-background);
-    }
-
-    &[data-cod-giudizio-sintetico="3"] {
-        color: var(--monithon-giudizio-3-background) !important;
-        border-color: var(--monithon-giudizio-3-background);
-    }
-
-    &[data-cod-giudizio-sintetico="4"] {
-        color: var(--monithon-giudizio-4-background) !important;
-        border-color: var(--monithon-giudizio-4-background);
-    }
-
-    &[data-cod-giudizio-sintetico="5"] {
-
-        color: var(--monithon-giudizio-5-background) !important;
-        border-color: var(--monithon-giudizio-5-background);
-    }
-
-    &[data-cod-giudizio-sintetico="6"] {
-        color: var(--monithon-giudizio-6-background) !important;
-        border-color: var(--monithon-giudizio-6-background);
-    }
 
     // stati e flag report
     &[data-oc-cod-stato-progetto],
@@ -563,30 +542,11 @@
     &.mat-chip-selected {
         color: var(--monithon-tema-color) !important;
 
-        &[data-cod-giudizio-sintetico="1"] {
-            background-color: var(--monithon-giudizio-1-background);
+        @for $codGiudizioSintetico from 1 through 6 {
+            &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
+                background-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
+            }
         }
-
-        &[data-cod-giudizio-sintetico="2"] {
-            background-color: var(--monithon-giudizio-2-background);
-        }
-
-        &[data-cod-giudizio-sintetico="3"] {
-            background-color: var(--monithon-giudizio-3-background);
-        }
-
-        &[data-cod-giudizio-sintetico="4"] {
-            background-color: var(--monithon-giudizio-4-background);
-        }
-
-        &[data-cod-giudizio-sintetico="5"] {
-            background-color: var(--monithon-giudizio-5-background);
-        }
-
-        &[data-cod-giudizio-sintetico="6"] {
-            background-color: var(--monithon-giudizio-6-background);
-        }
-
 
 
         &[data-oc-cod-stato-progetto],
@@ -902,56 +862,68 @@ ion-row.monithon-filtri-secondari {
             padding: 0 !important;
         }
 
-        &[data-cod-giudizio-sintetico="1"] {
-            border-bottom-color: var(--monithon-giudizio-1-background);
+        @for $codGiudizioSintetico from 1 through 6 {
+            &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
+                border-bottom-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
+            }
         }
 
-        &[data-cod-giudizio-sintetico="2"] {
-            border-bottom-color: var(--monithon-giudizio-2-background);
-        }
+        // &[data-cod-giudizio-sintetico="1"] {
+        //     border-bottom-color: var(--monithon-giudizio-1-background);
+        // }
 
-        &[data-cod-giudizio-sintetico="3"] {
-            border-bottom-color: var(--monithon-giudizio-3-background);
-        }
+        // &[data-cod-giudizio-sintetico="2"] {
+        //     border-bottom-color: var(--monithon-giudizio-2-background);
+        // }
 
-        &[data-cod-giudizio-sintetico="4"] {
-            border-bottom-color: var(--monithon-giudizio-4-background);
-        }
+        // &[data-cod-giudizio-sintetico="3"] {
+        //     border-bottom-color: var(--monithon-giudizio-3-background);
+        // }
 
-        &[data-cod-giudizio-sintetico="5"] {
-            border-bottom-color: var(--monithon-giudizio-5-background);
-        }
+        // &[data-cod-giudizio-sintetico="4"] {
+        //     border-bottom-color: var(--monithon-giudizio-4-background);
+        // }
 
-        &[data-cod-giudizio-sintetico="6"] {
-            border-bottom-color: var(--monithon-giudizio-6-background);
-        }
+        // &[data-cod-giudizio-sintetico="5"] {
+        //     border-bottom-color: var(--monithon-giudizio-5-background);
+        // }
+
+        // &[data-cod-giudizio-sintetico="6"] {
+        //     border-bottom-color: var(--monithon-giudizio-6-background);
+        // }
 
 
         &.selected {
 
-            &[data-cod-giudizio-sintetico="1"] {
-                border-color: var(--monithon-giudizio-1-background);
+            @for $codGiudizioSintetico from 1 through 6 {
+                &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
+                    border-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
+                }
             }
 
-            &[data-cod-giudizio-sintetico="2"] {
-                border-color: var(--monithon-giudizio-2-background);
-            }
+            // &[data-cod-giudizio-sintetico="1"] {
+            //     border-color: var(--monithon-giudizio-1-background);
+            // }
 
-            &[data-cod-giudizio-sintetico="3"] {
-                border-color: var(--monithon-giudizio-3-background);
-            }
+            // &[data-cod-giudizio-sintetico="2"] {
+            //     border-color: var(--monithon-giudizio-2-background);
+            // }
 
-            &[data-cod-giudizio-sintetico="4"] {
-                border-color: var(--monithon-giudizio-4-background);
-            }
+            // &[data-cod-giudizio-sintetico="3"] {
+            //     border-color: var(--monithon-giudizio-3-background);
+            // }
 
-            &[data-cod-giudizio-sintetico="5"] {
-                border-color: var(--monithon-giudizio-5-background);
-            }
+            // &[data-cod-giudizio-sintetico="4"] {
+            //     border-color: var(--monithon-giudizio-4-background);
+            // }
 
-            &[data-cod-giudizio-sintetico="6"] {
-                border-color: var(--monithon-giudizio-6-background);
-            }
+            // &[data-cod-giudizio-sintetico="5"] {
+            //     border-color: var(--monithon-giudizio-5-background);
+            // }
+
+            // &[data-cod-giudizio-sintetico="6"] {
+            //     border-color: var(--monithon-giudizio-6-background);
+            // }
 
         }
     }
