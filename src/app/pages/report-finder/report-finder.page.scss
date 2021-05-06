@@ -208,54 +208,64 @@
         }
     }
 
-    &[data-cod-giudizio-sintetico="1"] {
-        background-color: var(--monithon-giudizio-1-background);
+    @for $codGiudizioSintetico from 1 through 6 {
+        &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
+            background-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
+        }
 
         .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-giudizio-1-background);
+            color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
         }
     }
 
-    &[data-cod-giudizio-sintetico="2"] {
-        background-color: var(--monithon-giudizio-2-background);
+    // &[data-cod-giudizio-sintetico="1"] {
+    //     background-color: var(--monithon-giudizio-1-background);
 
-        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-giudizio-2-background);
-        }
-    }
+    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+    //         color: var(--monithon-giudizio-1-background);
+    //     }
+    // }
 
-    &[data-cod-giudizio-sintetico="3"] {
-        background-color: var(--monithon-giudizio-energia-background);
+    // &[data-cod-giudizio-sintetico="2"] {
+    //     background-color: var(--monithon-giudizio-2-background);
 
-        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-giudizio-energia-background);
-        }
-    }
+    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+    //         color: var(--monithon-giudizio-2-background);
+    //     }
+    // }
 
-    &[data-cod-giudizio-sintetico="4"] {
-        background-color: var(--monithon-giudizio-energia-background);
+    // &[data-cod-giudizio-sintetico="3"] {
+    //     background-color: var(--monithon-giudizio-energia-background);
 
-        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-giudizio-energia-background);
-        }
-    }
+    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+    //         color: var(--monithon-giudizio-energia-background);
+    //     }
+    // }
+
+    // &[data-cod-giudizio-sintetico="4"] {
+    //     background-color: var(--monithon-giudizio-energia-background);
+
+    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+    //         color: var(--monithon-giudizio-energia-background);
+    //     }
+    // }
 
 
-    &[data-cod-giudizio-sintetico="5"] {
-        background-color: var(--monithon-giudizio-ambiente-background);
+    // &[data-cod-giudizio-sintetico="5"] {
+    //     background-color: var(--monithon-giudizio-ambiente-background);
 
-        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-giudizio-ambiente-background);
-        }
-    }
+    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+    //         color: var(--monithon-giudizio-ambiente-background);
+    //     }
+    // }
 
-    &[data-cod-giudizio-sintetico="6"] {
-        background-color: var(--monithon-giudizio-attrazione-background);
+    // &[data-cod-giudizio-sintetico="6"] {
+    //     background-color: var(--monithon-giudizio-attrazione-background);
 
-        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-giudizio-attrazione-background);
-        }
-    }
+    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
+    //         color: var(--monithon-giudizio-attrazione-background);
+    //     }
+    // }
 
 
     &.hidden {
@@ -298,38 +308,41 @@
                 }
             }
 
-            &[data-cod-giudizio-sintetico] * {
-                background: var(--monithon-giudizio-#{attr(data-cod-giudizio-sintetico)}-background) !important;
 
+
+            @for $codGiudizioSintetico from 1 through 6 {
+                &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
+                    background: cssvar(monithon-giudizio, $codGiudizioSintetico, background) !important;
+                }
             }
 
-            &[data-cod-giudizio-sintetico="1"] * {
-                background: var(--monithon-giudizio-1-background) !important;
-            }
+            // &[data-cod-giudizio-sintetico="1"] * {
+            //     background: var(--monithon-giudizio-1-background) !important;
+            // }
 
-            &[data-cod-giudizio-sintetico="2"] * {
+            // &[data-cod-giudizio-sintetico="2"] * {
 
-                background: var(--monithon-giudizio-2-background) !important;
-            }
+            //     background: var(--monithon-giudizio-2-background) !important;
+            // }
 
-            &[data-cod-giudizio-sintetico="3"] * {
-                background: var(--monithon-giudizio-3-background) !important;
-            }
+            // &[data-cod-giudizio-sintetico="3"] * {
+            //     background: var(--monithon-giudizio-3-background) !important;
+            // }
 
 
 
-            &[data-cod-giudizio-sintetico="4"] * {
-                background: var(--monithon-giudizio-4-background) !important;
-            }
+            // &[data-cod-giudizio-sintetico="4"] * {
+            //     background: var(--monithon-giudizio-4-background) !important;
+            // }
 
-            &[data-cod-giudizio-sintetico="5"] * {
+            // &[data-cod-giudizio-sintetico="5"] * {
 
-                background: var(--monithon-giudizio-5-background) !important;
-            }
+            //     background: var(--monithon-giudizio-5-background) !important;
+            // }
 
-            &[data-cod-giudizio-sintetico="6"] * {
-                background: var(--monithon-giudizio-6-background) !important;
-            }
+            // &[data-cod-giudizio-sintetico="6"] * {
+            //     background: var(--monithon-giudizio-6-background) !important;
+            // }
 
 
 
@@ -529,10 +542,13 @@
         }
     }
 
+    &[data-tema-sintetico] {
+        width: 5rem; //FIXME: provvisorio per test
+    }
 
     // stati e flag report
     &[data-oc-cod-stato-progetto],
-    &[data-has-report] {
+    &[data-tema-sintetico] {
         background-color: transparent;
         color: var(--monithon-filtro-secondario-unselected-color);
         border-color: var(--monithon-filtro-secondario-unselected-color);
@@ -550,7 +566,7 @@
 
 
         &[data-oc-cod-stato-progetto],
-        &[data-has-report] {
+        &[data-tema-sintetico] {
             background-color: var(--monithon-filtro-secondario-selected-color) !important;
             border-color: var(--monithon-filtro-secondario-selected-color);
         }
@@ -567,9 +583,6 @@
 .mat-chip.monithon-filtro-stato-avanzamento {
     width: 33%;
     justify-content: center;
-
-
-
 }
 
 .mat-chip.monithon-filtro-report {

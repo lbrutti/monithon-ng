@@ -123,7 +123,7 @@
                             <div id="flagProgetto">
                                 <ion-grid class="ion-no-padding">
                                     <ion-row class="monithon-filtri-secondari ion-no-margin ">
-                                        <ion-col size="8" class="ion-no-margin ">
+                                        <ion-col size="6" class="ion-no-margin ">
                                             <ion-label
                                                 class="chart-title monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                                 {{'statoAvanzamento' |transloco}}</ion-label>
@@ -138,7 +138,7 @@
                                                 </mat-chip>
                                             </mat-chip-list>
                                         </ion-col>
-                                        <ion-col size="4"
+                                        <ion-col size="6"
                                             class="ion-no-margin monithon-dettaglio-progetto__flag_report">
                                             <ion-label
                                                 class="chart-title monithon-dettaglio-progetto__label  monithon-titolo-sezione"
@@ -149,7 +149,7 @@
                                                 <mat-chip class="monithon-dettaglio-progetto__has-report"
                                                     selectable="false" *ngFor="let tema of this.temiSintetici"
                                                     [selected]="reportSelezionato.codTemaSintetico==tema.codTemaSintetico"
-                                                    [attr.data-has-report]="tema.codTemaSintetico" disableRipple="true">
+                                                    [attr.data-tema-sintetico]="tema.codTemaSintetico" disableRipple="true">
                                                     {{tema.descTemaSintetico}}
                                                 </mat-chip>
                                             </mat-chip-list>
@@ -235,7 +235,7 @@
                                     <div id="filtriSecondariContainer">
                                         <ion-grid>
                                             <ion-row class="monithon-filtri-secondari ion-no-margin ">
-                                                <ion-col size="8" class="ion-no-margin ">
+                                                <ion-col size="6" class="ion-no-margin ">
                                                     <h5 class="chart-title monithon-titolo-sezione">
                                                         {{'cicloProgrammazione'
                                                         |transloco}}</h5>
@@ -253,7 +253,7 @@
                                                         </mat-chip>
                                                     </mat-chip-list>
                                                 </ion-col>
-                                                <ion-col size="4" class="ion-no-margin">
+                                                <ion-col size="6" class="ion-no-margin">
                                                     <h5 class="chart-title monithon-titolo-sezione">{{'temiSintetici'
                                                         |transloco}}</h5>
                                                     <mat-chip-list class="monithon-filtro-report" multiple="true"
@@ -263,7 +263,7 @@
                                                             [selected]="temaSintetico.isSelected"
                                                             [attr.data-active]="temaSintetico.isActive"
                                                             (click)="this.filterByReportFlag(temaSintetico)"
-                                                            [attr.data-has-report]="temaSintetico.codTemaSintetico"
+                                                            [attr.data-tema-sintetico]="temaSintetico.codTemaSintetico"
                                                             disableRipple="true">
                                                             {{ 'report.temaSintetico.'+temaSintetico.codTemaSintetico |
                                                             transloco}}
@@ -287,7 +287,7 @@
                     <ion-grid class="ion-no-margin">
                         <ion-row class="ion-no-margin">
                             <ion-col class="ion-no-margin monithon-header-col">
-                                <h2 class="monithon-risultati-header-titolo">4-{{'resultContainerTitle' | transloco}}
+                                <h2 class="monithon-risultati-header-titolo">4-{{'reportResultContainerTitle' | transloco}}
                                 </h2>
                                 <h1 class="monithon-risultati-contatore" [attr.data-hidden]="espandiListaRisultati"
                                     #resultCounter>{{this.risultatiRicerca.length | number}} </h1>
