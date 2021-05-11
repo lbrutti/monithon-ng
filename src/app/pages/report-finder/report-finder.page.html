@@ -149,7 +149,8 @@
                                                 <mat-chip class="monithon-dettaglio-progetto__has-report"
                                                     selectable="false" *ngFor="let tema of this.temi"
                                                     [selected]="reportSelezionato.ocCodTemaSintetico==tema.ocCodTemaSintetico"
-                                                    [attr.data-tema-sintetico]="tema.ocCodTemaSintetico" disableRipple="true">
+                                                    [attr.data-tema-sintetico]="tema.ocCodTemaSintetico"
+                                                    disableRipple="true">
                                                     {{tema.descTemaSintetico}}
                                                 </mat-chip>
                                             </mat-chip-list>
@@ -176,15 +177,15 @@
             <div id="filterContainer">
                 <!-- Temi -->
                 <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true">
-                <mat-chip [ngClass]="{'monithon-categoria': true}" *ngFor="let giudizio of this.giudiziSintetici"
-                    [selected]="giudizio.isSelected" [selectable]="giudizio.isActive" [attr.data-active]="giudizio.isActive"
-                    (click)="this.filterByGiudizio(giudizio)" [attr.data-cod-giudizio-sintetico]="giudizio.codGiudizioSintetico"
-                    disableRipple="true">
-                    <span class="monithon-categoria-wrapper">
-                        {{'report.giudizioSintetico.'+giudizio.codGiudizioSintetico |
-                        transloco}}
-                    </span>
-                </mat-chip>
+                    <mat-chip [ngClass]="{'monithon-categoria': true}" *ngFor="let giudizio of this.giudiziSintetici"
+                        [selected]="giudizio.isSelected" [selectable]="giudizio.isActive"
+                        [attr.data-active]="giudizio.isActive" (click)="this.filterByGiudizio(giudizio)"
+                        [attr.data-cod-giudizio-sintetico]="giudizio.codGiudizioSintetico" disableRipple="true">
+                        <span class="monithon-categoria-wrapper">
+                            {{'report.giudizioSintetico.'+giudizio.codGiudizioSintetico |
+                            transloco}}
+                        </span>
+                    </mat-chip>
                 </mat-chip-list>
 
                 <!-- Categorie dei temi attivi -->
@@ -198,23 +199,41 @@
                     <ion-grid class="ion-no-padding">
                         <ion-row>
                             <ion-col size="6" class="ion-no-margin monithon-categorie-container">
-                                <div #categorieDiSpesaContainer id="categorieDiSpesaContainer">
+                                <div #temaSinteticoContainer id="temaSinteticoContainer">
                                     <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
                                         aria-orientation="horizontal">
                                         <mat-chip [ngClass]="{'monithon-categoria': true}"
                                             *ngFor="let temaSintetico of this.temi"
-                                                            [selected]="true || temaSintetico.isSelected"
-                                                            [attr.data-active]="true || temaSintetico.isActive"
-                                                            (click)="this.filterByReportFlag(temaSintetico)"
-                                                            [attr.data-tema-sintetico]="temaSintetico.ocCodTemaSintetico"
-                                                            disableRipple="true">
+                                            [selected]="true || temaSintetico.isSelected"
+                                            [attr.data-active]="true || temaSintetico.isActive"
+                                            (click)="this.filterByReportFlag(temaSintetico)"
+                                            [attr.data-tema-sintetico]="temaSintetico.ocCodTemaSintetico"
+                                            disableRipple="true">
                                             <span class="monithon-categoria-wrapper">
                                                 {{ 'report.temaSintetico.'+temaSintetico.ocCodTemaSintetico |
                                                 transloco}}
                                             </span>
                                         </mat-chip>
                                     </mat-chip-list>
+                                </div>
+                                <div #programmaOperativoContainer id="programmaOperativoContainer">
+                                <label>Multi select + Typeahead + Custom items (tags)</label>
+                                
+                                <ng-select 
+                                [items]="programmiOperativi" 
+                                bindLabel="descProgrammaOperativo" 
+                                [addTag]="false" 
+                                [multiple]="false" 
+                                [searchFn]="searchProgrammaOperativo"
+                                [hideSelected]="true"
+                                [minTermLength]="2"
+                                [virtualScroll]="true"
+                                (change)="onProgrammOperativoChange($event)"
+                                typeToSearchText="Please enter 2 or more characters" 
+                                [(ngModel)]="programmiOperativiSelezionati">
+                                </ng-select>
+
                                 </div>
                             </ion-col>
                             <ion-col size="6" class="ion-no-margin monithon-chart-container-col">
@@ -299,7 +318,8 @@
                     <ion-grid class="ion-no-margin">
                         <ion-row class="ion-no-margin">
                             <ion-col class="ion-no-margin monithon-header-col">
-                                <h2 class="monithon-risultati-header-titolo">{{'reportResultContainerTitle' | transloco}}
+                                <h2 class="monithon-risultati-header-titolo">{{'reportResultContainerTitle' |
+                                    transloco}}
                                 </h2>
                                 <h1 class="monithon-risultati-contatore" [attr.data-hidden]="espandiListaRisultati"
                                     #resultCounter>{{this.risultatiRicerca.length | number}} </h1>

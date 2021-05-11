@@ -1,5 +1,5 @@
 // da ricevere da ws
 export interface ProgrammaOperativo {
-    codProgrammaOperativo: number;
+    codProgrammaOperativo: string;
     descProgrammaOperativo: string;
 }

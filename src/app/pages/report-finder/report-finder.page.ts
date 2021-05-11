@@ -1,6 +1,7 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { CurrencyPipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
@@ -11,6 +12,7 @@ import { Observer } from 'rxjs';
 import { CicloProgrammazione } from 'src/app/model/cicloProgrammazione/cicloProgrammazione.interface';
 import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
 import { Progetto } from 'src/app/model/progetto/progetto';
+import { ProgrammaOperativo } from 'src/app/model/programmaOperativo/programmaOperativo.interface';
 import { Report } from 'src/app/model/report/report';
 import { Tema } from 'src/app/model/tema/tema.interface';
 import { MonithonApiService } from 'src/app/services/monithonApiService/monithon-api.service';
@@ -83,7 +85,12 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     isAppReady: boolean = false;
     isWizardMode: boolean = false;
 
+    myControl = new FormControl();
+    options: string[] = ['One', 'Two', 'Three'];
+
     modalData: any;
+    programmiOperativi: Array<ProgrammaOperativo>;
+    programmiOperativiSelezionati: Array<ProgrammaOperativo> = [];
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -211,6 +218,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.temi = temiSintetici;
                 this.cicliProgrammazione = cicliProgrammazione;
                 this.giudiziSintetici = giudiziSintetici;
+                this.programmiOperativi = programmiOperativi;
                 this.reportMap.setGiudiziSintetici(giudiziSintetici.map(c => {
                     c.isSelected = true;
                     return c;
@@ -765,4 +773,14 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         return await modal.present();
     }
 
+
+    onProgrammOperativoChange(programma:ProgrammaOperativo){
+        console.dir(programma);
+    }
+
+    searchProgrammaOperativo(term:string, programma:ProgrammaOperativo){
+        term = term.toLowerCase();
+        return programma.descProgrammaOperativo.toLowerCase().indexOf(term) > -1 || programma.codProgrammaOperativo.toLowerCase() === term;
+
+    }
 }

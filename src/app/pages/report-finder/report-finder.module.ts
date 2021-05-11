@@ -20,6 +20,7 @@ import { FixencodedcharsPipeModule } from 'src/app/pipes/fixencodedchars/fixenco
 import { FormatDistanzaPipeModule } from 'src/app/pipes/format-distanza/format-distanza.pipe.module';
 import { MomentdateModule } from 'src/app/pipes/momentdate/momentdate.pipe.module';
 import { UnescapePipeModule } from 'src/app/pipes/unescape/unescape.pipe.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { UnescapePipeModule } from 'src/app/pipes/unescape/unescape.pipe.module'
         UnescapePipeModule,
         FixencodedcharsPipeModule,
         MatSliderModule,
-        ReportFinderPageRoutingModule
+        ReportFinderPageRoutingModule,
+        NgSelectModule
     ],
     declarations: [ReportFinderPage]
 })
