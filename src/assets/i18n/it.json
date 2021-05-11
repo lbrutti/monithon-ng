@@ -113,19 +113,19 @@
     },
     "report": {
         "temaSintetico": {
-            "1": "Trasporti e infrastrutture a rete",
-            "2": "Ambiente e prevenzione dei rischi",
-            "3": "Attrazione culturale, naturale e turistica",
-            "4": "Competitività per le imprese",
-            "5": "Ricerca e innovazione",
-            "6": "Energia e efficienza energetica",
-            "7": "Rafforzamento capacità della PA",
-            "8": "Istruzione",
-            "9": "Occupazione e mobilità dei lavoratori",
-            "10": "Inclusione sociale",
-            "11": "Agenda digitale",
+            "01": "Ricerca e innovazione",
+            "02": "Agenda digitale",
+            "03": "Competitività per le imprese",
+            "04": "Energia e efficienza energetica",
+            "05": "Ambiente e prevenzione dei rischi",
+            "06": "Attrazione culturale, naturale e turistica",
+            "07": "Trasporti e infrastrutture a rete",
+            "08": "Occupazione e mobilità dei lavoratori",
+            "09": "Inclusione sociale",
+            "10": "Servizi di cura infanzia e anziani",
+            "11": "Istruzione",
             "12": "Rinnovamento urbano  e rurale",
-            "13": "Servizi di cura infanzia e anziani "
+            "13": "Rafforzamento capacità della PA"
         },
         "giudizioSintetico": {
             "1": "Appena iniziato",

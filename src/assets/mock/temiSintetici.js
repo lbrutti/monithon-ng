@@ -1,55 +1,55 @@
 let temiSintetici = [
     {
-        "codTemaSintetico": 1,
-        "descTemaSintetico": "Trasporti e infrastrutture a rete"
+        ocCodTemaSintetico: '01',
+        descTemaSintetico: 'Ricerca e innovazione'
     },
     {
-        "codTemaSintetico": 2,
-        "descTemaSintetico": "Ambiente e prevenzione dei rischi"
+        ocCodTemaSintetico: '02',
+        descTemaSintetico: 'Agenda digitale'
     },
     {
-        "codTemaSintetico": 3,
-        "descTemaSintetico": "Attrazione culturale, naturale e turistica"
+        ocCodTemaSintetico: '03',
+        descTemaSintetico: 'Competitività per le imprese'
     },
     {
-        "codTemaSintetico": 4,
-        "descTemaSintetico": "Competitività per le imprese"
+        ocCodTemaSintetico: '04',
+        descTemaSintetico: 'Energia e efficienza energetica'
     },
     {
-        "codTemaSintetico": 5,
-        "descTemaSintetico": "Ricerca e innovazione"
+        ocCodTemaSintetico: '05',
+        descTemaSintetico: 'Ambiente e prevenzione dei rischi'
     },
     {
-        "codTemaSintetico": 6,
-        "descTemaSintetico": "Energia e efficienza energetica"
+        ocCodTemaSintetico: '06',
+        descTemaSintetico: 'Attrazione culturale, naturale e turistica'
     },
     {
-        "codTemaSintetico": 7,
-        "descTemaSintetico": "Rafforzamento capacità della PA"
+        ocCodTemaSintetico: '07',
+        descTemaSintetico: 'Trasporti e infrastrutture a rete'
     },
     {
-        "codTemaSintetico": 8,
-        "descTemaSintetico": "Istruzione"
+        ocCodTemaSintetico: '08',
+        descTemaSintetico: 'Occupazione e mobilità dei lavoratori'
     },
     {
-        "codTemaSintetico": 9,
-        "descTemaSintetico": "Occupazione e mobilità dei lavoratori"
+        ocCodTemaSintetico: '09',
+        descTemaSintetico: 'Inclusione sociale'
     },
     {
-        "codTemaSintetico": 10,
-        "descTemaSintetico": "Inclusione sociale"
+        ocCodTemaSintetico: '10',
+        descTemaSintetico: 'Servizi di cura infanzia e anziani'
     },
     {
-        "codTemaSintetico": 11,
-        "descTemaSintetico": "Agenda digitale"
+        ocCodTemaSintetico: '11',
+        descTemaSintetico: 'Istruzione'
     },
     {
-        "codTemaSintetico": 12,
-        "descTemaSintetico": "Rinnovamento urbano e rurale"
+        ocCodTemaSintetico: '12',
+        descTemaSintetico: 'Rinnovamento urbano  e rurale'
     },
     {
-        "codTemaSintetico": 13,
-        "descTemaSintetico": "Servizi di cura infanzia e anziani"
+        ocCodTemaSintetico: '13',
+        descTemaSintetico: 'Rafforzamento capacità della PA'
     }
 ];
 

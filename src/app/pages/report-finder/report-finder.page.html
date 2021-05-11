@@ -147,9 +147,9 @@
                                             <mat-chip-list class="monithon-dettaglio-progetto__has-report"
                                                 multiple="false" aria-orientation="horizontal">
                                                 <mat-chip class="monithon-dettaglio-progetto__has-report"
-                                                    selectable="false" *ngFor="let tema of this.temiSintetici"
-                                                    [selected]="reportSelezionato.codTemaSintetico==tema.codTemaSintetico"
-                                                    [attr.data-tema-sintetico]="tema.codTemaSintetico" disableRipple="true">
+                                                    selectable="false" *ngFor="let tema of this.temi"
+                                                    [selected]="reportSelezionato.ocCodTemaSintetico==tema.ocCodTemaSintetico"
+                                                    [attr.data-tema-sintetico]="tema.ocCodTemaSintetico" disableRipple="true">
                                                     {{tema.descTemaSintetico}}
                                                 </mat-chip>
                                             </mat-chip-list>
@@ -203,14 +203,14 @@
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
                                         aria-orientation="horizontal">
                                         <mat-chip [ngClass]="{'monithon-categoria': true}"
-                                            *ngFor="let temaSintetico of this.temiSintetici"
+                                            *ngFor="let temaSintetico of this.temi"
                                                             [selected]="true || temaSintetico.isSelected"
                                                             [attr.data-active]="true || temaSintetico.isActive"
                                                             (click)="this.filterByReportFlag(temaSintetico)"
-                                                            [attr.data-tema-sintetico]="temaSintetico.codTemaSintetico"
+                                                            [attr.data-tema-sintetico]="temaSintetico.ocCodTemaSintetico"
                                                             disableRipple="true">
                                             <span class="monithon-categoria-wrapper">
-                                                {{ 'report.temaSintetico.'+temaSintetico.codTemaSintetico |
+                                                {{ 'report.temaSintetico.'+temaSintetico.ocCodTemaSintetico |
                                                 transloco}}
                                             </span>
                                         </mat-chip>
@@ -271,13 +271,13 @@
                                                     <mat-chip-list class="monithon-filtro-report" multiple="true"
                                                         aria-orientation="horizontal">
                                                         <mat-chip class="monithon-filtro-report monithon-small-chip"
-                                                            *ngFor="let temaSintetico of this.temiSintetici"
+                                                            *ngFor="let temaSintetico of this.temi"
                                                             [selected]="temaSintetico.isSelected"
                                                             [attr.data-active]="temaSintetico.isActive"
                                                             (click)="this.filterByReportFlag(temaSintetico)"
-                                                            [attr.data-tema-sintetico]="temaSintetico.codTemaSintetico"
+                                                            [attr.data-tema-sintetico]="temaSintetico.ocCodTemaSintetico"
                                                             disableRipple="true">
-                                                            {{ 'report.temaSintetico.'+temaSintetico.codTemaSintetico |
+                                                            {{ 'report.temaSintetico.'+temaSintetico.ocCodTemaSintetico |
                                                             transloco}}
                                                         </mat-chip>
                                                     </mat-chip-list>

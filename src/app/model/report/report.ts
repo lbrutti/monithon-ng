@@ -14,7 +14,7 @@ export class Report {
     titolo: string; //ocTitoloProgetto: string; mostrato in lista e dettaglio
     sintesi: string; //ocSintesiProgetto: any;  mostrato in dettaglio
     dataInserimento: number; //ocDataInizioProgetto: number; mostrato in dettaglio e usato per chart/filtro ANNO
-    codTemaSintetico: string | number; //ocCodTemaSintetico: number; mostrato in dettaglio e uusato per filtro secondario con chips
+    ocCodTemaSintetico: string | number; //ocCodTemaSintetico: number; mostrato in dettaglio e uusato per filtro secondario con chips
     codGiudizioSintetico: string; //ocCodCategoriaSpesa: Array<string>; mostrato in dettaglio, usato per filtro primario e per colore marker su mappa
     ocFinanzTotPubNetto: number | string; //ocFinanzTotPubNetto: number | string; mostrato in dettaglio, usato per filtro BUDGET
 

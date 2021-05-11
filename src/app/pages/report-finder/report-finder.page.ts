@@ -12,7 +12,7 @@ import { CicloProgrammazione } from 'src/app/model/cicloProgrammazione/cicloProg
 import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
 import { Progetto } from 'src/app/model/progetto/progetto';
 import { Report } from 'src/app/model/report/report';
-import { TemaSintetico } from 'src/app/model/temaSintetico/temaSintetico';
+import { Tema } from 'src/app/model/tema/tema.interface';
 import { MonithonApiService } from 'src/app/services/monithonApiService/monithon-api.service';
 import { ReportMapService } from 'src/app/services/reportMapService/reportmap.service';
 import { environment } from 'src/environments/environment';
@@ -58,7 +58,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     public giudiziSintetici: Array<GiudizioSintetico> = [];
     public cicliProgrammazione: Array<CicloProgrammazione> = [];
 
-    public temiSintetici: Array<TemaSintetico> = [];
+    public temi: Array<Tema> = [];
 
     reportsCrossFilter: any;
     reportSelezionato: any = {};
@@ -123,8 +123,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                     s.isSelected = s.isActive;
                 });
 
-                this.temiSintetici.map(tema => {
-                    tema.isActive = lodash.some(this.reports, p => p.codTemaSintetico == tema.codTemaSintetico);
+                this.temi.map(tema => {
+                    tema.isActive = lodash.some(this.reports, p => p.ocCodTemaSintetico == tema.ocCodTemaSintetico);
                     tema.isSelected = tema.isActive;
                 });
                 if (this.redrawCharts) {
@@ -208,7 +208,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 let cicliProgrammazione = data[2];
                 let programmiOperativi = data[3];
                 let giudiziSintetici = data[4];
-                this.temiSintetici = temiSintetici;
+                this.temi = temiSintetici;
                 this.cicliProgrammazione = cicliProgrammazione;
                 this.giudiziSintetici = giudiziSintetici;
                 this.reportMap.setGiudiziSintetici(giudiziSintetici.map(c => {
@@ -678,8 +678,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     public filterByReportFlag(reportFlag) {
         reportFlag.isSelected = !reportFlag.isSelected;
 
-        if (lodash.every(this.temiSintetici, f => !f.isSelected)) {
-            this.temiSintetici.map(f => f.isSelected = f.isActive);
+        if (lodash.every(this.temi, f => !f.isSelected)) {
+            this.temi.map(f => f.isSelected = f.isActive);
         }
         this.filtraRisultati();
         this.evidenziaRisultatiSuMappa();
@@ -694,10 +694,10 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     filtraRisultati() {
         let cicliProgrammazioneSelezionati = this.cicliProgrammazione.filter(ciclo => ciclo.isSelected).map(flag => flag.codCicloProgrammazione);
-        let temiSinteticiSelezionati = this.temiSintetici.filter(flag => flag.isSelected).map(flag => flag.codTemaSintetico);
+        let temiSinteticiSelezionati = this.temi.filter(flag => flag.isSelected).map(flag => flag.ocCodTemaSintetico);
 
         this.risultatiRicerca = this.reports.filter((report: Report) => {
-            let matchesTemaSintetico = ((temiSinteticiSelezionati.length == 0) || lodash.includes(temiSinteticiSelezionati, report.codTemaSintetico));
+            let matchesTemaSintetico = ((temiSinteticiSelezionati.length == 0) || lodash.includes(temiSinteticiSelezionati, report.ocCodTemaSintetico));
             let matchesCicloProgrammazione = ((cicliProgrammazioneSelezionati.length == 0) || lodash.includes(cicliProgrammazioneSelezionati, report.codCicloProgrammazione))
 
             return matchesTemaSintetico && matchesCicloProgrammazione;
