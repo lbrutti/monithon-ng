@@ -218,9 +218,11 @@
                                     </mat-chip-list>
                                 </div>
                                 <div #programmaOperativoContainer id="programmaOperativoContainer">
-                                <label>Multi select + Typeahead + Custom items (tags)</label>
+                        
+                                <label class="monithon-titolo-sezione">{{'report.programmiOperativi'|transloco}}</label>
                                 
                                 <ng-select 
+                                class="monithon-report-programmi-operativi-select"
                                 [items]="programmiOperativi" 
                                 bindLabel="descProgrammaOperativo" 
                                 [addTag]="false" 
