@@ -218,23 +218,19 @@
                                     </mat-chip-list>
                                 </div>
                                 <div #programmaOperativoContainer id="programmaOperativoContainer">
-                        
-                                <label class="monithon-titolo-sezione">{{'report.programmiOperativi'|transloco}}</label>
-                                
-                                <ng-select 
-                                class="monithon-report-programmi-operativi-select"
-                                [items]="programmiOperativi" 
-                                bindLabel="descProgrammaOperativo" 
-                                [addTag]="false" 
-                                [multiple]="false" 
-                                [searchFn]="searchProgrammaOperativo"
-                                [hideSelected]="true"
-                                [minTermLength]="2"
-                                [virtualScroll]="true"
-                                (change)="onProgrammOperativoChange($event)"
-                                typeToSearchText="Please enter 2 or more characters" 
-                                [(ngModel)]="programmiOperativiSelezionati">
-                                </ng-select>
+
+                                    <label
+                                        class="monithon-titolo-sezione monithon-programmi-operativi-label">{{'report.programmiOperativi'|transloco}}</label>
+
+                                    <ng-select class="monithon-report-programmi-operativi-select"
+                                        [items]="programmiOperativi" bindLabel="descProgrammaOperativo" [addTag]="false"
+                                        [multiple]="false" [searchFn]="searchProgrammaOperativo" [hideSelected]="true"
+                                        [minTermLength]="2" [virtualScroll]="true"
+                                        (change)="onProgrammOperativoChange($event)"
+                                        [placeholder]="'report.programmiOperativiPlaceholder'|transloco"
+                                        [typeToSearchText]="'report.programmiOperativiSearchText'|transloco"
+                                        [(ngModel)]="programmiOperativiSelezionati">
+                                    </ng-select>
 
                                 </div>
                             </ion-col>

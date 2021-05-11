@@ -594,8 +594,8 @@ ion-row.monithon-filtri-secondari {
     }
 
     ::ng-deep .mat-chip-list-wrapper {
-        padding-left: 12px !important;
-        // max-width: 432px;
+        padding-left: 24px !important;
+        padding-right: 12px !important;
     }
     .monithon-categoria-wrapper{
         display: inline-block;
