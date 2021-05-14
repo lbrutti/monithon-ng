@@ -3,81 +3,12 @@
 @import '../home/home.page.scss';
 
 
-.monithon-chart-container {
-    height: 50%;
-}
-
 #temaSinteticoContainer {
     width: 100%;
-    // height: 100%;
 }
 
-#budgetChartContainer,
-#annoChartContainer {
-    width: 100%;
-    min-height: 34px;
-
-    g.axis.y {
-        display: none !important;
-    }
-
-}
-
-.chart-title {
-    // font-size: small;
-    text-align: left;
-    font-weight: normal;
-    margin-top: 0;
-    margin-bottom: 5px;
-    padding-left: 3px;
-    text-decoration: none !important;
-}
-
-#mapContainer {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    margin: 0;
-    padding: 0;
-}
 
 .monithon-dettaglio-progetto {
-    position: absolute;
-    bottom: 0;
-    width: 66vw;
-    transition: left 0.5s;
-    z-index: 1001;
-    height: 72vh;
-    text-align: left;
-    color: var(--monithon-font-color);
-
-    @media not screen and (-webkit-min-device-pixel-ratio: 2),
-    not screen and (min--moz-device-pixel-ratio: 2),
-    not screen and (-o-min-device-pixel-ratio: 2/1),
-    not screen and (min-device-pixel-ratio: 2),
-    not screen and (min-resolution: 192dpi),
-    not screen and (min-resolution: 2dppx) {
-
-        height: 74vh;
-
-    }
-
-    .monithon-dettaglio-progetto__dettagli_container {
-        height: 90%;
-        overflow-y: scroll;
-        padding-left: 12px;
-        padding-right: 12px;
-        @include hideScrollbar();
-
-        ion-grid {
-            height: 100%;
-
-            ion-row {
-                height: 100%;
-            }
-        }
-    }
 
     @for $codGiudizioSintetico from 1 through 6 {
         &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
@@ -86,85 +17,6 @@
 
         .monithon-dettaglio-progetto__inizia_monitoraggio__button {
             color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
-        }
-    }
-
-    // &[data-cod-giudizio-sintetico="1"] {
-    //     background-color: var(--monithon-giudizio-1-background);
-
-    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-    //         color: var(--monithon-giudizio-1-background);
-    //     }
-    // }
-
-    // &[data-cod-giudizio-sintetico="2"] {
-    //     background-color: var(--monithon-giudizio-2-background);
-
-    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-    //         color: var(--monithon-giudizio-2-background);
-    //     }
-    // }
-
-    // &[data-cod-giudizio-sintetico="3"] {
-    //     background-color: var(--monithon-giudizio-energia-background);
-
-    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-    //         color: var(--monithon-giudizio-energia-background);
-    //     }
-    // }
-
-    // &[data-cod-giudizio-sintetico="4"] {
-    //     background-color: var(--monithon-giudizio-energia-background);
-
-    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-    //         color: var(--monithon-giudizio-energia-background);
-    //     }
-    // }
-
-
-    // &[data-cod-giudizio-sintetico="5"] {
-    //     background-color: var(--monithon-giudizio-ambiente-background);
-
-    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-    //         color: var(--monithon-giudizio-ambiente-background);
-    //     }
-    // }
-
-    // &[data-cod-giudizio-sintetico="6"] {
-    //     background-color: var(--monithon-giudizio-attrazione-background);
-
-    //     .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-    //         color: var(--monithon-giudizio-attrazione-background);
-    //     }
-    // }
-
-
-    &.hidden {
-        left: -100vw;
-    }
-
-    &.visible {
-        left: 0;
-    }
-
-    .monithon-dettaglio-progetto__header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        height: 2rem;
-        padding-left: 12px;
-
-        ion-icon {
-            // background-image: url("data:image/svg+xml,%3Csvg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' version='1.1' fill='none' viewBox='0 0 29 29'%3E%3Cpath style='stroke-width:0.965516' id='path883' stroke='%23ffffff' fill='transparent' d='M 28.017242,14.5 C 28.017242,21.965373 21.96538,28.017242 14.5,28.017242 7.0346299,28.017242 0.98275807,21.965373 0.98275807,14.5 0.98275807,7.0346278 7.0346299,0.98275807 14.5,0.98275807 c 7.46538,0 13.517242,6.05186973 13.517242,13.51724193 z' /%3E%3Cpath style='stroke-width:0.965516;fill:%23ffffff;fill-opacity:1' id='path885' stroke='%23ffffff' fill='transparent' d='m 19.810345,5.6533406 c 0,0.2056564 -0.08004,0.4155974 -0.240221,0.5715536 l -8.399942,8.2750598 8.398977,8.27523 c 0.320648,0.317054 0.320648,0.827338 0,1.143107 -0.320649,0.317053 -0.839807,0.317053 -1.160069,0 L 9.4298755,15.071636 c -0.153913,-0.149958 -0.2402206,-0.355615 -0.2402206,-0.571554 0,-0.214225 0.086636,-0.419882 0.2402206,-0.571553 L 18.409669,5.0818299 c 0.320648,-0.3170538 0.840193,-0.3170538 1.160166,0 0.160469,0.1585268 0.24051,0.3641832 0.24051,0.5715107 z' /%3E%3C/svg%3E%0A");
-            background-image: url("data:image/svg+xml,%3Csvg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' height='30' width='30'%3E%3Ccircle id='circle924' stroke='%23ffffff'%0Afill='transparent' r='14' cy='15' cx='15' /%3E%3Cpath id='path1499' d='m 19.13653,4.8027803 -9.698229,9.7266967 9.626505,9.539828' style='fill:transparent;stroke:%23ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /%3E%3C/svg%3E%0A");
-            background-repeat: no-repeat;
-            background-size: contain;
-            margin-top: 6px;
-            margin-bottom: auto;
-            margin-right: 12px;
-            width: 28px;
-            height: 28px;
         }
     }
 
@@ -187,103 +39,12 @@
                 }
             }
 
-            // &[data-cod-giudizio-sintetico="1"] * {
-            //     background: var(--monithon-giudizio-1-background) !important;
-            // }
-
-            // &[data-cod-giudizio-sintetico="2"] * {
-
-            //     background: var(--monithon-giudizio-2-background) !important;
-            // }
-
-            // &[data-cod-giudizio-sintetico="3"] * {
-            //     background: var(--monithon-giudizio-3-background) !important;
-            // }
-
-
-
-            // &[data-cod-giudizio-sintetico="4"] * {
-            //     background: var(--monithon-giudizio-4-background) !important;
-            // }
-
-            // &[data-cod-giudizio-sintetico="5"] * {
-
-            //     background: var(--monithon-giudizio-5-background) !important;
-            // }
-
-            // &[data-cod-giudizio-sintetico="6"] * {
-            //     background: var(--monithon-giudizio-6-background) !important;
-            // }
-
-
-
-
-            .monithon-dettaglio-progetto__lista__categorie__header {
-                padding: 0;
-                height: auto;
-
-                .monithon-dettaglio-progetto__arrow {
-                    margin-left: 10px
-                }
-
-                &.mat-expanded {
-                    .monithon-dettaglio-progetto__arrow {
-                        transform: translateY(0px) rotateX(180deg)
-                    }
-                }
-            }
-
-
         }
 
 
     }
 
-    .mat-chip.monithon-dettaglio-progetto__stato-avanzamento,
-    .mat-chip.monithon-dettaglio-progetto__has-report {
-        background-color: transparent;
-        border-width: 1px;
-        border-style: solid;
-        border-color: var(--monithon-font-color);
-        text-align: center;
-        justify-content: center;
-        opacity: 0.3;
 
-        &.mat-chip-selected {
-            background-color: var(--monithon-label-color);
-            color: var(--monithon-font-color);
-            border: 0;
-            opacity: 1;
-        }
-    }
-
-    .mat-chip.monithon-dettaglio-progetto__stato-avanzamento {
-        width: 33%;
-    }
-
-    .mat-chip.monithon-dettaglio-progetto__has-report {
-        width: 50%;
-    }
-
-    .monithon-dettaglio-progetto__dettagli {
-        display: flex;
-        flex-direction: column;
-
-    }
-
-    .monithon-dettaglio-progetto__titolo_scheda {
-        margin-left: 10px;
-    }
-
-    .monithon-dettaglio-progetto__titolo_container {
-        border-bottom: 1px;
-    }
-
-    .monithon-dettaglio-progetto__titolo {
-        margin-top: 0;
-        padding-bottom: 15px;
-        border-bottom: 1px solid var(--monithon-font-color);
-    }
 
     .monithon-dettaglio-progetto__sintesi {
         overflow-y: scroll;
