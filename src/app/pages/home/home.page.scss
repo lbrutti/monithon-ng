@@ -725,6 +725,9 @@ ion-row.monithon-filtri-secondari {
 .monithon-lista-header {
     padding-left: 24px;
     padding-right: 24px;
+    ion-row{
+        border-bottom: 2px solid var(--monithon-contatore-risultati-color);
+    }
 }
 
 .monithon-lista-risultato {

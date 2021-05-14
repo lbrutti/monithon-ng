@@ -134,6 +134,9 @@
             "4": "Bloccato",
             "5": "Concluso e utile",
             "6": "Concluso e inefficace "
-        }
-    }
+        },
+        "cercaPerTitolo": "Cerca tra i risultati"
+    },
+    "codGiudizioSintetico":"Giudizio sintetico",
+    "dataInserimento":"Data"
 }

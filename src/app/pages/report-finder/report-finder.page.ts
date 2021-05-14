@@ -91,6 +91,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     modalData: any;
     programmiOperativi: Array<ProgrammaOperativo>;
     programmiOperativiSelezionati: Array<ProgrammaOperativo> = [];
+    titleSearchTerm:string = '';
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -782,5 +783,12 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         term = term.toLowerCase();
         return programma.descProgrammaOperativo.toLowerCase().indexOf(term) > -1 || programma.codProgrammaOperativo.toLowerCase() === term;
 
+    }
+    searchReportByTitle(){
+        console.log('searchReportByTitle: ', this.titleSearchTerm);
+    }
+    resetTitleSearch(){
+        this.titleSearchTerm ='';
+        this.searchReportByTitle();
     }
 }
