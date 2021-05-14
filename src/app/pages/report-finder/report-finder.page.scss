@@ -135,141 +135,11 @@
     }
 }
 
-.monithon-filtri-charts {
-    background-color: var(--monithon-tema-sfondo-charts);
-    width: 100%;
 
-    .mat-expansion-panel-header {
-        padding-left: 12px;
-        padding-right: 14px;
-    }
 
-    .monithon-titolo-sezione-budget {
-        height: 21px;
-    }
-
-    &.mat-expanded {
-        ::ng-deep .mat-expansion-panel-content {
-            height: 54vh;
-
-            @media not screen and (-webkit-min-device-pixel-ratio: 2),
-            not screen and (min--moz-device-pixel-ratio: 2),
-            not screen and (-o-min-device-pixel-ratio: 2/1),
-            not screen and (min-device-pixel-ratio: 2),
-            not screen and (min-resolution: 192dpi),
-            not screen and (min-resolution: 2dppx) {
-
-                height: 52vh;
-
-            }
-        }
-    }
-}
-
-.monithon-criterio-ordinamento__selezione {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    mat-label {
-        align-self: flex-start;
-    }
-}
-
-.monithon-criterio-ordinamento {
-    flex-grow: 1;
-    transition-delay: 0;
-    color: var(--monithon-tema-color);
-    border: 1px solid var(--monithon-tema-color);
-    background: var(--monithon-label-color);
-    justify-content: center;
-
-    &.selected {
-        background: var(--monithon-tema-color);
-        color: var(--monithon-label-color);
-    }
-}
-
-.monithon-criteri-ordinamento {
-    ::ng-deep .mat-chip-list-wrapper {
-        display: flex !important;
-        flex-direction: row !important;
-        //align-content: flex-start !important;
-    }
-}
-
-.monithon-criterio-ordinamento-selezionato {
-    &.hidden {
-        display: none;
-    }
-}
-
-.monithon-risultati-header {
-    height: auto;
-
-    .monithon-header-col {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-    }
-
-    .monithon-risultati-header-titolo,
-    .monithon-risultati-contatore {
-        margin-top: auto;
-        margin-bottom: auto;
-        align-self: flex-start;
-    }
-
-    .monithon-risultati-contatore {
-        &[data-hidden="true"] {
-            display: none;
-        }
-    }
-}
-
-.monithon-risultati-contatore {
-    color: var(--monithon-contatore-risultati-color);
-    font-size: 80px;
-    font-weight: bolder;
-    text-align: left;
-    opacity: .9;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.monithon-lista-header {
-    padding-left: 24px;
-    padding-right: 24px;
-}
 
 .monithon-lista-risultato {
-    // text-transform: lowercase;
-    white-space: pre-line;
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    align-items: center;
-    justify-content: flex-start;
-
-    &::before {
-        content: '\0000a0';
-        border-radius: 100%;
-        width: .5rem;
-        height: .5rem;
-        display: inline-block;
-        margin-bottom: auto;
-        margin-top: 6px;
-
-    }
-
-
-    color: var(--monithon-lista-risultato-color);
-
-    &.selected {
-        h2 {
-            font-weight: bolder;
-        }
-    }
+  
 
     &[data-cod-giudizio-sintetico="4"]::before {
         background-color: var(--monithon-giudizio-energia-background);
@@ -300,102 +170,19 @@
 
 
 
-
-    h2 {
-        margin-bottom: auto;
-        width: 90%;
-        margin-left: 12px;
-        margin-top: 0;
-
-    }
-
 }
 
-.right-column {
-    margin-top: auto;
-    z-index: 100;
-    right: 0;
-    position: absolute;
-    bottom: 0;
 
-    @media not screen and (-webkit-min-device-pixel-ratio: 2),
-    not screen and (min--moz-device-pixel-ratio: 2),
-    not screen and (-o-min-device-pixel-ratio: 2/1),
-    not screen and (min-device-pixel-ratio: 2),
-    not screen and (min-resolution: 192dpi),
-    not screen and (min-resolution: 2dppx) {
-
-        max-height: 85vh;
-
-    }
-}
 
 #resultContainer {
-    width: 34vw;
-    align-self: flex-end;
-    overflow-y: hidden;
-
-    &.mat-expanded {
-        transition-property: height;
-        // height: 95vh;
-    }
-
-    .monithon-lista-progetti {
-
-        @include hideScrollbar();
-        height: 60vh;
-
-    }
 
     .monithon-lista-progetti__progetto {
-        display: flex;
-        align-content: center;
-        cursor: pointer !important;
-        min-height: 100px !important;
-        color: var(--monithon-font-color);
-        --ion-item-border-color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
-
-        border-left: 12px solid;
-        border-left-color: white;
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-        // width: 460px;
-
-        ion-grid,
-        ion-row,
-        ion-col {
-            padding: 0 !important;
-        }
 
         @for $codGiudizioSintetico from 1 through 6 {
             &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
                 border-bottom-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
             }
         }
-
-        // &[data-cod-giudizio-sintetico="1"] {
-        //     border-bottom-color: var(--monithon-giudizio-1-background);
-        // }
-
-        // &[data-cod-giudizio-sintetico="2"] {
-        //     border-bottom-color: var(--monithon-giudizio-2-background);
-        // }
-
-        // &[data-cod-giudizio-sintetico="3"] {
-        //     border-bottom-color: var(--monithon-giudizio-3-background);
-        // }
-
-        // &[data-cod-giudizio-sintetico="4"] {
-        //     border-bottom-color: var(--monithon-giudizio-4-background);
-        // }
-
-        // &[data-cod-giudizio-sintetico="5"] {
-        //     border-bottom-color: var(--monithon-giudizio-5-background);
-        // }
-
-        // &[data-cod-giudizio-sintetico="6"] {
-        //     border-bottom-color: var(--monithon-giudizio-6-background);
-        // }
 
 
         &.selected {
@@ -406,208 +193,16 @@
                 }
             }
 
-            // &[data-cod-giudizio-sintetico="1"] {
-            //     border-color: var(--monithon-giudizio-1-background);
-            // }
-
-            // &[data-cod-giudizio-sintetico="2"] {
-            //     border-color: var(--monithon-giudizio-2-background);
-            // }
-
-            // &[data-cod-giudizio-sintetico="3"] {
-            //     border-color: var(--monithon-giudizio-3-background);
-            // }
-
-            // &[data-cod-giudizio-sintetico="4"] {
-            //     border-color: var(--monithon-giudizio-4-background);
-            // }
-
-            // &[data-cod-giudizio-sintetico="5"] {
-            //     border-color: var(--monithon-giudizio-5-background);
-            // }
-
-            // &[data-cod-giudizio-sintetico="6"] {
-            //     border-color: var(--monithon-giudizio-6-background);
-            // }
 
         }
     }
 
-    .monithon-lista-progetti__progetto__dettagli {
-        * {
-            color: var(--monithon-lista-report-in-dettaglio-font-color) !important;
-        }
 
-        .monithon-lista-progetti__progetto__dettagli__contatore_report {
-            text-align: right;
-
-            &[data-mostra-icona="true"]::after {
-                content: ' ↓';
-            }
-        }
-
-        .monithon-lista-progetti__progetto__dettagli__lista_report * {
-            color: var(--monithon-lista-report-in-dettaglio-font-color);
-        }
-
-        ::ng-deep .mat-expansion-panel-content {
-            padding-left: 12px !important;
-            padding-right: 12px !important;
-        }
-
-        .monithon-lista-progetti__progetto__dettagli__header {
-            padding-right: 0;
-        }
-    }
-
-    .monithon-geolocator-data-container {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        justify-content: flex-start;
-
-        .monithon-comune-corrente,
-        .monithon-raggio-corrente {
-            margin-bottom: 10px;
-            margin-left: auto;
-        }
-
-        .monithon-comune-corrente::before,
-        .monithon-raggio-corrente::before {
-            content: ' ';
-            display: inline-block;
-            background-repeat: no-repeat;
-            margin-right: 5px;
-        }
-
-        .monithon-comune-corrente::before {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 5.33614C0 2.12957 2.2687 0.0703125 5 0.0703125C7.7313 0.0703125 10 2.12957 10 5.33614C10 6.48342 9.73692 7.27552 9.275 8.15894L5.35624 15.6526C5.28787 15.7881 5.15027 15.8734 5 15.8734C4.84973 15.8734 4.71213 15.7881 4.64376 15.6526L0.725 8.15894C0.26306 7.27554 0 6.48342 0 5.33614ZM9.2 5.33614C9.2 2.50252 7.34974 0.880439 5 0.880439C2.65026 0.880439 0.8 2.50252 0.8 5.33614C0.8 6.36579 1.00468 6.95145 1.4375 7.77919L5 14.5893L8.5625 7.77919C8.99534 6.95141 9.2 6.36579 9.2 5.33614ZM5 2.70322C3.67926 2.70322 2.6 3.79616 2.6 5.13361C2.6 6.47107 3.67926 7.564 5 7.564C6.32074 7.564 7.4 6.47107 7.4 5.13361C7.4 3.79616 6.32074 2.70322 5 2.70322ZM6.6 5.13361C6.6 4.234 5.88838 3.51335 5 3.51335C4.11162 3.51335 3.4 4.234 3.4 5.13361C3.4 6.03324 4.11162 6.75386 5 6.75386C5.88838 6.75386 6.6 6.03324 6.6 5.13361Z' fill='black'/%3E%3C/svg%3E%0A");
-            width: 10px;
-            height: 16px;
-        }
-
-        .monithon-raggio-corrente::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 11'%3E%3Cpath stroke='%23005bac' d='M 9.5,5.5 C 9.5,7.98528 7.48528,10 5,10 2.51472,10 0.5,7.98528 0.5,5.5 0.5,3.01472 2.51472,1 5,1 7.48528,1 9.5,3.01472 9.5,5.5 Z' /%3E%3Cpath stroke='%23005bac' d='M 5.5,5.5 C 5.5,5.77614 5.27614,6 5,6 4.72386,6 4.5,5.77614 4.5,5.5 4.5,5.22386 4.72386,5 5,5 5.27614,5 5.5,5.22386 5.5,5.5 Z' /%3E%3C/svg%3E%0A");
-            width: 10px;
-            height: 10px;
-        }
-    }
-
-}
-
-.monithon-header * {
-    background-color: transparent;
-}
-
-.geocoder {
-    position: absolute;
-    z-index: 100;
-    width: 432px;
-    left: 24px;
-    top: 10px;
-
-    ion-label {
-        opacity: 0;
-    }
-
-    &.geocoder-ready {
-        ion-label {
-            opacity: 1;
-        }
-    }
-
-}
-
-#raggioContainer {
-    position: absolute;
-    z-index: 100;
-    width: 432px;
-    left: 24px;
-    top: 80px;
-
-    mat-slider {
-        width: 432px;
-    }
-
-    z-index: 10;
-    // &.backgrounded {
-    // }
-
-    ::ng-deep mat-slider {
-        &.mat-slider-horizontal {
-            width: 432px;
-        }
-
-        &.mat-slider-disabled {
-            display: none !important;
-        }
-
-        .mat-slider-thumb-container {
-            top: 0px !important;
-        }
-
-        .mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label {
-            background: var(--monithon-range-thumb-label-background) !important
-        }
-
-        .mat-slider-thumb-label {
-            top: -15px !important;
-            transform: rotate(0deg) !important;
-            width: 75px !important;
-            height: 30px !important;
-            border-top-left-radius: 25px;
-            border-top-right-radius: 25px;
-            border-bottom-left-radius: 25px;
-            border-bottom-right-radius: 25px;
-
-
-            border-color: white !important;
-            border-width: 3px !important;
-            border-style: solid !important;
-            opacity: 1 !important;
-            background: var(--monithon-range-thumb-label-background) !important;
-
-            .mat-slider-thumb-label-text {
-                margin-top: 6px;
-                transform: rotate(0deg);
-                width: 100%;
-                height: 100%;
-                text-align: center;
-                font-size: 16px;
-            }
-        }
-
-
-
-        .mat-slider-thumb {
-            transform: scale(0) !important;
-        }
-
-        .mat-slider-thumb-label-text {
-            opacity: 1 !important;
-        }
-
-        .mat-slider-track-fill,
-        .mat-slider-track-background {
-            background: var(--monithon-range-track-fill) !important;
-        }
-    }
 }
 
 
 
-.mapboxgl-ctrl-geocoder {
-    min-width: 100%;
 
-    .mapbox-gl-geocoder--no-results {
-        line-height: 40px !important;
-    }
-}
-
-monithon-drawer {
-    z-index: 90;
-    position: absolute;
-}
 
 .monithon-search-input {
     width: 100%;
