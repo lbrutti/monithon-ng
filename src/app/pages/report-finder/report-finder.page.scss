@@ -45,93 +45,6 @@
     }
 
 
-
-    .monithon-dettaglio-progetto__sintesi {
-        overflow-y: scroll;
-        @include hideScrollbar();
-
-        .monithon-dettaglio-progetto__sintesi__oc_link {
-            margin-top: 12px;
-            font-weight: bold;
-
-            a {
-                color: var(--monithon-font-color) !important;
-            }
-        }
-    }
-
-    .monithon-dettaglio-progetto__row {
-        justify-content: space-between;
-    }
-
-    .monithon-dettaglio-progetto__col {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        max-height: 100%;
-
-    }
-
-    .monithon-dettaglio-progetto__dettagli {
-        justify-content: space-between;
-        //inserire mediaquery per schermi xl per evitare aletzza estrema
-        max-height: 600px;
-    }
-
-    .monithon-dettaglio-progetto__label {
-        color: var(--monithon-label-color);
-        text-transform: uppercase;
-        display: block;
-    }
-
-
-    &.monithon-finanziamenti-chart,
-    &.monithon-pagamenti-chart {
-        height: 36px;
-    }
-
-    .monithon-label-container {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: nowrap;
-    }
-
-    .monithon-dettaglio-progetto__oc_link {
-        margin-top: auto;
-    }
-
-    .monithon-dettaglio-progetto__unica__categoria {
-        pointer-events: none;
-        cursor: default;
-    }
-
-    .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-        background: var(--monithon-font-color);
-        display: inline-flex;
-        flex-direction: column;
-        align-content: center;
-        justify-content: center;
-        width: auto;
-        height: 44px;
-        border-radius: 22px;
-        text-transform: uppercase;
-        font-size: 17px;
-        font-weight: 400;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-}
-
-.mat-chip[data-active="true"] {
-    cursor: pointer;
-}
-
-.mat-chip[data-active="false"] {
-    pointer-events: none;
-    cursor: default;
-    background-color: transparent !important;
-    opacity: 0.5;
 }
 
 .mat-chip.monithon-tema[data-active="false"],
@@ -160,10 +73,6 @@
 .mat-chip.monithon-categoria,
 .mat-chip.monithon-filtro-stato-avanzamento,
 .mat-chip.monithon-filtro-report {
-
-    background-color: transparent;
-    border-width: 1px;
-    border-style: solid;
 
     // giudizi sintetici
     @for $codGiudizioSintetico from 1 through 6 {
@@ -205,75 +114,12 @@
     }
 }
 
-.monithon-filtro-stato-avanzamento,
-.monithon-filtro-report {
-    ::ng-deep .mat-chip-list-wrapper {
-        padding-left: 2px !important;
-    }
-}
 
-.mat-chip.monithon-filtro-stato-avanzamento {
-    width: 33%;
-    justify-content: center;
-}
 
-.mat-chip.monithon-filtro-report {
-    width: 50%;
-    justify-content: center;
-}
-
-.mat-expansion-panel {
-    border-radius: 0;
-}
-
-ion-row.monithon-filtri-secondari {
-    display: flex;
-    justify-content: space-between;
-}
-
-.mat-chip-list.monithon-categorie {
-    max-height: 60vh;
-    display: block;
-    overflow-x: hidden;
-    @include hideScrollbar();
-    // width: 100%;
-    margin: 0;
-    padding: 0;
-
-    //width: 432px;
-    .mat-chip {
-        &.monithon-categoria {
-            max-width: 432px;
-        }
-    }
-
-    ::ng-deep .mat-chip-list-wrapper {
-        padding-left: 24px !important;
-        padding-right: 12px !important;
-    }
-
-    .monithon-categoria-wrapper {
-        display: inline-block;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-}
 
 .monithon-filtri {
-    background-color: var(--monithon-tema-sfondo-filtri);
-
-    .mat-expansion-panel-header {
-        height: 50px !important;
-        padding-right: 14px;
-    }
 
     &.mat-expanded {
-        .monithon-categorie-container {
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-        }
 
         #programmaOperativoContainer {
             margin-top: auto;
