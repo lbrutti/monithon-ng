@@ -2,39 +2,6 @@
 @import '../../../theme/cssvar.scss';
 @import '../home/home.page.scss';
 
-::ng-deep .mat-standard-chip {
-    padding: 3px 6px !important;
-    min-height: 28px !important;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    word-break: inherit;
-}
-
-::ng-deep .mat-tooltip {
-    /* your own custom styles here */
-    /* e.g. */
-    font-size: small;
-}
-
-#chartPanel {
-    align-self: flex-end;
-    margin-top: auto;
-
-    .mat-expansion-panel-content {
-        overflow-y: scroll;
-    }
-}
-
-#chartsContainer {
-    overflow-y: scroll;
-    @include hideScrollbar();
-}
-
-.monithon-chart-container-col {
-    display: flex;
-    flex-direction: column;
-}
 
 .monithon-chart-container {
     height: 50%;
