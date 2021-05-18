@@ -7,9 +7,10 @@ import { Observer, Subject } from 'rxjs';
 
 import '@turf/distance';
 import { circle, distance, point } from '@turf/turf';
-import { COLOR_MAP } from 'src/app/utils/colorMap';
+import { REPORT_COLOR_MAP } from 'src/app/utils/colorMap';
 import { TranslocoService } from '@ngneat/transloco';
 import { Report } from 'src/app/model/report/report';
+import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
 
 
 @Injectable({
@@ -171,15 +172,19 @@ export class ReportMapService {
                             // ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
                             // 'transparent',
                             ['all', ['boolean', ['feature-state', 'isSelected'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
-                            COLOR_MAP.temi.default,
-                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 4]],
-                            COLOR_MAP.temi.energia,
-                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 5]],
-                            COLOR_MAP.temi.ambiente,
-                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 6]],
-                            COLOR_MAP.temi.attrazione,
-                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 7]],
-                            COLOR_MAP.temi.mobilita,
+                            REPORT_COLOR_MAP.giudiziSintetici.default,
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'codGiudizioSintetico'], 1]],
+                            REPORT_COLOR_MAP.giudiziSintetici['1'],
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'codGiudizioSintetico'], 2]],
+                            REPORT_COLOR_MAP.giudiziSintetici['2'],
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'codGiudizioSintetico'], 3]],
+                            REPORT_COLOR_MAP.giudiziSintetici['3'],
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'codGiudizioSintetico'], 4]],
+                            REPORT_COLOR_MAP.giudiziSintetici['4'],
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'codGiudizioSintetico'], 5]],
+                            REPORT_COLOR_MAP.giudiziSintetici['5'],
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'codGiudizioSintetico'], 6]],
+                            REPORT_COLOR_MAP.giudiziSintetici['6'],
                             'transparent'
                         ],
                         'circle-stroke-color': [
@@ -187,15 +192,20 @@ export class ReportMapService {
                             ['any',
                                 ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]
                             ],
-                            COLOR_MAP.temi.default,
-                            ['==', ['get', 'ocCodTemaSintetico'], 4],
-                            COLOR_MAP.temi.energia,
-                            ['==', ['get', 'ocCodTemaSintetico'], 5],
-                            COLOR_MAP.temi.ambiente,
-                            ['==', ['get', 'ocCodTemaSintetico'], 6],
-                            COLOR_MAP.temi.attrazione,
-                            ['==', ['get', 'ocCodTemaSintetico'], 7],
-                            COLOR_MAP.temi.mobilita,
+                            REPORT_COLOR_MAP.giudiziSintetici.default,
+                            ['==', ['get', 'codGiudizioSintetico'], 1],
+                            REPORT_COLOR_MAP.giudiziSintetici['1'],
+                            ['==', ['get', 'codGiudizioSintetico'], 2],
+                            REPORT_COLOR_MAP.giudiziSintetici['2'],
+                            ['==', ['get', 'codGiudizioSintetico'], 3],
+                            REPORT_COLOR_MAP.giudiziSintetici['3'],
+                            ['==', ['get', 'codGiudizioSintetico'], 4],
+                            REPORT_COLOR_MAP.giudiziSintetici['4'],
+                            ['==', ['get', 'codGiudizioSintetico'], 5],
+                            REPORT_COLOR_MAP.giudiziSintetici['5'],
+                            ['==', ['get', 'codGiudizioSintetico'], 6],
+                            REPORT_COLOR_MAP.giudiziSintetici['6'],
+                          
                             'transparent'
                         ],
                         'circle-stroke-width': 1,
@@ -289,10 +299,9 @@ export class ReportMapService {
 
 
 
-    public setGiudiziSintetici(categorie: Array<any>) {
-        this.giudiziSintetici = categorie.map((c) => ({
+    public setGiudiziSintetici(giudiziSintetici: Array<GiudizioSintetico>) {
+        this.giudiziSintetici = giudiziSintetici.map((c) => ({
             'codGiudizioSintetico': c.codGiudizioSintetico,
-            'ocCodTemaSintetico': c.ocCodTemaSintetico,
             'isSelected': true,
             'isActive': true
         }));

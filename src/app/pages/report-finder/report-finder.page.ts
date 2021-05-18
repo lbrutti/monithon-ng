@@ -22,9 +22,9 @@ import { AboutPage } from '../about/about.page';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
-  selector: 'app-report-finder',
-  templateUrl: './report-finder.page.html',
-  styleUrls: ['./report-finder.page.scss'],
+    selector: 'app-report-finder',
+    templateUrl: './report-finder.page.html',
+    styleUrls: ['./report-finder.page.scss'],
 })
 export class ReportFinderPage implements OnInit, AfterViewInit {
 
@@ -91,7 +91,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     modalData: any;
     programmiOperativi: Array<ProgrammaOperativo>;
     programmiOperativiSelezionati: Array<ProgrammaOperativo> = [];
-    titleSearchTerm:string = '';
+    titleSearchTerm: string = '';
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -202,8 +202,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        Promise.all([   
-            this.monithonApiService.getListaReport().toPromise(), 
+        Promise.all([
+            this.monithonApiService.getListaReport().toPromise(),
             this.monithonApiService.getTemiSintetici().toPromise(),
             this.monithonApiService.getCicliProgrammazione().toPromise(),
             this.monithonApiService.getProgrammiOperativi().toPromise(),
@@ -220,9 +220,9 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.cicliProgrammazione = cicliProgrammazione;
                 this.giudiziSintetici = giudiziSintetici;
                 this.programmiOperativi = programmiOperativi;
-                this.reportMap.setGiudiziSintetici(giudiziSintetici.map(c => {
-                    c.isSelected = true;
-                    return c;
+                this.reportMap.setGiudiziSintetici(giudiziSintetici.map((g: GiudizioSintetico) => {
+                    g.isSelected = true;
+                    return g;
                 }));
 
                 this.reportMap.renderMap(this.mapContainer.nativeElement, listaReport, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
@@ -775,20 +775,20 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
 
-    onProgrammOperativoChange(programma:ProgrammaOperativo){
+    onProgrammOperativoChange(programma: ProgrammaOperativo) {
         console.dir(programma);
     }
 
-    searchProgrammaOperativo(term:string, programma:ProgrammaOperativo){
+    searchProgrammaOperativo(term: string, programma: ProgrammaOperativo) {
         term = term.toLowerCase();
         return programma.descProgrammaOperativo.toLowerCase().indexOf(term) > -1 || programma.codProgrammaOperativo.toLowerCase() === term;
 
     }
-    searchReportByTitle(){
+    searchReportByTitle() {
         console.log('searchReportByTitle: ', this.titleSearchTerm);
     }
-    resetTitleSearch(){
-        this.titleSearchTerm ='';
+    resetTitleSearch() {
+        this.titleSearchTerm = '';
         this.searchReportByTitle();
     }
 }
