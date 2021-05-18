@@ -1,7 +1,7 @@
 
 // da ricevere da ws
 export interface CicloProgrammazione {
-    codCicloProgrammazione: number;
+    ocCodCicloProgrammazione: number;
     descCicloProgrammazione: string;
     isSelected: boolean;
     isActive:boolean;

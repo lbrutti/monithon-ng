@@ -131,10 +131,10 @@
                                                 multiple="true" aria-orientation="horizontal">
                                                 <mat-chip class="monithon-dettaglio-progetto__stato-avanzamento"
                                                     selectable="false" *ngFor="let ciclo of this.cicliProgrammazione"
-                                                    [selected]="reportSelezionato.codCicloProgrammazione==ciclo.codCicloProgrammazione"
-                                                    [attr.data-oc-cod-stato-progetto]="ciclo.codCicloProgrammazione"
+                                                    [selected]="reportSelezionato.ocCodCicloProgrammazione==ciclo.ocCodCicloProgrammazione"
+                                                    [attr.data-oc-cod-stato-progetto]="ciclo.ocCodCicloProgrammazione"
                                                     disableRipple="true">
-                                                    {{'statiAvanzamento.'+ciclo.codCicloProgrammazione | transloco}}
+                                                    {{'statiAvanzamento.'+ciclo.ocCodCicloProgrammazione | transloco}}
                                                 </mat-chip>
                                             </mat-chip-list>
                                         </ion-col>
@@ -175,7 +175,7 @@
 
         <div id="panelContainer">
             <div id="filterContainer">
-                <!-- Temi -->
+                <!-- Giudizi sintetici -->
                 <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true">
                     <mat-chip [ngClass]="{'monithon-categoria': true}" *ngFor="let giudizio of this.giudiziSintetici"
                         [selected]="giudizio.isSelected" [selectable]="giudizio.isActive"
@@ -188,11 +188,11 @@
                     </mat-chip>
                 </mat-chip-list>
 
-                <!-- Categorie dei temi attivi -->
+                <!-- Temi -->
                 <mat-expansion-panel class="monithon-filtri">
                     <mat-expansion-panel-header>
                         <mat-panel-title class="monithon-titolo-sezione">
-                            {{'monithonFiltriTitle'|transloco}}
+                            {{'report.monithonFiltriTitle'|transloco}}
                         </mat-panel-title>
 
                     </mat-expansion-panel-header>
@@ -276,7 +276,7 @@
                                                             [attr.data-active]="ciclo.isActive"
                                                             [selected]="ciclo.isSelected"
                                                             (click)="this.filterByCiclo(ciclo)"
-                                                            [attr.data-oc-cod-stato-progetto]="ciclo.codCicloProgrammazione"
+                                                            [attr.data-oc-cod-stato-progetto]="ciclo.ocCodCicloProgrammazione"
                                                             disableRipple="true">
                                                             {{ciclo.descCicloProgrammazione }}
                                                         </mat-chip>

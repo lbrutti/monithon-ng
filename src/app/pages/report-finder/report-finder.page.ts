@@ -127,7 +127,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
                 this.reports = updateSubject.reports; //lodash.take(updateSubject.progetti, 50);
                 this.cicliProgrammazione.map(s => {
-                    s.isActive = lodash.some(this.reports, p => p.codCicloProgrammazione == s.codCicloProgrammazione);
+                    s.isActive = lodash.some(this.reports, p => p.ocCodCicloProgrammazione == s.ocCodCicloProgrammazione);
                     s.isSelected = s.isActive;
                 });
 
@@ -459,8 +459,11 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.renderBudgetChart(this.reportsCrossFilter, listaReports);
         this.renderAnnoChart(this.reportsCrossFilter, listaReports);
         dc.renderAll();
+        //FIXME: fare refactoring per adeguare a report
         this.filtraRisultati();
-        this.evidenziaRisultatiSuMappa();
+        if (false){
+            this.evidenziaRisultatiSuMappa();
+        }
     }
 
     private renderAnnoChart(crossFilterData: any, listaReports: any) {
@@ -702,12 +705,12 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
     filtraRisultati() {
-        let cicliProgrammazioneSelezionati = this.cicliProgrammazione.filter(ciclo => ciclo.isSelected).map(flag => flag.codCicloProgrammazione);
+        let cicliProgrammazioneSelezionati = this.cicliProgrammazione.filter(ciclo => ciclo.isSelected).map(flag => flag.ocCodCicloProgrammazione);
         let temiSinteticiSelezionati = this.temi.filter(flag => flag.isSelected).map(flag => flag.ocCodTemaSintetico);
 
         this.risultatiRicerca = this.reports.filter((report: Report) => {
             let matchesTemaSintetico = ((temiSinteticiSelezionati.length == 0) || lodash.includes(temiSinteticiSelezionati, report.ocCodTemaSintetico));
-            let matchesCicloProgrammazione = ((cicliProgrammazioneSelezionati.length == 0) || lodash.includes(cicliProgrammazioneSelezionati, report.codCicloProgrammazione))
+            let matchesCicloProgrammazione = ((cicliProgrammazioneSelezionati.length == 0) || lodash.includes(cicliProgrammazioneSelezionati, report.ocCodCicloProgrammazione))
 
             return matchesTemaSintetico && matchesCicloProgrammazione;
         });

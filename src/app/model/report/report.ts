@@ -19,7 +19,7 @@ export class Report {
     ocFinanzTotPubNetto: number | string; //ocFinanzTotPubNetto: number | string; mostrato in dettaglio, usato per filtro BUDGET
 
     codProgrammaOperativo?: string; //codStatoProgetto?: any; mostrato in dettaglio, usato per filtro con autocomplete?
-    codCicloProgrammazione?: number | string; //codStatoProgetto?: string;  mostrato in dettaglio, usato per filtro secondario con chips
+    ocCodCicloProgrammazione?: number | string; //codStatoProgetto?: string;  mostrato in dettaglio, usato per filtro secondario con chips
     link?: string; //ocLink?: string; usato in dettaglio per linkare alla pagina del report
 
     lat: number;
