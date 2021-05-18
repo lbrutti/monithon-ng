@@ -14,6 +14,7 @@ import temiSintetici from '../../../assets/mock/temiSintetici';
 import cicliProgrammazione from '../../../assets/mock/cicliProgrammazione';
 import programmiOperativi from '../../../assets/mock/programmiOperativi';
 import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
+import listaReport from '../../../assets/mock/mockListaReport';
 
 @Injectable({
     providedIn: 'root'
@@ -122,7 +123,7 @@ export class MonithonApiService {
      * getListaReport
      */
     public getListaReport(): Observable<any> {
-        return of([]);
+        return of(listaReport);
     }
 
     /**
