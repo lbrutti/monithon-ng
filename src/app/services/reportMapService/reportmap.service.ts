@@ -371,11 +371,11 @@ export class ReportMapService {
         let categorieVisibili = lodash.uniq(
             this.reports.features.filter(f => f.properties.isSelected)
                 .reduce((acc, f) => {
-                    f.properties.codGiudizioSintetico.map(c => {
-                        if (acc.indexOf(c) == -1) {
-                            acc.push(c);
-                        }
-                    });
+
+                    if (acc.indexOf(f.properties.codGiudizioSintetico) == -1) {
+                        acc.push(f.properties.codGiudizioSintetico);
+                    }
+
                     return acc;
                 }, []));
         this.giudiziSintetici.map(c => {
