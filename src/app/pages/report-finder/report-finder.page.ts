@@ -126,9 +126,9 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             next: updateSubject => {
 
                 this.reports = updateSubject.reports; //lodash.take(updateSubject.progetti, 50);
-                this.cicliProgrammazione.map(s => {
-                    s.isActive = lodash.some(this.reports, p => p.ocCodCicloProgrammazione == s.ocCodCicloProgrammazione);
-                    s.isSelected = s.isActive;
+                this.cicliProgrammazione.map(ciclo => {
+                    ciclo.isActive = lodash.some(this.reports, p => p.ocCodCicloProgrammazione == ciclo.ocCodCicloProgrammazione);
+                    ciclo.isSelected = ciclo.isActive;
                 });
 
                 this.temi.map(tema => {

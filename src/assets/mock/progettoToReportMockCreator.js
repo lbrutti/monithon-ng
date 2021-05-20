@@ -1311,6 +1311,9 @@ function remapProgettoToReport(p) {
             case 'codGiudizioSintetico':
                 report.codGiudizioSintetico = randomCodGiudizioSintetico();
                 break;
+            case 'ocCodTemaSintetico':
+                report.ocCodTemaSintetico = p[remap[k]] < 10 ? '0' + p[remap[k]] : '' + p[remap[k]];
+                break;
             default:
                 report[k] = p[remap[k]];
                 break;
@@ -1323,7 +1326,7 @@ function randomOcCodProgrammaOperativo() {
 }
 
 function randomOcCodCicloProgrammazione() {
-    return cicliProgrammazione[cicliProgrammazione.length * Math.random() | 0]['codCicloProgrammazione']
+    return cicliProgrammazione[cicliProgrammazione.length * Math.random() | 0]['ocCodCicloProgrammazione']
 }
 
 function randomCodGiudizioSintetico() {

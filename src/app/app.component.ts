@@ -35,11 +35,9 @@ export class AppComponent {
                 hasTouchScreen = navigator['msMaxTouchPoints'] > 0;
             }
 
-        
-            
-            if (this.platform.is('desktop') || this.platform.is('tablet') || !hasTouchScreen){
-                console.log('tutto ok');
-            } else {
+
+            let goodDevice = this.platform.is('desktop') || this.platform.is('tablet') || !hasTouchScreen;
+            if (!goodDevice) {
                 this.router.navigate(['/courtesy'], { skipLocationChange: true });
             }
 
