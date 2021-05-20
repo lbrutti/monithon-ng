@@ -459,11 +459,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.renderBudgetChart(this.reportsCrossFilter, listaReports);
         this.renderAnnoChart(this.reportsCrossFilter, listaReports);
         dc.renderAll();
-        //FIXME: fare refactoring per adeguare a report
         this.filtraRisultati();
-        if (false){
-            this.evidenziaRisultatiSuMappa();
-        }
+        this.evidenziaRisultatiSuMappa();
     }
 
     private renderAnnoChart(crossFilterData: any, listaReports: any) {
