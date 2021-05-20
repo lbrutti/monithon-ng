@@ -1,15 +1,50 @@
-let remap = {
-    'uid': 'uid',
-    'titoloReport': 'ocTitoloProgetto',
-    'dataInserimento': 'ocDataInizioProgetto',
-    'codGiudizioSintetico': 'codStatoProgetto',
-    'ocCodTemaSintetico': 'ocCodTemaSintetico',
-    'ocFinanzTotPubNetto': 'ocFinanzTotPubNetto',
-    'ocCodProgrammaOperativo':'ocCodProgrammaOperativo',
-    'ocCodCicloProgrammazione':'ocCodCicloProgrammazione',
-    'lat':'lat',
-    'long':'long'
-};
+let giudiziSintetici = [
+    {
+        "codGiudizioSintetico": 1,
+        "descGiudizioSintetico": "appena iniziato"
+    },
+    {
+        "codGiudizioSintetico": 2,
+        "descGiudizioSintetico": "in corso e procede bene"
+    },
+    {
+        "codGiudizioSintetico": 3,
+        "descGiudizioSintetico": "procede con difficolta"
+    },
+    {
+        "codGiudizioSintetico": 4,
+        "descGiudizioSintetico": "bloccato"
+    },
+    {
+        "codGiudizioSintetico": 5,
+        "descGiudizioSintetico": "concluso e utile"
+    },
+    {
+        "codGiudizioSintetico": 6,
+        "descGiudizioSintetico": "concluso e inefficace"
+    }
+];
+
+let cicliProgrammazione = [
+    {
+        "ocCodCicloProgrammazione": 1,
+        "descCicloProgrammazione": "2007-2013",
+        "isSelected": true,
+        "isActive": true
+    },
+    {
+        "ocCodCicloProgrammazione": 2,
+        "descCicloProgrammazione": "2014-2020",
+        "isSelected": true,
+        "isActive": true
+    },
+    {
+        "ocCodCicloProgrammazione": 3,
+        "descCicloProgrammazione": "2021-2027",
+        "isSelected": true,
+        "isActive": true
+    }
+];
 
 let programmiOperativi = [
     {
@@ -1245,33 +1280,36 @@ let programmiOperativi = [
         "descProgrammaOperativo": "POR FESR UMBRIA"
     }
 ];
+let remap = {
+    'uid': 'uid',
+    'titoloReport': 'ocTitoloProgetto',
+    'dataInserimento': 'ocDataInizioProgetto',
+    'codGiudizioSintetico': 'codStatoProgetto',
+    'ocCodTemaSintetico': 'ocCodTemaSintetico',
+    'ocFinanzTotPubNetto': 'ocFinanzTotPubNetto',
+    'ocCodProgrammaOperativo': 'ocCodProgrammaOperativo',
+    'ocCodCicloProgrammazione': 'ocCodCicloProgrammazione',
+    'lat': 'lat',
+    'long': 'long'
+};
 
-let cicliProgrammazione = [
-    {
-        "codCicloProgrammazione": 1,
-        "descCicloProgrammazione": "2007-2013"
-    },
-    {
-        "codCicloProgrammazione": 2,
-        "descCicloProgrammazione": "2014-2020"
-    },
-    {
-        "codCicloProgrammazione": 3,
-        "descCicloProgrammazione": "2021-2027"
-    }
-];
 
-function remapProgettoToReport(p){
+
+function remapProgettoToReport(p) {
     let reportKeys = Object.keys(remap);
     let report = {};
-    reportKeys.map(k=>{
+    reportKeys.map(k => {
         switch (k) {
             case 'ocCodProgrammaOperativo':
                 report.ocCodProgrammaOperativo = randomOcCodProgrammaOperativo();
                 break;
-        
+
             case 'ocCodCicloProgrammazione':
                 report.ocCodCicloProgrammazione = randomOcCodCicloProgrammazione();
+                break;
+
+            case 'codGiudizioSintetico':
+                report.codGiudizioSintetico = randomCodGiudizioSintetico();
                 break;
             default:
                 report[k] = p[remap[k]];
@@ -1281,11 +1319,15 @@ function remapProgettoToReport(p){
     return report;
 }
 function randomOcCodProgrammaOperativo() {
-   return programmiOperativi[programmiOperativi.length * Math.random() | 0]['codProgrammaOperativo']
+    return programmiOperativi[programmiOperativi.length * Math.random() | 0]['codProgrammaOperativo']
 }
 
 function randomOcCodCicloProgrammazione() {
     return cicliProgrammazione[cicliProgrammazione.length * Math.random() | 0]['codCicloProgrammazione']
+}
+
+function randomCodGiudizioSintetico() {
+    return giudiziSintetici[giudiziSintetici.length * Math.random() | 0]['codGiudizioSintetico']
 }
 let progetti = await fetch('https://api.monithon.eu/api/mapdata/listaProgetti');
 progetti = await progetti.json();
