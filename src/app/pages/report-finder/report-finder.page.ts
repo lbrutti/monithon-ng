@@ -220,10 +220,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.cicliProgrammazione = cicliProgrammazione;
                 this.giudiziSintetici = giudiziSintetici;
                 this.programmiOperativi = programmiOperativi;
-                this.reportMap.setGiudiziSintetici(giudiziSintetici.map((g: GiudizioSintetico) => {
-                    g.isSelected = true;
-                    return g;
-                }));
+                this.reportMap.setGiudiziSintetici(this.giudiziSintetici);
 
                 this.reportMap.renderMap(this.mapContainer.nativeElement, listaReport, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
@@ -671,7 +668,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         giudizioSintetico.isSelected = !giudizioSintetico.isSelected;
 
         this.redrawCharts = true;
-        this.reportMap.filtraPerCategoria();
+        this.reportMap.filtraPerGiudizio();
     }
 
     //Filtri di secondo livello:

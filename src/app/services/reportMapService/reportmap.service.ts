@@ -205,7 +205,7 @@ export class ReportMapService {
                             REPORT_COLOR_MAP.giudiziSintetici['5'],
                             ['==', ['get', 'codGiudizioSintetico'], 6],
                             REPORT_COLOR_MAP.giudiziSintetici['6'],
-                          
+
                             'transparent'
                         ],
                         'circle-stroke-width': 1,
@@ -300,11 +300,7 @@ export class ReportMapService {
 
 
     public setGiudiziSintetici(giudiziSintetici: Array<GiudizioSintetico>) {
-        this.giudiziSintetici = giudiziSintetici.map((c) => ({
-            'codGiudizioSintetico': c.codGiudizioSintetico,
-            'isSelected': true,
-            'isActive': true
-        }));
+        this.giudiziSintetici = giudiziSintetici;
     }
     private reportsToFeatureCollection(data: Array<Report>): any {
         this.reports = {
@@ -401,7 +397,7 @@ export class ReportMapService {
 
 
 
-    filtraPerCategoria() {
+    filtraPerGiudizio() {
         let reports = this.filtraReport();
         lodash.remove(reports, (p: Report) => !p.isSelected);
         this.publishUpdate(reports);
@@ -427,14 +423,15 @@ export class ReportMapService {
 
 
     filtraReport(): Array<any> {
-        let categorieSelezionate = this.giudiziSintetici.filter(c => {
+        let giudiziSelezionati: Array<number | string> = this.giudiziSintetici.filter(c => {
             return c.isSelected;
         }).map(c => c.codGiudizioSintetico);
 
         return this.reports.features
             .map(f => {
                 let report: Report = f.properties;
-                report.isSelected = ((categorieSelezionate == 0) || (lodash.intersection(categorieSelezionate, report.codGiudizioSintetico).length > 0));
+
+                report.isSelected = ((giudiziSelezionati.length == 0) || (giudiziSelezionati.indexOf(report.codGiudizioSintetico) > -1));
                 let featureStates = { isSelected: report.isSelected, isWithinRange: true };
                 if (this.filtroPerRaggioEnabled) {
                     report.distanza = distance(point(f.geometry.coordinates), this.centerPoint);
