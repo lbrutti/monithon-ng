@@ -664,8 +664,12 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
 
 
-    public filterByGiudizio(giudizioSintetico: GiudizioSintetico): void {
+    public filtraPerGiudizio(giudizioSintetico: GiudizioSintetico): void {
         giudizioSintetico.isSelected = !giudizioSintetico.isSelected;
+
+        if (lodash.every(this.giudiziSintetici, g => !g.isSelected)) {
+            this.giudiziSintetici.map(g => g.isSelected = true);
+        }
 
         this.redrawCharts = true;
         this.reportMap.filtraPerGiudizio();
