@@ -17,6 +17,7 @@ import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
 import listaReport from '../../../assets/mock/mockListaReport';
 import listaDettagli from '../../../assets/mock/mockDettagliReport';
 import { Report } from 'src/app/model/report/report';
+import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -132,7 +133,7 @@ export class MonithonApiService {
      * getDettaglioReport
      */
     public getDettaglioReport(uid: string | number) {
-        let report:Report = lodash.find(listaDettagli, {uid:uid});
+        let report: Report = lodash.find(listaDettagli, { uid: uid });
         return of(report);
     }
 
@@ -160,7 +161,13 @@ export class MonithonApiService {
     /**
      * getGiudiziSintetici
      */
-    public getGiudiziSintetici() : Observable<any> {
-        return of(giudiziSintetici);
+    public getGiudiziSintetici(): Observable<GiudizioSintetico[]> {
+        let giudizi: GiudizioSintetico[] = giudiziSintetici.map(g => ({
+            codGiudizioSintetico: g.codGiudizioSintetico,
+            descGiudizioSintetico: g.descGiudizioSintetico,
+            isSelected: true,
+            isActive: true
+        }));
+        return of(giudizi);
     }
 }
