@@ -293,14 +293,14 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     hideDettaglioReport() {
         this.visualizzaDettaglio = false;
     }
-    showDettaglioReport(progetto: any) {
-        if (!lodash.isNil(progetto)) {
-            this.monithonApiService.getDettaglio(progetto)
+    showDettaglioReport(report: Report) {
+        if (!lodash.isNil(report)) {
+            this.monithonApiService.getDettaglioReport(report.uid)
                 .subscribe({
-                    next: progetto => {
+                    next: dettaglioReport => {
                         let dettaglioBoundingRect = this.dettaglioProgetto.nativeElement.getBoundingClientRect();
-                        if (progetto) {
-                            this.reportSelezionato = progetto;
+                        if (dettaglioReport) {
+                            this.reportSelezionato = dettaglioReport;
                             this.visualizzaDettaglio = true;
                             this.reportMap.easeToReport(dettaglioBoundingRect, this.reportSelezionato, this.visualizzaDettaglio);
                             this.renderDettaglioProgettoCharts();

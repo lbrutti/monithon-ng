@@ -15,6 +15,8 @@ import cicliProgrammazione from '../../../assets/mock/cicliProgrammazione';
 import programmiOperativi from '../../../assets/mock/programmiOperativi';
 import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
 import listaReport from '../../../assets/mock/mockListaReport';
+import listaDettagli from '../../../assets/mock/mockDettagliReport';
+import { Report } from 'src/app/model/report/report';
 
 @Injectable({
     providedIn: 'root'
@@ -130,7 +132,8 @@ export class MonithonApiService {
      * getDettaglioReport
      */
     public getDettaglioReport(uid: string | number) {
-
+        let report:Report = lodash.find(listaDettagli, {uid:uid});
+        return of(report);
     }
 
     /**
