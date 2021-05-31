@@ -1335,3 +1335,21 @@ function randomCodGiudizioSintetico() {
 let progetti = await fetch('https://api.monithon.eu/api/mapdata/listaProgetti');
 progetti = await progetti.json();
 let report = progetti.map(p => remapProgettoToReport(p));
+
+//Creazione dettagli corrispondenti ai singoli report
+let listaDettagli = report.map(r => {
+    let dettaglio = {};
+    dettaglio.uid = r.uid;
+    dettaglio.titoloReport = r.titoloReport;
+    dettaglio.dataInserimento = r.dataInserimento;
+    dettaglio.codGiudizioSintetico = r.codGiudizioSintetico;
+    dettaglio.ocCodTemaSintetico = r.ocCodTemaSintetico;
+    dettaglio.ocFinanzTotPubNetto = r.ocFinanzTotPubNetto;
+    dettaglio.ocCodProgrammaOperativo = r.ocCodProgrammaOperativo;
+    dettaglio.ocCodCicloProgrammazione = r.ocCodCicloProgrammazione;
+
+    dettaglio.sintesiReport = "Placeat harum consequatur qui reprehenderit laborum. Quis autem est distinctio maxime ex alias quibusdam ut. Laboriosam autem quidem voluptatibus aperiam voluptates voluptatem consequatur commodi. Veniam sapiente aut omnis nostrum facilis aut dolore";
+    dettaglio.link = "https://www.monithon.eu/it/";
+
+    return dettaglio;
+});

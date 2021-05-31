@@ -657,12 +657,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
         });
 
-
-
         return crossFilterData;
     }
-
-
 
     public filtraPerGiudizio(giudizioSintetico: GiudizioSintetico): void {
         giudizioSintetico.isSelected = !giudizioSintetico.isSelected;
