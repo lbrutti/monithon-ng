@@ -10,7 +10,8 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "release": "ionic build --prod --release --config=production"
+        "release": "ionic build --prod --release --config=production",
+        "release-dev": "ionic build --prod --release"
     },
     "private": true,
     "dependencies": {
