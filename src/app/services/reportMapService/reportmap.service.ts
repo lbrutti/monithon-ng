@@ -58,7 +58,7 @@ export class ReportMapService {
         this.isFreeMode = isFreeMode;
         this.map = new mapboxgl.Map({
             container: container,
-            style: environment.mapbox.style,
+            style: environment.mapbox.reportStyle,
             center: [12.3959144, 41.909986], //roma
             zoom: 4.8,
             antialias: false,
