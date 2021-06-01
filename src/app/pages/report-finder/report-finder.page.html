@@ -369,8 +369,11 @@
                             <ion-col>
                                 <mat-form-field floatLabel='never' class="monithon-search-input">
                                     <mat-icon matPrefix>search</mat-icon>
-                                    <input (keypress)="searchReportByTitle()" matInput type="search" [placeholder]="'report.cercaPerTitolo' | transloco" class="search-input" [(ngModel)]="titleSearchTerm">
-                                    <button mat-button *ngIf="titleSearchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="resetTitleSearch()">
+                                    <input (keypress)="searchReportByTitle()" matInput type="search"
+                                        [placeholder]="'report.cercaPerTitolo' | transloco" class="search-input"
+                                        [(ngModel)]="titleSearchTerm">
+                                    <button mat-button *ngIf="titleSearchTerm" matSuffix mat-icon-button
+                                        aria-label="Clear" (click)="resetTitleSearch()">
                                         <mat-icon>close</mat-icon>
                                     </button>
                                 </mat-form-field>
@@ -398,7 +401,28 @@
                                     </ion-label>
                                 </ion-col>
                             </ion-row>
+                            <ion-row class="ion-no-margin">
+                                <ion-col class="ion-no-margin" size-xl="8">
+                                    <mat-expansion-panel disabled="true" hideToggle="true"
+                                        class="monithon-lista-progetti__progetto__dettagli mat-elevation-z">
+                                        <mat-expansion-panel-header
+                                            class="monithon-lista-progetti__progetto__dettagli__header">
+                                            <ion-grid class="ion-no-margin">
+                                                <ion-row class="ion-no-margin">
+                                                    <ion-col size="6" class="ion-no-margin">
+                                                        <ion-label
+                                                            class="monithon-lista-progetti__progetto__dettagli__distanza">
+                                                            {{'distanza'|transloco}}: {{report.distanza |
+                                                            formatDistanza }}
+                                                        </ion-label>
+                                                    </ion-col>
 
+                                                </ion-row>
+                                            </ion-grid>
+                                        </mat-expansion-panel-header>
+                                    </mat-expansion-panel>
+                                </ion-col>
+                            </ion-row>
                         </ion-grid>
 
                     </ion-item>
