@@ -17,12 +17,13 @@ export const COLOR_MAP = {
 // --monithon - giudizio - 6 - background: green;
 export const REPORT_COLOR_MAP = {
     giudiziSintetici: {
-        1: 'red',
-        2: 'gold',
-        3: 'purple',
-        4: 'cyan',
-        5: 'pink',
-        6: 'green',
+        1: '#5362EB',
+        2: '#00CEB8',
+        3: '#FDD0B3',
+        4: '#FFC921',
+
+        5: '#089B43',
+        6: '#EA4A3E',
         'default': 'white'
     }
 };
