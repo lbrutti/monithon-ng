@@ -154,11 +154,10 @@ ion-content {
 
 app-report-finder {
     .mat-expansion-indicator {
-        background-color: transparent !important;
-        border-color: white;
+        background-color: var(--monithon-panel-chevron-background-report);
 
         &::after {
-            color: var(--monithon-panel-chevron-color) !important;
+            color: var(--monithon-panel-chevron-color);
         }
     }
 }
