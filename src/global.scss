@@ -130,17 +130,17 @@ ion-content {
 
 
 .mat-expansion-indicator {
-    border: 1px solid transparent !important;
+    border: 1px solid transparent;
     width: 27px !important;
     height: 27px !important;
     border-radius: 100% !important;
-    background-color: var(--monithon-panel-chevron-background) !important;
+    background-color: var(--monithon-panel-chevron-background);
     display: inline-flex !important;
     align-self: flex-start !important;
     margin-top: 14px !important;
 
     &::after {
-        color: var(--monithon-panel-chevron-color) !important;
+        color: var(--monithon-panel-chevron-color);
         // margin: auto !important;
         margin-left: auto;
         margin-top: auto;
@@ -149,6 +149,17 @@ ion-content {
         border-width: 1px 0 0 1px !important;
         padding-top: 9px !important;
         padding-left: 9px !important;
+    }
+}
+
+app-report-finder {
+    .mat-expansion-indicator {
+        background-color: transparent !important;
+        border-color: white;
+
+        &::after {
+            color: var(--monithon-panel-chevron-color) !important;
+        }
     }
 }
 
@@ -286,7 +297,8 @@ app-courtesy {
             }
         }
     }
-    .ng-has-value{
+
+    .ng-has-value {
         .ng-placeholder {
             display: none;
         }

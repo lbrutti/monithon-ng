@@ -118,6 +118,7 @@
 
 
 .monithon-filtri {
+    background-color: var(--monithon-tema-sfondo-filtri-report);
 
     &.mat-expanded {
 
@@ -133,7 +134,16 @@
 
         }
     }
+
 }
+
+.monithon-filtri-charts {
+    background-color: var(--monithon-tema-sfondo-charts-report);
+}
+
+
+
+
 
 
 
