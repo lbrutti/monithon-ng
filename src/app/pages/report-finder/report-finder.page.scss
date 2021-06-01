@@ -139,36 +139,18 @@
 
 
 .monithon-lista-risultato {
-  
 
-    &[data-cod-giudizio-sintetico="4"]::before {
-        background-color: var(--monithon-giudizio-energia-background);
 
+
+    @for $codGiudizioSintetico from 1 through 6 {
+        &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"]::before {
+            background-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
+        }
+
+        &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"].selected {
+            color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
+        }
     }
-
-    &[data-cod-giudizio-sintetico="4"].selected {
-        color: var(--monithon-giudizio-energia-background);
-    }
-
-    &[data-cod-giudizio-sintetico="5"]::before {
-        background-color: var(--monithon-giudizio-ambiente-background);
-
-    }
-
-    &[data-cod-giudizio-sintetico="5"].selected {
-        color: var(--monithon-giudizio-ambiente-background);
-    }
-
-    &[data-cod-giudizio-sintetico="6"]::before {
-        background-color: var(--monithon-giudizio-attrazione-background);
-
-    }
-
-    &[data-cod-giudizio-sintetico="6"].selected {
-        color: var(--monithon-giudizio-attrazione-background);
-    }
-
-
 
 }
 
