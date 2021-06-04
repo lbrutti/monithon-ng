@@ -681,15 +681,14 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.evidenziaRisultatiSuMappa();
 
     }
-    public filterByReportFlag(reportFlag) {
-        reportFlag.isSelected = !reportFlag.isSelected;
+    public filterByTemaSintetico(tema: Tema) {
+        tema.isSelected = !tema.isSelected;
 
         if (lodash.every(this.temi, f => !f.isSelected)) {
             this.temi.map(f => f.isSelected = f.isActive);
         }
         this.filtraRisultati();
         this.evidenziaRisultatiSuMappa();
-
     }
 
     evidenziaRisultatiSuMappa() {
@@ -701,12 +700,12 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     filtraRisultati() {
         let cicliProgrammazioneSelezionati = this.cicliProgrammazione.filter(ciclo => ciclo.isSelected).map(flag => flag.ocCodCicloProgrammazione);
         let temiSinteticiSelezionati = this.temi.filter(flag => flag.isSelected).map(flag => flag.ocCodTemaSintetico);
-
+        let programmaOperativo: ProgrammaOperativo = this.programmiOperativi.filter(p => p.isSelected)[0];
         this.risultatiRicerca = this.reports.filter((report: Report) => {
             let matchesTemaSintetico = ((temiSinteticiSelezionati.length == 0) || lodash.includes(temiSinteticiSelezionati, report.ocCodTemaSintetico));
             let matchesCicloProgrammazione = ((cicliProgrammazioneSelezionati.length == 0) || lodash.includes(cicliProgrammazioneSelezionati, report.ocCodCicloProgrammazione))
-
-            return matchesTemaSintetico && matchesCicloProgrammazione;
+            let matchesProgrammaOperativo = lodash.isNil(programmaOperativo) || report.ocCodProgrammaOperativo === programmaOperativo.ocCodProgrammaOperativo;
+            return matchesTemaSintetico && matchesCicloProgrammazione && matchesProgrammaOperativo;
         });
 
         this.ordinaRisultatiPerCriterio();
@@ -774,11 +773,17 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     onProgrammOperativoChange(programma: ProgrammaOperativo) {
         console.dir(programma);
+
+        this.programmiOperativi.map((p: ProgrammaOperativo) => {
+            p.isSelected = !lodash.isNil(programma) && (p.ocCodProgrammaOperativo == programma.ocCodProgrammaOperativo);
+        });
+        this.filtraRisultati();
+        this.evidenziaRisultatiSuMappa();
     }
 
     searchProgrammaOperativo(term: string, programma: ProgrammaOperativo) {
         term = term.toLowerCase();
-        return programma.descProgrammaOperativo.toLowerCase().indexOf(term) > -1 || programma.codProgrammaOperativo.toLowerCase() === term;
+        return programma.isActive && (programma.descProgrammaOperativo.toLowerCase().indexOf(term) > -1 || programma.ocCodProgrammaOperativo.toLowerCase() === term);
 
     }
     searchReportByTitle() {

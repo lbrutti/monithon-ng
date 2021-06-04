@@ -1,5 +1,7 @@
 // da ricevere da ws
 export interface ProgrammaOperativo {
-    codProgrammaOperativo: string;
+    ocCodProgrammaOperativo: string;
     descProgrammaOperativo: string;
+    isSelected:boolean;
+    isActive:boolean;
 }

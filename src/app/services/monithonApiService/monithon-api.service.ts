@@ -141,7 +141,11 @@ export class MonithonApiService {
      * getProgrammiOperativi
      */
     public getProgrammiOperativi(): Observable<any> {
-        return of(programmiOperativi);
+        return of(programmiOperativi.map(p => {
+            p.isSelected = false;
+            p.isActive = true;
+            return p;
+        }));
     }
 
     /**

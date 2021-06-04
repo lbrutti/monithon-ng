@@ -207,7 +207,7 @@
                                             *ngFor="let temaSintetico of this.temi"
                                             [selected]="temaSintetico.isSelected"
                                             [attr.data-active]="temaSintetico.isActive"
-                                            (click)="this.filterByReportFlag(temaSintetico)"
+                                            (click)="this.filterByTemaSintetico(temaSintetico)"
                                             [attr.data-tema-sintetico]="temaSintetico.ocCodTemaSintetico"
                                             disableRipple="true">
                                             <span class="monithon-categoria-wrapper">
