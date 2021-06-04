@@ -19,6 +19,7 @@ import { Tema } from 'src/app/model/tema/tema.interface';
     providedIn: 'root'
 })
 export class ReportMapService {
+
     setTemi(temi: Tema[]) {
         this.temi = temi;
     }
@@ -294,7 +295,7 @@ export class ReportMapService {
                 navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
             }
 
-            this.publishUpdate(this.featureCollectionToReports());
+            this.publishUpdate(this.featureCollectionToReports(), true, true);
         });
 
 
@@ -409,10 +410,20 @@ export class ReportMapService {
 
     filtraPerGiudizio() {
         let reports = this.filtraReport();
-        lodash.remove(reports, (p: Report) => !p.isSelected);
-        this.publishUpdate(reports);
+        // lodash.remove(reports, (p: Report) => !p.isSelected);
+        this.publishUpdate(reports, true, true);
     }
 
+    filtraPerTema() {
+        let reports = this.filtraReport();
+        // lodash.remove(reports, (p: Report) => !p.isSelected);
+        this.publishUpdate(reports, false, true);
+    }
+    filtraPerProgrammaOperativo() {
+        let reports = this.filtraReport();
+        // lodash.remove(reports, (p: Report) => !p.isSelected);
+        this.publishUpdate(reports, false, false);
+    }
 
     /**
      * 
@@ -425,7 +436,7 @@ export class ReportMapService {
             this.radius = circleData.radius;
             let reports = this.filtraReport();
             this.aggiornaAttivabilitaGiudizi();
-            this.publishUpdate(reports);
+            this.publishUpdate(reports, true, true);
         }
 
 
@@ -463,6 +474,10 @@ export class ReportMapService {
             .filter(f => f.properties.isSelected)
             .map(f => f.properties);
     }
+
+    // filtraTemi() {
+    //     this.temi.map((t: Tema) => t.isActive = lodash.some(this.reports, (r: Report) => r.ocCodTemaSintetico == t.ocCodTemaSintetico));
+    // }
 
     resetFiltroReport(): Array<any> {
 
@@ -506,8 +521,12 @@ export class ReportMapService {
     public unsubscribeToGeocoderResults(): void {
         this.geocoderResults.unsubscribe();
     }
-    publishUpdate(reports: Array<Report>): void {
-        this.mapUpdated.next({ giudiziSintetici: this.giudiziSintetici, reports: lodash.uniqBy(reports, (r: Report) => r.uid) });
+    publishUpdate(reports: Array<Report>, refreshTemi: boolean = false, refreshCicliProgrammazione: boolean = false): void {
+        this.mapUpdated.next({
+            reports: lodash.uniqBy(reports, (r: Report) => r.uid),
+            refreshTemi: refreshTemi,
+            refreshCicliProgrammazione: refreshCicliProgrammazione
+        });
     }
 
     publishSelectedReport(report?: Report): void {

@@ -125,16 +125,14 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
-                this.reports = updateSubject.reports; //lodash.take(updateSubject.progetti, 50);
-                this.cicliProgrammazione.map(ciclo => {
-                    ciclo.isActive = lodash.some(this.reports, p => p.ocCodCicloProgrammazione == ciclo.ocCodCicloProgrammazione);
-                    ciclo.isSelected = ciclo.isActive;
-                });
+                this.reports = updateSubject.reports;
+                if(updateSubject.refreshCicliProgrammazione){
+                    this.setCicliProgrammazioneAttivi();
+                }
+                if(updateSubject.refreshTemi){
+                    this.setTemiAttivi();
+                }
 
-                this.temi.map(tema => {
-                    tema.isActive = lodash.some(this.reports, p => p.ocCodTemaSintetico == tema.ocCodTemaSintetico);
-                    tema.isSelected = tema.isActive;
-                });
                 if (this.redrawCharts) {
                     try {
                         this.renderCharts(this.reports);
@@ -188,6 +186,20 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.reportMap.subscribeToGeocoderResults(geocoderResultsObserver);
 
     }
+    private setTemiAttivi() {
+        this.temi.map(tema => {
+            tema.isActive = lodash.some(this.reports, p => p.ocCodTemaSintetico == tema.ocCodTemaSintetico);
+            tema.isSelected = tema.isActive;
+        });
+    }
+
+    private setCicliProgrammazioneAttivi() {
+        this.cicliProgrammazione.map(ciclo => {
+            ciclo.isActive = lodash.some(this.reports, p => p.ocCodCicloProgrammazione == ciclo.ocCodCicloProgrammazione);
+            ciclo.isSelected = ciclo.isActive;
+        });
+    }
+
     updateGeocoderBindindings(geocoderData: any): void {
         this.geocoderData = geocoderData;
         this.hideSlider = false;
@@ -220,6 +232,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.reportMap.setGiudiziSintetici(this.giudiziSintetici);
                 this.reportMap.setTemi(this.temi);
                 this.reportMap.setProgrammiOperativi(this.programmiOperativi);
+                
 
                 this.reportMap.renderMap(this.mapContainer.nativeElement, listaReport, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
@@ -672,11 +685,12 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     public filterByTemaSintetico(tema: Tema) {
         tema.isSelected = !tema.isSelected;
 
+        //reset chips
         if (lodash.every(this.temi, tema => !tema.isSelected)) {
             this.temi.map(tema => tema.isSelected = tema.isActive);
         }
         this.redrawCharts = true;
-        this.reportMap.filtraPerGiudizio();
+        this.reportMap.filtraPerTema();
     }
 
     onProgrammOperativoChange(programma: ProgrammaOperativo) {
@@ -684,7 +698,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             p.isSelected = !lodash.isNil(programma) && (p.ocCodProgrammaOperativo == programma.ocCodProgrammaOperativo);
         });
         this.redrawCharts = true;
-        this.reportMap.filtraPerGiudizio();
+        this.reportMap.filtraPerProgrammaOperativo();
     }
 
     //Filtri di secondo livello:
