@@ -192,15 +192,15 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
     private setTemiAttivi() {
         this.temi.map(tema => {
-            tema.isActive = lodash.some(this.reports, p => p.ocCodTemaSintetico == tema.ocCodTemaSintetico);
-            tema.isSelected = tema.isActive;
+            tema.isSelected = lodash.some(this.reports, p => p.ocCodTemaSintetico == tema.ocCodTemaSintetico);
+            // tema.isSelected = tema.isActive;
         });
     }
 
     private setCicliProgrammazioneAttivi() {
         this.cicliProgrammazione.map(ciclo => {
-            ciclo.isActive = lodash.some(this.reports, p => p.ocCodCicloProgrammazione == ciclo.ocCodCicloProgrammazione);
-            ciclo.isSelected = ciclo.isActive;
+            ciclo.isSelected = lodash.some(this.reports, p => p.ocCodCicloProgrammazione == ciclo.ocCodCicloProgrammazione);
+            // ciclo.isSelected = ciclo.isActive;
         });
     }
 
