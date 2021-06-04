@@ -1282,7 +1282,7 @@ let programmiOperativi = [
 ];
 let remap = {
     'uid': 'uid',
-    'titoloReport': 'ocTitoloProgetto',
+    'titolo': 'ocTitoloProgetto',
     'dataInserimento': 'ocDataInizioProgetto',
     'codGiudizioSintetico': 'codStatoProgetto',
     'ocCodTemaSintetico': 'ocCodTemaSintetico',
@@ -1340,7 +1340,7 @@ let report = progetti.map(p => remapProgettoToReport(p));
 let listaDettagli = report.map(r => {
     let dettaglio = {};
     dettaglio.uid = r.uid;
-    dettaglio.titoloReport = r.titoloReport;
+    dettaglio.titolo = r.titolo;
     dettaglio.dataInserimento = r.dataInserimento;
     dettaglio.codGiudizioSintetico = r.codGiudizioSintetico;
     dettaglio.ocCodTemaSintetico = r.ocCodTemaSintetico;

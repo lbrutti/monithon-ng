@@ -19,6 +19,9 @@ import { MonithonApiService } from 'src/app/services/monithonApiService/monithon
 import { ReportMapService } from 'src/app/services/reportMapService/reportmap.service';
 import { environment } from 'src/environments/environment';
 import { AboutPage } from '../about/about.page';
+import Fuse from 'fuse.js'
+import { SearchResult } from 'src/app/model/searchResult.interface';
+
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -47,7 +50,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     public espandiListaRisultati: boolean = false;
     reports: Array<Report> = [];
-    risultatiRicerca: Array<Report> = [];
+    risultatiRicerca: Array<Report & SearchResult> = [];
 
     //variabili charts
     budgetChart: any;
@@ -92,7 +95,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     programmiOperativi: Array<ProgrammaOperativo>;
     programmiOperativiSelezionati: Array<ProgrammaOperativo> = [];
     titleSearchTerm: string = '';
-    // keepProgetto: boolean = false;
+    lastKeypress: number = Date.now();
+    speedLim: number = 500;
     constructor(
         private monithonApiService: MonithonApiService,
         public reportMap: ReportMapService,
@@ -126,10 +130,10 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             next: updateSubject => {
 
                 this.reports = updateSubject.reports;
-                if(updateSubject.refreshCicliProgrammazione){
+                if (updateSubject.refreshCicliProgrammazione) {
                     this.setCicliProgrammazioneAttivi();
                 }
-                if(updateSubject.refreshTemi){
+                if (updateSubject.refreshTemi) {
                     this.setTemiAttivi();
                 }
 
@@ -232,7 +236,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.reportMap.setGiudiziSintetici(this.giudiziSintetici);
                 this.reportMap.setTemi(this.temi);
                 this.reportMap.setProgrammiOperativi(this.programmiOperativi);
-                
+
 
                 this.reportMap.renderMap(this.mapContainer.nativeElement, listaReport, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
@@ -712,24 +716,42 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     }
 
+    searchReportByTitle(reset: boolean = false) {
+        let now = Date.now();
+        if (reset) {
+            this.risultatiRicerca.map((r, i) => r.matches = true);
+            this.evidenziaRisultatiSuMappa();
+        }
+        else if ((now - this.lastKeypress) > this.speedLim) {
+            this.lastKeypress = now;
+            const options = {
+                threshold: 0.25,
+                keys: ['titolo']
+            }
+            const fuse = new Fuse(this.risultatiRicerca, options)
+            let matchingRes = fuse.search(this.titleSearchTerm).map(r => r.refIndex);
+            this.risultatiRicerca.map((r, i) => r.matches = matchingRes.indexOf(i) >= 0);
+            this.evidenziaRisultatiSuMappa();
+        }
 
+    }
+    getRisultati() {
+        return this.risultatiRicerca.filter(r => r.matches);
+    }
     evidenziaRisultatiSuMappa() {
-        let idRisultati = this.risultatiRicerca.map(p => p.uid);
+        let idRisultati = this.getRisultati().map(p => p.uid);
         idRisultati = idRisultati.length == 0 ? null : idRisultati; // evit
         this.reportMap.selectById(idRisultati);
     }
 
     filtraRisultati() {
         let cicliProgrammazioneSelezionati = this.cicliProgrammazione.filter(ciclo => ciclo.isSelected).map(flag => flag.ocCodCicloProgrammazione);
-        let temiSinteticiSelezionati = this.temi.filter(flag => flag.isSelected).map(flag => flag.ocCodTemaSintetico);
-        let programmaOperativo: ProgrammaOperativo = this.programmiOperativi.filter(p => p.isSelected)[0];
-        this.risultatiRicerca = this.reports.filter((report: Report) => {
-            let matchesTemaSintetico = ((temiSinteticiSelezionati.length == 0) || lodash.includes(temiSinteticiSelezionati, report.ocCodTemaSintetico));
-            let matchesCicloProgrammazione = ((cicliProgrammazioneSelezionati.length == 0) || lodash.includes(cicliProgrammazioneSelezionati, report.ocCodCicloProgrammazione))
-            let matchesProgrammaOperativo = lodash.isNil(programmaOperativo) || report.ocCodProgrammaOperativo === programmaOperativo.ocCodProgrammaOperativo;
-            return matchesTemaSintetico && matchesCicloProgrammazione && matchesProgrammaOperativo;
-        });
 
+        this.risultatiRicerca = this.reports.filter((report: Report) => {
+            let matchesCicloProgrammazione = ((cicliProgrammazioneSelezionati.length == 0) || lodash.includes(cicliProgrammazioneSelezionati, report.ocCodCicloProgrammazione))
+            return matchesCicloProgrammazione;
+        });
+        this.risultatiRicerca.map(r => r.matches = true)
         this.ordinaRisultatiPerCriterio();
     }
 
@@ -788,7 +810,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.modalData = modelData.data;
             }
         });
-
         return await modal.present();
     }
 
@@ -800,11 +821,9 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         return programma.isActive && (programma.descProgrammaOperativo.toLowerCase().indexOf(term) > -1 || programma.ocCodProgrammaOperativo.toLowerCase() === term);
 
     }
-    searchReportByTitle() {
-        console.log('searchReportByTitle: ', this.titleSearchTerm);
-    }
+
     resetTitleSearch() {
         this.titleSearchTerm = '';
-        this.searchReportByTitle();
+        this.searchReportByTitle(true);
     }
 }

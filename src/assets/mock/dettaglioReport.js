@@ -2,7 +2,7 @@
     
     {
         "uid": 1144,
-        "titoloReport": "Palazzo delle Aquile",
+        "titolo": "Palazzo delle Aquile",
         "dataInserimento": "27/04/2021",
         "codGiudizioSintetico": 1,
         "ocCodTemaSintetico": "06",

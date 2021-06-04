@@ -42,7 +42,7 @@
                             class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__col__titolo ">
                             <div class="monithon-dettaglio-progetto__titolo_container">
                                 <h4 class="monithon-dettaglio-progetto__titolo monithon-titolo-singolo-progetto ">
-                                    {{reportSelezionato.titoloReport |
+                                    {{reportSelezionato.titolo |
                                     fixencodedchars |
                                     unescape | capitalize}}
                                 </h4>
@@ -320,7 +320,7 @@
                                     transloco}}
                                 </h2>
                                 <h1 class="monithon-risultati-contatore" [attr.data-hidden]="espandiListaRisultati"
-                                    #resultCounter>{{this.risultatiRicerca.length | number}} </h1>
+                                    #resultCounter>{{this.getRisultati().length | number}} </h1>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
@@ -330,7 +330,7 @@
                         <ion-row>
                             <ion-col size="8">
                                 <h1 class="monithon-risultati-contatore" [attr.data-hidden]="!espandiListaRisultati"
-                                    #resultCounter>{{this.risultatiRicerca.length |
+                                    #resultCounter>{{this.getRisultati().length |
                                     number}}
                                 </h1>
                             </ion-col>
@@ -386,7 +386,7 @@
                 <!-- lista risultati -->
                 <cdk-virtual-scroll-viewport #listaRisultati itemSize="100" minBufferPx="500" maxBufferPx="1000"
                     class="monithon-lista-progetti">
-                    <ion-item color="light" *cdkVirtualFor="let report of risultatiRicerca;"
+                    <ion-item color="light" *cdkVirtualFor="let report of getRisultati()"
                         class="monithon-lista-progetti__progetto"
                         [attr.data-cod-giudizio-sintetico]="report.codGiudizioSintetico"
                         [ngClass]="{'selected': (report.uid==reportSelezionato.uid)}" lines="none">
@@ -396,7 +396,7 @@
                                     <ion-label class="monithon-lista-risultato" (click)="onReportClick(report)"
                                         [attr.data-cod-giudizio-sintetico]="report.codGiudizioSintetico"
                                         [ngClass]="{'selected': (report.uid==reportSelezionato.uid)}">
-                                        <h2>{{report.titoloReport | fixencodedchars | unescape | capitalize}}
+                                        <h2>{{report.titolo | fixencodedchars | unescape | capitalize}}
                                         </h2>
                                     </ion-label>
                                 </ion-col>
