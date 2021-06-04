@@ -197,10 +197,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.ordinaRisultatiPerCriterio();
     }
 
-    getTemi() {
-        return this.monithonApiService.getTemi();
-    }
-
     ngAfterViewInit(): void {
         Promise.all([
             this.monithonApiService.getListaReport().toPromise(),
@@ -220,7 +216,10 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.cicliProgrammazione = cicliProgrammazione;
                 this.giudiziSintetici = giudiziSintetici;
                 this.programmiOperativi = programmiOperativi;
+
                 this.reportMap.setGiudiziSintetici(this.giudiziSintetici);
+                this.reportMap.setTemi(this.temi);
+                this.reportMap.setProgrammiOperativi(this.programmiOperativi);
 
                 this.reportMap.renderMap(this.mapContainer.nativeElement, listaReport, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
@@ -670,6 +669,28 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.redrawCharts = true;
         this.reportMap.filtraPerGiudizio();
     }
+    public filterByTemaSintetico(tema: Tema) {
+        tema.isSelected = !tema.isSelected;
+
+        if (lodash.every(this.temi, f => !f.isSelected)) {
+            this.temi.map(f => f.isSelected = f.isActive);
+        }
+        // this.filtraRisultati();
+        // this.evidenziaRisultatiSuMappa();
+        // this.redrawCharts = true;
+        this.redrawCharts = true;
+        this.reportMap.filtraPerGiudizio();
+    }
+
+    onProgrammOperativoChange(programma: ProgrammaOperativo) {
+        console.dir(programma);
+
+        this.programmiOperativi.map((p: ProgrammaOperativo) => {
+            p.isSelected = !lodash.isNil(programma) && (p.ocCodProgrammaOperativo == programma.ocCodProgrammaOperativo);
+        });
+        this.redrawCharts = true;
+        this.reportMap.filtraPerGiudizio();
+    }
 
     //Filtri di secondo livello:
     public filterByCiclo(stato) {
@@ -681,15 +702,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.evidenziaRisultatiSuMappa();
 
     }
-    public filterByTemaSintetico(tema: Tema) {
-        tema.isSelected = !tema.isSelected;
 
-        if (lodash.every(this.temi, f => !f.isSelected)) {
-            this.temi.map(f => f.isSelected = f.isActive);
-        }
-        this.filtraRisultati();
-        this.evidenziaRisultatiSuMappa();
-    }
 
     evidenziaRisultatiSuMappa() {
         let idRisultati = this.risultatiRicerca.map(p => p.uid);
@@ -771,15 +784,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
 
-    onProgrammOperativoChange(programma: ProgrammaOperativo) {
-        console.dir(programma);
 
-        this.programmiOperativi.map((p: ProgrammaOperativo) => {
-            p.isSelected = !lodash.isNil(programma) && (p.ocCodProgrammaOperativo == programma.ocCodProgrammaOperativo);
-        });
-        this.filtraRisultati();
-        this.evidenziaRisultatiSuMappa();
-    }
 
     searchProgrammaOperativo(term: string, programma: ProgrammaOperativo) {
         term = term.toLowerCase();
