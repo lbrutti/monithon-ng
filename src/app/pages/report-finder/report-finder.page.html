@@ -369,7 +369,7 @@
                             <ion-col>
                                 <mat-form-field floatLabel='never' class="monithon-search-input">
                                     <mat-icon matPrefix>search</mat-icon>
-                                    <input (keypress)="searchReportByTitle()" matInput type="search"
+                                    <input (change)="searchReportByTitle()" matInput type="search"
                                         [placeholder]="'report.cercaPerTitolo' | transloco" class="search-input"
                                         [(ngModel)]="titleSearchTerm">
                                     <button mat-button *ngIf="titleSearchTerm" matSuffix mat-icon-button

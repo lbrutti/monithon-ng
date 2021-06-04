@@ -717,22 +717,19 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
     searchReportByTitle(reset: boolean = false) {
-        let now = Date.now();
-        if (reset) {
+        if (reset || !this.titleSearchTerm) {
             this.risultatiRicerca.map((r, i) => r.matches = true);
-            this.evidenziaRisultatiSuMappa();
         }
-        else if ((now - this.lastKeypress) > this.speedLim) {
-            this.lastKeypress = now;
+        else {
             const options = {
-                threshold: 0.25,
+                threshold: 0.1,
                 keys: ['titolo']
             }
             const fuse = new Fuse(this.risultatiRicerca, options)
             let matchingRes = fuse.search(this.titleSearchTerm).map(r => r.refIndex);
             this.risultatiRicerca.map((r, i) => r.matches = matchingRes.indexOf(i) >= 0);
-            this.evidenziaRisultatiSuMappa();
         }
+        this.evidenziaRisultatiSuMappa();
 
     }
     getRisultati() {
