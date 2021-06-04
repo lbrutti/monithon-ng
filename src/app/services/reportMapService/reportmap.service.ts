@@ -278,7 +278,7 @@ export class ReportMapService {
             this.map.dragRotate.disable();
             this.map.touchZoomRotate.disableRotation();
             this.map.resize();
-            this.aggiornaAttivabilitaCategorie();
+            this.aggiornaAttivabilitaGiudizi();
 
             if (this.isFreeMode) {
                 navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
@@ -372,8 +372,8 @@ export class ReportMapService {
     }
 
 
-    aggiornaAttivabilitaCategorie(reset: boolean = false) {
-        let categorieVisibili = lodash.uniq(
+    aggiornaAttivabilitaGiudizi(reset: boolean = false) {
+        let giudiziVisibili = lodash.uniq(
             this.reports.features.filter(f => f.properties.isSelected)
                 .reduce((acc, f) => {
 
@@ -384,8 +384,8 @@ export class ReportMapService {
                     return acc;
                 }, []));
         this.giudiziSintetici.map(c => {
-            //una categoria è attiva (selezionabile) quando esiste almeno un report che ce l'ha
-            c.isActive = lodash.includes(categorieVisibili, c.codGiudizioSintetico);
+            //un giudizio è attivo (selezionabile) quando esiste almeno un report che ce l'ha
+            c.isActive = lodash.includes(giudiziVisibili, c.codGiudizioSintetico);
             if (reset) {
                 c.isSelected = c.isActive;
             }
@@ -414,7 +414,7 @@ export class ReportMapService {
             this.centerPoint = point(circleData.center);
             this.radius = circleData.radius;
             let reports = this.filtraReport();
-            this.aggiornaAttivabilitaCategorie();
+            this.aggiornaAttivabilitaGiudizi();
             this.publishUpdate(reports);
         }
 
@@ -576,7 +576,7 @@ export class ReportMapService {
         });
 
         let reports = this.resetFiltroReport();
-        this.aggiornaAttivabilitaCategorie(true);
+        this.aggiornaAttivabilitaGiudizi(true);
         if (publishUpdate) {
             this.publishUpdate(reports);
         }
