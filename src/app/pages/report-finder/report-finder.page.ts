@@ -49,7 +49,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
 
     public espandiListaRisultati: boolean = false;
-    reports: Array<Report> = [];
+    reports: Array<Report & SearchResult> = [];
     risultatiRicerca: Array<Report & SearchResult> = [];
 
     //variabili charts
@@ -128,8 +128,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             });
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
-
-                this.reports = updateSubject.reports;
+                let matchIdx = updateSubject.reports.map((r: Report) => r.uid);
+                this.reports.map(r => r.matches = lodash.includes(matchIdx, r.uid)); //= updateSubject.reports;
                 if (updateSubject.refreshCicliProgrammazione) {
                     this.setCicliProgrammazioneAttivi();
                 }
@@ -139,7 +139,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
                 if (this.redrawCharts) {
                     try {
-                        this.renderCharts(this.reports);
+                        this.renderCharts(this.getReports());
                     } catch (error) {
                         console.error(error);
                     }
@@ -190,17 +190,20 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.reportMap.subscribeToGeocoderResults(geocoderResultsObserver);
 
     }
+    getReports() {
+        return this.reports.filter(r => r.matches);
+    }
     private setTemiAttivi() {
         this.temi.map(tema => {
-            tema.isSelected = lodash.some(this.reports, p => p.ocCodTemaSintetico == tema.ocCodTemaSintetico);
-            // tema.isSelected = tema.isActive;
+            tema.isActive = lodash.some(this.reports, r => r.ocCodTemaSintetico == tema.ocCodTemaSintetico);
+            tema.isSelected = lodash.some(this.getReports(), r => r.ocCodTemaSintetico == tema.ocCodTemaSintetico);
         });
     }
 
     private setCicliProgrammazioneAttivi() {
         this.cicliProgrammazione.map(ciclo => {
-            ciclo.isSelected = lodash.some(this.reports, p => p.ocCodCicloProgrammazione == ciclo.ocCodCicloProgrammazione);
-            // ciclo.isSelected = ciclo.isActive;
+            ciclo.isActive = lodash.some(this.reports, r => r.ocCodCicloProgrammazione == ciclo.ocCodCicloProgrammazione);
+            ciclo.isSelected = lodash.some(this.getReports(), r => r.ocCodCicloProgrammazione == ciclo.ocCodCicloProgrammazione);
         });
     }
 
@@ -228,6 +231,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 let cicliProgrammazione = data[2];
                 let programmiOperativi = data[3];
                 let giudiziSintetici = data[4];
+                this.reports = listaReport;
                 this.temi = temiSintetici;
                 this.cicliProgrammazione = cicliProgrammazione;
                 this.giudiziSintetici = giudiziSintetici;
@@ -744,7 +748,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     filtraRisultati() {
         let cicliProgrammazioneSelezionati = this.cicliProgrammazione.filter(ciclo => ciclo.isSelected).map(flag => flag.ocCodCicloProgrammazione);
 
-        this.risultatiRicerca = this.reports.filter((report: Report) => {
+        this.risultatiRicerca = this.getReports().filter((report: Report) => {
             let matchesCicloProgrammazione = ((cicliProgrammazioneSelezionati.length == 0) || lodash.includes(cicliProgrammazioneSelezionati, report.ocCodCicloProgrammazione))
             return matchesCicloProgrammazione;
         });
