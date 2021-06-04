@@ -435,7 +435,6 @@ export class ReportMapService {
     filtraReport(): Array<any> {
         let temiSinteticiSelezionati = this.temi.filter(flag => flag.isSelected).map(flag => flag.ocCodTemaSintetico);
         let programmaOperativo: ProgrammaOperativo = this.programmiOperativi.filter(p => p.isSelected)[0];
-
         let giudiziSelezionati: Array<number | string> = this.giudiziSintetici.filter(c => {
             return c.isSelected;
         }).map(c => c.codGiudizioSintetico);
@@ -444,7 +443,6 @@ export class ReportMapService {
             .map(f => {
                 let report: Report = f.properties;
 
-                // report.isSelected = ((giudiziSelezionati.length == 0) || (giudiziSelezionati.indexOf(report.codGiudizioSintetico) > -1));
 
                 let matchesTemaSintetico = ((temiSinteticiSelezionati.length == 0) || lodash.includes(temiSinteticiSelezionati, report.ocCodTemaSintetico));
                 let matchesGiudizioSintetico = ((giudiziSelezionati.length == 0) || lodash.includes(giudiziSelezionati, report.codGiudizioSintetico))

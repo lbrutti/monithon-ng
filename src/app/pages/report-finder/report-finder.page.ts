@@ -672,19 +672,14 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     public filterByTemaSintetico(tema: Tema) {
         tema.isSelected = !tema.isSelected;
 
-        if (lodash.every(this.temi, f => !f.isSelected)) {
-            this.temi.map(f => f.isSelected = f.isActive);
+        if (lodash.every(this.temi, tema => !tema.isSelected)) {
+            this.temi.map(tema => tema.isSelected = tema.isActive);
         }
-        // this.filtraRisultati();
-        // this.evidenziaRisultatiSuMappa();
-        // this.redrawCharts = true;
         this.redrawCharts = true;
         this.reportMap.filtraPerGiudizio();
     }
 
     onProgrammOperativoChange(programma: ProgrammaOperativo) {
-        console.dir(programma);
-
         this.programmiOperativi.map((p: ProgrammaOperativo) => {
             p.isSelected = !lodash.isNil(programma) && (p.ocCodProgrammaOperativo == programma.ocCodProgrammaOperativo);
         });
