@@ -749,6 +749,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             return matchesCicloProgrammazione;
         });
         this.risultatiRicerca.map(r => r.matches = true)
+        this.searchReportByTitle();
         this.ordinaRisultatiPerCriterio();
     }
 
