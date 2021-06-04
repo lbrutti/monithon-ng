@@ -534,7 +534,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.annoChart.on("filtered", () => {
 
             setTimeout(() => {
-                this.reports = annoDim.top(Infinity) || [];
+                let matchIdx = annoDim.top(Infinity).map(r => r.uid) || [];
+                this.reports.map(r => r.matches = matchIdx.indexOf(r.uid) >= 0);
                 this.filtraRisultati();
                 this.evidenziaRisultatiSuMappa();
             }, 0);
@@ -619,7 +620,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             setTimeout(() => {
                 // console.log('this.budgetChart.on("filtered", () => {');
                 //propagare evento per aggiornare la lista dei progetti
-                this.reports = budgetDim.top(Infinity) || [];
+                let matchIdx = budgetDim.top(Infinity).map(r => r.uid) || [];
+                this.reports.map(r => r.matches = matchIdx.indexOf(r.uid) >= 0);
                 this.filtraRisultati();
                 this.evidenziaRisultatiSuMappa();
             }, 0);
