@@ -121,6 +121,10 @@
     background-color: var(--monithon-tema-sfondo-filtri-report);
 
     &.mat-expanded {
+        .monithon-categorie-container {
+            display: flex;
+            flex-direction: column;
+        }
 
         #programmaOperativoContainer {
             margin-top: auto;
