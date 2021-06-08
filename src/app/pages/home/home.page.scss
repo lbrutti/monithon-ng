@@ -202,7 +202,9 @@
             height: 100%;
 
             ion-row {
-                height: 100%;
+                &.monithon-dettaglio-progetto__row {
+                    height: 100%;
+                }
             }
         }
     }
@@ -388,9 +390,9 @@
         flex-direction: column;
         justify-content: flex-start;
         max-height: 100%;
-        
+
     }
-    
+
     .monithon-dettaglio-progetto__dettagli {
         justify-content: space-between;
         //inserire mediaquery per schermi xl per evitare aletzza estrema
@@ -579,7 +581,7 @@ ion-row.monithon-filtri-secondari {
 
 .mat-chip-list.monithon-categorie {
     max-height: 60vh;
-    display:block;
+    display: block;
     overflow-x: hidden;
     @include hideScrollbar();
     // width: 100%;
@@ -597,7 +599,8 @@ ion-row.monithon-filtri-secondari {
         padding-left: 24px !important;
         padding-right: 12px !important;
     }
-    .monithon-categoria-wrapper{
+
+    .monithon-categoria-wrapper {
         display: inline-block;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -725,7 +728,8 @@ ion-row.monithon-filtri-secondari {
 .monithon-lista-header {
     padding-left: 24px;
     padding-right: 24px;
-    ion-row{
+
+    ion-row {
         border-bottom: 2px solid var(--monithon-contatore-risultati-color);
     }
 }

@@ -10,23 +10,23 @@ ricerca libera su titolo del report: TODO verificare...
 
 
 export class Report {
-    uid: string;
-    titolo: string; //ocTitoloProgetto: string; mostrato in lista e dettaglio
-    sintesi: string; //ocSintesiProgetto: any;  mostrato in dettaglio
-    dataInserimento: number; //ocDataInizioProgetto: number; mostrato in dettaglio e usato per chart/filtro ANNO
-    ocCodTemaSintetico: string | number; //ocCodTemaSintetico: number; mostrato in dettaglio e uusato per filtro secondario con chips
-    codGiudizioSintetico: string; //ocCodCategoriaSpesa: Array<string>; mostrato in dettaglio, usato per filtro primario e per colore marker su mappa
-    ocFinanzTotPubNetto: number | string; //ocFinanzTotPubNetto: number | string; mostrato in dettaglio, usato per filtro BUDGET
+    uid: string = '';
+    titolo: string = ''; //ocTitoloProgetto: string; mostrato in lista e dettaglio
+    sintesi: string = ''; //ocSintesiProgetto: any;  mostrato in dettaglio
+    dataInserimento: number = 0; //ocDataInizioProgetto: number; mostrato in dettaglio e usato per chart/filtro ANNO
+    ocCodTemaSintetico: string | number = ''; //ocCodTemaSintetico: number; mostrato in dettaglio e uusato per filtro secondario con chips
+    codGiudizioSintetico: string = ''; //ocCodCategoriaSpesa: Array<string>; mostrato in dettaglio, usato per filtro primario e per colore marker su mappa
+    ocFinanzTotPubNetto: number | string = ''; //ocFinanzTotPubNetto: number | string; mostrato in dettaglio, usato per filtro BUDGET
 
-    ocCodProgrammaOperativo?: string; //codStatoProgetto?: any; mostrato in dettaglio, usato per filtro con autocomplete?
-    ocCodCicloProgrammazione?: number | string; //codStatoProgetto?: string;  mostrato in dettaglio, usato per filtro secondario con chips
+    ocCodProgrammaOperativo?: string = ''; //codStatoProgetto?: any; mostrato in dettaglio, usato per filtro con autocomplete?
+    ocCodCicloProgrammazione?: number | string = ''; //codStatoProgetto?: string;  mostrato in dettaglio, usato per filtro secondario con chips
     link?: string; //ocLink?: string; usato in dettaglio per linkare alla pagina del report
 
-    lat: number;
-    long: number;
+    lat?: number;
+    long?: number;
 
-    hasReport: boolean = false;
-    reports: Array<Report>
+    hasReport?: boolean = false;
+    reports?: Array<Report>
 
     //attributi funzionali all'app:
     distanza: number = Infinity;

@@ -11,7 +11,6 @@ import moment from 'moment';
 import { Observer } from 'rxjs';
 import { CicloProgrammazione } from 'src/app/model/cicloProgrammazione/cicloProgrammazione.interface';
 import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
-import { Progetto } from 'src/app/model/progetto/progetto';
 import { ProgrammaOperativo } from 'src/app/model/programmaOperativo/programmaOperativo.interface';
 import { Report } from 'src/app/model/report/report';
 import { Tema } from 'src/app/model/tema/tema.interface';
@@ -66,7 +65,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     public temi: Array<Tema> = [];
 
     reportsCrossFilter: any;
-    reportSelezionato: any = {};
+    reportSelezionato: Report = new Report();
     visualizzaDettaglio: boolean = false;
 
     ordinamentoPanelOpenState: boolean = false;
@@ -194,8 +193,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         return this.reports.filter(r => r.matches);
     }
     private setTemiAttivi() {
-        this.temi.map(tema => {
-            tema.isActive = lodash.some(this.reports, r => r.ocCodTemaSintetico == tema.ocCodTemaSintetico);
+        this.temi.map((tema:Tema) => {
+            tema.isActive = lodash.some(this.reports, (r:Report) => r.ocCodTemaSintetico == tema.ocCodTemaSintetico);
             tema.isSelected = lodash.some(this.getReports(), r => r.ocCodTemaSintetico == tema.ocCodTemaSintetico);
         });
     }
@@ -284,25 +283,25 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
             });
     }
-    onDettaglioReportHandleClick(progetto: Progetto = undefined) {
+    onDettaglioReportHandleClick(report: Report = undefined) {
         this.hideDettaglioReport();
-        if (!lodash.isNil(progetto)) {
-            this.reportMap.highlightById([progetto.uid]);
+        if (!lodash.isNil(report)) {
+            this.reportMap.highlightById([report.uid]);
         }
     };
 
-    evidenziaReportInLista(progetto: Progetto) {
-        if (!lodash.isNil(progetto)) {
+    evidenziaReportInLista(report: Report) {
+        if (!lodash.isNil(report)) {
             if (!this.espandiListaRisultati) {
                 this.espandiListaRisultati = true;
             }
             //FIXME
-            this.reportSelezionato = progetto;
-            let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === progetto.uid);
+            this.reportSelezionato = report;
+            let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === report.uid);
             this.listaRisultati.scrollToIndex(indexRisultato);
         } else {
             if (!this.visualizzaDettaglio) {
-                this.reportSelezionato = {};
+                this.reportSelezionato = undefined;
             }
         }
 
@@ -379,7 +378,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         let chartContainer = (this.pagamentiChartContainer as any).nativeElement;
         let chartW = chartContainer.getBoundingClientRect().width
         let scale = d3.scaleLinear([0, chartW]);
-        scale.domain([0, this.reportSelezionato.ocFinanzTotPubNetto]);
+        scale.domain([0, +this.reportSelezionato.ocFinanzTotPubNetto]);
         d3.select('.monithon-pagamenti-chart').remove();
         this.pagamentiChart = d3.select(chartContainer).append('svg');
         this.pagamentiChart
@@ -773,8 +772,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
 
 
-    public iniziaMonitoraggioClicked(progetto: Progetto) {
-        window.open("https://it.monithon.eu/report/create?pfurl=" + encodeURI(progetto.ocLink), "_blank");
+    public iniziaMonitoraggioClicked(report: Report) {
+        window.open("https://it.monithon.eu/report/create?pfurl=" + encodeURI(report.link), "_blank");
     }
 
     public onCriterioSelezionatoClick(criterio: string) {

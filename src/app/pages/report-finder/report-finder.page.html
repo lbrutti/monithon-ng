@@ -35,10 +35,9 @@
                 <ion-icon (click)="onDettaglioReportHandleClick()"></ion-icon>
             </div>
             <div #dettagliProgetto class="monithon-dettaglio-progetto__dettagli_container">
-
                 <ion-grid>
-                    <ion-row class="monithon-dettaglio-progetto__row">
-                        <ion-col col-6
+                    <ion-row>
+                        <ion-col size="6"
                             class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__col__titolo ">
                             <div class="monithon-dettaglio-progetto__titolo_container">
                                 <h4 class="monithon-dettaglio-progetto__titolo monithon-titolo-singolo-progetto ">
@@ -47,8 +46,20 @@
                                     unescape | capitalize}}
                                 </h4>
                             </div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="monithon-dettaglio-progetto__row">
+                        <ion-col col-6
+                            class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__col__titolo ">
+                            <!-- <div class="monithon-dettaglio-progetto__titolo_container">
+                                <h4 class="monithon-dettaglio-progetto__titolo monithon-titolo-singolo-progetto ">
+                                    {{reportSelezionato.titolo |
+                                    fixencodedchars |
+                                    unescape | capitalize}}
+                                </h4>
+                            </div> -->
                             <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
-                                <div>{{reportSelezionato.sintesiReport | fixencodedchars | unescape | capitalize}}
+                                <div>{{reportSelezionato.sintesi | fixencodedchars | unescape | capitalize}}
                                 </div>
                                 <div class="monithon-dettaglio-progetto__sintesi__oc_link">
                                     <a href="{{reportSelezionato.link}}" target="_blank">→ {{'readmore' | transloco
@@ -61,42 +72,23 @@
                         <ion-col col-6 class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli">
                             <div class="monithon-dettaglio-progetto__data_inizio">
                                 <ion-label class="monithon-dettaglio-progetto__label monithon-titolo-sezione">
-                                    {{'dataInizio' | transloco}}
+                                    {{'dataInserimento' | transloco}}
                                 </ion-label>
                                 <ion-label class="monithon-dettaglio-progetto__data_inizio">
                                     {{reportSelezionato.dataInserimento | momentdate:'YYYYMMDD' |
                                     date:'MMMM y':'+0100': 'it'}}</ion-label>
                             </div>
 
-                            <div class="monithon-dettaglio-progetto__categoria">
+
+                            <div class="monithon-dettaglio-progetto__tema">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
-                                    {{'categoria' | transloco}}
+                                    {{'codGiudizioSintetico'
+                                    | transloco}}</ion-label>
+                                <ion-label class="monithon-dettaglio-progetto__tema__progetto">
+                                    {{'report.giudizioSintetico.'+reportSelezionato.codGiudizioSintetico| transloco}}
                                 </ion-label>
-
-                                <mat-expansion-panel hideToggle="true"
-                                    [attr.data-cod-giudizio-sintetico]="reportSelezionato.codGiudizioSintetico"
-                                    class="monithon-dettaglio-progetto__lista__categorie mat-elevation-z"
-                                    [ngClass]="{'inactive': getCategorieTail().length==1}">
-                                    <mat-expansion-panel-header
-                                        class="monithon-dettaglio-progetto__lista__categorie__header"
-                                        [ngClass]="{'monithon-dettaglio-progetto__unica__categoria': getCategorieTail().length==0}">
-                                        <ion-label
-                                            class="monithon-dettaglio-progetto__categoria__singola monithon-dettaglio-progetto__prima__categoria">
-                                            {{'categorie.'+getCategorieHead() |transloco }}
-                                        </ion-label>
-                                        <ion-label
-                                            class="monithon-dettaglio-progetto__categoria__singola monithon-dettaglio-progetto__arrow"
-                                            *ngIf="getCategorieTail().length>1"> ↓ </ion-label>
-
-                                    </mat-expansion-panel-header>
-                                    <div *ngFor="let categoria of getCategorieTail()">
-                                        <ion-label class="monithon-dettaglio-progetto__categoria__singola">
-                                            {{'categorie.'+categoria | transloco}}
-                                        </ion-label>
-                                    </div>
-                                </mat-expansion-panel>
-
                             </div>
+
 
                             <div class="monithon-dettaglio-progetto__tema">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">{{'tema'
@@ -106,27 +98,32 @@
                                 </ion-label>
                             </div>
 
-                            <div class="monithon-dettaglio-progetto__finanziamento">
-                                <div class="monithon-label-container">
-                                    <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
-                                        {{'finanziamento' |
-                                        transloco}}:
-                                    </ion-label>
-                                    <ion-label
-                                        class="monithon-dettaglio-progetto__label monithon-dettaglio-progetto__finanziamento  monithon-titolo-sezione">
-                                        {{reportSelezionato.ocFinanzTotPubNetto | currency:'EUR' }}
-                                    </ion-label>
-                                </div>
-                                <div #pagamentiChartContainer></div>
+                            <!-- ricever label da servizio -->
+                            <div class="monithon-dettaglio-progetto__tema">
+                                <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
+                                    {{'programmaOperativo'
+                                    | transloco}}</ion-label>
+                                <ion-label class="monithon-dettaglio-progetto__tema__progetto">
+                                    {{'temi.'+reportSelezionato.ocCodProgrammaOperativo | transloco}}
+                                </ion-label>
+                            </div>
+
+
+                            <div class="monithon-dettaglio-progetto__tema">
+                                <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
+                                    {{'finanziamento' | transloco}}:</ion-label>
+                                <ion-label class="monithon-dettaglio-progetto__tema__progetto">
+                                    {{reportSelezionato.ocFinanzTotPubNetto | currency:'EUR' }}
+                                </ion-label>
                             </div>
 
                             <div id="flagProgetto">
                                 <ion-grid class="ion-no-padding">
                                     <ion-row class="monithon-filtri-secondari ion-no-margin ">
-                                        <ion-col size="6" class="ion-no-margin ">
+                                        <ion-col size="12" class="ion-no-margin ">
                                             <ion-label
                                                 class="chart-title monithon-dettaglio-progetto__label  monithon-titolo-sezione">
-                                                {{'statoAvanzamento' |transloco}}</ion-label>
+                                                {{'cicloProgrammazione' |transloco}}</ion-label>
                                             <mat-chip-list class="monithon-dettaglio-progetto__stato-avanzamento"
                                                 multiple="true" aria-orientation="horizontal">
                                                 <mat-chip class="monithon-dettaglio-progetto__stato-avanzamento"
@@ -138,32 +135,16 @@
                                                 </mat-chip>
                                             </mat-chip-list>
                                         </ion-col>
-                                        <ion-col size="6"
-                                            class="ion-no-margin monithon-dettaglio-progetto__flag_report">
-                                            <ion-label
-                                                class="chart-title monithon-dettaglio-progetto__label  monithon-titolo-sezione"
-                                                monithon-dettaglio-progetto__label>{{'monitorati' |transloco}}
-                                            </ion-label>
-                                            <mat-chip-list class="monithon-dettaglio-progetto__has-report"
-                                                multiple="false" aria-orientation="horizontal">
-                                                <mat-chip class="monithon-dettaglio-progetto__has-report"
-                                                    selectable="false" *ngFor="let tema of this.temi"
-                                                    [selected]="reportSelezionato.ocCodTemaSintetico==tema.ocCodTemaSintetico"
-                                                    [attr.data-tema-sintetico]="tema.ocCodTemaSintetico"
-                                                    disableRipple="true">
-                                                    {{tema.descTemaSintetico}}
-                                                </mat-chip>
-                                            </mat-chip-list>
-                                        </ion-col>
+
                                     </ion-row>
                                 </ion-grid>
                             </div>
-                            <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
+                            <!-- <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
                                 <button (click)="iniziaMonitoraggioClicked(reportSelezionato)"
                                     class="monithon-dettaglio-progetto__inizia_monitoraggio__button monithon-titolo-sezione"
                                     mat-button color="primary">{{'iniziaMonitoraggio' | transloco}}
                                 </button>
-                            </div>
+                            </div> -->
                         </ion-col>
 
                     </ion-row>
