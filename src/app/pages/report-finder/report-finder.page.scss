@@ -2,6 +2,9 @@
 @import '../../../theme/cssvar.scss';
 @import '../home/home.page.scss';
 
+html {
+    --ion-backdrop-color: #040a0c;
+}
 
 #temaSinteticoContainer {
     width: 100%;

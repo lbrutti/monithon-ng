@@ -76,7 +76,13 @@
 
 ion-content {
     background: var(--monithon-tema-sfondo-charts) !important;
+
+    &.monithon-report-finder {
+        background: var(--monithon-loader-report-background) !important;
+    }
 }
+
+
 
 #container.visible,
 #navigationControl.visible {
@@ -127,6 +133,13 @@ ion-content {
     }
 }
 
+.monithon-loader-report {
+    --ion-backdrop-color: var(--monithon-loader-report-background);
+}
+
+.monithon-loaded-report {
+    @extend .monithon-loader;
+}
 
 
 .mat-expansion-indicator {

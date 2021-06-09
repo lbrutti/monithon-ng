@@ -112,7 +112,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
         let loaderOptions = {
             message: "",
-            cssClass: 'monithon-loader',
+            cssClass: 'monithon-loader monithon-loader-report',
             spinner: null
 
         };
