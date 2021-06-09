@@ -23,12 +23,16 @@
     color: $dark-blue;
 }
 
-.monithon-tema {
+.monithon-tema,
+.monithon-giudizio {
     font-family: $font1;
     font-size: 14px;
     font-style: normal;
     font-weight: normal;
     color: $dark-blue;
+}
+.monithon-giudizio{
+    font-size: 12px;
 }
 
 .monithon-categoria {
