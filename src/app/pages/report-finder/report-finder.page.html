@@ -156,7 +156,7 @@
             <div id="filterContainer">
                 <!-- Giudizi sintetici -->
                 <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true">
-                    <mat-chip [ngClass]="{'monithon-categoria': true}" *ngFor="let giudizio of this.giudiziSintetici"
+                    <mat-chip class='monithon-giudizio' *ngFor="let giudizio of this.giudiziSintetici"
                         [selected]="giudizio.isSelected" [selectable]="giudizio.isActive"
                         [attr.data-active]="giudizio.isActive" (click)="this.filtraPerGiudizio(giudizio)"
                         [attr.data-cod-giudizio-sintetico]="giudizio.codGiudizioSintetico" disableRipple="true">

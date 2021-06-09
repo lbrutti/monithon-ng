@@ -97,6 +97,7 @@
 
 .mat-chip.monithon-tema,
 .mat-chip.monithon-categoria,
+.mat-chip.monithon-giudizio,
 .mat-chip.monithon-filtro-stato-avanzamento,
 .mat-chip.monithon-filtro-report {
 
@@ -106,21 +107,22 @@
         &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
             color: cssvar(monithon-giudizio, $codGiudizioSintetico, background) !important;
             border-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
+            border-width: 1px;
+            border-style: solid;
         }
-    }
-
-    &[data-tema-sintetico] {
-        //width: 5rem; //FIXME: provvisorio per test
     }
 
     // stati e flag report
     &[data-oc-cod-stato-progetto],
     &[data-tema-sintetico] {
         background-color: transparent;
-        color: var(--monithon-filtro-secondario-unselected-color);
-        border-color: var(--monithon-filtro-secondario-unselected-color);
+        color: var(--monithon-filtro-secondario-unselected-color-report);
+        border-color: var(--monithon-filtro-secondario-unselected-color-report);
     }
 
+    &[data-cod-giudizio-sintetico] {
+        background-color: transparent;
+    }
 
     &.mat-chip-selected {
         color: var(--monithon-tema-color) !important;
