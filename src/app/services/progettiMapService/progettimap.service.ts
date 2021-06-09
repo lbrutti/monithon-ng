@@ -66,14 +66,14 @@ export class ProgettiMapService {
             attributionControl: false
         });
 
-        let gecoderPlaceholder = this.isFreeMode ? 'gecoderPlaceholder' : 'gecoderPlaceholderWizard';
+        let geocoderPlaceholder = this.isFreeMode ? 'geocoderPlaceholder' : 'geocoderPlaceholderWizard';
         let geocoderOptions = {
             accessToken: mapboxgl.accessToken,
             mapboxgl: mapboxgl,
             countries: 'it',
             minLength: 3,
             language: 'it',
-            placeholder: this.translocoService.translate(gecoderPlaceholder),
+            placeholder: this.translocoService.translate(geocoderPlaceholder),
             types: 'place,locality',
             enableEventLogging: false,
             trackProximity: false,
