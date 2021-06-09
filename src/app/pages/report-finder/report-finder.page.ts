@@ -12,7 +12,7 @@ import { Observer } from 'rxjs';
 import { CicloProgrammazione } from 'src/app/model/cicloProgrammazione/cicloProgrammazione.interface';
 import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
 import { ProgrammaOperativo } from 'src/app/model/programmaOperativo/programmaOperativo.interface';
-import { Report } from 'src/app/model/report/report';
+import { Report, ReportNullo } from 'src/app/model/report/report';
 import { Tema } from 'src/app/model/tema/tema.interface';
 import { MonithonApiService } from 'src/app/services/monithonApiService/monithon-api.service';
 import { ReportMapService } from 'src/app/services/reportMapService/reportmap.service';
@@ -157,9 +157,9 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         };
 
         let projectSelectionObserver: Observer<any> = {
-            next: progetto => {
-                this.onDettaglioReportHandleClick(progetto);
-                this.evidenziaReportInLista(progetto);
+            next: report => {
+                this.onDettaglioReportHandleClick(report);
+                this.evidenziaReportInLista(report);
             },
             error: err => console.error('subscribeReportSelection error: ', err),
             complete: () => console.log('subscribeReportSelection complete: ')
@@ -298,7 +298,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             this.listaRisultati.scrollToIndex(indexRisultato);
         } else {
             if (!this.visualizzaDettaglio) {
-                this.reportSelezionato = undefined;
+                this.reportSelezionato = ReportNullo;
             }
         }
 

@@ -62,3 +62,5 @@ export class Report {
         }
     }
 }
+
+export const ReportNullo: Report = new Report();
