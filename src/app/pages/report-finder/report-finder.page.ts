@@ -295,8 +295,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             if (!this.espandiListaRisultati) {
                 this.espandiListaRisultati = true;
             }
-            //FIXME
-            this.reportSelezionato = report;
+            this.reportSelezionato = new Report(report);
             let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === report.uid);
             this.listaRisultati.scrollToIndex(indexRisultato);
         } else {
