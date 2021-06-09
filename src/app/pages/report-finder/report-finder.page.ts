@@ -42,8 +42,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     @ViewChild('listaProgetti', { read: ElementRef }) listaProgetti: ElementRef;
     @ViewChild('dettaglioProgetto') dettaglioProgetto: ElementRef;
     @ViewChild('dettaglioProgettoContainer') dettaglioProgettoContainer: ElementRef;
-    @ViewChild('finanziamentoPubblicoChartContainer') finanziamentoPubblicoChartContainer: HTMLElement;
-    @ViewChild('pagamentiChartContainer') pagamentiChartContainer: HTMLElement;
     @ViewChild('listaRisultati') listaRisultati: CdkVirtualScrollViewport;
 
 
@@ -320,7 +318,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                             this.reportSelezionato.cicloProgrammazione = lodash.find(this.cicliProgrammazione, (c: CicloProgrammazione) => c.ocCodCicloProgrammazione == this.reportSelezionato.ocCodCicloProgrammazione);
                             this.visualizzaDettaglio = true;
                             this.reportMap.easeToReport(dettaglioBoundingRect, this.reportSelezionato, this.visualizzaDettaglio);
-                            this.renderDettaglioProgettoCharts();
                         } else {
                             this.hideDettaglioReport()
                             this.reportMap.highlightById([]);
@@ -337,112 +334,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     }
 
-    private renderDettaglioProgettoCharts() {
-        this.renderPagamentiChart();
-    }
 
-    renderFinanziamentoChart() {
-        // render chart finanziamento/spesa
-        d3.select('.monithon-finanziamenti-chart').remove();
-        let chartContainer = (this.finanziamentoPubblicoChartContainer as any).nativeElement;
-        let chartW = chartContainer.getBoundingClientRect().width;
-        this.finanziamentoPubblicoChart = d3.select(chartContainer).append('svg');
-        this.finanziamentoPubblicoChart
-            .attr('width', null)
-            .attr('height', null)
-            .attr('viewBox', `0 0 ${chartW} 56`)
-            .attr('class', 'monithon-finanziamenti-chart');
-
-        let chartG = this.finanziamentoPubblicoChart.append('g');
-
-        chartG.append('rect')
-            .attr('width', chartW)
-            .attr('height', '56')
-            .attr('class', 'foreground')
-        chartG.selectAll('text.finanziamento').remove();
-
-        chartG.selectAll('text.finanziamento')
-            .data([this.reportSelezionato])
-            .enter()
-            .append('text')
-            .attr('class', 'finanziamento')
-            .attr('x', chartW)
-            .attr('y', '56')
-            .attr('text-anchor', 'end')
-            .attr('dx', '-3')
-            .attr('dy', '-3')
-            .text(d => this.currencyPipe.transform(d.ocFinanzTotPubNetto, 'EUR'))
-            .attr('data-oc-cod-tema-sintetico', d => d.ocCodTemaSintetico)
-    }
-
-    renderPagamentiChart() {
-        let chartContainer = (this.pagamentiChartContainer as any).nativeElement;
-        let chartW = chartContainer.getBoundingClientRect().width
-        let scale = d3.scaleLinear([0, chartW]);
-        scale.domain([0, +this.reportSelezionato.ocFinanzTotPubNetto]);
-        d3.select('.monithon-pagamenti-chart').remove();
-        this.pagamentiChart = d3.select(chartContainer).append('svg');
-        this.pagamentiChart
-            .attr('width', chartW)
-            .attr('height', '56')
-            //  .attr('viewBox', `0 0 ${chartW} 56`)
-            .attr('class', 'monithon-pagamenti-chart');
-
-        let chartG = this.pagamentiChart.append('g');
-        chartG.append('rect')
-            .data([this.reportSelezionato])
-            .attr('width', `${chartW}`)
-            .attr('height', '56')
-            .attr('class', 'background')
-
-            .attr('fill', 'grey');
-        chartG.append('rect')
-            .data([this.reportSelezionato])
-            .attr('width', d => scale(d.totPagamenti))
-            .attr('height', '56')
-            .attr('class', 'foreground');
-        chartG.selectAll('text.pagamenti-label')
-            .data([this.reportSelezionato])
-            .enter()
-            .append('text')
-            .attr('class', 'pagamenti-label')
-            .attr('data-oc-cod-tema-sintetico', d => d.ocCodTemaSintetico)
-            .attr('x', d => scale(d.totPagamenti))
-            .attr('y', '28')
-            .attr('text-anchor', d => {
-                let position = scale(d.totPagamenti);
-                return position < 120 ? 'start' : 'end';
-            })
-            .attr('dy', '-7')
-            .attr('dx', d => {
-                let position = scale(d.totPagamenti);
-                return position < 120 ? '7' : '-7';
-            })
-            .text(d => {
-                return this.translocoService.translate('pagamenti');
-            });
-        chartG.selectAll('text.pagamenti')
-            .data([this.reportSelezionato])
-            .enter()
-            .append('text')
-            .attr('class', 'pagamenti')
-            .attr('data-oc-cod-tema-sintetico', d => d.ocCodTemaSintetico)
-            .attr('x', d => scale(d.totPagamenti))
-            .attr('y', '56')
-            .attr('text-anchor', d => {
-                let position = scale(d.totPagamenti);
-                return position < 120 ? 'start' : 'end';
-            })
-            .attr('dy', '-15')
-            .attr('dx', d => {
-                let position = scale(d.totPagamenti);
-                return position < 120 ? '7' : '-7';
-            })
-            .text(d => {
-                let pagamento = lodash.isNil(d.totPagamenti) ? 0 : d.totPagamenti;
-                return this.currencyPipe.transform(pagamento, 'EUR');
-            });
-    }
 
 
 

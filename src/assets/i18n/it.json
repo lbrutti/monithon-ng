@@ -137,6 +137,16 @@
         },
         "cercaPerTitolo": "Cerca tra i risultati"
     },
-    "codGiudizioSintetico":"Giudizio sintetico",
-    "dataInserimento":"Data"
+    "codGiudizioSintetico": "Giudizio sintetico",
+    "dataInserimento": "Data",
+    "report.readmore": "leggi il report su Monithon",
+    "report.giudizioSintetico.": "Giudizio sintetico",
+    "report.temaSintetico.": "Tema",
+    "programmaOperativo": "Programma operativo",
+    "report.monithonFiltriTitle": "????? come si chiama questa sezione? ",
+    "report.programmiOperativi": "Programmi operativi",
+    "report.programmiOperativiPlaceholder": "inserisci il nome o il codice del programma",
+    "report.programmiOperativiSearchText": "",
+    "cicloProgrammazione": "Ciclo di programmazione",
+    "reportResultContainerTitle": "Report"
 }
