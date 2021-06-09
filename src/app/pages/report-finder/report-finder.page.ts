@@ -193,8 +193,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         return this.reports.filter(r => r.matches);
     }
     private setTemiAttivi() {
-        this.temi.map((tema:Tema) => {
-            tema.isActive = lodash.some(this.reports, (r:Report) => r.ocCodTemaSintetico == tema.ocCodTemaSintetico);
+        this.temi.map((tema: Tema) => {
+            tema.isActive = lodash.some(this.reports, (r: Report) => r.ocCodTemaSintetico == tema.ocCodTemaSintetico);
             tema.isSelected = lodash.some(this.getReports(), r => r.ocCodTemaSintetico == tema.ocCodTemaSintetico);
         });
     }
@@ -313,10 +313,12 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         if (!lodash.isNil(report)) {
             this.monithonApiService.getDettaglioReport(report.uid)
                 .subscribe({
-                    next: dettaglioReport => {
+                    next: (dettaglioReport: Report) => {
                         let dettaglioBoundingRect = this.dettaglioProgetto.nativeElement.getBoundingClientRect();
                         if (dettaglioReport) {
                             this.reportSelezionato = dettaglioReport;
+                            this.reportSelezionato.programmaOperativo = lodash.find(this.programmiOperativi, (p: ProgrammaOperativo) => p.ocCodProgrammaOperativo == this.reportSelezionato.ocCodProgrammaOperativo);
+                            this.reportSelezionato.cicloProgrammazione = lodash.find(this.cicliProgrammazione, (c: CicloProgrammazione) => c.ocCodCicloProgrammazione == this.reportSelezionato.ocCodCicloProgrammazione);
                             this.visualizzaDettaglio = true;
                             this.reportMap.easeToReport(dettaglioBoundingRect, this.reportSelezionato, this.visualizzaDettaglio);
                             this.renderDettaglioProgettoCharts();

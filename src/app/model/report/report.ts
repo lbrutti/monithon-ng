@@ -8,6 +8,9 @@ ciclo di programmazione: al posto di stato progetto
 ricerca libera su titolo del report: TODO verificare...
 */
 
+import { CicloProgrammazione, CicloProgrammazioneNullo } from "../cicloProgrammazione/cicloProgrammazione.interface";
+import { ProgrammaOperativo, ProgrammaOperativoNullo } from "../programmaOperativo/programmaOperativo.interface";
+
 
 export class Report {
     uid: string = '';
@@ -34,4 +37,28 @@ export class Report {
     isWithinRange: boolean = false;
     isSelected: boolean = false;
     isHighlighted?: boolean;
+
+    programmaOperativo?: ProgrammaOperativo = ProgrammaOperativoNullo;
+    cicloProgrammazione?: CicloProgrammazione = CicloProgrammazioneNullo;
+
+    constructor(reportData?: Report) {
+        if (reportData) {
+            this.uid = reportData.uid;
+            this.titolo = reportData.titolo;
+            this.sintesi = reportData.sintesi;
+            this.dataInserimento = reportData.dataInserimento;
+            this.ocCodTemaSintetico = reportData.ocCodTemaSintetico;
+            this.codGiudizioSintetico = reportData.codGiudizioSintetico;
+            this.ocFinanzTotPubNetto = reportData.ocFinanzTotPubNetto;
+            this.ocCodProgrammaOperativo = reportData.ocCodProgrammaOperativo;
+            this.ocCodCicloProgrammazione = reportData.ocCodCicloProgrammazione;
+            this.link = reportData.link;
+            this.lat = reportData.lat;
+            this.long = reportData.long;
+            this.distanza = reportData.distanza;
+            this.isWithinRange = reportData.isWithinRange;
+            this.isSelected = reportData.isSelected;
+            this.isHighlighted = reportData.isHighlighted;
+        }
+    }
 }

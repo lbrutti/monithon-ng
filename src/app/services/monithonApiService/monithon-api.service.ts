@@ -133,7 +133,7 @@ export class MonithonApiService {
      * getDettaglioReport
      */
     public getDettaglioReport(uid: string | number) {
-        let report: Report = lodash.find(listaDettagli, { uid: uid });
+        let report: Report = new Report(lodash.find(listaDettagli, { uid: uid }));
         return of(report);
     }
 

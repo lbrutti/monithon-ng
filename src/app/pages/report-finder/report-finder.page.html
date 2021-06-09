@@ -62,7 +62,8 @@
                                 <div>{{reportSelezionato.sintesi | fixencodedchars | unescape | capitalize}}
                                 </div>
                                 <div class="monithon-dettaglio-progetto__sintesi__oc_link">
-                                    <a href="{{reportSelezionato.link}}" target="_blank">→ {{'readmore' | transloco
+                                    <a href="{{reportSelezionato.link}}" target="_blank">→ {{'report.readmore' |
+                                        transloco
                                         }}</a>
                                 </div>
                             </div>
@@ -94,7 +95,7 @@
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">{{'tema'
                                     | transloco}}</ion-label>
                                 <ion-label class="monithon-dettaglio-progetto__tema__progetto">
-                                    {{'temi.'+reportSelezionato.ocCodTemaSintetico | transloco}}
+                                    {{'report.temaSintetico.'+reportSelezionato.ocCodTemaSintetico | transloco}}
                                 </ion-label>
                             </div>
 
@@ -104,7 +105,7 @@
                                     {{'programmaOperativo'
                                     | transloco}}</ion-label>
                                 <ion-label class="monithon-dettaglio-progetto__tema__progetto">
-                                    {{'temi.'+reportSelezionato.ocCodProgrammaOperativo | transloco}}
+                                    {{reportSelezionato.programmaOperativo.descProgrammaOperativo}}
                                 </ion-label>
                             </div>
 
@@ -131,7 +132,7 @@
                                                     [selected]="reportSelezionato.ocCodCicloProgrammazione==ciclo.ocCodCicloProgrammazione"
                                                     [attr.data-oc-cod-stato-progetto]="ciclo.ocCodCicloProgrammazione"
                                                     disableRipple="true">
-                                                    {{'statiAvanzamento.'+ciclo.ocCodCicloProgrammazione | transloco}}
+                                                    {{ciclo.descCicloProgrammazione}}
                                                 </mat-chip>
                                             </mat-chip-list>
                                         </ion-col>
