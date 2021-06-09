@@ -36,6 +36,7 @@
             </div>
             <div #dettagliProgetto class="monithon-dettaglio-progetto__dettagli_container">
                 <ion-grid>
+                    <!-- titolo -->
                     <ion-row>
                         <ion-col size="6"
                             class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__col__titolo ">
@@ -48,16 +49,11 @@
                             </div>
                         </ion-col>
                     </ion-row>
+                    <!-- info accessorie -->
                     <ion-row class="monithon-dettaglio-progetto__row">
+                        <!-- sintesi e link -->
                         <ion-col col-6
                             class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__col__titolo ">
-                            <!-- <div class="monithon-dettaglio-progetto__titolo_container">
-                                <h4 class="monithon-dettaglio-progetto__titolo monithon-titolo-singolo-progetto ">
-                                    {{reportSelezionato.titolo |
-                                    fixencodedchars |
-                                    unescape | capitalize}}
-                                </h4>
-                            </div> -->
                             <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
                                 <div>{{reportSelezionato.sintesi | fixencodedchars | unescape | capitalize}}
                                 </div>
@@ -70,8 +66,9 @@
 
 
                         </ion-col>
-                        <ion-col col-6 class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli">
-                            <div class="monithon-dettaglio-progetto__data_inizio">
+                        <!-- dettagli -->
+                        <ion-col col-6 class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli monithon-dettaglio-report__dettagli">
+                            <div class="monithon-dettaglio-progetto__data_inizio monithon_dettaglio_report_info">
                                 <ion-label class="monithon-dettaglio-progetto__label monithon-titolo-sezione">
                                     {{'dataInserimento' | transloco}}
                                 </ion-label>
@@ -81,7 +78,7 @@
                             </div>
 
 
-                            <div class="monithon-dettaglio-progetto__tema">
+                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                     {{'codGiudizioSintetico'
                                     | transloco}}</ion-label>
@@ -91,7 +88,7 @@
                             </div>
 
 
-                            <div class="monithon-dettaglio-progetto__tema">
+                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">{{'tema'
                                     | transloco}}</ion-label>
                                 <ion-label class="monithon-dettaglio-progetto__tema__progetto">
@@ -100,7 +97,7 @@
                             </div>
 
                             <!-- ricever label da servizio -->
-                            <div class="monithon-dettaglio-progetto__tema">
+                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                     {{'programmaOperativo'
                                     | transloco}}</ion-label>
@@ -110,7 +107,7 @@
                             </div>
 
 
-                            <div class="monithon-dettaglio-progetto__tema">
+                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                     {{'finanziamento' | transloco}}:</ion-label>
                                 <ion-label class="monithon-dettaglio-progetto__tema__progetto">
@@ -118,7 +115,7 @@
                                 </ion-label>
                             </div>
 
-                            <div id="flagProgetto">
+                            <div id="flagProgetto monithon_dettaglio_report_info">
                                 <ion-grid class="ion-no-padding">
                                     <ion-row class="monithon-filtri-secondari ion-no-margin ">
                                         <ion-col size="12" class="ion-no-margin ">

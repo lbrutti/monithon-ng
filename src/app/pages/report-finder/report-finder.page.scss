@@ -48,6 +48,28 @@
         width: auto;
     }
 
+    .monithon-dettaglio-report__dettagli {
+        justify-content: flex-start;
+
+        .monithon_dettaglio_report_info {
+            margin-bottom: 12px;
+
+        }
+
+        @media not screen and (-webkit-min-device-pixel-ratio: 2),
+        not screen and (min--moz-device-pixel-ratio: 2),
+        not screen and (-o-min-device-pixel-ratio: 2/1),
+        not screen and (min-device-pixel-ratio: 2),
+        not screen and (min-resolution: 192dpi),
+        not screen and (min-resolution: 2dppx) {
+
+            .monithon_dettaglio_report_info {
+                margin-bottom: 6px;
+
+            }
+        }
+    }
+
 
 }
 
