@@ -11,7 +11,9 @@ export const environment = {
         
         accessToken: 'pk.eyJ1IjoibGJydXR0aSIsImEiOiJjaXl5NXMxNWswMDA2MzJwZGViZDNxOG05In0.R5OZB0r3ov9HeduzarkLjw',
         style: 'mapbox://styles/lbrutti/ckioi1m7m4o0g17nrz5wydq5g/draft?optimize=true',
-        reportStyle: 'mapbox://styles/lbrutti/ckpcrsy37511318o48aiagzcz?optimize=true'
+        reportStyle: 'mapbox://styles/lbrutti/ckpcrsy37511318o48aiagzcz?optimize=true',
+        geocoderCountries:'AT BE BG CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE GB'
+
 
     },
     server: {

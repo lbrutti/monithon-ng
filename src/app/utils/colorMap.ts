@@ -24,6 +24,7 @@ export const REPORT_COLOR_MAP = {
 
         5: '#089B43',
         6: '#EA4A3E',
+        7: '#99eae2',
         'default': 'white'
     }
 };

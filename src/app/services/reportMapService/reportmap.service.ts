@@ -80,7 +80,7 @@ export class ReportMapService {
         let geocoderOptions = {
             accessToken: mapboxgl.accessToken,
             mapboxgl: mapboxgl,
-            countries: 'it',
+            countries: environment.mapbox.geocoderCountries,
             minLength: 3,
             language: 'it',
             placeholder: this.translocoService.translate(geocoderPlaceholder),

@@ -100,6 +100,7 @@
     },
     "report": {
         "temaSintetico": {
+            "-1": "Non specificato",
             "01": "Ricerca e innovazione",
             "02": "Agenda digitale",
             "03": "Competitività per le imprese",
@@ -120,7 +121,8 @@
             "3": "Procede con difficoltà",
             "4": "Bloccato",
             "5": "Concluso e utile",
-            "6": "Concluso e inefficace "
+            "6": "Concluso e inefficace",
+            "7": "Non giudicato"
         },
         "cercaPerTitolo": "Cerca tra i risultati"
     },
