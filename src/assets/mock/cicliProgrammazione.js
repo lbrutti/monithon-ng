@@ -18,7 +18,7 @@ let cicliProgrammazione = [
         "isActive": true
     },
     {
-        "ocCodCicloProgrammazione": 100,
+        "ocCodCicloProgrammazione": -1,
         "descCicloProgrammazione": "non specificato",
         "isSelected": true,
         "isActive": true

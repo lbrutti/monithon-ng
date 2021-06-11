@@ -53,7 +53,7 @@ let temiSintetici = [
     },
     {
         ocCodTemaSintetico: '-1',
-        descTemaSintetico: 'Nessun tema'
+        descTemaSintetico: 'Tema non disponibile'
     }
 ];
 

@@ -91542,8 +91542,8 @@ let mockListaReport =[
     "codGiudizioSintetico": 7,
     "ocCodTemaSintetico": "-1",
     "ocFinanzTotPubNetto": 0,
-    "ocCodProgrammaOperativo": "0",
-    "ocCodCicloProgrammazione": 100,
+    "ocCodProgrammaOperativo": "-1",
+    "ocCodCicloProgrammazione": -1,
     "lat": 50.057903,
     "long": 19.94688
   }

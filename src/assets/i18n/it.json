@@ -100,7 +100,7 @@
     },
     "report": {
         "temaSintetico": {
-            "-1": "Non specificato",
+            "-1": "Tema non disponibile",
             "01": "Ricerca e innovazione",
             "02": "Agenda digitale",
             "03": "Competitività per le imprese",
@@ -122,15 +122,15 @@
             "4": "Bloccato",
             "5": "Concluso e utile",
             "6": "Concluso e inefficace",
-            "7": "Non giudicato"
+            "7": "Nessun giudizio"
         },
         "cercaPerTitolo": "Cerca tra i risultati"
     },
     "codGiudizioSintetico": "Giudizio sintetico",
     "dataInserimento": "Data",
     "report.readmore": "leggi il report su Monithon",
-    "report.giudizioSintetico.": "Giudizio sintetico",
-    "report.temaSintetico.": "Tema",
+    "report.giudizioSintetico.undefined": "Giudizio sintetico",
+    "report.temaSintetico.undefined": "Tema",
     "programmaOperativo": "Programma operativo",
     "report.monithonFiltriTitle": "Temi e programmi ",
     "report.programmiOperativi": "Programmi operativi",

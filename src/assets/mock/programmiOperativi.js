@@ -1232,8 +1232,8 @@ let programmiOperativi = [
         "descProgrammaOperativo": "POR FESR UMBRIA"
     },
     {
-        "ocCodProgrammaOperativo": "0",
-        "descProgrammaOperativo": "NON SPECIFICATO"
+        "ocCodProgrammaOperativo": "-1",
+        "descProgrammaOperativo": "Non disponibile"
     }
 ];
 
