@@ -1230,6 +1230,10 @@ let programmiOperativi = [
     {
         "ocCodProgrammaOperativo": "2014IT16RFOP019",
         "descProgrammaOperativo": "POR FESR UMBRIA"
+    },
+    {
+        "ocCodProgrammaOperativo": "0",
+        "descProgrammaOperativo": "NON SPECIFICATO"
     }
 ];
 

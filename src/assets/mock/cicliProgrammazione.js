@@ -16,6 +16,12 @@ let cicliProgrammazione = [
         "descCicloProgrammazione": "2021-2027",
         "isSelected": true,
         "isActive": true
+    },
+    {
+        "ocCodCicloProgrammazione": 100,
+        "descCicloProgrammazione": "non specificato",
+        "isSelected": true,
+        "isActive": true
     }
 ];
 

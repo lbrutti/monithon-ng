@@ -50,6 +50,10 @@ let temiSintetici = [
     {
         ocCodTemaSintetico: '13',
         descTemaSintetico: 'Rafforzamento capacità della PA'
+    },
+    {
+        ocCodTemaSintetico: '-1',
+        descTemaSintetico: 'Nessun tema'
     }
 ];
 

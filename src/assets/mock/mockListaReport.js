@@ -91537,15 +91537,15 @@ let mockListaReport =[
   },
   {
     "uid": 7629,
-    "titolo": "AGENDA AURBANA - AZIONE 6.4.1 - EFFICIENTAMENTO ENERGETICO T&hellip;",
-    "dataInserimento": 20181001,
-    "codGiudizioSintetico": 6,
-    "ocCodTemaSintetico": "06",
-    "ocFinanzTotPubNetto": 260000,
-    "ocCodProgrammaOperativo": "FSCACTBENICONF",
-    "ocCodCicloProgrammazione": 2,
-    "lat": 42.5618876,
-    "long": 12.6475625
+    "titolo": "ESEMPIO REPORT ESTERO A CRACOVIA",
+    "dataInserimento": 0,
+    "codGiudizioSintetico": 7,
+    "ocCodTemaSintetico": "-1",
+    "ocFinanzTotPubNetto": 0,
+    "ocCodProgrammaOperativo": "0",
+    "ocCodCicloProgrammazione": 100,
+    "lat": 50.057903,
+    "long": 19.94688
   }
 ];
 export default mockListaReport;
