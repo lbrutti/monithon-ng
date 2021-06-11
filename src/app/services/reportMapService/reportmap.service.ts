@@ -196,6 +196,8 @@ export class ReportMapService {
                             REPORT_COLOR_MAP.giudiziSintetici['5'],
                             ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'codGiudizioSintetico'], 6]],
                             REPORT_COLOR_MAP.giudiziSintetici['6'],
+                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'codGiudizioSintetico'], 7]],
+                            REPORT_COLOR_MAP.giudiziSintetici['7'],
                             'transparent'
                         ],
                         'circle-stroke-color': [
@@ -216,6 +218,8 @@ export class ReportMapService {
                             REPORT_COLOR_MAP.giudiziSintetici['5'],
                             ['==', ['get', 'codGiudizioSintetico'], 6],
                             REPORT_COLOR_MAP.giudiziSintetici['6'],
+                            ['==', ['get', 'codGiudizioSintetico'], 7],
+                            REPORT_COLOR_MAP.giudiziSintetici['7'],
 
                             'transparent'
                         ],
