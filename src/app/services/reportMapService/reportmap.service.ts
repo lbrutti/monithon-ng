@@ -603,7 +603,7 @@ export class ReportMapService {
                 'visibility',
                 'none'
             );
-            this.resetFiltroDistanza();
+            this.resetFiltroDistanza(true);
             this.filtroPerRaggioEnabled = false;
         }
     }
@@ -617,9 +617,16 @@ export class ReportMapService {
 
         let reports = this.resetFiltroReport();
         this.aggiornaAttivabilitaGiudizi(true);
+        this.resetFiltroTemi();
         if (publishUpdate) {
-            this.publishUpdate(reports);
+            this.publishUpdate(reports, true, true);
         }
+    }
+    private resetFiltroTemi() {
+        this.temi.map((t: Tema) => {
+            t.isSelected = true;
+            t.isActive = true;
+        })
     }
 
     //sposta la mappa per mostrare il report  correntemente selezionato

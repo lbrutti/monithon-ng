@@ -16,6 +16,7 @@ import programmiOperativi from '../../../assets/mock/programmiOperativi';
 import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
 import listaReport from '../../../assets/mock/mockListaReport';
 import listaDettagli from '../../../assets/mock/mockDettagliReport';
+import { CicloProgrammazione } from 'src/app/model/cicloProgrammazione/cicloProgrammazione.interface';
 import { Report } from 'src/app/model/report/report';
 import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
 
@@ -132,13 +133,8 @@ export class MonithonApiService {
             .pipe(
                 map((res) => {
                     return res.map((p: Report) => {
-
                         try {
-                            p.ocCodTemaSintetico = (p.ocCodTemaSintetico > 0 && p.ocCodTemaSintetico < 10) ? '0' + p.ocCodTemaSintetico  : p.ocCodTemaSintetico;
-
-                            p.ocCodProgrammaOperativo = (+p.ocCodProgrammaOperativo > 0 && +p.ocCodProgrammaOperativo < 10) ? '0' + p.ocCodProgrammaOperativo  : p.ocCodProgrammaOperativo;
-
-                            p.dataInserimento = parseInt(''+p.dataInserimento);
+                            p.dataInserimento = parseInt('' + p.dataInserimento);
 
                             p.ocCodCicloProgrammazione = parseInt('' + p.ocCodCicloProgrammazione);
 
@@ -146,8 +142,8 @@ export class MonithonApiService {
                             console.error(p.uid);
                             console.error(error);
                         }
-                        
-                       
+
+
                         return p;
                     });
                 }),
@@ -172,39 +168,67 @@ export class MonithonApiService {
      * getProgrammiOperativi
      */
     public getProgrammiOperativi(): Observable<any> {
-        return of(programmiOperativi.map(p => {
-            p.isSelected = false;
-            p.isActive = true;
-            return p;
-        }));
+        //https://it.monithon.eu/api/reportProgrammiOperativi
+        return this.httpClient.get<Array<any>>(this.reportApiUrl + `/reportProgrammiOperativi`)
+
+        // return of(programmiOperativi.map(p => {
+        //     p.isSelected = false;
+        //     p.isActive = true;
+        //     return p;
+        // }));
     }
 
     /**
      * getCicliProgrammazione
      */
     public getCicliProgrammazione(): Observable<any> {
-        return this.httpClient.get<any>(this.reportApiUrl + `/reportProgramCycles`)
+        // return of(cicliProgrammazione);
+        return this.httpClient.get<Array<any>>(this.reportApiUrl + `/reportProgramCycles`);
 
-        return of(cicliProgrammazione);
     }
 
     /**
    * getTemiSintetici
    */
     public getTemiSintetici(): Observable<any> {
-        return of(temiSintetici);
+        //https://it.monithon.eu/api/reportTemi
+        return this.httpClient.get<any>(this.reportApiUrl + `/reportTemi`)
+
+        // return of(temiSintetici);
     }
 
     /**
      * getGiudiziSintetici
      */
     public getGiudiziSintetici(): Observable<GiudizioSintetico[]> {
-        let giudizi: GiudizioSintetico[] = giudiziSintetici.map(g => ({
-            codGiudizioSintetico: g.codGiudizioSintetico,
-            descGiudizioSintetico: g.descGiudizioSintetico,
-            isSelected: true,
-            isActive: true
-        }));
-        return of(giudizi);
+        // let giudizi: GiudizioSintetico[] = giudiziSintetici.map(g => ({
+        //     codGiudizioSintetico: g.codGiudizioSintetico,
+        //     descGiudizioSintetico: g.descGiudizioSintetico,
+        //     isSelected: true,
+        //     isActive: true
+        // }));
+
+        // return of(giudizi);
+        return this.httpClient.get<any>(this.reportApiUrl + `/reportGS`)
+            .pipe(
+                map((res) => {
+                    return res.map((g: GiudizioSintetico) => {
+
+                        try {
+                            g.isActive = true;
+                            g.isSelected = true;
+
+                        } catch (error) {
+                            console.error(g.codGiudizioSintetico);
+                            console.error(error);
+                        }
+                        return g;
+                    });
+                }),
+                catchError(e => {
+                    console.error(e);
+                    return of(e);
+                })
+            );
     }
 }
