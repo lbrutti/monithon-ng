@@ -27,10 +27,11 @@ export class MonithonApiService {
 
     private httpClient: HttpClient;
     private url = '/monithon-api';
-
+    private reportApiUrl: string;
     constructor(httpClient: HttpClient) {
         this.httpClient = httpClient;
         this.url = `${environment.server.protocol}://${environment.server.ip}/${environment.server.apiroute}`;
+        this.reportApiUrl = `${environment.reportServer.protocol}://${environment.reportServer.ip}/${environment.reportServer.apiroute}`;
 
     }
 
@@ -126,15 +127,45 @@ export class MonithonApiService {
      * getListaReport
      */
     public getListaReport(): Observable<any> {
-        return of(listaReport);
+        // return of(listaReport);
+        return this.httpClient.get<any[]>(this.reportApiUrl + '/reportList')
+            .pipe(
+                map((res) => {
+                    return res.map((p: Report) => {
+
+                        try {
+                            p.ocCodTemaSintetico = (p.ocCodTemaSintetico > 0 && p.ocCodTemaSintetico < 10) ? '0' + p.ocCodTemaSintetico  : p.ocCodTemaSintetico;
+
+                            p.ocCodProgrammaOperativo = (+p.ocCodProgrammaOperativo > 0 && +p.ocCodProgrammaOperativo < 10) ? '0' + p.ocCodProgrammaOperativo  : p.ocCodProgrammaOperativo;
+
+                            p.dataInserimento = parseInt(''+p.dataInserimento);
+
+                            p.ocCodCicloProgrammazione = parseInt('' + p.ocCodCicloProgrammazione);
+
+                        } catch (error) {
+                            console.error(p.uid);
+                            console.error(error);
+                        }
+                        
+                       
+                        return p;
+                    });
+                }),
+                catchError(e => {
+                    console.error(e);
+                    return of(e);
+                })
+            );
     }
 
     /**
      * getDettaglioReport
      */
     public getDettaglioReport(uid: string | number) {
-        let report: Report = new Report(lodash.find(listaDettagli, { uid: uid }));
-        return of(report);
+        // let report: Report = new Report(lodash.find(listaDettagli, { uid: uid }));
+        // return of(report);
+        return this.httpClient.get<any>(this.reportApiUrl + `/reportDetail/${uid}`)
+
     }
 
     /**
@@ -152,6 +183,8 @@ export class MonithonApiService {
      * getCicliProgrammazione
      */
     public getCicliProgrammazione(): Observable<any> {
+        return this.httpClient.get<any>(this.reportApiUrl + `/reportProgramCycles`)
+
         return of(cicliProgrammazione);
     }
 

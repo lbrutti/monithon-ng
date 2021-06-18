@@ -22,5 +22,11 @@ export const environment = {
         port: "80",
         apiroute: "api"
     },
+    reportServer: {
+        protocol: "https",
+        ip: "it.monithon.eu",
+        port: "80",
+        apiroute: "api"
+    },
     version: version
 };
