@@ -9,14 +9,14 @@ import { Tema } from 'src/app/model/tema/tema.interface';
 import { Categoria } from 'src/app/model/categoria/categoria.interface';
 
 
-//MOCK
-import temiSintetici from '../../../assets/mock/temiSintetici';
-import cicliProgrammazione from '../../../assets/mock/cicliProgrammazione';
-import programmiOperativi from '../../../assets/mock/programmiOperativi';
-import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
-import listaReport from '../../../assets/mock/mockListaReport';
-import listaDettagli from '../../../assets/mock/mockDettagliReport';
-import { CicloProgrammazione } from 'src/app/model/cicloProgrammazione/cicloProgrammazione.interface';
+// //MOCK
+// import temiSintetici from '../../../assets/mock/temiSintetici';
+// import cicliProgrammazione from '../../../assets/mock/cicliProgrammazione';
+// import programmiOperativi from '../../../assets/mock/programmiOperativi';
+// import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
+// import listaReport from '../../../assets/mock/mockListaReport';
+// import listaDettagli from '../../../assets/mock/mockDettagliReport';
+// import { CicloProgrammazione } from 'src/app/model/cicloProgrammazione/cicloProgrammazione.interface';
 import { Report } from 'src/app/model/report/report';
 import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
 
