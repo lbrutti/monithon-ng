@@ -1,29 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslocoService } from '@ngneat/transloco';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     constructor(
         private platform: Platform,
-        // private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private translocoService: TranslocoService,
-        private router: Router
+        private router: Router,
+        private activatedRoute: ActivatedRoute
     ) {
+
+    }
+    ngOnInit(): void {
         this.initializeApp();
     }
 
     initializeApp() {
         this.platform.ready().then(() => {
-
+            let urlParams = new URLSearchParams(window.location.search);
+            let fromDesktop = urlParams.get('desktop') == "1";
+            let destination = window.location.pathname;
+            if (destination === '/') {
+                destination = '';
+            }
             this.translocoService.setDefaultLang('it');
             this.translocoService.setActiveLang('it');
             this.statusBar.styleDefault();
@@ -37,8 +45,8 @@ export class AppComponent {
 
 
             let goodDevice = this.platform.is('desktop') || this.platform.is('tablet') || !hasTouchScreen;
-            if (!goodDevice) {
-                this.router.navigate(['/courtesy'], { skipLocationChange: true });
+            if (!fromDesktop && !goodDevice) {
+                this.router.navigate(['/courtesy', destination], { skipLocationChange: true });
             }
 
         });

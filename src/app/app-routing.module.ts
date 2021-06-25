@@ -11,6 +11,10 @@ const routes: Routes = [
         loadChildren: () => import('./pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
     },
     {
+        path: 'wizard?desktop=1',
+        loadChildren: () => import('./pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
+    },
+    {
         path: '',
         loadChildren: () => import('./pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
     },
@@ -24,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPagePageModule)
   },
   {
-    path: 'courtesy',
+    path: 'courtesy/:destination',
     loadChildren: () => import('./pages/courtesy/courtesy.module').then( m => m.CourtesyPageModule)
   },
   {

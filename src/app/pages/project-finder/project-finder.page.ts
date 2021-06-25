@@ -121,7 +121,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         public modalController: ModalController
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
-        this.isWizardMode = this.router.url == '/#wizard' || this.router.url == '/wizard';
+        this.isWizardMode = lodash.isArray(this.router.url.match(/wizard/));
 
     }
 
