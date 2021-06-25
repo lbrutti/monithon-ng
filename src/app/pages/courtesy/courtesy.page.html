@@ -8,7 +8,10 @@
         </ion-row>
         <ion-row>
             <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
-                <h3 class="monithon-about-titolo-sezione">{{'courtesy.sottotitolo' | transloco}}</h3>
+                <h3 *ngIf="mode=='projectFinder'" class="monithon-about-titolo-sezione">{{'courtesy.projectFinder.sottotitolo' |
+                    transloco}}</h3>
+                <h3 *ngIf="mode=='reportFinder'" class="monithon-about-titolo-sezione">{{'courtesy.reportFinder.sottotitolo' |
+                    transloco}}</h3>
 
                 <p class="monithon-about-credit"><a href="{{destination}}/?desktop=1" target="_self">Prosegui
                         ugualmente</a> </p>

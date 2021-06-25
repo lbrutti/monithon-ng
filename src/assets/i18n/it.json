@@ -92,27 +92,24 @@
             "titolo": "Monithon Project Finder",
             "sottotitolo": "Scopri i progetti europei sui temi dell'ambiente, dell'energia, della valorizzazione del patrimonio naturale e culturale, e della mobilità sostenibile!",
             "cosaPuoiFare": "Cosa puoi fare",
-            "metodologia": "Metodologia",
-            "credits": "Credits",
-            "design": "Design:",
-            "dataAnalysis": "Data analysis:",
-            "softwareDevelopment": "Software development:"
+            "metodologia": "Metodologia"
         },
+        "credits": "Credits",
+        "design": "Design:",
+        "dataAnalysis": "Data analysis:",
+        "softwareDevelopment": "Software development:",
         "reportFinder": {
             "htmlCosaPuoiFare": "<li>Scoprire i report di monitoraggio civico nella tua regione, città o quartiere, a ogni pallino corrisponde un report. Aogni colore corrisponde un “giudizio sintetico” da parte del gruppo civico che ha effettuato il monitoraggio.</li><li>Selezionare i report filtrando per tema, Programma Operativo, budget, anno del monitoraggio, ciclo di programmazione.</li><li>Scorrere l'elenco dei report selezionati ordinandoli per distanza, budget, giudizio sintetico e data del monitoraggio</li><li>Leggere la sintesi del progetto monitorato e accedere al vero e proprio Report di monitoraggio civico</li>",
             "titolo": "Esplora i report di monitoraggio civico di Monithon",
             "sottotitolo": "Scopri i report di monitoraggio civico sui progetti finanziati dai fondi pubblici, realizzati da studenti, comunità civiche e associazioni.",
-            "cosaPuoiFare": "Cosa puoi fare",
-            "credits": "Credits",
-            "design": "Design:",
-            "dataAnalysis": "Data analysis:",
-            "softwareDevelopment": "Software development:"
+            "cosaPuoiFare": "Cosa puoi fare"
         }
     },
     "onlyDesktopAvailable": "Project Finder è disponibile solo in per desktop",
     "courtesy": {
         "titolo": "Ci dispiace!",
-        "sottotitolo": "Project finder è consultabile solo da desktop"
+        "projectFinder.sottotitolo": "Project finder è consultabile solo da desktop",
+        "reportFinder.sottotitolo": "Report finder è consultabile solo da desktop"
     },
     "report": {
         "temaSintetico": {
@@ -152,7 +149,7 @@
     "report.programmiOperativi": "Programmi operativi",
     "report.programmiOperativiPlaceholder": "inserisci il nome o il codice del programma",
     "report.programmiOperativiSearchText": "",
-    "report.sintesiReport":"Sintesi del progetto monitorato",
+    "report.sintesiReport": "Sintesi del progetto monitorato",
     "cicloProgrammazione": "Ciclo di programmazione",
     "reportResultContainerTitle": "Report di monitoraggio civico"
 }
