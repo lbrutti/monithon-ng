@@ -84,7 +84,7 @@ export class ReportMapService {
             minLength: 3,
             language: 'it',
             placeholder: this.translocoService.translate(geocoderPlaceholder),
-            types: 'place,locality',
+            types: 'place,locality,region,district',
             enableEventLogging: false,
             trackProximity: false,
             marker: false
@@ -172,10 +172,9 @@ export class ReportMapService {
                             'base': 1.75,
                             'stops': [
                                 [0, 0],
-                                [6, 1],
-                                [8, 2],
-                                [11, 4],
-                                [12, 5]
+                                [6, 3],
+                                [8, 6],
+                                [12, 8]
                             ]
                         },
                         'circle-color': [
