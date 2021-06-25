@@ -8,7 +8,7 @@
 
 
 <ion-content [fullscreen]="true" [scrollY]="false" class="monithon-about-modal-content">
-    <ion-grid class="monithon-about-grid">
+    <ion-grid class="monithon-about-grid" *ngIf="mode == 'projectFinder'">
         <ion-row>
             <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
                 <h1 class="monithon-about-titolo">{{'about.projectFinder.titolo' | transloco}}</h1>
@@ -22,8 +22,8 @@
         <ion-row>
             <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
                 <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.cosaPuoiFare'| transloco}}</h3>
-                <ul [innerHTML]="'about.projectFinder.htmlCosaPuoiFare'|transloco">   
-                 </ul>
+                <ul [innerHTML]="'about.projectFinder.htmlCosaPuoiFare'|transloco">
+                </ul>
             </ion-col>
         </ion-row>
         <ion-row>
@@ -37,13 +37,16 @@
         <ion-row class="monithon-credits-row">
             <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-credits-container">
                 <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.credits'| transloco}}</h3>
-                <p class="monithon-about-credit">{{"about.projectFinder.design"|transloco}} <a href="https://sheldon.studio/"
-                        target="_blank">Sheldon.studio</a> </p>
+                <p class="monithon-about-credit">{{"about.projectFinder.design"|transloco}} <a
+                        href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> </p>
 
-                <p class="monithon-about-credit"> {{"about.projectFinder.dataAnalysis"|transloco}} <a href="https://www.monithon.eu" target="_blank">Team Monithon</a>
+                <p class="monithon-about-credit"> {{"about.projectFinder.dataAnalysis"|transloco}} <a
+                        href="https://www.monithon.eu" target="_blank">Team Monithon</a>
                 </p>
 
-                <p class="monithon-about-credit"> {{"about.projectFinder.softwareDevelopment"|transloco}} <a href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> & <a href="https://www.monithon.eu" target="_blank">Team Monithon</a>
+                <p class="monithon-about-credit"> {{"about.projectFinder.softwareDevelopment"|transloco}} <a
+                        href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> & <a
+                        href="https://www.monithon.eu" target="_blank">Team Monithon</a>
                 </p>
 
 
@@ -58,8 +61,70 @@
         </ion-row>
 
         <ion-row class="monithon-colophon-row monithon-app-info-row">
-            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container monithon-app-info-container">
-                <div class="monithon-about-version-number">Project Finder - v.{{version}}</div>        
+            <ion-col size-md="4" size-sm="6"
+                class="monithon-about-col monithon-colophon-container monithon-app-info-container">
+                <div class="monithon-about-version-number">Project Finder - v.{{version}}</div>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+    <ion-grid class="monithon-about-grid" *ngIf="mode == 'reportFinder'">
+        <ion-row>
+            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
+                <h1 class="monithon-about-titolo">{{'about.reportFinder.titolo' | transloco}}</h1>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
+                <h3 class="monithon-about-titolo-sezione">{{'about.reportFinder.sottotitolo' | transloco}}</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
+                <h3 class="monithon-about-titolo-sezione">{{'about.reportFinder.cosaPuoiFare'| transloco}}</h3>
+                <ul [innerHTML]="'about.reportFinder.htmlCosaPuoiFare'|transloco">
+                </ul>
+            </ion-col>
+        </ion-row>
+        <!-- <ion-row>
+            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
+                <h3 class="monithon-about-titolo-sezione">{{'about.reportFinder.metodologia'| transloco}}</h3>
+                <ul [innerHTML]="'about.reportFinder.htmlMetodologia'|transloco">
+                </ul>
+            </ion-col>
+        </ion-row> -->
+
+        <ion-row class="monithon-credits-row">
+            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-credits-container">
+                <h3 class="monithon-about-titolo-sezione">{{'about.reportFinder.credits'| transloco}}</h3>
+                <p class="monithon-about-credit">{{"about.reportFinder.design"|transloco}} <a
+                        href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> </p>
+
+                <p class="monithon-about-credit"> {{"about.reportFinder.dataAnalysis"|transloco}} <a
+                        href="https://www.monithon.eu" target="_blank">Team Monithon</a>
+                </p>
+
+                <p class="monithon-about-credit"> {{"about.reportFinder.softwareDevelopment"|transloco}} <a
+                        href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> & <a
+                        href="https://www.monithon.eu" target="_blank">Team Monithon</a>
+                </p>
+
+
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="monithon-colophon-row">
+            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container">
+                <img class="monithon-about-eu-flag" src="../../assets/img/eu_flag.png">
+
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="monithon-colophon-row monithon-app-info-row">
+            <ion-col size-md="4" size-sm="6"
+                class="monithon-about-col monithon-colophon-container monithon-app-info-container">
+                <div class="monithon-about-version-number">Report Finder - v.{{version}}</div>
             </ion-col>
         </ion-row>
 

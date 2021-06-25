@@ -95,8 +95,18 @@
             "metodologia": "Metodologia",
             "credits": "Credits",
             "design": "Design:",
-            "dataAnalysis":"Data analysis:",
-            "softwareDevelopment":"Software development:"
+            "dataAnalysis": "Data analysis:",
+            "softwareDevelopment": "Software development:"
+        },
+        "reportFinder": {
+            "htmlCosaPuoiFare": "<li>Scoprire i report di monitoraggio civico nella tua regione, città o quartiere, a ogni pallino corrisponde un report. Aogni colore corrisponde un “giudizio sintetico” da parte del gruppo civico che ha effettuato il monitoraggio.</li><li>Selezionare i report filtrando per tema, Programma Operativo, budget, anno del monitoraggio, ciclo di programmazione.</li><li>Scorrere l'elenco dei report selezionati ordinandoli per distanza, budget, giudizio sintetico e data del monitoraggio</li><li>Leggere la sintesi del progetto monitorato e accedere al vero e proprio Report di monitoraggio civico</li>",
+            "titolo": "Esplora i report di monitoraggio civico di Monithon",
+            "sottotitolo": "Scopri i report di monitoraggio civico sui progetti finanziati dai fondi pubblici, realizzati da studenti, comunità civiche e associazioni.",
+            "cosaPuoiFare": "Cosa puoi fare",
+            "credits": "Credits",
+            "design": "Design:",
+            "dataAnalysis": "Data analysis:",
+            "softwareDevelopment": "Software development:"
         }
     },
     "onlyDesktopAvailable": "Project Finder è disponibile solo in per desktop",

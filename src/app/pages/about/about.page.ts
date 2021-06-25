@@ -10,10 +10,12 @@ import { environment } from 'src/environments/environment';
 export class AboutPage implements OnInit {
 
     @Input() modal_title: string;
+    @Input() mode: string;
     public version: string = environment.version;
     constructor(
         private modalController: ModalController
-    ) { }
+    ) { 
+    }
 
     ngOnInit() { }
 
