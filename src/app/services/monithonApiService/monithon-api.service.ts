@@ -161,6 +161,21 @@ export class MonithonApiService {
         // let report: Report = new Report(lodash.find(listaDettagli, { uid: uid }));
         // return of(report);
         return this.httpClient.get<any>(this.reportApiUrl + `/reportDetail/${uid}`)
+            .pipe(
+                map((p: Report) => {
+                    try {
+                        p.sintesi = p.sintesi.length > 500 ? (p.sintesi.slice(0, 495) + '...') : p.sintesi;
+                    } catch (error) {
+                        console.error(p.uid);
+                        console.error(error);
+                    }
+                    return p;
+                }),
+                catchError(e => {
+                    console.error(e);
+                    return of(e);
+                })
+            );
 
     }
 

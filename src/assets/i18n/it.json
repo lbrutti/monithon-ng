@@ -148,10 +148,11 @@
     "report.giudizioSintetico.undefined": "Giudizio sintetico",
     "report.temaSintetico.undefined": "Tema",
     "programmaOperativo": "Programma operativo",
-    "report.monithonFiltriTitle": "Temi e programmi ",
+    "report.monithonFiltriTitle": "Temi",
     "report.programmiOperativi": "Programmi operativi",
     "report.programmiOperativiPlaceholder": "inserisci il nome o il codice del programma",
     "report.programmiOperativiSearchText": "",
+    "report.sintesiReport":"Sintesi del progetto monitorato",
     "cicloProgrammazione": "Ciclo di programmazione",
-    "reportResultContainerTitle": "Report"
+    "reportResultContainerTitle": "Report di monitoraggio civico"
 }

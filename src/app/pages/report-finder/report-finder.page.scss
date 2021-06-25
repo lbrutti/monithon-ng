@@ -23,6 +23,19 @@ html {
         }
     }
 
+    .monithon-dettaglio-progetto__dettagli_container {
+        ion-grid {
+            height: 100%;
+
+            ion-row {
+                &.monithon-dettaglio-progetto__row {
+                    height: auto;
+                }
+            }
+        }
+    }
+
+
     .monithon-dettaglio-progetto__categoria {
 
 
