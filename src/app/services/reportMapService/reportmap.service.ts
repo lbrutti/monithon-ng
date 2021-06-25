@@ -295,9 +295,10 @@ export class ReportMapService {
             this.map.resize();
             this.aggiornaAttivabilitaGiudizi();
 
-            if (this.isFreeMode) {
-                navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
-            }
+            //rimosso centramento su utente onload
+            // if (this.isFreeMode) {
+            //     navigationControlContainer.querySelector('.mapboxgl-ctrl-geolocate').click();
+            // }
 
             this.publishUpdate(this.featureCollectionToReports(), true, true);
         });
