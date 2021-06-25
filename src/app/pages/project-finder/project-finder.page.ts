@@ -19,10 +19,10 @@ import { AboutPage } from '../about/about.page';
 declare const dc, crossfilter;
 @Component({
     selector: 'app-home',
-    templateUrl: 'home.page.html',
-    styleUrls: ['home.page.scss'],
+    templateUrl: 'project-finder.page.html',
+    styleUrls: ['project-finder.page.scss'],
 })
-export class HomePage implements OnInit, AfterViewInit {
+export class ProjectFinderPage implements OnInit, AfterViewInit {
 
     @ViewChild('budgetChart') budgetChartContainer: HTMLElement;
     @ViewChild('annoChart') annoChartContainer: HTMLElement;

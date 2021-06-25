@@ -4,15 +4,15 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
     {
         path: '#wizard',
-        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+        loadChildren: () => import('./pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
     },
     {
         path: 'wizard',
-        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+        loadChildren: () => import('./pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
     },
     {
         path: '',
-        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
+        loadChildren: () => import('./pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
     },
     {
         path: '',

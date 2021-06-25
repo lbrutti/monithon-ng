@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
+import { ProjectFinderPage } from './project-finder.page';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { ProjectFinderPageRoutingModule } from './project-finder-routing.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -26,7 +26,7 @@ import { FixencodedcharsPipeModule } from '../../pipes/fixencodedchars/fixencode
     imports: [
         CommonModule,
         FormsModule,
-        HomePageRoutingModule,
+        ProjectFinderPageRoutingModule,
         IonicModule,
         MatExpansionModule,
         MatChipsModule,
@@ -41,6 +41,6 @@ import { FixencodedcharsPipeModule } from '../../pipes/fixencodedchars/fixencode
         UnescapePipeModule,
         FixencodedcharsPipeModule,
         MatSliderModule    ],
-    declarations: [HomePage],
+    declarations: [ProjectFinderPage],
 })
-export class HomePageModule { }
+export class ProjectFinderPageModule { }
