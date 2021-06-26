@@ -676,6 +676,13 @@ export class ProgettiMapService {
     }
 
     private resetFiltroDistanza(publishUpdate: boolean = true) {
+        let easeOptions : mapboxgl.EaseToOptions = {
+            center: [12.3959144, 41.909986],
+            zoom: 4.8,
+            duration:500
+        }
+      
+        this.map.easeTo(easeOptions);
         this.radius = 10;
         lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
         lodash.map(this.categorie, c => {

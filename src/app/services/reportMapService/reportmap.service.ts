@@ -618,6 +618,13 @@ export class ReportMapService {
         let reports = this.resetFiltroReport();
         this.aggiornaAttivabilitaGiudizi(true);
         this.resetFiltroTemi();
+        let easeOptions: mapboxgl.EaseToOptions = {
+            center: [12.3959144, 41.909986],
+            zoom: 4.8,
+            duration: 500
+        }
+
+        this.map.easeTo(easeOptions);
         if (publishUpdate) {
             this.publishUpdate(reports, true, true);
         }
