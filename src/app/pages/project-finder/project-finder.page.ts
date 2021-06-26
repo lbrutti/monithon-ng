@@ -781,7 +781,12 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         this.ordinaRisultatiPerCriterio();
     }
     ordinaRisultatiPerCriterio() {
-        this.risultatiRicerca = lodash.sortBy(this.risultatiRicerca, (p: Progetto) => lodash.get(p, this.criterioSelezionato));
+        if (this.criterioSelezionato == 'ocCodTemaSintetico' || this.criterioSelezionato == 'distanza') {
+            this.risultatiRicerca = lodash.sortBy(this.risultatiRicerca, (p: Progetto) => lodash.get(p, this.criterioSelezionato));
+        } else {
+            let sorted = lodash.sortBy(this.risultatiRicerca, (p: Progetto) => lodash.get(p, this.criterioSelezionato)).reverse();
+            this.risultatiRicerca = sorted;
+        }
     }
 
 

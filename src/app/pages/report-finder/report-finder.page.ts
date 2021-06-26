@@ -677,7 +677,12 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.ordinaRisultatiPerCriterio();
     }
     ordinaRisultatiPerCriterio() {
-        this.risultatiRicerca = lodash.sortBy(this.risultatiRicerca, (r: Report) => lodash.get(r, this.criterioSelezionato));
+        if (this.criterioSelezionato == 'codGiudizioSintetico' || this.criterioSelezionato == 'distanza') {
+            this.risultatiRicerca = lodash.sortBy(this.risultatiRicerca, (r: Report) => lodash.get(r, this.criterioSelezionato));
+        } else {
+            let sorted = lodash.sortBy(this.risultatiRicerca, (r: Report) => lodash.get(r, this.criterioSelezionato)).reverse()
+            this.risultatiRicerca = sorted;
+        }
     }
 
 
@@ -702,7 +707,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         const modal = await this.modalController.create({
             component: AboutPage,
             cssClass: 'monithon-about-modal',
-            componentProps:{'mode':'reportFinder'}
+            componentProps: { 'mode': 'reportFinder' }
         });
 
         modal.onDidDismiss().then((modelData) => {
