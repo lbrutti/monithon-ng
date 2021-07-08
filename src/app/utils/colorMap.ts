@@ -1,7 +1,7 @@
 export const COLOR_MAP = {
     temi: {
         ambiente: '#EA4A3E',
-        attrazione: '#FDD0B3',
+        attrazione: '#FFC522',
         energia: '#FFC921',
         mobilita: '#006FD2',
         default: '#006FD2'
@@ -17,13 +17,13 @@ export const COLOR_MAP = {
 // --monithon - giudizio - 6 - background: green;
 export const REPORT_COLOR_MAP = {
     giudiziSintetici: {
-        1: '#5362EB',
-        2: '#00CEB8',
-        3: '#FDD0B3',
-        4: '#FFC921',
+        1: '#1AE0C1',
+        2: '#77D71F',
+        3: '#FFC522',
+        4: '#F84D2C',
 
-        5: '#089B43',
-        6: '#EA4A3E',
+        5: '#02784E',
+        6: '#793224',
         7: '#99eae2',
         'default': 'white'
     }
