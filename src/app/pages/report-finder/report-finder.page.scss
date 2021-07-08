@@ -60,7 +60,7 @@ html {
 
     }
 
-    .mat-chip.monithon-dettaglio-progetto__stato-avanzamento {
+    .mat-chip.monithon-dettaglio-progetto__stato-avanzamento{
         width: auto;
     }
 
@@ -162,6 +162,7 @@ html {
 
 
 .monithon-filtri {
+    --monithon-deselected-chart-fill: #D5E1DD;
     background-color: var(--monithon-tema-sfondo-filtri-report);
      ::ng-deep .mat-expansion-indicator{
         border:1px solid var(--monithon-panel-chevron-color);
@@ -183,6 +184,9 @@ html {
 
 
         }
+    }
+    .mat-chip.monithon-filtro-stato-avanzamento.monithon-filtro-ciclo-programmazione {
+        width: auto;
     }
 
 }

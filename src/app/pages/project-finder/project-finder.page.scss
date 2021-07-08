@@ -1,4 +1,4 @@
-@import '../../../theme/scrollbar-width-mixin.scss';
+@import "../../../theme/scrollbar-width-mixin.scss";
 
 #container {
     text-align: center;
@@ -32,7 +32,6 @@
     text-decoration: none;
 }
 
-
 #aboutBtnContainer {
     z-index: 100;
     position: absolute;
@@ -62,8 +61,6 @@
             margin-bottom: 5px !important;
         }
     }
-
-
 }
 
 #filterContainer {
@@ -71,9 +68,6 @@
     width: 66vw;
     //min-height: 66vh;
 }
-
-
-
 
 //https://stackoverflow.com/questions/53195131/angular-material-mat-expansion-panel-body-style-not-being-applied
 ::ng-deep .mat-expansion-panel-body {
@@ -144,11 +138,10 @@
 #annoChartContainer {
     width: 100%;
     min-height: 34px;
-
+    padding-left: 3px;
     g.axis.y {
         display: none !important;
     }
-
 }
 
 .chart-title {
@@ -181,14 +174,12 @@
     color: var(--monithon-font-color);
 
     @media not screen and (-webkit-min-device-pixel-ratio: 2),
-    not screen and (min--moz-device-pixel-ratio: 2),
-    not screen and (-o-min-device-pixel-ratio: 2/1),
-    not screen and (min-device-pixel-ratio: 2),
-    not screen and (min-resolution: 192dpi),
-    not screen and (min-resolution: 2dppx) {
-
+        not screen and (min--moz-device-pixel-ratio: 2),
+        not screen and (-o-min-device-pixel-ratio: 2/1),
+        not screen and (min-device-pixel-ratio: 2),
+        not screen and (min-resolution: 192dpi),
+        not screen and (min-resolution: 2dppx) {
         height: 74vh;
-
     }
 
     .monithon-dettaglio-progetto__dettagli_container {
@@ -271,8 +262,6 @@
     }
 
     .monithon-dettaglio-progetto__categoria {
-
-
         .monithon-dettaglio-progetto__lista__categorie {
             &.inactive {
                 .monithon-dettaglio-progetto__lista__categorie__header {
@@ -286,7 +275,6 @@
             }
 
             &[data-oc-cod-tema-sintetico="5"] * {
-
                 background: var(--monithon-tema-ambiente-background) !important;
             }
 
@@ -298,27 +286,21 @@
                 background: var(--monithon-tema-mobilita-background) !important;
             }
 
-
-
             .monithon-dettaglio-progetto__lista__categorie__header {
                 padding: 0;
                 height: auto;
 
                 .monithon-dettaglio-progetto__arrow {
-                    margin-left: 10px
+                    margin-left: 10px;
                 }
 
                 &.mat-expanded {
                     .monithon-dettaglio-progetto__arrow {
-                        transform: translateY(0px) rotateX(180deg)
+                        transform: translateY(0px) rotateX(180deg);
                     }
                 }
             }
-
-
         }
-
-
     }
 
     .mat-chip.monithon-dettaglio-progetto__stato-avanzamento,
@@ -350,7 +332,6 @@
     .monithon-dettaglio-progetto__dettagli {
         display: flex;
         flex-direction: column;
-
     }
 
     .monithon-dettaglio-progetto__titolo_scheda {
@@ -390,7 +371,6 @@
         flex-direction: column;
         justify-content: flex-start;
         max-height: 100%;
-
     }
 
     .monithon-dettaglio-progetto__dettagli {
@@ -404,7 +384,6 @@
         text-transform: uppercase;
         display: block;
     }
-
 
     &.monithon-finanziamenti-chart,
     &.monithon-pagamenti-chart {
@@ -441,7 +420,6 @@
         padding-left: 20px;
         padding-right: 20px;
     }
-
 }
 
 .mat-chip[data-active="true"] {
@@ -457,14 +435,12 @@
 
 .mat-chip.monithon-tema[data-active="false"],
 .mat-chip.monithon-categoria[data-active="false"] {
-
     &[data-oc-cod-tema-sintetico="4"] {
         color: var(--monithon-tema-energia-background) !important;
         border-color: var(--monithon-tema-energia-background);
     }
 
     &[data-oc-cod-tema-sintetico="5"] {
-
         color: var(--monithon-tema-ambiente-background) !important;
         border-color: var(--monithon-tema-ambiente-background);
     }
@@ -478,14 +454,12 @@
         color: var(--monithon-tema-mobilita-background) !important;
         border-color: var(--monithon-tema-mobilita-background);
     }
-
 }
 
 .mat-chip.monithon-tema,
 .mat-chip.monithon-categoria,
 .mat-chip.monithon-filtro-stato-avanzamento,
 .mat-chip.monithon-filtro-report {
-
     background-color: transparent;
     border-width: 1px;
     border-style: solid;
@@ -497,7 +471,6 @@
     }
 
     &[data-oc-cod-tema-sintetico="5"] {
-
         color: var(--monithon-tema-ambiente-background) !important;
         border-color: var(--monithon-tema-ambiente-background);
     }
@@ -519,7 +492,6 @@
         color: var(--monithon-filtro-secondario-unselected-color);
         border-color: var(--monithon-filtro-secondario-unselected-color);
     }
-
 
     &.mat-chip-selected {
         // &[data-oc-cod-tema-sintetico] {
@@ -560,9 +532,6 @@
 .mat-chip.monithon-filtro-stato-avanzamento {
     width: 33%;
     justify-content: center;
-
-
-
 }
 
 .mat-chip.monithon-filtro-report {
@@ -626,7 +595,9 @@ ion-row.monithon-filtri-secondari {
 .monithon-filtri-charts {
     background-color: var(--monithon-tema-sfondo-charts);
     width: 100%;
-
+   ::ng-deep .mat-expansion-panel-body {
+        padding-left: 3px !important;
+    }
     .mat-expansion-panel-header {
         padding-left: 12px;
         padding-right: 14px;
@@ -641,14 +612,12 @@ ion-row.monithon-filtri-secondari {
             height: 54vh;
 
             @media not screen and (-webkit-min-device-pixel-ratio: 2),
-            not screen and (min--moz-device-pixel-ratio: 2),
-            not screen and (-o-min-device-pixel-ratio: 2/1),
-            not screen and (min-device-pixel-ratio: 2),
-            not screen and (min-resolution: 192dpi),
-            not screen and (min-resolution: 2dppx) {
-
+                not screen and (min--moz-device-pixel-ratio: 2),
+                not screen and (-o-min-device-pixel-ratio: 2/1),
+                not screen and (min-device-pixel-ratio: 2),
+                not screen and (min-resolution: 192dpi),
+                not screen and (min-resolution: 2dppx) {
                 height: 52vh;
-
             }
         }
     }
@@ -720,7 +689,7 @@ ion-row.monithon-filtri-secondari {
     font-size: 80px;
     font-weight: bolder;
     text-align: left;
-    opacity: .9;
+    opacity: 0.9;
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -744,16 +713,14 @@ ion-row.monithon-filtri-secondari {
     justify-content: flex-start;
 
     &::before {
-        content: '\0000a0';
+        content: "\0000a0";
         border-radius: 100%;
-        width: .5rem;
-        height: .5rem;
+        width: 0.5rem;
+        height: 0.5rem;
         display: inline-block;
         margin-bottom: auto;
         margin-top: 6px;
-
     }
-
 
     color: var(--monithon-lista-risultato-color);
 
@@ -765,7 +732,6 @@ ion-row.monithon-filtri-secondari {
 
     &[data-oc-cod-tema-sintetico="4"]::before {
         background-color: var(--monithon-tema-energia-background);
-
     }
 
     &[data-oc-cod-tema-sintetico="4"].selected {
@@ -774,7 +740,6 @@ ion-row.monithon-filtri-secondari {
 
     &[data-oc-cod-tema-sintetico="5"]::before {
         background-color: var(--monithon-tema-ambiente-background);
-
     }
 
     &[data-oc-cod-tema-sintetico="5"].selected {
@@ -783,7 +748,6 @@ ion-row.monithon-filtri-secondari {
 
     &[data-oc-cod-tema-sintetico="6"]::before {
         background-color: var(--monithon-tema-attrazione-background);
-
     }
 
     &[data-oc-cod-tema-sintetico="6"].selected {
@@ -792,7 +756,6 @@ ion-row.monithon-filtri-secondari {
 
     &[data-oc-cod-tema-sintetico="7"]::before {
         background-color: var(--monithon-tema-mobilita-background);
-
     }
 
     &[data-oc-cod-tema-sintetico="7"].selected {
@@ -804,9 +767,7 @@ ion-row.monithon-filtri-secondari {
         width: 90%;
         margin-left: 12px;
         margin-top: 0;
-
     }
-
 }
 
 .right-column {
@@ -817,14 +778,12 @@ ion-row.monithon-filtri-secondari {
     bottom: 0;
 
     @media not screen and (-webkit-min-device-pixel-ratio: 2),
-    not screen and (min--moz-device-pixel-ratio: 2),
-    not screen and (-o-min-device-pixel-ratio: 2/1),
-    not screen and (min-device-pixel-ratio: 2),
-    not screen and (min-resolution: 192dpi),
-    not screen and (min-resolution: 2dppx) {
-
+        not screen and (min--moz-device-pixel-ratio: 2),
+        not screen and (-o-min-device-pixel-ratio: 2/1),
+        not screen and (min-device-pixel-ratio: 2),
+        not screen and (min-resolution: 192dpi),
+        not screen and (min-resolution: 2dppx) {
         max-height: 85vh;
-
     }
 }
 
@@ -839,10 +798,8 @@ ion-row.monithon-filtri-secondari {
     }
 
     .monithon-lista-progetti {
-
         @include hideScrollbar();
         height: 60vh;
-
     }
 
     .monithon-lista-progetti__progetto {
@@ -882,7 +839,6 @@ ion-row.monithon-filtri-secondari {
         }
 
         &.selected {
-
             &[data-oc-cod-tema-sintetico="4"] {
                 border-color: var(--monithon-tema-energia-background);
             }
@@ -910,7 +866,7 @@ ion-row.monithon-filtri-secondari {
             text-align: right;
 
             &[data-mostra-icona="true"]::after {
-                content: ' ↓';
+                content: " ↓";
             }
         }
 
@@ -942,7 +898,7 @@ ion-row.monithon-filtri-secondari {
 
         .monithon-comune-corrente::before,
         .monithon-raggio-corrente::before {
-            content: ' ';
+            content: " ";
             display: inline-block;
             background-repeat: no-repeat;
             margin-right: 5px;
@@ -960,7 +916,6 @@ ion-row.monithon-filtri-secondari {
             height: 10px;
         }
     }
-
 }
 
 .monithon-header * {
@@ -983,7 +938,6 @@ ion-row.monithon-filtri-secondari {
             opacity: 1;
         }
     }
-
 }
 
 #raggioContainer {
@@ -1015,7 +969,7 @@ ion-row.monithon-filtri-secondari {
         }
 
         .mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label {
-            background: var(--monithon-range-thumb-label-background) !important
+            background: var(--monithon-range-thumb-label-background) !important;
         }
 
         .mat-slider-thumb-label {
@@ -1027,7 +981,6 @@ ion-row.monithon-filtri-secondari {
             border-top-right-radius: 25px;
             border-bottom-left-radius: 25px;
             border-bottom-right-radius: 25px;
-
 
             border-color: white !important;
             border-width: 3px !important;
@@ -1045,8 +998,6 @@ ion-row.monithon-filtri-secondari {
             }
         }
 
-
-
         .mat-slider-thumb {
             transform: scale(0) !important;
         }
@@ -1061,8 +1012,6 @@ ion-row.monithon-filtri-secondari {
         }
     }
 }
-
-
 
 .mapboxgl-ctrl-geocoder {
     min-width: 100%;

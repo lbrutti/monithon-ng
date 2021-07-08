@@ -250,7 +250,7 @@
                                                     <mat-chip-list class="monithon-filtro-stato-avanzamento"
                                                         multiple="true" aria-orientation="horizontal">
                                                         <mat-chip *ngFor="let ciclo of this.cicliProgrammazione"
-                                                            class="monithon-filtro-stato-avanzamento monithon-small-chip"
+                                                            class="monithon-filtro-stato-avanzamento monithon-filtro-ciclo-programmazione monithon-small-chip"
                                                             selectable="{{ciclo.isActive}}"
                                                             [attr.data-active]="ciclo.isActive"
                                                             [selected]="ciclo.isSelected"
