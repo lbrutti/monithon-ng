@@ -121,7 +121,7 @@ html {
     @for $codGiudizioSintetico from 1 through 7 {
 
         &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
-            color: cssvar(monithon-giudizio, $codGiudizioSintetico, background) !important;
+            // color: cssvar(monithon-giudizio, $codGiudizioSintetico, background) !important;
             border-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
             border-width: 1px;
             border-style: solid;
@@ -133,7 +133,7 @@ html {
     &[data-tema-sintetico] {
         background-color: transparent;
         color: var(--monithon-filtro-secondario-unselected-color-report);
-        border-color: var(--monithon-filtro-secondario-unselected-color-report);
+        border-color: var(--monithon-filtro-secondario-unselected-border-color-report);
     }
 
     &[data-cod-giudizio-sintetico] {
