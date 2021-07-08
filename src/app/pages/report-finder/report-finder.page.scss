@@ -163,7 +163,9 @@ html {
 
 .monithon-filtri {
     background-color: var(--monithon-tema-sfondo-filtri-report);
-
+     ::ng-deep .mat-expansion-indicator{
+        border:1px solid var(--monithon-panel-chevron-color);
+    }
     &.mat-expanded {
         .monithon-categorie-container {
             display: flex;
@@ -185,6 +187,11 @@ html {
 
 }
 
+.monithon-risultati-header{
+     ::ng-deep .mat-expansion-indicator{
+        background-color: var(--monithon-contatore-risultati-color);
+    }
+}
 .monithon-filtri-charts {
     background-color: var(--monithon-tema-sfondo-charts-report);
 }
