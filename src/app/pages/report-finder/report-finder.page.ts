@@ -721,6 +721,10 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
 
+    goToMonithon(){
+        window.open("https://www.monithon.eu/", "_blank");
+    }
+
 
 
     searchProgrammaOperativo(term: string, programma: ProgrammaOperativo) {

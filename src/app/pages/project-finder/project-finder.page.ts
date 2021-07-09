@@ -824,6 +824,9 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         return await modal.present();
     }
 
+    goToMonithon() {
+        window.open("https://www.monithon.eu/", "_blank");
+    }
 }
 
 
