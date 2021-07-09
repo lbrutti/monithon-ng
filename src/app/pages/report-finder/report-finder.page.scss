@@ -165,7 +165,7 @@ html {
         width: auto;
     }
     #chartPanel {
-       ::ng-deep .mat-expansion-panel-body {
+        ::ng-deep .mat-expansion-panel-body {
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -173,6 +173,10 @@ html {
                 display: flex;
                 flex-direction: column;
                 height: 100%;
+                #budgetChartContainer,
+                #annoChartContainer {
+                    height: 50%;
+                }
             }
             #filtriSecondariContainer {
                 margin-top: auto;

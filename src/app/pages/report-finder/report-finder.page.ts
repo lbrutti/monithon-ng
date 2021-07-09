@@ -375,72 +375,12 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.evidenziaRisultatiSuMappa();
     }
 
-    private renderAnnoChart(crossFilterData: any, listaReports: any) {
-        this.annoChart = new dc.BarChart((this.annoChartContainer as any).nativeElement);
-        let chartHeight = 72;
-        let chartWidth = 432;
-        let annoDim = crossFilterData.dimension((d) => {
-            try {
 
-                let anno = moment(`${parseInt(d.dataInserimento)}`, "YYYYMMDD").year();
-                return anno < 2014 ? 2013 : anno;
-            } catch (error) {
-                console.error(error);
-            }
-        });
-        let reportPerAnno = annoDim.group().reduceCount();
-        let annoRange = d3.extent(listaReports, (d: any) => moment(`${parseInt(d.dataInserimento)}`, "YYYYMMDD").year()
-        );
-        annoRange[0] = 2013;
-        annoRange[1] += 1;
-        let maxCount = reportPerAnno
-            .all()
-            .map(v => v.value)
-            .reduce((a, v) => Math.max(a, v), -Infinity);
-
-        maxCount += (maxCount / 2);
-
-        this.annoChart.height(chartHeight);
-        this.annoChart.width(chartWidth);
-        this.annoChart.useViewBoxResizing(true)
-
-        let chartMargins = { top: 2, right: 10, bottom: 20, left: 0 };
-        let xScale = d3.scaleLinear().domain(annoRange).range([chartMargins.left, chartWidth]);
-        let yScale = d3.scaleLinear().domain([0, maxCount]);
-        this.annoChart
-            .dimension(annoDim)
-            .group(reportPerAnno)
-            .brushOn(true)
-            .x(xScale)
-            .y(yScale)
-            .xUnits(dc.units.integers)
-            .elasticX(false)
-            .elasticY(false)
-            .centerBar(false)
-            .margins(chartMargins)
-            .transitionDuration(250);
-
-        this.annoChart
-            .xAxis()
-            .tickSizeOuter(0)
-            .tickFormat(anno => anno <= 2013 ? `...${parseInt(anno)}` : parseInt(anno));
-
-
-        this.annoChart.on("filtered", () => {
-
-            setTimeout(() => {
-                let matchIdx = annoDim.top(Infinity).map(r => r.uid) || [];
-                this.reports.map(r => r.matches = matchIdx.indexOf(r.uid) >= 0);
-                this.filtraRisultati();
-                this.evidenziaRisultatiSuMappa();
-            }, 0);
-        });
-
-    }
 
     private renderBudgetChart(crossFilterData: any, listaReports: any) {
         this.budgetChart = new dc.BarChart((this.budgetChartContainer as any).nativeElement);
-        let chartHeight = 72;
+        let containerH = (this.budgetChartContainer as any).nativeElement.getBoundingClientRect().height;
+        let chartHeight = containerH < 72 ? 72 : containerH;
         let chartWidth = 432;
         let budgetBin = d3.bin();
 
@@ -576,7 +516,69 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
         return crossFilterData;
     }
+    private renderAnnoChart(crossFilterData: any, listaReports: any) {
+        this.annoChart = new dc.BarChart((this.annoChartContainer as any).nativeElement);
+        let containerH = (this.annoChartContainer as any).nativeElement.getBoundingClientRect().height - 12;
+        let chartHeight = containerH < 72 ? 72 : containerH;
+        let chartWidth = 432;
+        let annoDim = crossFilterData.dimension((d) => {
+            try {
 
+                let anno = moment(`${parseInt(d.dataInserimento)}`, "YYYYMMDD").year();
+                return anno < 2014 ? 2013 : anno;
+            } catch (error) {
+                console.error(error);
+            }
+        });
+        let reportPerAnno = annoDim.group().reduceCount();
+        let annoRange = d3.extent(listaReports, (d: any) => moment(`${parseInt(d.dataInserimento)}`, "YYYYMMDD").year()
+        );
+        annoRange[0] = 2013;
+        annoRange[1] += 1;
+        let maxCount = reportPerAnno
+            .all()
+            .map(v => v.value)
+            .reduce((a, v) => Math.max(a, v), -Infinity);
+
+        maxCount += (maxCount / 2);
+
+        this.annoChart.height(chartHeight);
+        this.annoChart.width(chartWidth);
+        this.annoChart.useViewBoxResizing(true)
+
+        let chartMargins = { top: 2, right: 10, bottom: 20, left: 0 };
+        let xScale = d3.scaleLinear().domain(annoRange).range([chartMargins.left, chartWidth]);
+        let yScale = d3.scaleLinear().domain([0, maxCount]);
+        this.annoChart
+            .dimension(annoDim)
+            .group(reportPerAnno)
+            .brushOn(true)
+            .x(xScale)
+            .y(yScale)
+            .xUnits(dc.units.integers)
+            .elasticX(false)
+            .elasticY(false)
+            .centerBar(false)
+            .margins(chartMargins)
+            .transitionDuration(250);
+
+        this.annoChart
+            .xAxis()
+            .tickSizeOuter(0)
+            .tickFormat(anno => anno <= 2013 ? `...${parseInt(anno)}` : parseInt(anno));
+
+
+        this.annoChart.on("filtered", () => {
+
+            setTimeout(() => {
+                let matchIdx = annoDim.top(Infinity).map(r => r.uid) || [];
+                this.reports.map(r => r.matches = matchIdx.indexOf(r.uid) >= 0);
+                this.filtraRisultati();
+                this.evidenziaRisultatiSuMappa();
+            }, 0);
+        });
+
+    }
     public filtraPerGiudizio(giudizioSintetico: GiudizioSintetico): void {
         giudizioSintetico.isSelected = !giudizioSintetico.isSelected;
 
