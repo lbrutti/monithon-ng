@@ -1,5 +1,11 @@
 <ion-content [fullscreen]="true" [scrollY]="false" class="monithon-about-modal-content">
     <ion-grid class="monithon-about-grid">
+        <ion-row class="monithon-logo-row">
+            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container">
+                <img class="monithon-about-logo" src="../../assets/img/logo_monithon.svg">
+
+            </ion-col>
+        </ion-row>
         <ion-row>
             <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
                 <h1 class="monithon-about-titolo">{{'courtesy.titolo' | transloco}}</h1>
@@ -8,9 +14,11 @@
         </ion-row>
         <ion-row>
             <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
-                <h3 *ngIf="mode=='projectFinder'" class="monithon-about-titolo-sezione">{{'courtesy.projectFinder.sottotitolo' |
+                <h3 *ngIf="mode=='projectFinder'" class="monithon-about-titolo-sezione">
+                    {{'courtesy.projectFinder.sottotitolo' |
                     transloco}}</h3>
-                <h3 *ngIf="mode=='reportFinder'" class="monithon-about-titolo-sezione">{{'courtesy.reportFinder.sottotitolo' |
+                <h3 *ngIf="mode=='reportFinder'" class="monithon-about-titolo-sezione">
+                    {{'courtesy.reportFinder.sottotitolo' |
                     transloco}}</h3>
 
                 <p class="monithon-about-credit"><a href="{{destination}}/?desktop=1" target="_self">Prosegui

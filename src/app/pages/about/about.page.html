@@ -9,6 +9,12 @@
 
 <ion-content [fullscreen]="true" [scrollY]="false" class="monithon-about-modal-content">
     <ion-grid class="monithon-about-grid" *ngIf="mode == 'projectFinder'">
+        <ion-row class="monithon-logo-row">
+            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container">
+                <img class="monithon-about-logo" src="../../assets/img/logo_monithon.svg">
+
+            </ion-col>
+        </ion-row>
         <ion-row>
             <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
                 <h1 class="monithon-about-titolo">{{'about.projectFinder.titolo' | transloco}}</h1>
@@ -40,8 +46,8 @@
                 <p class="monithon-about-credit">{{"about.projectFinder.design"|transloco}} <a
                         href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> </p>
 
-                <p class="monithon-about-credit"> {{"about.dataAnalysis"|transloco}} <a
-                        href="https://www.monithon.eu" target="_blank">Team Monithon</a>
+                <p class="monithon-about-credit"> {{"about.dataAnalysis"|transloco}} <a href="https://www.monithon.eu"
+                        target="_blank">Team Monithon</a>
                 </p>
 
                 <p class="monithon-about-credit"> {{"about.softwareDevelopment"|transloco}} <a
@@ -70,6 +76,12 @@
     </ion-grid>
 
     <ion-grid class="monithon-about-grid" *ngIf="mode == 'reportFinder'">
+        <ion-row class="monithon-logo-row">
+            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container">
+                <img class="monithon-about-logo" src="../../assets/img/logo_monithon.svg">
+
+            </ion-col>
+        </ion-row>
         <ion-row>
             <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
                 <h1 class="monithon-about-titolo">{{'about.reportFinder.titolo' | transloco}}</h1>
@@ -98,11 +110,11 @@
         <ion-row class="monithon-credits-row">
             <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-credits-container">
                 <h3 class="monithon-about-titolo-sezione">{{'about.credits'| transloco}}</h3>
-                <p class="monithon-about-credit">{{"about.design"|transloco}} <a
-                        href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> </p>
+                <p class="monithon-about-credit">{{"about.design"|transloco}} <a href="https://sheldon.studio/"
+                        target="_blank">Sheldon.studio</a> </p>
 
-                <p class="monithon-about-credit"> {{"about.dataAnalysis"|transloco}} <a
-                        href="https://www.monithon.eu" target="_blank">Team Monithon</a>
+                <p class="monithon-about-credit"> {{"about.dataAnalysis"|transloco}} <a href="https://www.monithon.eu"
+                        target="_blank">Team Monithon</a>
                 </p>
 
                 <p class="monithon-about-credit"> {{"about.softwareDevelopment"|transloco}} <a
