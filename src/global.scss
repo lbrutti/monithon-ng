@@ -15,7 +15,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,10 +24,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-@import '~@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-@import '~mapbox-gl/dist/mapbox-gl.css';
+@import "~@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+@import "~mapbox-gl/dist/mapbox-gl.css";
 @import "~@ng-select/ng-select/themes/material.theme.css";
-
+@import "theme/ng-select-override.scss";
 
 .mapboxgl-ctrl-bottom-left,
 .mapbox-gl-draw_ctrl-draw-btn {
@@ -70,9 +70,8 @@
     }
 }
 
-@import './theme/charts.scss';
-@import './theme/typography.scss';
-
+@import "./theme/charts.scss";
+@import "./theme/typography.scss";
 
 ion-content {
     background: var(--monithon-tema-sfondo-charts) !important;
@@ -81,8 +80,6 @@ ion-content {
         background: var(--monithon-loader-report-background) !important;
     }
 }
-
-
 
 #container.visible,
 #navigationControl.visible {
@@ -105,7 +102,7 @@ ion-content {
     background: var(--monithon-sfondo-loader);
 
     .loading-wrapper {
-        background-image: url('assets/img/loader.gif');
+        background-image: url("assets/img/loader.gif");
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
@@ -125,7 +122,7 @@ ion-content {
             margin: 0;
             padding: 0;
             font-size: 20px;
-            font-family: 'Roboto';
+            font-family: "Roboto";
             width: 80vw;
             height: 100%;
             color: var(--monithon-default-font-color);
@@ -140,7 +137,6 @@ ion-content {
 .monithon-loaded-report {
     @extend .monithon-loader;
 }
-
 
 .mat-expansion-indicator {
     border: 1px solid transparent;
@@ -188,12 +184,11 @@ app-courtesy {
     background-image: unset;
 }
 
-@import './theme/scrollbar-width-mixin.scss';
+@import "./theme/scrollbar-width-mixin.scss";
 
 .monithon-about-modal .modal-wrapper,
 app-courtesy {
     --background: white;
-
 
     .header-md::after {
         background-image: unset;
@@ -243,7 +238,6 @@ app-courtesy {
 
     .monithon-colophon-row {
         margin-top: 50px;
-
     }
 
     .monithon-about-eu-flag {
@@ -265,7 +259,6 @@ app-courtesy {
         font-size: small;
         text-align: center;
     }
-
 }
 
 //ng-select custum styles
@@ -317,9 +310,9 @@ app-courtesy {
     }
 
     .ng-dropdown-panel {
-        margin-left: 12px;
-        padding-right: 12px;
-        width: calc(100% - 24px);
+        margin-left: 24px;
+        // padding-right: 12px;
+        width: calc(100% - 36px);
         border-top-left-radius: 18px;
         border-bottom-left-radius: 0;
         border-top-right-radius: 18px;

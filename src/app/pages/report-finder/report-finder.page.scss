@@ -1,6 +1,6 @@
-@import '../../../theme/scrollbar-width-mixin.scss';
-@import '../../../theme/cssvar.scss';
-@import '../project-finder/project-finder.page.scss';
+@import "../../../theme/scrollbar-width-mixin.scss";
+@import "../../../theme/cssvar.scss";
+@import "../project-finder/project-finder.page.scss";
 
 html {
     --ion-backdrop-color: #040a0c;
@@ -10,9 +10,7 @@ html {
     width: 100%;
 }
 
-
 .monithon-dettaglio-progetto {
-
     @for $codGiudizioSintetico from 1 through 7 {
         &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
             background-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
@@ -35,10 +33,7 @@ html {
         }
     }
 
-
     .monithon-dettaglio-progetto__categoria {
-
-
         .monithon-dettaglio-progetto__lista__categorie {
             &.inactive {
                 .monithon-dettaglio-progetto__lista__categorie__header {
@@ -47,20 +42,15 @@ html {
                 }
             }
 
-
-
             @for $codGiudizioSintetico from 1 through 7 {
                 &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
                     background: cssvar(monithon-giudizio, $codGiudizioSintetico, background) !important;
                 }
             }
-
         }
-
-
     }
 
-    .mat-chip.monithon-dettaglio-progetto__stato-avanzamento{
+    .mat-chip.monithon-dettaglio-progetto__stato-avanzamento {
         width: auto;
     }
 
@@ -69,36 +59,29 @@ html {
 
         .monithon_dettaglio_report_info {
             margin-bottom: 12px;
-
         }
 
         @media not screen and (-webkit-min-device-pixel-ratio: 2),
-        not screen and (min--moz-device-pixel-ratio: 2),
-        not screen and (-o-min-device-pixel-ratio: 2/1),
-        not screen and (min-device-pixel-ratio: 2),
-        not screen and (min-resolution: 192dpi),
-        not screen and (min-resolution: 2dppx) {
-
+            not screen and (min--moz-device-pixel-ratio: 2),
+            not screen and (-o-min-device-pixel-ratio: 2/1),
+            not screen and (min-device-pixel-ratio: 2),
+            not screen and (min-resolution: 192dpi),
+            not screen and (min-resolution: 2dppx) {
             .monithon_dettaglio_report_info {
                 margin-bottom: 6px;
-
             }
         }
     }
-
-
 }
 
 .mat-chip.monithon-tema[data-active="false"],
 .mat-chip.monithon-categoria[data-active="false"] {
-
     &[data-cod-giudizio-sintetico="4"] {
         color: var(--monithon-giudizio-energia-background) !important;
         border-color: var(--monithon-giudizio-energia-background);
     }
 
     &[data-cod-giudizio-sintetico="5"] {
-
         color: var(--monithon-giudizio-ambiente-background) !important;
         border-color: var(--monithon-giudizio-ambiente-background);
     }
@@ -107,8 +90,6 @@ html {
         color: var(--monithon-giudizio-attrazione-background) !important;
         border-color: var(--monithon-giudizio-attrazione-background);
     }
-
-
 }
 
 .mat-chip.monithon-tema,
@@ -116,10 +97,8 @@ html {
 .mat-chip.monithon-giudizio,
 .mat-chip.monithon-filtro-stato-avanzamento,
 .mat-chip.monithon-filtro-report {
-
     // giudizi sintetici
     @for $codGiudizioSintetico from 1 through 7 {
-
         &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
             // color: cssvar(monithon-giudizio, $codGiudizioSintetico, background) !important;
             border-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
@@ -149,7 +128,6 @@ html {
             }
         }
 
-
         &[data-oc-cod-stato-progetto],
         &[data-tema-sintetico] {
             background-color: var(--monithon-filtro-secondario-selected-color) !important;
@@ -158,14 +136,11 @@ html {
     }
 }
 
-
-
-
 .monithon-filtri {
-    --monithon-deselected-chart-fill: #D5E1DD;
+    --monithon-deselected-chart-fill: #d5e1dd;
     background-color: var(--monithon-tema-sfondo-filtri-report);
-     ::ng-deep .mat-expansion-indicator{
-        border:1px solid var(--monithon-panel-chevron-color);
+    ::ng-deep .mat-expansion-indicator {
+        border: 1px solid var(--monithon-panel-chevron-color);
     }
     &.mat-expanded {
         .monithon-categorie-container {
@@ -179,20 +154,36 @@ html {
             padding-top: 12px;
 
             .monithon-programmi-operativi-label {
+                display: block;
                 padding-left: 24px;
+                margin-bottom: 12px;
+                margin-top: -12px;
             }
-
-
         }
     }
     .mat-chip.monithon-filtro-stato-avanzamento.monithon-filtro-ciclo-programmazione {
         width: auto;
     }
-
+    #chartPanel {
+       ::ng-deep .mat-expansion-panel-body {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            #chartsContainer {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+            #filtriSecondariContainer {
+                margin-top: auto;
+                margin-bottom: 12px;
+            }
+        }
+    }
 }
 
-.monithon-risultati-header{
-     ::ng-deep .mat-expansion-indicator{
+.monithon-risultati-header {
+    ::ng-deep .mat-expansion-indicator {
         background-color: var(--monithon-contatore-risultati-color);
     }
 }
@@ -200,17 +191,7 @@ html {
     background-color: var(--monithon-tema-sfondo-charts-report);
 }
 
-
-
-
-
-
-
-
 .monithon-lista-risultato {
-
-
-
     @for $codGiudizioSintetico from 1 through 7 {
         &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"]::before {
             background-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
@@ -220,46 +201,30 @@ html {
             color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
         }
     }
-
 }
 
-
-
 #resultContainer {
-
     .monithon-lista-progetti__progetto {
-
         @for $codGiudizioSintetico from 1 through 7 {
             &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
                 border-bottom-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
             }
         }
 
-
         &.selected {
-
             @for $codGiudizioSintetico from 1 through 7 {
                 &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
                     border-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
                 }
             }
-
-
         }
     }
-
-
 }
-
-
-
-
 
 .monithon-search-input {
     width: 100%;
 
     ::ng-deep {
-
         .mat-form-field-underline,
         .mat-form-field-subscript-wrapper {
             display: none;
