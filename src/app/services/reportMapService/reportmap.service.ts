@@ -381,7 +381,7 @@ export class ReportMapService {
     }
 
     public updateRadius(newRadiusValue: number) {
-        this.resetFiltroDistanza(false);
+        this.resetFiltroDistanza(false, false);
         this.radius = newRadiusValue;
         this.drawRangeReport(this.center);
     }
@@ -608,8 +608,7 @@ export class ReportMapService {
         }
     }
 
-    private resetFiltroDistanza(publishUpdate: boolean = true) {
-        this.radius = 10;
+    private resetFiltroDistanza(publishUpdate: boolean = true, resetMapView: boolean = true) {
         lodash.map(this.giudiziSintetici, c => {
             c.isSelected = true;
             c.isActive = true;
@@ -618,13 +617,15 @@ export class ReportMapService {
         let reports = this.resetFiltroReport();
         this.aggiornaAttivabilitaGiudizi(true);
         this.resetFiltroTemi();
-        let easeOptions: mapboxgl.EaseToOptions = {
-            center: [12.3959144, 41.909986],
-            zoom: 4.8,
-            duration: 500
+        if (resetMapView) {
+            this.radius = 10;
+            let easeOptions: mapboxgl.EaseToOptions = {
+                center: [12.3959144, 41.909986],
+                zoom: 4.8,
+                duration: 500
+            }
+            this.map.easeTo(easeOptions);
         }
-
-        this.map.easeTo(easeOptions);
         if (publishUpdate) {
             this.publishUpdate(reports, true, true);
         }

@@ -369,7 +369,7 @@ export class ProgettiMapService {
     }
 
     public updateRadius(newRadiusValue: number) {
-        this.resetFiltroDistanza(false);
+        this.resetFiltroDistanza(false, false);
         this.radius = newRadiusValue;
         this.drawRangeProgetti(this.center);
     }
@@ -675,15 +675,17 @@ export class ProgettiMapService {
         }
     }
 
-    private resetFiltroDistanza(publishUpdate: boolean = true) {
-        let easeOptions : mapboxgl.EaseToOptions = {
-            center: [12.3959144, 41.909986],
-            zoom: 4.8,
-            duration:500
+    private resetFiltroDistanza(publishUpdate: boolean = true, resetMapView: boolean = true) {
+        if (resetMapView) {
+            this.radius = 10;
+            let easeOptions: mapboxgl.EaseToOptions = {
+                center: [12.3959144, 41.909986],
+                zoom: 4.8,
+                duration: 500
+            }
+
+            this.map.easeTo(easeOptions);
         }
-      
-        this.map.easeTo(easeOptions);
-        this.radius = 10;
         lodash.map(this.temi, t => { t.isSelected = true; t.isActive = true; });
         lodash.map(this.categorie, c => {
             c.isSelected = true;
