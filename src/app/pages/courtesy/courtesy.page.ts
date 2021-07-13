@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -10,14 +11,13 @@ export class CourtesyPage implements OnInit {
 
     public version: string = environment.version;
     public destination: string = '/';
-    public mode = environment.mode || 'projectFinder';
-    constructor() { }
+    public mode = environment.mode;
+    constructor(private route: ActivatedRoute) { }
 
     ngOnInit() {
-        // this.route.params.subscribe((params: Params) => {
-        //     this.destination = params['destination'];
-        //     this.mode = this.destination.match(/report-finder/) ? 'reportFinder' : 'projectFinder';
-        // });
+        this.route.params.subscribe((params: Params) => {
+            this.destination = params['destination'];
+        });
     }
 
 }

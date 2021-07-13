@@ -20,6 +20,14 @@ export const environment = {
             loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
         },
         {
+            path: 'about-page',
+            loadChildren: () => import('../app/pages/about/about.module').then(m => m.AboutPagePageModule)
+        },
+        {
+            path: 'courtesy/:destination',
+            loadChildren: () => import('../app/pages/courtesy/courtesy.module').then(m => m.CourtesyPageModule)
+        },
+        {
             path: '',
             redirectTo: '',
             pathMatch: 'full'
