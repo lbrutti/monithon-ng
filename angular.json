@@ -20,6 +20,7 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
                         "assets": [
+                            "src/.htaccess",
                             {
                                 "glob": "**/*",
                                 "input": "src/assets",
@@ -44,6 +45,7 @@
                     },
                     "configurations": {
                         "production": {
+                            "outputPath": "project-finder-www",
                             "fileReplacements": [
                                 {
                                     "replace": "src/environments/environment.ts",
@@ -76,6 +78,7 @@
                             ]
                         },
                         "production_report_finder": {
+                            "outputPath": "report-finder-www",
                             "fileReplacements": [
                                 {
                                     "replace": "src/environments/environment.ts",
