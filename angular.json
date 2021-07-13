@@ -46,6 +46,7 @@
                     "configurations": {
                         "production": {
                             "outputPath": "project-finder-www",
+                            "tsConfig": "tsconfig.project-finder.json",
                             "fileReplacements": [
                                 {
                                     "replace": "src/environments/environment.ts",
@@ -70,6 +71,7 @@
                             ]
                         },
                         "report_finder": {
+                            "tsConfig": "tsconfig.report-finder.json",
                             "fileReplacements": [
                                 {
                                     "replace": "src/environments/environment.ts",
@@ -78,6 +80,7 @@
                             ]
                         },
                         "production_report_finder": {
+                            "tsConfig": "tsconfig.report-finder.json",
                             "outputPath": "report-finder-www",
                             "fileReplacements": [
                                 {
