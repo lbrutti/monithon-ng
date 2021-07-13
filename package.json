@@ -5,7 +5,7 @@
     "homepage": "https://projectfinder.monithon.eu/",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
+        "start-project": "ng serve",
         "start-report": "ng serve -c report_finder",
         "build": "ng build",
         "test": "ng test",
