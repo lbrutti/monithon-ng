@@ -1,6 +1,30 @@
 import { version } from "package.json";
 
 export const environment = {
+    routes: [
+        //rotte per project finder
+        {
+            path: '#wizard',
+            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
+        },
+        {
+            path: 'wizard',
+            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
+        },
+        {
+            path: 'wizard?desktop=1',
+            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
+        },
+        {
+            path: '',
+            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
+        },
+        {
+            path: '',
+            redirectTo: '',
+            pathMatch: 'full'
+        }
+    ],
     mode: "projectFinder",
     production: true,
     monithonReportUrl: 'https://it.monithon.eu/report/view',

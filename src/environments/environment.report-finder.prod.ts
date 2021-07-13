@@ -4,9 +4,28 @@
 import { version } from "package.json";
 
 export const environment = {
-    mode:'reportFinder',
+    routes: [
+        //rotte per report finder
+        {
+            path: 'about-page',
+            loadChildren: () => import('../app/pages/about/about.module').then(m => m.AboutPagePageModule)
+        },
+        {
+            path: 'courtesy/:destination',
+            loadChildren: () => import('../app/pages/courtesy/courtesy.module').then(m => m.CourtesyPageModule)
+        },
+        {
+            path: '',
+            loadChildren: () => import('../app/pages/report-finder/report-finder.module').then(m => m.ReportFinderPageModule)
+        },
+        {
+            path: '',
+            redirectTo: '',
+            pathMatch: 'full'
+        }],
+    mode: 'reportFinder',
     production: true,
-    monithonReportUrl:'https://it.monithon.eu/report/view',
+    monithonReportUrl: 'https://it.monithon.eu/report/view',
     mapbox: {
         //account monithon prod
         accessToken: 'pk.eyJ1IjoibW9uaXRob24iLCJhIjoiY2tuZWNsb2Y0MHdvejJwbzdzYWtoam9ociJ9.UNMDQ62eNCvZPoC0ITNOzA',
@@ -18,12 +37,12 @@ export const environment = {
         // style: 'mapbox://styles/lbrutti/ckioi1m7m4o0g17nrz5wydq5g/draft?optimize=true',
         // reportStyle:'mapbox://styles/lbrutti/ckquyct3w16ua17o1ohkz78t6',
 
-        geocoderCountries:'AT BE BG CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE GB'
+        geocoderCountries: 'AT BE BG CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE GB'
     },
-    server:{
-        protocol:"https",
-        ip:"api.monithon.eu",
-        port:"80",
+    server: {
+        protocol: "https",
+        ip: "api.monithon.eu",
+        port: "80",
         apiroute: "api"
     },
     reportServer: {

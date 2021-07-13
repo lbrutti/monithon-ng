@@ -708,8 +708,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     async openIonModal() {
         const modal = await this.modalController.create({
             component: AboutPage,
-            cssClass: 'monithon-about-modal',
-            componentProps: { 'mode': 'reportFinder' }
+            cssClass: 'monithon-about-modal'
         });
 
         modal.onDidDismiss().then((modelData) => {

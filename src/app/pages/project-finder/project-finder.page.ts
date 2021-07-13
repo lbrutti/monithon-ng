@@ -810,14 +810,12 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     async openIonModal() {
         const modal = await this.modalController.create({
             component: AboutPage,
-            cssClass: 'monithon-about-modal',
-            componentProps: { 'mode': 'projectFinder' }
+            cssClass: 'monithon-about-modal'
         });
 
         modal.onDidDismiss().then((modelData) => {
             if (modelData !== null) {
                 this.modalData = modelData.data;
-                console.log('Modal Data : ' + modelData.data);
             }
         });
 

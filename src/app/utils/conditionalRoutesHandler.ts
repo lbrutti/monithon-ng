@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 export class ConditionalRoutesHandler {
-
     static projectFinderRoutes: Routes = [
         //rotte per project finder
         {
@@ -19,6 +18,14 @@ export class ConditionalRoutesHandler {
         {
             path: '',
             loadChildren: () => import('../pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
+        },
+        {
+            path: 'about-page',
+            loadChildren: () => import('../pages/about/about.module').then(m => m.AboutPagePageModule)
+        },
+        {
+            path: 'courtesy/:destination',
+            loadChildren: () => import('../pages/courtesy/courtesy.module').then(m => m.CourtesyPageModule)
         },
         {
             path: '',
@@ -48,6 +55,8 @@ export class ConditionalRoutesHandler {
         }];
 
     static getRoutesForMode(environment: any): Routes {
+        console.log('ConditionalRoutesHandler');
+
         switch (environment.mode) {
             case "reportFinder":
                 return ConditionalRoutesHandler.reportFinderRoutes;
