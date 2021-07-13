@@ -4,9 +4,9 @@
 import { version } from "package.json";
 
 export const environment = {
-    mode: "projectFinder",
+    mode:'reportFinder',
     production: false,
-    monithonReportUrl: 'https://it.monithon.eu/report/view',
+    monithonReportUrl:'https://it.monithon.eu/report/view',
     mapbox: {
         //account monithon prod
         accessToken: 'pk.eyJ1IjoibW9uaXRob24iLCJhIjoiY2tuZWNsb2Y0MHdvejJwbzdzYWtoam9ociJ9.UNMDQ62eNCvZPoC0ITNOzA',
@@ -18,12 +18,12 @@ export const environment = {
         // style: 'mapbox://styles/lbrutti/ckioi1m7m4o0g17nrz5wydq5g/draft?optimize=true',
         // reportStyle:'mapbox://styles/lbrutti/ckquyct3w16ua17o1ohkz78t6',
 
-        geocoderCountries: 'AT BE BG CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE GB'
+        geocoderCountries:'AT BE BG CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE GB'
     },
-    server: {
-        protocol: "https",
-        ip: "api.monithon.eu",
-        port: "80",
+    server:{
+        protocol:"https",
+        ip:"api.monithon.eu",
+        port:"80",
         apiroute: "api"
     },
     reportServer: {
@@ -42,4 +42,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+ import 'zone.js/dist/zone-error';  // Included with Angular CLI.

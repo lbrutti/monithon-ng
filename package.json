@@ -11,6 +11,7 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "release": "ionic build --prod --release --config=production",
+        "release-report-finder": "ionic build --prod --release --config=production_report_finder",
         "release-dev": "ionic build --prod --release"
     },
     "private": true,
