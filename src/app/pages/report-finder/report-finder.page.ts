@@ -147,7 +147,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                     this.counterValue = this.reports.length;
                 }
 
-                
+
                 this.loading.dismiss();
                 this.loading.onDidDismiss()
                     .then(() => {
@@ -721,7 +721,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
 
-    goToMonithon(){
+    goToMonithon() {
         window.open("https://www.monithon.eu/", "_blank");
     }
 

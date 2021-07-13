@@ -415,18 +415,18 @@ export class ReportMapService {
     filtraPerGiudizio() {
         let reports = this.filtraReport();
         // lodash.remove(reports, (p: Report) => !p.isSelected);
-        this.publishUpdate(reports, true, true);
+        this.publishUpdate(reports);
     }
 
     filtraPerTema() {
         let reports = this.filtraReport();
         // lodash.remove(reports, (p: Report) => !p.isSelected);
-        this.publishUpdate(reports, false, true);
+        this.publishUpdate(reports);
     }
     filtraPerProgrammaOperativo() {
         let reports = this.filtraReport();
         // lodash.remove(reports, (p: Report) => !p.isSelected);
-        this.publishUpdate(reports, false, false);
+        this.publishUpdate(reports);
     }
 
     /**
@@ -440,7 +440,7 @@ export class ReportMapService {
             this.radius = circleData.radius;
             let reports = this.filtraReport();
             this.aggiornaAttivabilitaGiudizi();
-            this.publishUpdate(reports, true, true);
+            this.publishUpdate(reports);
         }
 
 
@@ -627,7 +627,7 @@ export class ReportMapService {
             this.map.easeTo(easeOptions);
         }
         if (publishUpdate) {
-            this.publishUpdate(reports, true, true);
+            this.publishUpdate(reports);
         }
     }
     private resetFiltroTemi() {
