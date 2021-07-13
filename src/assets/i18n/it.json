@@ -1,4 +1,6 @@
 {
+    "projectFinder":"Monithon project finder",
+    "reportFinder": "Monithon report finder",
     "temi": {
         "4": "Energia",
         "5": "Ambiente",

@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslocoService } from '@ngneat/transloco';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
     }
     ngOnInit(): void {
         this.initializeApp();
+
     }
 
     initializeApp() {
@@ -34,6 +36,10 @@ export class AppComponent implements OnInit {
             }
             this.translocoService.setDefaultLang('it');
             this.translocoService.setActiveLang('it');
+            this.translocoService.selectTranslate(environment.mode)
+                .subscribe(value => {
+                    document.querySelector('title').textContent = value;
+                });
             this.statusBar.styleDefault();
 
             let hasTouchScreen = false;
@@ -48,6 +54,8 @@ export class AppComponent implements OnInit {
             if (!fromDesktop && !goodDevice) {
                 this.router.navigate(['/courtesy', destination], { skipLocationChange: true });
             }
+
+
 
         });
     }
