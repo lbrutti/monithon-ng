@@ -30,7 +30,8 @@
             [attr.data-cod-giudizio-sintetico]="this.reportSelezionato.codGiudizioSintetico"
             class="monithon-dettaglio-progetto" #dettaglioProgettoContainer>
             <div class="monithon-dettaglio-progetto__header">
-                <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">{{'report.sintesiReport' |
+                <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">{{'report.sintesiReport'
+                    |
                     transloco}}</h5>
 
                 <ion-icon (click)="onDettaglioReportHandleClick()"></ion-icon>
@@ -68,7 +69,8 @@
 
                         </ion-col>
                         <!-- dettagli -->
-                        <ion-col col-6 class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli monithon-dettaglio-report__dettagli">
+                        <ion-col col-6
+                            class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli monithon-dettaglio-report__dettagli">
                             <div class="monithon-dettaglio-progetto__data_inizio monithon_dettaglio_report_info">
                                 <ion-label class="monithon-dettaglio-progetto__label monithon-titolo-sezione">
                                     {{'dataInserimento' | transloco}}
@@ -112,7 +114,7 @@
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                     {{'finanziamento' | transloco}}:</ion-label>
                                 <ion-label class="monithon-dettaglio-progetto__tema__progetto">
-                                    {{reportSelezionato.ocFinanzTotPubNetto | currency:'EUR' }}
+                                    {{reportSelezionato.ocFinanzTotPubNetto | currency:reportSelezionato.curr }}
                                 </ion-label>
                             </div>
 
@@ -208,10 +210,9 @@
                                         [minTermLength]="2" [virtualScroll]="true"
                                         (change)="onProgrammOperativoChange($event)"
                                         [placeholder]="'report.programmiOperativiPlaceholder'|transloco"
-                                        [typeToSearchText]=""
-                                        #programmiOperativiSelect
+                                        [typeToSearchText]="" #programmiOperativiSelect
                                         [(ngModel)]="programmiOperativiSelezionati">
-                                        
+
                                     </ng-select>
 
                                 </div>
