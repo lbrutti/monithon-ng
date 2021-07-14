@@ -32,7 +32,7 @@ export class MonithonApiService {
     constructor(httpClient: HttpClient) {
         this.httpClient = httpClient;
         this.url = `${environment.server.protocol}://${environment.server.ip}/${environment.server.apiroute}`;
-        this.reportApiUrl = `${environment.reportServer.protocol}://${environment.reportServer.ip}/${environment.reportServer.apiroute}`;
+        this.reportApiUrl = `${environment.server.protocol}://${environment.server.ip}/${environment.server.apiroute}`;
 
     }
 
@@ -184,7 +184,7 @@ export class MonithonApiService {
      */
     public getProgrammiOperativi(): Observable<any> {
         //https://it.monithon.eu/api/reportProgrammiOperativi
-        return this.httpClient.get<Array<any>>(this.reportApiUrl + `/reportProgrammiOperativi`)
+        return this.httpClient.get<Array<any>>(this.reportApiUrl + `/reportOperativeProgrammes`)
 
         // return of(programmiOperativi.map(p => {
         //     p.isSelected = false;
@@ -207,7 +207,7 @@ export class MonithonApiService {
    */
     public getTemiSintetici(): Observable<any> {
         //https://it.monithon.eu/api/reportTemi
-        return this.httpClient.get<any>(this.reportApiUrl + `/reportTemi`)
+        return this.httpClient.get<any>(this.reportApiUrl + `/reportThemes`)
 
         // return of(temiSintetici);
     }
