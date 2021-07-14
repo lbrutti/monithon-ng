@@ -1,20 +1,28 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "outDir": "./out-tsc/app",
-    "types": []
-  },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts"
-  ],
-  "exclude": [
-    "src/**/*.spec.ts",
-    "src/test.ts",
-    "**/*.spec.ts"
-  ]
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./out-tsc/app",
+        "types": []
+    },
+    "files": [
+        "src/main.ts",
+        "src/polyfills.ts"
+    ],
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.d.ts"
+    ],
+    "exclude": [
+        "src/app/model/searchResult.interface.ts",
+        "src/app/services/reportMapService/reportmap.service.ts",
+        "src/app/pages/report-finder/report-finder.page.ts",
+        "src/app/pages/report-finder/report-finder-routing.module.ts",
+        "src/app/pages/report-finder/report-finder.module.ts",
+        "src/app/utils/conditionalRoutesHandler.ts",
+        "src/environments/environment.report-finder.prod.ts",
+        "src/environments/environment.report-finder.ts",
+        "src/**/*.spec.ts",
+        "src/test.ts",
+        "**/*.spec.ts"
+    ]
 }

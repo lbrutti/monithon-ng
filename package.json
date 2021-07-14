@@ -11,7 +11,7 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "release-project": "ionic build --prod --release --configuration=production",
+        "release-project": "ionic build --configuration=production_project_finder",
         "release-report": "ionic build --configuration=production_report_finder",
         "release-dev": "ionic build --prod --release"
     },

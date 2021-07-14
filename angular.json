@@ -44,9 +44,9 @@
                         "scripts": []
                     },
                     "configurations": {
-                        "production": {
-                            "outputPath": "project-finder-www",
+                        "production_project_finder": {
                             "tsConfig": "tsconfig.project-finder.json",
+                            "outputPath": "project-finder-www",
                             "fileReplacements": [
                                 {
                                     "replace": "src/environments/environment.ts",
