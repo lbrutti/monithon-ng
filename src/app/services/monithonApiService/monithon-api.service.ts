@@ -19,6 +19,7 @@ import { Categoria } from 'src/app/model/categoria/categoria.interface';
 // import { CicloProgrammazione } from 'src/app/model/cicloProgrammazione/cicloProgrammazione.interface';
 import { Report } from 'src/app/model/report/report';
 import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
+import { ProgrammaOperativo } from 'src/app/model/programmaOperativo/programmaOperativo.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -185,6 +186,28 @@ export class MonithonApiService {
     public getProgrammiOperativi(): Observable<any> {
         //https://it.monithon.eu/api/reportProgrammiOperativi
         return this.httpClient.get<Array<any>>(this.reportApiUrl + `/reportOperativeProgrammes`)
+            .pipe(
+                map((res) => {
+                    return res.map((p: ProgrammaOperativo) => {
+                        try {
+                            p.isActive = true;
+
+                            p.isSelected = false;
+
+                        } catch (error) {
+                            console.error(p.ocCodProgrammaOperativo);
+                            console.error(error);
+                        }
+
+
+                        return p;
+                    });
+                }),
+                catchError(e => {
+                    console.error(e);
+                    return of(e);
+                })
+            );
 
         // return of(programmiOperativi.map(p => {
         //     p.isSelected = false;
