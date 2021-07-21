@@ -728,7 +728,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
     searchProgrammaOperativo(term: string, programma: ProgrammaOperativo) {
         term = term.toLowerCase();
-        return programma.isActive && (programma.descProgrammaOperativo.toLowerCase().indexOf(term) > -1 || programma.ocCodProgrammaOperativo.toLowerCase() === term);
+        return programma.isActive && ((programma.descProgrammaOperativo.toLowerCase().indexOf(term) > -1) || (programma.ocCodProgrammaOperativo.toLowerCase().indexOf(term) > -1));
 
     }
 
