@@ -110,6 +110,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     isWizardMode: boolean = false;
 
     modalData: any;
+    locale: string;
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -824,6 +825,11 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
     goToMonithon() {
         window.open("https://www.monithon.eu/", "_blank");
+    }
+
+
+    setLanguage() {
+        this.translocoService.setActiveLang(this.locale);
     }
 }
 

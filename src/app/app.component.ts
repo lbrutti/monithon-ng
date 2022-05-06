@@ -34,8 +34,9 @@ export class AppComponent implements OnInit {
             if (destination === '/') {
                 destination = '';
             }
-            this.translocoService.setDefaultLang('it');
-            this.translocoService.setActiveLang('it');
+            this.translocoService.setDefaultLang('it-IT');
+            this.translocoService.setActiveLang('it-IT');
+            this.translocoService.setAvailableLangs(['it-IT', 'en-GB']);
             this.translocoService.selectTranslate(environment.mode)
                 .subscribe(value => {
                     document.querySelector('title').textContent = value;

@@ -13,6 +13,10 @@
             [displayWith]="formatLabelSliderRaggio" [value]="raggioCorrente" (input)="onRadiusChange($event)"
             [disabled]="!monithonMap.filtroPerRaggioEnabled">
         </mat-slider>
+        <ion-select class="langSelect" [(ngModel)]="locale" interface="action-sheet" (ionChange)="setLanguage()">
+            <ion-select-option value="it-IT">{{'language.ita' | transloco}}</ion-select-option>
+            <ion-select-option value="en-GB">{{'language.en' | transloco}}</ion-select-option>
+        </ion-select>
     </div>
 
     <div #navigationControl id="navigationControl" class="navigation-control"
