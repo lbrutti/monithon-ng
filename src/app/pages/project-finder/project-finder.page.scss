@@ -683,37 +683,18 @@ ion-row.monithon-filtri-secondari {
         }
     }
 
-    &[data-oc-cod-tema-sintetico="4"]::before {
-        background-color: var(--monithon-tema-4-background);
+
+    //loop per preparare binding a variabile parametrizzata
+    @for $codTemaSintetico from 0 to 50 {
+        &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"]::before {
+            background-color: cssvar(monithon-tema, $codTemaSintetico, background);
+        }
+
+        &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"].selected {
+            color: cssvar(monithon-tema, $codTemaSintetico, background);
+        }
     }
 
-    &[data-oc-cod-tema-sintetico="4"].selected {
-        color: var(--monithon-tema-4-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="5"]::before {
-        background-color: var(--monithon-tema-5-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="5"].selected {
-        color: var(--monithon-tema-5-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="6"]::before {
-        background-color: var(--monithon-tema-6-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="6"].selected {
-        color: var(--monithon-tema-6-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="7"]::before {
-        background-color: var(--monithon-tema-7-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="7"].selected {
-        color: var(--monithon-tema-7-background);
-    }
 
     h2 {
         margin-bottom: auto;
@@ -775,37 +756,19 @@ ion-row.monithon-filtri-secondari {
             padding: 0 !important;
         }
 
-        &[data-oc-cod-tema-sintetico="4"] {
-            border-bottom-color: var(--monithon-tema-4-background);
-        }
-
-        &[data-oc-cod-tema-sintetico="5"] {
-            border-bottom-color: var(--monithon-tema-5-background);
-        }
-
-        &[data-oc-cod-tema-sintetico="6"] {
-            border-bottom-color: var(--monithon-tema-6-background);
-        }
-
-        &[data-oc-cod-tema-sintetico="7"] {
-            border-bottom-color: var(--monithon-tema-7-background);
+        //loop per preparare binding a variabile parametrizzata
+        @for $codTemaSintetico from 0 to 50 {
+            &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
+                border-bottom-color: cssvar(monithon-tema, $codTemaSintetico, background);
+            }
         }
 
         &.selected {
-            &[data-oc-cod-tema-sintetico="4"] {
-                border-color: var(--monithon-tema-4-background);
-            }
-
-            &[data-oc-cod-tema-sintetico="5"] {
-                border-color: var(--monithon-tema-5-background);
-            }
-
-            &[data-oc-cod-tema-sintetico="6"] {
-                border-color: var(--monithon-tema-6-background);
-            }
-
-            &[data-oc-cod-tema-sintetico="7"] {
-                border-color: var(--monithon-tema-7-background);
+            //loop per preparare binding a variabile parametrizzata
+            @for $codTemaSintetico from 0 to 50 {
+                &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
+                    border-color: cssvar(monithon-tema, $codTemaSintetico, background);
+                }
             }
         }
     }
