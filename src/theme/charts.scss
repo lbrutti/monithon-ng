@@ -7,7 +7,7 @@
         height: 50px;
 
         text[data-oc-cod-tema-sintetico="4"] {
-            fill: var(--monithon-tema-energia-background);
+            fill: var(--monithon-tema-4-background);
 
             &[text-anchor="start"] {
                 fill: var(--monithon-finanziamenti-foreground);
@@ -15,7 +15,7 @@
         }
 
         text[data-oc-cod-tema-sintetico="5"] {
-            fill: var(--monithon-tema-ambiente-background);
+            fill: var(--monithon-tema-5-background);
 
             &[text-anchor="start"] {
                 fill: var(--monithon-finanziamenti-foreground);
@@ -23,7 +23,7 @@
         }
 
         text[data-oc-cod-tema-sintetico="6"] {
-            fill: var(--monithon-tema-attrazione-background);
+            fill: var(--monithon-tema-6-background);
 
             &[text-anchor="start"] {
                 fill: var(--monithon-finanziamenti-foreground);
@@ -31,7 +31,7 @@
         }
 
         text[data-oc-cod-tema-sintetico="7"] {
-            fill: var(--monithon-tema-mobilita-background);
+            fill: var(--monithon-tema-7-background);
 
             &[text-anchor="start"] {
                 fill: var(--monithon-mobilita-foreground);
