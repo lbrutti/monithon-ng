@@ -150,6 +150,7 @@
     width: 100%;
     min-height: 34px;
     padding-left: 3px;
+
     g.axis.y {
         display: none !important;
     }
@@ -185,11 +186,11 @@
     color: var(--monithon-font-color);
 
     @media not screen and (-webkit-min-device-pixel-ratio: 2),
-        not screen and (min--moz-device-pixel-ratio: 2),
-        not screen and (-o-min-device-pixel-ratio: 2/1),
-        not screen and (min-device-pixel-ratio: 2),
-        not screen and (min-resolution: 192dpi),
-        not screen and (min-resolution: 2dppx) {
+    not screen and (min--moz-device-pixel-ratio: 2),
+    not screen and (-o-min-device-pixel-ratio: 2/1),
+    not screen and (min-device-pixel-ratio: 2),
+    not screen and (min-resolution: 192dpi),
+    not screen and (min-resolution: 2dppx) {
         height: 74vh;
     }
 
@@ -211,42 +212,9 @@
         }
     }
 
-   
-
-    &[data-oc-cod-tema-sintetico="4"] {
-        background-color: var(--monithon-tema-4-background);
-
-        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-tema-4-background);
-        }
-    }
-
-    &[data-oc-cod-tema-sintetico="5"] {
-        background-color: var(--monithon-tema-5-background);
-
-        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-tema-5-background);
-        }
-    }
-
-    &[data-oc-cod-tema-sintetico="6"] {
-        background-color: var(--monithon-tema-6-background);
-
-        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-tema-6-background);
-        }
-    }
-
-    &[data-oc-cod-tema-sintetico="7"] {
-        background-color: var(--monithon-tema-7-background);
-
-        .monithon-dettaglio-progetto__inizia_monitoraggio__button {
-            color: var(--monithon-tema-7-background);
-        }
-    }
 
     //loop per preparare binding a variabile parametrizzata
-     @for $codTemaSintetico from 0 to 50 {
+    @for $codTemaSintetico from 0 to 50 {
         &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
             background-color: cssvar(monithon-tema, $codTemaSintetico, background);
 
@@ -294,20 +262,11 @@
                 }
             }
 
-            &[data-oc-cod-tema-sintetico="4"] * {
-                background: var(--monithon-tema-4-background) !important;
-            }
-
-            &[data-oc-cod-tema-sintetico="5"] * {
-                background: var(--monithon-tema-5-background) !important;
-            }
-
-            &[data-oc-cod-tema-sintetico="6"] * {
-                background: var(--monithon-tema-6-background) !important;
-            }
-
-            &[data-oc-cod-tema-sintetico="7"] * {
-                background: var(--monithon-tema-7-background) !important;
+            //loop per preparare binding a variabile parametrizzata
+            @for $codTemaSintetico from 0 to 50 {
+                &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
+                    background-color: cssvar(monithon-tema, $codTemaSintetico, background) !important;
+                }
             }
 
             .monithon-dettaglio-progetto__lista__categorie__header {
@@ -459,25 +418,15 @@
 
 .mat-chip.monithon-tema[data-active="false"],
 .mat-chip.monithon-categoria[data-active="false"] {
-    &[data-oc-cod-tema-sintetico="4"] {
-        color: var(--monithon-tema-4-background) !important;
-        border-color: var(--monithon-tema-4-background);
+
+    //loop per preparare binding a variabile parametrizzata
+    @for $codTemaSintetico from 0 to 50 {
+        &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
+            background-color: cssvar(monithon-tema, $codTemaSintetico, background);
+            color: cssvar(monithon-tema, $codTemaSintetico, background) !important;
+        }
     }
 
-    &[data-oc-cod-tema-sintetico="5"] {
-        color: var(--monithon-tema-5-background) !important;
-        border-color: var(--monithon-tema-5-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="6"] {
-        color: var(--monithon-tema-6-background) !important;
-        border-color: var(--monithon-tema-6-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="7"] {
-        color: var(--monithon-tema-7-background) !important;
-        border-color: var(--monithon-tema-7-background);
-    }
 }
 
 .mat-chip.monithon-tema,
@@ -488,25 +437,12 @@
     border-width: 1px;
     border-style: solid;
 
-    // temi
-    &[data-oc-cod-tema-sintetico="4"] {
-        color: var(--monithon-tema-4-background) !important;
-        border-color: var(--monithon-tema-4-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="5"] {
-        color: var(--monithon-tema-5-background) !important;
-        border-color: var(--monithon-tema-5-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="6"] {
-        color: var(--monithon-tema-6-background) !important;
-        border-color: var(--monithon-tema-6-background);
-    }
-
-    &[data-oc-cod-tema-sintetico="7"] {
-        color: var(--monithon-tema-7-background) !important;
-        border-color: var(--monithon-tema-7-background);
+    //loop per preparare binding a variabile parametrizzata
+    @for $codTemaSintetico from 0 to 50 {
+        &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
+            border-color: cssvar(monithon-tema, $codTemaSintetico, background);
+            color: cssvar(monithon-tema, $codTemaSintetico, background) !important;
+        }
     }
 
     // stati e flag report
@@ -522,20 +458,11 @@
         color: var(--monithon-tema-color) !important;
         // }
 
-        &[data-oc-cod-tema-sintetico="4"] {
-            background-color: var(--monithon-tema-4-background);
-        }
-
-        &[data-oc-cod-tema-sintetico="5"] {
-            background-color: var(--monithon-tema-5-background);
-        }
-
-        &[data-oc-cod-tema-sintetico="6"] {
-            background-color: var(--monithon-tema-6-background);
-        }
-
-        &[data-oc-cod-tema-sintetico="7"] {
-            background-color: var(--monithon-tema-7-background);
+        //loop per preparare binding a variabile parametrizzata
+        @for $codTemaSintetico from 0 to 50 {
+            &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
+                background-color: cssvar(monithon-tema, $codTemaSintetico, background);
+            }
         }
 
         &[data-oc-cod-stato-progetto],
@@ -619,9 +546,11 @@ ion-row.monithon-filtri-secondari {
 .monithon-filtri-charts {
     background-color: var(--monithon-tema-sfondo-charts);
     width: 100%;
+
     ::ng-deep .mat-expansion-panel-body {
         padding-left: 3px !important;
     }
+
     .mat-expansion-panel-header {
         padding-left: 12px;
         padding-right: 14px;
@@ -636,11 +565,11 @@ ion-row.monithon-filtri-secondari {
             height: 54vh;
 
             @media not screen and (-webkit-min-device-pixel-ratio: 2),
-                not screen and (min--moz-device-pixel-ratio: 2),
-                not screen and (-o-min-device-pixel-ratio: 2/1),
-                not screen and (min-device-pixel-ratio: 2),
-                not screen and (min-resolution: 192dpi),
-                not screen and (min-resolution: 2dppx) {
+            not screen and (min--moz-device-pixel-ratio: 2),
+            not screen and (-o-min-device-pixel-ratio: 2/1),
+            not screen and (min-device-pixel-ratio: 2),
+            not screen and (min-resolution: 192dpi),
+            not screen and (min-resolution: 2dppx) {
                 height: 52vh;
             }
         }
@@ -802,11 +731,11 @@ ion-row.monithon-filtri-secondari {
     bottom: 0;
 
     @media not screen and (-webkit-min-device-pixel-ratio: 2),
-        not screen and (min--moz-device-pixel-ratio: 2),
-        not screen and (-o-min-device-pixel-ratio: 2/1),
-        not screen and (min-device-pixel-ratio: 2),
-        not screen and (min-resolution: 192dpi),
-        not screen and (min-resolution: 2dppx) {
+    not screen and (min--moz-device-pixel-ratio: 2),
+    not screen and (-o-min-device-pixel-ratio: 2/1),
+    not screen and (min-device-pixel-ratio: 2),
+    not screen and (min-resolution: 192dpi),
+    not screen and (min-resolution: 2dppx) {
         max-height: 85vh;
     }
 }
