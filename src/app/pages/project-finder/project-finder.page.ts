@@ -224,12 +224,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         this.ordinaRisultatiPerCriterio();
     }
 
-    getTemi() {
-        return this.monithonApiService.getTemi();
-    }
-
     ngAfterViewInit(): void {
-        Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise()])
+        Promise.all([this.getProgetti().toPromise(), this.monithonApiService.getTemi().toPromise()])
             .then(data => {
 
                 this.monithonMap.setCategorie(data[1].categorie.map(c => {
