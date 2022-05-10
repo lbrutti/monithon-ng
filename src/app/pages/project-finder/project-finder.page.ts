@@ -20,7 +20,7 @@ declare const dc, crossfilter;
 @Component({
     selector: 'app-home',
     templateUrl: 'project-finder.page.html',
-    styleUrls: ['project-finder.page.scss'],
+    styleUrls: ['project-finder.page.scss']
 })
 export class ProjectFinderPage implements OnInit, AfterViewInit {
 
@@ -228,6 +228,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         Promise.all([this.getProgetti().toPromise(), this.monithonApiService.getTemi().toPromise()])
             .then(data => {
 
+                //create ngStyle object with data driven properties
                 this.monithonMap.setCategorie(data[1].categorie.map(c => {
                     c.isSelected = true;
                     return c;
