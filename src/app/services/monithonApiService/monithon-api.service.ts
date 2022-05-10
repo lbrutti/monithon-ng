@@ -130,7 +130,7 @@ export class MonithonApiService {
                 map((res: any) => {
                     let temi: Tema[] = lodash.chain(res)
                         .keys()
-                        .map(tema => ({ 'ocCodTemaSintetico': tema, 'isActive': true }))
+                        .map(tema => ({ 'ocCodTemaSintetico': tema, 'isActive': true , stile:lodash.get(res, `[${tema}].stile`)}))
                         .value();
                     let categorie: Categoria[] = lodash.chain(res).map((props, tema) => {
                         let categorie: Categoria[] = props.categorie.map(c => ({ 'ocCodTemaSintetico': tema, 'ocCodCategoriaSpesa': c }));
