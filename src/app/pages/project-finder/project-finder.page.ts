@@ -227,6 +227,10 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
         Promise.all([this.getProgetti().toPromise(), this.monithonApiService.getTemi().toPromise()])
             .then(data => {
+                //create css variables for temi:
+                data[1].temi.map(t=>{
+                    document.documentElement.style.setProperty(`--monithon-tema-${t.ocCodTemaSintetico}-background`, t.stile.colore);
+                });
 
                 //create ngStyle object with data driven properties
                 this.monithonMap.setCategorie(data[1].categorie.map(c => {

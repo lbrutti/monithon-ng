@@ -341,11 +341,11 @@ body {
     --monithon-lista-report-in-dettaglio-font-color: #{$mid-green};
     --monithon-range-thumb-label-background: #{$dark-blue};
     --monithon-range-track-fill: #{$white};
-    --monithon-tema-5-background: #{$red};
-    --monithon-tema-6-background: #{$pink};
     --monithon-tema-color: #{$dark-blue};
-    --monithon-tema-4-background: #{$yellow};
-    --monithon-tema-7-background: #006FD2;
+    // --monithon-tema-5-background: #{$red};
+    // --monithon-tema-6-background: #{$pink};
+    // --monithon-tema-4-background: #{$yellow};
+    // --monithon-tema-7-background: #006FD2;
     --monithon-tema-sfondo-charts: #{$light-green};
     --monithon-tema-sfondo-filtri: #{$dark-green};
     --monithon-panel-chevron-color:#{$white};
@@ -463,11 +463,12 @@ body {
         --monithon-finanziamenti-foreground: #{$dark-blue};
         --monithon-range-thumb-label-background: #{$dark-blue};
         --monithon-range-track-fill: #000000;
-        --monithon-tema-5-background: #{$red};
-        --monithon-tema-6-background: #{$pink};
+        //colori temi ricevuti da BE
+        // --monithon-tema-5-background: #{$red};
+        // --monithon-tema-6-background: #{$pink};
+        // --monithon-tema-4-background: #{$yellow};
+        // --monithon-tema-7-background: #006FD2;
         --monithon-tema-color: #{$dark-blue};
-        --monithon-tema-4-background: #{$yellow};
-        --monithon-tema-7-background: #006FD2;
         --monithon-tema-sfondo-charts: #{$white};
         --monithon-tema-sfondo-filtri: #{$white};
         --monithon-panel-chevron-color:#{$white};
