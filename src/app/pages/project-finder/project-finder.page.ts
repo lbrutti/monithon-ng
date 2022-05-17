@@ -111,6 +111,11 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
     modalData: any;
     locale: string;
+
+    customActionSheetOptions: any = {
+        header: 'Colors',
+        subHeader: 'Select your favorite color'
+    };
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -830,6 +835,10 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
     setLanguage() {
         this.translocoService.setActiveLang(this.locale);
+    }
+
+    openLangPopover() {
+        console.log('openLangPopover');
     }
 }
 

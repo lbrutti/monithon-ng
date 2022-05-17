@@ -2,6 +2,11 @@
     <!-- <ion-toolbar class="monithon-header" >
     </ion-toolbar> -->
     <div id="aboutBtnContainer">
+        <!-- <ion-select class="langSelect" [(ngModel)]="locale" interface="popover" (ionChange)="setLanguage()">
+            <ion-select-option value="it-IT">{{'language.ita' | transloco}}</ion-select-option>
+            <ion-select-option value="en-GB">{{'language.en' | transloco}}</ion-select-option>
+        </ion-select> -->
+        <ion-icon class="monithon-lang-icon" slot="icon-only" (click)="openLangPopover()" name="globe-outline"></ion-icon>
         <ion-icon class="monithon-about-icon" slot="icon-only" (click)="openIonModal()"></ion-icon>
         <ion-icon class="monithon-logo-icon" slot="icon-only" (click)="goToMonithon()"></ion-icon>
     </div>
@@ -13,10 +18,6 @@
             [displayWith]="formatLabelSliderRaggio" [value]="raggioCorrente" (input)="onRadiusChange($event)"
             [disabled]="!monithonMap.filtroPerRaggioEnabled">
         </mat-slider>
-        <ion-select class="langSelect" [(ngModel)]="locale" interface="action-sheet" (ionChange)="setLanguage()">
-            <ion-select-option value="it-IT">{{'language.ita' | transloco}}</ion-select-option>
-            <ion-select-option value="en-GB">{{'language.en' | transloco}}</ion-select-option>
-        </ion-select>
     </div>
 
     <div #navigationControl id="navigationControl" class="navigation-control"
