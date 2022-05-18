@@ -11,10 +11,11 @@ import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, PopoverController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
 import { AboutPage } from '../about/about.page';
+import { LangSwitcherComponent } from 'src/app/lang-switcher/lang-switcher.component';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -124,7 +125,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         private translocoService: TranslocoService,
         public loadingController: LoadingController,
         private router: Router,
-        public modalController: ModalController
+        public modalController: ModalController,
+        public popoverController: PopoverController
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = lodash.isArray(this.router.url.match(/wizard/));
@@ -837,8 +839,20 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         this.translocoService.setActiveLang(this.locale);
     }
 
-    openLangPopover() {
+    async openLangPopover(evt:any) {
         console.log('openLangPopover');
+        const modal = await this.popoverController.create({
+            component: LangSwitcherComponent,
+            cssClass: 'monithon-about-modal',
+            translucent: true,
+            event:evt
+        });
+
+        modal.onDidDismiss().then((modelData) => {
+           console.log(modelData)
+        });
+
+        return await modal.present();
     }
 }
 

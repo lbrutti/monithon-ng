@@ -6,7 +6,7 @@
             <ion-select-option value="it-IT">{{'language.ita' | transloco}}</ion-select-option>
             <ion-select-option value="en-GB">{{'language.en' | transloco}}</ion-select-option>
         </ion-select> -->
-        <ion-icon class="monithon-lang-icon" slot="icon-only"  id="lang-switch" name="globe-outline"></ion-icon>
+        <ion-icon class="monithon-lang-icon" slot="icon-only"  id="lang-switch" name="globe-outline" (click)="openLangPopover($event)"></ion-icon>
         <ion-icon class="monithon-about-icon" slot="icon-only" (click)="openIonModal()"></ion-icon>
         <ion-icon class="monithon-logo-icon" slot="icon-only" (click)="goToMonithon()"></ion-icon>
     </div>
