@@ -117,6 +117,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         header: 'Colors',
         subHeader: 'Select your favorite color'
     };
+    langModal: HTMLIonPopoverElement;
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -839,20 +840,20 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         this.translocoService.setActiveLang(this.locale);
     }
 
-    async openLangPopover(evt:any) {
-        console.log('openLangPopover');
-        const modal = await this.popoverController.create({
+    async openLangPopover(evt: any) {
+        this.langModal = await this.popoverController.create({
             component: LangSwitcherComponent,
             cssClass: 'monithon-about-modal',
             translucent: true,
-            event:evt
-        });
+            event: evt,
+            componentProps: {
+                onChangeLang: (param) => {
+                    this.langModal.dismiss();
+                }
+            }
 
-        modal.onDidDismiss().then((modelData) => {
-           console.log(modelData)
         });
-
-        return await modal.present();
+        return await this.langModal.present();
     }
 }
 
