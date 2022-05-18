@@ -1,14 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
-  selector: 'app-lang-switcher',
-  templateUrl: './lang-switcher.component.html',
-  styleUrls: ['./lang-switcher.component.scss'],
+    selector: 'app-lang-switcher',
+    templateUrl: './lang-switcher.component.html',
+    styleUrls: ['./lang-switcher.component.scss'],
 })
 export class LangSwitcherComponent implements OnInit {
+    public availableLangs: string[];
+    public currentLang: string;
 
-  constructor() { }
+    constructor(private translocoService: TranslocoService) {
 
-  ngOnInit() {}
+    }
+
+    ngOnInit() {
+        this.availableLangs = (this.translocoService.getAvailableLangs() as string[]);
+        this.currentLang = this.translocoService.getActiveLang();
+
+        console.log(this.availableLangs);
+
+        console.log(this.currentLang)
+
+    }
 
 }
