@@ -15,7 +15,7 @@ import { LoadingController, ModalController, PopoverController } from '@ionic/an
 import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
 import { AboutPage } from '../about/about.page';
-import { LangSwitcherComponent } from 'src/app/lang-switcher/lang-switcher.component';
+import { LangSwitcherComponent } from 'src/app/components/lang-switcher/lang-switcher.component';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
