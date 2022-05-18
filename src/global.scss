@@ -29,6 +29,8 @@
 @import "~@ng-select/ng-select/themes/material.theme.css";
 @import "theme/ng-select-override.scss";
 
+@import "~flag-icons/sass/flag-icons.scss";
+
 .mapboxgl-ctrl-bottom-left,
 .mapbox-gl-draw_ctrl-draw-btn {
     display: none !important;

@@ -1,6 +1,6 @@
 <ion-list>
         <ion-item *ngFor="let langCode of availableLangs">
-           <ion-label>{{langCode}}</ion-label>
+           <ion-label><span [ngClass]="getFlag(langCode)"></span><span>{{langCode}}</span></ion-label>
         </ion-item>
 
 

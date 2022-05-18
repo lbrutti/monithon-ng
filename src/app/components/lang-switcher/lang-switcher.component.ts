@@ -24,4 +24,8 @@ export class LangSwitcherComponent implements OnInit {
 
     }
 
+    getFlag(langCode){
+        return `fi fi-${langCode.split('-')[1]}`.toLowerCase();
+    }
+
 }
