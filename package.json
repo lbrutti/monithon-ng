@@ -84,5 +84,9 @@
         "os": false,
         "path": false
     },
-    "description": "An Ionic project"
+    "description": "An Ionic project",
+    "engines": {
+        "node": "16.13.1"
+    },
+    "engineStrict": true
 }
