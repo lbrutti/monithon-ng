@@ -150,11 +150,16 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
+                let matchIdx = updateSubject.reports.map((p: Progetto) => p.uid);
+
                 if (!this.temi.length) {
                     this.temi = updateSubject.temi; // <- nessun problema di performance
                     this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
                 }
-                this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
+                this.progetti = updateSubject.progetti.map((p: Progetto & SearchResult) => {
+                    p.matches = lodash.includes(matchIdx, p.uid);
+                    return p;
+                }); 
                 this.statiAvanzamento.map(s => {
                     s.isActive = lodash.some(this.progetti, p => p.codStatoProgetto == s.codStatoProgetto);
                     s.isSelected = s.isActive;
@@ -231,7 +236,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         Promise.all([this.getProgetti().toPromise(), this.monithonApiService.getTemi().toPromise()])
             .then(data => {
                 //create css variables for temi:
-                data[1].temi.map(t=>{
+                data[1].temi.map(t => {
                     document.documentElement.style.setProperty(`--monithon-tema-${t.ocCodTemaSintetico}-background`, t.stile.colore);
                 });
 

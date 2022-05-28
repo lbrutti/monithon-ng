@@ -126,7 +126,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
                 let matchIdx = updateSubject.reports.map((r: Report) => r.uid);
-                this.reports.map(r => {
+                this.reports.map((r: Report & SearchResult) => {
                     r.matches = lodash.includes(matchIdx, r.uid);
                     r.distanza = (lodash.find(updateSubject.reports, report => report.uid == r.uid) || {}).distanza;
                 }); //= updateSubject.reports;
