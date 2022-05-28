@@ -625,7 +625,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         }
         else {
             const options = {
-                // threshold: 0.1,
+                threshold: 0.0,
+                ignoreLocation: true, 
                 keys: ['titolo']
             }
             const fuse = new Fuse(this.risultatiRicerca, options)
