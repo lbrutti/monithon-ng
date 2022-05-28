@@ -750,7 +750,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     }
 
     evidenziaRisultatiSuMappa() {
-        let idRisultati = this.risultatiRicerca.map(p => p.uid);
+        let idRisultati = this.getRisultati().map(p => p.uid);
         idRisultati = idRisultati.length == 0 ? null : idRisultati; // evit
         this.monithonMap.selectById(idRisultati);
     }
@@ -845,7 +845,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         }
         else {
             const options = {
-                // threshold: 0.1,
+                threshold: 0.0,
+                ignoreLocation: true,
                 keys: ['ocTitoloProgetto']
             }
             const fuse = new Fuse(this.risultatiRicerca, options)
