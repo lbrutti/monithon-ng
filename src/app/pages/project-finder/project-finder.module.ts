@@ -22,6 +22,7 @@ import { CapitalizePipeModule } from '../../pipes/capitalize/capitalize.pipe.mod
 import { FormatDistanzaPipeModule } from '../../pipes/format-distanza/format-distanza.pipe.module';
 import { UnescapePipeModule } from '../../pipes/unescape/unescape.pipe.module';
 import { FixencodedcharsPipeModule } from '../../pipes/fixencodedchars/fixencodedchars.pipe.module';
+import { MatIconModule } from '@angular/material/icon'
 @NgModule({
     imports: [
         CommonModule,
@@ -40,7 +41,8 @@ import { FixencodedcharsPipeModule } from '../../pipes/fixencodedchars/fixencode
         FormatDistanzaPipeModule,
         UnescapePipeModule,
         FixencodedcharsPipeModule,
-        MatSliderModule    ],
+        MatSliderModule,
+        MatIconModule   ],
     declarations: [ProjectFinderPage],
 })
 export class ProjectFinderPageModule { }

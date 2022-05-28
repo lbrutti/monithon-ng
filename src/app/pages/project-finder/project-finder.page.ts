@@ -15,6 +15,8 @@ import { LoadingController, ModalController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
 import { AboutPage } from '../about/about.page';
+import Fuse from 'fuse.js';
+import { SearchResult } from 'src/app/model/searchResult.interface';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -42,8 +44,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
 
     public espandiListaRisultati: boolean = false;
-    progetti: Array<Progetto> = [];
-    risultatiRicerca: Array<Progetto> = [];
+    progetti: Array<Progetto & SearchResult> = [];
+    risultatiRicerca: Array<Progetto & SearchResult> = [];
 
     //variabili charts
     budgetChart: any;
@@ -110,6 +112,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     isWizardMode: boolean = false;
 
     modalData: any;
+    titleSearchTerm: any;
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -825,6 +828,27 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
     goToMonithon() {
         window.open("https://www.monithon.eu/", "_blank");
+    }
+
+    searchByTitle(reset: boolean = false) {
+        if (reset || !this.titleSearchTerm) {
+            this.risultatiRicerca.map((r, i) => r.matches = true);
+        }
+        else {
+            const options = {
+                threshold: 0.1,
+                keys: ['titolo']
+            }
+            const fuse = new Fuse(this.risultatiRicerca, options)
+            let matchingRes = fuse.search(this.titleSearchTerm).map(r => r.refIndex);
+            this.risultatiRicerca.map((r, i) => r.matches = matchingRes.indexOf(i) >= 0);
+        }
+        this.evidenziaRisultatiSuMappa();
+
+    }
+    resetTitleSearch() {
+        this.titleSearchTerm = '';
+        this.searchByTitle(true);
     }
 }
 
