@@ -15,6 +15,8 @@ import { LoadingController, ModalController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
 import { AboutPage } from '../about/about.page';
+import Fuse from 'fuse.js';
+import { SearchResult } from 'src/app/model/searchResult.interface';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -42,8 +44,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
 
     public espandiListaRisultati: boolean = false;
-    progetti: Array<Progetto> = [];
-    risultatiRicerca: Array<Progetto> = [];
+    progetti: Array<Progetto & SearchResult> = [];
+    risultatiRicerca: Array<Progetto & SearchResult> = [];
 
     //variabili charts
     budgetChart: any;
@@ -110,6 +112,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     isWizardMode: boolean = false;
 
     modalData: any;
+    titleSearchTerm: any;
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -147,11 +150,16 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
+                let matchIdx = updateSubject.progetti.map((p: Progetto) => p.uid);
+
                 if (!this.temi.length) {
                     this.temi = updateSubject.temi; // <- nessun problema di performance
                     this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
                 }
-                this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
+                this.progetti = updateSubject.progetti.map((p: Progetto & SearchResult) => {
+                    p.matches = lodash.includes(matchIdx, p.uid);
+                    return p;
+                }); 
                 this.statiAvanzamento.map(s => {
                     s.isActive = lodash.some(this.progetti, p => p.codStatoProgetto == s.codStatoProgetto);
                     s.isSelected = s.isActive;
@@ -225,10 +233,13 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        Promise.all([this.getProgetti().toPromise(), this.monithonApiService.getTemi().toPromise()])
+        Promise.all([
+            this.monithonApiService.getProgetti().toPromise(), 
+            this.monithonApiService.getTemi().toPromise()
+        ])
             .then(data => {
                 //create css variables for temi:
-                data[1].temi.map(t=>{
+                data[1].temi.map(t => {
                     document.documentElement.style.setProperty(`--monithon-tema-${t.ocCodTemaSintetico}-background`, t.stile.colore);
                 });
 
@@ -242,7 +253,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
                     t.isActive = true;
                     return t;
                 }));
-                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
+                this.progetti = data[0];
+                this.monithonMap.renderMap(this.mapContainer.nativeElement, this.progetti, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
 
@@ -692,8 +704,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         return crossFilterData;
     }
 
-    private getProgetti(): Observable<any> {
-        return this.monithonApiService.getProgetti();
+    private getProgetti(): Array<Progetto & SearchResult> {
+        return this.progetti.filter(p=>p.matches);
     }
 
     //Filtri di primo livello:
@@ -738,7 +750,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     }
 
     evidenziaRisultatiSuMappa() {
-        let idRisultati = this.risultatiRicerca.map(p => p.uid);
+        let idRisultati = this.getRisultati().map(p => p.uid);
         idRisultati = idRisultati.length == 0 ? null : idRisultati; // evit
         this.monithonMap.selectById(idRisultati);
     }
@@ -747,7 +759,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.codStatoProgetto);
         let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);
 
-        this.risultatiRicerca = this.progetti.filter((progetto: Progetto) => {
+        this.risultatiRicerca = this.getProgetti().filter((progetto: Progetto) => {
             let matchesStato = ((reportFlagSelezionate.length == 0) || lodash.includes(reportFlagSelezionate, progetto.hasReport));
             let matchesReportFlags = ((statiAvanzamentoSelezionati.length == 0) || lodash.includes(statiAvanzamentoSelezionati, progetto.codStatoProgetto))
 
@@ -825,6 +837,32 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
     goToMonithon() {
         window.open("https://www.monithon.eu/", "_blank");
+    }
+
+    searchByTitle(reset: boolean = false) {
+        if (reset || !this.titleSearchTerm) {
+            this.risultatiRicerca.map((r, i) => r.matches = true);
+        }
+        else {
+            const options = {
+                threshold: 0.0,
+                ignoreLocation: true,
+                keys: ['ocTitoloProgetto']
+            }
+            const fuse = new Fuse(this.risultatiRicerca, options)
+            let matchingRes = fuse.search(this.titleSearchTerm).map(r => r.refIndex);
+            this.risultatiRicerca.map((r, i) => r.matches = matchingRes.indexOf(i) >= 0);
+        }
+        this.evidenziaRisultatiSuMappa();
+
+    }
+    resetTitleSearch() {
+        this.titleSearchTerm = '';
+        this.searchByTitle(true);
+    }
+
+    getRisultati() {
+        return this.risultatiRicerca.filter(r => r.matches);
     }
 }
 

@@ -348,12 +348,13 @@
 
                             </ion-col>
                         </ion-row>
+                        <!-- ricerca testuale -->
                         <ion-row>
                             <ion-col>
                                 <mat-form-field floatLabel='never' class="monithon-search-input">
                                     <mat-icon matPrefix>search</mat-icon>
                                     <input (change)="searchReportByTitle()" matInput type="search"
-                                        [placeholder]="'report.cercaPerTitolo' | transloco" class="search-input"
+                                        [placeholder]="'cercaPerTitolo' | transloco" class="search-input"
                                         [(ngModel)]="titleSearchTerm">
                                     <button mat-button *ngIf="titleSearchTerm" matSuffix mat-icon-button
                                         aria-label="Clear" (click)="resetTitleSearch()">

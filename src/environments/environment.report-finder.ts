@@ -51,6 +51,7 @@ export const environment = {
         port: "80",
         apiroute: "api"
     },
+    translationServiceURL: '/assets/i18n/',
     version: version
 };
 
