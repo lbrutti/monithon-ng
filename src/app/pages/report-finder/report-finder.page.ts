@@ -242,7 +242,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.reportMap.setProgrammiOperativi(this.programmiOperativi);
 
 
-                this.reportMap.renderMap(this.mapContainer.nativeElement, listaReport, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
+                this.reportMap.renderMap(this.mapContainer.nativeElement, this.reports, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
 
@@ -625,7 +625,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         }
         else {
             const options = {
-                threshold: 0.1,
+                // threshold: 0.1,
                 keys: ['titolo']
             }
             const fuse = new Fuse(this.risultatiRicerca, options)

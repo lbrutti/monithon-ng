@@ -23,6 +23,8 @@ import { FormatDistanzaPipeModule } from '../../pipes/format-distanza/format-dis
 import { UnescapePipeModule } from '../../pipes/unescape/unescape.pipe.module';
 import { FixencodedcharsPipeModule } from '../../pipes/fixencodedchars/fixencodedchars.pipe.module';
 import { MatIconModule } from '@angular/material/icon'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
     imports: [
         CommonModule,
@@ -42,6 +44,8 @@ import { MatIconModule } from '@angular/material/icon'
         UnescapePipeModule,
         FixencodedcharsPipeModule,
         MatSliderModule,
+        MatFormFieldModule,
+        MatInputModule,
         MatIconModule   ],
     declarations: [ProjectFinderPage],
 })

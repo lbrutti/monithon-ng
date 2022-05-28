@@ -301,7 +301,7 @@
                                 <h2 class="monithon-risultati-header-titolo">{{'resultContainerTitle' | transloco}}
                                 </h2>
                                 <h1 class="monithon-risultati-contatore" [attr.data-hidden]="espandiListaRisultati"
-                                    #resultCounter>{{this.risultatiRicerca.length | number}} </h1>
+                                    #resultCounter>{{this.getRisultati().length | number}} </h1>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
@@ -311,7 +311,7 @@
                         <ion-row>
                             <ion-col size="8">
                                 <h1 class="monithon-risultati-contatore" [attr.data-hidden]="!espandiListaRisultati"
-                                    #resultCounter>{{this.risultatiRicerca.length |
+                                    #resultCounter>{{this.getRisultati().length |
                                     number}}
                                 </h1>
                             </ion-col>
@@ -352,7 +352,7 @@
                                 <mat-form-field floatLabel='never' class="monithon-search-input">
                                     <mat-icon matPrefix>search</mat-icon>
                                     <input (change)="searchByTitle()" matInput type="search"
-                                        [placeholder]="'project.cercaPerTitolo' | transloco" class="search-input" [(ngModel)]="titleSearchTerm">
+                                        [placeholder]="'cercaPerTitolo' | transloco" class="search-input" [(ngModel)]="titleSearchTerm">
                                     <button mat-button *ngIf="titleSearchTerm" matSuffix mat-icon-button aria-label="Clear"
                                         (click)="resetTitleSearch()">
                                         <mat-icon>close</mat-icon>
@@ -366,7 +366,7 @@
                 <!-- lista risultati -->
                 <cdk-virtual-scroll-viewport #listaRisultati itemSize="100" minBufferPx="500" maxBufferPx="1000"
                     class="monithon-lista-progetti">
-                    <ion-item color="light" *cdkVirtualFor="let progetto of risultatiRicerca;"
+                    <ion-item color="light" *cdkVirtualFor="let progetto of getRisultati();"
                         class="monithon-lista-progetti__progetto"
                         [attr.data-oc-cod-tema-sintetico]="progetto.ocCodTemaSintetico"
                         [ngClass]="{'selected': (progetto.uid==progettoSelezionato.uid)}" lines="none">

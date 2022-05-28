@@ -150,7 +150,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
-                let matchIdx = updateSubject.reports.map((p: Progetto) => p.uid);
+                let matchIdx = updateSubject.progetti.map((p: Progetto) => p.uid);
 
                 if (!this.temi.length) {
                     this.temi = updateSubject.temi; // <- nessun problema di performance
@@ -233,7 +233,10 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        Promise.all([this.getProgetti().toPromise(), this.monithonApiService.getTemi().toPromise()])
+        Promise.all([
+            this.monithonApiService.getProgetti().toPromise(), 
+            this.monithonApiService.getTemi().toPromise()
+        ])
             .then(data => {
                 //create css variables for temi:
                 data[1].temi.map(t => {
@@ -250,7 +253,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
                     t.isActive = true;
                     return t;
                 }));
-                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
+                this.progetti = data[0];
+                this.monithonMap.renderMap(this.mapContainer.nativeElement, this.progetti, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
 
@@ -700,8 +704,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         return crossFilterData;
     }
 
-    private getProgetti(): Observable<any> {
-        return this.monithonApiService.getProgetti();
+    private getProgetti(): Array<Progetto & SearchResult> {
+        return this.progetti.filter(p=>p.matches);
     }
 
     //Filtri di primo livello:
@@ -755,7 +759,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.codStatoProgetto);
         let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);
 
-        this.risultatiRicerca = this.progetti.filter((progetto: Progetto) => {
+        this.risultatiRicerca = this.getProgetti().filter((progetto: Progetto) => {
             let matchesStato = ((reportFlagSelezionate.length == 0) || lodash.includes(reportFlagSelezionate, progetto.hasReport));
             let matchesReportFlags = ((statiAvanzamentoSelezionati.length == 0) || lodash.includes(statiAvanzamentoSelezionati, progetto.codStatoProgetto))
 
@@ -841,8 +845,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         }
         else {
             const options = {
-                threshold: 0.1,
-                keys: ['titolo']
+                // threshold: 0.1,
+                keys: ['ocTitoloProgetto']
             }
             const fuse = new Fuse(this.risultatiRicerca, options)
             let matchingRes = fuse.search(this.titleSearchTerm).map(r => r.refIndex);
@@ -854,6 +858,10 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     resetTitleSearch() {
         this.titleSearchTerm = '';
         this.searchByTitle(true);
+    }
+
+    getRisultati() {
+        return this.risultatiRicerca.filter(r => r.matches);
     }
 }
 
