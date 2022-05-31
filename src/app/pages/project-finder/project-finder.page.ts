@@ -128,7 +128,6 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = lodash.isArray(this.router.url.match(/wizard/));
-
     }
 
     ngOnInit(): void {
@@ -236,9 +235,10 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+
         Promise.all([
-            this.monithonApiService.getProgetti().toPromise(),
-            this.monithonApiService.getTemi().toPromise()
+            this.monithonApiService.getProgetti(this.tema).toPromise(),
+            this.monithonApiService.getTemi(this.tema).toPromise()
         ])
             .then(data => {
                 let temi = data[1];
