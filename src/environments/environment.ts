@@ -7,6 +7,10 @@ export const environment = {
     routes: [
         //rotte per project finder
         {
+            path: 'tema/:ocCodTemaSintetico',
+            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
+        },
+        {
             path: '#wizard',
             loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
         },
