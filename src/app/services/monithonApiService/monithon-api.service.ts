@@ -39,6 +39,51 @@ export class MonithonApiService {
 
     //FIXME: lista progetti da ws monithon: va passato query param con codice tema per filtraggio
 
+    public getProgetti_REAL(ocCodTemaSintetico: string = ''): Observable<any[]> {
+        let url: string = this.url + '/mapdata';
+        if (ocCodTemaSintetico.length) {
+            url += `?tema=${ocCodTemaSintetico}`;
+        }
+        return this.httpClient.get<any[]>(url)
+            .pipe(
+                map((res) => {
+                    return res.map((p: any) => {
+
+                        p.lat = parseFloat(p.lat);
+                        p.long = parseFloat(p.long);
+                        try {
+                            p.ocDataInizioProgetto = parseInt(p.ocDataInizioProgetto);
+
+                        } catch (error) {
+                            console.error(p.uid);
+                            console.error(error);
+                        }
+                        try {
+                            p.ocFinanzTotPubNetto = parseFloat(p.ocFinanzTotPubNetto);
+
+                        } catch (error) {
+                            console.error(p.uid);
+                            console.error(error);
+
+                        }
+                        try {
+                            p.reports = lodash.map(p.reports, (data, reportId) => ({ id: reportId, dataAggiornamento: data }));
+                            p.hasReport = p.reports.length > 0;
+                        } catch (error) {
+                            console.error(p.uid);
+                            console.error(error);
+
+                        }
+                        return p;
+                    });
+                }),
+                catchError(e => {
+                    console.error(e);
+                    return of(e);
+                })
+            );
+    }
+
     public getProgetti(ocCodTemaSintetico: string = ''): Observable<any[]> {
         let url: string = this.url + '/mapdata';
         if (ocCodTemaSintetico.length) {
@@ -102,7 +147,7 @@ export class MonithonApiService {
     }
 
     //FIXME: lista temi da ws monithon: va passato query param con codice tema per filtraggio
-    public getTemi_current(ocCodTemaSintetico:string=''): Observable<any> {
+    public getTemi_REAL(ocCodTemaSintetico:string=''): Observable<any> {
         let url: string = this.url + '/mdTemi';
         if (ocCodTemaSintetico.length) {
             url += `?tema=${ocCodTemaSintetico}`;

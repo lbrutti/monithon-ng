@@ -262,6 +262,11 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
                     return t;
                 }));
                 this.progetti = data[0];
+                
+                //FIXME: RIMUOVERE FILTRAGGIO MOCK!
+                if(this.tema.length){
+                    this.progetti = this.progetti.filter(p=>+p.ocCodTemaSintetico == +this.tema);
+                }
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, this.progetti, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
