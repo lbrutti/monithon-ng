@@ -4,3 +4,20 @@
 ion-content {
     background: var(--monithon-tema-color) !important;
 }
+
+#container {
+    display: flex;
+}
+
+#chip-container {
+    margin: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.monithon-temi{
+    max-width: 50vw;
+}
