@@ -35,6 +35,10 @@ export const environment = {
             loadChildren: () => import('../app/pages/courtesy/courtesy.module').then(m => m.CourtesyPageModule)
         },
         {
+            path: 'temi',
+            loadChildren: () => import('../app/pages/temi/temi.module').then(m => m.TemiPageModule)
+        },
+        {
             path: '',
             redirectTo: '',
             pathMatch: 'full'
