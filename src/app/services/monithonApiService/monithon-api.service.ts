@@ -37,8 +37,14 @@ export class MonithonApiService {
 
     }
 
-    public getProgetti(): Observable<any[]> {
-        return this.httpClient.get<any[]>(this.url + '/mapdata')
+    //FIXME: lista progetti da ws monithon: va passato query param con codice tema per filtraggio
+
+    public getProgetti(ocCodTemaSintetico: string = ''): Observable<any[]> {
+        let url: string = this.url + '/mapdata';
+        if (ocCodTemaSintetico.length) {
+            url += `?tema=${ocCodTemaSintetico}`;
+        }
+        return this.httpClient.get<any[]>(url)
             .pipe(
                 map((res) => {
                     return res.map((p: any) => {
@@ -95,9 +101,14 @@ export class MonithonApiService {
             );
     }
 
-    public getTemi_current(): Observable<any> {
+    //FIXME: lista temi da ws monithon: va passato query param con codice tema per filtraggio
+    public getTemi_REAL(ocCodTemaSintetico:string=''): Observable<any> {
+        let url: string = this.url + '/mdTemi';
+        if (ocCodTemaSintetico.length) {
+            url += `?tema=${ocCodTemaSintetico}`;
+        }
         //{"4":[12,10,15,14,11,13,16],"6":[95,91,94,93,92],"5":[87,86,85,19,20,84,22,17,18,88,21,89,23,500],"7":[43]}
-        from(temiSintetici)
+        // from(temiSintetici)
         // return this.httpClient.get<any>(this.url + '/mdTemi')
         return this.httpClient.get<any>(this.url + '/mdTemi')
             .pipe(
@@ -124,13 +135,18 @@ export class MonithonApiService {
 
     }
 
-    public getTemi(): Observable<any> {
-        return of(temiSintetici)
+    public getTemi(ocCodTemaSintetico: string = ''): Observable<any> {
+        let temiMock = temiSintetici;
+        if(ocCodTemaSintetico.length){
+            temiMock = {};
+            lodash.set(temiMock, ocCodTemaSintetico, lodash.get(temiSintetici, ocCodTemaSintetico));
+        }
+        return of(temiMock)
             .pipe(
                 map((res: any) => {
                     let temi: Tema[] = lodash.chain(res)
                         .keys()
-                        .map(tema => ({ 'ocCodTemaSintetico': tema, 'isActive': true , stile:lodash.get(res, `[${tema}].stile`)}))
+                        .map(tema => ({ 'ocCodTemaSintetico': tema, 'isActive': true, stile: lodash.get(res, `[${tema}].stile`) }))
                         .value();
                     let categorie: Categoria[] = lodash.chain(res).map((props, tema) => {
                         let categorie: Categoria[] = props.categorie.map(c => ({ 'ocCodTemaSintetico': tema, 'ocCodCategoriaSpesa': c }));
@@ -144,7 +160,7 @@ export class MonithonApiService {
                     return {
                         temi: temi,
                         categorie: categorie,
-                        stili:stili
+                        stili: stili
                     }
                 }),
                 catchError(e => {
