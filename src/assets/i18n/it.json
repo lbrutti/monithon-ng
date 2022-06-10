@@ -5,7 +5,10 @@
         "4": "Energia",
         "5": "Ambiente",
         "6": "Cultura e turismo",
-        "7": "Mobilità sostenibile"
+        "7": "Mobilità sostenibile",
+        "wizard":{
+            "titolo":"Scegli il tema"
+        }
     },
     "categorie": {
         "17": "Gestione dei rifiuti domestici (prevenzione e riciclaggio)",

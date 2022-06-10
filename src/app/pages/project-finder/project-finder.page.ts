@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import moment from 'moment';
-import { Observable, Observer } from 'rxjs';
+import { Observer } from 'rxjs';
 import { Progetto } from '../../model/progetto/progetto';
 import { MonithonApiService } from '../../services/monithonApiService/monithon-api.service';
 
@@ -13,10 +13,11 @@ import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AboutPage } from '../about/about.page';
 import Fuse from 'fuse.js';
 import { SearchResult } from 'src/app/model/searchResult.interface';
+import { Tema } from 'src/app/model/tema/tema.interface';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -113,6 +114,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
     modalData: any;
     titleSearchTerm: any;
+    tema: string = '';
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -121,25 +123,25 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         private translocoService: TranslocoService,
         public loadingController: LoadingController,
         private router: Router,
-        public modalController: ModalController
+        public modalController: ModalController,
+        private route: ActivatedRoute
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = lodash.isArray(this.router.url.match(/wizard/));
-
     }
 
     ngOnInit(): void {
 
+        this.route.params.subscribe((params: Params) => {
+            this.tema = lodash.get(params, 'ocCodTemaSintetico', '');
+        });
         let loaderOptions = {
             message: "",
             cssClass: 'monithon-loader',
             spinner: null
 
         };
-        // if (!(isPlatform('desktop') || isPlatform('tablet'))) {
-        //     loaderOptions.message = this.translocoService.translate("onlyDesktopAvailable")
-        //     loaderOptions.cssClass = 'monithon-loader monithon-loader-only-desktop'
-        // }
+      
         this.loadingController
             .create(loaderOptions)
             .then((loading) => {
@@ -159,7 +161,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
                 this.progetti = updateSubject.progetti.map((p: Progetto & SearchResult) => {
                     p.matches = lodash.includes(matchIdx, p.uid);
                     return p;
-                }); 
+                });
                 this.statiAvanzamento.map(s => {
                     s.isActive = lodash.some(this.progetti, p => p.codStatoProgetto == s.codStatoProgetto);
                     s.isSelected = s.isActive;
@@ -233,27 +235,38 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+
         Promise.all([
-            this.monithonApiService.getProgetti().toPromise(), 
-            this.monithonApiService.getTemi().toPromise()
+            this.monithonApiService.getProgetti(this.tema).toPromise(),
+            this.monithonApiService.getTemi(this.tema).toPromise()
         ])
             .then(data => {
+                let temi = data[1];
+
+                if (this.tema.length) {
+                    temi.temi = temi.temi.filter((t: Tema) => t.ocCodTemaSintetico === this.tema);
+                }
                 //create css variables for temi:
-                data[1].temi.map(t => {
+                temi.temi.map(t => {
                     document.documentElement.style.setProperty(`--monithon-tema-${t.ocCodTemaSintetico}-background`, t.stile.colore);
                 });
 
                 //create ngStyle object with data driven properties
-                this.monithonMap.setCategorie(data[1].categorie.map(c => {
+                this.monithonMap.setCategorie(temi.categorie.map(c => {
                     c.isSelected = true;
                     return c;
                 }));
-                this.monithonMap.setTemi(data[1].temi.map(t => {
+                this.monithonMap.setTemi(temi.temi.map(t => {
                     t.isSelected = true;
                     t.isActive = true;
                     return t;
                 }));
                 this.progetti = data[0];
+                
+                //FIXME: RIMUOVERE FILTRAGGIO MOCK!
+                if(this.tema.length){
+                    this.progetti = this.progetti.filter(p=>+p.ocCodTemaSintetico == +this.tema);
+                }
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, this.progetti, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
@@ -705,7 +718,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     }
 
     private getProgetti(): Array<Progetto & SearchResult> {
-        return this.progetti.filter(p=>p.matches);
+        return this.progetti.filter(p => p.matches);
     }
 
     //Filtri di primo livello:

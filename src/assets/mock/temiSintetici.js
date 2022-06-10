@@ -9,16 +9,16 @@ let temiSintetici = {
             "colore": "#FFC921"
         }
     },
-    "6": {
-        "categorie": [95, 91, 94, 93, 92],
-        "stile": {
-            "colore": "#FDD0B3"
-        }
-    },
     "5": {
         "categorie": [87, 86, 85, 19, 20, 84, 22, 17, 18, 88, 21, 89, 23, 500],
         "stile": {
             "colore": "#EA4A3E"
+        }
+    },
+    "6": {
+        "categorie": [95, 91, 94, 93, 92],
+        "stile": {
+            "colore": "#FDD0B3"
         }
     },
     "7": {
