@@ -210,9 +210,9 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
         let projectSelectionObserver: Observer<any> = {
             next: progetto => {
-                // this.keepProgetto = !lodash.isNil(progetto);
                 this.onDettaglioProgettoHandleClick(progetto);
                 this.evidenziaProgettoInLista(progetto);
+                this.onProgettoClick(progetto);
             },
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
@@ -804,9 +804,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
      * onProgettoClick
      */
     public onProgettoClick(progetto: Progetto) {
-        // this.monithonMap.highlightById([progetto.uid]);
         this.showDettaglioProgetto(progetto);
-
     }
 
 
