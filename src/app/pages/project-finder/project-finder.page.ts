@@ -11,7 +11,7 @@ import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, Platform } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AboutPage } from '../about/about.page';
@@ -115,6 +115,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     modalData: any;
     titleSearchTerm: any;
     tema: string = '';
+    isMobile: boolean;
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -124,7 +125,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         public loadingController: LoadingController,
         private router: Router,
         public modalController: ModalController,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private platform: Platform
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = lodash.isArray(this.router.url.match(/wizard/));
@@ -135,13 +137,26 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         this.route.params.subscribe((params: Params) => {
             this.tema = lodash.get(params, 'ocCodTemaSintetico', '');
         });
+
+
+        let hasTouchScreen = false;
+        if ("maxTouchPoints" in navigator) {
+            hasTouchScreen = navigator.maxTouchPoints > 0;
+        } else if ("msMaxTouchPoints" in navigator) {
+            hasTouchScreen = navigator['msMaxTouchPoints'] > 0;
+        }
+
+
+        let goodDevice = this.platform.is('desktop') || this.platform.is('tablet') || !hasTouchScreen;
+        this.isMobile = !goodDevice;
+
         let loaderOptions = {
             message: "",
             cssClass: 'monithon-loader',
             spinner: null
 
         };
-      
+
         this.loadingController
             .create(loaderOptions)
             .then((loading) => {
@@ -262,10 +277,10 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
                     return t;
                 }));
                 this.progetti = data[0];
-                
+
                 //FIXME: RIMUOVERE FILTRAGGIO MOCK!
-                if(this.tema.length){
-                    this.progetti = this.progetti.filter(p=>+p.ocCodTemaSintetico == +this.tema);
+                if (this.tema.length) {
+                    this.progetti = this.progetti.filter(p => +p.ocCodTemaSintetico == +this.tema);
                 }
                 this.monithonMap.renderMap(this.mapContainer.nativeElement, this.progetti, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
