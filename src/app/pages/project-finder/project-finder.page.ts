@@ -210,7 +210,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
         let projectSelectionObserver: Observer<any> = {
             next: progetto => {
-                this.onDettaglioProgettoHandleClick(progetto);
+                // this.onDettaglioProgettoHandleClick(progetto);
                 this.evidenziaProgettoInLista(progetto);
                 this.onProgettoClick(progetto);
             },
