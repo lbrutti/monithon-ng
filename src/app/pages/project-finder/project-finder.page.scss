@@ -78,7 +78,6 @@
 #filterContainer {
     margin-top: auto;
     width: 66vw;
-    //min-height: 66vh;
 }
 
 //https://stackoverflow.com/questions/53195131/angular-material-mat-expansion-panel-body-style-not-being-applied
@@ -765,6 +764,7 @@ ion-row.monithon-filtri-secondari {
         }
 
         &.selected {
+
             //loop per preparare binding a variabile parametrizzata
             @for $codTemaSintetico from 0 to 50 {
                 &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
@@ -974,6 +974,49 @@ monithon-drawer {
         .mat-form-field-label-wrapper {
             top: 0;
             padding-top: 0;
+        }
+    }
+}
+
+ion-content.mobile {
+    .right-column {
+        display: none;
+    }
+
+    #filterContainer {
+        width: 100vw;
+    }
+
+    .mat-chip-list.monithon-categorie {
+        height: 50vh;
+    }
+
+    .monithon-filtri {
+        max-height: 50vh;
+        overflow-y: scroll;
+
+        &.mat-expanded {
+            .monithon-categorie-container {
+                height: 50vh;
+            }
+        }
+    }
+
+    .monithon-filtri-charts {
+
+        &.mat-expanded {
+            ::ng-deep .mat-expansion-panel-content {
+                height: 33vh;
+
+                @media not screen and (-webkit-min-device-pixel-ratio: 2),
+                not screen and (min--moz-device-pixel-ratio: 2),
+                not screen and (-o-min-device-pixel-ratio: 2/1),
+                not screen and (min-device-pixel-ratio: 2),
+                not screen and (min-resolution: 192dpi),
+                not screen and (min-resolution: 2dppx) {
+                    height: 30vh;
+                }
+            }
         }
     }
 }

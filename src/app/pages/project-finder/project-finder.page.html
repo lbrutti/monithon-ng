@@ -200,7 +200,7 @@
                     </mat-expansion-panel-header>
                     <ion-grid class="ion-no-padding">
                         <ion-row>
-                            <ion-col size="6" class="ion-no-margin monithon-categorie-container">
+                            <ion-col size-lg class="ion-no-margin monithon-categorie-container">
                                 <div #categorieDiSpesaContainer id="categorieDiSpesaContainer">
                                     <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
@@ -218,9 +218,8 @@
                                     </mat-chip-list>
                                 </div>
                             </ion-col>
-                            <ion-col size="6" class="ion-no-margin monithon-chart-container-col">
-                                <!-- INIZIALIZZARE COME ESPANSO -->
-                                <mat-expansion-panel expanded="true" class="monithon-filtri-charts" id="chartPanel">
+                            <ion-col size-lg class="ion-no-margin monithon-chart-container-col">
+                                <mat-expansion-panel [expanded]="!isMobile" class="monithon-filtri-charts" id="chartPanel">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title class="monithon-titolo-sezione monithon-titolo-sezione-budget">
                                             {{'chartPanelTitle'|transloco}}
