@@ -1,4 +1,4 @@
-import { version } from "package.json";
+import { FullSemVer } from "../assets/version.json";
 
 export const environment = {
     routes: [
@@ -66,5 +66,5 @@ export const environment = {
     translationServiceURL: '/assets/i18n/',
     //[SM-92] : decommentare e sostituire con url corretta.
     // translationServiceURL: 'https://projectfinder.monithon.eu/assets/i18n/',
-    version: version
+    version: FullSemVer
 };
