@@ -4,13 +4,43 @@
 
 let temiSintetici = {
     "4": {
-        "categorie": [12, 10, 15, 14, 11, 13, 16],
+        "categorie": [10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16],
         "stile": {
             "colore": "#FFC921"
         }
     },
+    "6": {
+        "categorie": [91,
+            92,
+            94,
+            93,
+            95],
+        "stile": {
+            "colore": "#FDD0B3"
+        }
+    },
     "5": {
-        "categorie": [87, 86, 85, 19, 20, 84, 22, 17, 18, 88, 21, 89, 23, 500],
+        "categorie": [500,
+            17,
+            18,
+            20,
+            22,
+            85,
+            86,
+            19,
+            21,
+            23,
+            84,
+            87,
+            88,
+            89,
+            90],
         "stile": {
             "colore": "#EA4A3E"
         }
@@ -22,7 +52,7 @@ let temiSintetici = {
         }
     },
     "7": {
-        "categorie": [43],
+        "categorie": [43, 44],
         "stile": {
             "colore": "#006FD2"
         }
