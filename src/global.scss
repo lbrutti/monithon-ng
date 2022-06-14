@@ -330,3 +330,13 @@ app-courtesy {
         }
     }
 }
+
+
+ion-content{
+    &.mobile{
+        .mapboxgl-ctrl-geocoder {
+                max-width: 75vw !important;
+                width: 75vw !important;
+            }
+    }
+}
