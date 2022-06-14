@@ -223,7 +223,8 @@
                                     id="chartPanel">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title class="monithon-titolo-sezione monithon-titolo-sezione-budget">
-                                            {{'chartPanelTitle'|transloco}}
+                                            <span *ngIf="!isMobile">{{'chartPanelTitle'|transloco}}</span>
+                                            <span *ngIf="isMobile">{{'chartPanelTitleMobile'|transloco}}</span>
                                         </mat-panel-title>
                                     </mat-expansion-panel-header>
                                     <div id="chartsContainer" [ngClass]="{'mobile': isMobile}">

@@ -63,6 +63,7 @@
     "schedaProgetto": "Scheda progetto",
     "monithonFiltriTitle": "Categorie",
     "chartPanelTitle": "Budget, anno e stato",
+    "chartPanelTitleMobile":"Stato e monitoraggi",
     "budgetChartTitle": "Budget",
     "annoChartTitle": "Anno",
     "resultContainerTitle": "Progetti finanziati",
