@@ -186,14 +186,20 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
                     flag.isActive = lodash.some(this.progetti, p => p.hasReport == flag.hasReport);
                     flag.isSelected = flag.isActive;
                 });
-                if (this.redrawCharts) {
-                    try {
-                        this.renderCharts(this.progetti);
-                    } catch (error) {
-                        console.error(error);
-                    }
+                if (this.isMobile) {
+                    this.filtraRisultati();
+                    this.evidenziaRisultatiSuMappa();
                 } else {
-                    this.counterValue = this.progetti.length;
+
+                    if (this.redrawCharts) {
+                        try {
+                            this.renderCharts(this.progetti);
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    } else {
+                        this.counterValue = this.progetti.length;
+                    }
                 }
 
 
