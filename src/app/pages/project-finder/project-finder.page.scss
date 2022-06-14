@@ -129,10 +129,6 @@
 #chartsContainer {
     overflow-y: scroll;
     @include hideScrollbar();
-
-    &.mobile {
-        display: none;
-    }
 }
 
 .monithon-chart-container-col {
@@ -1033,5 +1029,9 @@ ion-content.mobile {
 
     .monithon-dettaglio-progetto {
         width: 100vw;
+    }
+
+    #chartsContainer {
+        display: none;
     }
 }
