@@ -240,6 +240,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
             error: err => console.error('geocoderResultsObserver error: ', err),
             complete: () => console.log('geocoderResultsObserver complete')
         };
+        this.monithonMap.isMobile = this.isMobile;
         this.monithonMap.subscribeToUpdates(mapUpdateObserver);
         this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
         this.monithonMap.subscribeToGeocoderUpdates(geocoderObserver);

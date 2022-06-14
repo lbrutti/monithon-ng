@@ -47,7 +47,7 @@ export class ProgettiMapService {
     center: any;
     centerPoint: any;
     isFreeMode: boolean = false;
-
+    isMobile: boolean = false;
 
     constructor(
         private translocoService: TranslocoService,
@@ -252,16 +252,19 @@ export class ProgettiMapService {
 
     }
     private getCircleStrokeColor(): string | mapboxgl.StyleFunction | mapboxgl.Expression {
-        let circleStrokeColors: mapboxgl.Expression =  [
+        let circleStrokeColors: mapboxgl.Expression = [
             'case',
-                ['any',
-                    ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]
-                ],
-                COLOR_MAP.temi.default,
+            ['any',
+                ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]
+            ],
+            COLOR_MAP.temi.default,
         ];
 
         this.temi.map(tema => {
-            let temaCaseExpr = ['==', ['get', 'ocCodTemaSintetico'], +tema.ocCodTemaSintetico];
+            let temaCaseExpr: any = ['==', ['get', 'ocCodTemaSintetico'], +tema.ocCodTemaSintetico];
+            // if (this.isMobile) {
+            //     temaCaseExpr = ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], +tema.ocCodTemaSintetico]];
+            // }
             circleStrokeColors.push(temaCaseExpr);
             circleStrokeColors.push(tema.stile.colore);
         });
@@ -275,7 +278,7 @@ export class ProgettiMapService {
             ['all', ['boolean', ['feature-state', 'isSelected'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
             COLOR_MAP.temi.default,
         ];
-        this.temi.map(tema=>{
+        this.temi.map(tema => {
             let temaCaseExpr = ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], +tema.ocCodTemaSintetico]];
             circleColors.push(temaCaseExpr);
             circleColors.push(tema.stile.colore);
