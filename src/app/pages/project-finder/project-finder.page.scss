@@ -129,6 +129,10 @@
 #chartsContainer {
     overflow-y: scroll;
     @include hideScrollbar();
+
+    &.mobile {
+        display: none;
+    }
 }
 
 .monithon-chart-container-col {
@@ -1008,6 +1012,7 @@ ion-content.mobile {
             ::ng-deep .mat-expansion-panel-content {
                 height: 33vh;
 
+
                 @media not screen and (-webkit-min-device-pixel-ratio: 2),
                 not screen and (min--moz-device-pixel-ratio: 2),
                 not screen and (-o-min-device-pixel-ratio: 2/1),
@@ -1015,6 +1020,12 @@ ion-content.mobile {
                 not screen and (min-resolution: 192dpi),
                 not screen and (min-resolution: 2dppx) {
                     height: 30vh;
+                }
+            }
+
+            &.mobile {
+                ::ng-deep .mat-expansion-panel-content {
+                    height: auto;
                 }
             }
         }

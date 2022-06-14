@@ -219,13 +219,14 @@
                                 </div>
                             </ion-col>
                             <ion-col size-lg class="ion-no-margin monithon-chart-container-col">
-                                <mat-expansion-panel [expanded]="!isMobile" class="monithon-filtri-charts" id="chartPanel">
+                                <mat-expansion-panel [expanded]="!isMobile" class="monithon-filtri-charts" [ngClass]="{'mobile': isMobile}"
+                                    id="chartPanel">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title class="monithon-titolo-sezione monithon-titolo-sezione-budget">
                                             {{'chartPanelTitle'|transloco}}
                                         </mat-panel-title>
                                     </mat-expansion-panel-header>
-                                    <div id="chartsContainer">
+                                    <div id="chartsContainer" [ngClass]="{'mobile': isMobile}">
                                         <ion-grid class="ion-no-margin">
                                             <ion-row class="ion-no-margin monithon-chart-container">
                                                 <ion-col class="ion-no-margin">
