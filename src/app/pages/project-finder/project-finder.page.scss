@@ -988,7 +988,7 @@ ion-content.mobile {
     }
 
     .mat-chip-list.monithon-categorie {
-        height: 50vh;
+        height: auto;
     }
 
     .monithon-filtri {
@@ -997,7 +997,7 @@ ion-content.mobile {
 
         &.mat-expanded {
             .monithon-categorie-container {
-                height: 50vh;
+                height: auto;
             }
         }
     }
