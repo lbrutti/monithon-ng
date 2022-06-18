@@ -940,6 +940,12 @@ ion-content.mobile {
 
     .monithon-dettaglio-progetto {
         width: 100vw;
+        border-radius: 12px;
+
+        .monithon-dettaglio-progetto__dettagli_container {
+            padding-left: 0;
+            padding-right: 0;
+        }
     }
 
     #chartsContainer {
