@@ -17,6 +17,10 @@
     overflow: hidden;
     white-space: nowrap;
     word-break: inherit;
+
+    &.mobile{
+    padding: 3px 12px !important;
+    }
 }
 
 .mat-chip[data-active="true"] {

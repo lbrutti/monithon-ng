@@ -187,7 +187,8 @@
                     <mat-chip class="monithon-tema" *ngFor="let tema of this.temi" [selectable]="tema.isActive"
                         [attr.data-active]="tema.isActive" [selected]="tema.isSelected"
                         (click)="this.filterByTema(tema)" [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico"
-                        disableRipple="true">
+                        disableRipple="true"
+                        [ngClass]="{'mobile': isMobile}">
                         {{'temi.'+tema.ocCodTemaSintetico | transloco}}</mat-chip>
                 </mat-chip-list>
 
@@ -206,7 +207,7 @@
                                     <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
                                         aria-orientation="horizontal">
-                                        <mat-chip [ngClass]="{'monithon-categoria': true}"
+                                        <mat-chip [ngClass]="{'monithon-categoria': true, 'mobile': isMobile}"
                                             [selectable]="categoria.isActive" [attr.data-active]="categoria.isActive"
                                             *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected"
                                             (click)="this.filterByCategoria(categoria)"
