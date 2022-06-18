@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true" [scrollY]="false">
+<ion-content [fullscreen]="true" [scrollY]="false" [ngClass]="{'mobile': isMobile}">
     <!-- <ion-toolbar class="monithon-header" >
     </ion-toolbar> -->
     <div id="aboutBtnContainer">
@@ -60,7 +60,7 @@
 
                         </ion-col>
                         <ion-col col-6 class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli">
-                            <div class="monithon-dettaglio-progetto__data_inizio">
+                            <div class="monithon-dettaglio-progetto__data_inizio" [ngClass]="{'mobile': isMobile}">
                                 <ion-label class="monithon-dettaglio-progetto__label monithon-titolo-sezione">
                                     {{'dataInizio' | transloco}}
                                 </ion-label>
@@ -69,7 +69,7 @@
                                     date:'MMMM y':'+0100': 'it'}}</ion-label>
                             </div>
 
-                            <div class="monithon-dettaglio-progetto__categoria">
+                            <div class="monithon-dettaglio-progetto__categoria" [ngClass]="{'mobile': isMobile}">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                     {{'categoria' | transloco}}
                                 </ion-label>
@@ -99,7 +99,7 @@
 
                             </div>
 
-                            <div class="monithon-dettaglio-progetto__tema">
+                            <div class="monithon-dettaglio-progetto__tema" [ngClass]="{'mobile': isMobile}">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">{{'tema'
                                     | transloco}}</ion-label>
                                 <ion-label class="monithon-dettaglio-progetto__tema__progetto">
@@ -107,7 +107,7 @@
                                 </ion-label>
                             </div>
 
-                            <div class="monithon-dettaglio-progetto__finanziamento">
+                            <div class="monithon-dettaglio-progetto__finanziamento" [ngClass]="{'mobile': isMobile}">
                                 <div class="monithon-label-container">
                                     <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                         {{'finanziamento' |
@@ -127,7 +127,7 @@
                                 <div #pagamentiChartContainer></div>
                             </div> -->
 
-                            <div id="flagProgetto">
+                            <div id="flagProgetto" [ngClass]="{'mobile': isMobile}">
                                 <ion-grid class="ion-no-padding">
                                     <ion-row class="monithon-filtri-secondari ion-no-margin ">
                                         <ion-col size="8" class="ion-no-margin ">
@@ -164,7 +164,7 @@
                                     </ion-row>
                                 </ion-grid>
                             </div>
-                            <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
+                            <div class="monithon-dettaglio-progetto__inizia_monitoraggio" [ngClass]="{'mobile': isMobile}">
                                 <button (click)="iniziaMonitoraggioClicked(progettoSelezionato)"
                                     class="monithon-dettaglio-progetto__inizia_monitoraggio__button monithon-titolo-sezione"
                                     mat-button color="primary">{{'iniziaMonitoraggio' | transloco}}
@@ -182,11 +182,13 @@
         <div id="panelContainer">
             <div id="filterContainer">
                 <!-- Temi -->
-                <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true">
+                <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true"
+                    [ngClass]="{'mobile': isMobile}">
                     <mat-chip class="monithon-tema" *ngFor="let tema of this.temi" [selectable]="tema.isActive"
                         [attr.data-active]="tema.isActive" [selected]="tema.isSelected"
                         (click)="this.filterByTema(tema)" [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico"
-                        disableRipple="true">
+                        disableRipple="true"
+                        [ngClass]="{'mobile': isMobile}">
                         {{'temi.'+tema.ocCodTemaSintetico | transloco}}</mat-chip>
                 </mat-chip-list>
 
@@ -200,12 +202,12 @@
                     </mat-expansion-panel-header>
                     <ion-grid class="ion-no-padding">
                         <ion-row>
-                            <ion-col size="6" class="ion-no-margin monithon-categorie-container">
+                            <ion-col size-lg class="ion-no-margin monithon-categorie-container">
                                 <div #categorieDiSpesaContainer id="categorieDiSpesaContainer">
                                     <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
                                     <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
                                         aria-orientation="horizontal">
-                                        <mat-chip [ngClass]="{'monithon-categoria': true}"
+                                        <mat-chip [ngClass]="{'monithon-categoria': true, 'mobile': isMobile}"
                                             [selectable]="categoria.isActive" [attr.data-active]="categoria.isActive"
                                             *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected"
                                             (click)="this.filterByCategoria(categoria)"
@@ -218,15 +220,16 @@
                                     </mat-chip-list>
                                 </div>
                             </ion-col>
-                            <ion-col size="6" class="ion-no-margin monithon-chart-container-col">
-                                <!-- INIZIALIZZARE COME ESPANSO -->
-                                <mat-expansion-panel expanded="true" class="monithon-filtri-charts" id="chartPanel">
+                            <ion-col size-lg class="ion-no-margin monithon-chart-container-col">
+                                <mat-expansion-panel [expanded]="!isMobile" class="monithon-filtri-charts"
+                                    [ngClass]="{'mobile': isMobile}" id="chartPanel">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title class="monithon-titolo-sezione monithon-titolo-sezione-budget">
-                                            {{'chartPanelTitle'|transloco}}
+                                            <span *ngIf="!isMobile">{{'chartPanelTitle'|transloco}}</span>
+                                            <span *ngIf="isMobile">{{'chartPanelTitleMobile'|transloco}}</span>
                                         </mat-panel-title>
                                     </mat-expansion-panel-header>
-                                    <div id="chartsContainer">
+                                    <div id="chartsContainer" [ngClass]="{'mobile': isMobile}">
                                         <ion-grid class="ion-no-margin">
                                             <ion-row class="ion-no-margin monithon-chart-container">
                                                 <ion-col class="ion-no-margin">
@@ -352,13 +355,14 @@
                                 <mat-form-field floatLabel='never' class="monithon-search-input">
                                     <mat-icon matPrefix>search</mat-icon>
                                     <input (change)="searchByTitle()" matInput type="search"
-                                        [placeholder]="'cercaPerTitolo' | transloco" class="search-input" [(ngModel)]="titleSearchTerm">
-                                    <button mat-button *ngIf="titleSearchTerm" matSuffix mat-icon-button aria-label="Clear"
-                                        (click)="resetTitleSearch()">
+                                        [placeholder]="'cercaPerTitolo' | transloco" class="search-input"
+                                        [(ngModel)]="titleSearchTerm">
+                                    <button mat-button *ngIf="titleSearchTerm" matSuffix mat-icon-button
+                                        aria-label="Clear" (click)="resetTitleSearch()">
                                         <mat-icon>close</mat-icon>
                                     </button>
                                 </mat-form-field>
-                        
+
                             </ion-col>
                         </ion-row>
                     </ion-grid>

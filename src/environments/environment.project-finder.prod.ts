@@ -1,4 +1,4 @@
-import { version } from "package.json";
+import { FullSemVer } from "../assets/version.json";
 
 export const environment = {
     routes: [
@@ -26,6 +26,14 @@ export const environment = {
         {
             path: 'courtesy/:destination',
             loadChildren: () => import('../app/pages/courtesy/courtesy.module').then(m => m.CourtesyPageModule)
+        },
+        {
+            path: 'temi',
+            loadChildren: () => import('../app/pages/temi/temi.module').then(m => m.TemiPageModule)
+        },
+        {
+            path: 'tema/:ocCodTemaSintetico',
+            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
         },
         {
             path: '',
@@ -66,5 +74,5 @@ export const environment = {
     translationServiceURL: '/assets/i18n/',
     //[SM-92] : decommentare e sostituire con url corretta.
     // translationServiceURL: 'https://projectfinder.monithon.eu/assets/i18n/',
-    version: version
+    version: FullSemVer
 };

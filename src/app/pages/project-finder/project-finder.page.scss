@@ -72,13 +72,18 @@
             padding-left: 24px !important;
             margin-bottom: 5px !important;
         }
+
+        &.mobile {
+            ::ng-deep .mat-chip-list-wrapper {
+                padding-left: 8px !important;
+            }
+        }
     }
 }
 
 #filterContainer {
     margin-top: auto;
     width: 66vw;
-    //min-height: 66vh;
 }
 
 //https://stackoverflow.com/questions/53195131/angular-material-mat-expansion-panel-body-style-not-being-applied
@@ -91,26 +96,6 @@
     height: 32px;
 }
 
-// ::ng-deep .mat-chip.mat-standard-chip::after {
-//     background: transparent;
-// }
-
-// ::ng-deep .mat-chip.mat-standard-chip:active {
-//     box-shadow: none;
-// }
-
-// ::ng-deep .mat-chip-selected {
-//     font-weight: unset;
-// }
-
-// ::ng-deep .mat-standard-chip {
-//     padding: 3px 6px !important;
-//     min-height: 28px !important;
-//     text-overflow: ellipsis;
-//     overflow: hidden;
-//     white-space: nowrap;
-//     word-break: inherit;
-// }
 
 ::ng-deep .mat-tooltip {
     /* your own custom styles here */
@@ -406,90 +391,6 @@
     }
 }
 
-// .mat-chip[data-active="true"] {
-//     cursor: pointer;
-// }
-
-// .mat-chip[data-active="false"] {
-//     pointer-events: none;
-//     cursor: default;
-//     background-color: transparent !important;
-//     opacity: 0.5;
-// }
-
-// .mat-chip.monithon-tema[data-active="false"],
-// .mat-chip.monithon-categoria[data-active="false"] {
-
-//     //loop per preparare binding a variabile parametrizzata
-//     @for $codTemaSintetico from 0 to 50 {
-//         &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
-//             background-color: cssvar(monithon-tema, $codTemaSintetico, background);
-//             color: cssvar(monithon-tema, $codTemaSintetico, background) !important;
-//         }
-//     }
-
-// }
-
-// .mat-chip.monithon-tema,
-// .mat-chip.monithon-categoria,
-// .mat-chip.monithon-filtro-stato-avanzamento,
-// .mat-chip.monithon-filtro-report {
-//     background-color: transparent;
-//     border-width: 1px;
-//     border-style: solid;
-
-//     //loop per preparare binding a variabile parametrizzata
-//     @for $codTemaSintetico from 0 to 50 {
-//         &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
-//             border-color: cssvar(monithon-tema, $codTemaSintetico, background);
-//             color: cssvar(monithon-tema, $codTemaSintetico, background) !important;
-//         }
-//     }
-
-//     // stati e flag report
-//     &[data-oc-cod-stato-progetto],
-//     &[data-has-report] {
-//         background-color: transparent;
-//         color: var(--monithon-filtro-secondario-unselected-color);
-//         border-color: var(--monithon-filtro-secondario-unselected-color);
-//     }
-
-//     &.mat-chip-selected {
-//         // &[data-oc-cod-tema-sintetico] {
-//         color: var(--monithon-tema-color) !important;
-//         // }
-
-//         //loop per preparare binding a variabile parametrizzata
-//         @for $codTemaSintetico from 0 to 50 {
-//             &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
-//                 background-color: cssvar(monithon-tema, $codTemaSintetico, background);
-//             }
-//         }
-
-//         &[data-oc-cod-stato-progetto],
-//         &[data-has-report] {
-//             background-color: var(--monithon-filtro-secondario-selected-color) !important;
-//             border-color: var(--monithon-filtro-secondario-selected-color);
-//         }
-//     }
-// }
-
-// .monithon-filtro-stato-avanzamento,
-// .monithon-filtro-report {
-//     ::ng-deep .mat-chip-list-wrapper {
-//         padding-left: 2px !important;
-//     }
-// }
-
-// .mat-chip.monithon-filtro-stato-avanzamento {
-//     width: 33%;
-//     justify-content: center;
-// }
-
-// .mat-chip.monithon-filtro-report {
-//     width: 50%;
-//     justify-content: center;
-// }
 
 .mat-expansion-panel {
     border-radius: 0;
@@ -765,6 +666,7 @@ ion-row.monithon-filtri-secondari {
         }
 
         &.selected {
+
             //loop per preparare binding a variabile parametrizzata
             @for $codTemaSintetico from 0 to 50 {
                 &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
@@ -975,5 +877,93 @@ monithon-drawer {
             top: 0;
             padding-top: 0;
         }
+    }
+}
+
+ion-content.mobile {
+
+    #aboutBtnContainer {
+        right: 5px;
+    }
+
+    .geocoder {
+        left: 8px;
+    }
+
+    .right-column {
+        display: none;
+    }
+
+    #filterContainer {
+        width: 100vw;
+    }
+
+    .mat-chip-list.monithon-categorie {
+        height: auto;
+    }
+
+    .monithon-filtri {
+        max-height: 50vh;
+        overflow-y: scroll;
+
+        &.mat-expanded {
+            .monithon-categorie-container {
+                height: auto;
+            }
+        }
+    }
+
+    .monithon-filtri-charts {
+
+        &.mat-expanded {
+            ::ng-deep .mat-expansion-panel-content {
+                height: 33vh;
+
+
+                @media not screen and (-webkit-min-device-pixel-ratio: 2),
+                not screen and (min--moz-device-pixel-ratio: 2),
+                not screen and (-o-min-device-pixel-ratio: 2/1),
+                not screen and (min-device-pixel-ratio: 2),
+                not screen and (min-resolution: 192dpi),
+                not screen and (min-resolution: 2dppx) {
+                    height: 30vh;
+                }
+            }
+
+            &.mobile {
+                ::ng-deep .mat-expansion-panel-content {
+                    height: auto;
+                }
+            }
+        }
+    }
+
+    .monithon-dettaglio-progetto {
+        width: 100vw;
+        border-radius: 12px;
+
+        .monithon-dettaglio-progetto__dettagli_container {
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+
+        .monithon-dettaglio-progetto__header {
+            padding-left: 6px;
+        }
+
+        .monithon-dettaglio-progetto__dettagli{
+            .mobile{
+                margin-bottom: 12px;
+            }
+        }
+
+        .monithon-dettaglio-progetto__sintesi__oc_link{
+            margin-bottom: 24px;
+        }
+
+    }
+
+    #chartsContainer {
+        display: none;
     }
 }

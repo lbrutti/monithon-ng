@@ -42,18 +42,18 @@ export class AppComponent implements OnInit {
                 });
             this.statusBar.styleDefault();
 
-            let hasTouchScreen = false;
-            if ("maxTouchPoints" in navigator) {
-                hasTouchScreen = navigator.maxTouchPoints > 0;
-            } else if ("msMaxTouchPoints" in navigator) {
-                hasTouchScreen = navigator['msMaxTouchPoints'] > 0;
-            }
+            // let hasTouchScreen = false;
+            // if ("maxTouchPoints" in navigator) {
+            //     hasTouchScreen = navigator.maxTouchPoints > 0;
+            // } else if ("msMaxTouchPoints" in navigator) {
+            //     hasTouchScreen = navigator['msMaxTouchPoints'] > 0;
+            // }
 
 
-            let goodDevice = this.platform.is('desktop') || this.platform.is('tablet') || !hasTouchScreen;
-            if (!fromDesktop && !goodDevice) {
-                this.router.navigate(['/courtesy', destination], { skipLocationChange: true });
-            }
+            // let goodDevice = this.platform.is('desktop') || this.platform.is('tablet') || !hasTouchScreen;
+            // if (!fromDesktop && !goodDevice) {
+            //     this.router.navigate(['/courtesy', destination], { skipLocationChange: true });
+            // }
 
 
 

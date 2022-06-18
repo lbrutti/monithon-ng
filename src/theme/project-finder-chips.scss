@@ -17,6 +17,10 @@
     overflow: hidden;
     white-space: nowrap;
     word-break: inherit;
+
+    &.mobile{
+    padding: 3px 12px !important;
+    }
 }
 
 .mat-chip[data-active="true"] {
@@ -85,4 +89,21 @@
             border-color: var(--monithon-filtro-secondario-selected-color);
         }
     }
+}
+
+.monithon-filtro-stato-avanzamento,
+.monithon-filtro-report {
+    ::ng-deep .mat-chip-list-wrapper {
+        padding-left: 2px !important;
+    }
+}
+
+.mat-chip.monithon-filtro-stato-avanzamento {
+    width: 33%;
+    justify-content: center;
+}
+
+.mat-chip.monithon-filtro-report {
+    width: 50%;
+    justify-content: center;
 }
