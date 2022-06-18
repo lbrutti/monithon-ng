@@ -60,7 +60,7 @@
 
                         </ion-col>
                         <ion-col col-6 class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli">
-                            <div class="monithon-dettaglio-progetto__data_inizio">
+                            <div class="monithon-dettaglio-progetto__data_inizio" [ngClass]="{'mobile': isMobile}">
                                 <ion-label class="monithon-dettaglio-progetto__label monithon-titolo-sezione">
                                     {{'dataInizio' | transloco}}
                                 </ion-label>
@@ -69,7 +69,7 @@
                                     date:'MMMM y':'+0100': 'it'}}</ion-label>
                             </div>
 
-                            <div class="monithon-dettaglio-progetto__categoria">
+                            <div class="monithon-dettaglio-progetto__categoria" [ngClass]="{'mobile': isMobile}">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                     {{'categoria' | transloco}}
                                 </ion-label>
@@ -99,7 +99,7 @@
 
                             </div>
 
-                            <div class="monithon-dettaglio-progetto__tema">
+                            <div class="monithon-dettaglio-progetto__tema" [ngClass]="{'mobile': isMobile}">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">{{'tema'
                                     | transloco}}</ion-label>
                                 <ion-label class="monithon-dettaglio-progetto__tema__progetto">
@@ -107,7 +107,7 @@
                                 </ion-label>
                             </div>
 
-                            <div class="monithon-dettaglio-progetto__finanziamento">
+                            <div class="monithon-dettaglio-progetto__finanziamento" [ngClass]="{'mobile': isMobile}">
                                 <div class="monithon-label-container">
                                     <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                         {{'finanziamento' |
@@ -127,7 +127,7 @@
                                 <div #pagamentiChartContainer></div>
                             </div> -->
 
-                            <div id="flagProgetto">
+                            <div id="flagProgetto" [ngClass]="{'mobile': isMobile}">
                                 <ion-grid class="ion-no-padding">
                                     <ion-row class="monithon-filtri-secondari ion-no-margin ">
                                         <ion-col size="8" class="ion-no-margin ">
@@ -164,7 +164,7 @@
                                     </ion-row>
                                 </ion-grid>
                             </div>
-                            <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
+                            <div class="monithon-dettaglio-progetto__inizia_monitoraggio" [ngClass]="{'mobile': isMobile}">
                                 <button (click)="iniziaMonitoraggioClicked(progettoSelezionato)"
                                     class="monithon-dettaglio-progetto__inizia_monitoraggio__button monithon-titolo-sezione"
                                     mat-button color="primary">{{'iniziaMonitoraggio' | transloco}}
