@@ -943,9 +943,14 @@ ion-content.mobile {
         border-radius: 12px;
 
         .monithon-dettaglio-progetto__dettagli_container {
-            padding-left: 0;
-            padding-right: 0;
+            padding-left: 6px;
+            padding-right: 6px;
         }
+
+        .monithon-dettaglio-progetto__header {
+            padding-left: 6px;
+        }
+
     }
 
     #chartsContainer {
