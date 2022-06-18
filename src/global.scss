@@ -344,5 +344,22 @@ ion-content {
         .mapboxgl-ctrl-group button+button {
             border-top: none;
         }
+
+        .navigation-control {
+            position: absolute;
+            z-index: 100;
+            width: auto;
+            right: 0;
+            top: 50px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+
+            .mapboxgl-ctrl {
+                margin-right: 5px;
+                display: flex;
+                flex-direction: row-reverse;
+            }
+        }
     }
 }

@@ -72,6 +72,12 @@
             padding-left: 24px !important;
             margin-bottom: 5px !important;
         }
+
+        &.mobile {
+            ::ng-deep .mat-chip-list-wrapper {
+                padding-left: 8px !important;
+            }
+        }
     }
 }
 
@@ -979,6 +985,15 @@ monithon-drawer {
 }
 
 ion-content.mobile {
+
+    #aboutBtnContainer {
+        right: 5px;
+    }
+
+    .geocoder {
+        left: 8px;
+    }
+
     .right-column {
         display: none;
     }

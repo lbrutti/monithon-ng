@@ -182,7 +182,8 @@
         <div id="panelContainer">
             <div id="filterContainer">
                 <!-- Temi -->
-                <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true">
+                <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true"
+                    [ngClass]="{'mobile': isMobile}">
                     <mat-chip class="monithon-tema" *ngFor="let tema of this.temi" [selectable]="tema.isActive"
                         [attr.data-active]="tema.isActive" [selected]="tema.isSelected"
                         (click)="this.filterByTema(tema)" [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico"
@@ -219,8 +220,8 @@
                                 </div>
                             </ion-col>
                             <ion-col size-lg class="ion-no-margin monithon-chart-container-col">
-                                <mat-expansion-panel [expanded]="!isMobile" class="monithon-filtri-charts" [ngClass]="{'mobile': isMobile}"
-                                    id="chartPanel">
+                                <mat-expansion-panel [expanded]="!isMobile" class="monithon-filtri-charts"
+                                    [ngClass]="{'mobile': isMobile}" id="chartPanel">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title class="monithon-titolo-sezione monithon-titolo-sezione-budget">
                                             <span *ngIf="!isMobile">{{'chartPanelTitle'|transloco}}</span>
