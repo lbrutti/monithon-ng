@@ -1,11 +1,15 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { version } from "package.json";
+import { FullSemVer } from "../assets/version.json";
 
 export const environment = {
     routes: [
         //rotte per project finder
+        {
+            path: 'tema/:ocCodTemaSintetico',
+            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
+        },
         {
             path: '#wizard',
             loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
@@ -29,6 +33,10 @@ export const environment = {
         {
             path: 'courtesy/:destination',
             loadChildren: () => import('../app/pages/courtesy/courtesy.module').then(m => m.CourtesyPageModule)
+        },
+        {
+            path: 'temi',
+            loadChildren: () => import('../app/pages/temi/temi.module').then(m => m.TemiPageModule)
         },
         {
             path: '',
@@ -68,7 +76,7 @@ export const environment = {
     //[SM-92] : decommentare e sostituire con url corretta.
     // translationServiceURL: 'https://projectfinder.monithon.eu/assets/i18n/',
 
-    version: version
+    version: FullSemVer
 };
 
 /*

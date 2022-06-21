@@ -5,7 +5,10 @@
         "4": "Energia",
         "5": "Ambiente",
         "6": "Cultura e turismo",
-        "7": "Mobilità sostenibile"
+        "7": "Mobilità sostenibile",
+        "wizard":{
+            "titolo":"Scegli il tema"
+        }
     },
     "categorie": {
         "17": "Gestione dei rifiuti domestici (prevenzione e riciclaggio)",
@@ -60,6 +63,7 @@
     "schedaProgetto": "Scheda progetto",
     "monithonFiltriTitle": "Categorie",
     "chartPanelTitle": "Budget, anno e stato",
+    "chartPanelTitleMobile":"Stato e monitoraggi",
     "budgetChartTitle": "Budget",
     "annoChartTitle": "Anno",
     "resultContainerTitle": "Progetti finanziati",
@@ -138,9 +142,9 @@
             "5": "Concluso e utile",
             "6": "Concluso e inefficace",
             "7": "Nessun giudizio"
-        },
-        "cercaPerTitolo": "Cerca tra i risultati"
+        }
     },
+    "cercaPerTitolo": "Cerca tra i risultati",
     "codGiudizioSintetico": "Giudizio sintetico",
     "dataInserimento": "Data",
     "report.readmore": "leggi il report su Monithon",

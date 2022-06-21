@@ -11,10 +11,10 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "release-project": "ionic build --configuration=production_project_finder",
-        "release-report": "ionic build --configuration=production_report_finder",
-        "release-dev": "ionic build --prod --release",
-        "release-all": "ionic build --configuration=production_project_finder && ionic build --configuration=production_report_finder"
+        "release:project": "ionic build --configuration=production_project_finder",
+        "release:report": "ionic build --configuration=production_report_finder",
+        "release:dev": "ionic build --prod --release",
+        "release:all": "ionic build --configuration=production_project_finder && ionic build --configuration=production_report_finder"
     },
     "private": true,
     "dependencies": {
@@ -85,5 +85,9 @@
         "os": false,
         "path": false
     },
-    "description": "Monithon repo for project finder e report finder"
+    "description": "Monithon repo for project finder e report finder",
+    "engines": {
+        "node": "16.13.1"
+    },
+    "engineStrict": true
 }

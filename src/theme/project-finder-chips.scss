@@ -1,0 +1,109 @@
+::ng-deep .mat-chip.mat-standard-chip::after {
+    background: transparent;
+}
+
+::ng-deep .mat-chip.mat-standard-chip:active {
+    box-shadow: none;
+}
+
+::ng-deep .mat-chip-selected {
+    font-weight: unset;
+}
+
+::ng-deep .mat-standard-chip {
+    padding: 3px 6px !important;
+    min-height: 28px !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: inherit;
+
+    &.mobile{
+    padding: 3px 12px !important;
+    }
+}
+
+.mat-chip[data-active="true"] {
+    cursor: pointer;
+}
+
+.mat-chip[data-active="false"] {
+    pointer-events: none;
+    cursor: default;
+    background-color: transparent !important;
+    opacity: 0.5;
+}
+
+.mat-chip.monithon-tema[data-active="false"],
+.mat-chip.monithon-categoria[data-active="false"] {
+
+    //loop per preparare binding a variabile parametrizzata
+    @for $codTemaSintetico from 0 to 50 {
+        &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
+            background-color: cssvar(monithon-tema, $codTemaSintetico, background);
+            color: cssvar(monithon-tema, $codTemaSintetico, background) !important;
+        }
+    }
+
+}
+
+.mat-chip.monithon-tema,
+.mat-chip.monithon-categoria,
+.mat-chip.monithon-filtro-stato-avanzamento,
+.mat-chip.monithon-filtro-report {
+    background-color: transparent;
+    border-width: 1px;
+    border-style: solid;
+
+    //loop per preparare binding a variabile parametrizzata
+    @for $codTemaSintetico from 0 to 50 {
+        &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
+            border-color: cssvar(monithon-tema, $codTemaSintetico, background);
+            color: cssvar(monithon-tema, $codTemaSintetico, background) !important;
+        }
+    }
+
+    // stati e flag report
+    &[data-oc-cod-stato-progetto],
+    &[data-has-report] {
+        background-color: transparent;
+        color: var(--monithon-filtro-secondario-unselected-color);
+        border-color: var(--monithon-filtro-secondario-unselected-color);
+    }
+
+    &.mat-chip-selected {
+        // &[data-oc-cod-tema-sintetico] {
+        color: var(--monithon-tema-color) !important;
+        // }
+
+        //loop per preparare binding a variabile parametrizzata
+        @for $codTemaSintetico from 0 to 50 {
+            &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
+                background-color: cssvar(monithon-tema, $codTemaSintetico, background);
+            }
+        }
+
+        &[data-oc-cod-stato-progetto],
+        &[data-has-report] {
+            background-color: var(--monithon-filtro-secondario-selected-color) !important;
+            border-color: var(--monithon-filtro-secondario-selected-color);
+        }
+    }
+}
+
+.monithon-filtro-stato-avanzamento,
+.monithon-filtro-report {
+    ::ng-deep .mat-chip-list-wrapper {
+        padding-left: 2px !important;
+    }
+}
+
+.mat-chip.monithon-filtro-stato-avanzamento {
+    width: 33%;
+    justify-content: center;
+}
+
+.mat-chip.monithon-filtro-report {
+    width: 50%;
+    justify-content: center;
+}

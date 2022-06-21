@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import moment from 'moment';
-import { Observable, Observer } from 'rxjs';
+import { Observer } from 'rxjs';
 import { Progetto } from '../../model/progetto/progetto';
 import { MonithonApiService } from '../../services/monithonApiService/monithon-api.service';
 
@@ -11,17 +11,20 @@ import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
-import { LoadingController, ModalController, PopoverController } from '@ionic/angular';
+import { LoadingController, ModalController, PopoverController,  Platform } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AboutPage } from '../about/about.page';
 import { LangSwitcherComponent } from 'src/app/components/lang-switcher/lang-switcher.component';
+import Fuse from 'fuse.js';
+import { SearchResult } from 'src/app/model/searchResult.interface';
+import { Tema } from 'src/app/model/tema/tema.interface';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
     selector: 'app-home',
     templateUrl: 'project-finder.page.html',
-    styleUrls: ['project-finder.page.scss'],
+    styleUrls: ['project-finder.page.scss']
 })
 export class ProjectFinderPage implements OnInit, AfterViewInit {
 
@@ -43,8 +46,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
 
     public espandiListaRisultati: boolean = false;
-    progetti: Array<Progetto> = [];
-    risultatiRicerca: Array<Progetto> = [];
+    progetti: Array<Progetto & SearchResult> = [];
+    risultatiRicerca: Array<Progetto & SearchResult> = [];
 
     //variabili charts
     budgetChart: any;
@@ -118,6 +121,9 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         subHeader: 'Select your favorite color'
     };
     langModal: HTMLIonPopoverElement;
+    titleSearchTerm: any;
+    tema: string = '';
+    isMobile: boolean;
     // keepProgetto: boolean = false;
     constructor(
         private monithonApiService: MonithonApiService,
@@ -127,14 +133,31 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         public loadingController: LoadingController,
         private router: Router,
         public modalController: ModalController,
-        public popoverController: PopoverController
+        public popoverController: PopoverController,
+        private route: ActivatedRoute,
+        private platform: Platform
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = lodash.isArray(this.router.url.match(/wizard/));
-
     }
 
     ngOnInit(): void {
+
+        this.route.params.subscribe((params: Params) => {
+            this.tema = lodash.get(params, 'ocCodTemaSintetico', '');
+        });
+
+
+        let hasTouchScreen = false;
+        if ("maxTouchPoints" in navigator) {
+            hasTouchScreen = navigator.maxTouchPoints > 0;
+        } else if ("msMaxTouchPoints" in navigator) {
+            hasTouchScreen = navigator['msMaxTouchPoints'] > 0;
+        }
+
+
+        let goodDevice = this.platform.is('desktop') || this.platform.is('tablet') || !hasTouchScreen;
+        this.isMobile = !goodDevice;
 
         let loaderOptions = {
             message: "",
@@ -142,10 +165,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
             spinner: null
 
         };
-        // if (!(isPlatform('desktop') || isPlatform('tablet'))) {
-        //     loaderOptions.message = this.translocoService.translate("onlyDesktopAvailable")
-        //     loaderOptions.cssClass = 'monithon-loader monithon-loader-only-desktop'
-        // }
+
         this.loadingController
             .create(loaderOptions)
             .then((loading) => {
@@ -156,11 +176,16 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
 
+                let matchIdx = updateSubject.progetti.map((p: Progetto) => p.uid);
+
                 if (!this.temi.length) {
                     this.temi = updateSubject.temi; // <- nessun problema di performance
                     this.categorie = updateSubject.categorie;//.filter(c => c.isVisible);
                 }
-                this.progetti = updateSubject.progetti; //lodash.take(updateSubject.progetti, 50);
+                this.progetti = updateSubject.progetti.map((p: Progetto & SearchResult) => {
+                    p.matches = lodash.includes(matchIdx, p.uid);
+                    return p;
+                });
                 this.statiAvanzamento.map(s => {
                     s.isActive = lodash.some(this.progetti, p => p.codStatoProgetto == s.codStatoProgetto);
                     s.isSelected = s.isActive;
@@ -170,14 +195,20 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
                     flag.isActive = lodash.some(this.progetti, p => p.hasReport == flag.hasReport);
                     flag.isSelected = flag.isActive;
                 });
-                if (this.redrawCharts) {
-                    try {
-                        this.renderCharts(this.progetti);
-                    } catch (error) {
-                        console.error(error);
-                    }
+                if (this.isMobile) {
+                    this.filtraRisultati();
+                    this.evidenziaRisultatiSuMappa();
                 } else {
-                    this.counterValue = this.progetti.length;
+
+                    if (this.redrawCharts) {
+                        try {
+                            this.renderCharts(this.progetti);
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    } else {
+                        this.counterValue = this.progetti.length;
+                    }
                 }
 
 
@@ -194,9 +225,9 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
         let projectSelectionObserver: Observer<any> = {
             next: progetto => {
-                // this.keepProgetto = !lodash.isNil(progetto);
-                this.onDettaglioProgettoHandleClick(progetto);
+                // this.onDettaglioProgettoHandleClick(progetto);
                 this.evidenziaProgettoInLista(progetto);
+                this.onProgettoClick(progetto);
             },
             error: err => console.error('subscribeProjectSelection error: ', err),
             complete: () => console.log('subscribeProjectSelection complete: ')
@@ -218,6 +249,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
             error: err => console.error('geocoderResultsObserver error: ', err),
             complete: () => console.log('geocoderResultsObserver complete')
         };
+        this.monithonMap.isMobile = this.isMobile;
         this.monithonMap.subscribeToUpdates(mapUpdateObserver);
         this.monithonMap.subscribeProjectSelection(projectSelectionObserver);
         this.monithonMap.subscribeToGeocoderUpdates(geocoderObserver);
@@ -233,24 +265,40 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         this.ordinaRisultatiPerCriterio();
     }
 
-    getTemi() {
-        return this.monithonApiService.getTemi();
-    }
-
     ngAfterViewInit(): void {
-        Promise.all([this.getProgetti().toPromise(), this.getTemi().toPromise()])
-            .then(data => {
 
-                this.monithonMap.setCategorie(data[1].categorie.map(c => {
+        Promise.all([
+            this.monithonApiService.getProgetti(this.tema).toPromise(),
+            this.monithonApiService.getTemi(this.tema).toPromise()
+        ])
+            .then(data => {
+                let temi = data[1];
+
+                if (this.tema.length) {
+                    temi.temi = temi.temi.filter((t: Tema) => t.ocCodTemaSintetico === this.tema);
+                }
+                //create css variables for temi:
+                temi.temi.map(t => {
+                    document.documentElement.style.setProperty(`--monithon-tema-${t.ocCodTemaSintetico}-background`, t.stile.colore);
+                });
+
+                //create ngStyle object with data driven properties
+                this.monithonMap.setCategorie(temi.categorie.map(c => {
                     c.isSelected = true;
                     return c;
                 }));
-                this.monithonMap.setTemi(data[1].temi.map(t => {
+                this.monithonMap.setTemi(temi.temi.map(t => {
                     t.isSelected = true;
                     t.isActive = true;
                     return t;
                 }));
-                this.monithonMap.renderMap(this.mapContainer.nativeElement, data[0], this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
+                this.progetti = data[0];
+
+                //FIXME: RIMUOVERE FILTRAGGIO MOCK!
+                if (this.tema.length) {
+                    this.progetti = this.progetti.filter(p => +p.ocCodTemaSintetico == +this.tema);
+                }
+                this.monithonMap.renderMap(this.mapContainer.nativeElement, this.progetti, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
 
@@ -700,8 +748,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         return crossFilterData;
     }
 
-    private getProgetti(): Observable<any> {
-        return this.monithonApiService.getProgetti();
+    private getProgetti(): Array<Progetto & SearchResult> {
+        return this.progetti.filter(p => p.matches);
     }
 
     //Filtri di primo livello:
@@ -746,7 +794,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     }
 
     evidenziaRisultatiSuMappa() {
-        let idRisultati = this.risultatiRicerca.map(p => p.uid);
+        let idRisultati = this.getRisultati().map(p => p.uid);
         idRisultati = idRisultati.length == 0 ? null : idRisultati; // evit
         this.monithonMap.selectById(idRisultati);
     }
@@ -755,7 +803,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         let statiAvanzamentoSelezionati = this.statiAvanzamento.filter(stato => stato.isSelected).map(flag => flag.codStatoProgetto);
         let reportFlagSelezionate = this.reportFlags.filter(flag => flag.isSelected).map(flag => flag.hasReport);
 
-        this.risultatiRicerca = this.progetti.filter((progetto: Progetto) => {
+        this.risultatiRicerca = this.getProgetti().filter((progetto: Progetto) => {
             let matchesStato = ((reportFlagSelezionate.length == 0) || lodash.includes(reportFlagSelezionate, progetto.hasReport));
             let matchesReportFlags = ((statiAvanzamentoSelezionati.length == 0) || lodash.includes(statiAvanzamentoSelezionati, progetto.codStatoProgetto))
 
@@ -772,9 +820,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
      * onProgettoClick
      */
     public onProgettoClick(progetto: Progetto) {
-        // this.monithonMap.highlightById([progetto.uid]);
         this.showDettaglioProgetto(progetto);
-
     }
 
 
@@ -854,6 +900,32 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
         });
         return await this.langModal.present();
+    }
+    
+    searchByTitle(reset: boolean = false) {
+        if (reset || !this.titleSearchTerm) {
+            this.risultatiRicerca.map((r, i) => r.matches = true);
+        }
+        else {
+            const options = {
+                threshold: 0.0,
+                ignoreLocation: true,
+                keys: ['ocTitoloProgetto']
+            }
+            const fuse = new Fuse(this.risultatiRicerca, options)
+            let matchingRes = fuse.search(this.titleSearchTerm).map(r => r.refIndex);
+            this.risultatiRicerca.map((r, i) => r.matches = matchingRes.indexOf(i) >= 0);
+        }
+        this.evidenziaRisultatiSuMappa();
+
+    }
+    resetTitleSearch() {
+        this.titleSearchTerm = '';
+        this.searchByTitle(true);
+    }
+
+    getRisultati() {
+        return this.risultatiRicerca.filter(r => r.matches);
     }
 }
 

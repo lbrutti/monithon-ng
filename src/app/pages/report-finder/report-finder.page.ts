@@ -126,7 +126,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
                 let matchIdx = updateSubject.reports.map((r: Report) => r.uid);
-                this.reports.map(r => {
+                this.reports.map((r: Report & SearchResult) => {
                     r.matches = lodash.includes(matchIdx, r.uid);
                     r.distanza = (lodash.find(updateSubject.reports, report => report.uid == r.uid) || {}).distanza;
                 }); //= updateSubject.reports;
@@ -242,7 +242,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.reportMap.setProgrammiOperativi(this.programmiOperativi);
 
 
-                this.reportMap.renderMap(this.mapContainer.nativeElement, listaReport, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
+                this.reportMap.renderMap(this.mapContainer.nativeElement, this.reports, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
 
@@ -625,7 +625,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         }
         else {
             const options = {
-                threshold: 0.1,
+                threshold: 0.0,
+                ignoreLocation: true, 
                 keys: ['titolo']
             }
             const fuse = new Fuse(this.risultatiRicerca, options)

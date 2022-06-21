@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import lodash from 'lodash';
 import { environment } from 'src/environments/environment';
@@ -10,7 +10,7 @@ import { Categoria } from 'src/app/model/categoria/categoria.interface';
 
 
 // //MOCK
-// import temiSintetici from '../../../assets/mock/temiSintetici';
+import temiSintetici from '../../../assets/mock/temiSintetici.js';
 // import cicliProgrammazione from '../../../assets/mock/cicliProgrammazione';
 // import programmiOperativi from '../../../assets/mock/programmiOperativi';
 // import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
@@ -37,8 +37,14 @@ export class MonithonApiService {
 
     }
 
-    public getProgetti(): Observable<any[]> {
-        return this.httpClient.get<any[]>(this.url + '/mapdata')
+    //FIXME: lista progetti da ws monithon: va passato query param con codice tema per filtraggio
+
+    public getProgetti(ocCodTemaSintetico: string = ''): Observable<any[]> {
+        let url: string = this.url + '/mapdata';
+        if (ocCodTemaSintetico.length) {
+            url += `?tema=${ocCodTemaSintetico}`;
+        }
+        return this.httpClient.get<any[]>(url)
             .pipe(
                 map((res) => {
                     return res.map((p: any) => {
@@ -95,9 +101,15 @@ export class MonithonApiService {
             );
     }
 
-    public getTemi(): Observable<any> {
+    //FIXME: lista temi da ws monithon: va passato query param con codice tema per filtraggio
+    public getTemi_REAL(ocCodTemaSintetico:string=''): Observable<any> {
+        let url: string = this.url + '/mdTemi';
+        if (ocCodTemaSintetico.length) {
+            url += `?tema=${ocCodTemaSintetico}`;
+        }
         //{"4":[12,10,15,14,11,13,16],"6":[95,91,94,93,92],"5":[87,86,85,19,20,84,22,17,18,88,21,89,23,500],"7":[43]}
-
+        // from(temiSintetici)
+        // return this.httpClient.get<any>(this.url + '/mdTemi')
         return this.httpClient.get<any>(this.url + '/mdTemi')
             .pipe(
                 map((res: any) => {
@@ -113,6 +125,42 @@ export class MonithonApiService {
                     return {
                         temi: temi,
                         categorie: categorie
+                    }
+                }),
+                catchError(e => {
+                    console.error(e);
+                    return of(e);
+                })
+            );
+
+    }
+
+    public getTemi(ocCodTemaSintetico: string = ''): Observable<any> {
+        let temiMock = temiSintetici;
+        if(ocCodTemaSintetico.length){
+            temiMock = {};
+            lodash.set(temiMock, ocCodTemaSintetico, lodash.get(temiSintetici, ocCodTemaSintetico));
+        }
+        return of(temiMock)
+            .pipe(
+                map((res: any) => {
+                    let temi: Tema[] = lodash.chain(res)
+                        .keys()
+                        .map(tema => ({ 'ocCodTemaSintetico': tema, 'isActive': true, stile: lodash.get(res, `[${tema}].stile`) }))
+                        .value();
+                    let categorie: Categoria[] = lodash.chain(res).map((props, tema) => {
+                        let categorie: Categoria[] = props.categorie.map(c => ({ 'ocCodTemaSintetico': tema, 'ocCodCategoriaSpesa': c }));
+                        return categorie;
+                    }).flatten()
+                        .value();
+                    let stili: Categoria[] = lodash.chain(res).map((props, tema) => {
+                        return props.stile;
+                    }).flatten()
+                        .value();
+                    return {
+                        temi: temi,
+                        categorie: categorie,
+                        stili: stili
                     }
                 }),
                 catchError(e => {
