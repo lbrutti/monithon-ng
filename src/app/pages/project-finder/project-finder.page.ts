@@ -15,7 +15,6 @@ import { LoadingController, ModalController, PopoverController, Platform } from 
 import { TranslocoService } from '@ngneat/transloco';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AboutPage } from '../about/about.page';
-import { LangSwitcherComponent } from 'src/app/components/lang-switcher/lang-switcher.component';
 import Fuse from 'fuse.js';
 import { SearchResult } from 'src/app/model/searchResult.interface';
 import { Tema } from 'src/app/model/tema/tema.interface';

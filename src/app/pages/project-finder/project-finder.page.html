@@ -1,11 +1,6 @@
 <ion-content [fullscreen]="true" [scrollY]="false" [ngClass]="{'mobile': isMobile}">
-    <!-- <ion-toolbar class="monithon-header" >
-    </ion-toolbar> -->
+
     <div id="aboutBtnContainer">
-        <!-- <ion-select class="langSelect" [(ngModel)]="locale" interface="popover" (ionChange)="setLanguage()">
-            <ion-select-option value="it-IT">{{'language.ita' | transloco}}</ion-select-option>
-            <ion-select-option value="en-GB">{{'language.en' | transloco}}</ion-select-option>
-        </ion-select> -->
         <div class="monithon-lang-icon" id="lang-switch" (click)="switchLang($event)">{{translocoService.getActiveLang().split('-')[0]}}</div>
         <ion-icon class="monithon-about-icon" slot="icon-only" (click)="openIonModal()"></ion-icon>
         <ion-icon class="monithon-logo-icon" slot="icon-only" (click)="goToMonithon()"></ion-icon>
