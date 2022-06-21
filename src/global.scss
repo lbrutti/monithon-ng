@@ -213,7 +213,7 @@ app-courtesy {
         justify-content: space-between;
 
         .monithon-about-grid {
-            height: calc(100vh - 56px);
+            height: 100%;
             display: flex;
             flex-direction: column;
             overflow-y: scroll;
