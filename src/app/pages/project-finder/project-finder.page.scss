@@ -951,13 +951,13 @@ ion-content.mobile {
             padding-left: 6px;
         }
 
-        .monithon-dettaglio-progetto__dettagli{
-            .mobile{
+        .monithon-dettaglio-progetto__dettagli {
+            .mobile {
                 margin-bottom: 12px;
             }
         }
 
-        .monithon-dettaglio-progetto__sintesi__oc_link{
+        .monithon-dettaglio-progetto__sintesi__oc_link {
             margin-bottom: 24px;
         }
 
@@ -965,5 +965,22 @@ ion-content.mobile {
 
     #chartsContainer {
         display: none;
+    }
+
+
+    #raggioContainer {
+
+        left: 0px;
+        top: 100px;
+
+        mat-slider {
+            width: 100vw;
+        }
+
+        ::ng-deep mat-slider {
+            &.mat-slider-horizontal {
+                width: 100vw;
+            }
+        }
     }
 }
