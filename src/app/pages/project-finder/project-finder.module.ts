@@ -17,13 +17,10 @@ import { CapitalizePipeModule } from '../../pipes/capitalize/capitalize.pipe.mod
 import { FormatDistanzaPipeModule } from '../../pipes/format-distanza/format-distanza.pipe.module';
 import { UnescapePipeModule } from '../../pipes/unescape/unescape.pipe.module';
 import { FixencodedcharsPipeModule } from '../../pipes/fixencodedchars/fixencodedchars.pipe.module';
-<<<<<<< HEAD
 import { LangSwitcherModule } from 'src/app/components/lang-switcher/lang-switcher.module';
-=======
 import { MatIconModule } from '@angular/material/icon'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
->>>>>>> dev
 @NgModule({
     imports: [
         CommonModule,
@@ -43,13 +40,10 @@ import { MatInputModule } from '@angular/material/input';
         UnescapePipeModule,
         FixencodedcharsPipeModule,
         MatSliderModule,
-<<<<<<< HEAD
-        LangSwitcherModule    ],
-=======
+        LangSwitcherModule,
         MatFormFieldModule,
         MatInputModule,
         MatIconModule   ],
->>>>>>> dev
     declarations: [ProjectFinderPage],
 })
 export class ProjectFinderPageModule { }
