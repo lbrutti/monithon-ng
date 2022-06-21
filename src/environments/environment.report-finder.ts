@@ -53,7 +53,7 @@ export const environment = {
     },
     translationServiceURL: '/assets/i18n/',
     version: FullSemVer,
-    availableLangs: ['it', 'en'],
+    availableLangs: ['it', 'en', 'fr'],
 
 };
 

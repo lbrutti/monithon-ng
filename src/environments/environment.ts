@@ -73,7 +73,7 @@ export const environment = {
         apiroute: "api"
     },
     translationServiceURL: '/assets/i18n/',
-    availableLangs: ['it', 'en'],
+    availableLangs: ['it', 'en', 'fr'],
     //[SM-92] : decommentare e sostituire con url corretta.
     // translationServiceURL: 'https://projectfinder.monithon.eu/assets/i18n/',
 

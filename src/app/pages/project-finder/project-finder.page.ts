@@ -882,11 +882,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     }
 
 
-    setLanguage() {
-        this.translocoService.setActiveLang(this.locale);
-    }
-
     async switchLang(evt: any) {
+        debugger;
         let currentLang = this.translocoService.getActiveLang();
         let availableLangs: string[] = (this.translocoService.getAvailableLangs() as any[]).map((l: any) => (l as any).id || (l as string));
         console.log(availableLangs);
