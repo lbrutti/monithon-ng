@@ -11,7 +11,7 @@ import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
-import { LoadingController, ModalController, PopoverController,  Platform } from '@ionic/angular';
+import { LoadingController, ModalController, PopoverController, Platform } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AboutPage } from '../about/about.page';
@@ -19,6 +19,7 @@ import { LangSwitcherComponent } from 'src/app/components/lang-switcher/lang-swi
 import Fuse from 'fuse.js';
 import { SearchResult } from 'src/app/model/searchResult.interface';
 import { Tema } from 'src/app/model/tema/tema.interface';
+import _ from 'lodash';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -129,7 +130,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         private monithonApiService: MonithonApiService,
         public monithonMap: ProgettiMapService,
         private currencyPipe: CurrencyPipe,
-        private translocoService: TranslocoService,
+        protected translocoService: TranslocoService,
         public loadingController: LoadingController,
         private router: Router,
         public modalController: ModalController,
@@ -886,22 +887,15 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         this.translocoService.setActiveLang(this.locale);
     }
 
-    async openLangPopover(evt: any) {
-        this.langModal = await this.popoverController.create({
-            component: LangSwitcherComponent,
-            cssClass: 'monithon-about-modal',
-            translucent: true,
-            event: evt,
-            componentProps: {
-                onChangeLang: (param) => {
-                    this.langModal.dismiss();
-                }
-            }
-
-        });
-        return await this.langModal.present();
+    async switchLang(evt: any) {
+        let currentLang = this.translocoService.getActiveLang();
+        let availableLangs = this.translocoService.getAvailableLangs().map(l => _.get(l, 'id', l));
+        console.log(availableLangs);
+        let currentLangIdx = availableLangs.indexOf(currentLang);
+        let nextLangIdx = (++currentLangIdx % availableLangs.length);
+        this.translocoService.setActiveLang(availableLangs[nextLangIdx]);
     }
-    
+
     searchByTitle(reset: boolean = false) {
         if (reset || !this.titleSearchTerm) {
             this.risultatiRicerca.map((r, i) => r.matches = true);
