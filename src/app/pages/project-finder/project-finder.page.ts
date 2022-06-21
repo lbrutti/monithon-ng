@@ -888,7 +888,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
     async switchLang(evt: any) {
         let currentLang = this.translocoService.getActiveLang();
-        let availableLangs = this.translocoService.getAvailableLangs().map(l => _.get(l, 'id', l));
+        let availableLangs: string[] = (this.translocoService.getAvailableLangs() as any[]).map((l: any) => (l as any).id || (l as string));
         console.log(availableLangs);
         let currentLangIdx = availableLangs.indexOf(currentLang);
         let nextLangIdx = (++currentLangIdx % availableLangs.length);
