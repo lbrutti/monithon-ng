@@ -52,9 +52,8 @@ export const environment = {
         apiroute: "api"
     },
     translationServiceURL: '/assets/i18n/',
-    version: FullSemVer,
-    availableLangs: ['it', 'en', 'fr'],
-
+    langsUrl: '/assets/i18n/langs.json',
+    version: FullSemVer
 };
 
 /*
