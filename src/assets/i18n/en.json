@@ -1,11 +1,14 @@
 {
-    "projectFinder":"Monithon project finderEN",
+    "projectFinder": "Monithon project finderEN",
     "reportFinder": "Monithon report finderEN",
     "temi": {
         "4": "EnergiaEN",
         "5": "AmbienteEN",
         "6": "Cultura e turismoEN",
-        "7": "Mobilità sostenibileEN"
+        "7": "Mobilità sostenibileEN",
+        "wizard": {
+            "titolo": "Scegli il tema EN"
+        }
     },
     "categorie": {
         "17": "Gestione dei rifiuti domestici (prevenzione e riciclaggio)EN",
