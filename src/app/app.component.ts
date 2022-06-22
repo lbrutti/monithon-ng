@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { getBrowserLang, TranslocoService } from '@ngneat/transloco';
-import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
@@ -13,11 +12,11 @@ import { HttpClient } from '@angular/common/http';
     styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-    http: HttpClient;
     constructor(
         private platform: Platform,
         private statusBar: StatusBar,
-        private translocoService: TranslocoService
+        private translocoService: TranslocoService,
+        private http: HttpClient
     ) {
 
     }
@@ -37,8 +36,6 @@ export class AppComponent implements OnInit {
                 this.statusBar.styleDefault();
             }).then(() => this.http.get(environment.langsUrl).toPromise())
             .then((langs: string[]) => {
-                console.log(getBrowserLang());
-                this.translocoService.setDefaultLang(getBrowserLang());
                 this.translocoService.setActiveLang(getBrowserLang());
                 this.translocoService.setAvailableLangs(langs);
                 this.translocoService.selectTranslate(environment.mode)
