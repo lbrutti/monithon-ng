@@ -20,7 +20,7 @@ export class ProgettiMapService {
 
 
     map: mapboxgl.Map;
-    geocoder: any;
+    geocoder: MapboxGeocoder;
     draw: any;
     rangeProgetti: any;
     temi: Array<any> = [];
