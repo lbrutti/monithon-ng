@@ -860,37 +860,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         return lodash.first(this.progettoSelezionato.ocCodCategoriaSpesa);
     }
 
-    //metodi per modale
-    async openIonModal() {
-        const modal = await this.modalController.create({
-            component: AboutPage,
-            cssClass: 'monithon-about-modal'
-        });
-
-        modal.onDidDismiss().then((modelData) => {
-            if (modelData !== null) {
-                this.modalData = modelData.data;
-            }
-        });
-
-        return await modal.present();
-    }
-
-    goToMonithon() {
-        window.open("https://www.monithon.eu/", "_blank");
-    }
-
-
-    async switchLang(evt: any) {
-        let currentLang = this.translocoService.getActiveLang();
-        let availableLangs: string[] = (this.translocoService.getAvailableLangs() as any[]).map((l: any) => (l as any).id || (l as string));
-        let currentLangIdx = availableLangs.indexOf(currentLang);
-        let nextLangIdx = (++currentLangIdx % availableLangs.length);
-        this.translocoService.setActiveLang(availableLangs[nextLangIdx]);
-        let geocoderPlaceholder = this.isWizardMode ? 'geocoderPlaceholderWizard' : 'geocoderPlaceholder';
-        
-        this.monithonMap.geocoder.setPlaceholder(this.translocoService.translate(geocoderPlaceholder))
-    }
+   
 
     searchByTitle(reset: boolean = false) {
         if (reset || !this.titleSearchTerm) {
@@ -917,6 +887,40 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     getRisultati() {
         return this.risultatiRicerca.filter(r => r.matches);
     }
+
+
+    //metodi per modale
+    async openIonModal() {
+        const modal = await this.modalController.create({
+            component: AboutPage,
+            cssClass: 'monithon-about-modal'
+        });
+
+        // modal.onDidDismiss().then((modelData) => {
+        //     if (modelData !== null) {
+        //         this.modalData = modelData.data;
+        //     }
+        // });
+
+        return await modal.present();
+    }
+
+    goToMonithon() {
+        window.open("https://www.monithon.eu/", "_blank");
+    }
+
+
+    async switchLang() {
+        let currentLang = this.translocoService.getActiveLang();
+        let availableLangs: string[] = (this.translocoService.getAvailableLangs() as any[]).map((l: any) => (l as any).id || (l as string));
+        let currentLangIdx = availableLangs.indexOf(currentLang);
+        let nextLangIdx = (++currentLangIdx % availableLangs.length);
+        this.translocoService.setActiveLang(availableLangs[nextLangIdx]);
+        let geocoderPlaceholder = this.isWizardMode ? 'geocoderPlaceholderWizard' : 'geocoderPlaceholder';
+
+        this.monithonMap.geocoder.setPlaceholder(this.translocoService.translate(geocoderPlaceholder))
+    }
+
 }
 
 
