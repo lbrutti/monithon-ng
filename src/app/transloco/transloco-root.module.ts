@@ -26,9 +26,8 @@ export class TranslocoHttpLoader implements TranslocoLoader {
         {
             provide: TRANSLOCO_CONFIG,
             useValue: translocoConfig({
-                availableLangs: ['it', 'en'],
-                defaultLang: getBrowserLang() || 'it',
-                fallbackLang: 'it',
+                defaultLang: 'it-IT',
+                fallbackLang: 'it-IT',
                 // Remove this option if your application doesn't support changing language in runtime.
                 reRenderOnLangChange: true,
                 prodMode: environment.production,

@@ -11,13 +11,14 @@ import * as d3 from 'd3';
 import { CurrencyPipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling/virtual-scroll-viewport';
-import { LoadingController, ModalController, Platform } from '@ionic/angular';
+import { LoadingController, ModalController, PopoverController, Platform } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AboutPage } from '../about/about.page';
 import Fuse from 'fuse.js';
 import { SearchResult } from 'src/app/model/searchResult.interface';
 import { Tema } from 'src/app/model/tema/tema.interface';
+import _ from 'lodash';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -113,6 +114,12 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     isWizardMode: boolean = false;
 
     modalData: any;
+    locale: string;
+
+    customActionSheetOptions: any = {
+        header: 'Colors',
+        subHeader: 'Select your favorite color'
+    };
     titleSearchTerm: any;
     tema: string = '';
     isMobile: boolean;
@@ -121,10 +128,11 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         private monithonApiService: MonithonApiService,
         public monithonMap: ProgettiMapService,
         private currencyPipe: CurrencyPipe,
-        private translocoService: TranslocoService,
+        protected translocoService: TranslocoService,
         public loadingController: LoadingController,
         private router: Router,
         public modalController: ModalController,
+        public popoverController: PopoverController,
         private route: ActivatedRoute,
         private platform: Platform
     ) {
@@ -852,25 +860,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         return lodash.first(this.progettoSelezionato.ocCodCategoriaSpesa);
     }
 
-    //metodi per modale
-    async openIonModal() {
-        const modal = await this.modalController.create({
-            component: AboutPage,
-            cssClass: 'monithon-about-modal'
-        });
-
-        modal.onDidDismiss().then((modelData) => {
-            if (modelData !== null) {
-                this.modalData = modelData.data;
-            }
-        });
-
-        return await modal.present();
-    }
-
-    goToMonithon() {
-        window.open("https://www.monithon.eu/", "_blank");
-    }
+   
 
     searchByTitle(reset: boolean = false) {
         if (reset || !this.titleSearchTerm) {
@@ -897,6 +887,40 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     getRisultati() {
         return this.risultatiRicerca.filter(r => r.matches);
     }
+
+
+    //metodi per modale
+    async openIonModal() {
+        const modal = await this.modalController.create({
+            component: AboutPage,
+            cssClass: 'monithon-about-modal'
+        });
+
+        // modal.onDidDismiss().then((modelData) => {
+        //     if (modelData !== null) {
+        //         this.modalData = modelData.data;
+        //     }
+        // });
+
+        return await modal.present();
+    }
+
+    goToMonithon() {
+        window.open("https://www.monithon.eu/", "_blank");
+    }
+
+
+    async switchLang() {
+        let currentLang = this.translocoService.getActiveLang();
+        let availableLangs: string[] = (this.translocoService.getAvailableLangs() as any[]).map((l: any) => (l as any).id || (l as string));
+        let currentLangIdx = availableLangs.indexOf(currentLang);
+        let nextLangIdx = (++currentLangIdx % availableLangs.length);
+        this.translocoService.setActiveLang(availableLangs[nextLangIdx]);
+        let geocoderPlaceholder = this.isWizardMode ? 'geocoderPlaceholderWizard' : 'geocoderPlaceholder';
+
+        this.monithonMap.geocoder.setPlaceholder(this.translocoService.translate(geocoderPlaceholder))
+    }
+
 }
 
 

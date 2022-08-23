@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true" [scrollY]="false" [ngClass]="{'mobile': isMobile}">
-    <!-- <ion-toolbar class="monithon-header" >
-    </ion-toolbar> -->
+
     <div id="aboutBtnContainer">
+        <div class="monithon-lang-icon" id="lang-switch" (click)="switchLang()"><span>{{translocoService.getActiveLang().split('-')[0]}}</span></div>
         <ion-icon class="monithon-about-icon" slot="icon-only" (click)="openIonModal()"></ion-icon>
         <ion-icon class="monithon-logo-icon" slot="icon-only" (click)="goToMonithon()"></ion-icon>
     </div>

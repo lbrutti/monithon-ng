@@ -72,7 +72,8 @@ export const environment = {
         port: "80",
         apiroute: "api"
     },
-    translationServiceURL:'/assets/i18n/',
+    translationServiceURL: '/assets/i18n/',
+    langsUrl: '/assets/i18n/langs.json',
     //[SM-92] : decommentare e sostituire con url corretta.
     // translationServiceURL: 'https://projectfinder.monithon.eu/assets/i18n/',
 
