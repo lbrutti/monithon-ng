@@ -128,7 +128,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         private monithonApiService: MonithonApiService,
         public monithonMap: ProgettiMapService,
         private currencyPipe: CurrencyPipe,
-        protected translocoService: TranslocoService,
+        public translocoService: TranslocoService,
         public loadingController: LoadingController,
         private router: Router,
         public modalController: ModalController,

@@ -19,7 +19,7 @@ export class TemiPage implements OnInit, AfterViewInit {
         private monithonApiService: MonithonApiService,
         private router: Router,
         private platform: Platform,
-        protected translocoService: TranslocoService,
+        public translocoService: TranslocoService,
         public modalController: ModalController,
 
     ) { }
