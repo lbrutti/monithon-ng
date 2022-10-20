@@ -196,7 +196,7 @@ export class ProgettiMapService {
                 var features = this.map.queryRenderedFeatures(bbox, {
                     layers: ['progetti-layer']
                 });
-                if (features.length && this.map.getZoom() >= 10) { //https://www.meistertask.com/app/task/k9R9hJHO/markers-poter-cliccare-i-markers-solo-allultimo-livello-di-zoom-come-in-glocalclimatechange-eu
+                if (features.length && this.map.getZoom() >= 5) {
                     let feature = features[0];
                     let progetto: Progetto = feature.properties as Progetto;
                     let match = this.progetti.features.filter(f => f.properties.uid == progetto.uid);

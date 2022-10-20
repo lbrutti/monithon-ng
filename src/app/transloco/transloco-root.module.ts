@@ -5,8 +5,7 @@ import {
     TranslocoLoader,
     TRANSLOCO_CONFIG,
     translocoConfig,
-    TranslocoModule,
-    getBrowserLang
+    TranslocoModule
 } from '@ngneat/transloco';
 import { Injectable, NgModule } from '@angular/core';
 import { environment } from '../../environments/environment';
