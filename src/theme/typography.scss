@@ -15,6 +15,8 @@
     }
 }
 
+
+
 .monithon-titolo-singolo-progetto {
     font-family: $font2;
     font-style: normal;
@@ -24,15 +26,30 @@
 }
 
 .monithon-tema,
-.monithon-giudizio {
+.monithon-giudizio,
+.monithon-sorgente {
     font-family: $font1;
     font-size: 14px;
     font-style: normal;
     font-weight: normal;
     color: $dark-blue;
 }
-.monithon-giudizio{
+
+.monithon-giudizio {
     font-size: 12px;
+}
+
+#text-containe {
+    .monithon-titolo-sezione {
+        font-size: 23px;
+    }
+}
+
+.monithon-descrizione-wizard {
+    font-family: $font2;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
 }
 
 .monithon-categoria {
@@ -148,18 +165,22 @@ app-courtesy {
 
     .monithon-about-modal-content {
         font-family: $font2 !important;
+
         .monithon-about-col {
             color: var(--monithon-default-font-color) !important;
         }
-        .monithon-about-titolo{
+
+        .monithon-about-titolo {
             color: var(--monithon-about-titolo-color) !important;
             font-size: 23px;
         }
-        .monithon-about-titolo-sezione{
+
+        .monithon-about-titolo-sezione {
             font-size: 16px;
         }
-            .monithon-about-colophon {
-                font-size: 12px;
-            }
+
+        .monithon-about-colophon {
+            font-size: 12px;
+        }
     }
 }
