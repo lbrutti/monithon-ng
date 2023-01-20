@@ -19,9 +19,11 @@ export class AboutPage implements OnInit {
 
     ngOnInit() { }
 
-    async closeModal() {
+    async closeModal(delay: number = 50) {
         const close: string = "Modal Removed";
-        await this.modalController.dismiss(close);
+        setTimeout(async () => {
+            await this.modalController.dismiss(close);
+        }, delay);
     }
 
 }

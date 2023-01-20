@@ -109,7 +109,11 @@
             "titolo": "Monithon Project Finder",
             "sottotitolo": "Scopri i progetti europei sui temi dell'ambiente, dell'energia, della valorizzazione del patrimonio naturale e culturale, e della mobilità sostenibile!",
             "cosaPuoiFare": "Cosa puoi fare",
-            "metodologia": "Metodologia"
+            "metodologia": "Metodologia",
+            "noWizard": "Vedi tutti i progetti",
+            "wizardComuni": "Cerca il tuo comune",
+            "wizardTemi": "Filtra per tema",
+            "wizardSorgenti": "Filtra per origine del dato"
         },
         "credits": "Credits",
         "design": "Design:",

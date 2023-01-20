@@ -25,6 +25,33 @@
                 <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.sottotitolo' | transloco}}</h3>
             </ion-col>
         </ion-row>
+
+        <ion-row>
+            <ion-col text-center class="monithon-about-col">
+                <a [routerLink]="['/']" (click)="closeModal(250)">
+                    <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.noWizard' | transloco}}</h3>
+                </a>
+            </ion-col>
+       
+            
+            <ion-col text-center class="monithon-about-col">
+                <a [routerLink]="['/wizard']" (click)="closeModal(250)">
+                    <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.wizardComuni' | transloco}}</h3>
+                </a>
+            </ion-col>
+      
+            <ion-col text-center class="monithon-about-col">
+                <a [routerLink]="['/temi']" (click)="closeModal(250)">
+                    <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.wizardTemi' | transloco}}</h3>
+                </a>
+            </ion-col>
+      
+            <ion-col text-center class="monithon-about-col">
+                <a [routerLink]="['/sorgenti']" (click)="closeModal(250)">
+                    <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.wizardSorgenti' | transloco}}</h3>
+                </a>
+            </ion-col>
+        </ion-row>
         <ion-row>
             <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
                 <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.cosaPuoiFare'| transloco}}</h3>
