@@ -11,6 +11,7 @@ import { Categoria } from 'src/app/model/categoria/categoria.interface';
 
 // //MOCK
 import temiSintetici from '../../../assets/mock/temiSintetici.js';
+import sorgenti from '../../../assets/mock/sorgenti.js';
 // import cicliProgrammazione from '../../../assets/mock/cicliProgrammazione';
 // import programmiOperativi from '../../../assets/mock/programmiOperativi';
 // import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
@@ -20,6 +21,7 @@ import temiSintetici from '../../../assets/mock/temiSintetici.js';
 import { Report } from 'src/app/model/report/report';
 import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
 import { ProgrammaOperativo } from 'src/app/model/programmaOperativo/programmaOperativo.interface';
+import { Sorgente } from 'src/app/model/sorgente.js';
 
 @Injectable({
     providedIn: 'root'
@@ -102,7 +104,7 @@ export class MonithonApiService {
     }
 
     //FIXME: lista temi da ws monithon: va passato query param con codice tema per filtraggio
-    public getTemi_REAL(ocCodTemaSintetico:string=''): Observable<any> {
+    public getTemi_REAL(ocCodTemaSintetico: string = ''): Observable<any> {
         let url: string = this.url + '/mdTemi';
         if (ocCodTemaSintetico.length) {
             url += `?tema=${ocCodTemaSintetico}`;
@@ -137,7 +139,7 @@ export class MonithonApiService {
 
     public getTemi(ocCodTemaSintetico: string = ''): Observable<any> {
         let temiMock = temiSintetici;
-        if(ocCodTemaSintetico.length){
+        if (ocCodTemaSintetico.length) {
             temiMock = {};
             lodash.set(temiMock, ocCodTemaSintetico, lodash.get(temiSintetici, ocCodTemaSintetico));
         }
@@ -171,6 +173,26 @@ export class MonithonApiService {
 
     }
 
+    public getSorgenti(): Observable<any> {
+        let sorgentiMock = sorgenti;
+
+        return of(sorgentiMock).pipe(
+            map((res: any) => {
+                let sorgenti: Sorgente[] = lodash.chain(res)
+                    .keys()
+                    .map(sorgente => ({ 'id': sorgente, 'isActive': true, stile: lodash.get(res, `[${sorgente}].stile`) }))
+                    .value();
+                return {
+                    sorgenti: sorgenti
+                }
+            }),
+            catchError(e => {
+                console.error(e);
+                return of(e);
+            })
+        );
+
+    }
 
     /// metodi per report
     /**
