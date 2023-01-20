@@ -40,6 +40,10 @@ export const environment = {
             loadChildren: () => import('../app/pages/sorgenti/sorgenti.module').then(m => m.SorgentiPageModule)
         },
         {
+            path: 'sorgente/:idSorgente',
+            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
+        },
+        {
             path: '',
             redirectTo: '',
             pathMatch: 'full'

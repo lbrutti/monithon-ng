@@ -41,12 +41,16 @@ export class MonithonApiService {
 
     //FIXME: lista progetti da ws monithon: va passato query param con codice tema per filtraggio
 
-    public getProgetti(ocCodTemaSintetico: string = ''): Observable<any[]> {
+    public getProgetti(ocCodTemaSintetico?: string, idSorgente?: string): Observable<any[]> {
         let url: string = this.url + '/mapdata';
-        if (ocCodTemaSintetico.length) {
-            url += `?tema=${ocCodTemaSintetico}`;
+        let params: any = {};
+        if (ocCodTemaSintetico) {
+            params.tema = ocCodTemaSintetico;
         }
-        return this.httpClient.get<any[]>(url)
+        if (idSorgente) {
+            params.sorgente = idSorgente;
+        }
+        return this.httpClient.get<any[]>(url, { params: params })
             .pipe(
                 map((res) => {
                     return res.map((p: any) => {
@@ -137,7 +141,7 @@ export class MonithonApiService {
 
     }
 
-    public getTemi(ocCodTemaSintetico: string = ''): Observable<any> {
+    public getTemi(ocCodTemaSintetico: string = '', idSorgente?: string): Observable<any> {
         let temiMock = temiSintetici;
         if (ocCodTemaSintetico.length) {
             temiMock = {};
@@ -145,14 +149,18 @@ export class MonithonApiService {
         }
         // return of(temiMock)
         let url: string = 'https://api.dev.monithon.eu/api/mdTemi';
+        let params: any = {};
         if (ocCodTemaSintetico.length) {
-            url += `?tema=${ocCodTemaSintetico}`;
+            params.tema = ocCodTemaSintetico;
+        }
+        if (idSorgente) {
+            params.sorgente = idSorgente;
         }
 
         //{"4":[12,10,15,14,11,13,16],"6":[95,91,94,93,92],"5":[87,86,85,19,20,84,22,17,18,88,21,89,23,500],"7":[43]}
         // from(temiSintetici)
         // return this.httpClient.get<any>(this.url + '/mdTemi')
-        return this.httpClient.get<any>(url)
+        return this.httpClient.get<any>(url, { params: params })
             .pipe(
                 map((res: any) => {
                     let temi: Tema[] = lodash.chain(res)

@@ -48,7 +48,7 @@ export class SorgentiPage implements OnInit, AfterViewInit {
     }
 
     public goToTemaPreset(sorgente: Sorgente) {
-        this.router.navigateByUrl(`/tema/${sorgente.id}`);
+        this.router.navigateByUrl(`/sorgente/${sorgente.id}`);
     }
 
 

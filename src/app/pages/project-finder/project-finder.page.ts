@@ -122,6 +122,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     };
     titleSearchTerm: any;
     tema: string = '';
+    sorgente: any;
     isMobile: boolean;
     // keepProgetto: boolean = false;
     constructor(
@@ -144,6 +145,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
         this.route.params.subscribe((params: Params) => {
             this.tema = lodash.get(params, 'ocCodTemaSintetico', '');
+            this.sorgente = lodash.get(params, 'idSorgente', '');
         });
 
 
@@ -267,8 +269,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
 
         Promise.all([
-            this.monithonApiService.getProgetti(this.tema).toPromise(),
-            this.monithonApiService.getTemi(this.tema).toPromise()
+            this.monithonApiService.getProgetti(this.tema, this.sorgente).toPromise(),
+            this.monithonApiService.getTemi(this.tema, this.sorgente).toPromise()
         ])
             .then(data => {
                 let temi = data[1];
@@ -860,7 +862,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         return lodash.first(this.progettoSelezionato.ocCodCategoriaSpesa);
     }
 
-   
+
 
     searchByTitle(reset: boolean = false) {
         if (reset || !this.titleSearchTerm) {
