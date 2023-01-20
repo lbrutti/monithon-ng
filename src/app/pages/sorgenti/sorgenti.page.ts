@@ -2,17 +2,17 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, Platform } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
-import { Tema } from 'src/app/model/tema/tema.interface';
+import { Sorgente } from 'src/app/model/sorgente';
 import { MonithonApiService } from 'src/app/services/monithonApiService/monithon-api.service';
 import { AboutPage } from '../about/about.page';
 
 @Component({
-    selector: 'app-temi',
-    templateUrl: './temi.page.html',
-    styleUrls: ['./temi.page.scss'],
+    selector: 'app-sorgenti',
+    templateUrl: './sorgenti.page.html',
+    styleUrls: ['./sorgenti.page.scss'],
 })
-export class TemiPage implements OnInit, AfterViewInit {
-    temi: Array<Tema>;
+export class SorgentiPage implements OnInit, AfterViewInit {
+    sorgenti: Array<Sorgente>;
     isMobile: boolean = false;
 
     constructor(
@@ -35,19 +35,20 @@ export class TemiPage implements OnInit, AfterViewInit {
         this.isMobile = !goodDevice;
     }
     ngAfterViewInit() {
-        this.monithonApiService.getTemi().toPromise()
+        this.monithonApiService.getSorgenti().toPromise()
             .then(data => {
-                this.temi = data.temi;
+                debugger;
+                this.sorgenti = data.sorgenti;
                 //create css variables for temi:
-                this.temi.map((t: any) => {
-                    document.documentElement.style.setProperty(`--monithon-tema-${t.ocCodTemaSintetico}-background`, t.stile.colore);
+                this.sorgenti.map((s: any) => {
+                    document.documentElement.style.setProperty(`--monithon-sorgente-${s.id}-background`, s.stile.colore);
                 });
             });
 
     }
 
-    public goToTemaPreset(tema: Tema) {
-        this.router.navigateByUrl(`/tema/${tema.ocCodTemaSintetico}`);
+    public goToTemaPreset(sorgente: Sorgente) {
+        this.router.navigateByUrl(`/tema/${sorgente.id}`);
     }
 
 

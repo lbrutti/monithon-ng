@@ -1,31 +1,31 @@
 /**
- *  contenitori di temi
+ *  contenitori di sorgenti
  */
 
 let sorgenti = {
     "1": {
         "stile": {
-            "colore": "#FFC921"
+            "colore": "#FF0021"
         }
     },
     "2": {
         "stile": {
-            "colore": "#FDD0B3"
+            "colore": "#00DF00"
         }
     },
     "3": {
         "stile": {
-            "colore": "#EA4A3E"
+            "colore": "#EAF"
         }
     },
     "4": {
         "stile": {
-            "colore": "#FDD0B3"
+            "colore": "#DFE"
         }
     },
     "5": {
         "stile": {
-            "colore": "#006FD2"
+            "colore": "#890092"
         }
     }
 };

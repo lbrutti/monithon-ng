@@ -29,7 +29,7 @@ export const environment = {
         },
         {
             path: 'temi',
-            loadChildren: () => import('../app/pages/temi/temi.module').then(m => m.TemiPageModule)
+            loadChildren: () => import('../app/pages/sorgenti/sorgenti.module').then(m => m.TemiPageModule)
         },
         {
             path: 'tema/:ocCodTemaSintetico',

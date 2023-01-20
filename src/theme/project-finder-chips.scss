@@ -18,8 +18,8 @@
     white-space: nowrap;
     word-break: inherit;
 
-    &.mobile{
-    padding: 3px 12px !important;
+    &.mobile {
+        padding: 3px 12px !important;
     }
 }
 
@@ -48,6 +48,7 @@
 }
 
 .mat-chip.monithon-tema,
+.mat-chip.monithon-sorgente,
 .mat-chip.monithon-categoria,
 .mat-chip.monithon-filtro-stato-avanzamento,
 .mat-chip.monithon-filtro-report {
@@ -60,6 +61,13 @@
         &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
             border-color: cssvar(monithon-tema, $codTemaSintetico, background);
             color: cssvar(monithon-tema, $codTemaSintetico, background) !important;
+        }
+    }
+
+    @for $idSorgente from 0 to 50 {
+        &[data-id-sorgente="#{$idSorgente}"] {
+            border-color: cssvar(monithon-sorgente, $idSorgente, background);
+            color: cssvar(monithon-sorgente, $idSorgente, background) !important;
         }
     }
 
@@ -80,6 +88,12 @@
         @for $codTemaSintetico from 0 to 50 {
             &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
                 background-color: cssvar(monithon-tema, $codTemaSintetico, background);
+            }
+        }
+
+        @for $idSorgente from 0 to 50 {
+            &[data-id-sorgente="#{$idSorgente}"] {
+                background-color: cssvar(monithon-sorgente, $idSorgente, background);
             }
         }
 
