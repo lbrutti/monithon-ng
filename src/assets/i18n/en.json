@@ -10,6 +10,17 @@
             "titolo": "Scegli il tema EN"
         }
     },
+    "sorgenti": {
+        "1": "PNRR EN",
+        "2": "SORGENTE 1 EN",
+        "3": "SORGENTE 2 EN",
+        "4": "SORGENTE 3 EN",
+        "5": "SORGENTE 1 EN",
+        "wizard": {
+            "titolo": "Scegli l'origine dei dati EN",
+            "descrizione": "Nostrud qui consequat consequat excepteur pariatur velit. Voluptate laborum non cupidatat non Lorem ullamco est cupidatat qui reprehenderit ullamco esse. Deserunt dolor reprehenderit sint consectetur proident adipisicing duis sit fugiat irure. Elit dolor consectetur sunt laboris. EN"
+        }
+    },
     "categorie": {
         "17": "Gestione dei rifiuti domestici (prevenzione e riciclaggio)EN",
         "18": "Gestione dei rifiuti domestici (impianti)EN",
