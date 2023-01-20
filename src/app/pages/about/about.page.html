@@ -27,26 +27,19 @@
         </ion-row>
 
         <ion-row>
-            <ion-col text-center class="monithon-about-col">
+            <ion-col text-center class="monithon-about-col" size-md="4" size-sm="6">
                 <a [routerLink]="['/']" (click)="closeModal(250)">
                     <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.noWizard' | transloco}}</h3>
                 </a>
-            </ion-col>
-       
-            
-            <ion-col text-center class="monithon-about-col">
+
                 <a [routerLink]="['/wizard']" (click)="closeModal(250)">
                     <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.wizardComuni' | transloco}}</h3>
                 </a>
-            </ion-col>
-      
-            <ion-col text-center class="monithon-about-col">
+
                 <a [routerLink]="['/temi']" (click)="closeModal(250)">
                     <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.wizardTemi' | transloco}}</h3>
                 </a>
-            </ion-col>
-      
-            <ion-col text-center class="monithon-about-col">
+
                 <a [routerLink]="['/sorgenti']" (click)="closeModal(250)">
                     <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.wizardSorgenti' | transloco}}</h3>
                 </a>
