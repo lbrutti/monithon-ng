@@ -1,18 +1,30 @@
 <ion-content [ngClass]="{'mobile': isMobile}">
     <div id="aboutBtnContainer">
         <div class="monithon-lang-icon" id="lang-switch" (click)="switchLang()">
-            <span>{{translocoService.getActiveLang().split('-')[0]}}</span></div>
+            <span>{{translocoService.getActiveLang().split('-')[0]}}</span>
+        </div>
         <ion-icon class="monithon-about-icon" slot="icon-only" (click)="openIonModal()"></ion-icon>
         <ion-icon class="monithon-logo-icon" slot="icon-only" (click)="goToMonithon()"></ion-icon>
     </div>
     <div id="container">
-        <div id="chip-container">
+        <div id="text-container">
+            <img class="monithon-logo-center" src="../../../assets/img/logo_monithon_big.svg">
             <h3 class="monithon-titolo-sezione">{{'sorgenti.wizard.titolo'| transloco}}</h3>
+            <div class="monithon-descrizione-wizard">
+                Pariatur enim non non aute duis in. Dolor in tempor sit Lorem tempor sint nisi officia sint ullamco in
+                consectetur. Laborum mollit velit id reprehenderit cillum sit magna voluptate amet cillum et ullamco
+                aliqua in. Adipisicing sunt nulla non eiusmod eu elit aliqua elit consequat tempor enim sunt eu labore.
+                Anim ad minim dolor ullamco deserunt duis aute ad nisi. Ullamco ea anim sit id velit consectetur Lorem
+                adipisicing sunt in exercitation veniam. Anim amet pariatur officia aliqua consequat ea amet ex sit.
+            </div>
+        </div>
+        <div id="chip-container">
             <!-- Temi -->
             <mat-chip-list class="monithon-sorgenti" aria-label="sorgenti dati">
-                <mat-chip class="monithon-sorgente" *ngFor="let sorgente of this.sorgenti" [selectable]="sorgente.isActive"
-                    [attr.data-active]="true" selectable="true" (click)="this.goToTemaPreset(sorgente)"
-                    selected="true" [attr.data-id-sorgente]="sorgente.id" disableRipple="true">
+                <mat-chip class="monithon-sorgente" *ngFor="let sorgente of this.sorgenti"
+                    [selectable]="sorgente.isActive" [attr.data-active]="true" selectable="true"
+                    (click)="this.goToTemaPreset(sorgente)" selected="true" [attr.data-id-sorgente]="sorgente.id"
+                    disableRipple="true">
                     {{'sorgenti.'+sorgente.id | transloco}}</mat-chip>
             </mat-chip-list>
         </div>
