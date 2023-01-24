@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable, of } from 'rxjs';
+import {  Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import lodash from 'lodash';
 import { environment } from 'src/environments/environment';
@@ -10,8 +10,8 @@ import { Categoria } from 'src/app/model/categoria/categoria.interface';
 
 
 // //MOCK
-import temiSintetici from '../../../assets/mock/temiSintetici.js';
-import sorgenti from '../../../assets/mock/sorgenti.js';
+// import temiSintetici from '../../../assets/mock/temiSintetici.js';
+// import sorgenti from '../../../assets/mock/sorgenti.js';
 // import cicliProgrammazione from '../../../assets/mock/cicliProgrammazione';
 // import programmiOperativi from '../../../assets/mock/programmiOperativi';
 // import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
@@ -39,10 +39,8 @@ export class MonithonApiService {
 
     }
 
-    //FIXME: lista progetti da ws monithon: va passato query param con codice tema per filtraggio
-
     public getProgetti(ocCodTemaSintetico?: string, idSorgente?: string): Observable<any[]> {
-        let url: string = this.url + '/mapdata';
+        let url: string = 'https://api.dev.monithon.eu/api/mapdata';
         let params: any = {};
         if (ocCodTemaSintetico) {
             params.tema = ocCodTemaSintetico;
@@ -142,11 +140,11 @@ export class MonithonApiService {
     }
 
     public getTemi(ocCodTemaSintetico: string = '', idSorgente?: string): Observable<any> {
-        let temiMock = temiSintetici;
-        if (ocCodTemaSintetico.length) {
-            temiMock = {};
-            lodash.set(temiMock, ocCodTemaSintetico, lodash.get(temiSintetici, ocCodTemaSintetico));
-        }
+        // let temiMock = temiSintetici;
+        // if (ocCodTemaSintetico.length) {
+        //     temiMock = {};
+        //     lodash.set(temiMock, ocCodTemaSintetico, lodash.get(temiSintetici, ocCodTemaSintetico));
+        // }
         // return of(temiMock)
         let url: string = 'https://api.dev.monithon.eu/api/mdTemi';
         let params: any = {};
@@ -191,7 +189,6 @@ export class MonithonApiService {
     }
 
     public getSorgenti(): Observable<any> {
-        let sorgentiMock = sorgenti;
         let url: string = 'https://api.dev.monithon.eu/api/datasources';
         return this.httpClient.get<any>(url).pipe(
             map((res: any) => {
