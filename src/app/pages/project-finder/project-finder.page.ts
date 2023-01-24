@@ -19,6 +19,7 @@ import Fuse from 'fuse.js';
 import { SearchResult } from 'src/app/model/searchResult.interface';
 import { Tema } from 'src/app/model/tema/tema.interface';
 import _ from 'lodash';
+import { thresholdFreedmanDiaconis } from 'd3';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -122,7 +123,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     };
     titleSearchTerm: any;
     tema: string = '';
-    sorgente: string='';
+    sorgente: string = '';
     isMobile: boolean;
     // keepProgetto: boolean = false;
     constructor(
@@ -765,7 +766,13 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     }
 
     public filterByCategoria(categoria: any): void {
-        categoria.isSelected = !categoria.isSelected;
+        //[SM-100] : se tutte le categoria sono selezionate->deseleziona tutto tranne la cliccata
+        if (lodash.every(this.categorie, c => c.isSelected)) {
+            this.categorie.map(c => c.isSelected = c.ocCodCategoriaSpesa === categoria.ocCodCategoriaSpesa);
+        } else {
+            //[SM-100] : altrimenti inverti lo stato della categoria cliccata solamente
+            categoria.isSelected = !categoria.isSelected;
+        }
         if (lodash.every(this.categorie, c => !c.isSelected)) {
             this.monithonMap.resetFiltroTemi();
         }
