@@ -27,14 +27,17 @@
 
 .monithon-tema,
 .monithon-giudizio,
-.monithon-sorgente {
+.monithon-sorgente,
+#datasource_label {
     font-family: $font1;
     font-size: 14px;
     font-style: normal;
     font-weight: normal;
     color: $dark-blue;
 }
-
+#datasource_label{
+    font-size: 12px;
+}
 .monithon-giudizio {
     font-size: 12px;
 }

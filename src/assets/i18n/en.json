@@ -11,7 +11,7 @@
         }
     },
     "sorgenti": {
-        "1": "Open Coesione",
+        "1": "OpenCoesione",
         "2": "SORGENTE 1 EN",
         "3": "SORGENTE 2 EN",
         "4": "SORGENTE 3 EN",
@@ -19,7 +19,8 @@
         "wizard": {
             "titolo": "Scegli l'origine dei dati EN",
             "descrizione": "Nostrud qui consequat consequat excepteur pariatur velit. Voluptate laborum non cupidatat non Lorem ullamco est cupidatat qui reprehenderit ullamco esse. Deserunt dolor reprehenderit sint consectetur proident adipisicing duis sit fugiat irure. Elit dolor consectetur sunt laboris. EN"
-        }
+        },
+        "datasource_label": "Origine dati"
     },
     "categorie": {
         "17": "Gestione dei rifiuti domestici (prevenzione e riciclaggio)EN",

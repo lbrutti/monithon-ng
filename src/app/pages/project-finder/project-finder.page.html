@@ -186,6 +186,8 @@
 
         <div id="panelContainer">
             <div id="filterContainer">
+                <div *ngIf="sorgente.length" id="datasource_label">{{'sorgenti.datasource_label' |
+                    transloco}}:{{'sorgenti.'+sorgente | transloco}}</div>
                 <!-- Temi -->
                 <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true"
                     [ngClass]="{'mobile': isMobile}">

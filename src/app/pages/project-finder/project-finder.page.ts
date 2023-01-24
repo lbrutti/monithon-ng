@@ -122,7 +122,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     };
     titleSearchTerm: any;
     tema: string = '';
-    sorgente: any;
+    sorgente: string='';
     isMobile: boolean;
     // keepProgetto: boolean = false;
     constructor(
