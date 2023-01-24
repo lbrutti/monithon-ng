@@ -192,12 +192,16 @@ export class MonithonApiService {
 
     public getSorgenti(): Observable<any> {
         let sorgentiMock = sorgenti;
-
-        return of(sorgentiMock).pipe(
+        let url: string = 'https://api.dev.monithon.eu/api/datasources';
+        return this.httpClient.get<any>(url).pipe(
             map((res: any) => {
                 let sorgenti: Sorgente[] = lodash.chain(res)
                     .keys()
-                    .map(sorgente => ({ 'id': sorgente, 'isActive': true, stile: lodash.get(res, `[${sorgente}].stile`) }))
+                    .map(sorgente => ({
+                        'id': sorgente, 'isActive': true, stile: lodash.get(res, `[${sorgente}].stile`, {
+                            "colore": "#FF0021"
+                        })
+                    }))
                     .value();
                 return {
                     sorgenti: sorgenti
