@@ -157,9 +157,9 @@
             "5": "Concluso e utileEN",
             "6": "Concluso e inefficaceEN",
             "7": "Nessun giudizio"
-        },
-        "cercaPerTitolo": "Cerca tra i risultati"
+        }
     },
+    "cercaPerTitolo": "Cerca tra i risultati",
     "codGiudizioSintetico": "Giudizio sinteticoEN",
     "dataInserimento": "DataEN",
     "report.readmore": "leggi il report su MonithonEN",

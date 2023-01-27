@@ -140,6 +140,17 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = lodash.isArray(this.router.url.match(/wizard/));
+        this.translocoService.langChanges$.subscribe(lang => {
+            let geocoderPlaceholder = this.isWizardMode ? 'geocoderPlaceholderWizard' : 'geocoderPlaceholder';
+            this.translocoService.selectTranslate(geocoderPlaceholder)
+                .subscribe(value => {
+                    try {
+                        this.monithonMap.geocoder.setPlaceholder(value);
+                    } catch (error) {
+
+                    }
+                });
+        })
     }
 
     ngOnInit(): void {
@@ -925,11 +936,6 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         let currentLangIdx = availableLangs.indexOf(currentLang);
         let nextLangIdx = (++currentLangIdx % availableLangs.length);
         this.translocoService.setActiveLang(availableLangs[nextLangIdx]);
-        let geocoderPlaceholder = this.isWizardMode ? 'geocoderPlaceholderWizard' : 'geocoderPlaceholder';
-
-        this.monithonMap.geocoder.setPlaceholder(this.translocoService.translate(geocoderPlaceholder))
     }
 
 }
-
-
