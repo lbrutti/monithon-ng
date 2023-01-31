@@ -7,10 +7,6 @@ export const environment = {
     routes: [
         //rotte per project finder
         {
-            path: 'tema/:ocCodTemaSintetico',
-            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
-        },
-        {
             path: '#wizard',
             loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
         },
@@ -33,10 +29,6 @@ export const environment = {
         {
             path: 'courtesy/:destination',
             loadChildren: () => import('../app/pages/courtesy/courtesy.module').then(m => m.CourtesyPageModule)
-        },
-        {
-            path: 'temi',
-            loadChildren: () => import('../app/pages/temi/temi.module').then(m => m.TemiPageModule)
         },
         {
             path: 'sorgenti',
