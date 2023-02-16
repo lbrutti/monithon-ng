@@ -1,0 +1,58 @@
+
+ion-content {
+    #container {
+        display: flex;
+        text-align: center;
+        height: 100vh;
+        flex-direction: column;
+        max-width: 32rem;
+        margin: auto;
+        justify-content: space-between;
+    }
+
+    .text-container {
+        margin: auto;
+    }
+
+    .monithon-descrizione-wizard {
+        text-align: justify;
+    }
+
+    #chip-container {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center
+    }
+
+    .monithon-titolo-sezione {
+        margin-bottom: 40px;
+    }
+
+    .monithon-sorgenti,
+    .monithon-temi {
+        max-width: 50vw;
+        margin-bottom: auto;
+
+        ::ng-deep .mat-chip-list-wrapper {
+            justify-content: center;
+        }
+    }
+
+    &.mobile {
+        #chip-container {
+            text-align: center;
+            height: auto;
+        }
+
+        .monithon-sorgenti,
+        .monithon-temi {
+            max-width: 95vw;
+        }
+
+        .monithon-descrizione-wizard {
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+    }
+}

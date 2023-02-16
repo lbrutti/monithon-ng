@@ -19,6 +19,7 @@ import Fuse from 'fuse.js';
 import { SearchResult } from 'src/app/model/searchResult.interface';
 import { Tema } from 'src/app/model/tema/tema.interface';
 import _ from 'lodash';
+import { thresholdFreedmanDiaconis } from 'd3';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -122,6 +123,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     };
     titleSearchTerm: any;
     tema: string = '';
+    sorgente: string = '';
     isMobile: boolean;
     // keepProgetto: boolean = false;
     constructor(
@@ -138,12 +140,24 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = lodash.isArray(this.router.url.match(/wizard/));
+        this.translocoService.langChanges$.subscribe(lang => {
+            let geocoderPlaceholder = this.isWizardMode ? 'geocoderPlaceholderWizard' : 'geocoderPlaceholder';
+            this.translocoService.selectTranslate(geocoderPlaceholder)
+                .subscribe(value => {
+                    try {
+                        this.monithonMap.geocoder.setPlaceholder(value);
+                    } catch (error) {
+
+                    }
+                });
+        })
     }
 
     ngOnInit(): void {
 
         this.route.params.subscribe((params: Params) => {
             this.tema = lodash.get(params, 'ocCodTemaSintetico', '');
+            this.sorgente = lodash.get(params, 'idSorgente', '');
         });
 
 
@@ -267,8 +281,8 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
 
         Promise.all([
-            this.monithonApiService.getProgetti(this.tema).toPromise(),
-            this.monithonApiService.getTemi(this.tema).toPromise()
+            this.monithonApiService.getProgetti(this.tema, this.sorgente).toPromise(),
+            this.monithonApiService.getTemi(this.tema, this.sorgente).toPromise()
         ])
             .then(data => {
                 let temi = data[1];
@@ -753,7 +767,14 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
     //Filtri di primo livello:
     public filterByTema(tema: any): void {
-        tema.isSelected = !tema.isSelected;
+        //[SM-100] : se tutte le categoria sono selezionate->deseleziona tutto tranne la cliccata
+        if (lodash.every(this.temi, t => t.isSelected)) {
+            this.temi.map(t => t.isSelected = t.ocCodTemaSintetico === tema.ocCodTemaSintetico);
+        } else {
+            //[SM-100] : altrimenti inverti lo stato della categoria cliccata solamente
+            tema.isSelected = !tema.isSelected;
+        }
+        // tema.isSelected = !tema.isSelected;
         if (lodash.every(this.temi, t => !t.isSelected)) {
             this.monithonMap.resetFiltroTemi();
         }
@@ -763,7 +784,13 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
     }
 
     public filterByCategoria(categoria: any): void {
-        categoria.isSelected = !categoria.isSelected;
+        //[SM-100] : se tutte le categoria sono selezionate->deseleziona tutto tranne la cliccata
+        if (lodash.every(this.categorie, c => c.isSelected)) {
+            this.categorie.map(c => c.isSelected = c.ocCodCategoriaSpesa === categoria.ocCodCategoriaSpesa);
+        } else {
+            //[SM-100] : altrimenti inverti lo stato della categoria cliccata solamente
+            categoria.isSelected = !categoria.isSelected;
+        }
         if (lodash.every(this.categorie, c => !c.isSelected)) {
             this.monithonMap.resetFiltroTemi();
         }
@@ -860,7 +887,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         return lodash.first(this.progettoSelezionato.ocCodCategoriaSpesa);
     }
 
-   
+
 
     searchByTitle(reset: boolean = false) {
         if (reset || !this.titleSearchTerm) {
@@ -916,11 +943,6 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         let currentLangIdx = availableLangs.indexOf(currentLang);
         let nextLangIdx = (++currentLangIdx % availableLangs.length);
         this.translocoService.setActiveLang(availableLangs[nextLangIdx]);
-        let geocoderPlaceholder = this.isWizardMode ? 'geocoderPlaceholderWizard' : 'geocoderPlaceholder';
-
-        this.monithonMap.geocoder.setPlaceholder(this.translocoService.translate(geocoderPlaceholder))
     }
 
 }
-
-

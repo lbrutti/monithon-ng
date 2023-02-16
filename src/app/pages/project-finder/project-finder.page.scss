@@ -33,6 +33,7 @@
 #container a {
     text-decoration: none;
 }
+
 //moved to global.scss
 // #aboutBtnContainer {
 //     z-index: 1000;
@@ -95,6 +96,16 @@
 #filterContainer {
     margin-top: auto;
     width: 66vw;
+
+    #datasource_label {
+        text-align: left;
+        margin-left: 24px;
+        margin-bottom: 6px;
+        width: fit-content;
+        border-radius: 12px;
+        padding: 3px;
+        text-shadow: 0px 0px 11px rgba(0, 0, 0, 0.55);
+    }
 }
 
 //https://stackoverflow.com/questions/53195131/angular-material-mat-expansion-panel-body-style-not-being-applied

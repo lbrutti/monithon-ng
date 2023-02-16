@@ -7,10 +7,6 @@ export const environment = {
     routes: [
         //rotte per project finder
         {
-            path: 'tema/:ocCodTemaSintetico',
-            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
-        },
-        {
             path: '#wizard',
             loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
         },
@@ -35,8 +31,12 @@ export const environment = {
             loadChildren: () => import('../app/pages/courtesy/courtesy.module').then(m => m.CourtesyPageModule)
         },
         {
-            path: 'temi',
-            loadChildren: () => import('../app/pages/temi/temi.module').then(m => m.TemiPageModule)
+            path: 'sorgenti',
+            loadChildren: () => import('../app/pages/sorgenti/sorgenti.module').then(m => m.SorgentiPageModule)
+        },
+        {
+            path: 'sorgente/:idSorgente',
+            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
         },
         {
             path: '',
@@ -73,7 +73,7 @@ export const environment = {
         apiroute: "api"
     },
     translationServiceURL: '/assets/i18n/',
-    langsUrl: '/assets/i18n/langs.json',
+    langsUrl: 'https://api.monithon.eu/api/langs',
     //[SM-92] : decommentare e sostituire con url corretta.
     // translationServiceURL: 'https://projectfinder.monithon.eu/assets/i18n/',
 

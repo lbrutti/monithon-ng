@@ -1,7 +1,9 @@
 <ion-content [fullscreen]="true" [scrollY]="false" [ngClass]="{'mobile': isMobile}">
 
     <div id="aboutBtnContainer">
-        <div class="monithon-lang-icon" id="lang-switch" (click)="switchLang()"><span>{{translocoService.getActiveLang().split('-')[0]}}</span></div>
+        <div class="monithon-lang-icon" id="lang-switch" (click)="switchLang()">
+            <span>{{translocoService.getActiveLang().split('-')[0]}}</span>
+        </div>
         <ion-icon class="monithon-about-icon" slot="icon-only" (click)="openIonModal()"></ion-icon>
         <ion-icon class="monithon-logo-icon" slot="icon-only" (click)="goToMonithon()"></ion-icon>
     </div>
@@ -51,9 +53,11 @@
                             <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
                                 <div>{{progettoSelezionato.ocSintesiProgetto | fixencodedchars | unescape | capitalize}}
                                 </div>
-                                <div class="monithon-dettaglio-progetto__sintesi__oc_link">
+                                <div class="monithon-dettaglio-progetto__sintesi__oc_link"
+                                    *ngIf="progettoSelezionato.ocLink">
                                     <a href="{{progettoSelezionato.ocLink}}" target="_blank">→ {{'readmore' | transloco
-                                        }}</a>
+                                        }} {{'sorgenti.'+(progettoSelezionato.sorgente || 1) | transloco
+                                        }} </a>
                                 </div>
                             </div>
 
@@ -164,7 +168,8 @@
                                     </ion-row>
                                 </ion-grid>
                             </div>
-                            <div class="monithon-dettaglio-progetto__inizia_monitoraggio" [ngClass]="{'mobile': isMobile}">
+                            <div class="monithon-dettaglio-progetto__inizia_monitoraggio"
+                                [ngClass]="{'mobile': isMobile}">
                                 <button (click)="iniziaMonitoraggioClicked(progettoSelezionato)"
                                     class="monithon-dettaglio-progetto__inizia_monitoraggio__button monithon-titolo-sezione"
                                     mat-button color="primary">{{'iniziaMonitoraggio' | transloco}}
@@ -187,11 +192,11 @@
                     <mat-chip class="monithon-tema" *ngFor="let tema of this.temi" [selectable]="tema.isActive"
                         [attr.data-active]="tema.isActive" [selected]="tema.isSelected"
                         (click)="this.filterByTema(tema)" [attr.data-oc-cod-tema-sintetico]="tema.ocCodTemaSintetico"
-                        disableRipple="true"
-                        [ngClass]="{'mobile': isMobile}">
+                        disableRipple="true" [ngClass]="{'mobile': isMobile}">
                         {{'temi.'+tema.ocCodTemaSintetico | transloco}}</mat-chip>
                 </mat-chip-list>
-
+                <div *ngIf="sorgente.length" id="datasource_label">{{'sorgenti.datasource_label' |
+                    transloco}}: {{'sorgenti.'+sorgente | transloco}}</div>
                 <!-- Categorie dei temi attivi -->
                 <mat-expansion-panel class="monithon-filtri">
                     <mat-expansion-panel-header>

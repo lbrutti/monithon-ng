@@ -10,6 +10,18 @@
             "titolo": "Scegli il tema EN"
         }
     },
+    "sorgenti": {
+        "1": "OpenCoesione",
+        "2": "SORGENTE 1 EN",
+        "3": "SORGENTE 2 EN",
+        "4": "SORGENTE 3 EN",
+        "5": "SORGENTE 1 EN",
+        "wizard": {
+            "titolo": "Scegli l'origine dei dati",
+            "descrizione": "Benvenuto nel Project Finder di Monithon! Qui puoi scoprire quali sono i progetti  finanziati intorno a te, rintracciare quelli più interessanti da monitorare, visualizzare le informazioni essenziali per iniziare il monitoraggio, creare un report con la tua valutazione! Da dove  Vuoi iniziare?"
+        },
+        "datasource_label": "Origine dati"
+    },
     "categorie": {
         "17": "Gestione dei rifiuti domestici (prevenzione e riciclaggio)EN",
         "18": "Gestione dei rifiuti domestici (impianti)EN",
@@ -86,7 +98,7 @@
     "true": "SiEN",
     "false": "NoEN",
     "monitoraggio": "MonitoraggioEN",
-    "readmore": "vedi il progetto su OpenCoesioneEN",
+    "readmore": "vedi il progetto su",
     "loaderMessage": "Ci siamo quasi...EN",
     "geocoderPlaceholder": "cerca per comuneEN",
     "geocoderPlaceholderWizard": "inizia inserendo il tuo comuneEN",
@@ -97,7 +109,11 @@
             "titolo": "Monithon Project FinderEN",
             "sottotitolo": "Scopri i progetti europei sui temi dell'ambiente, dell'energia, della valorizzazione del patrimonio naturale e culturale, e della mobilità sostenibile!EN",
             "cosaPuoiFare": "Cosa puoi fareEN",
-            "metodologia": "Metodologia"
+            "metodologia": "Metodologia",
+            "noWizard": "Vedi tutti i progetti",
+            "wizardComuni": "Cerca il tuo comune",
+            "wizardTemi": "Filtra per tema",
+            "wizardSorgenti": "Filtra per origine del dato"
         },
         "credits": "CreditsEN",
         "design": "Design:EN",
@@ -141,9 +157,9 @@
             "5": "Concluso e utileEN",
             "6": "Concluso e inefficaceEN",
             "7": "Nessun giudizio"
-        },
-        "cercaPerTitolo": "Cerca tra i risultati"
+        }
     },
+    "cercaPerTitolo": "Cerca tra i risultati",
     "codGiudizioSintetico": "Giudizio sinteticoEN",
     "dataInserimento": "DataEN",
     "report.readmore": "leggi il report su MonithonEN",

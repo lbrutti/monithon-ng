@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable, of } from 'rxjs';
+import {  Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import lodash from 'lodash';
 import { environment } from 'src/environments/environment';
@@ -10,7 +10,8 @@ import { Categoria } from 'src/app/model/categoria/categoria.interface';
 
 
 // //MOCK
-import temiSintetici from '../../../assets/mock/temiSintetici.js';
+// import temiSintetici from '../../../assets/mock/temiSintetici.js';
+// import sorgenti from '../../../assets/mock/sorgenti.js';
 // import cicliProgrammazione from '../../../assets/mock/cicliProgrammazione';
 // import programmiOperativi from '../../../assets/mock/programmiOperativi';
 // import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
@@ -20,6 +21,7 @@ import temiSintetici from '../../../assets/mock/temiSintetici.js';
 import { Report } from 'src/app/model/report/report';
 import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
 import { ProgrammaOperativo } from 'src/app/model/programmaOperativo/programmaOperativo.interface';
+import { Sorgente } from 'src/app/model/sorgente.js';
 
 @Injectable({
     providedIn: 'root'
@@ -37,14 +39,16 @@ export class MonithonApiService {
 
     }
 
-    //FIXME: lista progetti da ws monithon: va passato query param con codice tema per filtraggio
-
-    public getProgetti(ocCodTemaSintetico: string = ''): Observable<any[]> {
-        let url: string = this.url + '/mapdata';
-        if (ocCodTemaSintetico.length) {
-            url += `?tema=${ocCodTemaSintetico}`;
+    public getProgetti(ocCodTemaSintetico?: string, idSorgente?: string): Observable<any[]> {
+        let url: string = 'https://api.dev.monithon.eu/api/mapdata';
+        let params: any = {};
+        if (ocCodTemaSintetico) {
+            params.tema = ocCodTemaSintetico;
         }
-        return this.httpClient.get<any[]>(url)
+        if (idSorgente) {
+            params.sorgente = idSorgente;
+        }
+        return this.httpClient.get<any[]>(url, { params: params })
             .pipe(
                 map((res) => {
                     return res.map((p: any) => {
@@ -102,15 +106,15 @@ export class MonithonApiService {
     }
 
     //FIXME: lista temi da ws monithon: va passato query param con codice tema per filtraggio
-    public getTemi_REAL(ocCodTemaSintetico:string=''): Observable<any> {
-        let url: string = this.url + '/mdTemi';
+    public getTemi_old(ocCodTemaSintetico: string = ''): Observable<any> {
+        let url: string = 'https://api.dev.monithon.eu/api/mdTemi';
         if (ocCodTemaSintetico.length) {
             url += `?tema=${ocCodTemaSintetico}`;
         }
         //{"4":[12,10,15,14,11,13,16],"6":[95,91,94,93,92],"5":[87,86,85,19,20,84,22,17,18,88,21,89,23,500],"7":[43]}
         // from(temiSintetici)
         // return this.httpClient.get<any>(this.url + '/mdTemi')
-        return this.httpClient.get<any>(this.url + '/mdTemi')
+        return this.httpClient.get<any>(url)
             .pipe(
                 map((res: any) => {
                     let temi: Tema[] = lodash.chain(res)
@@ -135,13 +139,26 @@ export class MonithonApiService {
 
     }
 
-    public getTemi(ocCodTemaSintetico: string = ''): Observable<any> {
-        let temiMock = temiSintetici;
-        if(ocCodTemaSintetico.length){
-            temiMock = {};
-            lodash.set(temiMock, ocCodTemaSintetico, lodash.get(temiSintetici, ocCodTemaSintetico));
+    public getTemi(ocCodTemaSintetico: string = '', idSorgente?: string): Observable<any> {
+        // let temiMock = temiSintetici;
+        // if (ocCodTemaSintetico.length) {
+        //     temiMock = {};
+        //     lodash.set(temiMock, ocCodTemaSintetico, lodash.get(temiSintetici, ocCodTemaSintetico));
+        // }
+        // return of(temiMock)
+        let url: string = 'https://api.dev.monithon.eu/api/mdTemi';
+        let params: any = {};
+        if (ocCodTemaSintetico.length) {
+            params.tema = ocCodTemaSintetico;
         }
-        return of(temiMock)
+        if (idSorgente) {
+            params.sorgente = idSorgente;
+        }
+
+        //{"4":[12,10,15,14,11,13,16],"6":[95,91,94,93,92],"5":[87,86,85,19,20,84,22,17,18,88,21,89,23,500],"7":[43]}
+        // from(temiSintetici)
+        // return this.httpClient.get<any>(this.url + '/mdTemi')
+        return this.httpClient.get<any>(url, { params: params })
             .pipe(
                 map((res: any) => {
                     let temi: Tema[] = lodash.chain(res)
@@ -171,6 +188,29 @@ export class MonithonApiService {
 
     }
 
+    public getSorgenti(): Observable<any> {
+        let url: string = 'https://api.dev.monithon.eu/api/datasources';
+        return this.httpClient.get<any>(url).pipe(
+            map((res: any) => {
+                let sorgenti: Sorgente[] = lodash.chain(res)
+                    .keys()
+                    .map(sorgente => ({
+                        'id': sorgente, 'isActive': true, stile: lodash.get(res, `[${sorgente}].stile`, {
+                            "colore": "#FF0021"
+                        })
+                    }))
+                    .value();
+                return {
+                    sorgenti: sorgenti
+                }
+            }),
+            catchError(e => {
+                console.error(e);
+                return of(e);
+            })
+        );
+
+    }
 
     /// metodi per report
     /**
