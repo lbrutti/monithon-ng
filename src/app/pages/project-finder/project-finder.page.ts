@@ -767,7 +767,14 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
     //Filtri di primo livello:
     public filterByTema(tema: any): void {
-        tema.isSelected = !tema.isSelected;
+        //[SM-100] : se tutte le categoria sono selezionate->deseleziona tutto tranne la cliccata
+        if (lodash.every(this.temi, t => t.isSelected)) {
+            this.temi.map(t => t.isSelected = t.ocCodTemaSintetico === tema.ocCodTemaSintetico);
+        } else {
+            //[SM-100] : altrimenti inverti lo stato della categoria cliccata solamente
+            tema.isSelected = !tema.isSelected;
+        }
+        // tema.isSelected = !tema.isSelected;
         if (lodash.every(this.temi, t => !t.isSelected)) {
             this.monithonMap.resetFiltroTemi();
         }

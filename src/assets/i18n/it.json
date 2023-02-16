@@ -18,7 +18,7 @@
         "5": "SORGENTE 1",
         "wizard": {
             "titolo": "Scegli l'origine dei dati",
-            "descrizione": "Nostrud qui consequat consequat excepteur pariatur velit. Voluptate laborum non cupidatat non Lorem ullamco est cupidatat qui reprehenderit ullamco esse. Deserunt dolor reprehenderit sint consectetur proident adipisicing duis sit fugiat irure. Elit dolor consectetur sunt laboris."
+            "descrizione": "Benvenuto nel Project Finder di Monithon! Qui puoi scoprire quali sono i progetti  finanziati intorno a te, rintracciare quelli più interessanti da monitorare, visualizzare le informazioni essenziali per iniziare il monitoraggio, creare un report con la tua valutazione! Da dove  Vuoi iniziare?"
         },
         "datasource_label":"Origine dati"
     },
