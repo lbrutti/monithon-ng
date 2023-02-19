@@ -30,9 +30,7 @@
             [attr.data-cod-giudizio-sintetico]="this.reportSelezionato.codGiudizioSintetico"
             class="monithon-dettaglio-progetto" #dettaglioProgettoContainer>
             <div class="monithon-dettaglio-progetto__header">
-                <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">{{'report.sintesiReport'
-                    |
-                    transloco}}</h5>
+                <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">{{'report.sintesiReport' | transloco}}</h5>
 
                 <ion-icon (click)="onDettaglioReportHandleClick()"></ion-icon>
             </div>
@@ -54,7 +52,7 @@
                     <!-- info accessorie -->
                     <ion-row class="monithon-dettaglio-progetto__row">
                         <!-- sintesi e link -->
-                        <ion-col col-6
+                        <ion-col size-lg="6" size-md="12" size="12"
                             class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__col__titolo ">
                             <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
                                 <div>{{reportSelezionato.sintesi | fixencodedchars | unescape | capitalize}}
@@ -69,7 +67,7 @@
 
                         </ion-col>
                         <!-- dettagli -->
-                        <ion-col col-6
+                        <ion-col size-lg="6" size-md="12" size="12"
                             class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli monithon-dettaglio-report__dettagli">
                             <div class="monithon-dettaglio-progetto__data_inizio monithon_dettaglio_report_info"
                                 [ngClass]="{'mobile': isMobile}">
