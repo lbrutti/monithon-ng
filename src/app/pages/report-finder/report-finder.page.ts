@@ -321,7 +321,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             }
             this.reportSelezionato = new Report(report);
             let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === report.uid);
-            this.listaRisultati.scrollToIndex(indexRisultato);
+            if (!this.isMobile) { this.listaRisultati.scrollToIndex(indexRisultato); }
         } else {
             if (!this.visualizzaDettaglio) {
                 this.reportSelezionato = ReportNullo;

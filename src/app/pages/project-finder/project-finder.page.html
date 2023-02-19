@@ -300,7 +300,7 @@
                 </mat-expansion-panel>
             </div>
         </div>
-        <div class="right-column">
+        <div class="right-column" *ngIf="!isMobile">
             <mat-expansion-panel id="resultContainer" [(expanded)]="espandiListaRisultati">
                 <mat-expansion-panel-header class="monithon-risultati-header">
                     <ion-grid class="ion-no-margin">
