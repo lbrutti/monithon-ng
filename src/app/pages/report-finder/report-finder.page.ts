@@ -104,7 +104,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         public loadingController: LoadingController,
         private router: Router,
         public modalController: ModalController,
-        private platform:Platform
+        private platform: Platform
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = this.router.url == '/#wizard' || this.router.url == '/wizard';
@@ -153,14 +153,20 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                     this.setTemiAttivi();
                 }
 
-                if (this.redrawCharts) {
-                    try {
-                        this.renderCharts(this.getReports());
-                    } catch (error) {
-                        console.error(error);
-                    }
+                if (this.isMobile) {
+                    this.filtraRisultati();
+                    this.evidenziaRisultatiSuMappa();
                 } else {
-                    this.counterValue = this.reports.length;
+
+                    if (this.redrawCharts) {
+                        try {
+                            this.renderCharts(this.getReports());
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    } else {
+                        this.counterValue = this.reports.length;
+                    }
                 }
 
 
@@ -642,7 +648,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         else {
             const options = {
                 threshold: 0.0,
-                ignoreLocation: true, 
+                ignoreLocation: true,
                 keys: ['titolo']
             }
             const fuse = new Fuse(this.risultatiRicerca, options)
