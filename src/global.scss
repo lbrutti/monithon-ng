@@ -277,6 +277,10 @@ app-courtesy {
     padding-left: 24px !important;
     padding-right: 12px !important;
 
+    &.mobile {
+        padding-left: 8px !important;
+    }
+
     .ng-select-container {
         min-height: unset !important;
         background: white;

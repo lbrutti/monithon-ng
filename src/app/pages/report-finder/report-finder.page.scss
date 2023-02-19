@@ -62,11 +62,11 @@ html {
         }
 
         @media not screen and (-webkit-min-device-pixel-ratio: 2),
-            not screen and (min--moz-device-pixel-ratio: 2),
-            not screen and (-o-min-device-pixel-ratio: 2/1),
-            not screen and (min-device-pixel-ratio: 2),
-            not screen and (min-resolution: 192dpi),
-            not screen and (min-resolution: 2dppx) {
+        not screen and (min--moz-device-pixel-ratio: 2),
+        not screen and (-o-min-device-pixel-ratio: 2/1),
+        not screen and (min-device-pixel-ratio: 2),
+        not screen and (min-resolution: 192dpi),
+        not screen and (min-resolution: 2dppx) {
             .monithon_dettaglio_report_info {
                 margin-bottom: 6px;
             }
@@ -97,6 +97,7 @@ html {
 .mat-chip.monithon-giudizio,
 .mat-chip.monithon-filtro-stato-avanzamento,
 .mat-chip.monithon-filtro-report {
+
     // giudizi sintetici
     @for $codGiudizioSintetico from 1 through 7 {
         &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
@@ -139,9 +140,11 @@ html {
 .monithon-filtri {
     --monithon-deselected-chart-fill: #d5e1dd;
     background-color: var(--monithon-tema-sfondo-filtri-report);
+
     ::ng-deep .mat-expansion-indicator {
         border: 1px solid var(--monithon-panel-chevron-color);
     }
+
     &.mat-expanded {
         .monithon-categorie-container {
             display: flex;
@@ -159,25 +162,36 @@ html {
                 margin-bottom: 12px;
                 margin-top: -12px;
             }
+
+            &.mobile {
+                .monithon-programmi-operativi-label {
+                    padding-left: 8px;
+                }
+            }
         }
     }
+
     .mat-chip.monithon-filtro-stato-avanzamento.monithon-filtro-ciclo-programmazione {
         width: auto;
     }
+
     #chartPanel {
         ::ng-deep .mat-expansion-panel-body {
             display: flex;
             flex-direction: column;
             height: 100%;
+
             #chartsContainer {
                 display: flex;
                 flex-direction: column;
                 height: 100%;
+
                 #budgetChartContainer,
                 #annoChartContainer {
                     height: 50%;
                 }
             }
+
             #filtriSecondariContainer {
                 margin-top: auto;
                 margin-bottom: 12px;
@@ -191,6 +205,7 @@ html {
         background-color: var(--monithon-contatore-risultati-color);
     }
 }
+
 .monithon-filtri-charts {
     background-color: var(--monithon-tema-sfondo-charts-report);
 }
@@ -229,6 +244,7 @@ html {
     width: 100%;
 
     ::ng-deep {
+
         .mat-form-field-underline,
         .mat-form-field-subscript-wrapper {
             display: none;

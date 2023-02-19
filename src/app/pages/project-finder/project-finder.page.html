@@ -210,8 +210,8 @@
                             <ion-col size-lg class="ion-no-margin monithon-categorie-container">
                                 <div #categorieDiSpesaContainer id="categorieDiSpesaContainer">
                                     <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
-                                    <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
-                                        aria-orientation="horizontal">
+                                    <mat-chip-list [ngClass]="{'monithon-categorie': true,  'mobile':isMobile}"
+                                        multiple="true" aria-orientation="horizontal">
                                         <mat-chip [ngClass]="{'monithon-categoria': true, 'mobile': isMobile}"
                                             [selectable]="categoria.isActive" [attr.data-active]="categoria.isActive"
                                             *ngFor="let categoria of this.categorie" [selected]="categoria.isSelected"
