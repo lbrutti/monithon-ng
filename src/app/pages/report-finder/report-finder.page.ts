@@ -3,7 +3,7 @@ import { CurrencyPipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, Platform } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import * as d3 from 'd3';
 import lodash from 'lodash';
@@ -94,6 +94,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     titleSearchTerm: string = '';
     lastKeypress: number = Date.now();
     speedLim: number = 500;
+    isMobile: boolean;
+
     constructor(
         private monithonApiService: MonithonApiService,
         public reportMap: ReportMapService,
@@ -101,7 +103,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         private translocoService: TranslocoService,
         public loadingController: LoadingController,
         private router: Router,
-        public modalController: ModalController
+        public modalController: ModalController,
+        private platform:Platform
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = this.router.url == '/#wizard' || this.router.url == '/wizard';
@@ -116,6 +119,19 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             spinner: null
 
         };
+
+
+        let hasTouchScreen = false;
+        if ("maxTouchPoints" in navigator) {
+            hasTouchScreen = navigator.maxTouchPoints > 0;
+        } else if ("msMaxTouchPoints" in navigator) {
+            hasTouchScreen = navigator['msMaxTouchPoints'] > 0;
+        }
+
+
+        let goodDevice = this.platform.is('desktop') || this.platform.is('tablet') || !hasTouchScreen;
+        this.isMobile = !goodDevice;
+
         this.loadingController
             .create(loaderOptions)
             .then((loading) => {
