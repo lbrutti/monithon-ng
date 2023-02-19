@@ -914,6 +914,9 @@ monithon-drawer {
 // }
 
 ion-content.mobile {
+    #panelContainer {
+        width: 100vw;
+    }
 
     #aboutBtnContainer {
         right: 5px;
