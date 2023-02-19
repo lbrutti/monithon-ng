@@ -183,8 +183,9 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
         let projectSelectionObserver: Observer<any> = {
             next: report => {
-                this.onDettaglioReportHandleClick(report);
+                // this.onDettaglioReportHandleClick(report);
                 this.evidenziaReportInLista(report);
+                this.onReportClick(report);
             },
             error: err => console.error('subscribeReportSelection error: ', err),
             complete: () => console.log('subscribeReportSelection complete: ')
