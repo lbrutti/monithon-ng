@@ -5,6 +5,12 @@
 ion-content {
     background: #EDED4E !important;
 
+    mat-chip {
+        min-width: 12vw;
+
+        justify-content: center;
+    }
+
     #container {
         max-width: 66vw;
     }
