@@ -1,7 +1,32 @@
 @import "../../../theme/cssvar.scss";
 @import "../../../theme/project-finder-chips.scss";
 @import "../../../theme/wizard.scss";
-ion-content {
-    background: var(--monithon-sorgente-color) !important;
 
+ion-content {
+    background: #EDED4E !important;
+
+    #container {
+        max-width: 66vw;
+    }
+
+    #text-container,
+    .monithon-titolo-sezione {
+        font-size: 48px;
+        color: #130320 !important;
+    }
+
+    .mat-chip.monithon-sorgente.mat-chip-selected {
+        color: #EDED4E !important;
+    }
+
+    #aboutBtnContainer {
+        top: 26px !important;
+
+        * {
+
+            border-color: #130320 !important;
+            color: #130320 !important;
+        }
+
+    }
 }

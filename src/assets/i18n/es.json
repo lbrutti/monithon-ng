@@ -17,10 +17,10 @@
         "4": "SORGENTE 3 - ES",
         "5": "SORGENTE 1 - ES",
         "wizard": {
-            "titolo": "Scegli l'origine dei dati",
-            "descrizione": "Benvenuto nel Project Finder di Monithon! Qui puoi scoprire quali sono i progetti  finanziati intorno a te, rintracciare quelli più interessanti da monitorare, visualizzare le informazioni essenziali per iniziare il monitoraggio, creare un report con la tua valutazione! Da dove  Vuoi iniziare?"
+            "titolo": "Scegli il tema da monitorare",
+            "descrizione": "Benvenuto nel Project Finder di Monithon! <br> Qui puoi scoprire quali sono i progetti  finanziati intorno a te, rintracciare quelli più interessanti da monitorare, visualizzare le informazioni essenziali per iniziare il monitoraggio, creare un report con la tua valutazione! <br>Da dove  Vuoi iniziare?"
         },
-        "datasource_label":"Origine dati"
+        "datasource_label": "Origine dati"
     },
     "categorie": {
         "17": "Gestione dei rifiuti domestici (prevenzione e riciclaggio) - ES",
