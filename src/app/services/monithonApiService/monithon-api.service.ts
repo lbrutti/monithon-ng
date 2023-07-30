@@ -105,39 +105,6 @@ export class MonithonApiService {
             );
     }
 
-    //FIXME: lista temi da ws monithon: va passato query param con codice tema per filtraggio
-    public getTemi_old(ocCodTemaSintetico: string = ''): Observable<any> {
-        let url: string = 'https://api.dev.monithon.eu/api/mdTemi';
-        if (ocCodTemaSintetico.length) {
-            url += `?tema=${ocCodTemaSintetico}`;
-        }
-        //{"4":[12,10,15,14,11,13,16],"6":[95,91,94,93,92],"5":[87,86,85,19,20,84,22,17,18,88,21,89,23,500],"7":[43]}
-        // from(temiSintetici)
-        // return this.httpClient.get<any>(this.url + '/mdTemi')
-        return this.httpClient.get<any>(url)
-            .pipe(
-                map((res: any) => {
-                    let temi: Tema[] = lodash.chain(res)
-                        .keys()
-                        .map(tema => ({ 'ocCodTemaSintetico': tema, 'isActive': true }))
-                        .value();
-                    let categorie: Categoria[] = lodash.chain(res).map((cat, tema) => {
-                        let categorie: Categoria[] = cat.map(c => ({ 'ocCodTemaSintetico': tema, 'ocCodCategoriaSpesa': c }));
-                        return categorie;
-                    }).flatten()
-                        .value();
-                    return {
-                        temi: temi,
-                        categorie: categorie
-                    }
-                }),
-                catchError(e => {
-                    console.error(e);
-                    return of(e);
-                })
-            );
-
-    }
 
     public getTemi(ocCodTemaSintetico: string = '', idSorgente?: string): Observable<any> {
         // let temiMock = temiSintetici;

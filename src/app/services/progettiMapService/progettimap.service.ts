@@ -266,7 +266,7 @@ export class ProgettiMapService {
             //     temaCaseExpr = ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], +tema.ocCodTemaSintetico]];
             // }
             circleStrokeColors.push(temaCaseExpr);
-            circleStrokeColors.push(tema.stile.colore);
+            circleStrokeColors.push(tema.stile.colore || COLOR_MAP.temi.default);
         });
         circleStrokeColors.push('transparent');
         return circleStrokeColors;
@@ -281,7 +281,7 @@ export class ProgettiMapService {
         this.temi.map(tema => {
             let temaCaseExpr = ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], +tema.ocCodTemaSintetico]];
             circleColors.push(temaCaseExpr);
-            circleColors.push(tema.stile.colore);
+            circleColors.push(tema.stile.colore || COLOR_MAP.temi.default);
         });
         circleColors.push('transparent');
         return circleColors;

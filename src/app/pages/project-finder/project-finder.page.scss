@@ -222,7 +222,7 @@
 
 
     //loop per preparare binding a variabile parametrizzata
-    @for $codTemaSintetico from 0 to 50 {
+    @for $codTemaSintetico from 0 to 200 {
         &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
             background-color: cssvar(monithon-tema, $codTemaSintetico, background);
 
@@ -271,7 +271,7 @@
             }
 
             //loop per preparare binding a variabile parametrizzata
-            @for $codTemaSintetico from 0 to 50 {
+            @for $codTemaSintetico from 0 to 200 {
                 &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
                     background-color: cssvar(monithon-tema, $codTemaSintetico, background) !important;
                 }
@@ -609,7 +609,7 @@ ion-row.monithon-filtri-secondari {
 
 
     //loop per preparare binding a variabile parametrizzata
-    @for $codTemaSintetico from 0 to 50 {
+    @for $codTemaSintetico from 0 to 200 {
         &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"]::before {
             background-color: cssvar(monithon-tema, $codTemaSintetico, background);
         }
@@ -681,7 +681,7 @@ ion-row.monithon-filtri-secondari {
         }
 
         //loop per preparare binding a variabile parametrizzata
-        @for $codTemaSintetico from 0 to 50 {
+        @for $codTemaSintetico from 0 to 200 {
             &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
                 border-bottom-color: cssvar(monithon-tema, $codTemaSintetico, background);
             }
@@ -690,7 +690,7 @@ ion-row.monithon-filtri-secondari {
         &.selected {
 
             //loop per preparare binding a variabile parametrizzata
-            @for $codTemaSintetico from 0 to 50 {
+            @for $codTemaSintetico from 0 to 200 {
                 &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
                     border-color: cssvar(monithon-tema, $codTemaSintetico, background);
                 }

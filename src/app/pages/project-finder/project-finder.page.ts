@@ -20,6 +20,7 @@ import { SearchResult } from 'src/app/model/searchResult.interface';
 import { Tema } from 'src/app/model/tema/tema.interface';
 import _ from 'lodash';
 import { thresholdFreedmanDiaconis } from 'd3';
+import { COLOR_MAP } from 'src/app/utils/colorMap';
 //librerie caricate come script per ottimizzare performance
 declare const dc, crossfilter;
 @Component({
@@ -292,7 +293,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
                 }
                 //create css variables for temi:
                 temi.temi.map(t => {
-                    document.documentElement.style.setProperty(`--monithon-tema-${t.ocCodTemaSintetico}-background`, t.stile.colore);
+                    document.documentElement.style.setProperty(`--monithon-tema-${t.ocCodTemaSintetico}-background`, (t.stile.colore || COLOR_MAP.temi.default ));
                 });
 
                 //create ngStyle object with data driven properties
