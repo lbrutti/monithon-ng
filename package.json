@@ -12,6 +12,7 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "release:project": "ionic build --configuration=production_project_finder",
+        "gh-publish:project": "ionic build --configuration=production_project_finder -- --base-href https://lbrutti.github.io/monithon-ng/ && npx angular-cli-ghpages --dir=project-finder-www",
         "release:report": "ionic build --configuration=production_report_finder",
         "release:dev": "ionic build --prod --release",
         "release:all": "ionic build --configuration=production_project_finder && ionic build --configuration=production_report_finder"
@@ -40,6 +41,7 @@
         "@turf/line-distance": "^4.7.3",
         "@turf/turf": "^6.3.0",
         "@types/mapbox-gl": "^2.0.3",
+        "angular-cli-ghpages": "^1.0.6",
         "d3": "^6.3.1",
         "flag-icons": "^6.4.2",
         "fs": "0.0.1-security",
