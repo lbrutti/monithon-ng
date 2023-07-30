@@ -1,5 +1,5 @@
 module.exports = {
-  rootTranslationsPath: 'src/assets/i18n/',
-  langs: ['it'],
-  keysManager: {}
+    rootTranslationsPath: 'https://projectfinder.monithon.eu/assets/i18n/',
+    langs: ['it'],
+    keysManager: {}
 };

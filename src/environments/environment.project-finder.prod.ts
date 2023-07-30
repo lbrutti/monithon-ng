@@ -61,7 +61,7 @@ export const environment = {
     },
     server: {
         protocol: "https",
-        ip: "api.monithon.eu",
+        ip: "api.dev.monithon.eu",
         port: "80",
         apiroute: "api"
     },
@@ -71,10 +71,10 @@ export const environment = {
         port: "80",
         apiroute: "api"
     },
-    translationServiceURL: '/assets/i18n/',
+    // translationServiceURL: '/assets/i18n/',
     langsUrl: 'https://api.monithon.eu/api/langs',
 
     //[SM-92] : decommentare e sostituire con url corretta.
-    // translationServiceURL: 'https://projectfinder.monithon.eu/assets/i18n/',
+    translationServiceURL: 'https://projectfinder.monithon.eu/assets/i18n/',
     version: FullSemVer
 };
