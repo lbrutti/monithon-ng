@@ -378,7 +378,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
             //FIXME
             this.progettoSelezionato = progetto;
             let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === progetto.uid);
-            this.listaRisultati.scrollToIndex(indexRisultato);
+           if(!this.isMobile){ this.listaRisultati.scrollToIndex(indexRisultato);}
         } else {
             if (!this.visualizzaDettaglio) {
                 this.progettoSelezionato = {};

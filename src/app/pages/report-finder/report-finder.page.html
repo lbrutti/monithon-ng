@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true" [scrollY]="false" class="monithon-report-finder">
+<ion-content [fullscreen]="true" [scrollY]="false" class="monithon-report-finder" [ngClass]="{'mobile': isMobile}">
     <!-- <ion-toolbar class="monithon-header" >
     </ion-toolbar> -->
     <div id="aboutBtnContainer">
@@ -30,9 +30,7 @@
             [attr.data-cod-giudizio-sintetico]="this.reportSelezionato.codGiudizioSintetico"
             class="monithon-dettaglio-progetto" #dettaglioProgettoContainer>
             <div class="monithon-dettaglio-progetto__header">
-                <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">{{'report.sintesiReport'
-                    |
-                    transloco}}</h5>
+                <h5 class="monithon-dettaglio-progetto__titolo_scheda monithon-titolo-sezione">{{'report.sintesiReport' | transloco}}</h5>
 
                 <ion-icon (click)="onDettaglioReportHandleClick()"></ion-icon>
             </div>
@@ -54,7 +52,7 @@
                     <!-- info accessorie -->
                     <ion-row class="monithon-dettaglio-progetto__row">
                         <!-- sintesi e link -->
-                        <ion-col col-6
+                        <ion-col size-lg="6" size-md="12" size="12"
                             class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__col__titolo ">
                             <div #sintesiProgetto class="monithon-dettaglio-progetto__sintesi">
                                 <div>{{reportSelezionato.sintesi | fixencodedchars | unescape | capitalize}}
@@ -69,9 +67,10 @@
 
                         </ion-col>
                         <!-- dettagli -->
-                        <ion-col col-6
+                        <ion-col size-lg="6" size-md="12" size="12"
                             class="monithon-dettaglio-progetto__col monithon-dettaglio-progetto__dettagli monithon-dettaglio-report__dettagli">
-                            <div class="monithon-dettaglio-progetto__data_inizio monithon_dettaglio_report_info">
+                            <div class="monithon-dettaglio-progetto__data_inizio monithon_dettaglio_report_info"
+                                [ngClass]="{'mobile': isMobile}">
                                 <ion-label class="monithon-dettaglio-progetto__label monithon-titolo-sezione">
                                     {{'dataInserimento' | transloco}}
                                 </ion-label>
@@ -81,7 +80,8 @@
                             </div>
 
 
-                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info">
+                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info"
+                                [ngClass]="{'mobile': isMobile}">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                     {{'codGiudizioSintetico'
                                     | transloco}}</ion-label>
@@ -91,7 +91,8 @@
                             </div>
 
 
-                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info">
+                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info"
+                                [ngClass]="{'mobile': isMobile}">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">{{'tema'
                                     | transloco}}</ion-label>
                                 <ion-label class="monithon-dettaglio-progetto__tema__progetto">
@@ -100,7 +101,8 @@
                             </div>
 
                             <!-- ricever label da servizio -->
-                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info">
+                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info"
+                                [ngClass]="{'mobile': isMobile}">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                     {{'programmaOperativo'
                                     | transloco}}</ion-label>
@@ -110,7 +112,8 @@
                             </div>
 
 
-                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info">
+                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info"
+                                [ngClass]="{'mobile': isMobile}">
                                 <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
                                     {{'finanziamento' | transloco}}:</ion-label>
                                 <ion-label class="monithon-dettaglio-progetto__tema__progetto">
@@ -118,7 +121,7 @@
                                 </ion-label>
                             </div>
 
-                            <div id="flagProgetto monithon_dettaglio_report_info">
+                            <div id="flagProgetto monithon_dettaglio_report_info" [ngClass]="{'mobile': isMobile}">
                                 <ion-grid class="ion-no-padding">
                                     <ion-row class="monithon-filtri-secondari ion-no-margin ">
                                         <ion-col size="12" class="ion-no-margin ">
@@ -140,12 +143,7 @@
                                     </ion-row>
                                 </ion-grid>
                             </div>
-                            <!-- <div class="monithon-dettaglio-progetto__inizia_monitoraggio">
-                                <button (click)="iniziaMonitoraggioClicked(reportSelezionato)"
-                                    class="monithon-dettaglio-progetto__inizia_monitoraggio__button monithon-titolo-sezione"
-                                    mat-button color="primary">{{'iniziaMonitoraggio' | transloco}}
-                                </button>
-                            </div> -->
+
                         </ion-col>
 
                     </ion-row>
@@ -158,11 +156,13 @@
         <div id="panelContainer">
             <div id="filterContainer">
                 <!-- Giudizi sintetici -->
-                <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true">
+                <mat-chip-list class="monithon-temi" aria-label="Temi progetto" multiple="true"
+                    [ngClass]="{'mobile': isMobile}">
                     <mat-chip class='monithon-giudizio' *ngFor="let giudizio of this.giudiziSintetici"
                         [selected]="giudizio.isSelected" [selectable]="giudizio.isActive"
                         [attr.data-active]="giudizio.isActive" (click)="this.filtraPerGiudizio(giudizio)"
-                        [attr.data-cod-giudizio-sintetico]="giudizio.codGiudizioSintetico" disableRipple="true">
+                        [attr.data-cod-giudizio-sintetico]="giudizio.codGiudizioSintetico" disableRipple="true"
+                        [ngClass]="{'mobile': isMobile}">
                         <span class="monithon-categoria-wrapper">
                             {{'report.giudizioSintetico.'+giudizio.codGiudizioSintetico |
                             transloco}}
@@ -180,13 +180,13 @@
                     </mat-expansion-panel-header>
                     <ion-grid class="ion-no-padding">
                         <ion-row>
-                            <ion-col size="6" class="ion-no-margin monithon-categorie-container">
+                            <ion-col size-lg class="ion-no-margin monithon-categorie-container">
                                 <div #temaSinteticoContainer id="temaSinteticoContainer">
                                     <!-- parametrizzare con categorie dei progetti selezionati su mappa -->
-                                    <mat-chip-list [ngClass]="{'monithon-categorie': true}" multiple="true"
-                                        aria-orientation="horizontal">
+                                    <mat-chip-list [ngClass]="{'monithon-categorie': true, 'mobile':isMobile}"
+                                        multiple="true" aria-orientation="horizontal">
                                         <mat-chip [ngClass]="{'monithon-categoria': true}"
-                                            *ngFor="let temaSintetico of this.temi"
+                                            [ngClass]="{'mobile': isMobile}" *ngFor="let temaSintetico of this.temi"
                                             [selected]="temaSintetico.isSelected"
                                             [attr.data-active]="temaSintetico.isActive"
                                             (click)="this.filterByTemaSintetico(temaSintetico)"
@@ -199,13 +199,13 @@
                                         </mat-chip>
                                     </mat-chip-list>
                                 </div>
-                                <div #programmaOperativoContainer id="programmaOperativoContainer">
+                                <div #programmaOperativoContainer  [ngClass]="{'mobile': isMobile}" id="programmaOperativoContainer">
 
                                     <label
                                         class="monithon-titolo-sezione monithon-programmi-operativi-label">{{'report.programmiOperativi'|transloco}}</label>
 
                                     <ng-select class="monithon-report-programmi-operativi-select"
-                                        [items]="programmiOperativi" bindLabel="descProgrammaOperativo" [addTag]="false"
+                                        [items]="programmiOperativi" [ngClass]="{'mobile': isMobile}"  bindLabel="descProgrammaOperativo" [addTag]="false"
                                         [multiple]="false" [searchFn]="searchProgrammaOperativo" [hideSelected]="true"
                                         [minTermLength]="2" [virtualScroll]="true"
                                         (change)="onProgrammOperativoChange($event)"
@@ -217,15 +217,17 @@
 
                                 </div>
                             </ion-col>
-                            <ion-col size="6" class="ion-no-margin monithon-chart-container-col">
+                            <ion-col size-lg class="ion-no-margin monithon-chart-container-col">
                                 <!-- INIZIALIZZARE COME ESPANSO -->
-                                <mat-expansion-panel expanded="true" class="monithon-filtri-charts" id="chartPanel">
+                                <mat-expansion-panel [expanded]="!isMobile" class="monithon-filtri-charts"
+                                    [ngClass]="{'mobile': isMobile}" id="chartPanel">
                                     <mat-expansion-panel-header>
                                         <mat-panel-title class="monithon-titolo-sezione monithon-titolo-sezione-budget">
-                                            {{'chartPanelTitle'|transloco}}
+                                            <span *ngIf="!isMobile"> {{'chartPanelTitle'|transloco}}</span>
+                                            <span *ngIf="isMobile"> {{'cicloProgrammazione'|transloco}}</span>
                                         </mat-panel-title>
                                     </mat-expansion-panel-header>
-                                    <div id="chartsContainer">
+                                    <div id="chartsContainer" [ngClass]="{'mobile': isMobile}" *ngIf="!isMobile">
                                         <ion-grid class="ion-no-margin">
                                             <ion-row class="ion-no-margin monithon-chart-container">
                                                 <ion-col class="ion-no-margin">
@@ -248,7 +250,7 @@
                                         <ion-grid>
                                             <ion-row class="monithon-filtri-secondari ion-no-margin ">
                                                 <ion-col class="ion-no-margin ">
-                                                    <h5 class="chart-title monithon-titolo-sezione">
+                                                    <h5 *ngIf="!isMobile" class="chart-title monithon-titolo-sezione">
                                                         {{'cicloProgrammazione'
                                                         |transloco}}</h5>
                                                     <mat-chip-list class="monithon-filtro-stato-avanzamento"
@@ -265,23 +267,7 @@
                                                         </mat-chip>
                                                     </mat-chip-list>
                                                 </ion-col>
-                                                <!-- <ion-col size="6" class="ion-no-margin">
-                                                    <h5 class="chart-title monithon-titolo-sezione">{{'temiSintetici'
-                                                        |transloco}}</h5>
-                                                    <mat-chip-list class="monithon-filtro-report" multiple="true"
-                                                        aria-orientation="horizontal">
-                                                        <mat-chip class="monithon-filtro-report monithon-small-chip"
-                                                            *ngFor="let temaSintetico of this.temi"
-                                                            [selected]="temaSintetico.isSelected"
-                                                            [attr.data-active]="temaSintetico.isActive"
-                                                            (click)="this.filterByReportFlag(temaSintetico)"
-                                                            [attr.data-tema-sintetico]="temaSintetico.ocCodTemaSintetico"
-                                                            disableRipple="true">
-                                                            {{ 'report.temaSintetico.'+temaSintetico.ocCodTemaSintetico |
-                                                            transloco}}
-                                                        </mat-chip>
-                                                    </mat-chip-list>
-                                                </ion-col> -->
+
                                             </ion-row>
                                         </ion-grid>
                                     </div>
@@ -293,7 +279,7 @@
                 </mat-expansion-panel>
             </div>
         </div>
-        <div class="right-column">
+        <div class="right-column" *ngIf="!isMobile">
             <mat-expansion-panel id="resultContainer" [(expanded)]="espandiListaRisultati">
                 <mat-expansion-panel-header class="monithon-risultati-header">
                     <ion-grid class="ion-no-margin">
