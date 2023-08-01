@@ -19,6 +19,7 @@ export class Report {
     dataInserimento: number = 0; //ocDataInizioProgetto: number; mostrato in dettaglio e usato per chart/filtro ANNO
     ocCodTemaSintetico: string | number = ''; //ocCodTemaSintetico: number; mostrato in dettaglio e uusato per filtro secondario con chips
     codGiudizioSintetico: string = ''; //ocCodCategoriaSpesa: Array<string>; mostrato in dettaglio, usato per filtro primario e per colore marker su mappa
+    codSDA: string = 'stato_avanzamento'; //ocCodCategoriaSpesa: Array<string>; mostrato in dettaglio, usato per filtro primario e per colore marker su mappa
     ocFinanzTotPubNetto: number | string = ''; //ocFinanzTotPubNetto: number | string; mostrato in dettaglio, usato per filtro BUDGET
     curr: string = 'EUR';
     ocCodProgrammaOperativo?: string = ''; //codStatoProgetto?: any; mostrato in dettaglio, usato per filtro con autocomplete?

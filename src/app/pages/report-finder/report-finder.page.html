@@ -90,6 +90,16 @@
                                 </ion-label>
                             </div>
 
+                            <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info"
+                                [ngClass]="{'mobile': isMobile}">
+                                <ion-label class="monithon-dettaglio-progetto__label  monithon-titolo-sezione">
+                                    {{'codSDA'
+                                    | transloco}}</ion-label>
+                                <ion-label class="monithon-dettaglio-progetto__tema__progetto">
+                                    {{'report.sda.'+reportSelezionato.codSDA| transloco}}
+                                </ion-label>
+                            </div>
+
 
                             <div class="monithon-dettaglio-progetto__tema monithon_dettaglio_report_info"
                                 [ngClass]="{'mobile': isMobile}">
