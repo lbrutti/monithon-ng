@@ -164,6 +164,8 @@
     "dataInserimento": "DataEN",
     "report.readmore": "leggi il report su MonithonEN",
     "report.giudizioSintetico.undefined": "Giudizio sinteticoEN",
+    "report.codSDA": "Stato di avanzamento EN",
+    "report.codSDA.1_mock": "Stato di avanzamento - mock EN",
     "report.temaSintetico.undefined": "TemaEN",
     "programmaOperativo": "Programma operativoEN",
     "report.monithonFiltriTitle": "TemiEN",

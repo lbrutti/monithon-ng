@@ -164,6 +164,8 @@
     "codGiudizioSintetico": "Giudizio sintetico",
     "dataInserimento": "Data",
     "report.readmore": "leggi il report su Monithon",
+    "report.codSDA": "Stato di avanzamento",
+    "report.codSDA.1_mock": "Stato di avanzamento - mock",
     "report.giudizioSintetico.undefined": "Giudizio sintetico",
     "report.temaSintetico.undefined": "Tema",
     "programmaOperativo": "Programma operativo",

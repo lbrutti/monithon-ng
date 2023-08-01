@@ -100,7 +100,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         private monithonApiService: MonithonApiService,
         public reportMap: ReportMapService,
         private currencyPipe: CurrencyPipe,
-        private translocoService: TranslocoService,
+        public translocoService: TranslocoService,
         public loadingController: LoadingController,
         private router: Router,
         public modalController: ModalController,
@@ -340,6 +340,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                         let dettaglioBoundingRect = this.dettaglioProgetto.nativeElement.getBoundingClientRect();
                         if (dettaglioReport) {
                             this.reportSelezionato = dettaglioReport;
+                            this.reportSelezionato.codSDA = "1_mock";
                             this.reportSelezionato.programmaOperativo = lodash.find(this.programmiOperativi, (p: ProgrammaOperativo) => p.ocCodProgrammaOperativo == this.reportSelezionato.ocCodProgrammaOperativo);
                             this.reportSelezionato.cicloProgrammazione = lodash.find(this.cicliProgrammazione, (c: CicloProgrammazione) => c.ocCodCicloProgrammazione == this.reportSelezionato.ocCodCicloProgrammazione);
                             this.visualizzaDettaglio = true;
@@ -759,5 +760,13 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     resetTitleSearch() {
         this.titleSearchTerm = '';
         this.searchReportByTitle(true);
+    }
+
+    async switchLang() {
+        let currentLang = this.translocoService.getActiveLang();
+        let availableLangs: string[] = (this.translocoService.getAvailableLangs() as any[]).map((l: any) => (l as any).id || (l as string));
+        let currentLangIdx = availableLangs.indexOf(currentLang);
+        let nextLangIdx = (++currentLangIdx % availableLangs.length);
+        this.translocoService.setActiveLang(availableLangs[nextLangIdx]);
     }
 }

@@ -62,7 +62,7 @@ export const environment = {
     },
     server: {
         protocol: "https",
-        ip: "api.dev.monithon.eu",
+        ip: "api.dev.monithon.eu", //"api.monithon.eu" <- prod
         port: "80",
         apiroute: "api"
     },
