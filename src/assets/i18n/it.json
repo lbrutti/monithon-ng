@@ -158,14 +158,16 @@
             "5": "Concluso e utile",
             "6": "Concluso e inefficace",
             "7": "Nessun giudizio"
+        },
+        "codSDA":{
+            "1_mock": "Stato di avanzamento mock"
         }
     },
     "cercaPerTitolo": "Cerca tra i risultati",
     "codGiudizioSintetico": "Giudizio sintetico",
     "dataInserimento": "Data",
     "report.readmore": "leggi il report su Monithon",
-    "report.codSDA": "Stato di avanzamento",
-    "report.codSDA.1_mock": "Stato di avanzamento - mock",
+    "report.codSdaLabel": "Stato di avanzamento",
     "report.giudizioSintetico.undefined": "Giudizio sintetico",
     "report.temaSintetico.undefined": "Tema",
     "programmaOperativo": "Programma operativo",
