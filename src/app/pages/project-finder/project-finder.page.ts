@@ -293,7 +293,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
                 }
                 //create css variables for temi:
                 temi.temi.map(t => {
-                    document.documentElement.style.setProperty(`--monithon-tema-${t.ocCodTemaSintetico}-background`, (t.stile.colore || COLOR_MAP.temi.default ));
+                    document.documentElement.style.setProperty(`--monithon-tema-${t.ocCodTemaSintetico}-background`, (t.stile.colore || COLOR_MAP.temi.default));
                 });
 
                 //create ngStyle object with data driven properties
@@ -378,7 +378,7 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
             //FIXME
             this.progettoSelezionato = progetto;
             let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === progetto.uid);
-           if(!this.isMobile){ this.listaRisultati.scrollToIndex(indexRisultato);}
+            if (!this.isMobile) { this.listaRisultati.scrollToIndex(indexRisultato); }
         } else {
             if (!this.visualizzaDettaglio) {
                 this.progettoSelezionato = {};
@@ -801,7 +801,12 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
 
     //Filtri di secondo livello:
     public filterByStato(stato) {
-        stato.isSelected = !stato.isSelected;
+        //[SM-100]
+        if (lodash.every(this.statiAvanzamento, s => s.isSelected)) {
+            this.statiAvanzamento.map(s => s.isSelected = s.codStatoProgetto === stato.codStatoProgetto);
+        } else {
+            stato.isSelected = !stato.isSelected;
+        }
         if (lodash.every(this.statiAvanzamento, s => !s.isSelected)) {
             this.statiAvanzamento.map(s => s.isSelected = s.isActive);
         }
@@ -809,12 +814,20 @@ export class ProjectFinderPage implements OnInit, AfterViewInit {
         this.evidenziaRisultatiSuMappa();
 
     }
-    public filterByReportFlag(reportFlag) {
-        reportFlag.isSelected = !reportFlag.isSelected;
 
-        if (lodash.every(this.reportFlags, f => !f.isSelected)) {
-            this.reportFlags.map(f => f.isSelected = f.isActive);
+
+    public filterByReportFlag(reportFlag) {
+
+        //[SM-100]
+        if (lodash.every(this.reportFlags, rf => rf.isSelected)) {
+            this.reportFlags.map(rf => rf.isSelected = rf.hasReport === reportFlag.hasReport);
+        } else {
+            reportFlag.isSelected = !reportFlag.isSelected;
         }
+        if (lodash.every(this.reportFlags, rf => !rf.isSelected)) {
+            this.reportFlags.map(rf => rf.isSelected = rf.isActive);
+        }
+
         this.filtraRisultati();
         this.evidenziaRisultatiSuMappa();
 
