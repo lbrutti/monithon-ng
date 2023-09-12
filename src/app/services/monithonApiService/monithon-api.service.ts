@@ -35,7 +35,7 @@ export class MonithonApiService {
     constructor(httpClient: HttpClient) {
         this.httpClient = httpClient;
         this.url = `${environment.server.protocol}://${environment.server.ip}/${environment.server.apiroute}`;
-        this.reportApiUrl = `${environment.server.protocol}://${environment.server.ip}/${environment.server.apiroute}`;
+        this.reportApiUrl = `${environment.reportServer.protocol}://${environment.reportServer.ip}/${environment.reportServer.apiroute}`;
 
     }
 
@@ -302,7 +302,7 @@ export class MonithonApiService {
         // }));
 
         // return of(giudizi);
-        return this.httpClient.get<any>(this.reportApiUrl + `/reportGS`)
+        return this.httpClient.get<any>(this.reportApiUrl + `/reportGdE`)
             .pipe(
                 map((res) => {
                     return res.map((g: GiudizioSintetico) => {

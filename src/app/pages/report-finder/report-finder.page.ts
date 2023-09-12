@@ -340,7 +340,6 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                         let dettaglioBoundingRect = this.dettaglioProgetto.nativeElement.getBoundingClientRect();
                         if (dettaglioReport) {
                             this.reportSelezionato = dettaglioReport;
-                            this.reportSelezionato.codSDA = "1_mock";
                             this.reportSelezionato.programmaOperativo = lodash.find(this.programmiOperativi, (p: ProgrammaOperativo) => p.ocCodProgrammaOperativo == this.reportSelezionato.ocCodProgrammaOperativo);
                             this.reportSelezionato.cicloProgrammazione = lodash.find(this.cicliProgrammazione, (c: CicloProgrammazione) => c.ocCodCicloProgrammazione == this.reportSelezionato.ocCodCicloProgrammazione);
                             this.visualizzaDettaglio = true;
