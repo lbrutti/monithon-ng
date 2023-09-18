@@ -602,8 +602,13 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         });
 
     }
-    public filtraPerGiudizio(giudizioSintetico: GiudizioSintetico): void {
-        giudizioSintetico.isSelected = !giudizioSintetico.isSelected;
+    public filtraPerGiudizio(gs: GiudizioSintetico): void {
+
+        if (lodash.every(this.giudiziSintetici, g => g.isSelected)) {
+            this.giudiziSintetici.map(g => g.isSelected = g.codGiudizioSintetico === gs.codGiudizioSintetico);
+        } else {
+            gs.isSelected = !gs.isSelected;
+        }
 
         if (lodash.every(this.giudiziSintetici, g => !g.isSelected)) {
             this.giudiziSintetici.map(g => g.isSelected = true);
@@ -613,7 +618,16 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.reportMap.filtraPerGiudizio();
     }
     public filterByTemaSintetico(tema: Tema) {
-        tema.isSelected = !tema.isSelected;
+
+        if (lodash.every(this.temi, t => t.isSelected)) {
+            this.temi.map(t => t.isSelected = t.ocCodTemaSintetico === tema.ocCodTemaSintetico);
+        } else {
+            tema.isSelected = !tema.isSelected;
+        }
+
+        if (lodash.every(this.temi, t => !t.isSelected)) {
+            this.temi.map(t => t.isSelected = true);
+        }
 
         //reset chips
         if (lodash.every(this.temi, tema => !tema.isSelected)) {
@@ -632,8 +646,14 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
     //Filtri di secondo livello:
-    public filterByCiclo(stato) {
-        stato.isSelected = !stato.isSelected;
+    public filterByCiclo(ciclo) {
+
+        if (lodash.every(this.cicliProgrammazione, c => c.isSelected)) {
+            this.cicliProgrammazione.map(c => c.isSelected = c.ocCodCicloProgrammazione === ciclo.ocCodCicloProgrammazione);
+        } else {
+            ciclo.isSelected = !ciclo.isSelected;
+        }
+
         if (lodash.every(this.cicliProgrammazione, s => !s.isSelected)) {
             this.cicliProgrammazione.map(s => s.isSelected = s.isActive);
         }
