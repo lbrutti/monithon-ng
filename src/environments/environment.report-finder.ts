@@ -53,8 +53,8 @@ export const environment = {
     },
     langsUrl: 'https://api.monithon.eu/api/langs',
     //[SM-92] : decommentare e sostituire con url corretta.
-    translationServiceURL: '/assets/i18n/',
-    // translationServiceURL: 'https://projectfinder.monithon.eu/dev/assets/i18n/',
+    // translationServiceURL: '/assets/i18n/',
+    translationServiceURL: 'https://projectfinder.monithon.eu/dev/assets/i18n/',
     version: FullSemVer,
 
 };
