@@ -114,7 +114,8 @@
             "noWizard": "Vedi tutti i progetti",
             "wizardComuni": "Cerca il tuo comune",
             "wizardTemi": "Filtra per tema",
-            "wizardSorgenti": "Filtra per origine del dato"
+            "wizardSorgenti": "Filtra per origine del dato",
+            "colophon": "Il Monithon Project Finder è stato realizzato nel 2021 grazie al contributo dell’Unione Europea.<br>Nel 2023, lo strumento è stato migliorato ed esteso ai progetti finanziati dal Piano Nazionale di Ripresa e Resilienza (PNRR) nell’ambito delle attività dell’<a href='https://www.osservatoriocivicopnrr.it/' target='_blank'>Osservatorio Civico PNRR</a> e grazie al contributo di <a href='https://www.opensocietyfoundations.org/' target='_blank'>Open Society Foundations</a>.<br> L’Osservatorio supporta percorsi locali di monitoraggio civico dei progetti a valere sul PNRR e promuove attività di lobby e advocacy per ottenere la massima trasparenza ed aprire spazi di partecipazione civica nei processi di attuazione del Piano. <br>All’iniziativa, promossa da ActionAid Italia, Cittadinanzattiva e Legambiente, attualmente hanno aderito oltre 50 organizzazioni. <br>Da maggio 2021, in collaborazione con la <a href='https://www.datibenecomune.it/chi-siamo/' target='_blank'>campagna #DatiBeneComune</a>, l’Osservatorio chiede l’apertura di tutti i dati relativi al PNRR e, più in generale, l’apertura di tutti i dati di pubblico interesse."
         },
         "credits": "Credits",
         "design": "Design:",
