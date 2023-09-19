@@ -20,7 +20,7 @@
             "titolo": "Scegli il tema da monitorare",
             "descrizione": "Benvenuto nel Project Finder di Monithon! <br> Qui puoi scoprire quali sono i progetti  finanziati intorno a te, rintracciare quelli più interessanti da monitorare, visualizzare le informazioni essenziali per iniziare il monitoraggio, creare un report con la tua valutazione! <br>Da dove  Vuoi iniziare?"
         },
-        "datasource_label":"Origine dati"
+        "datasource_label": "Origine dati"
     },
     "categorie": {
         "17": "Gestione dei rifiuti domestici (prevenzione e riciclaggio)",
@@ -114,7 +114,8 @@
             "noWizard": "Vedi tutti i progetti",
             "wizardComuni": "Cerca il tuo comune",
             "wizardTemi": "Filtra per tema",
-            "wizardSorgenti": "Filtra per origine del dato"
+            "wizardSorgenti": "Filtra per origine del dato",
+            "colophon": "Il Monithon Project Finder è stato realizzato nel 2021 grazie al contributo dell’Unione Europea.<br>Nel 2023, lo strumento è stato migliorato ed esteso ai progetti finanziati dal Piano Nazionale di Ripresa e Resilienza (PNRR) nell’ambito delle attività dell’Osservatorio Civico PNRR e grazie al contributo di Open Society Foundations.<br> L’Osservatorio supporta percorsi locali di monitoraggio civico dei progetti a valere sul PNRR e promuove attività di lobby e advocacy per ottenere la massima trasparenza ed aprire spazi di partecipazione civica nei processi di attuazione del Piano. <br>All’iniziativa, promossa da ActionAid Italia, Cittadinanzattiva e Legambiente, attualmente hanno aderito oltre 50 organizzazioni. <br>Da maggio 2021, in collaborazione con la campagna #DatiBeneComune, l’Osservatorio chiede l’apertura di tutti i dati relativi al PNRR e, più in generale, l’apertura di tutti i dati di pubblico interesse."
         },
         "credits": "Credits",
         "design": "Design:",
@@ -159,7 +160,7 @@
             "6": "Concluso e inefficace",
             "7": "Nessun giudizio"
         },
-        "codSDA":{
+        "codSDA": {
             "1_mock": "Stato di avanzamento mock"
         }
     },
