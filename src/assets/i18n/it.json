@@ -31,7 +31,7 @@
         "22": "Trattamento delle acque reflue",
         "23": "Misure ambientali volte a ridurre e/o evitare le emissioni di gas a effetto serra ",
         "84": "Prevenzione e riduzione integrate dell'inquinamento",
-        "85": "Tutela e valorizzazione della biodiversitÃ , protezione della natura e infrastrutture \"verdi\"",
+        "85": "Tutela e valorizzazione della biodiversitÃ , protezione della natura e infrastrutture \"verdi\"",
         "86": "Tutela, ripristino e uso sostenibile dei siti Natura 2000",
         "87": "Adattamento ai cambiamenti climatici, prevenzione e gestione dei rischi connessi al clima",
         "88": "Prevenzione e gestione dei rischi naturali non connessi al clima (ad esempio terremoti) ",
@@ -60,7 +60,7 @@
         "700": "Mobilità sostenibile generico"
     },
     "statiAvanzamento": {
-        "0": "Non terminabile",
+        "0": "Non determinabile",
         "1": "Non avviato",
         "2": "In corso",
         "3": "Liquidato",
@@ -105,10 +105,10 @@
     "geocoderPlaceholderWizard": "inizia inserendo il tuo comune",
     "about": {
         "projectFinder": {
-            "htmlCosaPuoiFare": "<li>Cercare i progetti finanziati nella tua città o nel tuo quartiere, a ogni pallino corrisponde unprogetto</li><li>Selezionare i progetti filtrando per tema, categoria di progetto, budget, anno di inizio, statodi avanzamento.</li><li>Scoprire i progetti sui quali è già stato pubblicato un Report di monitoraggio civico su<a href='https: //www.monithon.eu' target='_blank'> Monithon </a></li><li>Scorrere l'elenco dei progetti selezionati ordinandoli per distanza, budget,tema e anno di inizio</li><li>Leggere la sintesi del progetto e le sue principali caratteristiche</li><li>INIZIARE IL MONITORAGGIO e accedere all'area di lavoro di Monithon! Lì potrai scoprire tutti idettagli del progetto edessere guidato passo-passo alla redazione del Report di monitoraggio civico.</li>",
-            "htmlMetodologia": "<li>    La fonte dei dati è il Sistema Nazionale di Monitoraggio del MEF-IGRUE, pubblicati come dati    aperti su <a href='https://opencoesione.gov.it/' target='_blank'>OpenCoesione</a>.</li><li>    Sono considerati i progetti finanziati dal Fondo Europeo di Sviluppo Regionale (FESR) 2014-2020</li><li>    Sono stati inclusi i progetti classificati da OpenCoesione nei seguenti 'temi sintetici':    Ambiente, Energia, Cultura e    Turismo. A questi sono stati aggiunti i progetti di mobilità sostenibile, considerando i 'campi    di intervento' 43 e 44.</li><li>    La posizione geografica deriva dalla georeferenziazione degli indirizzi dei progetti presenti    nel Sistema di    Monitoraggio (se non presenti, il progetto è stato localizzato al centro del comune). Sono    esclusi i progetti di livello    nazionale e regionale.</li><li>    L'aggiornamento dei dati è al 31 Dicembre 2020.</li>",
+            "htmlCosaPuoiFare": "<li>Cercare i progetti finanziati nella tua città o nel tuo quartiere, a ogni pallino corrisponde un progetto</li><li>Selezionare i progetti filtrando per tema, categoria di progetto, budget, anno di inizio, stato di avanzamento.</li><li>Scoprire i progetti sui quali è già stato pubblicato un Report di monitoraggio civico su<a href='https: //www.monithon.eu' target='_blank'> Monithon </a></li><li>Scorrere l'elenco dei progetti selezionati ordinandoli per distanza, budget,tema e anno di inizio</li><li>Leggere la sintesi del progetto e le sue principali caratteristiche</li><li>INIZIARE IL MONITORAGGIO e accedere all'area di lavoro di Monithon! Lì potrai scoprire tutti i dettagli del progetto ed essere guidato passo-passo alla redazione del Report di monitoraggio civico.</li>",
+            "htmlMetodologia": "<li>La fonte dei dati sui progetti finanziati dal PNRR è il sistema informativo ReGiS della Ragioneria Generale dello Stato (RGS), Ministero Economia e Finanze. I dati considerati sono quelli pubblicati sul portale governativo <a href='https://www.italiadomani.gov.it/content/sogei-ng/it/it/catalogo-open-data.html' target='_blank'>Italia Domani</a> il 13/06/2023. I progetti sugli asili nido sono stati identificati tramite il codice investimento M4C1I1.1. </li><li> La fonte dei dati sui progetti finanziati dai Fondi Strutturali e di Investimento Europei è il Sistema Nazionale di Monitoraggio del MEF-IGRUE, pubblicati come dati aperti su <a href='https: //opencoesione.gov.it/' target='_blank'>OpenCoesione</a>.</li><li>Sono considerati i progetti finanziati dal Fondo Europeo di Sviluppo Regionale (FESR) 2014-2020</li><li> Sono stati inclusi i progetti classificati da OpenCoesione nei seguenti 'temi sintetici': Ambiente, Energia, Cultura e Turismo. A questi sono stati aggiunti i progetti di mobilità sostenibile, considerando i 'campi di intervento' 43 e 44.</li><li> La posizione geografica deriva dalla georeferenziazione degli indirizzi dei progetti presenti nel Sistema di Monitoraggio (se non presenti, il progetto è stato localizzato al centro del comune). Sono esclusi i progetti di livello nazionale e regionale.</li><li> L'aggiornamento dei dati è al 31 Dicembre 2020.</li>",
             "titolo": "Monithon Project Finder",
-            "sottotitolo": "Scopri i progetti europei sui temi dell'ambiente, dell'energia, della valorizzazione del patrimonio naturale e culturale, e della mobilità sostenibile!",
+            "sottotitolo": "Scopri i progetti finanziati dai fondi pubblici intorno a te!",
             "cosaPuoiFare": "Cosa puoi fare",
             "metodologia": "Metodologia",
             "noWizard": "Vedi tutti i progetti",
@@ -122,7 +122,7 @@
         "dataAnalysis": "Data analysis:",
         "softwareDevelopment": "Software development:",
         "reportFinder": {
-            "htmlCosaPuoiFare": "<li>Scoprire i report di monitoraggio civico nella tua regione, città o quartiere, a ogni pallino corrisponde un report. Aogni colore corrisponde un “giudizio sintetico” da parte del gruppo civico che ha effettuato il monitoraggio.</li><li>Selezionare i report filtrando per tema, Programma Operativo, budget, anno del monitoraggio, ciclo di programmazione.</li><li>Scorrere l'elenco dei report selezionati ordinandoli per distanza, budget, giudizio sintetico e data del monitoraggio</li><li>Leggere la sintesi del progetto monitorato e accedere al vero e proprio Report di monitoraggio civico</li>",
+            "htmlCosaPuoiFare": "<li>Scoprire i report di monitoraggio civico nella tua regione, città o quartiere, a ogni pallino corrisponde un report. A ogni colore corrisponde un “giudizio sintetico” da parte del gruppo civico che ha effettuato il monitoraggio.</li><li>Selezionare i report filtrando per tema, Programma Operativo, budget, anno del monitoraggio, ciclo di programmazione.</li><li>Scorrere l'elenco dei report selezionati ordinandoli per distanza, budget, giudizio sintetico e data del monitoraggio</li><li>Leggere la sintesi del progetto monitorato e accedere al vero e proprio Report di monitoraggio civico</li>",
             "titolo": "Esplora i report di monitoraggio civico di Monithon",
             "sottotitolo": "Scopri i report di monitoraggio civico sui progetti finanziati dai fondi pubblici, realizzati da studenti, comunità civiche e associazioni.",
             "cosaPuoiFare": "Cosa puoi fare"
@@ -152,13 +152,10 @@
             "13": "Rafforzamento capacità della PA"
         },
         "giudizioSintetico": {
-            "1": "Appena iniziato",
-            "2": "Procede bene",
-            "3": "Procede con difficoltà",
-            "4": "Bloccato",
-            "5": "Concluso e utile",
-            "6": "Concluso e inefficace",
-            "7": "Nessun giudizio"
+            "1": "Efficace",
+            "2": "Efficace ma con problemi",
+            "3": "Inefficace",
+            "4": "Efficacia non valutabile"
         },
         "codSDA": {
             "1_mock": "Stato di avanzamento mock"

@@ -51,8 +51,8 @@ export const environment = {
         port: "80",
         apiroute: "api"
     },
-    langsUrl: 'https://api.monithon.eu/api/langs',
     //[SM-92] : decommentare e sostituire con url corretta.
+    langsUrl: 'https://api.monithon.eu/api/langs',
     // translationServiceURL: '/assets/i18n/',
     translationServiceURL: 'https://projectfinder.monithon.eu/dev/assets/i18n/',
     version: FullSemVer,
