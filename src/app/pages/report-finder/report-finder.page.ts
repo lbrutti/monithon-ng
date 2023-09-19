@@ -3,7 +3,7 @@ import { CurrencyPipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, Platform } from '@ionic/angular';
 import { TranslocoService } from '@ngneat/transloco';
 import * as d3 from 'd3';
 import lodash from 'lodash';
@@ -94,14 +94,17 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     titleSearchTerm: string = '';
     lastKeypress: number = Date.now();
     speedLim: number = 500;
+    isMobile: boolean;
+
     constructor(
         private monithonApiService: MonithonApiService,
         public reportMap: ReportMapService,
         private currencyPipe: CurrencyPipe,
-        private translocoService: TranslocoService,
+        public translocoService: TranslocoService,
         public loadingController: LoadingController,
         private router: Router,
-        public modalController: ModalController
+        public modalController: ModalController,
+        private platform: Platform
     ) {
         this.monithonReportUrl = environment.monithonReportUrl;
         this.isWizardMode = this.router.url == '/#wizard' || this.router.url == '/wizard';
@@ -116,6 +119,19 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             spinner: null
 
         };
+
+
+        let hasTouchScreen = false;
+        if ("maxTouchPoints" in navigator) {
+            hasTouchScreen = navigator.maxTouchPoints > 0;
+        } else if ("msMaxTouchPoints" in navigator) {
+            hasTouchScreen = navigator['msMaxTouchPoints'] > 0;
+        }
+
+
+        let goodDevice = this.platform.is('desktop') || this.platform.is('tablet') || !hasTouchScreen;
+        this.isMobile = !goodDevice;
+
         this.loadingController
             .create(loaderOptions)
             .then((loading) => {
@@ -126,7 +142,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         let mapUpdateObserver: Observer<any> = {
             next: updateSubject => {
                 let matchIdx = updateSubject.reports.map((r: Report) => r.uid);
-                this.reports.map(r => {
+                this.reports.map((r: Report & SearchResult) => {
                     r.matches = lodash.includes(matchIdx, r.uid);
                     r.distanza = (lodash.find(updateSubject.reports, report => report.uid == r.uid) || {}).distanza;
                 }); //= updateSubject.reports;
@@ -137,14 +153,20 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                     this.setTemiAttivi();
                 }
 
-                if (this.redrawCharts) {
-                    try {
-                        this.renderCharts(this.getReports());
-                    } catch (error) {
-                        console.error(error);
-                    }
+                if (this.isMobile) {
+                    this.filtraRisultati();
+                    this.evidenziaRisultatiSuMappa();
                 } else {
-                    this.counterValue = this.reports.length;
+
+                    if (this.redrawCharts) {
+                        try {
+                            this.renderCharts(this.getReports());
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    } else {
+                        this.counterValue = this.reports.length;
+                    }
                 }
 
 
@@ -161,8 +183,9 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
 
         let projectSelectionObserver: Observer<any> = {
             next: report => {
-                this.onDettaglioReportHandleClick(report);
+                // this.onDettaglioReportHandleClick(report);
                 this.evidenziaReportInLista(report);
+                this.onReportClick(report);
             },
             error: err => console.error('subscribeReportSelection error: ', err),
             complete: () => console.log('subscribeReportSelection complete: ')
@@ -242,7 +265,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
                 this.reportMap.setProgrammiOperativi(this.programmiOperativi);
 
 
-                this.reportMap.renderMap(this.mapContainer.nativeElement, listaReport, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
+                this.reportMap.renderMap(this.mapContainer.nativeElement, this.reports, this.geocoder.nativeElement, this.navigationControl.nativeElement, !this.isWizardMode);
                 let geocoderClearBtn = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--button');
                 let geocoderInput = this.geocoder.nativeElement.querySelector('.mapboxgl-ctrl-geocoder--input');
 
@@ -298,7 +321,7 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
             }
             this.reportSelezionato = new Report(report);
             let indexRisultato = lodash.findIndex(this.risultatiRicerca, r => r.uid === report.uid);
-            this.listaRisultati.scrollToIndex(indexRisultato);
+            if (!this.isMobile) { this.listaRisultati.scrollToIndex(indexRisultato); }
         } else {
             if (!this.visualizzaDettaglio) {
                 this.reportSelezionato = ReportNullo;
@@ -579,8 +602,13 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         });
 
     }
-    public filtraPerGiudizio(giudizioSintetico: GiudizioSintetico): void {
-        giudizioSintetico.isSelected = !giudizioSintetico.isSelected;
+    public filtraPerGiudizio(gs: GiudizioSintetico): void {
+
+        if (lodash.every(this.giudiziSintetici, g => g.isSelected)) {
+            this.giudiziSintetici.map(g => g.isSelected = g.codGiudizioSintetico === gs.codGiudizioSintetico);
+        } else {
+            gs.isSelected = !gs.isSelected;
+        }
 
         if (lodash.every(this.giudiziSintetici, g => !g.isSelected)) {
             this.giudiziSintetici.map(g => g.isSelected = true);
@@ -590,7 +618,16 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         this.reportMap.filtraPerGiudizio();
     }
     public filterByTemaSintetico(tema: Tema) {
-        tema.isSelected = !tema.isSelected;
+
+        if (lodash.every(this.temi, t => t.isSelected)) {
+            this.temi.map(t => t.isSelected = t.ocCodTemaSintetico === tema.ocCodTemaSintetico);
+        } else {
+            tema.isSelected = !tema.isSelected;
+        }
+
+        if (lodash.every(this.temi, t => !t.isSelected)) {
+            this.temi.map(t => t.isSelected = true);
+        }
 
         //reset chips
         if (lodash.every(this.temi, tema => !tema.isSelected)) {
@@ -609,8 +646,14 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     }
 
     //Filtri di secondo livello:
-    public filterByCiclo(stato) {
-        stato.isSelected = !stato.isSelected;
+    public filterByCiclo(ciclo) {
+
+        if (lodash.every(this.cicliProgrammazione, c => c.isSelected)) {
+            this.cicliProgrammazione.map(c => c.isSelected = c.ocCodCicloProgrammazione === ciclo.ocCodCicloProgrammazione);
+        } else {
+            ciclo.isSelected = !ciclo.isSelected;
+        }
+
         if (lodash.every(this.cicliProgrammazione, s => !s.isSelected)) {
             this.cicliProgrammazione.map(s => s.isSelected = s.isActive);
         }
@@ -625,7 +668,8 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
         }
         else {
             const options = {
-                threshold: 0.1,
+                threshold: 0.0,
+                ignoreLocation: true,
                 keys: ['titolo']
             }
             const fuse = new Fuse(this.risultatiRicerca, options)
@@ -735,5 +779,13 @@ export class ReportFinderPage implements OnInit, AfterViewInit {
     resetTitleSearch() {
         this.titleSearchTerm = '';
         this.searchReportByTitle(true);
+    }
+
+    async switchLang() {
+        let currentLang = this.translocoService.getActiveLang();
+        let availableLangs: string[] = (this.translocoService.getAvailableLangs() as any[]).map((l: any) => (l as any).id || (l as string));
+        let currentLangIdx = availableLangs.indexOf(currentLang);
+        let nextLangIdx = (++currentLangIdx % availableLangs.length);
+        this.translocoService.setActiveLang(availableLangs[nextLangIdx]);
     }
 }

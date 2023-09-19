@@ -2,7 +2,7 @@
 // da ricevere da ws
 export interface GiudizioSintetico {
     codGiudizioSintetico: number;
-    descGiudizioSintetico: string;
+    descGiudizioSintetico?: string;
     isSelected: boolean;
     isActive:boolean;
 }

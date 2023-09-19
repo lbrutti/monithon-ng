@@ -20,7 +20,7 @@ export class ProgettiMapService {
 
 
     map: mapboxgl.Map;
-    geocoder: any;
+    geocoder: MapboxGeocoder;
     draw: any;
     rangeProgetti: any;
     temi: Array<any> = [];
@@ -47,7 +47,7 @@ export class ProgettiMapService {
     center: any;
     centerPoint: any;
     isFreeMode: boolean = false;
-
+    isMobile: boolean = false;
 
     constructor(
         private translocoService: TranslocoService,
@@ -168,39 +168,8 @@ export class ProgettiMapService {
                                 [12, 5]
                             ]
                         },
-                        'circle-color': [
-                            'case',
-                            // ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
-                            // 'transparent',
-                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
-                            COLOR_MAP.temi.default,
-                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 4]],
-                            COLOR_MAP.temi.energia,
-                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 5]],
-                            COLOR_MAP.temi.ambiente,
-                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 6]],
-                            COLOR_MAP.temi.attrazione,
-                            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], 7]],
-                            COLOR_MAP.temi.mobilita,
-                            'transparent'
-                        ],
-                        'circle-stroke-color': [
-                            'case',
-                            ['any',
-                                // ['!', ['boolean', ['feature-state', 'isSelected'], true]],
-                                ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]
-                            ],
-                            COLOR_MAP.temi.default,
-                            ['==', ['get', 'ocCodTemaSintetico'], 4],
-                            COLOR_MAP.temi.energia,
-                            ['==', ['get', 'ocCodTemaSintetico'], 5],
-                            COLOR_MAP.temi.ambiente,
-                            ['==', ['get', 'ocCodTemaSintetico'], 6],
-                            COLOR_MAP.temi.attrazione,
-                            ['==', ['get', 'ocCodTemaSintetico'], 7],
-                            COLOR_MAP.temi.mobilita,
-                            'transparent'
-                        ],
+                        'circle-color': this.getCircleColor(),
+                        'circle-stroke-color': this.getCircleStrokeColor(),
                         'circle-stroke-width': 1,
 
                         'circle-stroke-opacity': [
@@ -227,7 +196,7 @@ export class ProgettiMapService {
                 var features = this.map.queryRenderedFeatures(bbox, {
                     layers: ['progetti-layer']
                 });
-                if (features.length && this.map.getZoom() >= 10) { //https://www.meistertask.com/app/task/k9R9hJHO/markers-poter-cliccare-i-markers-solo-allultimo-livello-di-zoom-come-in-glocalclimatechange-eu
+                if (features.length && this.map.getZoom() >= 5) {
                     let feature = features[0];
                     let progetto: Progetto = feature.properties as Progetto;
                     let match = this.progetti.features.filter(f => f.properties.uid == progetto.uid);
@@ -282,6 +251,42 @@ export class ProgettiMapService {
 
 
     }
+    private getCircleStrokeColor(): string | mapboxgl.StyleFunction | mapboxgl.Expression {
+        let circleStrokeColors: mapboxgl.Expression = [
+            'case',
+            ['any',
+                ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]
+            ],
+            COLOR_MAP.temi.default,
+        ];
+
+        this.temi.map(tema => {
+            let temaCaseExpr: any = ['==', ['get', 'ocCodTemaSintetico'], +tema.ocCodTemaSintetico];
+            // if (this.isMobile) {
+            //     temaCaseExpr = ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], +tema.ocCodTemaSintetico]];
+            // }
+            circleStrokeColors.push(temaCaseExpr);
+            circleStrokeColors.push(tema.stile.colore || COLOR_MAP.temi.default);
+        });
+        circleStrokeColors.push('transparent');
+        return circleStrokeColors;
+    }
+
+    private getCircleColor(): string | mapboxgl.StyleFunction | mapboxgl.Expression {
+        let circleColors: mapboxgl.Expression = [
+            'case',
+            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
+            COLOR_MAP.temi.default,
+        ];
+        this.temi.map(tema => {
+            let temaCaseExpr = ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'ocCodTemaSintetico'], +tema.ocCodTemaSintetico]];
+            circleColors.push(temaCaseExpr);
+            circleColors.push(tema.stile.colore || COLOR_MAP.temi.default);
+        });
+        circleColors.push('transparent');
+        return circleColors;
+    }
+
     publishGeocoderResults(features: any) {
         this.geocoderResults.next(features);
     }
@@ -291,7 +296,7 @@ export class ProgettiMapService {
     }
 
     public setTemi(temi: Array<any>) {
-        this.temi = temi.map((t) => ({ 'ocCodTemaSintetico': t.ocCodTemaSintetico, 'isSelected': true, 'isActive': true }));
+        this.temi = temi.map((t) => ({ 'ocCodTemaSintetico': t.ocCodTemaSintetico, 'isSelected': true, 'isActive': true, 'stile': t.stile }));
     }
 
     public setCategorie(categorie: Array<any>) {

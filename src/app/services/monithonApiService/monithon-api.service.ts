@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import {  Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import lodash from 'lodash';
 import { environment } from 'src/environments/environment';
@@ -10,7 +10,8 @@ import { Categoria } from 'src/app/model/categoria/categoria.interface';
 
 
 // //MOCK
-// import temiSintetici from '../../../assets/mock/temiSintetici';
+// import temiSintetici from '../../../assets/mock/temiSintetici.js';
+// import sorgenti from '../../../assets/mock/sorgenti.js';
 // import cicliProgrammazione from '../../../assets/mock/cicliProgrammazione';
 // import programmiOperativi from '../../../assets/mock/programmiOperativi';
 // import giudiziSintetici from '../../../assets/mock/giudiziSintetici';
@@ -20,6 +21,7 @@ import { Categoria } from 'src/app/model/categoria/categoria.interface';
 import { Report } from 'src/app/model/report/report';
 import { GiudizioSintetico } from 'src/app/model/giudizioSintetico/giudizioSintetico.interface';
 import { ProgrammaOperativo } from 'src/app/model/programmaOperativo/programmaOperativo.interface';
+import { Sorgente } from 'src/app/model/sorgente.js';
 
 @Injectable({
     providedIn: 'root'
@@ -33,12 +35,20 @@ export class MonithonApiService {
     constructor(httpClient: HttpClient) {
         this.httpClient = httpClient;
         this.url = `${environment.server.protocol}://${environment.server.ip}/${environment.server.apiroute}`;
-        this.reportApiUrl = `${environment.server.protocol}://${environment.server.ip}/${environment.server.apiroute}`;
+        this.reportApiUrl = `${environment.reportServer.protocol}://${environment.reportServer.ip}/${environment.reportServer.apiroute}`;
 
     }
 
-    public getProgetti(): Observable<any[]> {
-        return this.httpClient.get<any[]>(this.url + '/mapdata')
+    public getProgetti(ocCodTemaSintetico?: string, idSorgente?: string): Observable<any[]> {
+        let url: string = 'https://api.dev.monithon.eu/api/mapdata';
+        let params: any = {};
+        if (ocCodTemaSintetico) {
+            params.tema = ocCodTemaSintetico;
+        }
+        if (idSorgente) {
+            params.sorgente = idSorgente;
+        }
+        return this.httpClient.get<any[]>(url, { params: params })
             .pipe(
                 map((res) => {
                     return res.map((p: any) => {
@@ -95,24 +105,46 @@ export class MonithonApiService {
             );
     }
 
-    public getTemi(): Observable<any> {
-        //{"4":[12,10,15,14,11,13,16],"6":[95,91,94,93,92],"5":[87,86,85,19,20,84,22,17,18,88,21,89,23,500],"7":[43]}
 
-        return this.httpClient.get<any>(this.url + '/mdTemi')
+    public getTemi(ocCodTemaSintetico: string = '', idSorgente?: string): Observable<any> {
+        // let temiMock = temiSintetici;
+        // if (ocCodTemaSintetico.length) {
+        //     temiMock = {};
+        //     lodash.set(temiMock, ocCodTemaSintetico, lodash.get(temiSintetici, ocCodTemaSintetico));
+        // }
+        // return of(temiMock)
+        let url: string = 'https://api.dev.monithon.eu/api/mdTemi';
+        let params: any = {};
+        if (ocCodTemaSintetico.length) {
+            params.tema = ocCodTemaSintetico;
+        }
+        if (idSorgente) {
+            params.sorgente = idSorgente;
+        }
+
+        //{"4":[12,10,15,14,11,13,16],"6":[95,91,94,93,92],"5":[87,86,85,19,20,84,22,17,18,88,21,89,23,500],"7":[43]}
+        // from(temiSintetici)
+        // return this.httpClient.get<any>(this.url + '/mdTemi')
+        return this.httpClient.get<any>(url, { params: params })
             .pipe(
                 map((res: any) => {
                     let temi: Tema[] = lodash.chain(res)
                         .keys()
-                        .map(tema => ({ 'ocCodTemaSintetico': tema, 'isActive': true }))
+                        .map(tema => ({ 'ocCodTemaSintetico': tema, 'isActive': true, stile: lodash.get(res, `[${tema}].stile`) }))
                         .value();
-                    let categorie: Categoria[] = lodash.chain(res).map((cat, tema) => {
-                        let categorie: Categoria[] = cat.map(c => ({ 'ocCodTemaSintetico': tema, 'ocCodCategoriaSpesa': c }));
+                    let categorie: Categoria[] = lodash.chain(res).map((props, tema) => {
+                        let categorie: Categoria[] = props.categorie.map(c => ({ 'ocCodTemaSintetico': tema, 'ocCodCategoriaSpesa': c }));
                         return categorie;
+                    }).flatten()
+                        .value();
+                    let stili: Categoria[] = lodash.chain(res).map((props, tema) => {
+                        return props.stile;
                     }).flatten()
                         .value();
                     return {
                         temi: temi,
-                        categorie: categorie
+                        categorie: categorie,
+                        stili: stili
                     }
                 }),
                 catchError(e => {
@@ -123,6 +155,29 @@ export class MonithonApiService {
 
     }
 
+    public getSorgenti(): Observable<any> {
+        let url: string = 'https://api.dev.monithon.eu/api/datasources';
+        return this.httpClient.get<any>(url).pipe(
+            map((res: any) => {
+                let sorgenti: Sorgente[] = lodash.chain(res)
+                    .keys()
+                    .map(sorgente => ({
+                        'id': sorgente, 'isActive': true, stile: lodash.get(res, `[${sorgente}].stile`, {
+                            "colore": "#FF0021"
+                        })
+                    }))
+                    .value();
+                return {
+                    sorgenti: sorgenti
+                }
+            }),
+            catchError(e => {
+                console.error(e);
+                return of(e);
+            })
+        );
+
+    }
 
     /// metodi per report
     /**
@@ -247,7 +302,7 @@ export class MonithonApiService {
         // }));
 
         // return of(giudizi);
-        return this.httpClient.get<any>(this.reportApiUrl + `/reportGS`)
+        return this.httpClient.get<any>(this.reportApiUrl + `/reportGdE`)
             .pipe(
                 map((res) => {
                     return res.map((g: GiudizioSintetico) => {

@@ -1,7 +1,7 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { version } from "package.json";
+import { FullSemVer } from "../assets/version.json";
 
 export const environment = {
     routes: [
@@ -51,7 +51,12 @@ export const environment = {
         port: "80",
         apiroute: "api"
     },
-    version: version
+    //[SM-92] : decommentare e sostituire con url corretta.
+    langsUrl: 'https://api.monithon.eu/api/langs',
+    // translationServiceURL: '/assets/i18n/',
+    translationServiceURL: 'https://projectfinder.monithon.eu/dev/assets/i18n/',
+    version: FullSemVer,
+
 };
 
 /*

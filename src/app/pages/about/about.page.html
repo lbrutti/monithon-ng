@@ -25,6 +25,26 @@
                 <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.sottotitolo' | transloco}}</h3>
             </ion-col>
         </ion-row>
+
+        <ion-row>
+            <ion-col text-center class="monithon-about-col" size-md="4" size-sm="6">
+                <a [routerLink]="['/']" (click)="closeModal(250)">
+                    <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.noWizard' | transloco}}</h3>
+                </a>
+
+                <a [routerLink]="['/wizard']" (click)="closeModal(250)">
+                    <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.wizardComuni' | transloco}}</h3>
+                </a>
+
+                <!-- <a [routerLink]="['/temi']" (click)="closeModal(250)">
+                    <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.wizardTemi' | transloco}}</h3>
+                </a> -->
+
+                <a [routerLink]="['/sorgenti']" (click)="closeModal(250)">
+                    <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.wizardSorgenti' | transloco}}</h3>
+                </a>
+            </ion-col>
+        </ion-row>
         <ion-row>
             <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
                 <h3 class="monithon-about-titolo-sezione">{{'about.projectFinder.cosaPuoiFare'| transloco}}</h3>
@@ -43,7 +63,7 @@
         <ion-row class="monithon-credits-row">
             <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-credits-container">
                 <h3 class="monithon-about-titolo-sezione">{{'about.credits'| transloco}}</h3>
-                <p class="monithon-about-credit">{{"about.projectFinder.design"|transloco}} <a
+                <p class="monithon-about-credit">{{"about.design"|transloco}} <a
                         href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> </p>
 
                 <p class="monithon-about-credit"> {{"about.dataAnalysis"|transloco}} <a href="https://www.monithon.eu"
@@ -55,6 +75,9 @@
                         href="https://www.monithon.eu" target="_blank">Team Monithon</a>
                 </p>
 
+
+                <p class="monithon-about-credit" [innerHTML]="'about.projectFinder.colophon'|transloco"> {{"about.colo"|transloco}}
+                </p>
 
             </ion-col>
         </ion-row>
@@ -78,7 +101,7 @@
     <ion-grid class="monithon-about-grid" *ngIf="mode == 'reportFinder'">
         <ion-row class="monithon-logo-row">
             <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container">
-                <img class="monithon-about-logo" src="../../assets/img/logo_monithon.svg">
+                <img class="monithon-about-logo" src="/assets/img/logo_monithon.svg">
 
             </ion-col>
         </ion-row>

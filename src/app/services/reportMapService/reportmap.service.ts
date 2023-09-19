@@ -248,7 +248,7 @@ export class ReportMapService {
                 var features = this.map.queryRenderedFeatures(bbox, {
                     layers: ['reports-layer']
                 });
-                if (features.length && this.map.getZoom() >= 10) { //https://www.meistertask.com/app/task/k9R9hJHO/markers-poter-cliccare-i-markers-solo-allultimo-livello-di-zoom-come-in-glocalclimatechange-eu
+                if (features.length) { //https://www.meistertask.com/app/task/k9R9hJHO/markers-poter-cliccare-i-markers-solo-allultimo-livello-di-zoom-come-in-glocalclimatechange-eu
                     let feature = features[0];
                     let report: Report = feature.properties as Report;
                     let match = this.reports.features.filter(f => f.properties.uid == report.uid);

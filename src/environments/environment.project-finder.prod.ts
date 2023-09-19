@@ -1,4 +1,4 @@
-import { version } from "package.json";
+import { FullSemVer } from "../assets/version.json";
 
 export const environment = {
     routes: [
@@ -28,6 +28,14 @@ export const environment = {
             loadChildren: () => import('../app/pages/courtesy/courtesy.module').then(m => m.CourtesyPageModule)
         },
         {
+            path: 'sorgenti',
+            loadChildren: () => import('../app/pages/sorgenti/sorgenti.module').then(m => m.SorgentiPageModule)
+        },
+        {
+            path: 'sorgente/:idSorgente',
+            loadChildren: () => import('../app/pages/project-finder/project-finder.module').then(m => m.ProjectFinderPageModule)
+        },
+        {
             path: '',
             redirectTo: '',
             pathMatch: 'full'
@@ -53,7 +61,7 @@ export const environment = {
     },
     server: {
         protocol: "https",
-        ip: "api.monithon.eu",
+        ip: "api.dev.monithon.eu",
         port: "80",
         apiroute: "api"
     },
@@ -63,5 +71,9 @@ export const environment = {
         port: "80",
         apiroute: "api"
     },
-    version: version
+    langsUrl: 'https://api.monithon.eu/api/langs',
+    //[SM-92] : decommentare e sostituire con url corretta.
+    // translationServiceURL: '/assets/i18n/',
+    translationServiceURL: 'https://projectfinder.monithon.eu/dev/assets/i18n/',
+    version: FullSemVer
 };

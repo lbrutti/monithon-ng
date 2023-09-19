@@ -1,0 +1,27 @@
+<ion-content [ngClass]="{'mobile': isMobile}">
+    <div id="aboutBtnContainer">
+        <div class="monithon-lang-icon" id="lang-switch" (click)="switchLang()">
+            <span>{{translocoService.getActiveLang().split('-')[0]}}</span>
+        </div>
+        <ion-icon class="monithon-about-icon black" slot="icon-only" (click)="openIonModal()"></ion-icon>
+        <ion-icon class="monithon-logo-icon" slot="icon-only" (click)="goToMonithon()"></ion-icon>
+    </div>
+    <div id="container">
+        <div id="text-container">
+            <img class="monithon-logo-center" src="../../../assets/img/logo_monithon_big_black.svg">
+            <h3 class="monithon-titolo-sezione">{{'sorgenti.wizard.titolo'| transloco}}</h3>
+            <div class="monithon-descrizione-wizard" [innerHTML]="'sorgenti.wizard.descrizione'|transloco">
+            </div>
+        </div>
+        <div id="chip-container">
+            <!-- Temi -->
+            <mat-chip-list class="monithon-sorgenti" aria-label="sorgenti dati">
+                <mat-chip class="monithon-sorgente" *ngFor="let sorgente of this.sorgenti"
+                    [selectable]="sorgente.isActive" [attr.data-active]="true" selectable="true"
+                    (click)="this.goToTemaPreset(sorgente)" selected="true" [attr.data-id-sorgente]="sorgente.id"
+                    disableRipple="true">
+                    {{'sorgenti.'+sorgente.id | transloco}}</mat-chip>
+            </mat-chip-list>
+        </div>
+    </div>
+</ion-content>
