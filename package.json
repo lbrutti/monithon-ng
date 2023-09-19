@@ -18,7 +18,7 @@
         "release:dev": "ionic build --prod --release",
         "release:all": "ionic build --configuration=production_project_finder && ionic build --configuration=production_report_finder"
     },
-    "private": true,
+    "private": false,
     "dependencies": {
         "@angular/animations": "~10.0.0",
         "@angular/cdk": "^10.2.7",
