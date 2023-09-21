@@ -157,7 +157,13 @@
             "4": "Efficacia non valutabile"
         },
         "codSDA": {
-            "1_mock": "Stato di avanzamento mock"
+            "1": "Appena avviato",
+            "2": "Mai partito",
+            "3": "In corso senza particolari intoppi",
+            "4": "In corso con problemi di realizzazione",
+            "5": "Bloccato",
+            "6": "Concluso",
+            "7": "Non è stato possibile verificare l’avanzamento"
         }
     },
     "cercaPerTitolo": "Cerca tra i risultati",

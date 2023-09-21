@@ -155,20 +155,29 @@
             "3": "Ineffective",
             "4": "Could not evaluate effectiveness"
         },
-        "cercaPerTitolo": "Search the results",
-        "codGiudizioSintetico": "Synthetic judgment",
-        "dataInserimento": "Date",
-        "report.readmore": "Read the report",
-        "report.codSdaLabel": "Progress",
-        "report.giudizioSintetico.undefined": "Synthetic judgment",
-        "report.temaSintetico.undefined": "Theme",
-        "programmaOperativo": "Operational Programme",
-        "report.monithonFiltriTitle": "Themes",
-        "report.programmiOperativi": "Operational Programmes",
-        "report.programmiOperativiPlaceholder": "Name or code of the Operational Programme",
-        "report.programmiOperativiSearchText": "",
-        "report.sintesiReport": "Summary of the monitored project",
-        "cicloProgrammazione": "Programming cycle",
-        "reportResultContainerTitle": "Civic monitoring report"
-    }
+        "codSDA": {
+            "1": "Just started",
+            "2": "Never started",
+            "3": "In progress without any particular problems",
+            "4": "In progress with implementation problems",
+            "5": "Blocked",
+            "6": "Concluded",
+            "7": "Progress could not be verified"
+        }
+    },
+    "cercaPerTitolo": "Search the results",
+    "codGiudizioSintetico": "Synthetic judgment",
+    "dataInserimento": "Date",
+    "report.readmore": "Read the report",
+    "report.codSdaLabel": "Progress",
+    "report.giudizioSintetico.undefined": "Synthetic judgment",
+    "report.temaSintetico.undefined": "Theme",
+    "programmaOperativo": "Operational Programme",
+    "report.monithonFiltriTitle": "Themes",
+    "report.programmiOperativi": "Operational Programmes",
+    "report.programmiOperativiPlaceholder": "Name or code of the Operational Programme",
+    "report.programmiOperativiSearchText": "",
+    "report.sintesiReport": "Summary of the monitored project",
+    "cicloProgrammazione": "Programming cycle",
+    "reportResultContainerTitle": "Civic monitoring report"
 }
