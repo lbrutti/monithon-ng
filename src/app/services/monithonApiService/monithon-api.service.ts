@@ -40,7 +40,7 @@ export class MonithonApiService {
     }
 
     public getProgetti(ocCodTemaSintetico?: string, idSorgente?: string): Observable<any[]> {
-        let url: string = 'https://api.dev.monithon.eu/api/mapdata';
+        let url: string = 'https://api.monithon.eu/api/mapdata';
         let params: any = {};
         if (ocCodTemaSintetico) {
             params.tema = ocCodTemaSintetico;
@@ -113,7 +113,7 @@ export class MonithonApiService {
         //     lodash.set(temiMock, ocCodTemaSintetico, lodash.get(temiSintetici, ocCodTemaSintetico));
         // }
         // return of(temiMock)
-        let url: string = 'https://api.dev.monithon.eu/api/mdTemi';
+        let url: string = 'https://api.monithon.eu/api/mdTemi';
         let params: any = {};
         if (ocCodTemaSintetico.length) {
             params.tema = ocCodTemaSintetico;
@@ -156,7 +156,7 @@ export class MonithonApiService {
     }
 
     public getSorgenti(): Observable<any> {
-        let url: string = 'https://api.dev.monithon.eu/api/datasources';
+        let url: string = 'https://api.monithon.eu/api/datasources';
         return this.httpClient.get<any>(url).pipe(
             map((res: any) => {
                 let sorgenti: Sorgente[] = lodash.chain(res)

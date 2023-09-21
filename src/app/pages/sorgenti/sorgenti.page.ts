@@ -37,7 +37,6 @@ export class SorgentiPage implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this.monithonApiService.getSorgenti().toPromise()
             .then(data => {
-                debugger;
                 this.sorgenti = data.sorgenti;
                 //create css variables for temi:
                 this.sorgenti.map((s: any) => {
