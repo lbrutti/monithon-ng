@@ -5,10 +5,18 @@
 ion-content {
     background: #EDED4E !important;
 
+    mat-chip-list {
+        &.monithon-sorgenti {
+            scale: 2 !important;
+        }
+
+    }
+
     mat-chip {
         min-width: 12vw;
 
         justify-content: center;
+
     }
 
     #container {

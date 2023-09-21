@@ -38,7 +38,7 @@
 .mat-chip.monithon-categoria[data-active="false"] {
 
     //loop per preparare binding a variabile parametrizzata
-    @for $codTemaSintetico from 0 to 50 {
+    @for $codTemaSintetico from 0 to 200 {
         &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
             background-color: cssvar(monithon-tema, $codTemaSintetico, background);
             color: cssvar(monithon-tema, $codTemaSintetico, background) !important;
@@ -57,7 +57,7 @@
     border-style: solid;
 
     //loop per preparare binding a variabile parametrizzata
-    @for $codTemaSintetico from 0 to 50 {
+    @for $codTemaSintetico from 0 to 200 {
         &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
             border-color: cssvar(monithon-tema, $codTemaSintetico, background);
             color: cssvar(monithon-tema, $codTemaSintetico, background) !important;
@@ -85,7 +85,7 @@
         // }
 
         //loop per preparare binding a variabile parametrizzata
-        @for $codTemaSintetico from 0 to 50 {
+        @for $codTemaSintetico from 0 to 200 {
             &[data-oc-cod-tema-sintetico="#{$codTemaSintetico}"] {
                 background-color: cssvar(monithon-tema, $codTemaSintetico, background);
             }
