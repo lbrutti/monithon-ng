@@ -6,16 +6,14 @@
         "5": "Ambiente",
         "6": "Cultura e turismo",
         "7": "Mobilità sostenibile",
+        "101": "PNRR",
         "wizard": {
             "titolo": "Scegli il tema"
         }
     },
     "sorgenti": {
         "1": "OpenCoesione",
-        "2": "SORGENTE 1",
-        "3": "SORGENTE 2",
-        "4": "SORGENTE 3",
-        "5": "SORGENTE 1",
+        "2": "PNRR",
         "wizard": {
             "titolo": "Scegli il tema da monitorare",
             "descrizione": "Benvenuto nel Project Finder di Monithon! <br> Qui puoi scoprire quali sono i progetti  finanziati intorno a te, rintracciare quelli più interessanti da monitorare, visualizzare le informazioni essenziali per iniziare il monitoraggio, creare un report con la tua valutazione! <br>Da dove  Vuoi iniziare?"
@@ -57,7 +55,8 @@
         "400": "Energia generico",
         "500": "Ambiente generico",
         "600": "Cultura e turismo generico",
-        "700": "Mobilità sostenibile generico"
+        "700": "Mobilità sostenibile generico",
+        "10100": "Asili Nido"
     },
     "statiAvanzamento": {
         "0": "Non determinabile",
