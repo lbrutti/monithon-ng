@@ -10,18 +10,17 @@ export const COLOR_MAP = {
 };
 
 
-// --monithon - giudizio - 1 - background: red;
-// --monithon - giudizio - 2 - background: gold;
-// --monithon - giudizio - 3 - background: purple;
-// --monithon - giudizio - 4 - background: cyan;
-// --monithon - giudizio - 5 - background: pink;
-// --monithon - giudizio - 6 - background: green;
+// EFFICACE: #77D71F
+// EFFICACE MA CON PROBLEMI: #FFC522
+// INEFFICACE: #F84D2C
+// EFFICACIA NON VALUTABILE: #1AE0C1
 export const REPORT_COLOR_MAP = {
     giudiziSintetici: {
-        1: '#1AE0C1',
-        2: '#77D71F',
-        3: '#FFC522',
-        4: '#F84D2C',
+        0: '#a2a2a2',
+        1: '#77D71F',
+        2: '#FFC522',
+        3: '#F84D2C',
+        4: '#1AE0C1',
 
         5: '#008A61',
         6: '#8E4436',

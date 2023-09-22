@@ -11,7 +11,7 @@ html {
 }
 
 .monithon-dettaglio-progetto {
-    @for $codGiudizioSintetico from 1 through 7 {
+    @for $codGiudizioSintetico from 0 through 10 {
         &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
             background-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
         }
@@ -43,7 +43,7 @@ html {
                 }
             }
 
-            @for $codGiudizioSintetico from 1 through 7 {
+            @for $codGiudizioSintetico from 0 through 10 {
                 &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
                     background: cssvar(monithon-giudizio, $codGiudizioSintetico, background) !important;
                 }
@@ -100,7 +100,7 @@ html {
 .mat-chip.monithon-filtro-report {
 
     // giudizi sintetici
-    @for $codGiudizioSintetico from 1 through 7 {
+    @for $codGiudizioSintetico from 0 through 10 {
         &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
             // color: cssvar(monithon-giudizio, $codGiudizioSintetico, background) !important;
             border-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
@@ -124,7 +124,7 @@ html {
     &.mat-chip-selected {
         color: var(--monithon-tema-color) !important;
 
-        @for $codGiudizioSintetico from 1 through 7 {
+        @for $codGiudizioSintetico from 0 through 10 {
             &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
                 background-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
             }
@@ -212,7 +212,7 @@ html {
 }
 
 .monithon-lista-risultato {
-    @for $codGiudizioSintetico from 1 through 7 {
+    @for $codGiudizioSintetico from 0 through 10 {
         &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"]::before {
             background-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
         }
@@ -225,14 +225,14 @@ html {
 
 #resultContainer {
     .monithon-lista-progetti__progetto {
-        @for $codGiudizioSintetico from 1 through 7 {
+        @for $codGiudizioSintetico from 0 through 10 {
             &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
                 border-bottom-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
             }
         }
 
         &.selected {
-            @for $codGiudizioSintetico from 1 through 7 {
+            @for $codGiudizioSintetico from 0 through 10 {
                 &[data-cod-giudizio-sintetico="#{$codGiudizioSintetico}"] {
                     border-color: cssvar(monithon-giudizio, $codGiudizioSintetico, background);
                 }
